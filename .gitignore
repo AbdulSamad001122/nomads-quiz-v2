@@ -1,0 +1,18 @@
+node_modules/
+dist/
+
+# secrets — never commit (Kit credentials live in .env.local / Vercel env vars)
+.env
+.env.*
+
+# source & reference material — not part of the app, and the Kit handover
+# docx contains the API secret. The app only ships what's in public/ + src/.
+Design Assets/
+Design Refrence/
+Quiz Questions and logic/
+Quiz and Gif Plan/
+*.docx
+
+# local OS noise
+Thumbs.db
+.DS_Store

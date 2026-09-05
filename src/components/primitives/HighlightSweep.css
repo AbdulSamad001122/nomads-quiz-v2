@@ -1,0 +1,93 @@
+/* Inline highlight wipe — ported verbatim from rpv-landing-v3
+   (primitives/HighlightSweep.css). The colored box sweeps in by
+   animating background-size on the outer span; the TEXT color sweeps
+   in lockstep on the inner span via a hard two-stop gradient clipped
+   to the glyphs. box-decoration-break: clone lets each wrapped line
+   sweep its own fragment. */
+.hl-sweep {
+  display: inline;
+  padding: 0.05em 0.25em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  background-image: linear-gradient(var(--sweep-bg), var(--sweep-bg));
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  transition: background-size 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hl-sweep--in {
+  background-size: 100% 100%;
+}
+
+@supports (-webkit-background-clip: text) {
+  .hl-sweep__text {
+    background-image: linear-gradient(
+      to right,
+      var(--sweep-color) 50%,
+      currentColor 50%
+    );
+    background-repeat: no-repeat;
+    background-size: 200% 100%;
+    background-position-x: 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    /* Hide the normal glyph fill but keep `color` inherited, so the
+       gradient's currentColor stop still resolves to the heading color. */
+    -webkit-text-fill-color: transparent;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    transition: background-position-x 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .hl-sweep--in .hl-sweep__text {
+    background-position-x: 0%;
+  }
+}
+
+/* Fallback for engines without background-clip: text — flip the text
+   color as the sweep finishes instead of mid-blink. */
+@supports not (-webkit-background-clip: text) {
+  .hl-sweep__text {
+    transition: color 0.1s linear 0.75s;
+  }
+
+  .hl-sweep--in .hl-sweep__text {
+    color: var(--sweep-color);
+  }
+}
+
+/* Tone pairs — background sweep + text color once revealed. */
+.hl-sweep--plum {
+  --sweep-bg: #5d1b4e;
+  --sweep-color: #ffffff;
+}
+
+.hl-sweep--navy {
+  --sweep-bg: #152638;
+  --sweep-color: #ffffff;
+}
+
+.hl-sweep--iceblue {
+  --sweep-bg: #e4fbff;
+  --sweep-color: #152638;
+}
+
+.hl-sweep--cream2 {
+  --sweep-bg: #f2e6d8;
+  --sweep-color: #5d1b4e;
+}
+
+/* Quiz maroon theme — warm cream box, deep wine text (matches the
+   belief-slide highlight colors the client picked). */
+.hl-sweep--cream4 {
+  --sweep-bg: #f4ede6;
+  --sweep-color: #391129;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hl-sweep,
+  .hl-sweep__text {
+    transition-duration: 0.01s;
+    transition-delay: 0s;
+  }
+}

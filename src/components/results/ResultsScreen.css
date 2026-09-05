@@ -1,0 +1,270 @@
+/* Simple results page — flat "printed" look, plain but on-brand.
+   Full designed version comes later. */
+
+.results-screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: #e4c8bc; /* Stone */
+  color: #152638;
+}
+
+.results-screen__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 28px 0;
+}
+
+.results-screen__logo {
+  background: #ffffff;
+  border: 1.5px solid #152638;
+  padding: 10px 18px;
+  box-shadow: 5px 5px 0 #250f1c;
+}
+
+.results-screen__logo img {
+  display: block;
+  height: 22px;
+}
+
+.results-screen__back {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: #152638;
+}
+
+.results-screen__body {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 28px 24px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.results-screen__eyebrow {
+  margin: 0;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #5d1b4e;
+}
+
+.results-card {
+  background: #ffffff;
+  border: 2px solid #152638;
+  box-shadow: 7px 7px 0 #250f1c;
+  padding: clamp(20px, 3vw, 32px);
+}
+
+.results-card p {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: #33475b;
+}
+
+.results-card__title {
+  margin: 0 0 14px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: clamp(18px, 2.4vw, 24px);
+  color: #152638;
+}
+
+.results-card__lead {
+  margin-bottom: 16px !important;
+}
+
+.results-card--warn {
+  border-color: #b8860b;
+  box-shadow: 7px 7px 0 #7a5a00;
+  background: #fcf6e6;
+}
+
+.results-card--good {
+  border-color: #1e7a4f;
+  box-shadow: 7px 7px 0 #0f4a2f;
+  background: #eaf7f0;
+}
+
+/* Hero */
+.results-hero__pair {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(18px, 4vw, 44px);
+  margin-bottom: 16px;
+}
+
+.results-hero__pair > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.results-hero__label {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #7c6a63;
+  margin-bottom: 6px;
+}
+
+.results-hero__value {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: clamp(34px, 7vw, 56px);
+  line-height: 1;
+  color: #152638;
+}
+
+.results-hero__arrow {
+  font-size: clamp(26px, 5vw, 40px);
+  color: #5d1b4e;
+  font-weight: 800;
+}
+
+.results-hero__sub {
+  text-align: center;
+}
+
+/* Metric table */
+.results-metrics {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.results-metrics th {
+  text-align: left;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #7c6a63;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-bottom: 1.5px solid #152638;
+}
+
+.results-metrics td {
+  padding: 11px 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #152638;
+  border-bottom: 1px solid rgba(21, 38, 56, 0.12);
+}
+
+.results-metrics th:not(:first-child),
+.results-metrics td:not(:first-child) {
+  text-align: center;
+}
+
+.results-metrics__ceil {
+  color: #7c6a63 !important;
+  font-weight: 500 !important;
+}
+
+.results-metrics__fixed {
+  color: #7c6a63 !important;
+  font-weight: 500 !important;
+  font-style: italic;
+}
+
+.results-chip {
+  display: inline-block;
+  min-width: 54px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.results-chip--green {
+  background: #d4f0e0;
+  color: #0f5c39;
+}
+
+.results-chip--yellow {
+  background: #fbeecb;
+  color: #8a6400;
+}
+
+.results-chip--red {
+  background: #f7d9d6;
+  color: #a5271b;
+}
+
+.results-metrics--ad td:first-child {
+  color: #33475b;
+  font-weight: 500;
+}
+
+/* Ad slider */
+.results-slider {
+  margin-bottom: 16px;
+}
+
+.results-slider label {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #152638;
+}
+
+.results-slider input[type='range'] {
+  width: 100%;
+  accent-color: #5d1b4e;
+}
+
+.results-ad__punch {
+  margin-top: 16px !important;
+  font-weight: 800 !important;
+  font-size: 17px !important;
+  color: #5d1b4e !important;
+}
+
+/* CTA */
+.results-cta__row {
+  display: flex;
+  gap: 14px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+/* Buttons use the shared .q-btn (landing-v3 style); ghost = white fill */
+.results-cta__btn--ghost {
+  background: #ffffff;
+}
+
+.results-screen__note {
+  margin: 8px 0 0;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 11px;
+  color: #7c6a63;
+  text-align: center;
+}
+
+@media (max-width: 560px) {
+  .results-screen__bar {
+    padding: 14px 16px 0;
+  }
+  .results-card {
+    box-shadow: 5px 5px 0 #250f1c;
+  }
+  .results-metrics td,
+  .results-metrics th {
+    padding: 9px 5px;
+    font-size: 13.5px;
+  }
+}

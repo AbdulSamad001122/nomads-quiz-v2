@@ -1,0 +1,285 @@
+/* ============================================================
+   DisqualifiedScreen — fancy DQ design (always blue theme).
+   Split background: dark blue texture on top (~46%), light blue
+   texture below; keyline frame; two exit cards straddle the seam.
+   Reuses .question-panel__logo-box + .seam-badge from QuizScreen.css
+   and the shared .q-btn button.
+   ============================================================ */
+
+.dq-screen {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(16px, 1.7vw, 26px);
+  background-image: url('/assets/blue-texture-bg.webp');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Dark blue top section behind the upper content */
+.dq-screen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 46%;
+  background-image: url('/assets/blue-bg.webp');
+  background-size: cover;
+  background-position: center;
+}
+
+/* keep the frame/topbar/content above the split backgrounds */
+.dq__top,
+.dq__frame {
+  position: relative;
+  z-index: 1;
+}
+
+/* Circle doodle — same seam position as the other full-bleed slides */
+.dq-screen .seam-badge {
+  position: absolute;
+  left: 50%;
+  right: auto;
+  top: clamp(14px, 2.4vh, 28px);
+  transform: translateX(-50%);
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  z-index: 2;
+}
+
+/* ---------- Top row: logo box + keylines around the badge ---------- */
+
+.dq__top {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-bottom: none;
+}
+
+.dq__top-left {
+  width: 48%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.dq__top-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding-left: clamp(56px, 4.6vw, 88px);
+}
+
+.dq__line {
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.55);
+  margin-left: clamp(14px, 1.5vw, 26px);
+  margin-right: clamp(52px, 4.2vw, 80px);
+}
+
+.dq__line--long {
+  margin-right: clamp(14px, 1.5vw, 26px);
+}
+
+/* ---------- Keyline frame + body ---------- */
+
+.dq__frame {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+.dq__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 70px clamp(20px, 4vw, 76px) clamp(18px, 2.6vh, 36px);
+}
+
+/* clear the seam badge hanging into the frame */
+.dq__headline {
+  margin-top: clamp(16px, 3.2vh, 44px);
+}
+
+/* Back — same anchored position as the belief slide */
+.dq__back {
+  position: absolute;
+  top: clamp(18px, 3vh, 38px);
+  left: clamp(48px, 12vw, 240px);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(15px, 1.2vw, 24px);
+  color: #ffffff;
+  padding: 6px 2px;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.dq__headline {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  color: #ffffff;
+  font-size: clamp(24px, 2.8vw, 54px);
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+}
+
+/* Better Brush "V" of "Visitors" — cream script accent */
+.dq__v {
+  font-family: var(--font-number);
+  font-weight: 400;
+  font-size: 1.2em;
+  line-height: 0;
+  color: #f2e6d8;
+}
+
+.dq__sub {
+  margin-top: clamp(12px, 2.2vh, 24px);
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: #ffffff;
+  font-size: clamp(14px, 1.35vw, 26px);
+  line-height: 1.5;
+}
+
+/* ---------- The two exit cards (straddle the bg seam) ---------- */
+
+.dq__cards {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: clamp(24px, 7.5vw, 150px);
+  width: 100%;
+}
+
+.dq__card {
+  background: #ffffff;
+  border: 1.5px solid rgba(21, 38, 56, 0.14);
+  border-radius: 18px;
+  width: clamp(300px, 32vw, 620px);
+  padding: clamp(18px, 2vw, 40px) clamp(18px, 2vw, 38px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(12px, 1.7vh, 22px);
+}
+
+.dq__card-text {
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: #152638;
+  font-size: clamp(15px, 1.35vw, 26px);
+  line-height: 1.5;
+}
+
+.dq__laptop {
+  width: min(100%, clamp(210px, 20vw, 380px));
+  height: auto;
+}
+
+.dq__cta {
+  margin-top: auto; /* keeps both buttons aligned across cards */
+}
+
+/* ---------- Footer strip: keyline + corner cell ---------- */
+
+.dq__footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.55);
+  display: flex;
+  min-height: clamp(44px, 4.4vw, 66px);
+}
+
+.dq__footer-hint {
+  flex: 1;
+}
+
+.dq__footer-cell {
+  width: clamp(44px, 4.4vw, 66px);
+  border-left: 1px solid rgba(255, 255, 255, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dq__footer-cell img {
+  width: 58%;
+  height: auto;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 900px) {
+  /* release the forced line breaks — text wraps naturally */
+  .dq__headline br,
+  .dq__sub br,
+  .dq__card-text br {
+    display: none;
+  }
+
+  .dq-screen::before {
+    height: 34%;
+  }
+
+  .dq-screen .seam-badge {
+    width: clamp(70px, 14vw, 96px);
+    height: clamp(70px, 14vw, 96px);
+    display: flex;
+  }
+
+  .dq__top-right {
+    padding-left: clamp(40px, 8vw, 56px);
+  }
+
+  .dq__line {
+    margin-right: clamp(38px, 7.5vw, 52px);
+  }
+
+  .dq__back {
+    left: clamp(20px, 8vw, 120px);
+    font-size: 15px;
+  }
+
+  .dq__headline {
+    margin-top: 26px;
+    font-size: clamp(20px, 6vw, 34px);
+  }
+
+  .dq__cards {
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+  }
+
+  .dq__card {
+    width: min(100%, 460px);
+  }
+}
+
+@media (max-width: 560px) {
+  .dq__top-left {
+    width: 40%;
+  }
+
+  .dq__top-line {
+    margin-right: 30px;
+  }
+
+  .dq__top-right {
+    padding-left: 72px;
+  }
+}

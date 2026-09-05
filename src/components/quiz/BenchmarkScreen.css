@@ -1,0 +1,233 @@
+/* ============================================================
+   BenchmarkScreen — split-screen benchmark slide (before Q5)
+   Reuses the QuizScreen shell (.quiz-screen / .question-panel /
+   .answer-panel + theme vars); this file styles only the
+   benchmark-specific content.
+   ============================================================ */
+
+/* The new circle doodle export is a square image on a white ground —
+   mask it into the badge's white disc so the spin reads as a disc. */
+.benchmark-screen .seam-badge {
+  background: #ffffff;
+  overflow: hidden;
+}
+
+/* ---------- Left panel content ---------- */
+
+.benchmark__content {
+  justify-content: center;
+  padding-bottom: 0; /* the question-slide bottom air would push past 100vh */
+}
+
+.benchmark-screen .question-panel__body {
+  padding-top: clamp(20px, 3vh, 44px);
+  padding-bottom: clamp(20px, 3vh, 44px);
+}
+
+/* Headline — same voice as question slides, sized so the reference's
+   4 forced lines each hold on one line at desktop widths */
+.benchmark__headline {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  color: var(--t-question-text);
+  font-size: clamp(22px, 2.2vw, 42px);
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+
+.benchmark__subhead {
+  margin-top: clamp(18px, 2.6vh, 36px);
+  font-family: var(--font-headline);
+  font-weight: 700;
+  color: var(--t-question-text);
+  font-size: clamp(16px, 1.45vw, 28px);
+  line-height: 1.5;
+}
+
+/* Arrow-doodle bullet points */
+.benchmark__points {
+  list-style: none;
+  margin: clamp(16px, 2.4vh, 32px) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 2vh, 24px);
+}
+
+.benchmark__points li {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(12px, 1.2vw, 22px);
+}
+
+.benchmark__points img {
+  width: clamp(20px, 1.7vw, 32px);
+  height: auto;
+  flex-shrink: 0;
+  margin-top: 0.15em;
+}
+
+.benchmark__points span {
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: var(--t-question-text);
+  font-size: clamp(14px, 1.15vw, 21px);
+  line-height: 1.5;
+  max-width: 34ch;
+}
+
+/* CONTINUE — visual style comes from the shared .q-btn (landing-v3
+   button); this class only positions it inside the panel */
+.benchmark__continue {
+  align-self: flex-start;
+  margin-top: clamp(22px, 3.4vh, 44px);
+}
+
+/* ---------- Right panel content ---------- */
+
+/* Tighter vertical rhythm than question slides so the whole slide
+   (incl. progress bar) fits a 720p viewport like the reference */
+.benchmark__panel {
+  padding-top: clamp(24px, 3.6vh, 44px);
+}
+
+.benchmark__panel-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: safe center;
+  padding: clamp(12px, 1.8vh, 26px) 0;
+}
+
+.benchmark__intro,
+.benchmark__outro {
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: var(--t-option-text);
+  font-size: clamp(14px, 1.15vw, 20px);
+  line-height: 1.55;
+}
+
+.benchmark__model {
+  margin-top: clamp(14px, 2vh, 26px);
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: var(--t-option-text);
+  font-size: clamp(15px, 1.2vw, 21px);
+}
+
+.benchmark__aov {
+  margin-top: clamp(8px, 1.1vh, 14px);
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: var(--t-option-text);
+  font-size: clamp(15px, 1.2vw, 21px);
+}
+
+/* Funnel benchmark table — dark header bar, white rounded body,
+   thin column separators (reference style) */
+.benchmark-table {
+  margin-top: clamp(14px, 2vh, 24px);
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #ffffff;
+  border: 1px solid var(--t-option-selected-bg);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+
+.benchmark-table th {
+  background: var(--t-option-selected-bg);
+  color: var(--t-option-selected-text);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(13px, 1.05vw, 19px);
+  text-align: center;
+  padding: clamp(9px, 1.1vh, 14px) clamp(8px, 0.8vw, 14px);
+}
+
+.benchmark-table td {
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: var(--t-option-text);
+  font-size: clamp(12px, 0.95vw, 17px);
+  line-height: 1.4;
+  text-align: center;
+  padding: clamp(8px, 1.2vh, 15px) clamp(8px, 0.8vw, 14px);
+}
+
+/* thin row rules + short column separators like the reference */
+.benchmark-table tbody tr + tr td {
+  border-top: 1px solid rgba(21, 38, 56, 0.14);
+}
+
+.benchmark-table td + td,
+.benchmark-table th + th {
+  border-left: 1px solid rgba(21, 38, 56, 0.18);
+}
+
+.benchmark-table th + th {
+  border-left-color: rgba(255, 255, 255, 0.25);
+}
+
+.benchmark__outro {
+  margin-top: clamp(14px, 2vh, 26px);
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+/* Panels stack under 900px (shell handles the frame/logo bar);
+   release the reference's forced line breaks so text wraps naturally */
+@media (max-width: 900px) {
+  .benchmark__headline br,
+  .benchmark__subhead br {
+    display: none;
+  }
+
+  .benchmark__headline {
+    font-size: clamp(23px, 4.6vw, 34px);
+    line-height: 1.45;
+  }
+
+  .benchmark__subhead {
+    font-size: clamp(16px, 3.6vw, 22px);
+  }
+
+  .benchmark__points span {
+    font-size: clamp(14px, 3.4vw, 18px);
+    max-width: none;
+  }
+
+  .benchmark__points img {
+    width: clamp(20px, 4.6vw, 28px);
+  }
+
+  .benchmark__continue {
+    margin-top: 26px;
+  }
+
+  .benchmark__intro,
+  .benchmark__outro {
+    font-size: clamp(14px, 3.4vw, 18px);
+  }
+
+  .benchmark__model,
+  .benchmark__aov {
+    font-size: clamp(15px, 3.6vw, 19px);
+  }
+
+  .benchmark-table th {
+    font-size: clamp(12px, 2.9vw, 16px);
+    padding: 10px 6px;
+  }
+
+  .benchmark-table td {
+    font-size: clamp(11px, 2.7vw, 15px);
+    padding: 10px 6px;
+    overflow-wrap: break-word;
+  }
+}

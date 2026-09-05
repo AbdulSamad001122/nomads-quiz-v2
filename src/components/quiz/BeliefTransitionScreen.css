@@ -1,0 +1,255 @@
+/* ============================================================
+   BeliefTransitionScreen — full-bleed "getting real" transition
+   Dark themed background across the whole screen, keyline frame,
+   centered highlight headline + CTA with curved arrow doodle.
+   Reuses tokens + logo-box / seam-badge styles from QuizScreen.css.
+   ============================================================ */
+
+.belief-screen {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background-image: var(--t-left-bg-image);
+  background-size: cover;
+  background-position: center;
+  padding: clamp(16px, 1.7vw, 26px);
+}
+
+/* Circle doodle badge — sits where the split-screen seam would be */
+.belief-screen .seam-badge {
+  position: absolute;
+  left: 48%;
+  right: auto;
+  top: clamp(14px, 2.4vh, 28px);
+  transform: translateX(-50%);
+  background: #ffffff;
+  overflow: hidden;
+}
+
+/* ---------- Top row: logo box, keylines, back link, icon ---------- */
+
+.belief__top {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-bottom: none; /* frame's top border supplies this line */
+}
+
+/* Two fixed halves: the badge sits absolutely on the 48% seam, the
+   left half ends before it and the right half (Back…) starts after it,
+   so the Back link can never slide underneath the badge. */
+.belief__top-left {
+  width: 48%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.belief__top-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  /* clear the badge's right half (badge is ~clamp(88-142px) wide) */
+  padding-left: clamp(56px, 4.6vw, 88px);
+}
+
+.belief__top-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.55);
+  margin-left: clamp(14px, 1.5vw, 26px);
+  /* stop before the badge's left half */
+  margin-right: clamp(52px, 4.2vw, 80px);
+}
+
+.belief__top-line--long {
+  margin-right: clamp(14px, 1.5vw, 26px);
+}
+
+/* Back — anchored to the top of the keyline frame, left side with a
+   slight right nudge */
+.belief__back {
+  position: absolute;
+  top: clamp(18px, 3vh, 34px);
+  left: clamp(90px, 17.5vw, 330px);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(15px, 1.2vw, 24px);
+  color: var(--t-question-text);
+  padding: 6px 2px;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+/* ---------- Keyline frame + centered body ---------- */
+
+.belief__frame {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: var(--keyline);
+}
+
+.belief__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(28px, 4vh, 64px) clamp(20px, 4vw, 76px);
+}
+
+.belief__headline {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  color: var(--t-question-text);
+  font-size: clamp(26px, 3.4vw, 64px);
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+}
+
+/* "Okay," — Better Brush script accent */
+.belief__script {
+  font-family: var(--font-number);
+  font-weight: 400;
+  font-size: 1.18em;
+  line-height: 1;
+}
+
+/* Highlight on "hit 60 sales" — animated HighlightSweep (see
+   primitives/HighlightSweep.css); tone picked per theme in the JSX. */
+
+/* Body line under the headline (almost-ready slide) */
+.belief__line {
+  margin-top: clamp(16px, 2.4vh, 30px);
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: var(--t-question-text);
+  font-size: clamp(15px, 1.25vw, 22px);
+  line-height: 1.55;
+}
+
+/* Label strip above the almost-ready headline (centered in this layout) */
+.almost-ready__label {
+  align-self: center;
+  margin-bottom: clamp(18px, 3vh, 32px);
+}
+
+/* ---------- CTA + curved arrow doodle ---------- */
+
+.belief__cta-wrap {
+  position: relative;
+  margin-top: clamp(36px, 8vh, 96px);
+}
+
+/* Visual style comes from the shared .q-btn (landing-v3 button);
+   this slide's CTA just runs a bit larger, like the reference */
+.belief__cta {
+  font-size: clamp(15px, 1.3vw, 22px);
+  padding: clamp(16px, 1.7vw, 24px) clamp(32px, 3vw, 52px);
+}
+
+/* Arrow points down-left into the button's top-right corner;
+   tail curls up toward the highlighted words */
+.belief__arrow {
+  position: absolute;
+  left: calc(100% + clamp(12px, 1.6vw, 32px));
+  bottom: 55%;
+  width: clamp(76px, 9vw, 170px);
+  height: auto;
+  pointer-events: none;
+}
+
+/* ---------- Footer strip: keyline + corner cell ---------- */
+
+.belief__footer {
+  border-top: var(--keyline);
+  display: flex;
+  min-height: clamp(44px, 4.4vw, 66px);
+}
+
+.belief__footer-hint {
+  flex: 1;
+}
+
+.belief__footer-cell {
+  width: clamp(44px, 4.4vw, 66px);
+  border-left: var(--keyline);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.belief__footer-cell img {
+  width: 58%;
+  height: auto;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 900px) {
+  /* release the forced line break; text wraps naturally */
+  .belief__headline br {
+    display: none;
+  }
+
+  .belief__headline {
+    font-size: clamp(26px, 6vw, 40px);
+    line-height: 1.55;
+  }
+
+  .belief-screen .seam-badge {
+    top: 0;
+    width: clamp(70px, 14vw, 96px);
+    height: clamp(70px, 14vw, 96px);
+    display: flex; /* keep visible (QuizScreen.css hides it when stacked) */
+  }
+
+  .belief__top-right {
+    padding-left: clamp(40px, 8vw, 56px);
+  }
+
+  .belief__top-line {
+    margin-right: clamp(38px, 7.5vw, 52px);
+  }
+
+  .belief__back {
+    top: 50px;
+    left: 50px;
+    font-size: 15px;
+  }
+
+  .belief__arrow {
+    width: clamp(44px, 10vw, 70px);
+    left: calc(100% + 8px);
+  }
+}
+
+@media (max-width: 560px) {
+  /* small phones: badge + keylines crowd the top row — simplify */
+  .belief__top-left {
+    width: 40%;
+  }
+
+  .belief__top-line {
+    margin-right: 30px;
+  }
+
+  .belief__top-right {
+    padding-left: 72px;
+  }
+
+  .belief__cta-wrap {
+    margin-top: 44px;
+  }
+}

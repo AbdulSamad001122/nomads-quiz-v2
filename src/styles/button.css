@@ -1,0 +1,85 @@
+/* ============================================================
+   .q-btn — sitewide quiz button, ported VERBATIM from
+   rpv-landing-v3 (src/components/primitives/Button.css) so the
+   quiz CTAs match the landing page exactly: lavender fill, ink
+   border + hard 7px offset shadow, uppercase Montserrat 700,
+   hover = lift + 1.04 scale + plum/white swap + 9px shadow.
+   Values are the landing tokens inlined (the quiz token set
+   differs): ink #391129 · lavender #f2e5f6 · plum #5d1b4e.
+   ============================================================ */
+
+.q-btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1rem; /* landing-v3 desktop size */
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  border: 2px solid #391129;
+  border-radius: 0;
+  padding: 18px 34px; /* landing-v3 desktop padding */
+  cursor: pointer;
+  background: #f2e5f6;
+  color: #391129;
+  box-shadow: 7px 7px 0 0 #391129;
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+    background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Universal hover: lifts + scales slightly + deepens the shadow, and
+   swaps to brand plum with white text (landing-v3 rule). */
+.q-btn:hover {
+  transform: translate(-2px, -2px) scale(1.04);
+  background: #5d1b4e;
+  color: #ffffff;
+  box-shadow: 9px 9px 0 0 #391129;
+}
+
+.q-btn:active {
+  transform: translate(0, 0) scale(1);
+  box-shadow: 3px 3px 0 0 #391129;
+}
+
+.q-btn:focus-visible {
+  outline: 3px solid #5d1b4e;
+  outline-offset: 3px;
+}
+
+/* On dark/textured panels the shadow reads as soft black
+   (landing "onDark" variant). */
+.q-btn--onDark {
+  box-shadow: 7px 7px 0 0 rgba(0, 0, 0, 0.55);
+}
+
+.q-btn--onDark:hover {
+  box-shadow: 9px 9px 0 0 rgba(0, 0, 0, 0.55);
+}
+
+.q-btn--onDark:active {
+  box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.55);
+}
+
+/* Disabled (quiz Continue buttons) — landing has no disabled state,
+   so: same look, dimmed, no hover animation. */
+.q-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.q-btn:disabled:hover {
+  transform: none;
+  background: #f2e5f6;
+  color: #391129;
+  box-shadow: 7px 7px 0 0 #391129;
+}
+
+.q-btn--onDark:disabled:hover {
+  box-shadow: 7px 7px 0 0 rgba(0, 0, 0, 0.55);
+}
+
+@media (max-width: 760px) {
+  .q-btn {
+    font-size: 0.8rem;
+    padding: 14px 12px;
+  }
+}

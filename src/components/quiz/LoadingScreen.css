@@ -1,0 +1,171 @@
+/* ============================================================
+   LoadingScreen — full-bleed dark texture, keyline frame,
+   compass + "Calculating…" headline + animated progress bar.
+   Reuses .question-panel__logo-box from QuizScreen.css.
+   ============================================================ */
+
+.loading-screen {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(16px, 1.7vw, 26px);
+  background-image: var(--ld-bg, url('/assets/maroon-bg.webp'));
+  background-size: cover;
+  background-position: center;
+}
+
+/* ---------- Top row: logo box + keyline to the right edge ---------- */
+
+.ld__top {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-bottom: none;
+}
+
+.ld__top-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.55);
+  margin: 0 clamp(14px, 1.5vw, 26px);
+}
+
+/* ---------- Keyline frame + centered body ---------- */
+
+.ld__frame {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+.ld__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(24px, 4vh, 48px) clamp(20px, 4vw, 76px);
+}
+
+.ld__compass {
+  width: clamp(120px, 21vh, 230px);
+  height: auto;
+  animation: ld-spin 2.4s linear infinite;
+}
+
+@keyframes ld-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ld__compass {
+    animation: none;
+  }
+}
+
+.ld__headline {
+  margin-top: clamp(20px, 4vh, 44px);
+  font-family: var(--font-headline);
+  font-weight: 800;
+  color: #ffffff;
+  font-size: clamp(24px, 3vw, 58px);
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+
+/* "Revenue per Visitor" — cream, with the Better Brush "R" */
+.ld__rev {
+  color: #f2e6d8;
+}
+
+.ld__r {
+  font-family: var(--font-number);
+  font-weight: 400;
+  font-size: 1.2em;
+  line-height: 0;
+}
+
+/* ---------- Progress bar ---------- */
+
+.ld__bar {
+  margin-top: clamp(28px, 6vh, 64px);
+  width: min(52%, 980px);
+  height: clamp(9px, 1.3vh, 14px);
+  border-radius: 999px;
+  background: #8b95a1;
+  overflow: hidden;
+}
+
+.ld__fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: #ffffff;
+  animation: ld-fill 1.5s ease-out forwards;
+}
+
+@keyframes ld-fill {
+  from {
+    width: 4%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* ---------- Footer strip: keyline + corner cell ---------- */
+
+.ld__footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.55);
+  display: flex;
+  min-height: clamp(44px, 4.4vw, 66px);
+}
+
+.ld__footer-hint {
+  flex: 1;
+}
+
+.ld__footer-cell {
+  width: clamp(44px, 4.4vw, 66px);
+  border-left: 1px solid rgba(255, 255, 255, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ld__footer-cell img {
+  width: 58%;
+  height: auto;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 900px) {
+  .ld__compass {
+    width: 90px;
+  }
+
+  .ld__headline br {
+    display: none;
+  }
+
+  .ld__headline {
+    font-size: clamp(21px, 5.6vw, 32px);
+  }
+
+  .ld__bar {
+    width: min(86%, 420px);
+  }
+}

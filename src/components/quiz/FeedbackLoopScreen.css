@@ -1,0 +1,231 @@
+/* ============================================================
+   FeedbackLoopScreen (Q14) — split screen on the QuizScreen shell.
+   Left: photo anchored bottom-left, spilling past the keyline frame.
+   Right: brush "Haaaa!" + label strip + question + textarea + Continue.
+   ============================================================ */
+
+/* The new circle-doodle export is square on white — mask to a disc.
+   Raised above everything (photo, frame, panels) so it always sits on top. */
+.fl-screen .seam-badge {
+  background: #ffffff;
+  overflow: hidden;
+  z-index: 10;
+}
+
+/* ---------- Left panel ---------- */
+
+.fl__left {
+  /* no overflow clipping — it would cut the seam badge's right half;
+     the photo is sized to stay inside the panel on its own */
+}
+
+/* Photo sits UNDER the frame so the keylines overlap her (reference) —
+   sized proportionally to the panel like the reference (~80% wide) */
+.fl__photo {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: min(92%, 40vw);
+  height: auto;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.fl__frame {
+  z-index: 2;
+}
+
+.fl-screen .question-panel__top {
+  position: relative;
+  z-index: 2;
+}
+
+/* Corner cell — bottom-right of the frame, like the question footer cell */
+.fl__corner {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: clamp(44px, 4.4vw, 66px);
+  height: clamp(44px, 4.4vw, 66px);
+  border-left: var(--keyline);
+  border-top: var(--keyline);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.fl__corner img {
+  width: 58%;
+  height: auto;
+}
+
+/* ---------- Right panel ---------- */
+
+.fl__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(16px, 3vh, 36px) 0;
+}
+
+/* Better Brush "Haaaa!" — plum accent (capped so it can't sprawl or
+   collide with the topbar keyline at wide windows) */
+.fl__haaaa {
+  margin-top: clamp(10px, 2vh, 24px);
+  margin-bottom: 20px;
+  font-family: var(--font-number);
+  font-weight: 400;
+  color: #5d1b4e;
+  font-size: 45px;
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+}
+
+/* Roboto Mono label strip — always navy with white text (reference),
+   regardless of theme, so it contrasts with the plum script */
+.fl__label {
+  display: inline-block;
+  width: fit-content;
+  margin-top: -0.3em;
+  background: #152638;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: clamp(11px, 0.95vw, 18px);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.4em 0.9em;
+}
+
+/* Question — always dark navy ink like the reference (never plum, so
+   it doesn't melt into the script on the maroon theme) */
+.fl__question {
+  margin-top: clamp(12px, 2vh, 22px);
+  font-family: var(--font-headline);
+  font-weight: 800;
+  color: #152638;
+  font-size: clamp(24px, 2.4vw, 48px);
+  line-height: 1.35;
+  letter-spacing: 0.005em;
+  max-width: 23ch;
+}
+
+.fl__textarea {
+  margin-top: clamp(18px, 3vh, 34px);
+  width: clamp(280px, 33vw, 660px);
+  max-width: 100%;
+  min-height: clamp(120px, 15vh, 170px);
+  box-sizing: border-box;
+  background: #ffffff;
+  color: var(--t-option-text);
+  border: 1.5px solid rgba(21, 38, 56, 0.18);
+  border-radius: 10px;
+  padding: clamp(12px, 1.2vw, 18px) clamp(14px, 1.4vw, 20px);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(14px, 1.2vw, 22px);
+  line-height: 1.5;
+  outline: none;
+  resize: vertical;
+}
+
+.fl__textarea::placeholder {
+  color: rgba(21, 38, 56, 0.45);
+}
+
+.fl__textarea:focus {
+  border-color: var(--t-option-number-bg);
+}
+
+.fl__continue {
+  margin-top: clamp(14px, 2.6vh, 28px);
+}
+
+/* mobile-only elements — hidden on desktop */
+.fl__mobile-bar,
+.fl__mobile-back {
+  display: none;
+}
+
+/* ============================================================
+   Responsive — panels stack (shell handles the white logo bar, badge,
+   mobile back link); the dark block needs a fixed height for the photo
+   ============================================================ */
+
+@media (max-width: 900px) {
+  /* Flip the stack: content first, photo panel at the bottom */
+  .fl-screen {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .fl__right {
+    order: 1;
+  }
+
+  .fl__left {
+    order: 2;
+    min-height: 52vh;
+    align-items: center;
+  }
+
+  /* full-bleed dark block on mobile */
+  .fl-screen .question-panel {
+    padding: 0;
+  }
+
+  /* the dark panel's own chrome moves into the content panel instead */
+  .fl-screen .question-panel__top,
+  .fl-screen .question-panel__mobile-back {
+    display: none;
+  }
+
+  /* white logo bar (full-bleed) + back link at the top of the content */
+  .fl__mobile-bar {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    margin: calc(-1 * clamp(24px, 5vw, 36px)) calc(-1 * clamp(28px, 6.2vw, 120px)) 0;
+    padding: 10px clamp(16px, 4.5vw, 24px);
+  }
+
+  .fl__mobile-bar img {
+    width: clamp(104px, 30vw, 140px);
+    height: auto;
+  }
+
+  .fl__mobile-back {
+    display: block;
+    margin: 14px 0 0;
+  }
+
+  .fl__photo {
+    width: 100%;
+    position: relative;
+  }
+
+  .fl__corner {
+    display: none;
+  }
+
+  .fl__content {
+    align-items: stretch;
+    padding: 35px 0 20px;
+  }
+
+  .fl__question {
+    font-size: clamp(22px, 5.6vw, 30px);
+    max-width: none;
+  }
+
+  .fl__textarea {
+    width: 100%;
+  }
+
+  .fl__continue {
+    align-self: flex-start;
+  }
+}

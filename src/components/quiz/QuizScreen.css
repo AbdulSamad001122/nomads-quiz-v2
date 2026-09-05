@@ -1,0 +1,1080 @@
+/* ============================================================
+   QuizScreen — split-screen quiz template
+   Left: dark textured question panel with keyline frame
+   Right: light answer panel with options + progress
+   All colors come from --t-* theme variables (see themes.js)
+   ============================================================ */
+
+.quiz-screen {
+  position: relative;
+  display: grid;
+  grid-template-columns: 48% 52%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
+/* ---------- Left panel ---------- */
+
+.question-panel {
+  position: relative;
+  background-image: var(--t-left-bg-image);
+  background-size: cover;
+  background-position: center;
+  padding: clamp(16px, 1.7vw, 26px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top row above the frame: keyline across the top, white logo box
+   hanging under it, plus a line at the box's mid-height */
+.question-panel__top {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-bottom: none; /* the frame's top border supplies this line */
+}
+
+.question-panel__top-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.55);
+  margin-left: clamp(14px, 1.5vw, 26px);
+}
+
+/* Thin keyline frame inset from the panel edges */
+.question-panel__frame {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: var(--keyline);
+}
+
+.question-panel__logo-box {
+  background: #ffffff;
+  padding: clamp(10px, 1vw, 16px) clamp(14px, 1.5vw, 26px);
+  display: flex;
+  align-items: center;
+}
+
+.question-panel__logo-box img {
+  width: clamp(96px, 8vw, 160px);
+  height: auto;
+}
+
+.question-panel__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(28px, 3.5vw, 64px) clamp(28px, 4.2vw, 76px);
+}
+
+
+.question-panel__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: clamp(24px, 6vh, 90px);
+}
+
+/* Step number badge — pale circle, Kilimanjaro number */
+.question-panel__step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(56px, 4.6vw, 90px);
+  height: clamp(56px, 4.6vw, 90px);
+  border-radius: 50%;
+  background: var(--t-step-badge-bg);
+  color: var(--t-step-badge-text);
+  font-family: var(--font-number);
+  font-weight: 100;
+  font-size: clamp(24px, 2vw, 38px);
+  line-height: 1;
+  margin-bottom: clamp(22px, 3.2vh, 48px);
+}
+
+/* Roboto Mono label strip — changes per question, 3-4 words max */
+.question-panel__label {
+  align-self: flex-start;
+  background: var(--t-label-bg);
+  color: var(--t-label-text);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: clamp(11px, 0.9vw, 16px);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.35em 0.7em;
+  margin-bottom: clamp(14px, 2vh, 26px);
+}
+
+.question-panel__question-wrap {
+  position: relative;
+}
+
+/* Curve arrows doodle — pinned to the right end of the question's
+   first text line (left/top set inline from measurement); the
+   translate lifts it so it points down into the line's end */
+.question-panel__curve-arrows {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: clamp(38px, 3.4vw, 64px);
+  height: auto;
+  transform: translateY(-72%);
+  pointer-events: none;
+}
+
+/* Question headline — Montserrat Extra Bold, natural wrapping,
+   generous open leading (design rule 0.1) */
+.question-panel__question {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  color: var(--t-question-text);
+  font-size: clamp(26px, 2.9vw, 56px);
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+}
+
+/* Inline helpers for styled words inside a question */
+.q-script {
+  font-family: var(--font-number);
+  font-weight: 100;
+  font-size: 1.18em;
+  line-height: 1;
+}
+
+/* Footer strip formed by the keyline: hint text + arrows centered,
+   square corner cell holding the compass icon on the right */
+.question-panel__footer {
+  border-top: var(--keyline);
+  display: flex;
+  min-height: clamp(44px, 4.4vw, 66px);
+}
+
+.question-panel__footer-hint {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(14px, 1.6vw, 28px);
+}
+
+.question-panel__hint-text {
+  font-family: var(--font-script);
+  font-weight: 400;
+  color: var(--t-question-text);
+  font-size: clamp(26px, 2.4vw, 44px);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.question-panel__hint-arrows {
+  width: clamp(34px, 3vw, 56px);
+  height: auto;
+}
+
+.question-panel__footer-cell {
+  width: clamp(44px, 4.4vw, 66px);
+  border-left: var(--keyline);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.question-panel__footer-cell img {
+  width: 58%;
+  height: auto;
+}
+
+/* ---------- Seam badge ----------
+   Anchored inside the left panel; translateX(50%) pushes half of it
+   across the seam onto the right panel. */
+
+.seam-badge {
+  position: absolute;
+  top: clamp(14px, 2.4vh, 28px);
+  right: 0;
+  transform: translateX(50%);
+  width: clamp(88px, 7.4vw, 142px);
+  height: clamp(88px, 7.4vw, 142px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.seam-badge img {
+  width: 100%;
+  height: auto;
+  animation: seam-badge-spin 18s linear infinite;
+}
+
+@keyframes seam-badge-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seam-badge img {
+    animation: none;
+  }
+}
+
+/* ---------- Right panel ---------- */
+
+.answer-panel {
+  background: var(--t-right-bg);
+  display: flex;
+  flex-direction: column;
+  padding: clamp(28px, 5.2vh, 56px) clamp(28px, 6.2vw, 120px)
+    clamp(24px, 3.6vh, 40px);
+}
+
+.answer-panel__topbar {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 1.6vw, 28px);
+  color: var(--t-back-text);
+}
+
+.answer-panel__topbar-line {
+  flex: 1;
+  height: 1.5px;
+  background: currentColor;
+  opacity: 0.85;
+}
+
+.answer-panel__topbar-icon {
+  width: clamp(18px, 1.5vw, 28px);
+  height: clamp(18px, 1.5vw, 28px);
+  flex-shrink: 0;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  align-self: flex-start;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(16px, 1.35vw, 26px);
+  color: var(--t-back-text);
+}
+
+.back-link__chevron {
+  font-size: 1.15em;
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+/* Options — vertically centered block; cards hug their content.
+   `safe center` keeps the list centred when it fits but aligns to the top
+   once it overflows, so the first items never get clipped above the scroll. */
+.answer-panel__options {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: safe center;
+  gap: clamp(12px, 1.9vh, 22px);
+  padding: clamp(20px, 3vh, 36px) 0;
+}
+
+.option-card {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(12px, 1.1vw, 20px);
+  background: var(--t-option-bg);
+  color: var(--t-option-text);
+  border: var(--card-border);
+  border-radius: 10px;
+  box-shadow: var(--card-shadow);
+  height: auto; /* grows/shrinks with the option text */
+  max-width: 100%; /* long labels wrap + stay inside the panel (no h-scroll) */
+  padding: 10px clamp(16px, 1.6vw, 28px);
+  text-align: left;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.option-card__number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(30px, 2.4vw, 46px);
+  height: clamp(30px, 2.4vw, 46px);
+  border-radius: 50%;
+  background: var(--t-option-number-bg);
+  color: var(--t-option-number-text);
+  font-family: var(--font-number);
+  font-weight: 100;
+  font-size: clamp(14px, 1.05vw, 20px);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.option-card__label {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(16px, 1.45vw, 28px);
+  line-height: 1.25;
+  min-width: 0; /* allow the label to wrap instead of forcing the card wider */
+  overflow-wrap: break-word;
+}
+
+.option-card__radio {
+  width: clamp(18px, 1.4vw, 27px);
+  height: clamp(18px, 1.4vw, 27px);
+  border-radius: 50%;
+  border: 2.5px solid currentColor;
+  flex-shrink: 0;
+}
+
+/* Selected state — dark fill, white text; number badge blends into
+   the fill (matches reference), radio becomes solid */
+.option-card.is-selected {
+  background: var(--t-option-selected-bg);
+  color: var(--t-option-selected-text);
+  border-color: var(--t-option-selected-bg);
+}
+
+.option-card.is-selected .option-card__radio {
+  background: #ffffff;
+  border-color: #ffffff;
+}
+
+/* ---------- Binary (Yes/No) options ---------- */
+
+.answer-panel__options--binary {
+  gap: clamp(24px, 4.5vh, 48px);
+}
+
+.binary-option {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 1.6vw, 30px);
+}
+
+/* Better Brush letter badge, outside the pill */
+.binary-option__letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(40px, 3.4vw, 64px);
+  height: clamp(40px, 3.4vw, 64px);
+  border-radius: 50%;
+  background: var(--t-option-number-bg);
+  color: var(--t-option-number-text);
+  font-family: var(--font-number);
+  font-weight: 100;
+  font-size: clamp(18px, 1.6vw, 30px);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* Fully-rounded pill */
+.binary-option__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(18px, 2vw, 38px);
+  background: var(--t-option-bg);
+  color: var(--t-option-text);
+  border: var(--card-border);
+  border-radius: 999px;
+  box-shadow: var(--card-shadow);
+  padding: clamp(8px, 1.1vh, 14px);
+  padding-right: clamp(24px, 2.6vw, 48px);
+  text-align: left;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+/* Large ice circle holding the tick/cross icon */
+.binary-option__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(52px, 4.8vw, 92px);
+  height: clamp(52px, 4.8vw, 92px);
+  border-radius: 50%;
+  background: var(--t-right-bg);
+  flex-shrink: 0;
+}
+
+.binary-option__icon img {
+  width: 46%;
+  height: auto;
+}
+
+.binary-option__label {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: clamp(22px, 2.2vw, 42px);
+  line-height: 1;
+}
+
+.binary-option__radio {
+  width: clamp(20px, 1.7vw, 32px);
+  height: clamp(20px, 1.7vw, 32px);
+  border-radius: 50%;
+  border: 2.5px solid currentColor;
+  flex-shrink: 0;
+}
+
+/* Selected — dark pill, white text, solid radio; icon circle stays ice */
+.binary-option__pill.is-selected {
+  background: var(--t-option-selected-bg);
+  color: var(--t-option-selected-text);
+  border-color: var(--t-option-selected-bg);
+}
+
+.binary-option__pill.is-selected .binary-option__radio {
+  background: #ffffff;
+  border-color: #ffffff;
+}
+
+/* ---------- Icon/GIF tile options (2-column grid) ---------- */
+
+.answer-panel__options--media {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  align-content: safe center; /* center when it fits, top-align + scroll when not */
+  gap: clamp(16px, 2vw, 32px);
+  max-width: 640px;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.media-option {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--t-media-bg);
+  color: var(--t-option-text);
+  border: 1.5px solid var(--t-option-selected-bg);
+  border-radius: 14px;
+  overflow: hidden;
+  text-align: center;
+  transition: background 0.15s ease;
+}
+
+/* Better Brush number badge, top-right inside the card */
+.media-option__number {
+  position: absolute;
+  top: clamp(10px, 1vw, 16px);
+  right: clamp(10px, 1vw, 16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(30px, 2.4vw, 44px);
+  height: clamp(30px, 2.4vw, 44px);
+  border-radius: 50%;
+  background: var(--t-option-number-bg);
+  color: var(--t-option-number-text);
+  font-family: var(--font-number);
+  font-weight: 100;
+  font-size: clamp(13px, 1vw, 19px);
+  line-height: 1;
+}
+
+.media-option__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(12px, 1.6vh, 20px);
+  padding: clamp(20px, 2.6vh, 34px) clamp(14px, 1.4vw, 24px)
+    clamp(16px, 2.2vh, 28px);
+}
+
+/* Circular media area — holds a static icon or an animated gif */
+.media-option__circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 1px solid var(--t-option-selected-bg);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.media-option__circle img {
+  width: 52%;
+  height: auto;
+}
+
+/* A gif fills the whole circle instead of sitting inside it */
+.media-option__circle img[src$='.gif'] {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.media-option__label {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+/* Dark footer strip with the radio at the right */
+.media-option__footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background: var(--t-option-selected-bg);
+  padding: clamp(8px, 0.9vw, 12px) clamp(12px, 1.2vw, 18px);
+}
+
+.media-option__radio {
+  width: clamp(18px, 1.5vw, 28px);
+  height: clamp(18px, 1.5vw, 28px);
+  border-radius: 50%;
+  border: 2.5px solid #ffffff;
+}
+
+/* Selected — body tints ice, footer radio fills solid */
+.media-option.is-selected {
+  background: var(--t-media-selected-bg);
+}
+
+.media-option.is-selected .media-option__radio {
+  background: #ffffff;
+}
+
+/* ---------- Progress ---------- */
+
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 1.4vh, 16px);
+  margin-top: 20px;
+}
+
+.progress__track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--t-progress-track);
+  overflow: hidden;
+}
+
+.progress__fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--t-progress-fill);
+  transition: width 0.3s ease;
+}
+
+.progress__label {
+  align-self: center;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(13px, 1vw, 19px);
+  color: var(--t-progress-label);
+}
+
+/* Mobile-only elements — hidden on desktop */
+.question-panel__mobile-back,
+.answer-panel__mobile-footer {
+  display: none;
+}
+
+/* ---------- Option hover effect (all variants, all themes) ----------
+   Only on hover-capable devices, so touch screens don't get a
+   sticky scaled state after tapping. */
+
+@media (hover: hover) {
+  .option-card {
+    transition: background 0.15s ease, color 0.15s ease,
+      transform 0.15s ease;
+  }
+
+  .binary-option__pill {
+    transition: background 0.15s ease, color 0.15s ease,
+      transform 0.15s ease;
+  }
+
+  .media-option {
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+
+  .option-card:hover,
+  .binary-option__pill:hover,
+  .media-option:hover {
+    transform: scale(1.1);
+    z-index: 1;
+  }
+}
+
+/* ============================================================
+   Responsive — tablet & mobile: panels stack vertically
+   ============================================================ */
+
+@media (max-width: 900px) {
+  .quiz-screen {
+    grid-template-columns: 1fr;
+    /* dark question row hugs its content; the answers row takes the rest */
+    grid-template-rows: auto 1fr;
+  }
+
+  /* Yes/no screens end where their content ends — no leftover space */
+  .quiz-screen--variant-binary {
+    min-height: 0;
+  }
+
+  /* --- Left/dark section becomes: white logo bar + frameless dark block --- */
+
+  .seam-badge {
+    display: none;
+  }
+
+  /* Full-bleed white logo bar */
+  .question-panel__top {
+    background: #ffffff;
+    border: none;
+    margin: calc(-1 * clamp(16px, 1.7vw, 26px)) calc(-1 * clamp(16px, 1.7vw, 26px)) 0;
+    padding: 10px clamp(16px, 4.5vw, 24px);
+  }
+
+  .question-panel__top-line {
+    display: none;
+  }
+
+  .question-panel__logo-box {
+    padding: 0;
+  }
+
+  .question-panel__logo-box img {
+    width: clamp(104px, 30vw, 140px);
+  }
+
+  /* Dark block: no keyline frame on mobile */
+  .question-panel__frame {
+    border: none;
+  }
+
+  .question-panel__body {
+    padding: clamp(18px, 5vw, 28px) clamp(16px, 4.5vw, 24px)
+      clamp(24px, 6vw, 36px);
+  }
+
+  /* Back link moves onto the dark panel, in the question text color */
+  .question-panel__mobile-back {
+    display: block;
+    margin-bottom: clamp(26px, 4vw, 24px);
+  }
+
+  .question-panel__mobile-back .back-link {
+    color: var(--t-question-text);
+    font-size: 16px;
+  }
+
+  /* Step badge floats to the top-right of the dark block */
+  .question-panel__step {
+    position: absolute;
+    top: clamp(14px, 4vw, 24px);
+    right: clamp(16px, 4.5vw, 24px);
+    width: 54px;
+    height: 54px;
+    font-size: 24px;
+    margin-bottom: 0;
+  }
+
+  .question-panel__content {
+    justify-content: flex-start;
+    padding-top: 0;
+    padding-bottom: 8px;
+  }
+
+  .question-panel__curve-arrows {
+    display: none;
+  }
+
+  .question-panel__footer {
+    display: none;
+  }
+
+  .question-panel__question {
+    font-size: clamp(24px, 4.6vw, 34px);
+    line-height: 1.45;
+  }
+
+  /* Badge sits on the horizontal seam between stacked panels,
+     bottom edge of the question panel, pushed half below it */
+  .seam-badge {
+    top: auto;
+    bottom: 0;
+    right: clamp(18px, 6vw, 48px);
+    transform: translateY(50%);
+    width: clamp(76px, 17vw, 100px);
+    height: clamp(76px, 17vw, 100px);
+  }
+
+  /* Light section stays full-bleed; the keylines are drawn INSIDE it,
+     inset 10px, overlapping the light background */
+  .answer-panel {
+    position: relative;
+    min-height: 55vh;
+    padding-top: clamp(24px, 5vw, 36px);
+    padding-bottom: 10px;
+  }
+
+  .answer-panel--binary {
+    align-self: start; /* hug content instead of stretching to fill */
+    height: auto;
+    min-height: 40vh;
+    padding-top: 15px;
+  }
+
+  .answer-panel--binary .answer-panel__options {
+    min-height: 0;
+    flex: 0 0 auto; /* don't stretch — sit right below the question */
+    justify-content: flex-start;
+    margin-inline: auto; /* center the options block horizontally */
+    padding-top: 10px;
+    padding-bottom: 14px;
+  }
+
+  /* footer stays on the panel's bottom edge, aligned with the inset lines */
+  .answer-panel--binary .answer-panel__mobile-footer {
+    margin-top: auto;
+  }
+
+
+  .answer-panel::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border-left: 1px solid color-mix(in srgb, var(--t-option-selected-bg) 55%, transparent);
+    border-right: 1px solid color-mix(in srgb, var(--t-option-selected-bg) 55%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--t-option-selected-bg) 55%, transparent);
+    pointer-events: none;
+  }
+
+  .answer-panel__topbar {
+    display: none;
+  }
+
+  /* Progress bar reads as a solid dark rule (mockup style) */
+  .progress__track {
+    background: var(--t-progress-fill);
+  }
+
+  .progress {
+    padding-bottom: clamp(14px, 3.5vw, 20px);
+  }
+
+  /* Bottom hint strip: script text + dark arrows + icon corner cell */
+  .answer-panel__mobile-footer {
+    display: flex;
+    border-top: 1px solid color-mix(in srgb, var(--t-option-selected-bg) 55%, transparent);
+    margin: 0 calc(10px - clamp(28px, 6.2vw, 120px));
+    min-height: 46px;
+  }
+
+  .answer-panel__mobile-hint {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .answer-panel__mobile-hint-text {
+    font-family: var(--font-script);
+    font-size: clamp(24px, 6.4vw, 30px);
+    color: var(--t-option-selected-bg);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .answer-panel__mobile-hint img {
+    width: 30px;
+    height: auto;
+  }
+
+  .answer-panel__mobile-cell {
+    width: 46px;
+    border-left: 1px solid color-mix(in srgb, var(--t-option-selected-bg) 55%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .answer-panel__mobile-cell img {
+    width: 24px;
+    height: auto;
+  }
+
+  .answer-panel__options {
+    align-items: stretch;
+  }
+
+  .option-card {
+    display: flex;
+    width: 100%;
+  }
+
+  .option-card__label {
+    flex: 1;
+    font-size: clamp(15px, 4vw, 20px);
+  }
+
+  .binary-option {
+    width: 100%;
+  }
+
+  .binary-option__pill {
+    display: flex;
+    flex: 1;
+  }
+
+  .binary-option__label {
+    flex: 1;
+    font-size: clamp(20px, 5.6vw, 28px);
+  }
+}
+
+/* Between 650–900px the yes/no options block hugs its content */
+@media (max-width: 900px) and (min-width: 650px) {
+  .answer-panel__options--binary {
+    width: fit-content;
+    max-width: 100%;
+  }
+}
+
+/* Between 420–460px the question headline steps down to 23px */
+@media (max-width: 460px) and (min-width: 420px) {
+  .question-panel__question {
+    font-size: 23px;
+  }
+}
+
+/* Below 420px the question headline steps down to 25px */
+@media (max-width: 419.98px) {
+  .question-panel__question {
+    font-size: 25px;
+  }
+}
+
+/* Below 650px the yes/no options block hugs its content */
+@media (max-width: 649.98px) {
+  .answer-panel__options--binary {
+    width: fit-content;
+    max-width: 100%;
+  }
+}
+
+/* Below 560px the step badge shrinks */
+@media (max-width: 559.98px) {
+  .question-panel__step {
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+  }
+}
+
+/* Below 570px the icon/gif tiles stack vertically (one per row) */
+@media (max-width: 569.98px) {
+  .answer-panel__options--media {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   Flow additions — subline, manual entry, continue/skip, textarea
+   ============================================================ */
+
+/* Smaller line under the question headline */
+.question-panel__subline {
+  margin: 14px 0 0;
+  font-family: var(--font-body, 'Montserrat', sans-serif);
+  font-weight: 500;
+  font-size: clamp(13px, 1.1vw, 16px);
+  line-height: 1.55;
+  color: var(--t-question-text);
+  opacity: 0.82;
+  max-width: 52ch;
+}
+
+/* Long option lists (Q3, Q6…): no inner scrollbox — the screen grows with
+   its content and the PAGE (body) scrolls instead. Horizontal overflow is
+   prevented structurally: cards cap at 100% width and labels wrap. */
+
+/* Manual exact-number input revealed under the options */
+.qa-manual {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: min(420px, 100%);
+}
+
+.qa-manual__label {
+  font-family: var(--font-mono, 'Roboto Mono', monospace);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--t-option-text);
+}
+
+.qa-manual__input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1.5px solid var(--t-option-number-bg);
+  border-radius: 10px;
+  background: var(--t-option-bg);
+  color: var(--t-option-text);
+  padding: 13px 16px;
+  font-family: var(--font-body, 'Montserrat', sans-serif);
+  font-weight: 600;
+  font-size: 16px;
+  outline: none;
+  box-shadow: var(--card-shadow);
+}
+
+.qa-manual__input:focus {
+  border-width: 2px;
+}
+
+/* Continue + skip row */
+.qa-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 4px;
+}
+
+/* Continue — visual style comes from the shared .q-btn (landing-v3
+   button, see styles/button.css); nothing extra needed here. */
+
+.qa-skip {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-mono, 'Roboto Mono', monospace);
+  font-size: 12.5px;
+  letter-spacing: 0.5px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: var(--t-back-text);
+  padding: 6px 2px;
+}
+
+/* Free-text screen (Q14) */
+.qa-textarea {
+  width: min(560px, 100%);
+  box-sizing: border-box;
+  border: 1.5px solid var(--t-option-number-bg);
+  border-radius: 10px;
+  background: var(--t-option-bg);
+  color: var(--t-option-text);
+  padding: 16px 18px;
+  font-family: var(--font-body, 'Montserrat', sans-serif);
+  font-weight: 500;
+  font-size: 15.5px;
+  line-height: 1.6;
+  outline: none;
+  resize: vertical;
+  box-shadow: var(--card-shadow);
+}
+
+.qa-textarea:focus {
+  border-width: 2px;
+}
+
+@media (max-width: 900px) {
+  .qa-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* Desktop: no viewport clamp — when a question has many/long options the
+   whole screen grows past 100vh and the BODY scrolls (no inner scrollbox).
+   The left panel stretches with it, so the design stays intact mid-scroll. */
+@media (min-width: 900.02px) {
+  .answer-panel__options--media {
+    grid-auto-rows: max-content; /* tiles keep natural height, never squash */
+  }
+
+  /* Q6 only: its long option list scrolls, so the question starts at the
+     top instead of centering (desktop only — mobile already top-aligns) */
+  .quiz-q-q6 .question-panel__content {
+    justify-content: flex-start;
+  }
+}
+
+/* ============================================================
+   Long labels — options whose text wraps past 2 lines drop to
+   weight 500 at a reduced size (set via useLongLabel.js)
+   ============================================================ */
+
+.option-card--long .option-card__label {
+  font-weight: 500;
+  font-size: clamp(14px, 1.1vw, 20px);
+  line-height: 1.4;
+}
+
+.media-option--long .media-option__label {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+/* During measurement the label is pinned to its BASE metrics so the
+   line count is judged pre-shrink (prevents style oscillation). */
+.option-card[data-measuring] .option-card__label {
+  font-weight: 700 !important;
+  font-size: clamp(16px, 1.45vw, 28px) !important;
+  line-height: 1.25 !important;
+}
+
+.media-option[data-measuring] .media-option__label {
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  line-height: 1.35 !important;
+}
+
+/* Q7C + Q12 (both SLG/PLG variants): option labels always unbold at one
+   uniform size — desktop and mobile (covers long-flagged labels too) */
+.quiz-q-q7c .option-card__label,
+.quiz-q-q12 .option-card__label,
+.quiz-q-q7c .option-card--long .option-card__label,
+.quiz-q-q12 .option-card--long .option-card__label {
+  font-weight: 500;
+  font-size: clamp(14px, 1.1vw, 20px);
+}
+
+/* ============================================================
+   Mobile: uniform option labels — everything weight 500 at one
+   size, so there's no bold/light mix regardless of line count
+   ============================================================ */
+
+@media (max-width: 900px) {
+  .option-card__label,
+  .option-card--long .option-card__label {
+    font-weight: 500;
+    font-size: clamp(15px, 4vw, 20px);
+    line-height: 1.4;
+  }
+
+  .media-option__label,
+  .media-option--long .media-option__label {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.4;
+  }
+}

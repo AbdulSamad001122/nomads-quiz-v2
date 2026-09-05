@@ -1,0 +1,30 @@
+/* Design tokens — from design-v2.md (Section 0.2) + quiz template references */
+
+:root {
+  /* Foundation colors */
+  --deep-purple: #250f1c;
+  --midnight-blue: #152638;
+  --stone: #e4c8bc;
+
+  /* Accent colors (sparing) */
+  --brand-plum: #5d1b4e;
+  --ice-blue: #cae1f4;
+
+  /* Quiz-template surfaces */
+  --quiz-right-blue: #e4fbff; /* right panel — blue template */
+  --card-white: #ffffff;
+  --ink-dark: #152638;
+  --text-on-dark: #f4ede6;
+
+  /* Fonts */
+  --font-headline: 'Montserrat', sans-serif; /* Extra Bold for headlines */
+  --font-body: 'Montserrat', sans-serif;
+  --font-number: 'Better Brush', cursive; /* option/step numbers only */
+  --font-script: 'Moontime', cursive; /* handwritten accents ("Pick what fits best.") */
+  --font-mono: 'Roboto Mono', monospace; /* small labels/tags only */
+
+  /* Borders & shadows — flat/printed feel */
+  --keyline: 1px solid rgba(255, 255, 255, 0.55);
+  --card-border: 1px solid rgba(21, 38, 56, 0.12);
+  --card-shadow: 0 2px 0 rgba(21, 38, 56, 0.08);
+}
