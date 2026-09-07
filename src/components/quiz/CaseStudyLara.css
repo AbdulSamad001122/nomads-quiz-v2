@@ -1,0 +1,384 @@
+/* ============================================================
+   CaseStudyLara — case study 5D (Lara Acosta / email-close).
+   Extends the shared cs5a__* shell. Uses the tuned patterns from
+   5B/5C: boxed stat cards (2px accent border + 8px cream shadow,
+   35px Better Brush numbers, 15px gaps), 35px accent bands,
+   numbered cards, tablet 2-col / phone 1-col grids.
+   ============================================================ */
+
+/* ---------- 1. Hero left content ---------- */
+
+.cs5d__intro-line {
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(14px, 1.2vw, 22px);
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.cs5d__headline {
+  font-size: clamp(26px, 2.9vw, 54px);
+}
+
+.cs5d__hero-para {
+  margin-top: clamp(14px, 2.4vh, 26px);
+  font-weight: 400;
+  color: #ffffff;
+  font-size: clamp(13px, 1.12vw, 21px);
+  line-height: 1.55;
+}
+
+.cs5d__hero-para strong {
+  font-weight: 800;
+}
+
+/* ---------- 2. Strategy band (accent) ---------- */
+
+.cs5d__strategy {
+  background: var(--cs-accent);
+  padding: 35px clamp(20px, 5.5vw, 100px) 35px;
+  text-align: center;
+}
+
+.cs5d__strategy-lead {
+  margin: 0 auto;
+  max-width: 72ch;
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: #ffffff;
+  font-size: clamp(14px, 1.2vw, 22px);
+  line-height: 1.6;
+}
+
+.cs5d__strategy-lead strong {
+  font-weight: 800;
+}
+
+.cs5d__stat-row {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(24px, 4.5vw, 80px);
+  flex-wrap: nowrap;
+}
+
+.cs5d__stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  background: var(--cs-card);
+  border: 2px solid var(--cs-accent);
+  box-shadow: 8px 8px 0 #f2e6d8;
+  padding: clamp(18px, 2.2vh, 30px) clamp(26px, 3vw, 54px);
+  min-width: clamp(170px, 17vw, 250px);
+  max-width: 340px;
+}
+
+.cs5d__stat-label {
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: #250f1c;
+  font-size: clamp(14px, 1.2vw, 22px);
+  line-height: 1.35;
+  text-wrap: balance;
+}
+
+.cs5d__stat-num {
+  font-family: 'Kilimanjaro Sans', sans-serif;
+  font-weight: 400;
+  color: var(--cs-accent);
+  font-size: 65px;
+  line-height: 1.25;
+}
+
+.cs5d__stat-arrow {
+  flex-shrink: 0;
+  width: clamp(38px, 3.6vw, 64px);
+}
+
+.cs5d__stat-arrow img {
+  width: 100%;
+  height: auto;
+}
+
+/* ---------- 3. SDR Coach section (white) ---------- */
+
+.cs5d__sdr {
+  background-image: var(--cs-paper);
+  background-size: cover;
+  background-position: center;
+  padding: clamp(16px, 1.7vw, 26px) clamp(20px, 3.5vw, 60px);
+  text-align: center;
+}
+
+/* keyline frame — same language as the DQ / loading / CTA bands */
+.cs5d__sdr-frame {
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  padding: 45px clamp(18px, 4vw, 80px) 45px;
+  margin: 22px 0;
+}
+
+/* short centered divider under the header pair */
+.cs5d__sdr-rule {
+  width: min(240px, 40%);
+  margin: 25px auto 0;
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.cs5d__sdr-head {
+  margin: 0 auto;
+  max-width: 72ch;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  color: #ffffff;
+  font-size: clamp(20px, 2.2vw, 40px);
+  line-height: 1.35;
+}
+
+.cs5d__sdr-another {
+  margin-top: 10px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  color: #f2e6d8;
+  font-size: clamp(16px, 1.5vw, 26px);
+}
+
+.cs5d__sdr-para {
+  margin: 30px auto 0;
+  max-width: 78ch;
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: #ffffff;
+  font-size: clamp(14px, 1.15vw, 21px);
+  line-height: 1.6;
+}
+
+.cs5d__sdr-para strong {
+  font-weight: 800;
+}
+
+/* the two-list experiment — VS cards */
+.cs5d__vs-row {
+  margin-top: 30px;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: clamp(24px, 4vw, 70px);
+  flex-wrap: wrap;
+}
+
+.cs5d__vs-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  background: var(--cs-card);
+  border: 2px solid var(--cs-accent);
+  box-shadow: 8px 8px 0 #f2e6d8;
+  padding: clamp(18px, 2.2vh, 30px) clamp(22px, 2.6vw, 46px);
+  width: 320px;
+  max-width: 100%;
+  min-height: 190px;
+}
+
+/* the quiz list — accent fill, white text */
+.cs5d__vs-card--win {
+  background: var(--cs-accent);
+}
+
+.cs5d__vs-lead {
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: #250f1c;
+  font-size: clamp(14px, 1.15vw, 21px);
+  line-height: 1.4;
+  text-wrap: balance;
+}
+
+.cs5d__vs-card--win .cs5d__vs-lead {
+  color: #ffffff;
+}
+
+.cs5d__vs-num {
+  font-family: 'Kilimanjaro Sans', sans-serif;
+  font-weight: 400;
+  color: var(--cs-accent);
+  font-size: 65px;
+  line-height: 1.25;
+}
+
+.cs5d__vs-card--win .cs5d__vs-num {
+  color: #f2e6d8;
+}
+
+.cs5d__vs-label {
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: #250f1c;
+  font-size: clamp(14px, 1.15vw, 21px);
+}
+
+.cs5d__vs-card--win .cs5d__vs-label {
+  color: #ffffff;
+}
+
+/* vs — cream circle so it pops on the dark paper texture */
+.cs5d__vs-badge {
+  align-self: center;
+  flex-shrink: 0;
+  width: clamp(46px, 4vw, 62px);
+  height: clamp(46px, 4vw, 62px);
+  border-radius: 50%;
+  background: #f2e6d8;
+  color: var(--cs-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-number);
+  font-weight: 400;
+  font-size: clamp(18px, 1.6vw, 24px);
+}
+
+.cs5d__sdr-closer {
+  margin: 30px auto 0;
+  max-width: 85ch;
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: #ffffff;
+  font-size: clamp(14px, 1.15vw, 21px);
+  line-height: 1.6;
+}
+
+.cs5d__sdr-closer strong {
+  font-weight: 800;
+}
+
+/* ---------- 4. Three things — numbered cards ---------- */
+
+.cs5d__three {
+  background: var(--cs-card);
+  padding: 65px clamp(20px, 5.5vw, 100px) 65px;
+}
+
+.cs5d__three-head {
+  margin: 0 auto;
+  max-width: 62ch;
+  text-align: center;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  color: #250f1c;
+  font-size: clamp(20px, 2.2vw, 40px);
+  line-height: 1.35;
+}
+
+.cs5d__three-cards {
+  margin: clamp(36px, 5.5vh, 64px) auto 0;
+  max-width: 1400px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(24px, 4.4vw, 44px);
+}
+
+.cs5d__three-card {
+  position: relative;
+  background: #ffffff;
+  border: 2px solid var(--cs-accent);
+  box-shadow: 8px 8px 0 var(--cs-accent); /* #5d1b4e on the maroon route */
+  padding: clamp(26px, 2.6vw, 42px) clamp(18px, 2vw, 34px)
+    clamp(18px, 2vw, 32px);
+}
+
+.cs5d__three-num {
+  position: absolute;
+  top: clamp(-30px, -2.4vw, -22px);
+  left: clamp(-28px, -2.2vw, -20px);
+  width: clamp(50px, 4.4vw, 70px);
+  height: clamp(50px, 4.4vw, 70px);
+  border-radius: 50%;
+  background: var(--cs-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-number);
+  font-weight: 400;
+  color: #ffffff;
+  font-size: clamp(20px, 1.8vw, 30px);
+}
+
+.cs5d__three-text {
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: #250f1c;
+  font-size: clamp(14px, 1.1vw, 20px);
+  line-height: 1.55;
+}
+
+.cs5d__three-text strong {
+  font-weight: 800;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 900px) {
+  /* keep the MORE MONEY highlight together (5B/5C lesson) */
+  .cs5d__headline .hl-sweep {
+    white-space: nowrap;
+  }
+
+  .cs5d__strategy {
+    padding: 35px clamp(16px, 5vw, 28px);
+  }
+
+  .cs5d__sdr {
+    padding: 48px clamp(16px, 5vw, 28px);
+  }
+
+  .cs5d__three {
+    padding: 48px clamp(16px, 5vw, 28px) 56px;
+  }
+
+  /* tablet (601–900): cards pair up, third spans full width */
+  .cs5d__three-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cs5d__three-card:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+
+  .cs5d__three-num {
+    left: -8px;
+  }
+
+  .cs5d__vs-row {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .cs5d__three-cards {
+    grid-template-columns: 1fr;
+    gap: 46px;
+  }
+
+  .cs5d__three-card:nth-child(3) {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .cs5d__stat-row {
+    flex-direction: column;
+  }
+
+  .cs5d__stat-arrow {
+    transform: rotate(90deg);
+  }
+}

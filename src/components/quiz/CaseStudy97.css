@@ -1,0 +1,599 @@
+/* ============================================================
+   CaseStudy97 — case study 5B (The 97%), per the 5B reference.
+   Builds on CaseStudyGolfbays.css (cs5a__* shell: hero panels,
+   frame, script band, chips, CTA). Only 5B-specific sections
+   live here (cs5b__*).
+   ============================================================ */
+
+/* ---------- 1. Hero left content ---------- */
+
+.cs5b__lead {
+  font-weight: 700;
+  color: #ffffff;
+  font-size: clamp(15px, 1.32vw, 25px);
+  line-height: 1.5;
+}
+
+.cs5b__problem-chip {
+  margin-top: clamp(16px, 2.6vh, 30px);
+}
+
+.cs5b__hero-para {
+  margin-top: clamp(12px, 2vh, 22px);
+  font-weight: 400;
+  color: #ffffff;
+  font-size: clamp(13px, 1.12vw, 21px);
+  line-height: 1.55;
+}
+
+/* ---------- 2. But what happens When you don't? ---------- */
+
+.cs5b__happens {
+  background: var(--cs-accent); /* #5d1b4e on the maroon route */
+  padding: 65px clamp(20px, 5.5vw, 100px) 65px;
+  text-align: center;
+}
+
+.cs5b__happens-head {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  color: #ffffff;
+  font-size: clamp(26px, 3.2vw, 56px);
+  line-height: 1.2;
+  letter-spacing: 0.005em;
+}
+
+/* Better Brush capital — cream on the dark band, like the DQ "V" */
+.cs5b__script-cap {
+  font-family: var(--font-number);
+  font-weight: 400;
+  font-size: 1.2em;
+  line-height: 0;
+  color: #f2e6d8;
+}
+
+.cs5b__happens-para {
+  margin: 30px auto 0;
+  max-width: 72ch;
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: #ffffff;
+  font-size: clamp(14px, 1.12vw, 21px);
+  line-height: 1.6;
+}
+
+/* ---------- 3. After the OS — zigzag numbered cards ---------- */
+
+.cs5b__after {
+  background: #ffffff;
+  padding: clamp(24px, 4vh, 48px) clamp(20px, 5.5vw, 100px)
+    clamp(52px, 8vh, 110px);
+}
+
+.cs5b__after-head {
+  text-align: center;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  color: #250f1c;
+  font-size: clamp(20px, 2.2vw, 40px);
+  margin-bottom: clamp(32px, 5.5vh, 70px);
+}
+
+.cs5b__cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(20px, 2.2vw, 40px);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.cs5b__card {
+  position: relative;
+  background: var(--cs-card);
+  border: 2px solid var(--cs-accent);
+  border-radius: 0;
+  box-shadow: 8px 8px 0 #f2e6d8; /* cream backing */
+  padding: clamp(22px, 2.4vw, 40px) clamp(18px, 2vw, 34px)
+    clamp(18px, 2vw, 32px);
+}
+
+
+.cs5b__num {
+  position: absolute;
+  top: clamp(-30px, -2.4vw, -22px);
+  left: clamp(-28px, -2.2vw, -20px);
+  width: clamp(50px, 4.4vw, 70px);
+  height: clamp(50px, 4.4vw, 70px);
+  border-radius: 50%;
+  background: var(--cs-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-number);
+  font-weight: 400;
+  color: #ffffff;
+  font-size: clamp(20px, 1.8vw, 30px);
+}
+
+.cs5b__card-text {
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: #250f1c;
+  font-size: clamp(14px, 1.15vw, 21px);
+  line-height: 1.5;
+}
+
+.cs5b__card-text strong {
+  font-weight: 800;
+}
+
+/* proof images — stats baked into the device frames */
+.cs5b__proof {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: clamp(16px, 2.4vh, 30px) auto 0;
+}
+
+.cs5b__proof--tablet {
+  width: min(50%, 400px);
+}
+
+/* ---------- 4. Samar Owais — dark band ---------- */
+
+.cs5b__samar {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  background: var(--cs-card);
+}
+
+.cs5b__photo-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(28px, 4vh, 60px) clamp(20px, 3vw, 56px);
+}
+
+.cs5b__photo-panel img {
+  width: 90%;
+  height: auto;
+}
+
+.cs5b__photo-panel--dark {
+  background-image: var(--t-left-bg-image);
+  background-size: cover;
+  background-position: center;
+}
+
+.cs5b__samar-content {
+  padding: clamp(36px, 6vh, 80px) clamp(24px, 4.5vw, 90px)
+    clamp(36px, 6vh, 80px) clamp(20px, 4.5vw, 90px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cs5b__script-head {
+  font-family: var(--font-number);
+  font-weight: 400;
+  color: #ffffff;
+  font-size: clamp(32px, 3.4vw, 64px);
+  line-height: 1.1;
+}
+
+.cs5b__script-head--accent {
+  color: var(--cs-accent);
+  font-family: var(--font-headline);
+  font-weight: 800;
+}
+
+.cs5b__samar-para {
+  margin-top: clamp(14px, 2.2vh, 24px);
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: #250f1c;
+  font-size: clamp(14px, 1.12vw, 21px);
+  line-height: 1.55;
+}
+
+.cs5b__samar-para strong {
+  font-weight: 800;
+}
+
+/* testimonial card — rebuilt per the reference (avatar = placeholder) */
+.cs5b__testi {
+  margin-top: clamp(18px, 3vh, 34px);
+  width: min(100%, 560px);
+  background: #ffffff;
+  border: 1.5px solid #152638;
+  box-shadow: 8px 8px 0 var(--cs-accent);
+  padding: clamp(16px, 1.8vw, 28px) clamp(16px, 1.8vw, 30px);
+}
+
+.cs5b__testi-head {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 1.2vw, 18px);
+}
+
+.cs5b__testi-avatar {
+  width: clamp(44px, 3.8vw, 62px);
+  height: clamp(44px, 3.8vw, 62px);
+  border-radius: 50%;
+  border: 1.5px solid var(--cs-accent);
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.cs5b__testi-name {
+  font-family: var(--font-body);
+  font-weight: 800;
+  color: #250f1c;
+  font-size: clamp(15px, 1.2vw, 22px);
+  line-height: 1.3;
+}
+
+.cs5b__testi-role {
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: #250f1c;
+  font-size: clamp(12px, 0.95vw, 16px);
+  line-height: 1.4;
+}
+
+.cs5b__testi-quote {
+  margin-top: clamp(12px, 1.8vh, 20px);
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: #250f1c;
+  font-size: clamp(14px, 1.15vw, 21px);
+  line-height: 1.55;
+}
+
+/* ---------- 5. Audio-tech SaaS — light band ---------- */
+
+.cs5b__audio {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  background: var(--cs-card);
+}
+
+.cs5b__audio-content {
+  padding: clamp(36px, 6vh, 80px) clamp(24px, 4.5vw, 90px)
+    clamp(36px, 6vh, 80px) clamp(20px, 4.5vw, 90px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cs5b__audio-para {
+  margin-top: clamp(14px, 2.2vh, 24px);
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: #250f1c;
+  font-size: clamp(14px, 1.12vw, 21px);
+  line-height: 1.55;
+}
+
+.cs5b__audio-para strong {
+  font-weight: 800;
+}
+
+.cs5b__quote {
+  margin-top: clamp(14px, 2.2vh, 24px);
+  width: fit-content;
+  background: var(--cs-accent);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: clamp(13px, 1.12vw, 20px);
+  line-height: 1.45;
+  padding: 8px 14px;
+}
+
+.cs5b__audio-lead {
+  margin-top: clamp(14px, 2.2vh, 24px);
+  font-weight: 800;
+  color: #250f1c;
+  font-size: clamp(14px, 1.15vw, 21px);
+}
+
+.cs5b__audio-bullets {
+  margin-top: clamp(10px, 1.6vh, 18px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1.2vh, 14px);
+}
+
+.cs5b__bullet {
+  display: flex;
+  gap: 10px;
+}
+
+.cs5b__bullet p {
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: #250f1c;
+  font-size: clamp(13px, 1.05vw, 19px);
+  line-height: 1.5;
+}
+
+/* larger bullet type in the eyeballs split, per the reference */
+.cs5b__eyes-right .cs5b__bullet p {
+  font-size: clamp(14px, 1.2vw, 22px);
+}
+
+.cs5b__eyes-right .cs5b__bullet {
+  gap: 12px;
+}
+
+.cs5b__audio-closer {
+  margin-top: clamp(16px, 2.6vh, 28px);
+  font-weight: 800;
+  color: #250f1c;
+  font-size: clamp(14px, 1.15vw, 21px);
+}
+
+/* ---------- 6. Eyeballs ---------- */
+
+.cs5b__eyes {
+  background: #ffffff;
+  padding: clamp(48px, 8vh, 100px) clamp(20px, 5.5vw, 100px)
+    clamp(32px, 5vh, 64px);
+}
+
+.cs5b__eyes-head {
+  position: relative;
+  text-align: left;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  color: #250f1c;
+  font-size: clamp(26px, 3vw, 54px);
+  line-height: 1.25;
+}
+
+.cs5b__eyes-arrow {
+  display: inline-block;
+  width: 70px;
+  height: auto;
+  margin-left: 12px;
+  position: absolute;
+  filter: brightness(0);
+  transform: rotate(253deg);
+}
+
+.cs5b__eyes-sub {
+  margin: clamp(16px, 2.6vh, 30px) 0 0;
+  max-width: 68ch;
+  text-align: left;
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: #250f1c;
+  font-size: clamp(14px, 1.12vw, 21px);
+  line-height: 1.6;
+}
+
+.cs5b__eyes-sub strong {
+  font-weight: 800;
+}
+
+/* full-bleed 50/50 split: dark texture + infographic | lavender + blocks */
+.cs5b__eyes-split {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.cs5b__eyes-left {
+  background-image: var(--t-left-bg-image);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(32px, 5vh, 72px) clamp(20px, 3vw, 56px);
+}
+
+.cs5b__eyes-img {
+  width: min(100%, 700px);
+  height: auto;
+}
+
+.cs5b__eyes-right {
+  background: var(--cs-card);
+  padding: clamp(36px, 6vh, 84px) clamp(24px, 4.2vw, 84px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cs5b__pool {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(30px, 5vh, 60px);
+}
+
+.cs5b__pool-block {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 1.8vh, 22px);
+}
+
+.cs5b__pool-chip {
+  width: fit-content;
+  background: var(--cs-accent);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: clamp(14px, 1.25vw, 24px);
+  line-height: 1.45;
+  padding: 8px 14px;
+  margin-bottom: 6px;
+}
+
+/* all pool chips share the accent plum (#5d1b4e on the maroon route) */
+.cs5b__pool-chip--ink {
+  background: var(--cs-accent);
+}
+
+/* bold lead line without chip background */
+.cs5b__pool-lead {
+  font-weight: 800;
+  color: #250f1c;
+  font-size: clamp(14px, 1.25vw, 24px);
+  line-height: 1.45;
+  margin-bottom: 6px;
+}
+
+.cs5b__pool-strong {
+  font-weight: 800;
+  color: #250f1c;
+  font-size: clamp(14px, 1.22vw, 23px);
+  line-height: 1.5;
+}
+
+.cs5b__pool-note {
+  font-weight: 500;
+  color: #250f1c;
+  font-size: clamp(14px, 1.18vw, 22px);
+  line-height: 1.5;
+}
+
+.cs5b__pool-note strong {
+  font-weight: 800;
+}
+
+/* Curious → Consideration → Conversation → Conversion */
+.cs5b__journey-wrap {
+  background: #ffffff;
+  padding: clamp(36px, 6vh, 72px) clamp(20px, 5.5vw, 100px);
+}
+
+.cs5b__journey {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(10px, 1.2vw, 18px);
+}
+
+.cs5b__journey-chip {
+  background: #ffffff;
+  border: 1.5px solid var(--cs-accent);
+  box-shadow: 4px 4px 0 var(--cs-card);
+  color: #250f1c;
+  font-weight: 700;
+  font-size: clamp(11px, 1.05vw, 19px);
+  padding: 8px 18px;
+}
+
+.cs5b__journey-arrow {
+  width: clamp(28px, 2.4vw, 38px);
+  height: clamp(28px, 2.4vw, 38px);
+  background: var(--cs-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cs5b__journey-arrow img {
+  width: 55%;
+  height: auto;
+}
+
+/* ---------- 7. CTA extras ---------- */
+
+.cs5b__cta-para {
+  margin-top: clamp(12px, 1.8vh, 22px);
+  max-width: 85ch;
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: #250f1c;
+  font-size: clamp(14px, 1.15vw, 21px);
+  line-height: 1.6;
+}
+
+.cs5b__cta-para strong {
+  font-weight: 800;
+}
+
+.cs5b__jiffy {
+  margin-top: clamp(10px, 1.6vh, 18px);
+  font-family: var(--font-headline);
+  font-weight: 800;
+  color: var(--cs-accent);
+  font-size: clamp(20px, 1.8vw, 32px);
+  line-height: 1.1;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 900px) {
+  /* tablet (601–900): cards pair up 2×2 */
+  .cs5b__cards {
+    grid-template-columns: 1fr 1fr;
+    gap: 34px 24px;
+  }
+
+  .cs5b__num {
+    left: -8px;
+  }
+
+
+  /* keep the "already spending" highlight on one line — the wrap moves
+     around the phrase instead of splitting the chip mid-phrase */
+  .cs5b__eyes-head .hl-sweep {
+    white-space: nowrap;
+  }
+
+  .cs5b__eyes-split {
+    grid-template-columns: 1fr;
+  }
+
+  .cs5b__eyes-right {
+    padding: 32px 20px;
+  }
+
+  .cs5b__eyes-arrow {
+    display: none;
+  }
+
+  .cs5b__journey {
+    gap: 8px;
+  }
+}
+
+/* Samar + Audio splits hold side-by-side until 800px, then stack */
+@media (max-width: 800px) {
+  .cs5b__samar {
+    grid-template-columns: 1fr;
+  }
+
+  .cs5b__audio {
+    grid-template-columns: 1fr;
+  }
+
+  .cs5b__audio-content {
+    padding: 32px clamp(16px, 5vw, 28px);
+  }
+
+  .cs5b__samar .cs5b__photo-panel {
+    order: 2;
+  }
+
+  .cs5b__samar-content {
+    order: 1;
+    padding: 32px clamp(16px, 5vw, 28px) 40px;
+  }
+
+  .cs5b__testi-quote {
+    font-size: clamp(13px, 1.15vw, 21px);
+  }
+}
+
+/* phones (≤600): cards single column */
+@media (max-width: 600px) {
+  .cs5b__cards {
+    grid-template-columns: 1fr;
+  }
+}

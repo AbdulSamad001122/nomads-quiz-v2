@@ -9,6 +9,11 @@ import DisqualifiedScreen from './DisqualifiedScreen.jsx';
 import LoadingScreen from './LoadingScreen.jsx';
 import FeedbackLoopScreen from './FeedbackLoopScreen.jsx';
 import OptinScreen from './OptinScreen.jsx';
+import CaseStudyGolfbays from './CaseStudyGolfbays.jsx';
+import CaseStudy97 from './CaseStudy97.jsx';
+import CaseStudyCreative from './CaseStudyCreative.jsx';
+import CaseStudyLara from './CaseStudyLara.jsx';
+import CaseStudyEstelle from './CaseStudyEstelle.jsx';
 import HighlightSweep from '../primitives/HighlightSweep.jsx';
 import SlideScreen from '../slides/SlideScreen.jsx';
 import ResultsScreen from '../results/ResultsScreen.jsx';
@@ -387,7 +392,7 @@ export default function QuizFlow() {
   // transition-to-calculator slides (skipped conditionals don't consume a
   // colour, so the alternation never breaks when Q2B / Q7B / Q7C are routed
   // around).
-  const THEMED_SLIDES = ['benchmark', 'transition-belief', 'transition-calculator', 'loading', 'almost-ready', 'optin'];
+  const THEMED_SLIDES = ['benchmark', 'transition-belief', 'case-study', 'transition-calculator', 'loading', 'almost-ready', 'optin'];
   const themeCycle = ['blue', 'maroon', 'green'];
   const themeAt = (idx) => {
     const seenPosition = SCREENS.slice(0, idx + 1).filter(
@@ -598,7 +603,51 @@ export default function QuizFlow() {
       );
 
     case 'case-study': {
-      const cs = CASE_STUDIES[answers.q5] || CASE_STUDIES['cold-traffic'];
+      const csKey = answers.q5 || 'cold-traffic';
+      // 5A (GolfBays) has its designed screen; other variants keep the
+      // placeholder until their references arrive.
+      if (csKey === 'cold-traffic') {
+        return (
+          <CaseStudyGolfbays
+            theme={themeAt(index)}
+            onBack={back}
+            onContinue={next}
+          />
+        );
+      }
+      if (csKey === 'low-optin') {
+        return (
+          <CaseStudy97 theme={themeAt(index)} onBack={back} onContinue={next} />
+        );
+      }
+      if (csKey === 'differentiation') {
+        return (
+          <CaseStudyCreative
+            theme={themeAt(index)}
+            onBack={back}
+            onContinue={next}
+          />
+        );
+      }
+      if (csKey === 'email-close') {
+        return (
+          <CaseStudyLara
+            theme={themeAt(index)}
+            onBack={back}
+            onContinue={next}
+          />
+        );
+      }
+      if (csKey === 'call-convincing') {
+        return (
+          <CaseStudyEstelle
+            theme={themeAt(index)}
+            onBack={back}
+            onContinue={next}
+          />
+        );
+      }
+      const cs = CASE_STUDIES[csKey] || CASE_STUDIES['cold-traffic'];
       return (
         <SlideScreen
           eyebrow={cs.eyebrow}

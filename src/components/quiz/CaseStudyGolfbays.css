@@ -1,0 +1,558 @@
+/* ============================================================
+   CaseStudyGolfbays — case study 5A (GolfBays), per the
+   "Quiz Case Studies [ 5A - Golfsbay ]" reference.
+   Three stacked sections: split hero / BEFORE-AFTER grid / CTA.
+   Theme accents via --cs-accent (chips + dark cards) and
+   --cs-card (light card fill).
+   ============================================================ */
+
+.cs5a {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-body);
+}
+
+/* ---------- 1. Hero — split panels ---------- */
+
+/* height = content (the taller panel decides), no forced full-viewport */
+.cs5a__hero {
+  display: grid;
+  grid-template-columns: 48.5% 51.5%;
+}
+
+.cs5a__left {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(16px, 1.7vw, 26px);
+  background-image: var(--t-left-bg-image);
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+}
+
+/* keyline frame — top strip supplies the top edge (its border has no
+   bottom), the frame carries the sides; the script band closes it */
+.cs5a__frame {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+.cs5a__left-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(24px, 3vw, 56px) clamp(20px, 3vw, 54px) 30px;
+}
+
+.cs5a__mobile-back {
+  display: none;
+}
+
+.cs5a__headline {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  color: #ffffff;
+  font-size: clamp(28px, 3.25vw, 60px);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+
+.cs5a__subhead {
+  margin-top: clamp(16px, 2.6vh, 32px);
+  font-weight: 700;
+  color: #ffffff;
+  font-size: clamp(15px, 1.4vw, 26px);
+  line-height: 1.45;
+}
+
+.cs5a__paren {
+  margin-top: clamp(8px, 1.4vh, 16px);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(13px, 1.1vw, 20px);
+}
+
+.cs5a__rule {
+  margin: clamp(14px, 2.4vh, 28px) 0;
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.55);
+  width: 90%;
+}
+
+.cs5a__para {
+  font-weight: 400;
+  color: #ffffff;
+  font-size: clamp(13px, 1.15vw, 21px);
+  line-height: 1.55;
+}
+
+/* script band — bordered row closing the keyline frame */
+.cs5a__script-band {
+  border-top: 1px solid rgba(255, 255, 255, 0.55);
+  text-align: center;
+  font-family: var(--font-script);
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 35px;
+  line-height: 1.1;
+}
+
+/* right (light) panel */
+.cs5a__right {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--t-right-bg);
+  padding: clamp(16px, 1.7vw, 26px) clamp(20px, 2.8vw, 52px);
+  overflow: hidden;
+}
+
+.cs5a__right .answer-panel__topbar {
+  width: 90%;
+}
+
+.cs5a__hero-img {
+  display: block;
+  height: auto;
+  margin: clamp(10px, 2.6vh, 30px) auto 0;
+}
+
+.cs5a__thisway {
+  position: absolute;
+  right: 0;
+  bottom: clamp(8px, 1.6vh, 24px);
+  width: clamp(130px, 15vw, 270px);
+  height: auto;
+  pointer-events: none;
+}
+
+/* ---------- 2. BEFORE / AFTER grid ---------- */
+
+.cs5a__ba {
+  background: #ffffff;
+  padding: clamp(36px, 5.5vh, 80px) clamp(20px, 5.5vw, 100px) 65px;
+}
+
+.cs5a__ba-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.26fr 0.56fr;
+  grid-template-areas:
+    'hb ha .'
+    'b1 a1 s1'
+    'b2 a2 s2';
+  gap: clamp(16px, 1.8vw, 30px);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.cs5a__ba-head {
+  text-align: center;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  color: #152638;
+  font-size: clamp(22px, 2.3vw, 42px);
+  line-height: 1.15;
+  align-self: end;
+}
+
+.cs5a__ba-head--before {
+  grid-area: hb;
+}
+
+.cs5a__ba-head--after {
+  grid-area: ha;
+}
+
+.cs5a__ba-head span {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(12px, 1vw, 18px);
+  margin-top: 4px;
+}
+
+/* label chips */
+.cs5a__chip {
+  display: inline-block;
+  width: fit-content;
+  background: var(--cs-accent);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: clamp(12px, 1.05vw, 19px);
+  line-height: 1.35;
+  padding: 3px 10px;
+}
+
+.cs5a__chip--light {
+  background: #ffffff;
+  color: var(--cs-accent);
+}
+
+/* before/after box labels — Roboto Mono, per the label-strip language */
+.cs5a__bcard .cs5a__chip,
+.cs5a__acard .cs5a__chip {
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+}
+
+/* BEFORE cards — light fill */
+.cs5a__bcard {
+  background: var(--cs-card);
+  border-radius: 14px;
+  padding: clamp(16px, 1.5vw, 28px);
+  height: fit-content;
+}
+
+.cs5a__bcard--1 {
+  grid-area: b1;
+}
+
+.cs5a__bcard--2 {
+  grid-area: b2;
+}
+
+.cs5a__bcard-body {
+  margin-top: clamp(10px, 1.4vh, 16px);
+  display: flex;
+  gap: 10px;
+}
+
+.cs5a__bullet-arrow {
+  width: clamp(16px, 1.3vw, 24px);
+  height: auto;
+  align-self: flex-start;
+  flex-shrink: 0;
+  margin-top: 4px;
+  filter: brightness(0);
+  opacity: 0.85;
+}
+
+.cs5a__btext {
+  color: #152638;
+  font-weight: 500;
+  font-size: clamp(13px, 1.05vw, 20px);
+  line-height: 1.5;
+}
+
+
+/* AFTER cards — accent fill */
+.cs5a__acard {
+  background: var(--cs-accent);
+  color: #ffffff;
+  border-radius: 14px;
+  padding: clamp(16px, 1.5vw, 28px);
+}
+
+.cs5a__acard--1 {
+  grid-area: a1;
+}
+
+.cs5a__acard--2 {
+  grid-area: a2;
+}
+
+.cs5a__check {
+  display: block;
+  width: clamp(38px, 3.2vw, 58px);
+  height: auto;
+  margin-bottom: clamp(10px, 1.4vh, 16px);
+}
+
+.cs5a__atext {
+  margin-top: clamp(10px, 1.4vh, 16px);
+  font-weight: 500;
+  font-size: clamp(13px, 1.05vw, 20px);
+  line-height: 1.55;
+}
+
+
+.cs5a__abullets {
+  margin-top: clamp(10px, 1.4vh, 16px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1.2vh, 14px);
+}
+
+.cs5a__abullet {
+  display: flex;
+  gap: 10px;
+}
+
+.cs5a__abullet img {
+  width: clamp(16px, 1.3vw, 24px);
+  height: auto;
+  align-self: flex-start;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.cs5a__abullet p {
+  font-weight: 500;
+  font-size: clamp(13px, 1.1vw, 20px);
+  line-height: 1.5;
+}
+
+/* stat cards */
+.cs5a__scard {
+  background: var(--cs-accent);
+  color: #ffffff;
+  border-radius: 14px;
+  padding: clamp(18px, 1.6vw, 30px) clamp(14px, 1.2vw, 22px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: clamp(8px, 1.2vh, 14px);
+}
+
+.cs5a__scard--1 {
+  grid-area: s1;
+}
+
+.cs5a__scard--2 {
+  grid-area: s2;
+}
+
+.cs5a__stat {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: clamp(28px, 2.9vw, 52px);
+  line-height: 1.05;
+}
+
+.cs5a__stat-sub {
+  font-weight: 500;
+  font-size: clamp(13px, 1.1vw, 20px);
+  line-height: 1.4;
+  text-wrap: balance;
+}
+
+.cs5a__stat-sub strong {
+  font-weight: 800;
+}
+
+/* ---------- 3. Your Turn CTA ---------- */
+
+.cs5a__cta {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-image: var(--t-left-bg-image);
+  background-size: cover;
+  background-position: center;
+  padding: clamp(16px, 1.7vw, 26px);
+}
+
+/* keyline frame around the whole CTA section, footer strip included */
+.cs5a__cta-frame {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+}
+
+.cs5a__cta-card {
+  position: relative;
+  background: var(--cs-card);
+  border-radius: 18px;
+  max-width: 1160px;
+  width: min(1160px, 86%);
+  margin: clamp(60px, 9vh, 110px) auto clamp(36px, 6vh, 72px);
+  padding: clamp(28px, 3.4vw, 60px) clamp(22px, 4vw, 72px);
+}
+
+/* Your Turn badge — straddles the white → dark section boundary */
+.cs5a__turn {
+  position: absolute;
+  top: 0;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: clamp(74px, 6.6vw, 116px);
+  height: auto;
+}
+
+.cs5a__cta-small {
+  color: #152638;
+  font-weight: 500;
+  font-size: clamp(12px, 1.02vw, 19px);
+  line-height: 1.6;
+}
+
+.cs5a__cta-head {
+  margin-top: clamp(14px, 2.4vh, 28px);
+  font-family: var(--font-headline);
+  font-weight: 800;
+  color: #152638;
+  font-size: clamp(20px, 2.9vw, 52px);
+  line-height: 1.3;
+  letter-spacing: 0.005em;
+}
+
+/* chip + Continue stacked, both flush left */
+.cs5a__cta-row {
+  margin-top: clamp(18px, 3vh, 34px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(14px, 2.2vh, 24px);
+}
+
+.cs5a__cta-arrow {
+  position: absolute;
+  right: clamp(50px, 11%, 170px);
+  bottom: clamp(46px, 16%, 110px);
+  width: clamp(48px, 7.6vw, 84px);
+  height: auto;
+  filter: brightness(0);
+  transform: rotate(12deg);
+  pointer-events: none;
+}
+
+.cs5a__continue {
+  display: block;
+}
+
+/* keyline footer strip — bottom row of the CTA frame */
+.cs5a__footer {
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.55);
+  display: flex;
+  min-height: clamp(44px, 4.4vw, 66px);
+}
+
+.cs5a__footer-hint {
+  flex: 1;
+}
+
+.cs5a__footer-cell {
+  width: clamp(44px, 4.4vw, 66px);
+  border-left: 1px solid rgba(255, 255, 255, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cs5a__footer-cell img {
+  width: 58%;
+  height: auto;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 900px) {
+  /* release the desktop line breaks — text wraps naturally */
+  .cs5a br {
+    display: none;
+  }
+
+  .cs5a__hero {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .cs5a__left .seam-badge {
+    display: flex;
+    left: 50%;
+    right: auto;
+    top: 0;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 70px;
+  }
+
+  .cs5a__mobile-back {
+    display: flex;
+    margin-bottom: 18px;
+  }
+
+  .cs5a__mobile-back .back-link {
+    color: #ffffff;
+  }
+
+  .cs5a__left-body {
+    padding: 18px 14px 22px;
+  }
+
+  .cs5a__right {
+    padding: 18px 18px 26px;
+  }
+
+  .cs5a__hero-img {
+    width: 100%;
+    margin-top: 6px;
+  }
+
+  .cs5a__thisway {
+    display: none;
+  }
+
+  .cs5a__ba {
+    padding: 36px clamp(16px, 5vw, 28px) 65px;
+  }
+
+  /* tablet (601–900): Before | After side by side, stats pair below */
+  .cs5a__ba-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      'hb ha'
+      'b1 a1'
+      'b2 a2'
+      's1 s2';
+    gap: 16px;
+  }
+
+  .cs5a__ba-head {
+    align-self: auto;
+  }
+
+  .cs5a__cta {
+    padding: 14px;
+  }
+
+  .cs5a__cta-card {
+    width: calc(100% - 28px);
+    margin: 52px auto 28px;
+    padding: 30px 20px 26px;
+  }
+
+  .cs5a__turn {
+    left: 64px;
+    width: 70px;
+  }
+
+  .cs5a__cta-arrow {
+    display: none;
+  }
+}
+
+/* phones (≤600): single column, reading order Before → After → stats */
+@media (max-width: 600px) {
+  .cs5a__ba-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'hb'
+      'b1'
+      'b2'
+      'ha'
+      'a1'
+      's1'
+      'a2'
+      's2';
+  }
+
+  .cs5a__ba-head--after {
+    margin-top: 18px;
+  }
+}
