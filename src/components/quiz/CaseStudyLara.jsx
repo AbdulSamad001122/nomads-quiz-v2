@@ -52,18 +52,13 @@ export default function CaseStudyLara({ theme, onBack, onContinue }) {
                 <BackLink onBack={onBack} />
               </div>
 
-              <p className="cs5d__intro-line">There was a time when</p>
-
-              <h1 className="cs5a__headline cs5d__headline">
-                {'MORE EMAIL SUBSCRIBERS'}
-                <br />
-                {' MEANT '}
+              <p className="cs5a__lead">
+                {'There was a time when more email subscribers meant '}
                 <HighlightSweep tone={sweepToneFor(theme.name)}>
-                  MORE MONEY
+                  more money
                 </HighlightSweep>
-              </h1>
-
-              <p className="cs5a__subhead">That time has passed.</p>
+                {'. That time has passed.'}
+              </p>
 
               <p className="cs5d__hero-para">
                 {'Lara Acosta, '}
@@ -103,14 +98,8 @@ export default function CaseStudyLara({ theme, onBack, onContinue }) {
           </div>
           <img
             className="cs5a__hero-img"
-            src="/assets/cs-5b-lara.webp"
+            src="/assets/cs-5d-lara.webp"
             alt="Lara Acosta, number one creator on LinkedIn"
-          />
-          <img
-            className="cs5a__thisway"
-            src="/assets/this-way-arrow.png"
-            alt=""
-            aria-hidden="true"
           />
         </div>
       </section>
@@ -127,7 +116,7 @@ export default function CaseStudyLara({ theme, onBack, onContinue }) {
           <div className="cs5d__stat-card">
             <span className="cs5d__stat-label">Next launch:</span>
             <span className="cs5d__stat-num">70</span>
-            <span className="cs5d__stat-label">students</span>
+            <span className="cs5d__stat-label">Students</span>
           </div>
           <span className="cs5d__stat-arrow" aria-hidden="true">
             <img src="/assets/arrow-white.png" alt="" />
@@ -136,7 +125,7 @@ export default function CaseStudyLara({ theme, onBack, onContinue }) {
             <span className="cs5d__stat-label">The launch after that:</span>
             <span className="cs5d__stat-num">500</span>
             <span className="cs5d__stat-label">
-              students and half a million dollars in revenue
+              Students and half a million dollars in revenue
             </span>
           </div>
         </div>
@@ -148,7 +137,9 @@ export default function CaseStudyLara({ theme, onBack, onContinue }) {
         <h2 className="cs5d__sdr-head">
           Email is the most profitable channel in her business today.
         </h2>
-        <p className="cs5d__sdr-another">{"Here's another one…"}</p>
+        <p className="cs5d__sdr-another">
+          <HighlightSweep tone="white">{"Here's another one…"}</HighlightSweep>
+        </p>
 
         <hr className="cs5d__sdr-rule" />
 
@@ -166,7 +157,7 @@ export default function CaseStudyLara({ theme, onBack, onContinue }) {
           <div className="cs5d__vs-card">
             <span className="cs5d__vs-lead">His original 10,000 subscribers</span>
             <span className="cs5d__vs-num">1</span>
-            <span className="cs5d__vs-label">sale</span>
+            <span className="cs5d__vs-label">Sale</span>
           </div>
           <span className="cs5d__vs-badge" aria-hidden="true">
             vs
@@ -176,7 +167,7 @@ export default function CaseStudyLara({ theme, onBack, onContinue }) {
               829 Conversion Quiz™ subscribers
             </span>
             <span className="cs5d__vs-num">23</span>
-            <span className="cs5d__vs-label">sales</span>
+            <span className="cs5d__vs-label">Sales</span>
           </div>
         </div>
 
@@ -202,9 +193,13 @@ export default function CaseStudyLara({ theme, onBack, onContinue }) {
             <span className="cs5d__three-num" aria-hidden="true">
               01
             </span>
+            <h3 className="cs5d__three-title">
+              Why each person joined your list
+            </h3>
             <p className="cs5d__three-text">
-              <strong>Why each person joined your list</strong>
-              {' — someone who joined to diagnose a real problem, and how their beliefs are challenged, and objections are handled during the diagnosis, can convert them within the first 14 days.'}
+              Someone who joined to diagnose a real problem, and how their
+              beliefs are challenged, and objections are handled during the
+              diagnosis, can convert them within the first 14 days.
             </p>
           </div>
 
@@ -212,9 +207,13 @@ export default function CaseStudyLara({ theme, onBack, onContinue }) {
             <span className="cs5d__three-num" aria-hidden="true">
               02
             </span>
+            <h3 className="cs5d__three-title">
+              What happens in the first 14 days
+            </h3>
             <p className="cs5d__three-text">
-              <strong>What happens in the first 14 days</strong>
-              {' — A subscriber is most engaged within the first 10 days of joining your list. Your email strategy should look very different in this window.'}
+              A subscriber is most engaged within the first 10 days of joining
+              your list. Your email strategy should look very different in
+              this window.
             </p>
           </div>
 
@@ -222,9 +221,9 @@ export default function CaseStudyLara({ theme, onBack, onContinue }) {
             <span className="cs5d__three-num" aria-hidden="true">
               03
             </span>
+            <h3 className="cs5d__three-title">What happens after 14 days</h3>
             <p className="cs5d__three-text">
-              <strong>What happens after 14 days</strong>
-              {" — Are you dumping all non-buyers in the same newsletter pool? Or you're planning a lifecycle email strategy with behavior-triggered segmentation that informs the strategy of your affiliate campaigns, seasonal sales, upsells, and cross-sells."}
+              {"Are you dumping all non-buyers in the same newsletter pool? Or you're planning a lifecycle email strategy with behavior-triggered segmentation that informs the strategy of your affiliate campaigns, seasonal sales, upsells, and cross-sells."}
             </p>
           </div>
         </div>
@@ -242,15 +241,11 @@ export default function CaseStudyLara({ theme, onBack, onContinue }) {
         <div className="cs5a__cta-frame">
           <div className="cs5a__cta-card">
             <h2 className="cs5a__cta-head">
-              {'Want to see what it would take you'}
-              <br />
-              {' to add an '}
+              {'Want to see what it would take you to add an '}
               <HighlightSweep tone={CTA_TONE[theme.name] || 'plum'}>
                 extra $125,000+
               </HighlightSweep>
-              {' to your MRR'}
-              <br />
-              {' with the traffic you already have?'}
+              {' to your MRR with the traffic you already have?'}
             </h2>
 
             <img

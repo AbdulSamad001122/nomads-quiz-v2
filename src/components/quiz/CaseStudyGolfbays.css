@@ -46,6 +46,8 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  gap: 10px;
   padding: clamp(24px, 3vw, 56px) clamp(20px, 3vw, 54px) 30px;
 }
 
@@ -137,7 +139,7 @@
 
 .cs5a__ba {
   background: #ffffff;
-  padding: clamp(36px, 5.5vh, 80px) clamp(20px, 5.5vw, 100px) 65px;
+  padding: 65px clamp(20px, 5.5vw, 100px) 65px;
 }
 
 .cs5a__ba-grid {
@@ -178,15 +180,37 @@
   margin-top: 4px;
 }
 
-/* label chips */
+/* bold opening lead — heroes that open with a paragraph, not a heading */
+.cs5a__lead {
+  font-weight: 700;
+  color: #ffffff;
+  font-size: clamp(22px, 1.32vw, 25px);
+  line-height: 1.5;
+}
+
+/* keep the short highlighted phrases on one line */
+.cs5a__lead .hl-sweep,
+.cs5b__lead .hl-sweep {
+  white-space: nowrap;
+}
+
+/* green route: the white sweep's revealed text uses the green ink */
+.quiz-screen--green .hl-sweep--white {
+  --sweep-color: #152638;
+}
+
+/* label chips — Roboto Mono, full caps, per the label-strip language */
 .cs5a__chip {
   display: inline-block;
   width: fit-content;
   background: var(--cs-accent);
   color: #ffffff;
+  font-family: var(--font-mono);
   font-weight: 700;
   font-size: clamp(12px, 1.05vw, 19px);
   line-height: 1.35;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   padding: 3px 10px;
 }
 
@@ -195,11 +219,9 @@
   color: var(--cs-accent);
 }
 
-/* before/after box labels — Roboto Mono, per the label-strip language */
-.cs5a__bcard .cs5a__chip,
-.cs5a__acard .cs5a__chip {
-  font-family: var(--font-mono);
-  letter-spacing: 0.04em;
+/* green route: light chips pick up the ice-blue card tint */
+.quiz-screen--green .cs5a__chip--light {
+  background: #e4fbff;
 }
 
 /* BEFORE cards — light fill */
@@ -390,6 +412,7 @@
 
 .cs5a__cta-head {
   margin-top: clamp(14px, 2.4vh, 28px);
+  text-wrap: balance;
   font-family: var(--font-headline);
   font-weight: 800;
   color: #152638;
@@ -499,7 +522,7 @@
   }
 
   .cs5a__ba {
-    padding: 36px clamp(16px, 5vw, 28px) 65px;
+    padding: 65px clamp(16px, 5vw, 28px) 65px;
   }
 
   /* tablet (601–900): Before | After side by side, stats pair below */
@@ -522,7 +545,7 @@
   }
 
   .cs5a__cta-card {
-    width: calc(100% - 28px);
+    width: calc(95% - 28px);
     margin: 52px auto 28px;
     padding: 30px 20px 26px;
   }

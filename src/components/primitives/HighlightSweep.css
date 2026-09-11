@@ -77,6 +77,13 @@
   --sweep-color: #5d1b4e;
 }
 
+/* White box, deep wine text — for dark paper bands (5D SDR). */
+.hl-sweep--white {
+  --sweep-bg: #ffffff;
+  --sweep-color: #391129;
+  padding: 6px;
+}
+
 /* Quiz maroon theme — warm cream box, deep wine text (matches the
    belief-slide highlight colors the client picked). */
 .hl-sweep--cream4 {

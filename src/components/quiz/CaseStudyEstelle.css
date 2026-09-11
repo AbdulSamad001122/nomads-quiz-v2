@@ -8,8 +8,16 @@
 
 /* ---------- 1. Hero left content ---------- */
 
+.cs5e .cs5a__lead {
+  font-size: clamp(22px, 1.32vw, 25px);
+}
+
+.cs5e .cs5a__hero-img {
+  width: 65%;
+}
+
 .cs5e__headline {
-  font-size: clamp(24px, 2.6vw, 48px);
+  font-size: max(24px, 2.4vw);
 }
 
 .cs5e__hero-para {
@@ -125,8 +133,14 @@
   font-family: var(--font-headline);
   font-weight: 800;
   color: #ffffff;
-  font-size: clamp(22px, 2.4vw, 44px);
+  font-size: clamp(30px, 4.4vw, 44px);
   line-height: 1.25;
+}
+
+/* "The" in Better Brush script */
+.cs5e__results-script {
+  font-family: var(--font-number);
+  font-weight: 400;
 }
 
 .cs5e__stat-row {
@@ -171,26 +185,19 @@
 /* funnel proof screenshot — wide white card */
 .cs5e__proof {
   display: block;
-  width: min(86%, 940px);
-  height: auto;
+  width: min(45%, 940px);
   margin: 30px auto 0;
-  border: 2px solid var(--cs-accent);
-  box-shadow: 8px 8px 0 #f2e6d8;
-  background: #ffffff;
+  height: auto;
 }
 
 .cs5e__results-closer {
-  margin: 30px auto 0;
-  max-width: 85ch;
+  margin: 40px auto 0;
+  max-width: 70ch;
   font-family: var(--font-body);
   font-weight: 500;
   color: #ffffff;
   font-size: clamp(14px, 1.15vw, 21px);
   line-height: 1.6;
-}
-
-.cs5e__results-closer strong {
-  font-weight: 800;
 }
 
 /* ============================================================
@@ -215,6 +222,11 @@
   .cs5e__stat-row {
     flex-direction: column;
     align-items: center;
+    width: 95%;
+  }
+
+  .cs5e__proof {
+    width: 95%;
   }
 }
 
@@ -222,6 +234,10 @@
   .cs5e__ba-grid {
     grid-template-columns: 1fr;
     gap: 26px;
+  }
+
+  .cs5e__results-closer {
+    text-align: left;
   }
 
   .cs5e__col:last-child .cs5a__ba-head {

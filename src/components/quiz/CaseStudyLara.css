@@ -8,6 +8,14 @@
 
 /* ---------- 1. Hero left content ---------- */
 
+.cs5d .cs5a__lead {
+  font-size: clamp(21px, 1.32vw, 25px);
+}
+
+.cs5d .cs5a__hero-img {
+  width: 65%;
+}
+
 .cs5d__intro-line {
   font-weight: 400;
   color: rgba(255, 255, 255, 0.92);
@@ -36,13 +44,14 @@
 
 .cs5d__strategy {
   background: var(--cs-accent);
-  padding: 35px clamp(20px, 5.5vw, 100px) 35px;
+  padding: 70px clamp(20px, 5.5vw, 100px) 70px;
   text-align: center;
 }
 
 .cs5d__strategy-lead {
-  margin: 0 auto;
+  margin: 0 auto 45px;
   max-width: 72ch;
+  text-wrap: balance;
   font-family: var(--font-body);
   font-weight: 500;
   color: #ffffff;
@@ -50,8 +59,9 @@
   line-height: 1.6;
 }
 
-.cs5d__strategy-lead strong {
-  font-weight: 800;
+/* green route: strategy band bg equals the green ink — white shadow */
+.quiz-screen--green .cs5d__stat-card {
+  box-shadow: 8px 8px 0 #ffffff;
 }
 
 .cs5d__stat-row {
@@ -70,7 +80,7 @@
   gap: 15px;
   background: var(--cs-card);
   border: 2px solid var(--cs-accent);
-  box-shadow: 8px 8px 0 #f2e6d8;
+  box-shadow: 8px 8px 0 var(--cs-ink); /* #391129 maroon / #152638 green */
   padding: clamp(18px, 2.2vh, 30px) clamp(26px, 3vw, 54px);
   min-width: clamp(170px, 17vw, 250px);
   max-width: 340px;
@@ -129,8 +139,8 @@
 }
 
 .cs5d__sdr-head {
-  margin: 0 auto;
-  max-width: 72ch;
+  margin: 0 auto 30px;
+  max-width: 25ch;
   font-family: var(--font-headline);
   font-weight: 800;
   color: #ffffff;
@@ -148,7 +158,7 @@
 
 .cs5d__sdr-para {
   margin: 30px auto 0;
-  max-width: 78ch;
+  max-width: 66ch;
   font-family: var(--font-body);
   font-weight: 500;
   color: #ffffff;
@@ -162,7 +172,7 @@
 
 /* the two-list experiment — VS cards */
 .cs5d__vs-row {
-  margin-top: 30px;
+  margin-top: 50px;
   display: flex;
   align-items: stretch;
   justify-content: center;
@@ -178,7 +188,7 @@
   gap: 15px;
   background: var(--cs-card);
   border: 2px solid var(--cs-accent);
-  box-shadow: 8px 8px 0 #f2e6d8;
+  box-shadow: 8px 8px 0 #ffffff;
   padding: clamp(18px, 2.2vh, 30px) clamp(22px, 2.6vw, 46px);
   width: 320px;
   max-width: 100%;
@@ -188,6 +198,7 @@
 /* the quiz list — accent fill, white text */
 .cs5d__vs-card--win {
   background: var(--cs-accent);
+  box-shadow: 8px 8px 0 #ffffff;
 }
 
 .cs5d__vs-lead {
@@ -212,7 +223,7 @@
 }
 
 .cs5d__vs-card--win .cs5d__vs-num {
-  color: #f2e6d8;
+  color: #ffffff;
 }
 
 .cs5d__vs-label {
@@ -244,7 +255,7 @@
 }
 
 .cs5d__sdr-closer {
-  margin: 30px auto 0;
+  margin: 50px auto 0;
   max-width: 85ch;
   font-family: var(--font-body);
   font-weight: 500;
@@ -261,7 +272,10 @@
 
 .cs5d__three {
   background: var(--cs-card);
-  padding: 65px clamp(20px, 5.5vw, 100px) 65px;
+  padding: 70px clamp(20px, 5.5vw, 100px) 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
 .cs5d__three-head {
@@ -309,6 +323,20 @@
   font-size: clamp(20px, 1.8vw, 30px);
 }
 
+/* card lead — accent highlight block on its own line */
+.cs5d__three-title {
+  display: inline-block;
+  width: fit-content;
+  background: var(--cs-accent); /* #5d1b4e on the maroon route */
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(14px, 1.1vw, 20px);
+  line-height: 1.4;
+  padding: 4px 10px;
+  margin-bottom: clamp(10px, 1.6vh, 16px);
+}
+
 .cs5d__three-text {
   font-family: var(--font-body);
   font-weight: 500;
@@ -332,20 +360,26 @@
   }
 
   .cs5d__strategy {
-    padding: 35px clamp(16px, 5vw, 28px);
+    padding: 60px clamp(16px, 5vw, 28px);
   }
 
   .cs5d__sdr {
-    padding: 48px clamp(16px, 5vw, 28px);
+    padding: 2px max(16px, 5vw);
   }
 
   .cs5d__three {
-    padding: 48px clamp(16px, 5vw, 28px) 56px;
+    padding: 60px clamp(16px, 5vw, 28px) 60px;
   }
 
   /* tablet (601–900): cards pair up, third spans full width */
   .cs5d__three-cards {
     grid-template-columns: 1fr 1fr;
+  }
+
+  /* extra top room so the overlapping number doesn't crowd the title */
+  .cs5d__three-card {
+    padding: clamp(45px, 2.6vw, 42px) clamp(18px, 2vw, 34px)
+      clamp(18px, 2vw, 32px);
   }
 
   .cs5d__three-card:nth-child(3) {
@@ -370,6 +404,18 @@
 
   .cs5d__three-card:nth-child(3) {
     grid-column: auto;
+  }
+
+  .cs5d__stat-card {
+    width: 85%;
+  }
+
+  .cs5d__strategy-lead,
+  .cs5d__sdr-head,
+  .cs5d__sdr-para,
+  .cs5d__sdr-closer,
+  .cs5d__three-head {
+    text-align: left;
   }
 }
 

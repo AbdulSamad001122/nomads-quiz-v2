@@ -330,6 +330,97 @@
   overflow-wrap: break-word;
 }
 
+/* bracketed tail on a media option — own line, lighter, smaller */
+.media-option__sub {
+  display: block;
+  margin-top: 4px;
+  font-weight: 500;
+  font-size: clamp(12px, 0.95vw, 15px);
+  line-height: 1.4;
+}
+
+/* the main label on these cards stays bold (beats the --long rule) */
+.media-option.media-option--sub .media-option__label {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* icon-less card (the "Other" tiles): text centers vertically, with
+   enough height to clear the number badge */
+.media-option--nomedia .media-option__body {
+  justify-content: center;
+  min-height: clamp(90px, 10vh, 120px);
+}
+
+/* rich option cards (Q5): icon header row + multi-paragraph body */
+.option-card--rich {
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  padding: clamp(16px, 1.8vw, 28px) clamp(18px, 2vw, 32px);
+}
+
+.option-card__richtop {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 1.6vw, 26px);
+}
+
+.option-card__richtop .option-card__radio {
+  margin-left: auto;
+}
+
+.option-card__icon {
+  width: clamp(30px, 2.6vw, 42px);
+  height: clamp(30px, 2.6vw, 42px);
+  object-fit: contain;
+}
+
+/* selected card is dark-filled — flip the icon to white */
+.option-card--rich.is-selected .option-card__icon {
+  filter: brightness(0) invert(1);
+}
+
+.option-card__richbody {
+  display: block;
+  margin-top: clamp(12px, 1.6vh, 20px);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(14px, 1.15vw, 21px);
+  line-height: 1.55;
+}
+
+.option-card__para {
+  display: block;
+}
+
+.option-card__para + .option-card__para {
+  margin-top: clamp(10px, 1.5vh, 18px);
+}
+
+.option-card__para strong {
+  font-weight: 800;
+}
+
+/* bracketed tail on a list option — own line, lighter, smaller */
+.option-card__sub {
+  display: block;
+  margin-top: 2px;
+  font-weight: 500;
+  font-size: clamp(12px, 0.95vw, 15px);
+  line-height: 1.4;
+}
+
+/* bold Montserrat stat line above an option's text (Q7C percentages) */
+.option-card__heading {
+  display: block;
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: clamp(18px, 1.6vw, 31px);
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
 .option-card__radio {
   width: clamp(18px, 1.4vw, 27px);
   height: clamp(18px, 1.4vw, 27px);
@@ -620,7 +711,7 @@
    Responsive — tablet & mobile: panels stack vertically
    ============================================================ */
 
-@media (max-width: 900px) {
+@media (max-width: 900px), (max-width: 1160px) and (orientation: portrait) {
   .quiz-screen {
     grid-template-columns: 1fr;
     /* dark question row hugs its content; the answers row takes the rest */
@@ -849,7 +940,7 @@
 }
 
 /* Between 650–900px the yes/no options block hugs its content */
-@media (max-width: 900px) and (min-width: 650px) {
+@media (max-width: 900px), (max-width: 1160px) and (orientation: portrait) and (min-width: 650px) {
   .answer-panel__options--binary {
     width: fit-content;
     max-width: 100%;
@@ -995,7 +1086,7 @@
   border-width: 2px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 900px), (max-width: 1160px) and (orientation: portrait) {
   .qa-actions {
     width: 100%;
     justify-content: space-between;
@@ -1063,7 +1154,7 @@
    size, so there's no bold/light mix regardless of line count
    ============================================================ */
 
-@media (max-width: 900px) {
+@media (max-width: 900px), (max-width: 1160px) and (orientation: portrait) {
   .option-card__label,
   .option-card--long .option-card__label {
     font-weight: 500;
@@ -1072,7 +1163,8 @@
   }
 
   .media-option__label,
-  .media-option--long .media-option__label {
+  .media-option--long .media-option__label,
+  .media-option.media-option--sub .media-option__label {
     font-weight: 500;
     font-size: 16px;
     line-height: 1.4;

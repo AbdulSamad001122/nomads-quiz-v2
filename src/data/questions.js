@@ -38,7 +38,11 @@ export const QUESTIONS = [
       { id: 'head-marketing', label: 'Head of Marketing, Content, or Sales' },
       { id: 'performance-marketer', label: 'Performance Marketer' },
       { id: 'obm-assistant', label: 'OBM / Marketing Assistant or Executive' },
-      { id: 'freelancer', label: 'Freelancer (under 2 years of experience)' },
+      {
+        id: 'freelancer',
+        label: 'Freelancer',
+        sub: '(under 2 years of experience)',
+      },
     ],
   },
   {
@@ -46,15 +50,15 @@ export const QUESTIONS = [
     stepNumber: '02',
     label: 'Where you stand',
     theme: 'maroon',
-    variant: 'media',
+    variant: 'list',
     question:
       'To make our recommendations realistic, where is your business today?',
     options: [
-      { id: 'under-10k', label: 'Under $10k/month', media: g('yIxNOXEMpqkqA') },
-      { id: '10k-35k', label: '$10k – $35k/month', media: g('9JguSQVWRVYPF5UJaM') },
-      { id: '35k-100k', label: '$35k – $100k/month', media: g('gauzBevJxeJHy') },
-      { id: '100k-250k', label: '$100k – $250k/month', media: g('7XmgAwugUlYWHWKcGt') },
-      { id: '250k-500k', label: '$250k – $500k+/month', media: g('DfLwM9kttDFEQ') },
+      { id: 'under-10k', label: 'Under $10k/month' },
+      { id: '10k-35k', label: '$10k – $35k/month' },
+      { id: '35k-100k', label: '$35k – $100k/month' },
+      { id: '100k-250k', label: '$100k – $250k/month' },
+      { id: '250k-500k', label: '$250k – $500k+/month' },
     ],
   },
   {
@@ -78,23 +82,36 @@ export const QUESTIONS = [
     stepNumber: '03',
     label: 'What you scale',
     theme: 'blue',
-    variant: 'list',
+    variant: 'media',
     question: 'Good. What are you scaling?',
     subline:
       'Because the path to an extra $1.5M/year looks different for an agency than it does for a course creator.',
     options: [
-      { id: 'saas', label: 'SaaS or Tech Company' },
-      { id: 'agency', label: 'Agency' },
-      { id: 'coach', label: 'Coaches and Course Creators' },
-      { id: 'consultant', label: 'Consultant or Fractional Expert' },
+      { id: 'saas', label: 'SaaS or Tech Company', media: '/assets/q3-laptop.svg' },
+      { id: 'agency', label: 'Agency', media: '/assets/q3-team.svg' },
+      {
+        id: 'coach',
+        label: 'Coaches and Course Creators',
+        media: '/assets/q3-cap.svg',
+      },
+      {
+        id: 'consultant',
+        label: 'Consultant or Fractional Expert',
+        media: '/assets/q3-professional.svg',
+      },
       {
         id: 'b2b-service',
-        label:
-          'B2B Service Provider (law, finance, real estate, logistics, architecture)',
+        label: 'B2B Service Provider',
+        sub: '(law, finance, real estate, logistics, architecture)',
+        media: '/assets/q3-handshake.svg',
       },
-      { id: 'ecommerce', label: 'E-commerce Brand' },
-      { id: 'creator', label: 'Creator or Personal Brand' },
-      { id: 'other', label: "Other (Your ex put you in a box. We won't.)" },
+      { id: 'ecommerce', label: 'E-commerce Brand', media: '/assets/q3-cart.svg' },
+      {
+        id: 'creator',
+        label: 'Creator or Personal Brand',
+        media: '/assets/q3-camera.svg',
+      },
+      { id: 'other', label: 'Other', sub: "(Your ex put you in a box. We won't.)" },
     ],
   },
   {
@@ -144,28 +161,94 @@ export const QUESTIONS = [
     options: [
       {
         id: 'cold-traffic',
+        iconSrc: '/assets/q5-funnel.svg',
         label:
           "We're driving cold traffic to our website or product pages, but if they're not ready to buy, we lose them. We don't have a way to keep them on our email list or pull them from “not considering” to “I'm open to it.”",
+        rich: [
+          [
+            {
+              t: "We're driving cold traffic to our website or product pages, but if they're not ready to buy, we lose them.",
+            },
+          ],
+          [
+            { t: "We don't have a way to keep them on our email list or pull them " },
+            { t: 'from “not considering” to “I\'m open to it.”', b: true },
+          ],
+        ],
       },
       {
         id: 'low-optin',
+        iconSrc: '/assets/q5-envelope.svg',
         label:
           'Our email list is our most profitable channel, but our opt-in rates are low, and we need a better way to get more people in there every day.',
+        rich: [
+          [
+            { t: 'Our email list is our most profitable channel, but our ' },
+            { t: 'opt-in rates are low', b: true },
+            { t: '.' },
+          ],
+          [
+            { t: 'And we need a better way to get ' },
+            { t: 'more people in there every day', b: true },
+            { t: '.' },
+          ],
+        ],
       },
       {
         id: 'differentiation',
+        iconSrc: '/assets/q5-diamond.svg',
         label:
           "People land on our website, read everything, and still can't tell why we're different from the five other options they're comparing us to, so they either pick the cheaper one or go with a familiar name.",
+        rich: [
+          [
+            { t: "People land on our website, read everything, and still can't tell " },
+            { t: "why we're different", b: true },
+            { t: " from the five other options they're comparing us to." },
+          ],
+          [
+            { t: 'So they either pick the ' },
+            { t: 'cheaper one', b: true },
+            { t: ' or go with a ' },
+            { t: 'familiar name', b: true },
+            { t: '.' },
+          ],
+        ],
       },
       {
         id: 'email-close',
+        iconSrc: '/assets/q5-loop.svg',
         label:
           "People are joining our list every day, but our emails aren't doing enough to close them in the first 14 days, and beyond that, we don’t have a solid strategy to keep converting the non-buyers over time, so our email revenue doesn’t compound month on month.",
+        rich: [
+          [
+            { t: "People are joining our list every day, but our emails aren't doing enough to close them in the " },
+            { t: 'first 14 days', b: true },
+            { t: '.' },
+          ],
+          [
+            { t: "And beyond that, we don’t have a solid strategy to keep converting the non-buyers over time, so our " },
+            { t: 'email revenue doesn’t compound', b: true },
+            { t: ' month on month.' },
+          ],
+        ],
       },
       {
         id: 'call-convincing',
+        iconSrc: '/assets/q5-handshake.svg',
         label:
           "We're spending a good chunk of our sales calls convincing doubtful buyers; we need a system that shows our differentiation before the call, so the call is spent closing, not educating.",
+        rich: [
+          [
+            { t: "We're spending a good chunk of our sales calls " },
+            { t: 'convincing doubtful buyers', b: true },
+            { t: '.' },
+          ],
+          [
+            { t: 'We need a system that shows our differentiation before the call, so the call is spent ' },
+            { t: 'closing, not educating', b: true },
+            { t: '.' },
+          ],
+        ],
       },
     ],
   },
@@ -256,23 +339,27 @@ export const QUESTIONS = [
     options: [
       {
         id: 'under-25',
+        heading: 'Under 25%',
         label:
-          'Just a small part. Most traffic is organic, SEO, or word of mouth. (Under 25%)',
+          'Just a small part. Most traffic is organic, SEO, or word of mouth.',
       },
       {
         id: '25-44',
+        heading: '25% to 44%',
         label:
-          'Less than half. Ads bring a decent chunk, organic and referrals bring more. (25% to 44%)',
+          'Less than half. Ads bring a decent chunk, organic and referrals bring more.',
       },
-      { id: '45-55', label: 'About half. Fairly even split. (45% to 55%)' },
+      { id: '45-55', heading: '45% to 55%', label: 'About half. Fairly even split.' },
       {
         id: '56-75',
-        label: 'More than half. Ads are our biggest single source. (56% to 75%)',
+        heading: '56% to 75%',
+        label: 'More than half. Ads are our biggest single source.',
       },
       {
         id: 'over-75',
+        heading: 'Over 75%',
         label:
-          'Almost all of it. Take the ads away and traffic mostly stops. (Over 75%)',
+          'Almost all of it. Take the ads away and traffic mostly stops.',
       },
       {
         id: 'not-sure',
@@ -497,41 +584,40 @@ export const QUESTIONS = [
         id: 'paid-ads',
         label:
           "We've increased our paid ad spend and experimented with new acquisition channels",
-        media: g('opP9JMYfG9a1y'),
+        media: '/assets/q13-megaphone.svg',
       },
       {
         id: 'organic',
         label:
           "We've been investing in organic channels like SEO, content, and social",
-        media: g('xQH5ZpvsFiyjYPV2j6'),
+        media: '/assets/q13-hashtag.svg',
       },
       {
         id: 'lead-magnets',
         label:
           "We've created lead magnets (webinars, ebooks, whitepapers) to capture and nurture traffic",
-        media: g('1lTRvRgRI1Y6iKsvI0'),
+        media: '/assets/q13-magnet.svg',
       },
       {
         id: 'email-marketing',
         label:
           "We've been building out email marketing to engage leads and turn them into customers",
-        media: g('f69Ei1R9MVz2w'),
+        media: '/assets/q13-envelope.svg',
       },
       {
         id: 'funnel',
         label:
           "We've been optimising our funnel (website, landing pages, conversion flows)",
-        media: g('Kx7Ramdh3yRmGlIt0W'),
+        media: '/assets/q13-funnel.svg',
       },
       {
         id: 'messaging',
         label: "We've worked on refining our messaging and positioning",
-        media: g('dvtl5jBWB35pC'),
+        media: '/assets/q13-diamond.svg',
       },
       {
         id: 'other',
         label: 'Other (please specify)',
-        media: g('ma7VlDSlty3EA'),
       },
     ],
   },

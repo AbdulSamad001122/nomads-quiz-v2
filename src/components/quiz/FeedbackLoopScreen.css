@@ -19,20 +19,20 @@
      the photo is sized to stay inside the panel on its own */
 }
 
-/* Photo sits UNDER the frame so the keylines overlap her (reference) —
-   sized proportionally to the panel like the reference (~80% wide) */
+/* Photo lives inside the keyline frame, centered both ways */
 .fl__photo {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: min(92%, 40vw);
+  width: auto;
   height: auto;
-  z-index: 1;
+  max-width: min(70%, 560px);
+  max-height: 60vh;
+  margin: auto;
   pointer-events: none;
 }
 
 .fl__frame {
   z-index: 2;
+  display: flex;
+  flex-direction: column;
 }
 
 .fl-screen .question-panel__top {
@@ -40,22 +40,27 @@
   z-index: 2;
 }
 
-/* Corner cell — bottom-right of the frame, like the question footer cell */
-.fl__corner {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: clamp(44px, 4.4vw, 66px);
-  height: clamp(44px, 4.4vw, 66px);
-  border-left: var(--keyline);
+/* Keyline footer strip — full-width line above the compass cell,
+   same language as the case-study CTA footer */
+.fl__footer {
   border-top: var(--keyline);
+  display: flex;
+  min-height: clamp(44px, 4.4vw, 66px);
+}
+
+.fl__footer-hint {
+  flex: 1;
+}
+
+.fl__footer-cell {
+  width: clamp(44px, 4.4vw, 66px);
+  border-left: var(--keyline);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 3;
 }
 
-.fl__corner img {
+.fl__footer-cell img {
   width: 58%;
   height: auto;
 }
@@ -155,7 +160,7 @@
    mobile back link); the dark block needs a fixed height for the photo
    ============================================================ */
 
-@media (max-width: 900px) {
+@media (max-width: 900px), (max-width: 1160px) and (orientation: portrait) {
   /* Flip the stack: content first, photo panel at the bottom */
   .fl-screen {
     display: flex;
@@ -204,10 +209,12 @@
 
   .fl__photo {
     width: 100%;
+    max-width: 100%;
+    max-height: none;
     position: relative;
   }
 
-  .fl__corner {
+  .fl__footer {
     display: none;
   }
 

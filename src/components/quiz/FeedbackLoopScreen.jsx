@@ -48,16 +48,19 @@ export default function FeedbackLoopScreen({
           <div className="question-panel__mobile-back">
             <BackLink onBack={onBack} />
           </div>
-          <div className="fl__corner">
-            <img src="/assets/nomads-icon.png" alt="" aria-hidden="true" />
+          <img
+            className="fl__photo"
+            src="/assets/alefiya-loop.webp"
+            alt=""
+            aria-hidden="true"
+          />
+          <div className="fl__footer" aria-hidden="true">
+            <div className="fl__footer-hint" />
+            <div className="fl__footer-cell">
+              <img src="/assets/nomads-icon.png" alt="" />
+            </div>
           </div>
         </div>
-        <img
-          className="fl__photo"
-          src="/assets/alefiya-loop.webp"
-          alt=""
-          aria-hidden="true"
-        />
       </section>
 
       <section className="answer-panel fl__right">

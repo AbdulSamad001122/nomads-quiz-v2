@@ -30,6 +30,7 @@ export default function CaseStudyGolfbays({ theme, onBack, onContinue }) {
     '--t-back-text': theme.backText,
     '--cs-accent': ACCENT[theme.name] || ACCENT.maroon,
     '--cs-card': CARD[theme.name] || CARD.maroon,
+    '--cs-ink': theme.name === 'maroon' ? '#391129' : '#152638',
   };
 
   return (
@@ -50,21 +51,12 @@ export default function CaseStudyGolfbays({ theme, onBack, onContinue }) {
               <div className="cs5a__mobile-back">
                 <BackLink onBack={onBack} />
               </div>
-            <h1 className="cs5a__headline">
-              {'STRANGE THING '}
+            <p className="cs5a__lead">
+              {"Strange thing about ROAS: if you're spending "}
               <HighlightSweep tone={sweepToneFor(theme.name)}>
-                ABOUT ROAS
+                $10k+/mo on ads
               </HighlightSweep>
-            </h1>
-
-            <p className="cs5a__subhead">
-              {"If you're spending $10k+/mo on ads,"}
-              <br />
-              {' ROAS shows you the handful who'}
-              <br />
-              {' bought and ignores the potential buyers'}
-              <br />
-              {' who clicked, browsed, and bounced'}
+              {', ROAS shows you the handful who bought and ignores the potential buyers who clicked, browsed, and bounced'}
             </p>
 
             <p className="cs5a__paren">(and you paid for every one of them)</p>
@@ -72,13 +64,7 @@ export default function CaseStudyGolfbays({ theme, onBack, onContinue }) {
             <hr className="cs5a__rule" />
 
             <p className="cs5a__para">
-              {'GolfBays went from having a discount opt-in to a quiz'}
-              <br />
-              {' opt-in that landed them an additional 530 demos a'}
-              <br />
-              {' month and £97,000+ in direct site revenue from the'}
-              <br />
-              {' same Shopify traffic they were already paying for.'}
+              {'GolfBays went from having a discount opt-in to a quiz opt-in that landed them an additional 530 demos a month and £97,000+ in direct site revenue from the same Shopify traffic they were already paying for.'}
             </p>
             </div>
 
@@ -101,12 +87,6 @@ export default function CaseStudyGolfbays({ theme, onBack, onContinue }) {
             className="cs5a__hero-img"
             src="/assets/cs-5a-golfbays.webp"
             alt="GolfBays website on a phone under the Case Study script"
-          />
-          <img
-            className="cs5a__thisway"
-            src="/assets/this-way-arrow.png"
-            alt=""
-            aria-hidden="true"
           />
         </div>
       </section>
@@ -234,15 +214,11 @@ export default function CaseStudyGolfbays({ theme, onBack, onContinue }) {
           </p>
 
           <h2 className="cs5a__cta-head">
-            {'Want to see what it would take you'}
-            <br />
-            {' to add an '}
+            {'Want to see what it would take you to add an '}
             <HighlightSweep tone={CTA_TONE[theme.name] || 'plum'}>
               extra $125,000+
             </HighlightSweep>
-            {' to your MRR'}
-            <br />
-            {' with the traffic you already have?'}
+            {' to your MRR with the traffic you already have?'}
           </h2>
 
           <img

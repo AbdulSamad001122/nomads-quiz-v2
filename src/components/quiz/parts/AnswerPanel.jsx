@@ -81,6 +81,7 @@ export default function AnswerPanel({
               key={opt.id}
               number={String(i + 1).padStart(2, '0')}
               label={opt.label}
+              sub={opt.sub}
               media={opt.media}
               selected={isSelected(opt.id)}
               onSelect={() => onSelect(opt.id)}
@@ -91,7 +92,11 @@ export default function AnswerPanel({
             <OptionCard
               key={opt.id}
               number={String(i + 1).padStart(2, '0')}
+              heading={opt.heading}
               label={opt.label}
+              sub={opt.sub}
+              iconSrc={opt.iconSrc}
+              rich={opt.rich}
               selected={isSelected(opt.id)}
               onSelect={() => onSelect(opt.id)}
             />

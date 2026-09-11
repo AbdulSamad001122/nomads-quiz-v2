@@ -10,7 +10,7 @@
 .cs5b__lead {
   font-weight: 700;
   color: #ffffff;
-  font-size: clamp(15px, 1.32vw, 25px);
+  font-size: clamp(22px, 1.32vw, 25px);
   line-height: 1.5;
 }
 
@@ -30,7 +30,7 @@
 
 .cs5b__happens {
   background: var(--cs-accent); /* #5d1b4e on the maroon route */
-  padding: 65px clamp(20px, 5.5vw, 100px) 65px;
+  padding: 80px clamp(20px, 5.5vw, 100px) 80px;
   text-align: center;
 }
 
@@ -53,7 +53,7 @@
 }
 
 .cs5b__happens-para {
-  margin: 30px auto 0;
+  margin: 45px auto 0;
   max-width: 72ch;
   font-family: var(--font-body);
   font-weight: 500;
@@ -66,8 +66,7 @@
 
 .cs5b__after {
   background: #ffffff;
-  padding: clamp(24px, 4vh, 48px) clamp(20px, 5.5vw, 100px)
-    clamp(52px, 8vh, 110px);
+  padding: 60px clamp(20px, 5.5vw, 100px) 70px;
 }
 
 .cs5b__after-head {
@@ -76,7 +75,7 @@
   font-weight: 800;
   color: #250f1c;
   font-size: clamp(20px, 2.2vw, 40px);
-  margin-bottom: clamp(32px, 5.5vh, 70px);
+  margin-bottom: 55px;
 }
 
 .cs5b__cards {
@@ -87,23 +86,30 @@
   margin: 0 auto;
 }
 
+.cs5b__card .cs5a__chip {
+  margin-bottom: 12px;
+}
+
 .cs5b__card {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background: var(--cs-card);
   border: 2px solid var(--cs-accent);
   border-radius: 0;
-  box-shadow: 8px 8px 0 #f2e6d8; /* cream backing */
+  box-shadow: 8px 8px 0 var(--cs-ink); /* #391129 maroon / #152638 green */
   padding: clamp(22px, 2.4vw, 40px) clamp(18px, 2vw, 34px)
-    clamp(18px, 2vw, 32px);
+    clamp(5px, 0.5vw, 32px);
 }
 
 
 .cs5b__num {
   position: absolute;
-  top: clamp(-30px, -2.4vw, -22px);
-  left: clamp(-28px, -2.2vw, -20px);
-  width: clamp(50px, 4.4vw, 70px);
-  height: clamp(50px, 4.4vw, 70px);
+  top: clamp(-25px, -2vw, -18px);
+  left: clamp(-23px, -1.9vw, -17px);
+  width: clamp(42px, 3.7vw, 58px);
+  height: clamp(42px, 3.7vw, 58px);
   border-radius: 50%;
   background: var(--cs-ink);
   display: flex;
@@ -112,7 +118,7 @@
   font-family: var(--font-number);
   font-weight: 400;
   color: #ffffff;
-  font-size: clamp(20px, 1.8vw, 30px);
+  font-size: clamp(17px, 1.5vw, 25px);
 }
 
 .cs5b__card-text {
@@ -135,8 +141,9 @@
   margin: clamp(16px, 2.4vh, 30px) auto 0;
 }
 
-.cs5b__proof--tablet {
-  width: min(50%, 400px);
+/* chips never center inside flex parents */
+.cs5b .cs5a__chip {
+  align-self: flex-start;
 }
 
 /* ---------- 4. Samar Owais — dark band ---------- */
@@ -337,18 +344,32 @@
 
 .cs5b__eyes {
   background: #ffffff;
-  padding: clamp(48px, 8vh, 100px) clamp(20px, 5.5vw, 100px)
-    clamp(32px, 5vh, 64px);
+  padding: 60px clamp(20px, 5.5vw, 100px) 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .cs5b__eyes-head {
   position: relative;
-  text-align: left;
+  text-align: center;
   font-family: var(--font-headline);
   font-weight: 800;
   color: #250f1c;
   font-size: clamp(26px, 3vw, 54px);
   line-height: 1.25;
+}
+
+/* "to get eyeballs" always on its own line (a br would be hidden by
+   the mobile .cs5a br rule) */
+.cs5b__eyes-line {
+  display: block;
+}
+
+/* "When you don't?" always on its own line */
+.cs5b__happens-line {
+  display: block;
 }
 
 .cs5b__eyes-arrow {
@@ -435,7 +456,7 @@
 
 /* bold lead line without chip background */
 .cs5b__pool-lead {
-  font-weight: 800;
+  font-weight: 500;
   color: #250f1c;
   font-size: clamp(14px, 1.25vw, 24px);
   line-height: 1.45;
@@ -463,7 +484,7 @@
 /* Curious → Consideration → Conversation → Conversion */
 .cs5b__journey-wrap {
   background: #ffffff;
-  padding: clamp(36px, 6vh, 72px) clamp(20px, 5.5vw, 100px);
+  padding: 70px clamp(20px, 5.5vw, 100px) 70px;
 }
 
 .cs5b__journey {
@@ -475,35 +496,68 @@
 }
 
 .cs5b__journey-chip {
-  background: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   border: 1.5px solid var(--cs-accent);
-  box-shadow: 4px 4px 0 var(--cs-card);
-  color: #250f1c;
   font-weight: 700;
   font-size: clamp(11px, 1.05vw, 19px);
   padding: 8px 18px;
 }
 
+.cs5b__journey-icon {
+  width: auto;
+  height: 1.1em;
+  flex-shrink: 0;
+}
+
+/* navy ink icons flip to white on the plum chips */
+.cs5b__journey-chip:nth-of-type(4n + 3) .cs5b__journey-icon {
+  filter: brightness(0) invert(1);
+}
+
+/* alternate chip fills — chips sit at span positions 1/3/5/7 */
+.cs5b__journey-chip:nth-of-type(4n + 1) {
+  background: var(--cs-card); /* #f2e5f6 maroon / #e4fbff green */
+  color: #250f1c;
+}
+
+.cs5b__journey-chip:nth-of-type(4n + 3) {
+  background: var(--cs-accent); /* #5d1b4e maroon / #152638 green */
+  color: #ffffff;
+}
+
 .cs5b__journey-arrow {
   width: clamp(28px, 2.4vw, 38px);
   height: clamp(28px, 2.4vw, 38px);
-  background: var(--cs-accent);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
+/* dark arrow, same treatment as .cs5a__bullet-arrow */
 .cs5b__journey-arrow img {
-  width: 55%;
+  width: 95%;
   height: auto;
+  filter: brightness(0);
+  opacity: 0.85;
+}
+
+/* the "bigger pool" chip + para, moved in from the CTA card */
+.cs5b__journey-pool {
+  margin-top: clamp(28px, 4.5vh, 52px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 /* ---------- 7. CTA extras ---------- */
 
 .cs5b__cta-para {
-  margin-top: clamp(12px, 1.8vh, 22px);
-  max-width: 85ch;
+  margin-top: clamp(20px, 1.8vh, 22px);
+  max-width: 55ch;
   font-family: var(--font-body);
   font-weight: 500;
   color: #250f1c;
@@ -531,8 +585,7 @@
 @media (max-width: 900px) {
   /* tablet (601–900): cards pair up 2×2 */
   .cs5b__cards {
-    grid-template-columns: 1fr 1fr;
-    gap: 34px 24px;
+    gap: 50px 24px;
   }
 
   .cs5b__num {
@@ -595,5 +648,40 @@
 @media (max-width: 600px) {
   .cs5b__cards {
     grid-template-columns: 1fr;
+  }
+
+  .cs5b__happens-para,
+  .cs5b__cta-para,
+  .cs5b__eyes-head {
+    text-align: left;
+  }
+
+  .cs5b__happens {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .cs5b__card {
+    padding-top: 35px;
+    padding-bottom: 15px;
+  }
+}
+
+/* tiny phones: journey folds into exactly 2 lines —
+   Curious → Consideration / Conversation → Conversion */
+@media (max-width: 350px) {
+  .cs5b__journey {
+    gap: 6px;
+  }
+
+  .cs5b__journey-chip {
+    padding: 6px 10px;
+  }
+
+  /* the middle arrow becomes an invisible full-width row break */
+  .cs5b__journey-arrow:nth-of-type(4) {
+    flex-basis: 100%;
+    height: 0;
+    visibility: hidden;
   }
 }

@@ -1,6 +1,6 @@
 import SeamBadge from './parts/SeamBadge.jsx';
 import BackLink from './parts/BackLink.jsx';
-import HighlightSweep from '../primitives/HighlightSweep.jsx';
+import HighlightSweep, { sweepToneFor } from '../primitives/HighlightSweep.jsx';
 import { ACCENT, CARD, CTA_TONE } from './CaseStudyGolfbays.jsx';
 import './QuizScreen.css';
 import './CaseStudyGolfbays.css';
@@ -61,7 +61,11 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
               </div>
 
               <p className="cs5b__lead">
-                {'If your business is doing less than $10M/year, spending on visibility to stay "top of mind"—while your opt-in rate stays flat— is a strategy borrowed from bigger players with deeper pockets. It\'s not the best use of your marketing budget.'}
+                {'If your business is doing less than $10M/year, spending on visibility to stay '}
+                <HighlightSweep tone={sweepToneFor(theme.name)}>
+                  {'"top of mind"'}
+                </HighlightSweep>
+                {" while your opt-in rate stays flat is a strategy borrowed from bigger players with deeper pockets. It's not the best use of your marketing budget."}
               </p>
 
               <span className="cs5a__chip cs5b__problem-chip">The problem</span>
@@ -71,7 +75,7 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
               </p>
 
               <p className="cs5b__hero-para">
-                {"You're targeting Alex — who doesn't believe he needs you — and Sam — who's actively looking for you — exactly the same way."}
+                {"You're targeting Alex who doesn't believe he needs you and Sam who's actively looking for you exactly the same way."}
               </p>
             </div>
 
@@ -95,26 +99,22 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
             src="/assets/cs-5a-golfbays.webp"
             alt="Website preview on a phone under the Case Study script"
           />
-          <img
-            className="cs5a__thisway"
-            src="/assets/this-way-arrow.png"
-            alt=""
-            aria-hidden="true"
-          />
         </div>
       </section>
 
       {/* ============ 2. BUT WHAT HAPPENS ============ */}
       <section className="cs5b__happens">
         <h2 className="cs5b__happens-head">
-          {'But what happens '}
-          <span className="cs5b__script-cap" aria-hidden="true">
-            W
+          {'But what happens'}
+          <span className="cs5b__happens-line">
+            <span className="cs5b__script-cap" aria-hidden="true">
+              W
+            </span>
+            <span className="cs5b__cap-rest">hen you don't?</span>
           </span>
-          <span className="cs5b__cap-rest">hen you don't?</span>
         </h2>
         <p className="cs5b__happens-para">
-          {'Mary — an executive coach pulling 60,000+ monthly LinkedIn views — had fewer than 500 new email subscribers a month. Every sale for her $5,000 offer depended on lengthy back-and-forth DMs. The moment she stepped back, revenue stepped back with her.'}
+          {'Mary an executive coach pulling 60,000+ monthly LinkedIn views had fewer than 500 new email subscribers a month. Every sale for her $5,000 offer depended on lengthy back-and-forth DMs. The moment she stepped back, revenue stepped back with her.'}
         </p>
       </section>
 
@@ -127,6 +127,7 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
             <span className="cs5b__num" aria-hidden="true">
               01
             </span>
+            <span className="cs5a__chip">Quiz opt-in</span>
             <p className="cs5b__card-text">
               {'A quiz converting existing traffic into email subscribers at a '}
               <strong>73–79% opt-in rate</strong>
@@ -134,7 +135,7 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
             <img
               className="cs5b__proof cs5b__proof--tablet"
               src="/assets/cs-5b-tablet.webp"
-              alt="Quiz platform stats — 1.9K started, 1.4K finished, 1,902 visitors"
+              alt="Quiz platform stats: 1.9K started, 1.4K finished, 1,902 visitors"
             />
           </div>
 
@@ -142,6 +143,7 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
             <span className="cs5b__num" aria-hidden="true">
               02
             </span>
+            <span className="cs5a__chip">Entry point offer</span>
             <p className="cs5b__card-text">
               {'Her membership repositioned as a '}
               <strong>$500/quarter entry point</strong>
@@ -154,6 +156,7 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
             <span className="cs5b__num" aria-hidden="true">
               03
             </span>
+            <span className="cs5a__chip">Sales without chasing</span>
             <p className="cs5b__card-text">
               {'People were buying within '}
               <strong>7 days</strong>
@@ -165,6 +168,7 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
             <span className="cs5b__num" aria-hidden="true">
               04
             </span>
+            <span className="cs5a__chip">Revenue jump</span>
             <p className="cs5b__card-text">
               {'Revenue moved from '}
               <strong>$14,000 → $51,000/month</strong>
@@ -182,14 +186,11 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
       {/* ============ 4. SAMAR OWAIS — dark band ============ */}
       <section className="cs5b__samar">
         <div className="cs5b__photo-panel cs5b__photo-panel--dark">
-          <img src="/assets/cs-5b-lara.webp" alt="" aria-hidden="true" />
+          <img src="/assets/cs-5b-samar.webp" alt="" aria-hidden="true" />
         </div>
         <div className="cs5b__samar-content">
-          <h2 className="cs5b__script-head cs5b__script-head--accent">
-            Samar Owais
-          </h2>
           <p className="cs5b__samar-para">
-            {"A respected name in SaaS and e-commerce email — watched her list grow in three days by what had previously taken six months, after launching the Champion's Challenge™ quiz."}
+            {"A respected name in SaaS and e-commerce email watched her list grow in three days by what had previously taken six months, after launching the Champion's Challenge™ quiz."}
           </p>
           <p className="cs5b__samar-para">
             <strong>7,706% list growth,</strong>
@@ -219,12 +220,9 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
       {/* ============ 5. AUDIO-TECH SAAS — light band ============ */}
       <section className="cs5b__audio">
         <div className="cs5b__audio-content">
-          <h2 className="cs5b__script-head cs5b__script-head--accent">
-            Audio-tech SaaS
-          </h2>
           <p className="cs5b__audio-para">
             <strong>An audio-tech SaaS</strong>
-            {' for gamers was spending heavily on influencer marketing — '}
+            {' for gamers was spending heavily on influencer marketing '}
             <strong>140,000 monthly visits</strong>
             {" landing on a website that couldn't answer the one question every gamer was quietly asking:"}
           </p>
@@ -261,7 +259,7 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
           </p>
         </div>
         <div className="cs5b__photo-panel cs5b__photo-panel--dark">
-          <img src="/assets/cs-5b-lara.webp" alt="" aria-hidden="true" />
+          <img src="/assets/cs-5b-innit-audio.webp" alt="" aria-hidden="true" />
         </div>
       </section>
 
@@ -269,18 +267,10 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
       <section className="cs5b__eyes">
         <h2 className="cs5b__eyes-head">
           {"If you're "}
-          <HighlightSweep tone="plum">
-            already
-            <br />
-            {' spending'}
+          <HighlightSweep tone={theme.name === 'maroon' ? 'plum' : 'navy'}>
+            already spending
           </HighlightSweep>
-          {' to get eyeballs'}
-          <img
-            className="cs5b__eyes-arrow"
-            src="/assets/curve-white-arrow.png"
-            alt=""
-            aria-hidden="true"
-          />
+          <span className="cs5b__eyes-line">to get eyeballs</span>
         </h2>
         <p className="cs5b__eyes-sub">
           <strong>the question worth sitting with is:</strong>
@@ -294,7 +284,7 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
         <div className="cs5b__eyes-left">
           <img
             className="cs5b__eyes-img"
-            src="/assets/cs-5b-eyeballs.webp"
+            src="/assets/pie-chart-doodle.png"
             alt="Out of 100 people, 3% are ready to buy and 97% don't see the problem yet"
           />
         </div>
@@ -302,23 +292,11 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
         <div className="cs5b__eyes-right">
           <div className="cs5b__pool">
             <div className="cs5b__pool-block">
-              <span className="cs5b__pool-chip">
-                Most businesses are fishing in the same crowded 3% pool
-              </span>
-              <div className="cs5b__bullet">
-                {bulletImg}
-                <p>The ones already convinced they have a problem</p>
-              </div>
-              <div className="cs5b__bullet">
-                {bulletImg}
-                <p>already comparing solutions</p>
-              </div>
-              <div className="cs5b__bullet">
-                {bulletImg}
-                <p>already halfway to a decision</p>
-              </div>
-              <p className="cs5b__pool-strong">
-                That pool is only 3% of your total buyers.
+              <p className="cs5b__pool-note">
+                Most businesses are fishing in the same crowded 3% pool. The
+                ones already convinced they have a problem, already comparing
+                solutions, already halfway to a decision. That pool is only 3%
+                of your total buyers.
               </p>
             </div>
 
@@ -334,11 +312,8 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
                 {bulletImg}
                 <p>{"They're not even considering"}</p>
               </div>
-              <p className="cs5b__pool-strong">
-                {"And a product page won't change that."}
-              </p>
               <p className="cs5b__pool-note">
-                {"It'll just confirm what they already thought "}
+                {"And a product page won't change that. It'll just confirm what they already thought "}
                 <strong>{'"not for me."'}</strong>
               </p>
             </div>
@@ -347,18 +322,9 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
               <span className="cs5b__pool-chip cs5b__pool-chip--ink">
                 But when you open a third door…
               </span>
-              <div className="cs5b__bullet">
-                {bulletImg}
-                <p>one that challenges their current thinking</p>
-              </div>
-              <div className="cs5b__bullet">
-                {bulletImg}
-                <p>{"surfaces the gap they hadn't named"}</p>
-              </div>
-              <div className="cs5b__bullet">
-                {bulletImg}
-                <p>educates them without pushing a product</p>
-              </div>
+              <p className="cs5b__pool-note">
+                {"One that challenges their current thinking, surfaces the gap they hadn't named, and educates them without pushing a product."}
+              </p>
               <p className="cs5b__pool-strong">
                 A chunk of that 97% starts considering your solution.
               </p>
@@ -369,19 +335,62 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
 
       <section className="cs5b__journey-wrap">
         <div className="cs5b__journey" aria-label="Curious to Conversion journey">
-          <span className="cs5b__journey-chip">Curious</span>
+          <span className="cs5b__journey-chip">
+            <img
+              className="cs5b__journey-icon"
+              src="/assets/icon-journey-bulb.png"
+              alt=""
+              aria-hidden="true"
+            />
+            Curious
+          </span>
           <span className="cs5b__journey-arrow" aria-hidden="true">
             <img src="/assets/arrow-white.png" alt="" />
           </span>
-          <span className="cs5b__journey-chip">Consideration</span>
+          <span className="cs5b__journey-chip">
+            <img
+              className="cs5b__journey-icon"
+              src="/assets/icon-journey-board.png"
+              alt=""
+              aria-hidden="true"
+            />
+            Consideration
+          </span>
           <span className="cs5b__journey-arrow" aria-hidden="true">
             <img src="/assets/arrow-white.png" alt="" />
           </span>
-          <span className="cs5b__journey-chip">Conversation</span>
+          <span className="cs5b__journey-chip">
+            <img
+              className="cs5b__journey-icon"
+              src="/assets/icon-journey-bubble.png"
+              alt=""
+              aria-hidden="true"
+            />
+            Conversation
+          </span>
           <span className="cs5b__journey-arrow" aria-hidden="true">
             <img src="/assets/arrow-white.png" alt="" />
           </span>
-          <span className="cs5b__journey-chip">Conversion</span>
+          <span className="cs5b__journey-chip">
+            <img
+              className="cs5b__journey-icon"
+              src="/assets/icon-journey-funnel.png"
+              alt=""
+              aria-hidden="true"
+            />
+            Conversion
+          </span>
+        </div>
+
+        <div className="cs5b__journey-pool">
+          <span className="cs5a__chip">{"That's the bigger pool."}</span>
+          <p className="cs5b__cta-para">
+            {"And that's exactly what the "}
+            <strong>Compounding RPV™ diagnosis</strong>
+            {' is about to show you: '}
+            <strong>your revenue potential</strong>
+            {" when you stop fishing in the 3% and open a door for the 97% who don't yet believe they need you."}
+          </p>
         </div>
       </section>
 
@@ -396,27 +405,14 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
 
         <div className="cs5a__cta-frame">
           <div className="cs5a__cta-card">
-            <span className="cs5a__chip">{"That's the bigger pool."}</span>
-            <p className="cs5b__cta-para">
-              {"And that's exactly what the "}
-              <strong>Compounding RPV™ diagnosis</strong>
-              {' is about to show you: '}
-              <strong>your revenue potential</strong>
-              {" when you stop fishing in the 3% and open a door for the 97% who don't yet believe they need you."}
-            </p>
-
             <p className="cs5b__jiffy">Coming up in a jiffy.</p>
 
             <h2 className="cs5a__cta-head">
-              {'Want to see what it would take you'}
-              <br />
-              {' to add an '}
+              {'Want to see what it would take you to add an '}
               <HighlightSweep tone={CTA_TONE[theme.name] || 'plum'}>
                 extra $125,000+
               </HighlightSweep>
-              {' to your MRR'}
-              <br />
-              {' with the traffic you already have?'}
+              {' to your MRR with the traffic you already have?'}
             </h2>
 
             <img

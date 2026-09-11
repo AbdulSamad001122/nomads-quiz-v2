@@ -59,15 +59,12 @@ export default function CaseStudyEstelle({ theme, onBack, onContinue }) {
                 <BackLink onBack={onBack} />
               </div>
 
-              <h1 className="cs5a__headline cs5e__headline">
-                {'"IF WE GET THEM ON A CALL, WE\'LL CLOSE THEM" '}
+              <p className="cs5a__lead">
+                {'"If we get them on a call, we\'ll close them" '}
                 <HighlightSweep tone={sweepToneFor(theme.name)}>
-                  {"ISN'T A FLEX."}
+                  {"isn't a flex."}
                 </HighlightSweep>
-              </h1>
-
-              <p className="cs5a__subhead">
-                {"It's booking you fewer calls and hurting your close rate."}
+                {" It's booking you fewer calls and hurting your close rate."}
               </p>
 
               <p className="cs5e__hero-para">
@@ -104,14 +101,8 @@ export default function CaseStudyEstelle({ theme, onBack, onContinue }) {
           </div>
           <img
             className="cs5a__hero-img"
-            src="/assets/cs-5a-golfbays.webp"
-            alt="Website preview on a phone under the Case Study script"
-          />
-          <img
-            className="cs5a__thisway"
-            src="/assets/this-way-arrow.png"
-            alt=""
-            aria-hidden="true"
+            src="/assets/cs-5e-estelle.webp"
+            alt="Estelle Winsett, stylist for high-performing lawyers"
           />
         </div>
       </section>
@@ -256,11 +247,13 @@ export default function CaseStudyEstelle({ theme, onBack, onContinue }) {
       {/* ============ 3. THE RESULTS — dark paper band ============ */}
       <section className="cs5e__results">
         <div className="cs5e__results-frame">
-          <h2 className="cs5e__results-head">The Results:</h2>
+          <h2 className="cs5e__results-head">
+            <span className="cs5e__results-script">The</span> Results
+          </h2>
 
           <div className="cs5e__stat-row">
             <div className="cs5e__stat-card">
-              <span className="cs5e__stat-num">5</span>
+              <span className="cs5e__stat-num">05</span>
               <span className="cs5e__stat-label">
                 Five out of every 100 quiz takers book a call with her in the
                 first 10 days of taking the quiz
@@ -283,8 +276,8 @@ export default function CaseStudyEstelle({ theme, onBack, onContinue }) {
 
           <img
             className="cs5e__proof"
-            src="/assets/doc/cs-estelle-results.webp"
-            alt="Funnel stats — quiz takers convert 62.8% vs 27.2% for non-quiz takers; 5.2% leads-to-sales"
+            src="/assets/cs-5e-tags.webp"
+            alt="Tags are changed, booked a call is added: 11 were here, 5.2% conversion rate. Leads to sales conversion rate of quiz takers is 5.2%"
           />
 
           <p className="cs5e__results-closer">
@@ -311,15 +304,11 @@ export default function CaseStudyEstelle({ theme, onBack, onContinue }) {
         <div className="cs5a__cta-frame">
           <div className="cs5a__cta-card">
             <h2 className="cs5a__cta-head">
-              {'Want to see what it would take you'}
-              <br />
-              {' to add an '}
+              {'Want to see what it would take you to add an '}
               <HighlightSweep tone={CTA_TONE[theme.name] || 'plum'}>
                 extra $125,000+
               </HighlightSweep>
-              {' to your MRR'}
-              <br />
-              {' with the traffic you already have?'}
+              {' to your MRR with the traffic you already have?'}
             </h2>
 
             <img

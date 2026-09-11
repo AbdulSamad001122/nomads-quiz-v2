@@ -14,6 +14,11 @@ import CaseStudy97 from './CaseStudy97.jsx';
 import CaseStudyCreative from './CaseStudyCreative.jsx';
 import CaseStudyLara from './CaseStudyLara.jsx';
 import CaseStudyEstelle from './CaseStudyEstelle.jsx';
+import Advice12A from './Advice12A.jsx';
+import Advice12B from './Advice12B.jsx';
+import Advice12C from './Advice12C.jsx';
+import Advice12D from './Advice12D.jsx';
+import FiveMetricsScreen from './FiveMetricsScreen.jsx';
 import HighlightSweep from '../primitives/HighlightSweep.jsx';
 import SlideScreen from '../slides/SlideScreen.jsx';
 import ResultsScreen from '../results/ResultsScreen.jsx';
@@ -673,31 +678,7 @@ export default function QuizFlow() {
       return <LoadingScreen theme={themeAt(index)} onDone={next} durationMs={1500} />;
 
     case 'five-metrics':
-      return (
-        <SlideScreen
-          eyebrow="Why this works"
-          title={
-            <>
-              {'Most businesses '}
-              <HighlightSweep tone="plum">can't tell</HighlightSweep>
-              {' if a slow month is a traffic problem, an email problem, or a positioning problem.'}
-            </>
-          }
-          body={[
-            "Because they're tracking data in isolation. You might be clocking 40,000 TikTok views and celebrating, without knowing how many of those views became subscribers, or how many subscribers bought within the first 14 days.",
-            'And when revenue dips, you start doing more of something or less of something without knowing what has a direct impact on sales.',
-            { img: '/assets/doc/five-metrics-1.webp', alt: 'RPV™ OS five-metrics diagram — traffic, subscribers, revenue per subscriber feeding the RPV number' },
-            { img: '/assets/doc/five-metrics-2.webp', alt: 'RPV™ OS five-metrics diagram — calls closing and early buyers, all tracked automatically' },
-            'The Revenue Per Visitor™ OS tracks five metrics, paired with action-triggered surveys and behavior analysis. So instead of guessing, you have a clear, reverse-engineered goal sitting in front of you.',
-            'Like “Let’s increase email opt-ins by 20% this month, and that alone adds $70,000 to MRR.”',
-            'So instead of experimenting, every action you take is tied to a revenue outcome you can see coming.',
-            'In 50 seconds, your results will reveal the average revenue you earn per visitor, and exactly which metrics to focus on to add $125k to your MRR.',
-          ]}
-          cta="Continue →"
-          onCta={next}
-          onBack={back}
-        />
-      );
+      return <FiveMetricsScreen onBack={back} onContinue={next} />;
 
     case 'almost-ready':
       return (
@@ -716,16 +697,18 @@ export default function QuizFlow() {
         path === 'slg'
           ? { a: 'a', b: 'b', c: 'c', d: 'c', e: 'd' }[answers.q12] || 'a'
           : answers.q12 || 'a';
-      const advice = ADVICE_12[adviceKey] || ADVICE_12.a;
-      return (
-        <SlideScreen
-          eyebrow="Our take"
-          body={advice.body}
-          cta="Continue →"
-          onCta={next}
-          onBack={back}
-        />
-      );
+      // 12A has its designed screen; the rest keep the placeholder until
+      // their references arrive.
+      if (adviceKey === 'a') {
+        return <Advice12A onBack={back} onContinue={next} />;
+      }
+      if (adviceKey === 'b') {
+        return <Advice12B onBack={back} onContinue={next} />;
+      }
+      if (adviceKey === 'c') {
+        return <Advice12C onBack={back} onContinue={next} />;
+      }
+      return <Advice12D onBack={back} onContinue={next} />;
     }
 
     case 'optin':

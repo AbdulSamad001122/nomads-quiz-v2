@@ -24,6 +24,7 @@ export default function CaseStudyCreative({ theme, onBack, onContinue }) {
     '--t-back-text': theme.backText,
     '--cs-accent': ACCENT[theme.name] || ACCENT.maroon,
     '--cs-card': CARD[theme.name] || CARD.maroon,
+    '--cs-ink': theme.name === 'maroon' ? '#391129' : '#152638',
   };
 
   const bulletImg = (
@@ -54,17 +55,12 @@ export default function CaseStudyCreative({ theme, onBack, onContinue }) {
                 <BackLink onBack={onBack} />
               </div>
 
-              <h1 className="cs5a__headline cs5c__headline">
-                {'WE KEEP HEARING'}
-                <br />
-                {" WE'RE IN A "}
+              <p className="cs5a__lead">
+                {"We keep hearing we're in a "}
                 <HighlightSweep tone={sweepToneFor(theme.name)}>
-                  TRUST RECESSION
+                  trust recession
                 </HighlightSweep>
-              </h1>
-
-              <p className="cs5a__subhead">
-                That buyers are more sceptical than ever.
+                {'. That buyers are more sceptical than ever.'}
               </p>
 
               <p className="cs5c__hero-para">
@@ -100,12 +96,6 @@ export default function CaseStudyCreative({ theme, onBack, onContinue }) {
             className="cs5a__hero-img"
             src="/assets/cs-5a-golfbays.webp"
             alt="Website preview on a phone under the Case Study script"
-          />
-          <img
-            className="cs5a__thisway"
-            src="/assets/this-way-arrow.png"
-            alt=""
-            aria-hidden="true"
           />
         </div>
       </section>
@@ -186,9 +176,7 @@ export default function CaseStudyCreative({ theme, onBack, onContinue }) {
           <div className="cs5c__results-card">
             <p className="cs5c__results-lead">Went from</p>
             <div className="cs5c__results-stat">
-              {'$8,000 to'}
-              <br />
-              {' $108,000/mo'}
+              {'$8,000 to $108,000/mo'}
             </div>
             <p className="cs5c__results-body">
               {'by increasing the close rate from '}
@@ -233,7 +221,7 @@ export default function CaseStudyCreative({ theme, onBack, onContinue }) {
       <section className="cs5c__closing">
         <span className="cs5c__closing-label">Contrarian POV</span>
         <h2 className="cs5c__closing-head">
-          {'is your stand against the majority of look-alike competitors, so you can become '}
+          {'Is your stand against the majority of look-alike competitors, so you can become '}
           <HighlightSweep tone={sweepToneFor(theme.name)}>
             the default choice
           </HighlightSweep>
@@ -260,15 +248,11 @@ export default function CaseStudyCreative({ theme, onBack, onContinue }) {
         <div className="cs5a__cta-frame">
           <div className="cs5a__cta-card">
             <h2 className="cs5a__cta-head">
-              {'Want to see what it would take you'}
-              <br />
-              {' to add an '}
+              {'Want to see what it would take you to add an '}
               <HighlightSweep tone={CTA_TONE[theme.name] || 'plum'}>
                 extra $125,000+
               </HighlightSweep>
-              {' to your MRR'}
-              <br />
-              {' with the traffic you already have?'}
+              {' to your MRR with the traffic you already have?'}
             </h2>
 
             <img

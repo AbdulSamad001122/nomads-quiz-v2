@@ -27,11 +27,12 @@
 
 .cs5c__hook {
   background: var(--cs-accent);
-  padding: 35px clamp(20px, 5.5vw, 100px) 35px;
+  padding: 70px clamp(20px, 5.5vw, 100px) 70px;
   text-align: center;
 }
 
 .cs5c__hook-lead {
+  margin-bottom: 35px;
   font-family: var(--font-body);
   font-weight: 500;
   color: #ffffff;
@@ -57,7 +58,7 @@
   gap: 15px;
   background: var(--cs-card);
   border: 2px solid var(--cs-accent); /* #5d1b4e on the maroon route */
-  box-shadow: 8px 8px 0 #f2e6d8;
+  box-shadow: 8px 8px 0 var(--cs-ink); /* #391129 maroon / #152638 green */
   padding: clamp(18px, 2.2vh, 30px) clamp(26px, 3vw, 54px);
   min-width: clamp(170px, 17vw, 250px);
 }
@@ -89,7 +90,7 @@
 }
 
 .cs5c__hook-close {
-  margin-top: 30px;
+  margin-top: 35px;
   font-family: var(--font-body);
   font-weight: 600;
   color: #ffffff;
@@ -103,6 +104,11 @@
 
 /* ---------- 3. Grid — third "Results" column ---------- */
 
+.cs5c .cs5a__ba {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
 /* the shared ba-grid gets a Results header + a tall results card */
 .cs5c .cs5a__ba-grid {
   grid-template-areas:
@@ -113,6 +119,19 @@
 
 .cs5c__results-head {
   grid-area: hr;
+}
+
+/* 5C: column headings in the theme's dark ink */
+.cs5c .cs5a__ba-head--before,
+.cs5c .cs5a__ba-head--after,
+.cs5c .cs5c__results-head {
+  color: var(--cs-ink);
+}
+
+/* green route: the hook band bg equals the green ink, so the stat
+   cards' shadow flips to white for contrast */
+.quiz-screen--green .cs5c__hook-stat {
+  box-shadow: 8px 8px 0 #ffffff;
 }
 
 .cs5c__results-card {
@@ -177,6 +196,7 @@
 .cs5c__closing-head {
   margin: clamp(18px, 2.8vh, 30px) auto 0;
   max-width: 900px;
+  text-wrap: balance;
   font-family: var(--font-headline);
   font-weight: 800;
   color: #ffffff;
@@ -232,7 +252,7 @@
   }
 
   .cs5c__hook {
-    padding: 35px clamp(16px, 5vw, 28px);
+    padding: 60px clamp(16px, 5vw, 28px);
   }
 
   .cs5c__closing {
@@ -256,6 +276,15 @@
   /* phones: back to full column width */
   .cs5c__results-card {
     width: 100%;
+  }
+
+  .cs5c__closing-sub {
+    font-size: clamp(13px, 1.3vw, 24px);
+  }
+
+  .cs5c__closing-head,
+  .cs5c__closing-sub {
+    text-align: left;
   }
 }
 

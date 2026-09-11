@@ -1,0 +1,103 @@
+/* ============================================================
+   FiveMetricsScreen — "Why this works" slide after loading.
+   Builds on the advice-slide shell (Advice12A.css, a12__*).
+   fm__ = five-metrics specific pieces.
+   ============================================================ */
+
+/* mono eyebrow chip — same label-strip language as the questions */
+.fm__eyebrow {
+  display: block;
+  width: fit-content;
+  margin: 0 auto clamp(18px, 3vh, 30px);
+  background: #f2e6d8;
+  color: #250f1c;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: clamp(12px, 1vw, 17px);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+}
+
+/* the headline runs longer than the advice ones */
+.fm__headline {
+  max-width: 44ch;
+}
+
+/* problem paragraphs on the dark top */
+.fm__dark-para {
+  margin: clamp(18px, 3vh, 32px) auto 0;
+  max-width: 60ch;
+  text-align: center;
+  font-family: var(--font-body);
+  font-weight: 400;
+  color: #ffffff;
+  font-size: clamp(14px, 1.15vw, 21px);
+  line-height: 1.6;
+}
+
+.fm__dark-para strong {
+  font-weight: 700;
+}
+
+/* the reverse-engineered goal — navy quote bar */
+.fm .a12__punch {
+  max-width: 44ch;
+}
+
+.fm .a12__para-block {
+  max-width: 55ch;
+}
+
+.fm__quote {
+  margin: clamp(22px, 3.6vh, 40px) auto 0;
+  width: fit-content;
+  max-width: 44ch;
+  background: #152638;
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(14px, 1.2vw, 22px);
+  line-height: 1.55;
+  padding: clamp(12px, 1.6vh, 18px) clamp(16px, 2vw, 28px);
+}
+
+.fm__quote strong {
+  font-weight: 800;
+}
+
+.fm .a12__info-img {
+  display: block;
+}
+
+/* CTA — same sizing as the 12B–D slides */
+.fm .a12__cta-head {
+  font-size: clamp(20px, 2vw, 52px);
+}
+
+@media (min-width: 901px) {
+  .fm .a12__cta-card {
+    width: min(1160px, 70%);
+  }
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 900px) {
+  .fm__dark-para {
+    text-align: left;
+  }
+}
+
+@media (max-width: 600px) {
+  .fm .a12__frame {
+    padding-bottom: 15px;
+  }
+
+  /* phones: body content reads left-aligned */
+  .fm .a12__body {
+    text-align: left;
+  }
+}
