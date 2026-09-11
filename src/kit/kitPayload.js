@@ -98,10 +98,14 @@ export function buildKitFields({
     quiz_taker_feedback_loop_what_led_you_here: vocText.trim() || null,
   };
 
-  // Computed results (logic doc's computed table) — the calculator already
-  // outputs them under `tags` with the doc's exact snake_case names.
+  // Computed results (logic doc's computed table). The calculator outputs
+  // the doc's snake_case names; Kit's custom fields carry a quiz_taker_
+  // prefix (checked live against the account), so map them here.
   if (result && result.tags) {
-    Object.assign(fields, result.tags, { record_unverified: false });
+    for (const [key, value] of Object.entries(result.tags)) {
+      fields[`quiz_taker_${key}`] = value;
+    }
+    fields.quiz_taker_record_unverified = false;
   }
 
   // Kit rejects nulls in the fields hash — drop empty values entirely.

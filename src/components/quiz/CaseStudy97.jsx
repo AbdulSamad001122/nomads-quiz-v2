@@ -68,15 +68,6 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
                 {" while your opt-in rate stays flat is a strategy borrowed from bigger players with deeper pockets. It's not the best use of your marketing budget."}
               </p>
 
-              <span className="cs5a__chip cs5b__problem-chip">The problem</span>
-
-              <p className="cs5b__hero-para">
-                {"Many of your potential buyers are already circling your ecosystem. They've seen your ads or content a few times, but they're still blurry on what you do, why it's different, and why it matters right now."}
-              </p>
-
-              <p className="cs5b__hero-para">
-                {"You're targeting Alex who doesn't believe he needs you and Sam who's actively looking for you exactly the same way."}
-              </p>
             </div>
 
             <div className="cs5a__script-band">your traffic is worth more.</div>
@@ -94,11 +85,31 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
               aria-hidden="true"
             />
           </div>
-          <img
-            className="cs5a__hero-img"
-            src="/assets/cs-5a-golfbays.webp"
-            alt="Website preview on a phone under the Case Study script"
-          />
+          <div className="cs5b__problem">
+            <h2 className="cs5b__problem-head">
+              <span className="cs5b__problem-script">The</span> Problem
+            </h2>
+            <p className="cs5b__problem-para">
+              {"Many of your potential buyers are already circling your ecosystem. They've seen your ads or content a few times, but they're still blurry on"}
+            </p>
+            <div className="cs5b__problem-bullets">
+              <div className="cs5b__bullet">
+                {bulletImg}
+                <p>what you do</p>
+              </div>
+              <div className="cs5b__bullet">
+                {bulletImg}
+                <p>{"why it's different"}</p>
+              </div>
+              <div className="cs5b__bullet">
+                {bulletImg}
+                <p>why it matters right now</p>
+              </div>
+            </div>
+            <p className="cs5b__problem-para">
+              {"You're targeting Alex who doesn't believe he needs you and Sam who's actively looking for you exactly the same way."}
+            </p>
+          </div>
         </div>
       </section>
 

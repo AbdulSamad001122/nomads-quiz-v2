@@ -6,6 +6,11 @@
 
 /* ---------- 1. Hero left content ---------- */
 
+/* hero art sized like 5D/5E */
+.cs5c .cs5a__hero-img {
+  width: 65%;
+}
+
 /* slightly smaller than 5A's headline — three short lines */
 .cs5c__headline {
   font-size: clamp(26px, 2.9vw, 54px);

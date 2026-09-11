@@ -80,9 +80,9 @@ eq(
   'Revenue stalled for two quarters.',
   'Q14 free text'
 );
-eq(typeof slg.current_rpv, 'number', 'computed current_rpv present');
-eq(typeof slg.goal_rpv, 'number', 'computed goal_rpv present');
-eq(slg.record_unverified, false, 'record_unverified false');
+eq(typeof slg.quiz_taker_current_rpv, 'number', 'computed current_rpv present');
+eq(typeof slg.quiz_taker_goal_rpv, 'number', 'computed goal_rpv present');
+eq(slg.quiz_taker_record_unverified, false, 'record_unverified false');
 eq('quiz_taker_ad_spend' in slg, false, 'no ad spend on organic path');
 
 /* ---------- PLG run (manual entries + hybrid checks) ---------- */
@@ -132,7 +132,7 @@ eq(hybD.quiz_taker_sales_model, 'SLG (Hybrid)', 'Q4 D → SLG (Hybrid)');
 
 /* ---------- no result (missing inputs) ---------- */
 const noCalc = buildKitFields({ answers: { q1: 'founder' } });
-eq('current_rpv' in noCalc, false, 'no computed fields without result');
+eq('quiz_taker_current_rpv' in noCalc, false, 'no computed fields without result');
 
 console.log(`\nkitPayload: all ${passed} checks passed ✓`);
 console.log('\nSample SLG payload that would reach Kit:');

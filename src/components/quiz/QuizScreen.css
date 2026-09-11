@@ -604,6 +604,23 @@
   height: auto;
 }
 
+/* Q3/Q5/Q13: question content starts at the top instead of centering */
+.quiz-q-q3 .question-panel__content,
+.quiz-q-q5 .question-panel__content,
+.quiz-q-q13 .question-panel__content {
+  justify-content: flex-start;
+}
+
+/* Q4 icon sizing — cart smaller, signpost/puzzle bigger */
+.quiz-q-q4 .media-option:nth-child(2) .media-option__circle img {
+  width: 63%;
+}
+
+.quiz-q-q4 .media-option:nth-child(3) .media-option__circle img,
+.quiz-q-q4 .media-option:nth-child(4) .media-option__circle img {
+  width: 75%;
+}
+
 /* A gif fills the whole circle instead of sitting inside it */
 .media-option__circle img[src$='.gif'] {
   width: 100%;

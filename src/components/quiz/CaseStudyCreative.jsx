@@ -94,8 +94,8 @@ export default function CaseStudyCreative({ theme, onBack, onContinue }) {
           </div>
           <img
             className="cs5a__hero-img"
-            src="/assets/cs-5a-golfbays.webp"
-            alt="Website preview on a phone under the Case Study script"
+            src="/assets/cs-5c-louis.webp"
+            alt="Louis, the Video Mastermind founder"
           />
         </div>
       </section>

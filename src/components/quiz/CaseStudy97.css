@@ -26,6 +26,48 @@
   line-height: 1.55;
 }
 
+/* ---------- 1b. The Problem — hero right panel ---------- */
+
+.cs5b__problem {
+  width: min(88%, 560px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 2vh, 22px);
+  padding: 0 0 clamp(24px, 4vh, 48px);
+  margin-top: clamp(44px, 7vh, 84px);
+  text-align: left;
+}
+
+.cs5b__problem-head {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  color: #250f1c;
+  font-size: clamp(28px, 2.8vw, 52px);
+  line-height: 1.2;
+}
+
+/* "The" in Better Brush script, accent colour */
+.cs5b__problem-script {
+  font-family: var(--font-number);
+  font-weight: 400;
+  color: var(--cs-accent);
+  font-size: 1.15em;
+}
+
+.cs5b__problem-para {
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: #250f1c;
+  font-size: clamp(14px, 1.12vw, 21px);
+  line-height: 1.55;
+}
+
+.cs5b__problem-bullets {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1.2vh, 14px);
+}
+
 /* ---------- 2. But what happens When you don't? ---------- */
 
 .cs5b__happens {
@@ -585,6 +627,8 @@
 @media (max-width: 900px) {
   /* tablet (601–900): cards pair up 2×2 */
   .cs5b__cards {
+    /* adaptive: as many ≥220px columns as fit — no fixed 2-col, no overflow */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 50px 24px;
   }
 

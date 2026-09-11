@@ -22,8 +22,6 @@
  * copy doc — values and structure follow Quiz Logics.docx.
  */
 
-const g = (id) => `https://media.giphy.com/media/${id}/giphy.gif`;
-
 export const QUESTIONS = [
   {
     id: 'q1',
@@ -126,25 +124,25 @@ export const QUESTIONS = [
       {
         id: 'calls',
         label: 'We close most deals through calls or demos',
-        media: g('lRPmjJleU2Usz8mu6v'),
+        media: '/assets/q4-calendar.svg',
         tag: 'SLG',
       },
       {
         id: 'self-serve',
         label: 'Most people buy without ever talking to us',
-        media: g('fw2LNzndEtIytKbDqU'),
+        media: '/assets/q3-cart.svg',
         tag: 'PLG',
       },
       {
         id: 'hybrid-call',
         label: 'Some buy on their own, some still need a call',
-        media: g('3ohfFhG5VDtDTzQv2o'),
+        media: '/assets/icon-12d-signpost.png',
         tag: 'SLG',
       },
       {
         id: 'hybrid-mess',
         label: "It's a bit all over the place right now",
-        media: g('cPfGsK8NjMWXjiXNR4'),
+        media: '/assets/icon-12d-puzzle.svg',
         tag: 'SLG',
       },
     ],
