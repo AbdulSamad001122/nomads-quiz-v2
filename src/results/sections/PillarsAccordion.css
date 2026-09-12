@@ -1,0 +1,222 @@
+/* Four-pillar accordion — cream linen bg, "This way" doodle, brush-number
+   bars. Reference: pillars accordion design image. */
+
+.rpl {
+  position: relative;
+  background: #f7f3e8 url('/assets/results-paper-texture.webp') center / cover;
+  padding: 110px 96px 120px;
+}
+
+.rpl__doodle {
+  position: absolute;
+  top: 44px;
+  right: 5%;
+  width: 300px;
+  height: auto;
+  pointer-events: none;
+}
+
+.rpl__headline {
+  max-width: 620px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 42px;
+  line-height: 1.25;
+  color: #431232;
+}
+
+.rpl__sub {
+  margin-top: 22px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  color: #2c1a26;
+}
+
+/* ——— bars ——— */
+
+.rpl__list {
+  margin: 64px auto 0;
+  max-width: 1190px;
+  display: flex;
+  flex-direction: column;
+  gap: 46px;
+}
+
+.rpl__item {
+  border-radius: 20px;
+}
+
+.rpl__bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 30px 44px;
+  text-align: left;
+  border-radius: 20px;
+  cursor: pointer;
+  color: inherit; /* buttons don't inherit — keeps text readable on dark bars */
+}
+
+.rpl__num {
+  flex-shrink: 0;
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-number);
+  font-size: 30px;
+}
+
+.rpl__labels {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rpl__title {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 31px;
+  line-height: 1.1;
+}
+
+.rpl__name {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.rpl__chev {
+  flex-shrink: 0;
+  width: 22px;
+  height: 16px;
+  transition: transform 0.25s ease;
+}
+
+.rpl__chev--open {
+  transform: rotate(180deg);
+}
+
+.rpl__panel {
+  padding: 0 44px 36px;
+}
+
+/* ——— variants ——— */
+
+.rpl__item--pink {
+  background: #f3dff0;
+  border: 1px solid #d9b8d3;
+  color: #431232;
+}
+
+.rpl__item--pink .rpl__num {
+  background: #641d4f;
+  color: #ffffff;
+}
+
+.rpl__item--plum {
+  background: #641d4f;
+  color: #ffffff;
+}
+
+.rpl__item--plum .rpl__num {
+  background: #ffffff;
+  color: #641d4f;
+}
+
+.rpl__item--ice {
+  background: #ddf2f8;
+  border: 1px solid #b7d5dd;
+  color: #16273b;
+}
+
+.rpl__item--ice .rpl__num {
+  background: #16273b;
+  color: #ffffff;
+}
+
+.rpl__item--navy {
+  background: #16273b;
+  color: #ffffff;
+}
+
+.rpl__item--navy .rpl__num {
+  background: #ddf2f8;
+  color: #16273b;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rpl {
+    padding: 80px 40px 90px;
+  }
+  .rpl__doodle {
+    width: 210px;
+    top: 24px;
+  }
+  .rpl__headline {
+    font-size: 33px;
+  }
+  .rpl__list {
+    margin-top: 48px;
+    gap: 30px;
+  }
+  .rpl__bar {
+    gap: 26px;
+    padding: 24px 30px;
+  }
+  .rpl__num {
+    width: 64px;
+    height: 64px;
+    font-size: 24px;
+  }
+  .rpl__title {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 640px) {
+  .rpl {
+    padding: 60px 20px 70px;
+  }
+  .rpl__doodle {
+    display: none;
+  }
+  .rpl__headline {
+    font-size: 26px;
+  }
+  .rpl__list {
+    gap: 20px;
+  }
+  .rpl__bar {
+    gap: 16px;
+    padding: 18px 18px;
+    border-radius: 14px;
+  }
+  .rpl__item {
+    border-radius: 14px;
+  }
+  .rpl__num {
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
+  }
+  .rpl__title {
+    font-size: 20px;
+  }
+  .rpl__name {
+    font-size: 13.5px;
+  }
+  .rpl__chev {
+    width: 16px;
+  }
+  .rpl__panel {
+    padding: 0 18px 24px;
+  }
+}

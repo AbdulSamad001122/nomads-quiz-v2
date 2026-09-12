@@ -1,0 +1,136 @@
+/* "Then It's Your Call." closer — cream card on topo texture, circle badge
+   on the top seam. Reference: your-call design image. */
+
+.ryc {
+  position: relative;
+  background: #1d3230 url('/assets/results-topo-bg.webp') center / cover;
+  padding: 46px 54px 70px;
+}
+
+.ryc__badge {
+  position: absolute;
+  top: 0;
+  right: 6%;
+  transform: translateY(-38%);
+  width: 132px;
+  height: auto;
+  z-index: 5;
+}
+
+.ryc__card {
+  max-width: 1330px;
+  margin: 0 auto;
+  background: #faf5e9 url('/assets/results-cream-bg.webp') center / cover;
+  border-radius: 28px;
+  padding: 46px 56px 64px;
+}
+
+.ryc__rule {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.ryc__rule-line {
+  flex: 1;
+  height: 1.5px;
+  background: #16273b;
+}
+
+.ryc__rule-icon {
+  width: 24px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.ryc__grid {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: 0.42fr 0.58fr;
+  align-items: center;
+  gap: 56px;
+}
+
+.ryc__para {
+  max-width: 440px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #2c1a26;
+}
+
+.ryc__band {
+  display: inline-block;
+  margin: 26px 0;
+  background: #641d4f;
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 17px;
+  padding: 7px 18px;
+  transform: rotate(-0.6deg);
+}
+
+.ryc__btn {
+  display: inline-block;
+  margin: 36px 0;
+  background: #f3dfef;
+  border: 2px solid #431232;
+  box-shadow: 6px 6px 0 #431232;
+  color: #431232;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  padding: 15px 28px;
+}
+
+.ryc__media img {
+  width: 100%;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .ryc__card {
+    padding: 36px 32px 48px;
+  }
+  .ryc__grid {
+    margin-top: 40px;
+    gap: 36px;
+  }
+}
+
+@media (max-width: 900px) {
+  .ryc {
+    padding: 40px 20px 56px;
+  }
+  .ryc__badge {
+    width: 100px;
+    right: 4%;
+  }
+  .ryc__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .ryc__para {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .ryc__card {
+    padding: 26px 20px 36px;
+    border-radius: 20px;
+  }
+  .ryc__btn {
+    font-size: 16px;
+    padding: 13px 20px;
+    margin: 26px 0;
+    box-shadow: 5px 5px 0 #431232;
+  }
+  .ryc__band {
+    font-size: 15px;
+  }
+}

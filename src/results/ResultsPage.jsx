@@ -15,6 +15,8 @@ import ClientDavid from './sections/ClientDavid.jsx';
 import WalkAwayWith from './sections/WalkAwayWith.jsx';
 import WeakestPillar from './sections/WeakestPillar.jsx';
 import LaraStory from './sections/LaraStory.jsx';
+import YourCall from './sections/YourCall.jsx';
+import PillarsAccordion from './sections/PillarsAccordion.jsx';
 import SameProblemIntro from './sections/SameProblemIntro.jsx';
 import RelateQuotes from './sections/RelateQuotes.jsx';
 import { resolveTokens } from './resolveTokens.js';
@@ -56,8 +58,10 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
       <WalkAwayWith />
       <WeakestPillar />
       <LaraStory />
-      {/* TODO (doc order): the four pillar sections (doc rows 6–9) slot in
-          here once their designs arrive. */}
+      <YourCall />
+      {/* Pillar content sections (doc rows 6–9) mount inside the accordion
+          panels as they're designed. */}
+      <PillarsAccordion />
       <SameProblemIntro />
       <RelateQuotes />
       {/* Next sections land here as they're designed. */}

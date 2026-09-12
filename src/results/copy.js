@@ -418,6 +418,31 @@ export const LARA_STORY = {
   band: 'That\'s what you get on the call.',
 };
 
+export const YOUR_CALL = {
+  para1: 'Run it in-house, or hand it to our dream team that\'s done it across 15+ industries.',
+  band: 'No pressure to pick the second one.',
+  // Doc: "…you leave seeing your funnel more clearly…" — the design shows a
+  // "customer journey" rewrite (with a missing-space typo); doc wins, flagged.
+  para2: 'Either way, you leave seeing your funnel more clearly than you walked in.',
+  // Doc: "→ Book your Next $125k/mo Game Plan" — design shows "Book Next
+  // $125k Game Plan Call"; doc wins, flagged for review.
+  button: '→ Book your Next $125k/mo Game Plan',
+  sub: 'It\'s free, takes about 30 minutes, and you\'re welcome to bring your team.',
+};
+
+export const PILLARS = {
+  // Doc: "So let's open the pillars, one at a time." — comma kept per doc
+  // (design drops it) — flagged.
+  headline: 'So let\'s open the pillars, one at a time.',
+  sub: 'Starting with the first one your scorecard just asked about.',
+  items: [
+    { num: '01', title: 'Pillar one', name: 'Maximise Revenue Per Visitor™', variant: 'pink' },
+    { num: '02', title: 'Pillar two', name: 'Contrarian POV™', variant: 'plum' },
+    { num: '03', title: 'Pillar three', name: 'Speed to Decision™', variant: 'ice' },
+    { num: '04', title: 'Pillar four', name: 'Compounding Revenue per Subscriber™', variant: 'navy' },
+  ],
+};
+
 export const HERO = {
   introBefore: 'You’re here for the spoils of adding',
   introChip: '$1.5M/Year',
