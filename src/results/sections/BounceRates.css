@@ -1,0 +1,105 @@
+/* "That's where most teams stop." — keyline-framed white section: teal
+   nautical band with audit copy, then three baked bounce-rate cards. */
+
+.rbr {
+  position: relative;
+  background: #ffffff;
+  padding: 27px 27px 29px;
+}
+
+.rbr__keyline {
+  position: absolute;
+  inset: 27px;
+  border: 1px solid #2b3a4d;
+  pointer-events: none;
+}
+
+.rbr__band {
+  background: #122b2e url('/assets/results-bounce-teal-bg.webp') center 35% / cover no-repeat;
+  padding: 104px 40px 118px 361px;
+}
+
+.rbr__copy {
+  max-width: 760px;
+}
+
+.rbr__p {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(14px, 1.32vw, 19px);
+  line-height: 1.6;
+  color: #f2f6f8;
+}
+
+.rbr__chip {
+  display: inline-block;
+  margin: 26px 0;
+  background: #ffffff;
+  color: #16273b;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(16px, 1.46vw, 21px);
+  padding: 8px 18px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.rbr__cards {
+  list-style: none;
+  margin: 58px auto 0;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 47px;
+  max-width: 1440px;
+}
+
+.rbr__card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rbr__band {
+    padding: 72px 36px 84px 20%;
+  }
+  .rbr__cards {
+    gap: 28px;
+    padding: 0 8px;
+  }
+}
+
+@media (max-width: 900px) {
+  .rbr {
+    padding: 16px 16px 20px;
+  }
+  .rbr__keyline {
+    inset: 16px;
+  }
+  .rbr__band {
+    padding: 48px 24px 56px;
+  }
+  .rbr__p {
+    font-size: 16px;
+  }
+  .rbr__p br {
+    display: none;
+  }
+  .rbr__chip {
+    font-size: 17px;
+    margin: 20px 0;
+  }
+  .rbr__cards {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 36px;
+  }
+  .rbr__card {
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}

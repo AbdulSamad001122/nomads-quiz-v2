@@ -597,3 +597,36 @@ export const NOT_JUST_SITE = {
     'chaotic customer journey.',
   ],
 };
+
+export const BOUNCE_RATES = {
+  // Doc (row 10) verbatim, straight after "And you do see the correlation
+  // too."; line maps from the design.
+  p1Lines: [
+    'You hired a content agency, your Influencer UGC spend has tripled this quarter,',
+    'you’ve doubled your ad spend and you see how your revenue doubled too.',
+  ],
+  chip: 'That’s where most teams stop.',
+  p2Lines: [
+    'But when I audit the assets underneath all that traffic, I keep seeing',
+    'the same thing: sites with 50, 60, 70% bounce rates. Thousands of',
+    'visitors, on a page built only for the person ready to buy today.',
+  ],
+  // The three bounce-rate cards are fully baked design art (Groups 841–843:
+  // ice card, AVG-duration chip, laptop + Similarweb popup, name, bounce
+  // badge). The doc holds only an empty visual row here — design-only,
+  // flagged. Alts carry the baked text for accessibility.
+  cards: [
+    {
+      src: '/assets/results-bounce-card-1.webp',
+      alt: 'David Graham, professional services — 64% bounce rate, 12-second average visit',
+    },
+    {
+      src: '/assets/results-bounce-card-2.webp',
+      alt: 'Bridgeline, coaching — 70% bounce rate, 29-second average visit',
+    },
+    {
+      src: '/assets/results-bounce-card-3.webp',
+      alt: 'Health wellbeing clinic — 60% bounce rate, 22-second average visit',
+    },
+  ],
+};

@@ -20,6 +20,7 @@ import PillarsAccordion from './sections/PillarsAccordion.jsx';
 import SameProblemIntro from './sections/SameProblemIntro.jsx';
 import RelateQuotes from './sections/RelateQuotes.jsx';
 import InCommon from './sections/InCommon.jsx';
+import BounceRates from './sections/BounceRates.jsx';
 import NotJustSite from './sections/NotJustSite.jsx';
 import { resolveTokens } from './resolveTokens.js';
 import './results.css';
@@ -67,6 +68,7 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
       <SameProblemIntro />
       <RelateQuotes />
       <InCommon />
+      <BounceRates />
       <NotJustSite />
       {/* Next sections land here as they're designed. */}
     </div>
