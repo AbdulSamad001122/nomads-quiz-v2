@@ -28,6 +28,8 @@
 }
 
 .rb__headline {
+  max-width: 540px;
+  margin: 0 auto;
   font-family: var(--font-headline);
   font-weight: 800;
   font-size: 39px;
@@ -78,7 +80,7 @@
 
 .rb__intro {
   margin: 76px auto 0;
-  max-width: 960px;
+  max-width: 780px;
   padding: 0 24px;
   font-family: var(--font-body);
   font-weight: 500;
@@ -88,7 +90,8 @@
 }
 
 .rb__question {
-  margin-top: 42px;
+  margin: 42px auto 0;
+  max-width: 730px;
   font-family: var(--font-headline);
   font-weight: 800;
   font-size: 39px;
@@ -111,7 +114,8 @@
 }
 
 .rb__closing {
-  margin-top: 52px;
+  margin: 52px auto 0;
+  max-width: 540px;
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 16px;
@@ -164,11 +168,6 @@
   .rb__intro {
     margin-top: 60px;
     font-size: 16px;
-  }
-  .rb__intro br,
-  .rb__question br,
-  .rb__closing br {
-    display: none;
   }
   .rb__question {
     font-size: 24px;

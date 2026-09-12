@@ -20,6 +20,7 @@
 /* ——— left copy column ——— */
 
 .rhero__intro {
+  max-width: 470px;
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 16px;
@@ -43,6 +44,7 @@
 }
 
 .rhero__headline {
+  max-width: 560px;
   font-family: var(--font-headline);
   font-weight: 800;
   font-size: 31px;
@@ -160,11 +162,6 @@
   }
   .rhero__media {
     order: 2;
-  }
-  /* stacked layout: let the headline wrap naturally — the forced desktop
-     break (exact reference line map) can orphan a word at these widths */
-  .rhero__headline br {
-    display: none;
   }
   .rhero__alefiya {
     width: min(100%, 400px);

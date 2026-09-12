@@ -29,11 +29,7 @@ export default function BeyondFourteenDays() {
         <h2 className="rb__headline">
           {beforeR}
           <span className="rb__brush-r">R</span>
-          {afterR}
-          <br />
-          {l2}
-          <br />
-          {l3Before}
+          {afterR} {l2} {l3Before}
           <span className="rb__accent">{BEYOND.bannerAccent}</span>
         </h2>
       </div>
@@ -45,21 +41,14 @@ export default function BeyondFourteenDays() {
         </div>
 
         <p className="rb__intro">
-          {i1}
-          <br /> {i2}
+          {i1} {i2}
         </p>
 
-        <h3 className="rb__question">
-          {BEYOND.questionLines[0]}
-          <br /> {BEYOND.questionLines[1]}
-        </h3>
+        <h3 className="rb__question">{BEYOND.questionLines.join(' ')}</h3>
 
         <p className="rb__tape">{BEYOND.tape}</p>
 
-        <p className="rb__closing">
-          {BEYOND.closingLines[0]}
-          <br /> {BEYOND.closingLines[1]}
-        </p>
+        <p className="rb__closing">{BEYOND.closingLines.join(' ')}</p>
       </div>
     </section>
   );

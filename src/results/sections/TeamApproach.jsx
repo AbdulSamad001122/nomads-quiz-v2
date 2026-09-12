@@ -39,16 +39,9 @@ export default function TeamApproach() {
 
         <p className="rta__para">{TEAM_APPROACH.para1}</p>
 
-        <p className="rta__para">
-          {TEAM_APPROACH.para2Lines[0]}
-          <br /> {TEAM_APPROACH.para2Lines[1]}
-        </p>
+        <p className="rta__para">{TEAM_APPROACH.para2Lines.join(' ')}</p>
 
-        <p className="rta__para">
-          {TEAM_APPROACH.para3Lines[0]}
-          <br /> {TEAM_APPROACH.para3Lines[1]}
-          <br /> {TEAM_APPROACH.para3Lines[2]}
-        </p>
+        <p className="rta__para">{TEAM_APPROACH.para3Lines.join(' ')}</p>
       </div>
     </section>
   );

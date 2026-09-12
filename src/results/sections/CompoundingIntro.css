@@ -8,6 +8,8 @@
 }
 
 .rcx__headline {
+  max-width: 640px;
+  margin: 0 auto;
   font-family: var(--font-headline);
   font-weight: 800;
   font-size: 44px;
@@ -203,7 +205,7 @@
 
 /* ——— responsive ——— */
 
-@media (max-width: 1200px) {
+@media (max-width: 1260px) {
   .rcx__potential {
     flex-wrap: wrap;
     padding: 44px 32px;
@@ -220,9 +222,6 @@
   .rcx__cards {
     gap: 32px;
   }
-  .rcx__card-text br {
-    display: none;
-  }
 }
 
 @media (max-width: 700px) {
@@ -231,9 +230,6 @@
   }
   .rcx__headline {
     font-size: 26px;
-  }
-  .rcx__headline br {
-    display: none;
   }
   .rcx__cards {
     margin-top: 44px;

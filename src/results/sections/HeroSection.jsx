@@ -13,18 +13,12 @@ export default function HeroSection({ tokens }) {
       <div className="rhero__grid">
         <div className="rhero__copy">
           <p className="rhero__intro">
-            {HERO.introBefore} <span className="rhero__intro-chip">{HERO.introChip}</span>
-            <br />
-            {HERO.introAfter}
+            {HERO.introBefore} <span className="rhero__intro-chip">{HERO.introChip}</span> {HERO.introAfter}
           </p>
 
           <p className="rhero__based">{HERO.basedOn}</p>
 
-          <h1 className="rhero__headline">
-            {HERO.headlineLines[0]}
-            <br />{' '}
-            {HERO.headlineLines[1]}
-          </h1>
+          <h1 className="rhero__headline">{HERO.headlineLines.join(' ')}</h1>
 
           <div className="rhero__number-row">
             <span className="rhero__number">{fill(HERO.numberToken, tokens)}</span>

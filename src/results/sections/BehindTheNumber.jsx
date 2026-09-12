@@ -20,13 +20,10 @@ export default function BehindTheNumber() {
           <h2 className="rbn__headline">
             {beforeW}
             <span className="rbn__script-w">W</span>
-            {afterW}
-            <br /> {l2}
-            <br /> <span className="rbn__hl">{l3}</span>
+            {afterW} {l2} <span className="rbn__hl">{l3}</span>
           </h2>
           <p className="rbn__sub">
-            {s1}
-            <br /> {s2}
+            {s1} {s2}
           </p>
         </div>
       </div>

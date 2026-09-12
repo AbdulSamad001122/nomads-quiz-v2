@@ -98,9 +98,6 @@
   .rta__right {
     padding: 60px 22px 64px;
   }
-  .rta__para br {
-    display: none;
-  }
 }
 
 @media (max-width: 560px) {

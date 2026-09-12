@@ -137,10 +137,6 @@
   .rcd__right {
     padding: 56px 22px 64px;
   }
-  .rcd__bullet-text br,
-  .rcd__box-para br {
-    display: none;
-  }
   .rcd__bullet {
     margin-top: 32px;
     gap: 14px;

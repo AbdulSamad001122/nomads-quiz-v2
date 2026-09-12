@@ -41,6 +41,8 @@
 /* ——— headline + traffic ——— */
 
 .rmx__headline {
+  max-width: 1020px;
+  margin: 0 auto;
   font-family: var(--font-headline);
   font-weight: 800;
   font-size: 44px;
@@ -222,9 +224,6 @@
   }
   .rmx__headline {
     font-size: 25px;
-  }
-  .rmx__headline br {
-    display: none;
   }
   .rmx__traffic {
     margin-top: 28px;

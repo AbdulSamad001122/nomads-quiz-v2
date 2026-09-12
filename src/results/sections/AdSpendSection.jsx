@@ -53,8 +53,7 @@ export default function AdSpendSection({ result }) {
   return (
     <section className="rad">
       <div className="rad__band" aria-hidden="true">
-        {AD_SPEND.bandLines[0]}
-        <br /> {AD_SPEND.bandLines[1]}
+        {AD_SPEND.bandLines.join(' ')}
       </div>
 
       <span className="rad__chip">{AD_SPEND.chip}</span>
@@ -68,10 +67,7 @@ export default function AdSpendSection({ result }) {
         </h2>
       </div>
 
-      <p className="rad__sub">
-        {AD_SPEND.subLines[0]}
-        <br /> {AD_SPEND.subLines[1]}
-      </p>
+      <p className="rad__sub">{AD_SPEND.subLines.join(' ')}</p>
 
       <div className="rad__grid">
         <div className="rad__main">
@@ -129,10 +125,7 @@ export default function AdSpendSection({ result }) {
         </div>
 
         <aside className="rad__panel">
-          <p className="rad__panel-intro">
-            {AD_SPEND.panelIntroLines[0]}
-            <br /> {AD_SPEND.panelIntroLines[1]}
-          </p>
+          <p className="rad__panel-intro">{AD_SPEND.panelIntroLines.join(' ')}</p>
           <span className="rad__panel-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="#4b1238" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
               <path d="M3 17 10 10l4 4 7-8" />

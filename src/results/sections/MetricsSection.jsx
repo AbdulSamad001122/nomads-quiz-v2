@@ -60,11 +60,7 @@ export default function MetricsSection({ result, tokens }) {
       <div className="rmx__inner">
         <h2 className="rmx__headline">
           {beforeV}
-          <span className="rmx__script-v">v</span>isitor{afterV}
-          <br />
-          {l2}
-          <br />
-          {l3}
+          <span className="rmx__script-v">v</span>isitor{afterV} {l2} {l3}
         </h2>
 
         <p className="rmx__traffic">

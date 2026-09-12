@@ -16,6 +16,8 @@
 }
 
 .rpb__headline {
+  max-width: 860px;
+  margin: 0 auto;
   font-family: var(--font-headline);
   font-weight: 800;
   font-size: 45px;

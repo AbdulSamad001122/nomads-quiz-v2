@@ -372,6 +372,52 @@ export const WALK_AWAY = {
   band: 'You\'ve mostly had yourself to compare to. I don’t.',
 };
 
+export const WEAKEST_PILLAR = {
+  // Doc: "My judgment…" — design shows "judgement"; doc spelling wins, flagged.
+  // Doc writes "Compounding RPV ™ system" with the space before ™ (kept).
+  leftParaLines: [
+    'My judgment comes from building Compounding',
+    'RPV ™ system across ecom, coaching, SaaS, B2B firms,',
+    'clinics, law firms, and the list goes on.',
+  ],
+  leftBoldLines: ['Your diagnostic already shows your', 'current RPV and your potential RPV.'],
+  // Doc ends with ":" (design drops it) — doc wins, flagged.
+  rightHeader: 'On the call, we take the weakest pillar and get specific:',
+  bubbles: [
+    { variant: 'tan', lines: ['Why is it that we only got 29', 'sales from this ad campaign?'] },
+    { variant: 'darkplum', lines: ['Why is the ROAS 15X but the', 'website has 69% bounce rate?'] },
+    { variant: 'midplum', lines: ['Why is your browse', 'abandonment so high?'] },
+    { variant: 'navy', lines: ['Why are you only closing', '1 in 8 sales calls?'] },
+    { variant: 'ice', lines: ['Why are you not generating', 'clients from your content?'] },
+  ],
+  para1Lines: ['We go deep into your numbers so you don\'t', 'leave with "improve your positioning."'],
+  para2Before:
+    'You leave with a clear next step like "All sales calls start at this message, so we’ll use this message top of funnel to lift opt-ins ',
+  para2Bold: 'from 11% to 25% and that shall add $40,000/mo',
+  para2After: ' to our revenue", an action with a number attached to it.',
+  // First sentence of the doc's next paragraph — the Lara story that follows
+  // it belongs to the next section.
+  band: 'I don\'t guess at these.',
+};
+
+export const LARA_STORY = {
+  para1:
+    'When I was working with Lara Acosta on her launches, early on we audited why she wasn\'t pulling enough people into her lead magnets and her launch events.',
+  // Doc: "My verdict:" — colon kept per doc (design chip drops it) — flagged.
+  chip: 'My verdict:',
+  para2: 'She kept partnering with the same handful of collaborators, launch after launch.',
+  // Doc runs these as one sentence; the design splits them into three bullets
+  // (bullet 3 capitalises "So" as its own line start).
+  bullets: [
+    'Same audiences, over and over.',
+    'They\'d seen it all before,',
+    'So registrations had quietly flattened due to audience fatigue.',
+  ],
+  para3:
+    'So we partnered with fresh collaborators and reached audiences that hadn\'t been tapped yet. And the next launch pulled so many registrations that Zoom crashed and Lara had to apologise to her email list.',
+  band: 'That\'s what you get on the call.',
+};
+
 export const HERO = {
   introBefore: 'You’re here for the spoils of adding',
   introChip: '$1.5M/Year',

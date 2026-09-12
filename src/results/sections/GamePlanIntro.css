@@ -96,7 +96,8 @@
 }
 
 .rgi__closing {
-  margin-top: 60px;
+  margin: 60px auto 0;
+  max-width: 520px;
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 16px;
@@ -130,10 +131,6 @@
     grid-template-columns: 1fr;
     gap: 22px;
     max-width: 560px;
-  }
-  .rgi__card-text br,
-  .rgi__closing br {
-    display: none;
   }
   .rgi__arrows {
     display: none;

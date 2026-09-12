@@ -67,9 +67,6 @@
   .rgp__headline {
     font-size: 26px;
   }
-  .rgp__body br {
-    display: none;
-  }
 }
 
 @media (max-width: 900px) {

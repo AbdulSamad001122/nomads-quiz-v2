@@ -2,13 +2,7 @@ import { WALK_AWAY } from '../copy.js';
 import './WalkAwayWith.css';
 
 function Lines({ lines }) {
-  return lines.map((line, i) => (
-    <span key={i}>
-      {i > 0 && <br />}
-      {i > 0 && ' '}
-      {line}
-    </span>
-  ));
+  return lines.join(' ');
 }
 
 /**

@@ -1,0 +1,134 @@
+/* Lara Acosta story — cream linen left, dark maroon crumpled right with the
+   Lara composition. Reference: Lara story design image. */
+
+.rls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* ——— left cream panel ——— */
+
+.rls__left {
+  background: #f7f3e8 url('/assets/results-paper-texture.webp') center / cover;
+  padding: 108px 70px 96px 95px;
+}
+
+.rls__para {
+  max-width: 520px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #3c1a30;
+}
+
+.rls__para--tight {
+  max-width: 400px;
+}
+
+.rls__chip {
+  display: inline-block;
+  margin-top: 40px;
+  background: #641d4f;
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 17px;
+  padding: 6px 18px;
+}
+
+.rls__chip + .rls__para {
+  margin-top: 28px;
+}
+
+.rls__bullets {
+  list-style: none;
+  margin: 34px 0 0;
+  padding: 0 0 0 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.rls__bullet {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  max-width: 430px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #3c1a30;
+}
+
+.rls__bullet img {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.rls__bullets + .rls__para {
+  margin-top: 40px;
+}
+
+.rls__band {
+  display: inline-block;
+  margin-top: 44px;
+  background: #641d4f;
+  color: #ffffff;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 24px;
+  padding: 12px 28px;
+}
+
+/* ——— right maroon panel ——— */
+
+.rls__right {
+  background: #2a0f1c url('/assets/results-maroon-crumple.webp') center / cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 70px 48px;
+}
+
+.rls__lara {
+  width: min(100%, 500px);
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rls {
+    grid-template-columns: 1fr;
+  }
+  .rls__left {
+    padding: 64px 40px 60px;
+  }
+  .rls__right {
+    padding: 56px 24px;
+  }
+  .rls__lara {
+    width: min(100%, 420px);
+  }
+}
+
+@media (max-width: 640px) {
+  .rls__left {
+    padding: 52px 22px 52px;
+  }
+  .rls__chip {
+    margin-top: 30px;
+  }
+  .rls__bullets {
+    padding-left: 8px;
+    gap: 18px;
+    margin-top: 26px;
+  }
+  .rls__band {
+    font-size: 19px;
+    padding: 11px 20px;
+  }
+}

@@ -23,6 +23,7 @@
   line-height: 1.4;
   padding: 14px 34px;
   text-align: center;
+  max-width: 300px; /* wraps the band copy to its two-line lockup naturally */
 }
 
 .rad__chip {
@@ -67,7 +68,8 @@
 }
 
 .rad__sub {
-  margin-top: 30px;
+  margin: 30px auto 0;
+  max-width: 560px;
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 16px;
@@ -274,6 +276,8 @@
 }
 
 .rad__panel-intro {
+  max-width: 290px;
+  margin: 0 auto;
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 16px;
@@ -392,9 +396,6 @@
   }
   .rad__sub {
     font-size: 16px;
-  }
-  .rad__sub br {
-    display: none;
   }
   /* whole calculator card fits one phone viewport — no scrolling */
   .rad__main {

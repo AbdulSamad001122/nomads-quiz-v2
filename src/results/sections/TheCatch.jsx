@@ -1,15 +1,9 @@
 import { THE_CATCH } from '../copy.js';
 import './TheCatch.css';
 
-/** Renders copy lines with forced desktop breaks (hidden on small screens). */
+/** Copy lines flow as one naturally-wrapping run (no forced breaks). */
 function Lines({ lines }) {
-  return lines.map((line, i) => (
-    <span key={i}>
-      {i > 0 && <br />}
-      {i > 0 && ' '}
-      {line}
-    </span>
-  ));
+  return lines.join(' ');
 }
 
 /**

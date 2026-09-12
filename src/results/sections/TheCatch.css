@@ -167,12 +167,6 @@
   .rtc__left {
     padding: 96px 22px 60px;
   }
-  .rtc__headline br,
-  .rtc__sub br,
-  .rtc__para br,
-  .rtc__bold br {
-    display: none;
-  }
   .rtc__right {
     padding: 90px 22px 70px;
   }

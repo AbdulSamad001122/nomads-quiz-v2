@@ -50,6 +50,7 @@
 
 .rcta__sub {
   margin-top: 40px;
+  max-width: 470px;
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 16px;
@@ -75,11 +76,10 @@
     grid-template-columns: 1fr;
     text-align: center;
   }
-  .rcta__headline br,
-  .rcta__sub br {
-    display: none;
-  }
   .rcta__btn {
+    max-width: 100%;
+  }
+  .rcta__sub {
     max-width: 100%;
   }
 }

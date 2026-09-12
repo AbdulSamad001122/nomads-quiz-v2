@@ -15,15 +15,7 @@ export default function GamePlanCta() {
           <h2 className="rgp__headline">
             {GAMEPLAN_CTA.headlinePlain} <span className="rgp__accent">{GAMEPLAN_CTA.headlineAccent}</span>
           </h2>
-          <p className="rgp__body">
-            {GAMEPLAN_CTA.bodyLines.map((line, i) => (
-              <span key={i}>
-                {i > 0 && <br />}
-                {i > 0 && ' '}
-                {line}
-              </span>
-            ))}
-          </p>
+          <p className="rgp__body">{GAMEPLAN_CTA.bodyLines.join(' ')}</p>
           {/* TODO: real booking URL when provided */}
           <a className="rgp__btn" href="#" onClick={() => ga.ctaClick('book_call')}>
             {GAMEPLAN_CTA.button}

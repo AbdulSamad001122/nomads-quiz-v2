@@ -16,8 +16,7 @@ export default function PromiseBanner() {
           {PROMISE_BANNER.line1Before} <span className="rpb__script">{PROMISE_BANNER.line1Script}</span>
         </span>
         <br />
-        {PROMISE_BANNER.line2Before} <span className="rpb__hl">{PROMISE_BANNER.line2Highlight}</span>
-        <br />
+        {PROMISE_BANNER.line2Before} <span className="rpb__hl">{PROMISE_BANNER.line2Highlight}</span>{' '}
         {PROMISE_BANNER.line3}
       </h2>
       <p className="rpb__sub">{PROMISE_BANNER.sub}</p>

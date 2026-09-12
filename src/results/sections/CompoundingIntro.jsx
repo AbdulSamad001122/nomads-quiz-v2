@@ -10,24 +10,13 @@ import './CompoundingIntro.css';
 export default function CompoundingIntro() {
   return (
     <section className="rcx">
-      <h2 className="rcx__headline">
-        {CRPS_INTRO.headlineLines[0]}
-        <br /> {CRPS_INTRO.headlineLines[1]}
-      </h2>
+      <h2 className="rcx__headline">{CRPS_INTRO.headlineLines.join(' ')}</h2>
 
       <div className="rcx__cards">
         {CRPS_INTRO.cards.map((card, i) => (
           <div key={i} className="rcx__card">
             <img className="rcx__card-icon" src={card.icon} alt="" aria-hidden="true" />
-            <p className="rcx__card-text">
-              {card.lines.map((line, j) => (
-                <span key={j}>
-                  {j > 0 && <br />}
-                  {j > 0 && ' '}
-                  {line}
-                </span>
-              ))}
-            </p>
+            <p className="rcx__card-text">{card.lines.join(' ')}</p>
           </div>
         ))}
       </div>

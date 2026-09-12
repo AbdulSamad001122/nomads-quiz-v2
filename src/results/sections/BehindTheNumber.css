@@ -53,6 +53,7 @@
 
 .rbn__sub {
   margin-top: 32px;
+  max-width: 470px;
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 16px;
@@ -170,12 +171,6 @@
   }
   .rbn__left {
     padding: 72px 26px 60px;
-  }
-  .rbn__headline br {
-    display: none;
-  }
-  .rbn__sub br {
-    display: none;
   }
   .rbn__right {
     padding: 56px 22px 64px;
