@@ -15,6 +15,9 @@
 }
 
 .rbr__band {
+  /* paints above the keyline, so the frame only shows below the band
+     (reference: the band sits outside the border) */
+  position: relative;
   background: #122b2e url('/assets/results-bounce-teal-bg.webp') center / 100% 100% no-repeat;
   padding: 104px 40px 118px 361px;
 }
