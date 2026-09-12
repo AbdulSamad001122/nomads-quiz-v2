@@ -41,7 +41,7 @@
 /* torn plum banner (image 54) with the title-case line */
 .rwi__banner {
   display: inline-block;
-  margin-top: 54px;
+  margin-top: 30px;
   padding: 26px 62px 28px;
   background: url('/assets/results-whatif-banner.png') center / 100% 100% no-repeat;
   font-family: var(--font-body);
@@ -51,26 +51,21 @@
 }
 
 .rwi__note {
-  margin-top: 66px;
+  margin-top: 34px;
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 16px;
   color: #3a2130;
 }
 
-/* proof card over a gradient backdrop peeking out bottom-right */
+/* proof card inside a soft cream→plum gradient frame on all sides */
 .rwi__card-wrap {
   position: relative;
   max-width: 1160px;
   margin: 30px auto 0;
-}
-
-.rwi__card-wrap::before {
-  content: '';
-  position: absolute;
-  inset: 8px -12px -12px 8px;
-  border-radius: 14px;
-  background: linear-gradient(160deg, #f3e6ea 0%, #d9b8c6 45%, #6b2a5a 100%);
+  padding: 12px;
+  border-radius: 20px;
+  background: #e9d6d8 url('/assets/results-cream-plum-gradient.webp') center / cover no-repeat;
 }
 
 .rwi__card {
@@ -84,7 +79,7 @@
 
 .rwi__card-head {
   font-family: var(--font-body);
-  font-weight: 700;
+  font-weight: 800;
   font-size: 24px;
   line-height: 1.45;
   color: #4b1240;
@@ -144,7 +139,7 @@
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 13px;
-  color: #5cb52a;
+  color: #4b1240;
 }
 
 /* ——— responsive ——— */
@@ -183,19 +178,17 @@
     display: none;
   }
   .rwi__banner {
-    margin-top: 34px;
+    margin-top: 22px;
     padding: 16px 28px 18px;
     font-size: 16px;
   }
   .rwi__note {
-    margin-top: 40px;
+    margin-top: 24px;
   }
   .rwi__card-wrap {
     margin-top: 22px;
-  }
-  .rwi__card-wrap::before {
-    inset: 6px -8px -8px 6px;
-    border-radius: 12px;
+    padding: 8px;
+    border-radius: 16px;
   }
   .rwi__card {
     padding: 30px 22px 28px;
