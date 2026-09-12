@@ -759,3 +759,36 @@ export const TWO_PATHS = {
   btnWorkshop: 'Watch the workshop →',
   btnCall: 'Book your Next +$125k/mo Game Plan Call →',
 };
+
+export const WHAT_IF = {
+  // Doc (row 1): "But... what if you did?" — design sets a true ellipsis;
+  // rendered as shown in the reference (flagged).
+  kicker: 'But… what if you did?',
+  // Doc: "If you hit the maximum benchmark across all five conversion
+  // points, your existing traffic could add {{achievable_gain}}/year (yep,
+  // with the same traffic!)" — 3-line map from the design; design
+  // capitalises "Your" at the line start and lifts the parenthetical into
+  // the plum banner in title case without the parens (flagged).
+  headLine1: 'If you hit the maximum benchmark',
+  headLine2: 'across all five conversion points,',
+  headLine3Before: 'Your existing traffic could add',
+  headLine3After: '/year',
+  banner: 'Yep, With The Same Traffic!',
+  note: 'More on how to max these metrics in the upcoming workshop.',
+  // GolfBays proof card. The bold recap line is design-added (flagged);
+  // the accent spans follow the design. Body is the doc's box copy
+  // verbatim — the doc's em-dash before "without" is kept (design drops
+  // it; doc wins, flagged).
+  golfHead: [
+    { t: 'GolfBays generated ' },
+    { t: '£97,000+', hl: true },
+    { t: ' ($131K USD) in just ' },
+    { t: '20 days', hl: true },
+    { t: ' after launching their Conversion Quiz Ecosystem' },
+  ],
+  golfHeadBreakAfter: '20 days',
+  golfBody:
+    'GolfBays generated £97,000+ ($131K USD) in just 20 days after launching their Conversion Quiz Ecosystem™ — without increasing traffic. They also increased demo conversions by 15.25X using the same traffic they already had.',
+  golfName: 'Golfbays',
+  golfType: 'E-commerce company',
+};

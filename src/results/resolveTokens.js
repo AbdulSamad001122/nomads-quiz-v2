@@ -12,6 +12,9 @@ export function resolveTokens(result) {
     annual_visitors: (result.inputs.q7 * 12).toLocaleString('en-US'),
     current_rpv: rpvMoney(result.currentRPV),
     goal_rpv: rpvMoney(result.goalRPV),
+    // "But… what if you did?" — max-benchmark gain (Logic Doc capped maths;
+    // display rounds money to the nearest $100).
+    achievable_gain: money(result.capped.achievableGain),
   };
 }
 
