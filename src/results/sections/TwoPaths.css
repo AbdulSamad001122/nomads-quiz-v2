@@ -175,7 +175,7 @@
   margin: 0 auto;
   transform: translateY(-40px);
   border: 4px solid #5d1b4e;
-  background: #f7efe1;
+  background: #f7efe1 url('/assets/results-cream-speckle.webp') center / cover;
   display: grid;
   grid-template-columns: 1fr 0.82fr;
 }
