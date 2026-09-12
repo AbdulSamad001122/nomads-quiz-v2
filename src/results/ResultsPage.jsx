@@ -12,6 +12,7 @@ import TheCatch from './sections/TheCatch.jsx';
 import TeamApproach from './sections/TeamApproach.jsx';
 import GamePlanIntro from './sections/GamePlanIntro.jsx';
 import ClientDavid from './sections/ClientDavid.jsx';
+import WalkAwayWith from './sections/WalkAwayWith.jsx';
 import { resolveTokens } from './resolveTokens.js';
 import './results.css';
 
@@ -48,6 +49,7 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
       <TeamApproach />
       <GamePlanIntro />
       <ClientDavid />
+      <WalkAwayWith />
       {/* Next sections land here as they're designed. */}
     </div>
   );

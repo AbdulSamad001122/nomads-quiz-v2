@@ -331,6 +331,47 @@ export const CLIENT_DAVID = {
   boxBold: 'It\'s exactly what the call is for.',
 };
 
+export const WALK_AWAY = {
+  headlinePlain: 'So here’s what you',
+  headlineScript: 'walk away with.',
+  subLines: ['Which of your numbers is genuinely', 'costing you, and which just looks scary.'],
+  // These two cards are the doc's "[VISUAL — the two 'looked fine from the
+  // inside' reads]" — the design supplies the card copy. NOTE the design
+  // copy extends/rewords the doc's body sentences (doc: "comparable list
+  // running at 45%" / "0.044% demo rate" / "We took it to 14%") — flagged
+  // for Alefiya's confirmation; rendered per the design as the visual's copy.
+  cards: [
+    {
+      variant: 'white',
+      icon: '/assets/results-icon-envelope-plum.svg',
+      stat: '45%',
+      chip: 'Email click rate',
+      paras: [
+        [
+          'One client was proud of a 6%',
+          'email click rate, until they saw',
+          'a comparable list with 45%',
+          'click rate and saw email wasn\'t',
+          'the most profitable channel',
+          'they thought it was.',
+        ],
+      ],
+    },
+    {
+      variant: 'lavender',
+      icon: '/assets/results-icon-laptop-plum.png',
+      stat: '14%',
+      chip: 'Demo conversion rate',
+      paras: [
+        ['Another clocked 440,000 shopify', 'sessions with 6X ad ROAS. So ads', 'were healthy, but were they?'],
+        ['I found behind the 6X ROAS', 'was a measly 0.04% traffic to', 'demo conversion rate.'],
+        ['We then took it to 14%.'],
+      ],
+    },
+  ],
+  band: 'You\'ve mostly had yourself to compare to. I don’t.',
+};
+
 export const HERO = {
   introBefore: 'You’re here for the spoils of adding',
   introChip: '$1.5M/Year',
