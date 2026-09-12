@@ -1,0 +1,170 @@
+/* "And it's not just the site." — split screen: cream paper + eagle art
+   left, navy copy column with plum chevron bullets right. */
+
+.rns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* ——— left ——— */
+
+.rns__left {
+  position: relative;
+  background: #f3efe2 url('/assets/results-paper-texture.webp') center / cover;
+  padding: 112px 40px 70px 58px;
+}
+
+.rns__keyline {
+  position: absolute;
+  inset: 40px 26px 37px;
+  border: 1px solid #2b3a4d;
+  pointer-events: none;
+}
+
+.rns__eagle {
+  display: block;
+  width: min(576px, 40vw);
+  height: auto;
+}
+
+.rns__sub {
+  margin-top: 110px;
+  margin-left: 26px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(14px, 1.18vw, 17px);
+  line-height: 1.65;
+  color: #7d3160;
+}
+
+/* ——— right ——— */
+
+.rns__right {
+  background: #16273b;
+  padding: 54px 72px 90px;
+}
+
+.rns__rule {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 590px;
+}
+
+.rns__rule-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.rns__rule img {
+  width: 26px;
+  height: auto;
+}
+
+.rns__heading {
+  margin-top: 78px;
+  max-width: 580px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: clamp(19px, 1.74vw, 25px);
+  line-height: 1.5;
+  color: #ffffff;
+}
+
+.rns__p {
+  margin-top: 24px;
+  max-width: 580px;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(14px, 1.18vw, 17px);
+  line-height: 1.55;
+  color: #e8edf3;
+}
+
+.rns__p--bold {
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.rns__bullets {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+  max-width: 580px;
+}
+
+.rns__bullet {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  margin-top: 10px;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(14px, 1.18vw, 17px);
+  line-height: 1.5;
+  color: #e8edf3;
+}
+
+/* white brush chevron recoloured plum via mask */
+.rns__chev {
+  flex: none;
+  width: 24px;
+  height: 20px;
+  margin-top: 2px;
+  background-color: #a05e84;
+  -webkit-mask: url('/assets/results-njs-chevron.png') center / contain no-repeat;
+  mask: url('/assets/results-njs-chevron.png') center / contain no-repeat;
+}
+
+/* "hoping something finally…" hangs under the bullet text column */
+.rns__tail {
+  margin-top: 10px;
+  padding-left: 37px;
+}
+
+.rns__gap-lg {
+  margin-top: 36px;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 900px) {
+  .rns {
+    grid-template-columns: 1fr;
+  }
+  .rns__left {
+    padding: 64px 28px 52px;
+  }
+  .rns__eagle {
+    width: min(480px, 88%);
+    margin: 0 auto;
+  }
+  .rns__sub {
+    margin: 40px auto 0;
+    max-width: 480px;
+    margin-left: auto;
+    font-size: 16px;
+  }
+  .rns__sub br {
+    display: none;
+  }
+  .rns__right {
+    padding: 44px 26px 60px;
+  }
+  .rns__heading {
+    margin-top: 44px;
+    font-size: 21px;
+  }
+  .rns__heading br,
+  .rns__p br {
+    display: none;
+  }
+  .rns__p,
+  .rns__bullet {
+    font-size: 16px;
+  }
+  .rns__tail {
+    padding-left: 37px;
+  }
+}
