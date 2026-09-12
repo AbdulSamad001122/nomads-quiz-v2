@@ -47,13 +47,7 @@ export default function TwoPaths() {
             />
             <p>{c.pathA}</p>
           </div>
-          <img
-            className="rtp__or"
-            src="/assets/results-fork-or.png"
-            alt="Or"
-            width="830"
-            height="830"
-          />
+          <span className="rtp__or" aria-hidden="true">Or</span>
           <div className="rtp__path rtp__path--mauve">
             <span className="rtp__path-icon">
               <img src="/assets/results-fork-coins.png" alt="" width="830" height="830" />
