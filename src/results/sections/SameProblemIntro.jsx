@@ -17,9 +17,6 @@ export default function SameProblemIntro() {
       <p className="rsp__ribbon">
         <span className="rsp__ribbon-text">{SAME_PROBLEM.ribbon}</span>
       </p>
-      <div className="rsp__watermark" aria-hidden="true">
-        {SAME_PROBLEM.watermark}
-      </div>
       <img
         className="rsp__avatars"
         src="/assets/results-relate-avatars.png"
