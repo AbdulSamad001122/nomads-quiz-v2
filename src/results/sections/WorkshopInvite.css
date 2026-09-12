@@ -47,7 +47,7 @@
 }
 
 .rwk__headline {
-  margin: 30px 0 34px 14px;
+  margin: 30px 0 34px;
   font-family: var(--font-headline);
   font-weight: 800;
   font-size: clamp(28px, 3.4vw, 50px);
@@ -116,7 +116,7 @@
 .rwk__thumb {
   display: grid;
   place-items: center;
-  max-width: 1410px;
+  max-width: 90%;
   margin: 56px auto 0;
   aspect-ratio: 1410 / 760;
   background: #e4fbff;
@@ -137,9 +137,6 @@
   }
   .rwk__dark {
     padding: 80px 36px 80px;
-  }
-  .rwk__headline {
-    margin-left: 0;
   }
   .rwk__badge {
     right: 60px;
