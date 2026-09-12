@@ -1,5 +1,15 @@
 # rpv-landing-v2 — Project Instructions
 
+## Git workflow (two-person team)
+
+- Abdul Samad works on `main` and is the only one who merges branches into `main`.
+- Everyone else: build each result-page section on its own branch, created FROM FRESH MAIN — never from another feature branch:
+  1. `git checkout main`
+  2. `git pull origin main`
+  3. `git checkout -b section/<section-name>`
+- One section per branch, only that section's commits on it. When done: `git push origin section/<name>` and stop — do not merge into `main` yourself.
+- Never stack a new section branch on top of a previous section branch (chained branches can't be merged independently).
+
 ## Definition of done for any UI/frontend task
 
 Never report a UI task as complete without verifying it in the running browser first. This applies to every task in this project, not just ones where the user explicitly asks for it.
