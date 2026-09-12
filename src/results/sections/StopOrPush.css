@@ -1,0 +1,156 @@
+/* "You can stop at $1.5M. or push all 5 metrics" — maroon-crumple band
+   with white keyline, compass stamp on the top-left seam, centred RPV-lift
+   headline (white current box → plum goal box). */
+
+.rso {
+  position: relative;
+  background: #250f1c url('/assets/results-maroon-crumple.webp') center / cover;
+  padding: 196px 48px 190px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.rso__keyline {
+  position: absolute;
+  inset: 52px 52px 60px;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  pointer-events: none;
+}
+
+/* compass stamp on a white disc, straddling the top-left seam */
+.rso__badge {
+  --badge: clamp(112px, 11vw, 160px);
+  position: absolute;
+  top: calc(var(--badge) / -2);
+  left: 150px;
+  width: var(--badge);
+  height: var(--badge);
+  border-radius: 50%;
+  background: #ffffff;
+  display: grid;
+  place-items: center;
+  z-index: 2;
+}
+
+.rso__badge img {
+  width: 90%;
+  height: 90%;
+}
+
+.rso__inner {
+  position: relative;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+/* lead line — sub-heading role, sized above body per the reference */
+.rso__lead {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.5;
+  color: #ffffff;
+}
+
+.rso__headline {
+  margin-top: 26px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: clamp(28px, 3.2vw, 48px);
+  line-height: 1.4;
+  color: #ffffff;
+}
+
+/* token boxes — current on white, goal on plum */
+.rso__box {
+  display: inline-block;
+  padding: 0 14px 4px;
+  line-height: 1.25;
+  vertical-align: baseline;
+}
+
+.rso__box--current {
+  background: #ffffff;
+  color: #5d1b4e;
+}
+
+.rso__box--goal {
+  background: #5d1b4e;
+  color: #ffffff;
+}
+
+.rso__arrow {
+  display: inline-block;
+  margin: 0 14px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.72em;
+  color: #ffffff;
+}
+
+.rso__body {
+  margin-top: 30px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #f4ede6;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rso {
+    padding: 150px 40px 130px;
+  }
+  .rso__keyline {
+    inset: 40px 34px 44px;
+  }
+  .rso__badge {
+    left: 56px;
+  }
+  .rso__headline {
+    margin-top: 22px;
+  }
+  .rso__body {
+    margin-top: 26px;
+  }
+}
+
+@media (max-width: 760px) {
+  .rso {
+    padding: 104px 22px 80px;
+  }
+  .rso__keyline {
+    inset: 26px 14px 30px;
+  }
+  .rso__badge {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .rso__lead {
+    font-size: 17px;
+  }
+  .rso__headline {
+    font-size: 26px;
+    line-height: 1.4;
+    margin-top: 20px;
+  }
+  .rso__headline br {
+    display: none;
+  }
+  .rso__box {
+    padding: 0 10px 3px;
+    margin: 4px 0;
+  }
+  .rso__arrow {
+    margin: 0 8px;
+  }
+  .rso__body {
+    margin-top: 22px;
+    line-height: 1.6;
+  }
+  .rso__body br {
+    display: none;
+  }
+}
