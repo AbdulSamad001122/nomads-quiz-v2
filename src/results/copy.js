@@ -551,3 +551,49 @@ export const IN_COMMON = {
   // The circular "NOMADS MARKETING · CONVERSION QUIZZES" stamp (Group 122)
   // is design-only wayfinding straddling the section's top seam — flagged.
 };
+
+export const NOT_JUST_SITE = {
+  // Left panel headline is baked into the eagle art (Group 840 1.png).
+  // Doc: "And it's not just the site." — the art renders it ALL CAPS;
+  // design casing kept per the casing rule (flagged).
+  eagleAlt: 'And it’s not just the site.',
+  // Doc (row 10) verbatim; line map from the design.
+  subLines: [
+    '9 in 10 teams run their top-of-funnel ads and influencer',
+    'campaigns straight to a product page or a web page, to',
+    'people who were never going to buy on the first visit.',
+  ],
+  headingLines: [
+    'So what if you could earn more from',
+    'each visitor by meeting them where',
+    'they are in their buying journey?',
+  ],
+  hookLines: [
+    'Hook the non-buyers onto your email list, and',
+    'compound revenue from traffic you’re already paying for.',
+  ],
+  becauseBold: 'Because here’s what usually happens instead.',
+  throwLines: ['Revenue gets inconsistent, and', 'the response is to throw'],
+  // Doc runs these in one lowercase sentence ("…throw more money at
+  // acquisition, more pressure…"); the design splits them into chevron
+  // bullets with capital "More" — design presentation kept (flagged).
+  bullets: [
+    'More money at acquisition,',
+    'More pressure on the sales team,',
+    'More content into the void,',
+    'More random experiments at the wall,',
+  ],
+  bulletsTail: 'hoping something finally moves the needle.',
+  compoundingLines: ['But compounding businesses don’t do', 'more random marketing.'],
+  scaleLines: [
+    'They scale because they know which specific actions move',
+    'revenue, where buyers lose certainty, and how to build a',
+    'system where each new visitor becomes more valuable',
+    'over time instead of disappearing after one interaction.',
+  ],
+  goalLines: [
+    'That’s the real goal of the Compounding RPV™ OS.',
+    'Not another funnel duct-taped onto an already',
+    'chaotic customer journey.',
+  ],
+};
