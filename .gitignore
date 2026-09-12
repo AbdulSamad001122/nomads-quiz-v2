@@ -5,13 +5,16 @@ dist/
 .env
 .env.*
 
-# source & reference material — not part of the app, and the Kit handover
-# docx contains the API secret. The app only ships what's in public/ + src/.
-Design Assets/
-Design Refrence/
-Quiz Questions and logic/
-Quiz and Gif Plan/
+# The Kit handover docs in this folder contain the API secret — folder stays
+# ignored; the safe content docs are whitelisted below.
+Quiz Questions and logic/*
 *.docx
+
+# …content docs the team DOES need in the repo:
+!Quiz Questions and logic/Result Page Copy.docx
+!Quiz Questions and logic/Quiz Logics.docx
+!Quiz Questions and logic/Quiz Questions.docx
+!Quiz Questions and logic/Quiz building plan and process.docx
 
 # local OS noise
 Thumbs.db
