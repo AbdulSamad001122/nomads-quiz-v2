@@ -759,3 +759,41 @@ export const TWO_PATHS = {
   btnWorkshop: 'Watch the workshop →',
   btnCall: 'Book your Next +$125k/mo Game Plan Call →',
 };
+
+export const WORKSHOP_INVITE = {
+  // Doc (row 2 tail) verbatim. "Because…" line is bold per the design.
+  because: 'Because… revenue rarely scales by millions from one isolated metric.',
+  // 2-line map from the design. Doc has no terminal period — kept as is.
+  mostLines: [
+    'Most of the time, traffic is disconnected from monetisation, email growth is',
+    'disconnected from conversion, sales calls are disconnected from positioning',
+  ],
+  // Headline 4-line map from the design; "revenue growth" in the cream
+  // highlight box.
+  headLines: [
+    '…and teams keep optimising isolated',
+    'channels without fully knowing',
+    'which actions are directly influencing',
+  ],
+  headHl: 'revenue growth',
+  headTail: 'across their funnel…',
+  // Doc (row 3) verbatim incl. the doc's "RPV ™" spacing; 2-line map.
+  beforeLines: [
+    'So before you spend another dollar on marketing, it’s worth seeing how they’re connected, which one',
+    'needs the most attention from your team, and which one has the potential to scale your RPV ™ the fastest.',
+  ],
+  // Doc verbatim incl. the 👇this👇 emoji and "RPV ™" spacing; tokens
+  // resolve to the taker's live RPVs. 3-line map from the design.
+  grabBefore: 'Grab a pen and paper (and your marketing, product and sales team) for 👇this👇',
+  grabMid1: 'hands-on workshop to see how you can scale your RPV ™ from',
+  grabMid2: 'to',
+  grabAfter: 'by optimising 4 key pillars in your customer’s buying journey.',
+  // Doc: "→ Watch the Workshop" — design drops the arrow; design kept
+  // (flagged). TODO: real workshop URL (same as NAV).
+  button: 'Watch the Workshop',
+  // Doc: "[Add workshop CLICKABLE THUMBNAIL THAT REDIRECTS THEM TO WORKSHOP
+  // PAGE]" — placeholder box per the design until the thumbnail asset lands.
+  thumbPlaceholder: 'Thumbnail After Workshop',
+  // The plum "See What's Working" stamp (Group 855) on the seam is
+  // design-only wayfinding — flagged.
+};

@@ -7,6 +7,7 @@ import CrpsCalculatorCta from './sections/CrpsCalculatorCta.jsx';
 import AdSpendSection from './sections/AdSpendSection.jsx';
 import PromiseBanner from './sections/PromiseBanner.jsx';
 import BehindTheNumber from './sections/BehindTheNumber.jsx';
+import WorkshopInvite from './sections/WorkshopInvite.jsx';
 import GamePlanCta from './sections/GamePlanCta.jsx';
 import TheCatch from './sections/TheCatch.jsx';
 import TeamApproach from './sections/TeamApproach.jsx';
@@ -52,8 +53,7 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
       {result.ad && <AdSpendSection result={result} />}
       <PromiseBanner />
       <BehindTheNumber />
-      {/* TODO (doc order): the workshop CTA half ("So before you spend
-          another dollar…" + thumbnail) precedes this in the doc's row 3. */}
+      <WorkshopInvite tokens={tokens} />
       <GamePlanCta />
       <TheCatch />
       <TeamApproach />
