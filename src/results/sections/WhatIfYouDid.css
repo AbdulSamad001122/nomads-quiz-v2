@@ -167,12 +167,16 @@
   .rwi__band {
     height: calc(100% - 400px);
   }
+  /* heading runs past 3 lines here → left-aligned (design 0.9);
+     the eyebrow sits with it so the lockup reads as one block */
   .rwi__kicker {
     font-size: 18px;
+    text-align: left;
   }
   .rwi__headline {
     font-size: 26px;
     margin-top: 12px;
+    text-align: left;
   }
   .rwi__headline br {
     display: none;
