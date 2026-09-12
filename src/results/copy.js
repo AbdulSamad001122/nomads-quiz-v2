@@ -527,3 +527,27 @@ export const RELATE_QUOTES = {
     },
   ],
 };
+
+export const IN_COMMON = {
+  // Doc (row 10): "Here's what they have in common. AI made content easy, so
+  // everyone is producing more visibility than ever, and feeling less sure
+  // where revenue is actually coming from." — verbatim. Line map from the
+  // design. Doc ends "coming from." — the design image drops the period;
+  // doc wins, flagged.
+  heading: 'Here’s what they have in common.',
+  subLine1: 'AI made content easy, so everyone is producing more visibility than',
+  subLine2: 'ever, and feeling less sure where revenue is actually coming from.',
+  // Doc: "More LinkedIn posts. More YouTube. More influencer collabs. More
+  // ad spend." — rendered as icon labels without the periods per the design
+  // (flagged). Label line breaks per the design.
+  channels: [
+    { icon: '/assets/results-common-linkedin.png', lines: ['More LinkedIn', 'posts'] },
+    { icon: '/assets/results-common-youtube.png', lines: ['More YouTube'] },
+    { icon: '/assets/results-common-collabs.png', lines: ['More influencer', 'collabs'] },
+    { icon: '/assets/results-common-adspend.png', lines: ['More ad spend'] },
+  ],
+  beliefLines: ['All on the belief that more', 'distribution means more revenue.'],
+  beliefChip: 'And you do see the correlation too.',
+  // The circular "NOMADS MARKETING · CONVERSION QUIZZES" stamp (Group 122)
+  // is design-only wayfinding straddling the section's top seam — flagged.
+};

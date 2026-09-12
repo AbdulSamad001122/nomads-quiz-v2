@@ -1,0 +1,217 @@
+/* "Here's what they have in common." — white rounded card over a maroon
+   crumple band handing off to cream paper; stamp badge on the top seam;
+   four icon circles with dotted connectors; navy belief box + ice chip. */
+
+.ric {
+  position: relative;
+  background: #f7f4ea url('/assets/results-paper-texture.webp') center / cover;
+  padding: 73px 40px 81px;
+}
+
+/* maroon band behind the card's upper half */
+.ric::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 405px;
+  background: #240a12 url('/assets/results-maroon-crumple.webp') center / cover;
+}
+
+/* Nomads stamp straddling the top seam */
+.ric__badge {
+  position: absolute;
+  top: -22px;
+  right: 122px;
+  width: 145px;
+  height: auto;
+  z-index: 2;
+}
+
+.ric__card {
+  position: relative;
+  max-width: 1109px;
+  margin: 0 auto;
+  background: #ffffff;
+  border: 1px solid rgba(93, 27, 78, 0.45);
+  border-radius: 29px;
+  padding: 70px 60px 43px;
+  text-align: center;
+}
+
+.ric__heading {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 25px;
+  color: #5d1b4e;
+}
+
+.ric__sub {
+  margin-top: 16px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.55;
+  color: #3f4f63;
+}
+
+.ric__row {
+  list-style: none;
+  margin: 58px auto 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  max-width: 1050px;
+}
+
+.ric__item {
+  position: relative;
+  flex: 1 1 0;
+}
+
+.ric__icon {
+  display: block;
+  width: 104px;
+  height: 104px;
+  margin: 0 auto;
+}
+
+/* dotted connector to the next circle */
+.ric__item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 52px;
+  left: calc(50% + 64px);
+  width: calc(100% - 128px);
+  border-top: 2px dotted #bfa8ba;
+}
+
+.ric__label {
+  margin-top: 17px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 1.35;
+  color: #16273b;
+}
+
+.ric__belief {
+  margin: 44px auto 0;
+  max-width: 943px;
+  background: #16273b;
+  border-radius: 14px;
+  padding: 39px 24px 42px;
+}
+
+.ric__belief-lines {
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 25px;
+  line-height: 1.5;
+  color: #ffffff;
+}
+
+.ric__chip {
+  display: inline-block;
+  margin-top: 18px;
+  background: #ddf2f8;
+  color: #16273b;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 19px;
+  padding: 5px 14px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .ric__card {
+    padding: 48px 32px 32px;
+  }
+  .ric__badge {
+    width: 116px;
+    right: 42px;
+    top: -16px;
+  }
+  .ric__icon {
+    width: 88px;
+    height: 88px;
+  }
+  .ric__item:not(:last-child)::after {
+    top: 44px;
+    left: calc(50% + 56px);
+    width: calc(100% - 112px);
+  }
+  .ric__belief-lines {
+    font-size: 21px;
+  }
+}
+
+@media (max-width: 900px) {
+  .ric__row {
+    flex-wrap: wrap;
+    row-gap: 30px;
+  }
+  .ric__item {
+    flex: 0 0 50%;
+  }
+  /* connectors read wrong once the row wraps */
+  .ric__item::after {
+    display: none;
+  }
+  .ric__sub br {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .ric {
+    padding: 52px 20px 56px;
+  }
+  .ric::before {
+    height: 300px;
+  }
+  .ric__badge {
+    width: 92px;
+    right: 16px;
+    top: -12px;
+  }
+  .ric__card {
+    border-radius: 20px;
+    padding: 36px 22px 26px;
+  }
+  .ric__heading {
+    font-size: 21px;
+  }
+  .ric__sub {
+    font-size: 16px;
+  }
+  .ric__row {
+    margin-top: 36px;
+  }
+  .ric__icon {
+    width: 82px;
+    height: 82px;
+  }
+  .ric__label {
+    font-size: 16px;
+    margin-top: 12px;
+  }
+  .ric__belief {
+    margin-top: 32px;
+    padding: 26px 18px 30px;
+  }
+  .ric__belief-lines {
+    font-size: 18px;
+  }
+  .ric__belief-lines br {
+    display: none;
+  }
+  .ric__chip {
+    font-size: 15px;
+    margin-top: 14px;
+  }
+}
