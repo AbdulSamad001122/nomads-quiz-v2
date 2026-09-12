@@ -391,3 +391,25 @@ export const HERO = {
     right: 'NOW LET’S SEE WHAT EACH VISITOR COULD BE WORTH',
   },
 };
+
+export const SAME_PROBLEM = {
+  // Design-only plum ribbon straddling the section's top seam (not in the
+  // doc) — flagged. Casing + arrow per the reference.
+  ribbon: 'See How It Shows Up ↓',
+  // Doc (row 10): "Here are variations of the same problem a dozen marketing
+  // teams scaling 7-figure businesses to 8 figures have shared with me" —
+  // verbatim; line map (7/6/8 words) + the ice "same problem" highlight from
+  // the design. The "v" of "variations" renders as a script glyph per the
+  // design (same device as METRICS / BEHIND_NUMBER).
+  l1Before: 'Here are',
+  l1ScriptGlyph: 'v',
+  l1ScriptRest: 'ariations',
+  l1After: 'of the',
+  l1Highlight: 'same problem',
+  line2: 'a dozen marketing teams scaling 7-figure',
+  line3: 'businesses to 8 figures have shared with me',
+  // The "8 figures" brush watermark is baked into the section's bg art
+  // (Frame 807 → results-relate-bg-art.webp); mobile uses the plain texture.
+  // Doc continues "Perhaps you can relate?" + the four quote cards — the
+  // next slice of this row, built when its reference arrives.
+};
