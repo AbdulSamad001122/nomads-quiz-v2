@@ -51,8 +51,8 @@
 }
 
 .rpu__picto {
-  width: 52px;
-  height: 40px;
+  height: 44px;
+  width: auto;
   flex-shrink: 0;
 }
 

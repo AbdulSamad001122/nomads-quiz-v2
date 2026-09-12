@@ -521,6 +521,85 @@ export const PILLAR_ONE_FLOW = {
   para2: 'So that’s the first metric: turning more of your visitors, especially the 97% who aren’t ready yet, into email or SMS subscribers.',
 };
 
+export const PILLAR_ONE_ISOLATION = {
+  lead: 'But just growing your email list doesn’t add $1.5m/year to your bottom line.',
+  headBefore: 'Revenue becomes inconsistent when a business sets agendas and',
+  headHighlight: 'goals in isolation.',
+  // Doc runs the three goals as consecutive quoted sentences — rendered as
+  // the design's three cards.
+  quotes: [
+    '“We want to add 10,000 subscribers in 6 months.”',
+    '“We want to increase ads ROAS by 5%.”',
+    '“We want to go from closing one in eight calls to four in eight calls.”',
+  ],
+  band: 'Because of that…',
+  // Doc: "…or a positioning problem — because their teams work in isolation."
+  // The design drops the em-dash and highlights the tail; doc dash kept
+  // (outside the highlight), flagged.
+  head2Before: 'Most businesses can’t tell if a slow month is a traffic problem, an email problem, a sales problem or a positioning problem —',
+  head2Highlight: 'because their teams work in isolation.',
+  sub: 'Very few know how much revenue each visitor is bringing. And without that, scaling becomes expensive guessing.',
+};
+
+export const PILLAR_ONE_SITUATIONS = {
+  // "Situation 01/02" chips are design-added labels (the doc has none) —
+  // flagged. Body copy is doc row 7 verbatim.
+  one: {
+    chip: 'Situation 01',
+    p1: 'You set a goal to increase your close rate, so you hire a sales trainer.',
+    headBefore: 'They train on better discovery, negotiation, and',
+    headHighlight: 'objection handling skills.',
+    p2: 'But after spending months applying the new technique, the close rate still doesn’t significantly improve.',
+    bold: 'Why? Because it was a positioning problem.',
+  },
+  two: {
+    chip: 'Situation 02',
+    p1: 'You set a goal to get 10,000 new visitors on your website each month.',
+    p2: 'So you scale your ad spend and double down on SEO.',
+    p3: 'You do get 10,000 new visitors, but that doesn’t move your revenue.',
+    bold: 'Why? Because your older messaging was for a warm audience, and that messaging didn’t support the cold audience.',
+  },
+};
+
+export const PILLAR_ONE_SITUATION3 = {
+  chip: 'Situation 03', // design-added label (doc has none) — flagged
+  lead: 'You set a goal to book 20 sales calls a week.',
+  paras: [
+    'You hire more SDRs, and your content team really doubles down.',
+    'And you’re pretty close to the target.',
+    'But the content directly pushed people to a call.',
+    'Now the sales team is frustrated because they spend 45 minutes educating a doubtful buyer, and the close rate has dramatically decreased.',
+  ],
+  bold: 'Why? Because the ones coming on the call weren’t pre-educated.',
+  // Doc: "So you keep setting new targets, new goals, and your team even
+  // achieves that. But yet…scaling still feels unpredictable." — doc's final
+  // period dropped by the design; doc wins, flagged.
+  closing: 'So you keep setting new targets, new goals, and your team even achieves that. But yet…scaling still feels unpredictable.',
+};
+
+export const PILLAR_ONE_LARA_QUOTE = {
+  quoteBefore: 'Alefiya to me became almost like a',
+  quoteHighlight: 'second brain',
+  quoteAfter: 'when it came to the execution of how to launch things',
+  para: 'Alefiya gave me the structure that I didn\'t know that I needed because I didn\'t know how to structure sales emails the way she would.”',
+  // Doc also lists "Lara Acosta", "Co-Founder, Kleo" and "Forbes 30 Under 30";
+  // the design shows only this chip (the name + Forbes badge are baked into
+  // the Lara image) — "Co-Founder, Kleo" is dropped entirely, flagged.
+  chip: 'Founder, Literally Academy & LA Digital',
+  // Doc wraps this line with ☝️ on BOTH sides; the design shows only the
+  // leading one — doc kept, flagged for review.
+  statLead: '☝️',
+  stat: '491 students joined against a goal of 200 and the launch generated approximately $186K',
+  statTrail: '☝️',
+};
+
+export const PILLAR_ONE_PREDICTABLE = {
+  // Doc: "…metrics that move revenue — together, not in isolation." The
+  // design drops the em-dash and the comma; doc punctuation kept, flagged.
+  headline: 'Get predictable, consistent revenue by letting your entire team track, obsess, and optimise metrics that move revenue — together, not in isolation.',
+  sub: 'And of the four they track together, here’s the one that I want you to pay the MOST attention to.',
+};
+
 export const HERO = {
   introBefore: 'You’re here for the spoils of adding',
   introChip: '$1.5M/Year',

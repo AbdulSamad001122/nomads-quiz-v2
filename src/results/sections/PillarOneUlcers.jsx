@@ -1,25 +1,6 @@
 import { PILLAR_ONE_ULCERS } from '../copy.js';
 import './PillarOneUlcers.css';
 
-/* Simple original people pictograms — stand-ins until the designer's crowd
-   icons land in the Icons folder (flagged). */
-function Crowd({ color, count }) {
-  const positions =
-    count === 3
-      ? [[10, 8], [0, 12], [20, 12]]
-      : [[15, 2], [5, 5], [25, 5], [0, 11], [10, 10], [20, 10], [30, 11]];
-  return (
-    <svg viewBox="0 0 44 34" className="rpu__picto" aria-hidden="true">
-      {positions.map(([x, y], i) => (
-        <g key={i} transform={`translate(${x + 4} ${y})`} fill={color}>
-          <circle cx="3" cy="3" r="3" />
-          <path d="M-1 14 q0 -6 4 -6 q4 0 4 6 z" />
-        </g>
-      ))}
-    </svg>
-  );
-}
-
 /**
  * Pillar one — ulcer example: bear panel with the pie chart image left,
  * cream linen right with the 100/03 stat cards, story paragraphs and the
@@ -40,13 +21,13 @@ export default function PillarOneUlcers() {
         <p className="rpu__lead">{PILLAR_ONE_ULCERS.lead}</p>
 
         <div className="rpu__card">
-          <Crowd color="#16273b" count={7} />
+          <img className="rpu__picto" src="/assets/results-people-many.png" alt="" aria-hidden="true" />
           <span className="rpu__num">{PILLAR_ONE_ULCERS.card1Num}</span>
           <span className="rpu__card-text">{PILLAR_ONE_ULCERS.card1Text}</span>
         </div>
 
         <div className="rpu__card">
-          <Crowd color="#641d4f" count={3} />
+          <img className="rpu__picto" src="/assets/results-people-three.png" alt="" aria-hidden="true" />
           <span className="rpu__num">{PILLAR_ONE_ULCERS.card2Num}</span>
           <span className="rpu__card-text">{PILLAR_ONE_ULCERS.card2Text}</span>
         </div>

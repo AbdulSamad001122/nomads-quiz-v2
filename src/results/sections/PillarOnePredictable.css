@@ -1,0 +1,72 @@
+/* Pillar one — closing "predictable revenue" banner, flush inside the
+   accordion card. Dark compass chart bg with a white keyline frame. */
+
+.rpd {
+  position: relative;
+  background: #140a11 url('/assets/results-maroon-compass-banner.webp') center / cover;
+  padding: 96px 48px 104px;
+}
+
+.rpd__keyline {
+  position: absolute;
+  inset: 30px 34px;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  pointer-events: none;
+}
+
+.rpd__inner {
+  position: relative;
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 30px 24px;
+}
+
+.rpd__headline {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 36px;
+  line-height: 1.34;
+  color: #ffffff;
+}
+
+.rpd__sub {
+  margin-top: 30px;
+  max-width: 520px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.65;
+  color: #f4ede6;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rpd {
+    padding: 68px 30px 76px;
+  }
+  .rpd__keyline {
+    inset: 20px 20px;
+  }
+  .rpd__headline {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  .rpd {
+    padding: 48px 18px 54px;
+  }
+  .rpd__keyline {
+    inset: 12px 12px;
+  }
+  .rpd__inner {
+    padding: 20px 12px;
+  }
+  .rpd__headline {
+    font-size: 21px;
+  }
+  .rpd__sub {
+    margin-top: 22px;
+  }
+}

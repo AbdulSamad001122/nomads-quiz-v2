@@ -1,0 +1,168 @@
+/* Pillar one — "goals in isolation": peach band + dark panel with the plum
+   "Because of that…" band on the seam. Flush inside the accordion card. */
+
+/* ——— peach top band ——— */
+
+.rpi__top {
+  background: #f6e8dc url('/assets/results-peach-bg.webp') center / cover;
+  padding: 58px 48px 76px;
+  text-align: center;
+}
+
+.rpi__lead {
+  margin: 0 auto;
+  max-width: 720px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  color: #4a1533;
+}
+
+.rpi__headline {
+  margin: 26px auto 0;
+  max-width: 780px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 37px;
+  line-height: 1.3;
+  color: #3c1028;
+}
+
+.rpi__hl {
+  background: #641d4f;
+  color: #ffffff;
+  padding: 2px 14px 5px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.rpi__cards {
+  margin: 52px auto 0;
+  max-width: 1080px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.rpi__card {
+  background: #ffffff;
+  border: 1px solid #e4d3d9;
+  border-radius: 10px;
+  padding: 30px 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 130px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #641d4f;
+}
+
+/* ——— dark bottom panel ——— */
+
+.rpi__bottom {
+  position: relative;
+  background: #0e0e12 url('/assets/results-navy-texture.webp') center / cover;
+  padding: 100px 48px 88px;
+  text-align: center;
+}
+
+/* plum band straddling the seam */
+.rpi__band {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-1.5deg);
+  background: #641d4f;
+  color: #ffffff;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 22px;
+  padding: 14px 44px;
+  white-space: nowrap;
+}
+
+.rpi__headline2 {
+  margin: 0 auto;
+  max-width: 900px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 37px;
+  line-height: 1.32;
+  color: #ffffff;
+}
+
+.rpi__hl2 {
+  background: #ddf2f8;
+  color: #16273b;
+  padding: 2px 12px 5px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.rpi__sub {
+  margin: 34px auto 0;
+  max-width: 620px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #f4ede6;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rpi__top {
+    padding: 44px 28px 60px;
+  }
+  .rpi__headline,
+  .rpi__headline2 {
+    font-size: 28px;
+  }
+  .rpi__cards {
+    margin-top: 40px;
+    gap: 20px;
+  }
+  .rpi__card {
+    padding: 22px 18px;
+    min-height: 0;
+  }
+  .rpi__bottom {
+    padding: 80px 28px 68px;
+  }
+  .rpi__band {
+    font-size: 18px;
+    padding: 11px 30px;
+  }
+}
+
+@media (max-width: 760px) {
+  .rpi__cards {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .rpi__top {
+    padding: 34px 18px 46px;
+  }
+  .rpi__headline,
+  .rpi__headline2 {
+    font-size: 21px;
+  }
+  .rpi__bottom {
+    padding: 62px 18px 50px;
+  }
+  .rpi__band {
+    font-size: 15px;
+    padding: 9px 20px;
+  }
+  .rpi__sub {
+    margin-top: 26px;
+  }
+}

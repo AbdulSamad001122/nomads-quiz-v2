@@ -1,0 +1,203 @@
+/* Pillar one — Situation 03: 2×2 grid (copy + flow / Lara + testimonial).
+   Flush inside the accordion card. */
+
+.rpt {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.rpt__cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 56px;
+}
+
+.rpt__cell--ice {
+  background: #ddf2f8;
+}
+
+.rpt__cell--navy {
+  background: #16273b;
+}
+
+.rpt__cell--maroon {
+  background: #2a0f1c url('/assets/results-maroon-crumple.webp') center / cover;
+}
+
+.rpt__cell--cream {
+  background: #f7f3e8 url('/assets/results-paper-texture.webp') center / cover;
+}
+
+/* ——— situation copy ——— */
+
+.rpt__body {
+  max-width: 500px;
+}
+
+.rpt__chip {
+  display: inline-block;
+  background: #16273b;
+  color: #ffffff;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 25px;
+  padding: 5px 16px;
+}
+
+.rpt__lead {
+  margin-top: 26px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #16273b;
+}
+
+.rpt__para {
+  margin-top: 24px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1e3547;
+}
+
+.rpt__bold {
+  margin-top: 26px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #16273b;
+}
+
+/* ——— media ——— */
+
+.rpt__flow {
+  width: min(100%, 340px);
+}
+
+.rpt__lara {
+  width: min(100%, 460px);
+}
+
+/* ——— testimonial ——— */
+
+.rpt__quote {
+  position: relative;
+  max-width: 520px;
+  padding: 26px 0 30px;
+}
+
+.rpt__mark {
+  position: absolute;
+  width: 30px;
+  height: auto;
+}
+
+.rpt__mark--open {
+  top: 0;
+  left: 0;
+}
+
+/* same doodle, flipped for the closing mark */
+.rpt__mark--close {
+  bottom: 0;
+  right: 0;
+  transform: rotate(180deg);
+}
+
+.rpt__quote-head {
+  margin-top: 24px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 1.4;
+  color: #4a1533;
+}
+
+.rpt__hl {
+  background: #641d4f;
+  color: #ffffff;
+  padding: 1px 8px 3px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.rpt__quote-para {
+  margin-top: 28px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #3c1a30;
+}
+
+.rpt__quote-chip {
+  display: inline-block;
+  margin-top: 30px;
+  background: #641d4f;
+  color: #ffffff;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 18px;
+  padding: 8px 18px;
+}
+
+.rpt__stat {
+  margin-top: 28px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #3c1a30;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rpt__cell {
+    padding: 48px 32px;
+  }
+  .rpt__chip {
+    font-size: 20px;
+  }
+  .rpt__quote-head {
+    font-size: 21px;
+  }
+  .rpt__quote-chip {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 860px) {
+  .rpt {
+    grid-template-columns: 1fr;
+  }
+  /* stacked order reads: situation copy → flow → Lara → her quote */
+  .rpt__cell {
+    padding: 44px 22px;
+  }
+  .rpt__flow {
+    width: min(100%, 300px);
+  }
+  .rpt__lara {
+    width: min(100%, 380px);
+  }
+}
+
+@media (max-width: 560px) {
+  .rpt__cell {
+    padding: 36px 18px;
+  }
+  .rpt__chip {
+    font-size: 18px;
+  }
+  .rpt__quote-head {
+    font-size: 19px;
+  }
+  .rpt__mark {
+    width: 24px;
+  }
+}

@@ -6,6 +6,10 @@ import PillarOneCurious from './PillarOneCurious.jsx';
 import PillarOneSamar from './PillarOneSamar.jsx';
 import PillarOnePyramid from './PillarOnePyramid.jsx';
 import PillarOneFlow from './PillarOneFlow.jsx';
+import PillarOneIsolation from './PillarOneIsolation.jsx';
+import PillarOneSituations from './PillarOneSituations.jsx';
+import PillarOneSituation3 from './PillarOneSituation3.jsx';
+import PillarOnePredictable from './PillarOnePredictable.jsx';
 import './PillarsAccordion.css';
 
 /**
@@ -22,6 +26,10 @@ const PANELS = {
       <PillarOneSamar />
       <PillarOnePyramid />
       <PillarOneFlow />
+      <PillarOneIsolation />
+      <PillarOneSituations />
+      <PillarOneSituation3 />
+      <PillarOnePredictable />
     </>
   ),
 };
