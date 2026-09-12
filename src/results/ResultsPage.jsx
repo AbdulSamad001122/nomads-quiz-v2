@@ -14,6 +14,7 @@ import GamePlanIntro from './sections/GamePlanIntro.jsx';
 import ClientDavid from './sections/ClientDavid.jsx';
 import WalkAwayWith from './sections/WalkAwayWith.jsx';
 import SameProblemIntro from './sections/SameProblemIntro.jsx';
+import RelateQuotes from './sections/RelateQuotes.jsx';
 import { resolveTokens } from './resolveTokens.js';
 import './results.css';
 
@@ -54,6 +55,7 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
       {/* TODO (doc order): the four pillar sections (doc rows 6–9) slot in
           here once their designs arrive. */}
       <SameProblemIntro />
+      <RelateQuotes />
       {/* Next sections land here as they're designed. */}
     </div>
   );

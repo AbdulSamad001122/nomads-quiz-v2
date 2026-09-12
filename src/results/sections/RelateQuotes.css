@@ -1,0 +1,155 @@
+/* "Perhaps you can relate?" — ice band with hard diagonal split and four
+   multi-tone rounded quote cards (wine / cream / navy / ice). */
+
+.rrq {
+  background: linear-gradient(152deg, #e6f4f9 53%, #d8e6ea 53%);
+  padding: 48px 45px 78px;
+}
+
+.rrq__heading {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 32px;
+  color: #16273b;
+  text-align: center;
+}
+
+.rrq__grid {
+  max-width: 1350px;
+  margin: 44px auto 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 26px;
+}
+
+.rrq__card {
+  margin: 0;
+  border-radius: 16px;
+  padding: 26px 20px 24px 28px;
+  min-height: 381px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* tone rotation (multi-tone card rule, design 0.3) */
+.rrq__card--wine {
+  background: #431232;
+  color: #ffffff;
+  --mark: #a4638c;
+}
+.rrq__card--cream {
+  background: #f8ead9;
+  border: 1.5px solid #5d1b4e;
+  color: #5d1b4e;
+  --mark: #5d1b4e;
+}
+.rrq__card--navy {
+  background: #16273b;
+  color: #ffffff;
+  --mark: #e9f1f6;
+}
+.rrq__card--ice {
+  background: #e9f9fd;
+  border: 1.5px solid #5d1b4e;
+  color: #16273b;
+  --mark: #5d1b4e;
+}
+
+/* plum comma graphic, recoloured per tone via mask */
+.rrq__mark {
+  display: inline-block;
+  width: 34px;
+  height: 23px;
+  flex: none;
+  background-color: var(--mark);
+  -webkit-mask: url('/assets/results-relate-quote.png') center / contain no-repeat;
+  mask: url('/assets/results-relate-quote.png') center / contain no-repeat;
+}
+
+.rrq__mark--close {
+  transform: rotate(180deg);
+  width: 28px;
+  height: 19px;
+}
+
+.rrq__quote {
+  margin: auto 0;
+  padding: 20px 0;
+}
+
+.rrq__quote p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 1.45;
+}
+
+.rrq__quote p + p {
+  margin-top: 1em;
+}
+
+.rrq__foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.rrq__who {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+/* reference breaks this caption after "Concierge" */
+.rrq__card--wine .rrq__who {
+  max-width: 11em;
+}
+
+/* reference wrap: "highest volume is" / "from paid ads." (4-col layout only) */
+@media (min-width: 1101px) {
+  .rrq__card--ice .rrq__quote p {
+    max-width: 245px;
+  }
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rrq__grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 720px;
+  }
+  .rrq__card {
+    min-height: 320px;
+  }
+  .rrq__heading {
+    font-size: 27px;
+  }
+}
+
+@media (max-width: 640px) {
+  .rrq {
+    padding: 40px 26px 56px;
+  }
+  .rrq__grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: 30px;
+  }
+  .rrq__card {
+    min-height: 0;
+  }
+  .rrq__quote {
+    padding: 16px 0;
+  }
+  .rrq__quote p {
+    font-size: 19px;
+  }
+  .rrq__heading {
+    font-size: 22px;
+  }
+}

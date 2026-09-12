@@ -413,3 +413,46 @@ export const SAME_PROBLEM = {
   // Doc continues "Perhaps you can relate?" + the four quote cards — the
   // next slice of this row, built when its reference arrives.
 };
+
+export const RELATE_QUOTES = {
+  // Doc (row 10): "Perhaps you can relate?" — verbatim.
+  heading: 'Perhaps you can relate?',
+  // Quote copy verbatim from the doc's two nested tables. Flags:
+  // - Doc prefixes attributions with "~" / "-"; the design drops the dash
+  //   and renders the attribution as a plain caption line — design kept.
+  // - Doc: "CMO @ Sports Ecommerce store in the UK" — design shows "CMO@ "
+  //   (no space before the @); design spacing kept per the casing rule.
+  // - The doc's opening/closing “ ” marks render as the plum comma graphic
+  //   (comma 20.png → results-relate-quote.png), not as text.
+  cards: [
+    {
+      tone: 'wine',
+      paras: [
+        'We’re growing, but growth is fuzzy.',
+        'Things are working, but I don’t fully know why, and I don’t trust that they’ll keep working if I push harder.',
+      ],
+      who: '7-figure Concierge Medical Clinic Owner',
+    },
+    {
+      tone: 'cream',
+      paras: ['We don’t know who’s serious until the call.'],
+      who: 'B2B Content Agency owner',
+    },
+    {
+      tone: 'navy',
+      paras: [
+        'The majority of leads aren’t relevant.',
+        'People show interest but don’t convert.',
+      ],
+      who: 'CMO@ Sports Ecommerce store in the UK',
+    },
+    {
+      tone: 'ice',
+      paras: [
+        'Lowest quality but highest volume is from paid ads.',
+        'We don’t trust what’s converting. The calls we book, sales is explaining basics.',
+      ],
+      who: 'Founder of a Cold Email SaaS',
+    },
+  ],
+};
