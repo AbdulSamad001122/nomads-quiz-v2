@@ -1,0 +1,194 @@
+/* "Because… revenue rarely scales…" → workshop invite. One keyline-framed
+   block: navy→maroon crumple band + white half, plum stamp on the seam. */
+
+.rwk {
+  position: relative;
+  background: #ffffff;
+}
+
+/* thin navy keyline around the whole block (both halves) */
+.rwk__frame {
+  position: absolute;
+  inset: 40px 36px 34px;
+  border: 1px solid #2b3a4d;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* ——— dark band ——— */
+
+.rwk__dark {
+  position: relative;
+  background: #101c28 url('/assets/results-navy-maroon-crumple.webp') center / cover no-repeat;
+  padding: 108px 40px 100px;
+}
+
+.rwk__col {
+  max-width: 1080px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.rwk__because {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #ffffff;
+}
+
+.rwk__p {
+  margin-top: 14px;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #e8edf3;
+}
+
+.rwk__headline {
+  margin: 30px 0 34px 14px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: clamp(28px, 3.4vw, 50px);
+  line-height: 1.32;
+  color: #ffffff;
+}
+
+.rwk__hl {
+  background: #efe2cf;
+  color: #5d1b4e;
+  padding: 0 10px 4px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* plum "See What's Working" stamp straddling the seam, right side */
+.rwk__badge {
+  position: absolute;
+  right: 150px;
+  bottom: 0;
+  width: 188px;
+  height: 188px;
+  z-index: 4;
+  transform: translateY(50%); /* half over the white half */
+}
+
+/* ——— white half ——— */
+
+.rwk__light {
+  position: relative;
+  padding: 76px 40px 92px;
+}
+
+.rwk__invite {
+  max-width: 990px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.rwk__p--dark {
+  margin-top: 0;
+  color: #2f2a2a;
+}
+
+.rwk__btn {
+  display: inline-block;
+  margin-top: 34px;
+  background: #f3e6f6;
+  color: #4b1240;
+  border: 2px solid #5d1b4e;
+  box-shadow: 5px 5px 0 #5d1b4e;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 18px;
+  padding: 18px 54px;
+  text-decoration: none;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.rwk__btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 3px 3px 0 #5d1b4e;
+}
+
+/* clickable thumbnail — ice placeholder until the asset lands */
+.rwk__thumb {
+  display: grid;
+  place-items: center;
+  max-width: 1410px;
+  margin: 56px auto 0;
+  aspect-ratio: 1410 / 760;
+  background: #e4fbff;
+  border: 1px solid #5d1b4e;
+  border-radius: 16px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 18px;
+  color: #3a2130;
+  text-decoration: none;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rwk__frame {
+    inset: 28px 24px 24px;
+  }
+  .rwk__dark {
+    padding: 80px 36px 80px;
+  }
+  .rwk__headline {
+    margin-left: 0;
+  }
+  .rwk__badge {
+    right: 60px;
+    width: 150px;
+    height: 150px;
+  }
+  .rwk__light {
+    padding: 64px 36px 72px;
+  }
+}
+
+@media (max-width: 900px) {
+  .rwk__p br {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .rwk__frame {
+    inset: 16px 12px 14px;
+  }
+  .rwk__dark {
+    padding: 56px 24px 72px;
+  }
+  .rwk__headline {
+    font-size: 27px;
+    line-height: 1.35;
+    margin: 22px 0 24px;
+  }
+  .rwk__headline br {
+    display: none;
+  }
+  .rwk__badge {
+    right: 16px;
+    width: 112px;
+    height: 112px;
+  }
+  .rwk__light {
+    padding: 68px 22px 48px;
+  }
+  .rwk__btn {
+    margin-top: 26px;
+    width: 100%;
+    text-align: center;
+    padding: 16px 20px;
+  }
+  .rwk__thumb {
+    margin-top: 32px;
+    border-radius: 12px;
+    font-size: 15px;
+  }
+}
