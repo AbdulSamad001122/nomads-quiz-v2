@@ -367,8 +367,8 @@ export const SAME_PROBLEM = {
   l1Highlight: 'same problem',
   line2: 'a dozen marketing teams scaling 7-figure',
   line3: 'businesses to 8 figures have shared with me',
-  // Decorative brush-script watermark behind the headline (design-only).
-  watermark: '8 figures',
+  // The "8 figures" brush watermark is baked into the section's bg art
+  // (Frame 807 → results-relate-bg-art.webp); mobile uses the plain texture.
   // Doc continues "Perhaps you can relate?" + the four quote cards — the
   // next slice of this row, built when its reference arrives.
 };
