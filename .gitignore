@@ -11,6 +11,10 @@ Quiz Questions and logic/*
 *.docx
 
 # …content docs the team DOES need in the repo:
+# NOTE: the Kit handover doc contains the live Kit API secret — committed on
+# the owner's explicit instruction (Sep 12). If this repo ever goes public,
+# rotate the Kit key FIRST.
+!Quiz Questions and logic/New kit handover doc.docx
 !Quiz Questions and logic/Result Page Copy.docx
 !Quiz Questions and logic/Quiz Logics.docx
 !Quiz Questions and logic/Quiz Questions.docx
