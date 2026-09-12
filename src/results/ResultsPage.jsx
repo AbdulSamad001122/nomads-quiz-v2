@@ -15,6 +15,7 @@ import ClientDavid from './sections/ClientDavid.jsx';
 import WalkAwayWith from './sections/WalkAwayWith.jsx';
 import SameProblemIntro from './sections/SameProblemIntro.jsx';
 import RelateQuotes from './sections/RelateQuotes.jsx';
+import InCommon from './sections/InCommon.jsx';
 import { resolveTokens } from './resolveTokens.js';
 import './results.css';
 
@@ -56,6 +57,7 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
           here once their designs arrive. */}
       <SameProblemIntro />
       <RelateQuotes />
+      <InCommon />
       {/* Next sections land here as they're designed. */}
     </div>
   );
