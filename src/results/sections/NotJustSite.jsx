@@ -36,6 +36,7 @@ export default function NotJustSite() {
         </div>
       </div>
       <div className="rns__right">
+        <div className="rns__col">
         <div className="rns__rule" aria-hidden="true">
           <span className="rns__rule-line" />
           <img src="/assets/results-njs-compass.png" alt="" width="233" height="196" />
@@ -56,6 +57,7 @@ export default function NotJustSite() {
         <p className="rns__p rns__gap-lg">{brJoin(c.compoundingLines)}</p>
         <p className="rns__p">{brJoin(c.scaleLines)}</p>
         <p className="rns__p">{brJoin(c.goalLines)}</p>
+        </div>
       </div>
     </section>
   );

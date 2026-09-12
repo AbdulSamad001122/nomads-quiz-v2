@@ -52,11 +52,16 @@
   padding: 54px 72px 90px;
 }
 
+/* centred content column — text stays left-aligned inside */
+.rns__col {
+  max-width: 580px;
+  margin: 0 auto;
+}
+
 .rns__rule {
   display: flex;
   align-items: center;
   gap: 12px;
-  max-width: 590px;
 }
 
 .rns__rule-line {
@@ -72,7 +77,6 @@
 
 .rns__heading {
   margin-top: 78px;
-  max-width: 580px;
   font-family: var(--font-headline);
   font-weight: 800;
   font-size: clamp(19px, 1.74vw, 25px);
@@ -82,7 +86,6 @@
 
 .rns__p {
   margin-top: 24px;
-  max-width: 580px;
   font-family: var(--font-body);
   font-weight: 400;
   font-size: clamp(14px, 1.18vw, 17px);
@@ -99,7 +102,6 @@
   list-style: none;
   margin: 18px 0 0;
   padding: 0;
-  max-width: 580px;
 }
 
 .rns__bullet {
