@@ -597,3 +597,54 @@ export const NOT_JUST_SITE = {
     'chaotic customer journey.',
   ],
 };
+
+export const TWO_PATHS = {
+  // Design-only wayfinding: rotated "Here's the fork in the road" text
+  // (Group 807) on a white circle straddling the seam, and the mono
+  // "TWO PATHS" chip — both flagged (not in the doc).
+  intro:
+    'It’s the difference between guessing and a team that can look at the numbers and say:',
+  // Doc (row 10 tail) verbatim; 4-line map from the design. Doc says
+  // "email opt-in rate" — the design hyphenates "email-opt-in rate";
+  // doc wins, flagged. Highlight span per the design.
+  headlineLines: [
+    '“Let’s double down on testing',
+    'top-of-funnel hooks for our opt-in page',
+    'because if we increase email opt-in rate',
+  ],
+  headlineTail: 'by 20%,',
+  headlineHl: 'it adds $357,000 this quarter.”',
+  forkChip: 'So there’s a fork here.',
+  // Doc: "Keep spending more to reach more people. Or earn more from the
+  // people already finding you, using the four pillars you just walked
+  // through." — split across the two path cards + the "Or" badge per the
+  // design; card B capitalises "Earn" (design casing kept, flagged).
+  pathA: 'Keep spending more to reach more people.',
+  pathB:
+    'Earn more from the people already finding you, using the four pillars you just walked through.',
+  // Panel copy verbatim; line maps from the design.
+  panelP1Lines: [
+    'If you’ve made it this far, part of you probably already knows your',
+    'business has more sitting inside it than it’s currently pulling out,',
+    'especially in the 70% of the market you’ve been walking past.',
+  ],
+  // Doc runs this as one sentence ("Watch the workshop with your team, or
+  // bring your numbers to a call, and let’s plan how we can add your next
+  // $125k…"). The design splits it into heading + sub and drops the comma
+  // after "to a call" — doc comma kept, design capitalises the sub's "How"
+  // (design casing kept); both flagged.
+  panelHeadingLines: [
+    'Watch the workshop with your',
+    'team, or bring your numbers',
+    'to a call, and let’s plan',
+  ],
+  panelSubLines: [
+    'How we can add your next $125k to your existing',
+    'monthly revenue with your current marketing spend.',
+  ],
+  // Doc writes "→ Watch the workshop | → Book your Next +$125k/mo Game
+  // Plan Call" with leading arrows; the design renders trailing arrows —
+  // design kept, flagged. TODO: real workshop / booking URLs (same as NAV).
+  btnWorkshop: 'Watch the workshop →',
+  btnCall: 'Book your Next +$125k/mo Game Plan Call →',
+};

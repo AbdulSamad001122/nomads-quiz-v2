@@ -1,0 +1,302 @@
+/* "So there's a fork here." — dark maroon-crumple band with the two path
+   cards, then a plum-framed panel bridging into the cream footer with the
+   workshop/call CTAs and founder photo. */
+
+.rtp {
+  position: relative;
+  background: #efe7d6 url('/assets/results-cream-bg.webp') center / cover;
+}
+
+/* ——— dark band ——— */
+
+.rtp__dark {
+  position: relative;
+  background: #250f1c url('/assets/results-maroon-crumple.webp') center / cover;
+  padding: 0 40px 96px;
+}
+
+/* rotated "Here's the fork in the road" on a white circle over the top seam */
+.rtp__badge {
+  position: absolute;
+  top: -40px;
+  right: 96px;
+  width: 152px;
+  height: 152px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.rtp__badge img {
+  width: 128px;
+  height: 128px;
+  transform: rotate(-9deg);
+}
+
+.rtp__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 218px;
+}
+
+.rtp__label {
+  display: inline-block;
+  background: #ffffff;
+  color: #16273b;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  padding: 6px 14px;
+}
+
+.rtp__intro {
+  margin-top: 22px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  color: #e7dbe4;
+}
+
+.rtp__headline {
+  margin-top: 22px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: clamp(30px, 3.4vw, 49px);
+  line-height: 1.28;
+  color: #ffffff;
+}
+
+.rtp__hl {
+  background: #efe2cf;
+  color: #5d1b4e;
+  padding: 2px 12px 5px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.rtp__fork-chip {
+  width: max-content;
+  margin: 40px auto 0;
+  background: #efe2cf;
+  color: #16273b;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  padding: 7px 16px;
+}
+
+/* two path cards + "Or" badge */
+.rtp__paths {
+  max-width: 1130px;
+  margin: 40px auto 0;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 0;
+}
+
+.rtp__path {
+  padding: 42px 48px;
+  text-align: center;
+}
+
+.rtp__path p {
+  margin: 20px 0 0;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #3a2130;
+}
+
+.rtp__path--cream {
+  background: #f7efe1;
+}
+
+.rtp__path--mauve {
+  background: #f3e6f6;
+}
+
+.rtp__path-img {
+  width: 104px;
+  height: 104px;
+  margin: 0 auto;
+  display: block;
+}
+
+/* coins art has no circle in the source — give it the cream disc */
+.rtp__path-icon {
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: grid;
+  place-items: center;
+  margin: 0 auto;
+}
+
+.rtp__path-icon img {
+  width: 58px;
+  height: 58px;
+}
+
+.rtp__or {
+  width: 78px;
+  height: 78px;
+  margin: 0 -18px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ——— panel bridging into the cream footer ——— */
+
+.rtp__panel {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  transform: translateY(-40px);
+  border: 3px solid #5d1b4e;
+  background: #f7efe1;
+  display: grid;
+  grid-template-columns: 1fr 0.82fr;
+}
+
+.rtp__panel-copy {
+  padding: 52px 40px 52px 52px;
+}
+
+.rtp__p {
+  max-width: 520px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #3a2130;
+}
+
+.rtp__panel-heading {
+  margin-top: 40px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: clamp(24px, 2.3vw, 33px);
+  line-height: 1.32;
+  color: #5d1b4e;
+}
+
+.rtp__panel-sub {
+  margin-top: 22px;
+}
+
+.rtp__btns {
+  margin-top: 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  align-items: flex-start;
+}
+
+.rtp__btn {
+  background: #f3e6f6;
+  color: #16273b;
+  border: 2px solid #16273b;
+  box-shadow: 5px 5px 0 #16273b;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  padding: 14px 22px;
+  text-decoration: none;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.rtp__btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 3px 3px 0 #16273b;
+}
+
+.rtp__panel-photo {
+  position: relative;
+  overflow: hidden;
+}
+
+.rtp__panel-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rtp__inner {
+    padding-top: 180px;
+  }
+  .rtp__badge {
+    right: 40px;
+    width: 128px;
+    height: 128px;
+  }
+  .rtp__panel-copy {
+    padding: 40px 32px;
+  }
+}
+
+@media (max-width: 860px) {
+  .rtp__dark {
+    padding: 0 24px 72px;
+  }
+  .rtp__inner {
+    padding-top: 150px;
+  }
+  .rtp__badge {
+    top: 16px;
+    right: 20px;
+    width: 104px;
+    height: 104px;
+  }
+  .rtp__badge img {
+    width: 86px;
+    height: 86px;
+  }
+  .rtp__headline br {
+    display: none;
+  }
+  /* stack the paths, drop the "Or" between them */
+  .rtp__paths {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    max-width: 460px;
+  }
+  .rtp__or {
+    margin: -8px auto;
+    width: 64px;
+    height: 64px;
+  }
+  .rtp__panel {
+    grid-template-columns: 1fr;
+    transform: translateY(-28px);
+  }
+  .rtp__panel-photo {
+    order: -1;
+    height: 340px;
+  }
+  .rtp__panel-photo img {
+    position: static;
+    height: 100%;
+  }
+  .rtp__p br,
+  .rtp__panel-heading br,
+  .rtp__panel-sub br {
+    display: none;
+  }
+  .rtp__btn {
+    width: 100%;
+    text-align: center;
+  }
+}
