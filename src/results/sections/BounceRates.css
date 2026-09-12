@@ -5,7 +5,7 @@
 .rbr {
   position: relative;
   background: #ffffff;
-  padding: 27px 27px 12px;
+  padding: 0 0 12px;
 }
 
 .rbr__band {
@@ -102,7 +102,7 @@
 
 @media (max-width: 900px) {
   .rbr {
-    padding: 16px 16px 10px;
+    padding: 0 0 10px;
   }
   .rbr__band {
     padding: 48px 24px 56px;
