@@ -24,14 +24,16 @@ export default function NotJustSite() {
     <section className="rns">
       <div className="rns__left">
         <div className="rns__keyline" aria-hidden="true" />
-        <img
-          className="rns__eagle"
-          src="/assets/results-njs-eagle.webp"
-          alt={c.eagleAlt}
-          width="1560"
-          height="1497"
-        />
-        <p className="rns__sub">{brJoin(c.subLines)}</p>
+        <div className="rns__stick">
+          <img
+            className="rns__eagle"
+            src="/assets/results-njs-eagle.webp"
+            alt={c.eagleAlt}
+            width="1560"
+            height="1497"
+          />
+          <p className="rns__sub">{brJoin(c.subLines)}</p>
+        </div>
       </div>
       <div className="rns__right">
         <div className="rns__rule" aria-hidden="true">

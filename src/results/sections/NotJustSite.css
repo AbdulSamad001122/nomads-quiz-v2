@@ -21,6 +21,12 @@
   pointer-events: none;
 }
 
+/* eagle + paragraph stay pinned while the navy column scrolls */
+.rns__stick {
+  position: sticky;
+  top: 84px;
+}
+
 .rns__eagle {
   display: block;
   width: min(576px, 40vw);
@@ -28,7 +34,7 @@
 }
 
 .rns__sub {
-  margin-top: 56px;
+  margin-top: 40px;
   margin-left: 26px;
   font-family: var(--font-body);
   font-weight: 500;
@@ -148,6 +154,9 @@
   }
   .rns__sub br {
     display: none;
+  }
+  .rns__stick {
+    position: static; /* stacked layout — nothing to stick against */
   }
   .rns__right {
     padding: 44px 26px 60px;
