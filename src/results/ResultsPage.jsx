@@ -1,6 +1,7 @@
 import ResultsNav from './sections/ResultsNav.jsx';
 import HeroSection from './sections/HeroSection.jsx';
 import MetricsSection from './sections/MetricsSection.jsx';
+import WhatIfYouDid from './sections/WhatIfYouDid.jsx';
 import BeyondFourteenDays from './sections/BeyondFourteenDays.jsx';
 import CompoundingIntro from './sections/CompoundingIntro.jsx';
 import CrpsCalculatorCta from './sections/CrpsCalculatorCta.jsx';
@@ -40,9 +41,11 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
       <ResultsNav />
       <HeroSection tokens={tokens} />
       <MetricsSection result={result} tokens={tokens} />
-      {/* TODO (doc order): Blocks 4–7 capped outcome, "stop at $1.5M" /
-          achievable gain, GolfBays proof — sections slot in here once
-          their designs arrive. */}
+      {/* NOTE (doc order): the "stop at $1.5M or push" RPV-lift banner
+          (branch section/stop-or-push) sits between these two. */}
+      <WhatIfYouDid result={result} tokens={tokens} />
+      {/* TODO (doc order): Blocks 4–7 capped outcome copy slots in here
+          once its design arrives. */}
       <BeyondFourteenDays />
       {/* TODO: Block 3 no-email conditional (Logic Doc) adapts the RPS story
           here when RPS = $0. */}
