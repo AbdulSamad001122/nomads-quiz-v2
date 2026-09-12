@@ -1,25 +1,31 @@
-/* "That's where most teams stop." — keyline-framed white section: teal
-   nautical band with audit copy, then three baked bounce-rate cards. */
+/* "That's where most teams stop." — teal nautical band bleeding past the
+   keyline; the frame runs white inside the band (top + sides) and black
+   below it around the cards, one continuous rectangle. */
 
 .rbr {
   position: relative;
   background: #ffffff;
-  padding: 27px 27px 29px;
-}
-
-.rbr__keyline {
-  position: absolute;
-  inset: 27px;
-  border: 1px solid #2b3a4d;
-  pointer-events: none;
+  padding: 27px 27px 12px;
 }
 
 .rbr__band {
+  position: relative;
   background: #122b2e url('/assets/results-bounce-teal-bg.webp') center / 100% 100% no-repeat;
   padding: 104px 40px 118px 361px;
 }
 
+/* white part of the frame — top + sides, inside the band */
+.rbr__band::after {
+  content: '';
+  position: absolute;
+  inset: 29px 27px 0;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-bottom: none;
+  pointer-events: none;
+}
+
 .rbr__copy {
+  position: relative;
   max-width: 760px;
 }
 
@@ -44,14 +50,28 @@
   -webkit-box-decoration-break: clone;
 }
 
+/* cards zone — the frame's black part (sides + bottom) continues here */
+.rbr__lower {
+  position: relative;
+  padding: 58px 52px 29px;
+}
+
+.rbr__lower::before {
+  content: '';
+  position: absolute;
+  inset: 0 27px;
+  border: 1px solid #2b3a4d;
+  border-top: none;
+  pointer-events: none;
+}
+
 .rbr__cards {
   list-style: none;
-  margin: 58px auto 0;
-  padding: 0 24px;
+  margin: 0 auto;
+  padding: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 47px;
-  max-width: 1440px;
 }
 
 .rbr__card img {
@@ -66,21 +86,29 @@
   .rbr__band {
     padding: 72px 36px 84px 20%;
   }
+  .rbr__band::after {
+    inset: 22px 20px 0;
+  }
+  .rbr__lower {
+    padding: 44px 34px 24px;
+  }
+  .rbr__lower::before {
+    inset: 0 20px;
+  }
   .rbr__cards {
     gap: 28px;
-    padding: 0 8px;
   }
 }
 
 @media (max-width: 900px) {
   .rbr {
-    padding: 16px 16px 20px;
-  }
-  .rbr__keyline {
-    inset: 16px;
+    padding: 16px 16px 10px;
   }
   .rbr__band {
     padding: 48px 24px 56px;
+  }
+  .rbr__band::after {
+    inset: 14px 12px 0;
   }
   .rbr__p {
     font-size: 16px;
@@ -92,10 +120,15 @@
     font-size: 17px;
     margin: 20px 0;
   }
+  .rbr__lower {
+    padding: 34px 26px 20px;
+  }
+  .rbr__lower::before {
+    inset: 0 12px;
+  }
   .rbr__cards {
     grid-template-columns: 1fr;
     gap: 24px;
-    margin-top: 36px;
   }
   .rbr__card {
     max-width: 480px;

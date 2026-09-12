@@ -19,7 +19,6 @@ const brJoin = (lines) =>
 export default function BounceRates() {
   return (
     <section className="rbr">
-      <div className="rbr__keyline" aria-hidden="true" />
       <div className="rbr__band">
         <div className="rbr__copy">
           <p className="rbr__p">{brJoin(BOUNCE_RATES.p1Lines)}</p>
@@ -27,13 +26,15 @@ export default function BounceRates() {
           <p className="rbr__p">{brJoin(BOUNCE_RATES.p2Lines)}</p>
         </div>
       </div>
-      <ul className="rbr__cards">
-        {BOUNCE_RATES.cards.map((c) => (
-          <li className="rbr__card" key={c.src}>
-            <img src={c.src} alt={c.alt} width="854" height="790" />
-          </li>
-        ))}
-      </ul>
+      <div className="rbr__lower">
+        <ul className="rbr__cards">
+          {BOUNCE_RATES.cards.map((c) => (
+            <li className="rbr__card" key={c.src}>
+              <img src={c.src} alt={c.alt} width="854" height="790" />
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 }
