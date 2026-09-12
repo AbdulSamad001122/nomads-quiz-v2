@@ -1,0 +1,138 @@
+/* "That's where most teams stop." — teal nautical band bleeding past the
+   keyline; the frame runs white inside the band (top + sides) and black
+   below it around the cards, one continuous rectangle. */
+
+.rbr {
+  position: relative;
+  background: #ffffff;
+  padding: 0 0 12px;
+}
+
+.rbr__band {
+  position: relative;
+  background: #122b2e url('/assets/results-bounce-teal-bg.webp') center / 100% 100% no-repeat;
+  padding: 104px 40px 118px 361px;
+}
+
+/* white part of the frame — top + sides, inside the band */
+.rbr__band::after {
+  content: '';
+  position: absolute;
+  inset: 29px 27px 0;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-bottom: none;
+  pointer-events: none;
+}
+
+.rbr__copy {
+  position: relative;
+  max-width: 760px;
+}
+
+.rbr__p {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #f2f6f8;
+}
+
+.rbr__chip {
+  display: inline-block;
+  margin: 26px 0;
+  background: #ffffff;
+  color: #16273b;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(16px, 1.46vw, 21px);
+  padding: 8px 18px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* cards zone — the frame's black part (sides + bottom) continues here */
+.rbr__lower {
+  position: relative;
+  padding: 58px 52px 29px;
+}
+
+.rbr__lower::before {
+  content: '';
+  position: absolute;
+  inset: 0 27px;
+  border: 1px solid #2b3a4d;
+  border-top: none;
+  pointer-events: none;
+}
+
+.rbr__cards {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 47px;
+}
+
+.rbr__card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rbr__band {
+    padding: 72px 36px 84px 20%;
+  }
+  .rbr__band::after {
+    inset: 22px 20px 0;
+  }
+  .rbr__lower {
+    padding: 44px 34px 24px;
+  }
+  .rbr__lower::before {
+    inset: 0 20px;
+  }
+  .rbr__cards {
+    gap: 28px;
+  }
+}
+
+@media (max-width: 900px) {
+  .rbr {
+    padding: 0 0 10px;
+  }
+  .rbr__band {
+    padding: 48px 24px 56px;
+  }
+  .rbr__band::after {
+    inset: 14px 12px 0;
+  }
+  .rbr__p {
+    font-size: 16px;
+  }
+  .rbr__p br {
+    display: none;
+  }
+  .rbr__chip {
+    font-size: 17px;
+    margin: 20px 0;
+  }
+  .rbr__lower {
+    padding: 34px 26px 20px;
+  }
+  .rbr__lower::before {
+    inset: 0 12px;
+  }
+  .rbr__cards {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .rbr__card {
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
