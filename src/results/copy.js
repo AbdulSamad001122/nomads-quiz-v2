@@ -759,3 +759,24 @@ export const TWO_PATHS = {
   btnWorkshop: 'Watch the workshop →',
   btnCall: 'Book your Next +$125k/mo Game Plan Call →',
 };
+
+export const STOP_OR_PUSH = {
+  // Doc (row 1): "You can stop at $1.5M. Or push all 5 metrics to their
+  // max." — design renders "or" lowercase mid-sentence; design casing kept
+  // (flagged). Lead line above the headline.
+  lead: 'You can stop at $1.5M. or push all 5 metrics to their max.',
+  // Doc: "By increasing your Revenue Per Visitor™ from {{current_rpv}} →
+  // {{goal_rpv}}, you could add $1.5M/year ($125K/mo) without adding a
+  // penny to your current marketing and ad spend." The design splits this
+  // into a 3-line headline ending at "($125K/mo)" and moves "without
+  // adding…" to a body line with a capital W; the doc's comma after the
+  // goal token and lowercase "you could" are dropped/capitalised per the
+  // design (flagged). Tokens resolve to the taker's live RPVs.
+  headLine1: 'By increasing your Revenue Per',
+  headLine2Before: 'Visitor™ from',
+  headLine3: 'You could add $1.5M/year ($125K/mo)',
+  bodyLine1: 'Without adding a penny to your current marketing and ad spend.',
+  bodyLine2: 'And nope, you don’t need to max out all 5 metrics to get there.',
+  // The "PLAYFUL, YET HIGHLY PROFITABLE" compass stamp (Group 225) on the
+  // top-left seam is design-only wayfinding — flagged.
+};
