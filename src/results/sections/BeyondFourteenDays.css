@@ -1,0 +1,186 @@
+/* "Beyond the first 14-day window" — dark keyline banner + ice-blue body.
+   Reference: beyond-14-days design image. Banner texture is the closest
+   match from the Backgrounds folder + a CSS light-flare overlay (exact
+   flare texture not in folder — flagged). */
+
+.rb__banner {
+  position: relative;
+  background:
+    linear-gradient(100deg, rgba(30, 20, 30, 0) 55%, rgba(150, 175, 200, 0.55) 82%, rgba(225, 238, 248, 0.85) 100%),
+    #241420 url('/assets/results-banner-dark.webp') center / cover no-repeat;
+  padding: 108px 48px 118px;
+}
+
+.rb__keyline {
+  position: absolute;
+  inset: 36px 45px;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  pointer-events: none;
+}
+
+.rb__arrows {
+  position: absolute;
+  left: 14.5%;
+  top: 50%;
+  transform: translateY(-58%);
+  height: 96px;
+  width: auto;
+}
+
+.rb__headline {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 39px;
+  line-height: 1.38;
+  color: #ffffff;
+  text-align: center;
+}
+
+.rb__brush-r {
+  font-family: var(--font-number);
+  font-weight: 400;
+  font-size: 0.8em;
+  line-height: 0;
+  vertical-align: -0.14em;
+  margin: 0 0.02em;
+}
+
+.rb__accent {
+  color: #ead9bc;
+}
+
+/* ——— ice-blue body ——— */
+
+.rb__body {
+  background: #daf0f8;
+  padding: 62px 0 110px;
+  text-align: center;
+}
+
+.rb__rule {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 66px;
+}
+
+.rb__rule-line {
+  flex: 1;
+  height: 1.5px;
+  background: #1c3850;
+}
+
+.rb__rule-icon {
+  width: 26px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.rb__intro {
+  margin: 76px auto 0;
+  max-width: 960px;
+  padding: 0 24px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.65;
+  color: #1c3850;
+}
+
+.rb__question {
+  margin-top: 42px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 39px;
+  line-height: 1.35;
+  color: #1c3850;
+  padding: 0 24px;
+}
+
+.rb__tape {
+  display: inline-block;
+  margin-top: 48px;
+  background: #5d1b4e;
+  color: #ffffff;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 19px;
+  padding: 13px 30px;
+  clip-path: polygon(1.5% 8%, 99% 0, 100% 88%, 97.5% 100%, 0 96%);
+  transform: rotate(-0.6deg);
+}
+
+.rb__closing {
+  margin-top: 52px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1c3850;
+  padding: 0 24px;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rb__headline {
+    font-size: 32px;
+  }
+  .rb__question {
+    font-size: 32px;
+  }
+  .rb__arrows {
+    left: 8%;
+    height: 80px;
+  }
+}
+
+@media (max-width: 700px) {
+  .rb__banner {
+    padding: 84px 32px 90px;
+  }
+  .rb__keyline {
+    inset: 16px 18px;
+  }
+  .rb__arrows {
+    display: none;
+  }
+  .rb__headline {
+    font-size: 26px;
+  }
+  .rb__brush-r {
+    font-size: 1.55em;
+    vertical-align: -0.06em;
+  }
+  .rb__body {
+    padding: 44px 0 80px;
+  }
+  .rb__rule {
+    margin: 0 20px;
+  }
+  .rb__rule-icon {
+    width: 20px;
+  }
+  .rb__intro {
+    margin-top: 60px;
+    font-size: 16px;
+  }
+  .rb__intro br,
+  .rb__question br,
+  .rb__closing br {
+    display: none;
+  }
+  .rb__question {
+    font-size: 24px;
+    margin-top: 32px;
+  }
+  .rb__tape {
+    margin-top: 36px;
+    font-size: 16px;
+    padding: 11px 22px;
+  }
+  .rb__closing {
+    margin-top: 40px;
+    font-size: 16px;
+  }
+}

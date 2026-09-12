@@ -1,0 +1,288 @@
+/* "This is where Compounding Revenue Per Subscriber™ comes in." —
+   dark navy textured section. Reference: CRPS intro design image. */
+
+.rcx {
+  background: #10131c url('/assets/results-navy-texture.webp') center / cover;
+  padding: 96px 48px 110px;
+  text-align: center;
+}
+
+.rcx__headline {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 44px;
+  line-height: 1.32;
+  color: #ffffff;
+}
+
+/* ——— RPV / RPS cards ——— */
+
+.rcx__cards {
+  margin-top: 68px;
+  display: flex;
+  justify-content: center;
+  gap: 64px;
+}
+
+.rcx__card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 44px 42px;
+  text-align: left;
+  max-width: 460px;
+}
+
+.rcx__card-icon {
+  height: 54px;
+  width: auto;
+}
+
+.rcx__card-text {
+  margin-top: 26px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1e3547;
+}
+
+/* ——— potential frame ——— */
+
+.rcx__potential {
+  margin: 104px auto 0;
+  max-width: 1330px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 22px;
+  padding: 58px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.rcx__left {
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.rcx__left-label,
+.rcx__left-sub {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.rcx__left-big {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 50px;
+  line-height: 1.15;
+  color: #ffffff;
+  margin: 14px 0;
+  white-space: nowrap;
+}
+
+.rcx__arrow {
+  width: 46px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.rcx__becard {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 24px 36px 30px;
+  text-align: center;
+}
+
+.rcx__chip {
+  display: inline-block;
+  background: #f2e3c9;
+  color: #1e3547;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 16px;
+  padding: 5px 16px;
+}
+
+.rcx__becard-row {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.rcx__bicon {
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  background: #1e3547;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.rcx__bicon img {
+  width: 58%;
+  height: auto;
+}
+
+.rcx__benum {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 60px;
+  line-height: 1.1;
+  color: #1e3547;
+  white-space: nowrap;
+}
+
+.rcx__besub {
+  margin-top: 6px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  color: #1e3547;
+}
+
+.rcx__vdiv {
+  width: 1px;
+  height: 165px;
+  background: rgba(255, 255, 255, 0.35);
+  flex-shrink: 0;
+}
+
+.rcx__plus {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #5d1b4e;
+  color: #ffffff;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.rcx__icecard {
+  background: #d9edf6;
+  border-radius: 14px;
+  padding: 26px 30px 30px;
+  width: 330px;
+  flex-shrink: 0;
+  text-align: left;
+}
+
+.rcx__icecircle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rcx__icecircle img {
+  width: 60%;
+  height: auto;
+}
+
+.rcx__icetext {
+  margin-top: 18px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #1e3547;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1200px) {
+  .rcx__potential {
+    flex-wrap: wrap;
+    padding: 44px 32px;
+  }
+  .rcx__vdiv {
+    display: none;
+  }
+}
+
+@media (max-width: 1100px) {
+  .rcx__headline {
+    font-size: 34px;
+  }
+  .rcx__cards {
+    gap: 32px;
+  }
+  .rcx__card-text br {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .rcx {
+    padding: 64px 20px 80px;
+  }
+  .rcx__headline {
+    font-size: 26px;
+  }
+  .rcx__headline br {
+    display: none;
+  }
+  .rcx__cards {
+    margin-top: 44px;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .rcx__card {
+    padding: 30px 26px;
+    max-width: 100%;
+  }
+  .rcx__card-text {
+    font-size: 16px;
+    margin-top: 18px;
+  }
+  .rcx__card-icon {
+    height: 44px;
+  }
+  .rcx__potential {
+    margin-top: 60px;
+    flex-direction: column;
+    gap: 24px;
+    padding: 36px 22px;
+  }
+  .rcx__left-label,
+  .rcx__left-sub {
+    font-size: 16px;
+  }
+  .rcx__left-big {
+    font-size: 42px;
+  }
+  .rcx__arrow {
+    transform: rotate(90deg);
+    width: 40px;
+  }
+  .rcx__benum {
+    font-size: 40px;
+  }
+  .rcx__becard {
+    padding: 20px 22px 24px;
+  }
+  .rcx__becard-row {
+    gap: 16px;
+  }
+  .rcx__bicon {
+    width: 68px;
+    height: 68px;
+  }
+  .rcx__icecard {
+    width: 100%;
+  }
+}

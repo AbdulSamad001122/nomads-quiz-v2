@@ -1,0 +1,103 @@
+/* "$125k Game Plan Call" CTA — cream card on teal/maroon topo texture.
+   Reference: game-plan call design image. */
+
+.rgp {
+  background: #1d3230 url('/assets/results-topo-bg.webp') center / cover;
+  padding: 60px 54px 76px;
+}
+
+.rgp__card {
+  max-width: 1330px;
+  margin: 0 auto;
+  background: #faf3e3 url('/assets/results-cream-bg.webp') center / cover;
+  border-radius: 28px;
+  padding: 60px 56px;
+  display: grid;
+  grid-template-columns: 0.42fr 0.58fr;
+  align-items: center;
+  gap: 58px;
+}
+
+.rgp__headline {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 31px;
+  line-height: 1.35;
+  color: #4a1533;
+}
+
+.rgp__accent {
+  color: #792861;
+}
+
+.rgp__body {
+  margin-top: 34px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #3c1a30;
+}
+
+.rgp__btn {
+  display: inline-block;
+  margin-top: 40px;
+  background: #f3dfef;
+  border: 2px solid #431232;
+  box-shadow: 6px 6px 0 #431232;
+  color: #431232;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 19px;
+  text-decoration: none;
+  padding: 16px 30px;
+}
+
+.rgp__media img {
+  width: 100%;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rgp__card {
+    padding: 44px 36px;
+    gap: 40px;
+  }
+  .rgp__headline {
+    font-size: 26px;
+  }
+  .rgp__body br {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .rgp {
+    padding: 44px 20px 56px;
+  }
+  .rgp__card {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 560px) {
+  .rgp__card {
+    padding: 30px 22px;
+    border-radius: 20px;
+  }
+  .rgp__headline {
+    font-size: 22px;
+  }
+  .rgp__body {
+    margin-top: 22px;
+    font-size: 16px;
+  }
+  .rgp__btn {
+    margin-top: 28px;
+    font-size: 16px;
+    padding: 13px 20px;
+    box-shadow: 5px 5px 0 #431232;
+  }
+}

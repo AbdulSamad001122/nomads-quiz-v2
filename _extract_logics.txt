@@ -1,0 +1,763 @@
+TOTAL PARAS: 762
+[0000] RPV™ Quiz — Logic Doc
+[0001] How the quiz behaves, calculates, and delivers results.
+[0002] Question logic
+[0003] One row per question (PLG/SLG variants split into their own rows). The Answer column carries a self-contained identifier so it never depends on checkbox order. Backend value is what the calculator stores. Routing and Conditional display are only filled where something branches or the question doesn’t always show.
+[0004] Manual entry: every question marked ✎ shows a “Enter your exact number” field on tapping the last option. An entered value overrides the bracket bounds.
+[0005] Segmentation & routing (Q1–Q6)
+[0006] Q
+[0007] Shows when
+[0008] Answer
+[0009] Backend value
+[0010] Routing
+[0011] Q1
+[0012] always
+[0013] A–E · role
+[0014] — (tag only)
+[0015] → Q2
+[0016] Q2
+[0017] always
+[0018] A · Under $10k/mo
+[0019] $60,000/yr
+[0020] A → Q2B gate
+[0021] 
+[0022] 
+[0023] B · $10k–35k
+[0024] $270,000
+[0025] 
+[0026] 
+[0027] 
+[0028] C · $35k–100k
+[0029] $810,000
+[0030] 
+[0031] 
+[0032] 
+[0033] D · $100k–250k
+[0034] $2,100,000
+[0035] 
+[0036] 
+[0037] 
+[0038] E · $250k–500k+
+[0039] $4,500,000
+[0040] B–E → Q3
+[0041] Q2B
+[0042] only if Q2=A
+[0043] A · Yes / B · No
+[0044] —
+[0045] A → Q3 · B → disqualify
+[0046] Q3
+[0047] always
+[0048] A–H · business type
+[0049] — (tag only)
+[0050] → Q4
+[0051] Q4
+[0052] always
+[0053] A · calls/demos
+[0054] tag SLG
+[0055] → Q5
+[0056] 
+[0057] 
+[0058] B · buy without talking
+[0059] tag PLG
+[0060] 
+[0061] 
+[0062] 
+[0063] C · some need a call
+[0064] tag SLG (hybrid)
+[0065] 
+[0066] 
+[0067] 
+[0068] D · all over the place
+[0069] tag SLG (hybrid)
+[0070] 
+[0071] Q5
+[0072] always
+[0073] A–E · biggest problem
+[0074] — (routes case study)
+[0075] → matched case study → Q6
+[0076] Q6
+[0077] always
+[0078] multi-select traffic
+[0079] — (tag)
+[0080] Paid ads → unlock Q7b
+[0081] 
+[0082] Calculator inputs (Q7–Q11)
+[0083] Q
+[0084] Shows when
+[0085] Answer
+[0086] Backend value
+[0087] Routing
+[0088] Q7 ✎
+[0089] always
+[0090] A · Under 3,000
+[0091] (disqualify)
+[0092] A → disqualify, not Q8
+[0093] 
+[0094] 
+[0095] B · 3,000–5,000
+[0096] 4,000
+[0097] 
+[0098] 
+[0099] 
+[0100] C · 5,001–10,000
+[0101] 7,500
+[0102] 
+[0103] 
+[0104] 
+[0105] D · 10,001–50,000
+[0106] 30,000
+[0107] 
+[0108] 
+[0109] 
+[0110] E · 50,001–100,000
+[0111] 75,000
+[0112] 
+[0113] 
+[0114] 
+[0115] F · 100,000+
+[0116] 150,000
+[0117] 
+[0118] 
+[0119] 
+[0120] G · don’t track
+[0121] 10,000 (default)
+[0122] 
+[0123] Q7b ✎
+[0124] only if Q6 = Paid ads
+[0125] A · Under $5k
+[0126] 3,500
+[0127] 
+[0128] 
+[0129] 
+[0130] B · $5k–10k
+[0131] 7,500
+[0132] 
+[0133] 
+[0134] 
+[0135] C · $10k–25k
+[0136] 17,500
+[0137] 
+[0138] 
+[0139] 
+[0140] D · $25k–50k
+[0141] 37,500
+[0142] 
+[0143] 
+[0144] 
+[0145] E · $50k–100k
+[0146] 75,000
+[0147] 
+[0148] 
+[0149] 
+[0150] F · $100k+
+[0151] 125,000
+[0152] 
+[0153] Q7c
+[0154] only if Q7b answered
+[0155] A · Under 25%
+[0156] 0.15
+[0157] 
+[0158] 
+[0159] 
+[0160] B · 25–44%
+[0161] 0.35
+[0162] 
+[0163] 
+[0164] 
+[0165] C · 45–55%
+[0166] 0.50
+[0167] 
+[0168] 
+[0169] 
+[0170] D · 56–75%
+[0171] 0.65
+[0172] 
+[0173] 
+[0174] 
+[0175] E · Over 75%
+[0176] 0.85
+[0177] 
+[0178] 
+[0179] 
+[0180] F · Not sure
+[0181] 0.50 (default; results slider)
+[0182] 
+[0183] 
+[0184] 
+[0185] If Q7c Skipped 
+[0186] 
+[0187] No ad section on result
+[0188] Q8 ✎
+[0189] always
+[0190] A · Under 1,000
+[0191] 500
+[0192] 
+[0193] 
+[0194] 
+[0195] B · 1,000–5,000
+[0196] 3,000
+[0197] 
+[0198] 
+[0199] 
+[0200] C · 5,001–10,000
+[0201] 7,500
+[0202] 
+[0203] 
+[0204] 
+[0205] D · 10,001–25,000
+[0206] 17,500
+[0207] 
+[0208] 
+[0209] 
+[0210] E · 25,001–50,000
+[0211] 37,500
+[0212] 
+[0213] 
+[0214] 
+[0215] F · 50,000+
+[0216] 75,000
+[0217] 
+[0218] 
+[0219] 
+[0220] G · don’t track
+[0221] 10% of Q7 value
+[0222] 
+[0223] Q9a ✎ PLG
+[0224] PLG path
+[0225] A · <1 in 100
+[0226] 0.005
+[0227] 
+[0228] 
+[0229] 
+[0230] B · 1–5 
+[0231] 0.03
+[0232] 
+[0233] 
+[0234] 
+[0235] C · 5–10 
+[0236] 0.075
+[0237] 
+[0238] 
+[0239] 
+[0240] D · 10–15 
+[0241] 0.125 
+[0242] 
+[0243] 
+[0244] 
+[0245] E · 15+ 
+[0246] 0.175
+[0247] 
+[0248] 
+[0249] 
+[0250] F · don’t track
+[0251] 0.02 (default)
+[0252] 
+[0253] Q9a ✎ SLG
+[0254] SLG path
+[0255] A · <1 in 100
+[0256] 0.005
+[0257] 
+[0258] 
+[0259] 
+[0260] B · 1–5
+[0261] 0.03
+[0262] 
+[0263] 
+[0264] 
+[0265] C · 5–10
+[0266] 0.075
+[0267] 
+[0268] 
+[0269] 
+[0270] D · 10–15
+[0271] 0.125
+[0272] 
+[0273] 
+[0274] 
+[0275] E · 15+
+[0276] 0.22
+[0277] stores at 0.22 (SLG lead cap)
+[0278] 
+[0279] 
+[0280] F · don’t track
+[0281] 0.02 (default)
+[0282] 
+[0283] Q9b ✎ PLG
+[0284] PLG path
+[0285] A · Under 10%
+[0286] 0.05
+[0287] 
+[0288] 
+[0289] 
+[0290] B · 10–25%
+[0291] 0.175
+[0292] 
+[0293] 
+[0294] 
+[0295] C · 25–50%
+[0296] 0.375
+[0297] 
+[0298] 
+[0299] 
+[0300] D · 50–75%
+[0301] 0.625
+[0302] 
+[0303] 
+[0304] 
+[0305] E · 75%+
+[0306] 0.75 (cap)
+[0307] 
+[0308] 
+[0309] 
+[0310] F · don’t track
+[0311] 0.50 (default)
+[0312] 
+[0313] Q9b ✎ SLG
+[0314] SLG path
+[0315] A · Under 10%
+[0316] 0.05
+[0317] 
+[0318] 
+[0319] 
+[0320] B · 10–25%
+[0321] 0.175
+[0322] 
+[0323] 
+[0324] 
+[0325] C · 25–50%
+[0326] 0.375
+[0327] 
+[0328] 
+[0329] 
+[0330] D · 50–75%
+[0331] 0.625
+[0332] 
+[0333] 
+[0334] 
+[0335] E · 75%+
+[0336] 0.75 (cap)
+[0337] 
+[0338] 
+[0339] 
+[0340] F · don’t track
+[0341] 0.50 (default)
+[0342] 
+[0343] Q10 ✎ PLG
+[0344] PLG path
+[0345] A · Under $50
+[0346] 25
+[0347] 
+[0348] 
+[0349] 
+[0350] B · $50–100
+[0351] 75
+[0352] 
+[0353] 
+[0354] 
+[0355] C · $100–250
+[0356] 175
+[0357] 
+[0358] 
+[0359] 
+[0360] D · $250–500
+[0361] 375
+[0362] 
+[0363] 
+[0364] 
+[0365] E · $500–1,000
+[0366] 750
+[0367] 
+[0368] 
+[0369] 
+[0370] F · $1,000–2,000
+[0371] 1,500
+[0372] 
+[0373] 
+[0374] 
+[0375] G · $2,000+
+[0376] 3,000
+[0377] 
+[0378] Q10 ✎ SLG
+[0379] SLG path
+[0380] A · $500–2,000
+[0381] 1,250
+[0382] 
+[0383] 
+[0384] 
+[0385] B · $2,000–5,000
+[0386] 3,500
+[0387] 
+[0388] 
+[0389] 
+[0390] C · $5,000–10,000
+[0391] 7,500
+[0392] 
+[0393] 
+[0394] 
+[0395] D · $10,000–25,000
+[0396] 17,500
+[0397] 
+[0398] 
+[0399] 
+[0400] E · $25,000–50,000
+[0401] 37,500
+[0402] 
+[0403] 
+[0404] 
+[0405] F · $50,000+
+[0406] 75,000
+[0407] 
+[0408] Q11 ✎
+[0409] always required, no skip
+[0410] A · Under $25k
+[0411] 12,500
+[0412] 
+[0413] 
+[0414] 
+[0415] B · $25k–100k
+[0416] 62,500
+[0417] 
+[0418] 
+[0419] 
+[0420] C · $100k–250k
+[0421] 175,000
+[0422] 
+[0423] 
+[0424] 
+[0425] D · $250k–500k
+[0426] 375,000
+[0427] 
+[0428] 
+[0429] 
+[0430] E · $500k–1M
+[0431] 750,000
+[0432] 
+[0433] 
+[0434] 
+[0435] F · $1M–2.5M
+[0436] 1,750,000
+[0437] 
+[0438] 
+[0439] 
+[0440] G · Over $2.5M
+[0441] 3,500,000
+[0442] 
+[0443] 
+[0444] 
+[0445] H · no email marketing
+[0446] 0 → RPS = 0
+[0447] 
+[0448] 
+[0449] Diagnostic & capture (Q12–Q14)
+[0450] Q
+[0451] Shows when
+[0452] Answer
+[0453] Backend value
+[0454] Routing
+[0455] Q12
+[0456] always
+[0457] PLG/SLG · what to crack
+[0458] — (tag)
+[0459] → matched advice slide → Q13
+[0460] Q13
+[0461] always
+[0462] multi-select · what tried
+[0463] — (tag)
+[0464] → Q14
+[0465] Q14
+[0466] always
+[0467] free text
+[0468] — (VOC tag)
+[0469] → opt-in → results
+[0470] 
+[0471] Note: The PLG/SLG tag from Q4 decides which variant of Q9a, Q9b, Q10 and Q12 the taker sees, and which labels appear on the results page. Hybrid answers (Q4 C, D) follow the SLG path.
+[0472] 
+[0473] 
+[0474] The calculator
+[0475] Runs silently. It produces the current RPV, the goal RPV, a set of goal metrics, and the numbers the results page needs. The taker never sees any of this math.
+[0476] 
+[0477] 1 · The five metrics
+[0478] Five metrics feed RPV. Four can be improved; order value is fixed.
+[0479] Metric
+[0480] Source
+[0481] Can improve?
+[0482] Opt-in Rate
+[0483] Q8 ÷ Q7
+[0484] yes
+[0485] Lead Conversion Rate
+[0486] Q9a
+[0487] yes
+[0488] Close Rate
+[0489] Q9b
+[0490] yes
+[0491] Revenue Per Subscriber™ (RPS)
+[0492] Q11 ÷ annual subscribers
+[0493] yes
+[0494] Order value/deal size
+[0495] Q10
+[0496] no — fixed
+[0497] 
+[0498] 2 · Current numbers
+[0499] Annual Visitors        = Q7 value × 12
+[0500] Current Annual Revenue  = Q2 value   (already annual — no ×12)
+[0501] Current RPV            =  Current Annual Revenue ÷ annualVisitors
+[0502] Annual Subscribers     = Annual Visitors × OptIn Rate
+[0503] OptIn Rate             = Q8 value ÷ Q7 value
+[0504] Lead Rate              = Q9a value
+[0505] Close Rate             = Q9b value
+[0506] Order Value            = Q10 value
+[0507] RPS                   = Q11 value ÷ annualSubscribers
+[0508]  // Note: There’s one revenue source. Q2. RPV is the annual figure. The 14-day window in the questions is only the benchmark window for lead conversion — it is not part of the revenue figure.  // 
+[0509] 3 · The goal
+[0510] Target Revenue        = Current Annual Revenue + 1,500,000
+[0511] Additional RPV needed  = 1,500,000 ÷ Annual Visitors
+[0512] Goal RPV              = Current RPV + Additional RPV Needed
+[0513]  // 4 · Ceilings
+[0514] Metric
+[0515] Ceiling
+[0516] Opt-in Rate
+[0517] 0.60
+[0518] Lead Conversion — PLG
+[0519] 0.30
+[0520] Lead Conversion — SLG
+[0521] 0.22
+[0522] Close Rate
+[0523] 0.75
+[0524] Revenue Per Subscriber™
+[0525] $50
+[0526]  // 5 · The improvement loop
+[0527] A round-robin that raises one metric at a time until the goal is reached or every metric is maxed. Deterministic, so the same answers always produce the same result.
+[0528] Before the loop:
+[0529] Any metric already at/above its ceiling → set to ceiling, freeze.
+[0530] If RPS = 0 → freeze it, run on three metrics.
+[0531] Clamping: a goal value is never returned below the current value. If it would be, hold at current.
+[0532] The cycle — fixed order, repeat until it stops:
+[0533] order = [ closeRate, leadRate, optInRate, RPS ]
+[0534] for each metric in order:
+[0535]     if frozen: skip
+[0536]     candidate = currentValue × 1.1          // multiplicative: a tenth of current
+[0537]     if candidate ≥ ceiling: set to ceiling, freeze
+[0538]     else: set to candidate
+[0539]     evaluate revenue()                     // after EVERY adjustment
+[0540]     if revenue ≥ targetRevenue: STOP       // these are the goal values
+[0541]  // Revenue evaluation:
+[0542] Annual Subscribers = annual Visitors × optIn Rate
+[0543] List Revenue       = annual Subscribers × RPS
+[0544] Non List Revenue = current Annual Revenue − current List Revenue   // fixed before the loop
+[0545] revenue           = List Revenue + non List Revenue
+[0546]  // Note: ×1.1 is multiplicative (0.25 → 0.275 → 0.3025), not +0.1. RPS already includes the subscriber’s purchase value, so lead and close rates live inside RPS — never add the funnel product beside it. Non List Revenue is fixed once and never recalculated. No rounding inside the loop.
+[0547] Two endings:
+[0548] Goal reached — stop on the adjustment that hits it. Those are the goal values. (Results Block 4.)
+[0549] Everything maxed, goal not reached — go to the capped-state maths under Results-page logic. (Results Blocks 5–7.) 
+[0550] 
+[0551] Manual entry & validation
+[0552] Manual entry applies to Q7, Q7b, Q8, Q9a, Q9b, Q10, Q11. Tap the last option to reveal one input field; an entered value overrides the bracket.
+[0553] Question
+[0554] Type
+[0555] Bounds
+[0556] Q7
+[0557] whole number
+[0558] 1 – 100,000,000
+[0559] Q8
+[0560] whole number
+[0561] 0 – 100,000,000
+[0562] Q9a
+[0563] percentage, 1 dp
+[0564] 0 – 100
+[0565] Q9b
+[0566] percentage, 1 dp
+[0567] 0 – 100
+[0568] Q10
+[0569] currency, 2 dp
+[0570] 0.01 – 10,000,000
+[0571] Q11
+[0572] currency, whole
+[0573] 0 – 1,000,000,000
+[0574] Reject out-of-bounds values with an inline message; do not silently clamp. Two impossible-answer checks fire on advancing:
+[0575] Subscribers ≥ visitors (Q8 vs Q7): “That’s more new subscribers than visitors, which usually means one of these is off. Mind having another look?”
+[0576] Email revenue > total revenue (Q11 vs Q2): “That’s more email revenue than total revenue. Mind having another look?”
+[0577] Each offers “Go back and check” (returns, answer preserved) and “Keep my answers” (advances, clamps at ceiling, tags the record unverified). 
+[0578] 
+[0579] Results-page logic
+[0580] The results page walks through five inputs — visitors, opt-in rate, lead conversion rate, close rate, and revenue per subscriber (RPS) — then shows a metric table and a set of conditional blocks. Test blocks in order; render only what fires. The section labelled “Copy Shown” is the exact wording that renders.
+[0581] Order on the page:
+[0582] Metric table  →  Block 1  →  (Block 2 or 3)  →  (Block 4, 5, 6 or 7)  →  Ad module (if shown)
+[0583] 1 · Metric table colours
+[0584] Each current metric is coloured by how close it sits to its ceiling. Green = at ceiling, red = below 30% of ceiling, yellow = in between.
+[0585] Metric (ceiling)
+[0586] Red
+[0587] Yellow
+[0588] Green
+[0589] Opt-in Rate (60%)
+[0590] below 18%
+[0591] 18–59%
+[0592] 60%+
+[0593] Lead Conversion PLG (30%)
+[0594] below 9%
+[0595] 9–29%
+[0596] 30%+
+[0597] Lead Conversion SLG (22%)
+[0598] below 7%
+[0599] 7–21%
+[0600] 22%+
+[0601] Close Rate (75%)
+[0602] below 23%
+[0603] 23–74%
+[0604] 75%+
+[0605] Revenue Per Subscriber ($50)
+[0606] below $15
+[0607] $15–49
+[0608] $50+
+[0609] Note: Same rule for any metric added later: green = at ceiling, red = below 30% of ceiling, yellow = between. The table shows five rows (four funnel metrics + RPS), each with current, goal, and ceiling.  // 
+[0610] 2 · Block 1 — Revenue split
+[0611] trigger: Other Revenue ≥ 0    (suppress if < 0; tag split_suppressed)
+[0612] Email Path Revenue = annual Subscribers × RPS
+[0613] Other Revenue     = current Annual Revenue − email Path Revenue
+[0614] X = round((email Path Revenue ÷ current Annual Revenue × 100) to nearest 5) ;  Y = 100 − X
+[0615] 
+[0616] Copy Shown: 
+[0617] Around {{email_percentage}}% of your revenue comes through the five metrics that influence your RPV™. Everything else comes from: repeat purchases, referrals, direct traffic, social, and word of mouth. The {{email_percentage}}% is the part you can track, control, and systematically optimise. The bigger this number, the more predictable your revenue. 
+[0618] 
+[0619] 3 · Block 2 — Low path share
+[0620] trigger: X < 5    (suppress if Block 3 or 7 fires)
+[0621]  // 
+[0622] Copy Shown: 
+[0623] Almost none of your revenue is coming through the five metrics used to calculate Revenue Per Visitor™. That usually means you're not making the most of the visitors you're already attracting. Too much of your revenue depends on channels and outcomes you can't reliably predict or control. 
+[0624] 
+[0625] 4 · Block 3 — No email marketing
+[0626] trigger: RPS = 0    (suppress Block 2)
+[0627]  // Copy Shown: 
+[0628] You're not using email to bring people back, so every visitor is mostly a one-shot opportunity. They either buy today or you may lose them. That means Revenue Per Subscriber™ is currently $0. You're leaving a major revenue lever unused: turning the people you already attracted into repeat revenue.
+[0629] 5 · Block 4 — Goal reached
+[0630] trigger: loop reached target
+[0631]  // Standard results page. Metric table shows current, goal, and ceiling for all five rows. No capped-state copy.  // 
+[0632] 6 · Blocks 5–7 — Capped states
+[0633] Maths for all three:
+[0634] Max RPV     = (annual Visitors × optIn Ceiling × rps Ceiling + non ListRevenue) ÷ annual Visitors
+[0635] Achievable Gain  = (annual Visitors × max RPV) − current Annual Revenue
+[0636] Remaining Gap   = 1,500,000 − achievable Gain
+[0637] Additional Daily Visitors = (remaining Gap ÷ max RPV) ÷ 365      // divide by max RPV, not current RPV
+[0638]  // Guards: if achievable Gain ≤ 0, set to 0 and suppress any sentence containing it. Round money to nearest $100, visitors to nearest 100 (display only). Show traffic as a daily number.
+[0639] 
+[0640] Block 5 — capped, gain positive, traffic within reach (≤ 20× current visitors): 
+[0641] Copy Shown: 
+[0642] You've maximised every metric in the Compounding Revenue Per Visitor™ OS. Following the system, you could add another {{achievable_gain}} a year without increasing your traffic. You're still {{remaining_gap}} short of $1.5M. So now, the answer really is more traffic: {{additional_daily_visitors}} more visitors a day. But before you scale, build the feedback loop. Every buyer and non-buyer gives you data to improve your messaging and positioning, making each new visitor more valuable. Want to see how it works? Watch the workshop → 
+[0643] 
+[0644] Block 6 — capped, gain positive, traffic out of reach (> 20× current visitors): 
+[0645] Copy Shown: 
+[0646] You've maximised every metric in the Compounding Revenue Per Visitor™ OS. Following the system, you could add another {{achievable_gain}} a year without increasing your traffic. But getting all the way to $1.5M would require far more traffic than your business can realistically handle. So this isn't a conversion problem. And more traffic isn't the answer either. Want to understand what is? Watch the workshop → 
+[0647] 
+[0648] Block 7 — capped, no gain available (achievableGain ≤ 0; suppress Blocks 2, 5, 6): 
+[0649] Copy Shown: 
+[0650] Almost none of your revenue is coming through the five metrics used to calculate Revenue Per Visitor™. That usually means you're not making the most of the visitors you're already attracting. Too much of your revenue depends on channels and outcomes you can't reliably predict or control. Want to see how to change that? Watch the workshop → 
+[0651] 
+[0652] 7 · Ad-spend module
+[0653] Renders only if the taker answered Q7c. Shows what the same ad spend could produce at the goal RPV versus today.
+[0654] Ad Visitors   = Q7 value × Q7c share
+[0655] Current Ad Rev = ad Visitors × current RPV
+[0656] Goal Ad Rev    = ad Visitors × goal RPV
+[0657] monthlyGain  = goal Ad Rev − current Ad Rev   (= ad Visitors × additional RPV needed)
+[0658] Current ROAS  = current Ad Rev ÷ Q7b spend ;  goal ROAS = goal AdRev ÷ Q7b spend
+[0659] Round money to the nearest $100 (display only)
+[0660] 
+[0661] Worked example (test fixture)
+[0662] From real quiz values: Q7 = D (30,000) · Q2 = C ($810,000) · Q7b = C ($17,500) · Q7c = D (0.65).
+[0663] annualVisitors 360,000 · currentRPV $2.25 · additionalRPVneeded $4.17 · goalRPV $6.42 · adVisitors 19,500
+[0664] 
+[0665] Today
+[0666] At RPV™ goal
+[0667] Monthly ad spend
+[0668] $17,500
+[0669] $17,500
+[0670] Ad-generated visitors
+[0671] 19,500
+[0672] 19,500
+[0673] Revenue per visitor
+[0674] $2.25
+[0675] $6.42
+[0676] Revenue from ad traffic
+[0677] $43,900
+[0678] $125,100
+[0679] ROAS
+[0680] 2.5×
+[0681] 7.2×
+[0682] Result: +$81,200/month, +$975,000/year, from the same ad spend.
+[0683] Slider (only if Q7c = “Not sure”): adjusts ad-traffic share 10–100%; the table updates live. Does not change current/goal RPV or the funnel targets.
+[0684] 
+[0685] 
+[0686] CRM / Kit tags
+[0687] “Fired by” = what triggers it. Quiz-fired tags are hardcoded into the quiz build; computed tags are pushed after the calculation runs.
+[0688] Segmentation (fired by answer)
+[0689] Tag
+[0690] Fired by
+[0691] Values
+[0692] role
+[0693] Q1
+[0694] 5 role values
+[0695] revenue_tier
+[0696] Q2
+[0697] 5 tiers
+[0698] business_type
+[0699] Q3
+[0700] 8 types
+[0701] sales_model
+[0702] Q4
+[0703] PLG / SLG
+[0704] biggest_problem
+[0705] Q5
+[0706] A–E
+[0707] traffic_source
+[0708] Q6
+[0709] multi (10)
+[0710] ad_spender
+[0711] Q6
+[0712] yes/no
+[0713] current_challenge
+[0714] Q12
+[0715] PLG/SLG set
+[0716] tried
+[0717] Q13
+[0718] multi (7)
+[0719] voc_reason
+[0720] Q14
+[0721] free text
+[0722] 
+[0723] Computed (pushed after calculation)
+[0724] Tag
+[0725] Source
+[0726] Notes
+[0727] current_rpv
+[0728] calculator
+[0729] $ value
+[0730] goal_rpv
+[0731] calculator
+[0732] $ value
+[0733] required_lift
+[0734] calculator
+[0735] goalRPV − currentRPV
+[0736] capped_state
+[0737] results logic
+[0738] true on Blocks 5–7
+[0739] capped_block
+[0740] results logic
+[0741] 4 / 5 / 6 / 7
+[0742] achievable_gain
+[0743] capped maths
+[0744] $ (Blocks 5–7)
+[0745] remaining_gap
+[0746] capped maths
+[0747] $ (Blocks 5–7)
+[0748] additional_daily_visitors
+[0749] capped maths
+[0750] Blocks 5–7
+[0751] split_suppressed
+[0752] Block 1
+[0753] true if otherRevenue < 0
+[0754] record_unverified
+[0755] validation
+[0756] true if a check was overridden
+[0757]  // Data-quality flags (per question)
+[0758] For each manual-entry question (Q7, Q7b, Q8, Q9a, Q9b, Q10, Q11), tag whether the answer was exact or bracket, e.g. q7_entry = exact | bracket. This tells the sales team how solid a record is before a call.
+[0759]  // Disqualification
+[0760] Disqualified users exit before email capture, so they aren’t tagged inside the quiz. Tag them at the workshop opt-in with disqualified plus the reason (revenue_gate or traffic_gate).
+[0761] 

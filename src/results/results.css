@@ -1,0 +1,6 @@
+/* Result page shell — shared page-level styles. */
+
+.results-page {
+  min-height: 100%;
+  background: #f8f1e4; /* paper cream that peeks under the hero's angled cut */
+}

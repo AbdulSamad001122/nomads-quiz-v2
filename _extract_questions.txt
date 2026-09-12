@@ -1,0 +1,519 @@
+TOTAL PARAS: 518
+[0000] RPV™ Quiz
+[0001] Questions, Slides & Copy — Wireframe
+[0002] Version 2.0 · 2026-08-25 · 
+[0003] Each box is one screen the quiz-taker sees, in order. Directional writing and logic are in square boxes [] and highlighted in yellow // 
+[0004] [First Page of the Quiz]
+[0005] 
+[0006] 
+[0007] 
+[0008] 
+[0009] 
+[0010] Phase 1 · Segmentation & rapport
+[0011] [Q1 · ROLE]
+[0012] Before we get into the good stuff, who's on the other side of this screen?
+[0013] Founder or Managing Partner
+[0014] Head of Marketing, Content, or Sales
+[0015] Performance Marketer
+[0016] OBM / Marketing Assistant or Executive
+[0017] Freelancer (under 2 years of experience) // 
+[0018] [Logic: Segmentation only. CRM/Kit tag. All options → Q2.]
+[0019] 
+[0020] [Q2A · REVENUE TIER  (qualifier gate)]
+[0021] To make our recommendations realistic, where is your business today?
+[0022] Under $10k/month
+[0023] $10k – $35k/month
+[0024] $35k – $100k/month
+[0025] $100k – $250k/month
+[0026] $250k – $500k+/month
+[0027]  // [Logic: If anything other than “Under $10k/month” → Q3.  If “Under $10k/month” → Q2B gate below.]
+[0028] [Q2B (ONLY IF UNDER $10K/MONTH)]
+[0029] Do you have the operational ability to scale past $100k/month?
+[0030] Yes → Q3
+[0031] No → exit (disqualification screen) 
+[0032]  // [Logic: If “Yes” option chosen, move to Q3. If “No” option chosen, exit quiz and show disqualification screen]  // 
+[0033] [DISQUALIFICATION SCREEN] 
+[0034] You’ll need more visitors to reach $1.5M.
+[0035] But before you scale, build a system that makes every visitor worth more.
+[0036] Watch the workshop →  // See how to make an extra $4,000 a day from the same system.
+[0037] Explore the website →  // See how the Compounding Revenue Per Visitor™ OS works.
+[0038] {add all my social buttons and cta}
+[0039]  // [Logic: No email capture on this screen — copy + two CTAs only.]
+[0040] 
+[0041] 
+[0042] [Q3 · BUSINESS TYPE]
+[0043] Good. What are you scaling?
+[0044] Because the path to an extra $1.5M/year looks different for an agency than it does for a course creator.
+[0045] SaaS or Tech Company
+[0046] Agency
+[0047] Coaches and Course Creators
+[0048] Consultant or Fractional Expert
+[0049] B2B Service Provider (law, finance, real estate, logistics, architecture)
+[0050] E-commerce Brand
+[0051] Creator or Personal Brand
+[0052] Other (Your ex put you in a box. We won't.) 
+[0053]  // [Logic: Segmentation. CRM/Kit tag and all → Q4.] 
+[0054] 
+[0055] [Q4 · SALES MODEL]
+[0056] How does your business typically win a customer?
+[0057] Where do roughly 80% of your sales come from today?
+[0058] We close most deals through calls or demos  → SLG
+[0059] Most people buy without ever talking to us  → PLG
+[0060] Some buy on their own, some still need a call  → SLG
+[0061] It’s a bit all over the place right now  → SLG 
+[0062]  // [Logic: PLG/SLG tag for quiz, CRM and Kit · The PLG/SLG tag drives custom slides as well as Q9, Q9b, Q10 wording and the results-page labels.]
+[0063] 
+[0064] [SLIDE (BEFORE Q5) · BENCHMARK]
+[0065] [Logic: Two versions of the slide — SLG (Q4 A,C,D) and PLG (Q4 B)] // 
+[0066] [SLIDE FOR SLG (Options 4A, C, & D)] 
+[0067] If 5,000 more qualified visitors landed on your business tomorrow, what would actually happen?
+[0068] If your funnel is working the way it should, you’d expect to
+[0069] Convert  a minimum of ~35% of your 5,000 visitors into subscribers
+[0070] That’s equivalent to 1,750 subscribers entering your brand ecosystem
+[0071] Ideally, roughly 3% of them should convert into 50-60 sales conversations
+[0072] 
+[0073] These numbers come from high-performing funnels with the highest Revenue Per Visitor™. We'll compare them with yours to find your biggest opportunity.
+[0074] 
+[0075]  // In the next few questions, you will get visibility into your sales and marketing system. You’ll also find out what needs optimization to stack $125k MRR ($1.5M/year) on top of your existing monthly revenue. 
+[0076] 
+[0077] [SLIDE FOR PLG (Option 4B)] 
+[0078] If 5,000 more qualified visitors landed on your business tomorrow, what would actually happen?
+[0079] If your funnel is working the way it should, you’d expect to
+[0080] Convert a minimum of ~35% of your 5,000 visitors into subscribers // 
+[0081] That’s equivalent to 1,750 subscribers entering your brand ecosystem // 
+[0082] Ideally, roughly 3% of them should convert into 50-60 sales
+[0083] 
+[0084] These numbers come from high-performing funnels with the highest Revenue Per Visitor™. We'll compare them with yours to find your biggest opportunity.
+[0085] 
+[0086] In the next few questions, you will get visibility into your sales and marketing system. You’ll also find out what needs optimization to stack $125k MRR ($1.5M/year) on top of your existing monthly revenue. 
+[0087] 
+[0088] 
+[0089] [Q5 · BIGGEST PROBLEM  (single select)]
+[0090] If 5,000 qualified visitors landed on your business tomorrow, what would your team be obsessing over to make 60 sales from it?
+[0091] (Select the ONE most pressing problem right now.)
+[0092] We’re driving cold traffic to our website or product pages, but if they're not ready to buy, we lose them. We don't have a way to keep them on our email list or pull them from “not considering” to “I'm open to it.”
+[0093] Our email list is our most profitable channel, but our opt-in rates are low, and we need a better way to get more people in there every day.
+[0094] People land on our website, read everything, and still can't tell why we're different from the five other options they're comparing us to, so they either pick the cheaper one or go with a familiar name.
+[0095] People are joining our list every day, but our emails aren't doing enough to close them in the first 14 days, and beyond that, we don’t have a solid strategy to keep converting the non-buyers over time, so our email revenue doesn’t compound month on month.
+[0096] We’re spending a good chunk of our sales calls convincing doubtful buyers; we need a system that shows our differentiation before the call, so the call is spent closing, not educating. 
+[0097] [Logic: Each answer routes to its matched case-study slide next.] 
+[0098] 
+[0099] Phase 2 · Belief-shifting case studies
+[0100] [TRANSITION SCREEN BEFORE BELIEF SLIDES] 
+[0101] Okay, let's get real about what it actually takes to hit 60 sales.  
+[0102] 
+[0103] [SLIDES AFTER Q5 - RESULTS AND CASE STUDIES THAT CHALLENGE THEIR CURRENT BELIEF ]
+[0104] [CASE STUDY FOR OPTION 5A]
+[0105] Strange thing about ROAS: if you're spending $10k+/mo on ads, ROAS shows you the handful who bought and ignores the potential buyers who clicked, browsed, and bounced (and you paid for every one of them).
+[0106] GolfBays went from having a discount opt-in to a quiz opt-in that landed them an additional 530 demos a month and £97,000+ in direct site revenue from the same Shopify traffic they were already paying for.
+[0107] Before Compounding RPV™ OS:
+[0108] 440,000 Shopify sessions with 1 demo booked for every 2,500 visitors (a 0.04% visitor-to-demo conversion rate) underneath it
+[0109] Buyers knew they wanted to purchase, but 400+ products created enough decision fatigue that they stalled, and the demos that did get booked were spent on product education instead of closing
+[0110] After Compounding RPV™ OS:
+[0111] We reverse-engineered hundreds of their best demos into a personalised product recommendation engine, coupled with emotional messaging around the real payoff, such as bonding over Christmas holidays in the room that was of no use before installing a GolfBay // 
+[0112] 14 out of every 100 quiz takers bought directly without a demo, and the £97,000+ doesn't include a single pound from 530+ additional demos booked through the quiz  or quiz takers who then visited the physical store
+[0113] When you build a pre-sales experience that mimics your best sales conversations, the one who wasn't thinking about buying starts thinking about it, and the one who was, feels certain enough to purchase
+[0114] Want to see what it would take you to add an extra $125,000+ to your MRR with the traffic you already have? Follow along. 
+[0115] 
+[0116] 
+[0117] [CASE STUDY FOR OPTION 5B] 
+[0118] If your business is doing less than $10M/year, spending on visibility to stay "top of mind"—while your opt-in rate stays flat— is a strategy borrowed from bigger players with deeper pockets. It's not the best use of your marketing budget.
+[0119] The problem: many of your potential buyers are already circling your ecosystem. They've seen your ads or content a few times, but they're still blurry on what you do, why it's different, and why it matters right now.
+[0120] You're targeting Alex — who doesn't believe he needs you — and Sam — who's actively looking for you — exactly the same way. //  // But what happens when you don’t? 
+[0121] Mary—an executive coach pulling 60,000+ monthly LinkedIn views — had fewer than 500 new email subscribers a month. Every sale for her $5,000 offer depended on lengthy back-and-forth DMs. The moment she stepped back, revenue stepped back with her.
+[0122] After the Compounding RPV™ OS:
+[0123] A quiz converting existing traffic into email subscribers at a 73–79% opt-in rate
+[0124] 
+[0125] Her membership repositioned as a $500/quarter entry point into her $5,000 offer
+[0126] People were buying within 7 days of taking the quiz  without chasing via calls or DMs
+[0127] Revenue moved from $14,000 → $51,000/month from the same organic traffic
+[0128] 
+[0129] 
+[0130] 
+[0131] Samar Owais — a respected name in SaaS and e-commerce email — watched her list grow in three days by what had previously taken six months, after launching the Champion's Challenge™ quiz. //  // 7,706% list growth, which directly fuelled her EEBC course sales.  // 
+[0132] 
+[0133] An audio-tech SaaS for gamers was spending heavily on influencer marketing — 140,000 monthly visits landing on a website that couldn't answer the one question every gamer was quietly asking: "If this is similar to Dolby or Sony, why would I switch?"
+[0134] The product was free.  But free doesn't convert when visitors haven't yet seen why what they have isn't enough.
+[0135] The Disguised Demo ™ quiz educated them on the difference, challenged their current setup, and walked them through the features as a live demo — personalised to whether they were an immersive gamer or a competitive one. 
+[0136] The founder estimates this will save $2M/year in ad spend. 
+[0137] 
+[0138] If you're already spending to get eyeballs, the question worth sitting with is: is each of those eyeballs experiencing something that helps them see why this, why now, and why this over what they're already doing?
+[0139] Most businesses are fishing in the same crowded 3% pool. The ones already convinced they have a problem, already comparing solutions, already halfway to a decision. That pool is only 3% of your total buyers. 
+[0140] The other 97% aren't unqualified. They just don't believe they have a problem yet. They're not comparing; they're not even considering. And a product page won't change that. It'll just confirm what they already thought: "not for me."
+[0141] But when you open a third door…one that challenges their current thinking, surfaces the gap they hadn't named, and educates them without pushing a product — a chunk of that 97% starts considering your solution.  //  // Curious → Consideration → Conversation → Conversion.
+[0142] That's the bigger pool.  //  // And that's exactly what the Compounding RPV™ diagnosis is about to show you: your revenue potential when you stop fishing in the 3% and open a door for the 97% who don't yet believe they need you.
+[0143] Coming up in a jiffy. 
+[0144] Want to see what it would take you to add an extra $125,000+ to your MRR with the traffic you already have? Follow along. 
+[0145] 
+[0146] 
+[0147] [CASE STUDY FOR OPTION 5C] 
+[0148] We keep hearing we're in a trust recession. That buyers are more sceptical than ever. But if that were true, the most trusted creators and celebrities wouldn't launch products that flop. They do. All the time. 
+[0149] Turns out there's something that matters more than trust: whether they can tell you apart from the other five tabs they have open. A Contrarian POV™ as we call it.
+[0150] A Video Mastermind founder went from losing 27 sales calls to closing 29 of the next 31 with a Contrarian POV™.
+[0151] [Add Screenshot]
+[0152] Before Contrarian POV ™ 
+[0153] They promised “Videos that get more sales,” which boxed them into the same category as their competitors 
+[0154] Trust was there; the founder got 200-300 organic comments on his LinkedIn post, yet people thought they wouldn’t buy into the same claim and drop $6000 on the mastermind
+[0155] The Contrarian POV ™ 
+[0156] We analysed a bunch of sales calls, and one word kept coming up: creativity, so the contrarian POV became: Your videos don’t need high-level production; they need “Creative Delivery.”
+[0157] All the features of the offer now support the  Contrarian POV “Creative Delivery.”
+[0158] Results:
+[0159] Went from $8,000 to $108,000/mo by increasing the close rate from 3.7% to 93.5% with a Contrarian POV that created a “Market of One” for him. 
+[0160] Contrarian POV is your stand against the majority of look-alike competitors, so you can become the default choice by creating your ownable category. You’re no longer competing with cheaper alternatives or established brands. 
+[0161] Want to see what it would take you to add an extra $125,000+ to your MRR with the traffic you already have? Follow along. 
+[0162] 
+[0163] 
+[0164] [CASE STUDY FOR OPTION 5D] 
+[0165] There was a time when more email subscribers meant more money. That time has passed. 
+[0166] Lara Acosta, Forbes 30 Under 30 and the number one female LinkedIn creator, was pulling in subscribers at the speed of light, considering her 180,000+ followers.
+[0167] However, her first launch drew only 30 students and a 6% click-through rate.
+[0168] We built a full pre-launch, launch, and post-launch belief-shifting email strategy, layered with affiliate collaborations, a masterclass, and behavior-triggered sequences that compounded with every launch.
+[0169] Next launch: 70 students
+[0170] The launch after that: 500 students and half a million dollars in revenue
+[0171] Email is the most profitable channel in her business today. //  // Here’s another one… The #1 SDR Sales Coach had built a list of 10,000 subscribers through a "Comment X, Get Y" strategy and his emails simply weren't converting despite every effort.  //  // We ran the exact same sequence, same messaging, same timing, to two lists simultaneously:
+[0172] His original 10,000 subscribers — 1 sale
+[0173] 829 Conversion Quiz™ subscribers — 23 sales
+[0174] Same audience. Same emails. The only difference was the frame they joined with. The people who joined to diagnose their gaps were way more likely to buy the solution than those who just wanted a quick freebie.
+[0175] Three things make email your most profitable channel in your business.
+[0176] Why each person joined your list — someone who joined to diagnose a real problem, and how their beliefs are challenged, and objections are handled during the diagnosis, can convert them within the first 14 days.
+[0177] What happens in the first 14 days — A subscriber is most engaged within the first 10 days of joining your list. Your email strategy should look very different in this window.   //  // What happens after 14 days — Are you dumping all non-buyers in the same newsletter pool? Or you’re planning a lifecycle email strategy with behavior-triggered segmentation that informs the strategy of your affiliate campaigns, seasonal sales, upsells, and cross-sells. 
+[0178] Want to see what it would take you to add an extra $125,000+ to your MRR with the traffic you already have? Follow along. 
+[0179] 
+[0180] 
+[0181] [CASE STUDY FOR OPTION 5E]  
+[0182] “If we get them on a call, we’ll close them” isn’t a flex. It’s booking you fewer calls and hurting your close rate.
+[0183] Estelle Winsett is a former attorney who styles high-performing lawyers from court to cocktails. 
+[0184] She had built an engaged audience of 9000+ women hungry for better presence and positioning through their style. 
+[0185] Before Compounding RPV OS:
+[0186] She spent hours in LinkedIn DMs nurturing lawyers to book a call with her even if she was writing content daily.
+[0187] The manual back-and-forth conversations made growth slow, and nonexistent on days when she wasn’t active in the DMs.
+[0188] Her buyers only saw the $5000 price, Estelle’s deep process, and her clients' transformations on the call. 
+[0189] After Compounding RPV OS:
+[0190] The Conversion Quiz sits on her profile, under each post, and in a QR when she’s delivering talks, so it brings in consistent quiz takers without her being in the DMs
+[0191] “It’s not your body, it’s your clothes” contrarian POV ™  that etched Estelle’s take in her audience’s mind. 
+[0192]  // 
+[0193] In the DMs, instead of back and forth, she points them to the Quiz, and that easily transitions the conversation to a sales call
+[0194] They see the $5000 offer, her detailed process, and her Contrarian take from other stylists *before* they hop on a call with her 
+[0195] The Results: 
+[0196] Five out of every 100 quiz takers book a call with her in the first 10 days of taking the quiz
+[0197] 
+[0198] She went from 3 sales calls per month to 3 per week, while closing 75% of them, since the convincing doesn’t happen on a call. 
+[0199] Because the moment someone books a call still unconvinced, you've already added 45 minutes of convincing to your calendar, and weeks of follow-ups to your sales cycle. 
+[0200] Want to see what it would take you to add an extra $125,000+ to your MRR with the traffic you already have? Follow along. 
+[0201] 
+[0202] 
+[0203] 
+[0204] 
+[0205] 
+[0206] [SLIDE AFTER CASE STUDIES · TRANSITION TO CALCULATOR]
+[0207] Most businesses have a rough sense of their traffic and leads, but very few know how much revenue each eyeball is bringing in. 
+[0208] And without that number, you can't tell which traffic channel is worth keeping and which one is draining your budget. That's exactly what the RPV™ calculator is about to show you. 
+[0209] That's exactly what the RPV™ calculator is about to show you.>>> 
+[0210] 
+[0211] Phase 2 · The calculator
+[0212] INTERNAL
+[0213] CALCULATOR LOGIC STARTS HERE — the taker still just answers questions; the math runs silently. Full formulas live in the Build Spec.
+[0214] 
+[0215] [Q6 · TRAFFIC SOURCES  (multi-select)]
+[0216] Where does most of your traffic or audience come from today?
+[0217] (Select all that apply)
+[0218] LinkedIn content
+[0219] Instagram / TikTok / social media
+[0220] SEO / Google search
+[0221] Paid ads
+[0222] YouTube
+[0223] Referrals / word of mouth
+[0224] Email marketing
+[0225] Influencer partnerships
+[0226] Communities / forums
+[0227] Partnerships or affiliates 
+[0228]  // [Logic: If “Paid ads” selected → show Q7B after Q7. Otherwise skip Q7B and Q7C.]
+[0229] 
+[0230] [Q7A · MONTHLY VISITORS  ✎ Manual Entry]
+[0231] Roughly, how many eyeballs is your business getting each month across all your channels?
+[0232] (Website visits, social media reach, offline — all of it counts.)
+[0233] Under 3,000
+[0234] 3,000 to 5,000
+[0235] 5,001 to 10,000
+[0236] 10,001 to 50,000
+[0237] 50,001 to 100,000
+[0238] 100,000+
+[0239] We don’t track this number yet 
+[0240] Enter your exact number for more accurate calculations 
+[0241]  // [Logic 1: When the last option is tapped/chosen, reveal an empty input field]
+[0242] [Logic 2: If “Under 3,000” → disqualification screen below, not Q8. 3,000 now sits on a bracket edge so the cut is clean.] 
+[0243] 
+[0244] [DISQUALIFICATION SCREEN]
+[0245] You’ll need more visitors to reach $1.5M.
+[0246] But before you scale, build a system that makes every visitor worth more.
+[0247] Watch the workshop →  // See how to make an extra $4,000 a day from the same system.
+[0248] Explore the website →  // See how the Compounding Revenue Per Visitor™ OS works.
+[0249] {add all my social buttons and cta}
+[0250]  // [Logic: No email capture on this screen — copy + two CTAs only.]
+[0251] 
+[0252] 
+[0253] [Q7B · AD SPEND . Conditional  ✎ Manual Entry]
+[0254] You mentioned some of your traffic is paid. Roughly, what are you putting into ads each month?
+[0255] Under $5k
+[0256] $5k – $10k
+[0257] $10k – $25k
+[0258] $25k – $50k
+[0259] $50k – $100k
+[0260] $100k+ 
+[0261] Enter your exact number for more accurate calculations 
+[0262] [Logic 1: When the last option is tapped/chosen, reveal an empty input field] 
+[0263] [Logic 2: Only show this question if “Paid ads” was selected in Q6.]
+[0264] 
+[0265] [Q7C · AD TRAFFIC SHARE  (conditional · skippable)]
+[0266] Of all the visitors landing on your business each month, how much comes from paid ads specifically?
+[0267] Just a small part. Most traffic is organic, SEO, or word of mouth. (Under 25%)
+[0268] Less than half. Ads bring a decent chunk, organic and referrals bring more. (25% to 44%)
+[0269] About half. Fairly even split. (45% to 55%)
+[0270] More than half. Ads are our biggest single source. (56% to 75%)
+[0271] Almost all of it. Take the ads away and traffic mostly stops. (Over 75%)
+[0272] Not sure. We haven't broken traffic down by source. (We'll estimate and you can adjust your results.)
+[0273] [Logic 1: Only show this question if “Paid ads” was selected in Q6 and Q7B was answered]
+[0274] [Logic: If they skip, the ad section isn’t shown on the result page. If they answer “Not sure,” ad section renders on the result page.] 
+[0275] 
+[0276] [Q8 · NEW EMAIL SUBSCRIBERS / MONTH  ✎ Manual Entry]
+[0277] Out of everyone discovering your business each month, how many are becoming new email subscribers?
+[0278] (Think new opt-ins across all your lead magnets, landing pages, and anywhere else people join your list.)
+[0279] Under 1,000
+[0280] 1,000 to 5,000
+[0281] 5,001 to 10,000
+[0282] 10,001 to 25,000
+[0283] 25,001 to 50,000
+[0284] 50,000+
+[0285] We don’t track this number yet 
+[0286] Enter your exact number for more accurate calculations 
+[0287]  // [Logic 1: When the last option is tapped/chosen, reveal an empty input field] 
+[0288] 
+[0289] [Q9A & 9B · LEAD CONVERSION RATE  ✎ Manual Entry]
+[0290] [Different question wording for PLG vs SLG (tagged in Q4).]
+[0291] 
+[0292] [Q9A for PLG]
+[0293] Out of every 100 new subscribers joining your list, how many take a buying action within the first 14 days? (adding to cart, starting a trial, landing on your order page - whether or not they buy) 
+[0294] Fewer than 1 in 100
+[0295] 1 to 5
+[0296] 5 to 10
+[0297] 10 to 15
+[0298] 15+
+[0299] We don't track this number yet
+[0300] Enter your exact number for more accurate calculations 
+[0301]  // [Logic: When the last option is tapped/chosen, reveal an empty input field]
+[0302] [Logic 2: “15+” stores as 22% (the SLG lead-conversion ceiling). Any respondent above 15 in 100 is treated as already at cap — do not extrapolate a higher value from this bucket.]
+[0303] [Q9B for PLG] 
+[0304] And out of every 100 who take that action, how many complete it? 
+[0305] Under 10% 
+[0306] 10 - 25% 
+[0307] 25 - 50% 
+[0308] 50 - 75%
+[0309] Over 75%
+[0310] We don't track this yet
+[0311] Enter your exact number for more accurate calculations 
+[0312]  // [Logic 1: When the last option is tapped/chosen, reveal an empty input field]
+[0313] [Logic 2: Response here is the close rate source. I.e., Close rate reads straight off this answer].
+[0314] 
+[0315] [Q9A for SLG] 
+[0316] Out of every 100 new subscribers joining your list, how many book a call or demo (or a demo) within the first 14 days?
+[0317] Fewer than 1 in 100
+[0318] 1 to 5
+[0319] 5 to 10
+[0320] 10 to 15
+[0321] 15+
+[0322] We don't track these numbers yet
+[0323] Enter your exact number for more accurate calculations 
+[0324]  // [Logic: When the last option is tapped/chosen, reveal an empty input field] 
+[0325] [Q9B for SLG]
+[0326] And out of every 100 who book, how many become paying clients? 
+[0327] Under 10% 
+[0328] 10 - 25% 
+[0329] 25 - 50% 
+[0330] 50 - 75%
+[0331] We don't track this yet
+[0332] Enter your exact number for more accurate calculations 
+[0333]  // [Logic 1: When the last option is tapped/chosen, reveal an empty input field] 
+[0334] [Logic 2: Response here is the close rate source. I.e., Close rate reads straight off this answer]. 
+[0335] 
+[0336] 
+[0337] [Q10 · ORDER VALUE / DEAL SIZE  ✎ Manual Entry]
+[0338] [Different questions for PLG vs SLG (tagged in Q4).]
+[0339] Q10 for PLG 
+[0340] What's your average order value? 
+[0341] Under $50
+[0342] $50-$100
+[0343] $100-$250
+[0344] $250- $500
+[0345] $500-$1000
+[0346] $1000-$2000
+[0347] $2000+ 
+[0348] Enter your exact number for more accurate calculations 
+[0349]  // [Logic : When the last option is tapped/chosen, reveal an empty input field]
+[0350] 
+[0351] [Q10 for SLG ]
+[0352] What's your average deal size?  // 
+[0353] $500 - $2000
+[0354] $2,000 – $5,000
+[0355] $5,000 - $10,000
+[0356] $10,,000 - $25,000
+[0357] $25,000 - $50,000
+[0358] $50,000+ 
+[0359] Enter your exact number for more accurate calculations 
+[0360]  // [Logic: When the last option is tapped/chosen, reveal an empty input field]
+[0361] 
+[0362] 
+[0363] [Q11 · EMAIL REVENUE (Feeds RPS)  ✎ Manual Entry]
+[0364] How much revenue came from your email list in the last 12 months?
+[0365] Pick your best estimate. There’s a calculator on your results page that takes you deeper into your email numbers.
+[0366] Under $25,000
+[0367] $25,000 to $100,000
+[0368] $100,000 to $250,000
+[0369] $250,000 to $500,000
+[0370] $500,000 to $1M
+[0371] $1M to $2.5M
+[0372] Over $2.5M
+[0373] We don’t do email marketing
+[0374] Enter your exact number for more accurate calculations 
+[0375]  // [Logic 1: This question is required. When they choose “We don’t do email marketing” → RPS = $0 on the result page.] 
+[0376] [Logic 2: When the last option is tapped/chosen, reveal an empty input field]
+[0377] 
+[0378] [LOADING SCREEN]
+[0379] Calculating your current and potential Revenue per Visitor™
+[0380] [1.5 sec loading gif in compass shape] 
+[0381] 
+[0382] [SLIDE AFTER Q11 · FIVE METRICS]
+[0383] Most businesses can't tell if a slow month is a traffic problem, an email problem, or a positioning problem — because they're tracking data in isolation.
+[0384] You might be clocking 40,000 TikTok views and celebrating, without knowing how many of those views became subscribers, or how many subscribers bought within the first 14 days. 
+[0385] And when revenue dips, you start doing more of something or less of something without knowing what has a direct impact on sales. 
+[0386] 
+[0387] 
+[0388] 
+[0389] The Revenue Per Visitor™ OS tracks five metrics, paired with action-triggered surveys and behavior analysis. 
+[0390] So instead of guessing, you have a clear, reverse-engineered goal sitting in front of you. 
+[0391] Like “Let’s increase email opt-ins by 20% this month, and that alone adds $70,000 to MRR.” 
+[0392] So instead of experimenting, every action you take is tied to a revenue outcome you can see coming. 
+[0393] 
+[0394] In 50 seconds, your results will reveal the average revenue you earn per visitor, and exactly which metrics to focus on to add $125k to your MRR. 
+[0395] 
+[0396] 
+[0397] Phase 4 · Diagnosis & Education 
+[0398] 
+[0399] [TRANSITION SLIDE] 
+[0400] Your RPV is almost ready. 
+[0401] Before we show you the numbers… 
+[0402] 
+[0403] [Q12 · DIFFERENT OPTIONS FOR PLG & SLG ← LOGIC]
+[0404] What's the one thing you and your team are heads down trying to crack right now?
+[0405] [PLG OPTIONS]
+[0406] We’re attracting more casual browsers than buyers
+[0407] Why has revenue started to plateau, even though traffic hasn’t?
+[0408] Sales are inconsistent. Some weeks are great, others are quiet.
+[0409] How do we stop losing sales to cheaper alternatives, especially when we know we're the better choice?
+[0410] [SLG OPTIONS]
+[0411] Honestly, the quality of who's landing on our calls — too many doubtful buyers who need convincing from the ground up
+[0412] Why has revenue started to plateau, even though traffic hasn’t?
+[0413] The pipeline is there, but sales calls are inconsistent, and we want to know what next month looks like before it arrives
+[0414] We're getting visibility, but we can't tell which channels are actually driving revenue.
+[0415] We’re losing to price wars! We’re seeing more deals go to competitors.
+[0416] 
+[0417] 
+[0418] [SLIDES AFTER EACH OPTION IN Q12]
+[0419] [SLIDE AFTER OPTION 12A]
+[0420] Put an end to attracting doubtful buyers and tire-kickers by ditching educating buyers on the call. 
+[0421] 
+[0422] If you want to bring your close rate up, and shrink your sales cycle:
+[0423] 
+[0424] Pre-educate before the call — on your process, differentiation, price range. Let the call be for the last few questions, not convince-me-you-are-not-a-knob. //  
+[0425] Personalise the pre-sales experience — Alex and Adam have different use cases, different objections, different reasons to buy. 
+[0426] Are you showing them relevant features, the right testimonials, and handling their specific objections before they ever speak to you? // 
+[0427] Filter misfits early without lowering your threshold — stop hoping a call will convert someone who was never the right fit. There are enough qualified buyers out there.
+[0428] Let the tire-kickers filter themselves out naturally.
+[0429] 
+[0430] Reserve the calls for buyers to confirm their commitment, not to build it from scratch. 
+[0431] 
+[0432] 
+[0433] [SLIDE AFTER OPTION 12B]
+[0434] Revenue has plateaued even though your traffic hasn't slowed down.
+[0435] Revenue Plateaus                                    Revenue Compounds
+[0436] 
+[0437] Three levers break a plateau without adding a single new visitor:
+[0438] Are more people buying in the first 10 days?
+[0439] Every 100 people who are considering buying from you can give you feedback on why they bought or didn’t. 
+[0440] Use that to scale from converting 1 in 100 to 5 in 100 by optimising messaging and positioning consistently.
+[0441] Are you nurturing non-buyers differently from buyers? 
+[0442] Non-buyers have unresolved objections. A personalised 5-email objection sequence can close harder than dumping everyone on the same list.
+[0443] Are you going back to your existing buyers? 
+[0444] The easiest revenue you'll ever make is from someone who already bought. Repeat purchases, upsells, cross-sells, affiliate campaigns, seasonal sales — all of it becomes possible when zero-party data tells you what they actually want next instead of you guessing.
+[0445] Believe it or not, you don't have a traffic problem. You've probably filled enough of Zuckerberg's pockets already. What you need is a system that compounds revenue from the traffic you're already paying for. 
+[0446] 
+[0447] [SLIDE AFTER OPTION 12C] 
+[0448] Good months happen. Then they stop. And you don't know why.
+[0449] Last year, August was my best sales month (whereas summer is usually a slow season). 
+[0450] I thought it was luck. I am a Scoreapp partner, and I had multiple Scoreapp inquiries.
+[0451] Later, when we interviewed our customers, the pattern revealed: it was because Daniel Priestly went on the Diary of a CEO podcast. His visibility positively influenced our sales.
+[0452] The same growth occurred when one of his YouTube videos went viral.
+[0453] If only I had a feedback loop built-in, I could’ve immediately sponsored his newsletter or proposed a content partnership. 
+[0454] That’s where I could’ve doubled down on a GOOD MONTH. 
+[0455] But like me, many teams don’t know why a good month was good, or a bad month was bad. 
+[0456] Was it a positioning problem, market change, or an industry leader influencing their sales? 
+[0457] [INSERT FEEDBACK LOOP IMAGE]
+[0458] That’s why now I’ve built a 14-step feedback loop that helps us get behavioral data from every visitor going through a business’s sales ecosystem. 
+[0459] So one can immediately point out why something is working, or not working, and act on it.
+[0460] Without that loop, you're not making data-led decisions. You're making expensive guesses.
+[0461] And this is what's usually happening behind the inconsistency:
+[0462] Your Head of Content is celebrating and reporting a 30% increase in visibility
+[0463] The ads strategist  is responsible for how many calls or clicks they’re producing
+[0464] But does it take the sales team 15 minutes or 3 hours to close the deal? Or did the ads create rage-bait, and now customer service has an influx of refund requests? 
+[0465] Is that a metric that determines the ads’ success? Or is it just tracking ROAS?
+[0466] Inconsistency in revenue happens because marketing, customer success, and sales are not working in sync. 
+[0467] When your teams are tracking in isolation, your good months feel like luck — and your slow months feel like failure.
+[0468] Neither is true.
+[0469] You just don't have the number that connects everything.
+[0470] 
+[0471] 
+[0472] ^The feedback loop + sales team tells which calls have been the best — which messages and positioning is selling. The ad team creates 5–8 variations of that message, the outlier gets picked by the content team, so now the messages are converting on socials. Each action is in sync and data-led.
+[0473] That's what we're about to find. Once you know your RPV — your revenue per visitor — you stop guessing which month is a traffic problem, an email problem, or a positioning problem. You start seeing it.
+[0474] 
+[0475] [SLIDE AFTER OPTION 12D] 
+[0476] Nobody defaults to the cheapest option when one choice is dominantly clear. 
+[0477] But when there is no clear differentiation, price becomes the only thing left to compare. 
+[0478] That's a positioning problem.
+[0479] To own a category, you need a Contrarian POV ™ .  Here's why:
+[0480] Your offer is asking people to switch or start something new — and nobody does that without a reason. You need a "why switch" that challenges them to reconsider their current approach.
+[0481] A Contrarian POV creates that contradiction — it makes them question their old way and start seeing your way as the obvious solution.
+[0482] Your customer’s words tell you which category to own.  //  // Here are 9 reasons people buy and 7 reasons they don't. //  // Your Contrarian POV is built on research that identifies which specific trigger is most dominant for your buyer and which hesitation is keeping them stuck. One big idea speaks to all of it simultaneously. 
+[0483] 
+[0484] When your Contrarian POV is doing its job, the question stops being "why should I pick you over them" and starts being "why would I pick anyone else."
+[0485] Bring your differentiation forward so buying decisions aren’t left at the mercy of your competitor’s pricing charts!
+[0486] 
+[0487] 
+[0488] [Q13 · WHAT HAVE YOU TRIED?  (Multi-Select)]
+[0489] What have you already tried to improve your revenue?
+[0490] We've increased our paid ad spend and experimented with new acquisition channels
+[0491] We've been investing in organic channels like SEO, content, and social
+[0492] We've created lead magnets (webinars, ebooks, whitepapers) to capture and nurture traffic
+[0493] We've been building out email marketing to engage leads and turn them into customers
+[0494] We've been optimising our funnel (website, landing pages, conversion flows)
+[0495] We've worked on refining our messaging and positioning
+[0496] Other (please specify)
+[0497]  // [Logic 1: CRM/Kit Tag for feedback loop question] 
+[0498] [Logic 2: When the last option is tapped/chosen, reveal an empty input field]
+[0499] 
+[0500] [Q14 · FEEDBACK LOOP]
+[0501] Haaaa! The ride is over. One last Q:
+[0502] What was going on in your life and business that led you to take this diagnostic today?
+[0503] 
+[0504] [Logic: Free text. Qualitative VOC to be recorded on CRM/Kit] 
+[0505] 
+[0506] [OPT-IN SLIDE] 
+[0507] Your RPV™ is calculated.
+[0508] We've run your numbers against the funnels pulling the highest revenue per visitor we've seen.
+[0509] Two things are waiting on the other side of this:
+[0510] Your current and potential revenue per visitor, aka how much money you’re making per visitor. 
+[0511] And an on-demand workshop that lets you and your team map out your next steps to add $1.5M/year based on your new RPV™ . //  // Where should we send them? // 
+[0512] Your Email 
+[0513] Your First Name 
+[0514] 
+[0515] 
+[0516] 
+[0517] 

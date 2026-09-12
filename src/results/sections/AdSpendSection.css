@@ -1,0 +1,476 @@
+/* Ad-spend module — peach gradient bg, plum slider panel, navy comparison
+   table with floating ice goal column + caption inside, plum gains panel.
+   Reference: ad-spend design + calculator close-up (exact-match pass). */
+
+.rad {
+  position: relative;
+  background: #f6e8dc url('/assets/results-peach-bg.webp') center / cover;
+  padding: 96px 48px 110px;
+  text-align: center;
+}
+
+/* transition band straddling the seam with the navy section above */
+.rad__band {
+  position: absolute;
+  top: 0;
+  right: 7%;
+  transform: translateY(-52%) rotate(-1.5deg);
+  background: #5d1b4e;
+  color: #ffffff;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1.4;
+  padding: 14px 34px;
+  text-align: center;
+}
+
+.rad__chip {
+  display: inline-block;
+  background: #16273b;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 2px;
+  padding: 6px 16px;
+}
+
+.rad__head {
+  position: relative;
+  max-width: 1360px;
+  margin: 26px auto 0;
+}
+
+.rad__doodle {
+  position: absolute;
+  left: 0;
+  top: 62%;
+  width: 190px;
+  height: auto;
+}
+
+.rad__headline {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 44px;
+  line-height: 1.3;
+  color: #431232;
+}
+
+.rad__hl {
+  display: inline-block;
+  background: #5d1b4e;
+  color: #ffffff;
+  padding: 2px 20px 6px;
+  margin-top: 6px;
+}
+
+.rad__sub {
+  margin-top: 30px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #2c1a26;
+}
+
+/* ——— layout grid ——— */
+
+.rad__grid {
+  max-width: 1360px;
+  margin: 56px auto 0;
+  display: grid;
+  grid-template-columns: 1fr 430px;
+  gap: 32px;
+  align-items: stretch;
+  text-align: left;
+}
+
+/* ——— main white card ——— */
+
+.rad__main {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 26px 26px 28px;
+}
+
+.rad__slider {
+  background: #431232;
+  border-radius: 22px;
+  padding: 40px 46px 28px;
+}
+
+.rad__slider-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.rad__slider-label {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 19px;
+  color: #ffffff;
+}
+
+.rad__slider-value {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 46px;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.rad__range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 7px;
+  border-radius: 4px;
+  outline: none;
+  margin-top: 30px;
+  cursor: pointer;
+}
+
+.rad__range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid #ecd9c5;
+  cursor: pointer;
+}
+
+.rad__range::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid #ecd9c5;
+  cursor: pointer;
+}
+
+.rad__ticks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 15px;
+  color: #f4ede6;
+}
+
+.rad__adjust {
+  margin: 20px 0;
+  text-align: center;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 15px;
+  color: #6d2450;
+}
+
+/* ——— comparison table (navy panel, ice column + caption inside) ——— */
+
+.rad__table {
+  background: #16243a;
+  border-radius: 22px;
+  padding: 26px 28px 20px;
+}
+
+.rad__tablegrid {
+  display: grid;
+  grid-template-columns: 1fr 205px;
+  gap: 26px;
+}
+
+.rad__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  height: 80px;
+  padding: 0 26px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 19px;
+  color: #dfe7ee;
+}
+
+.rad__row:not(.rad__row--lead):not(.rad__row--hl):not(:last-child) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.rad__row--lead {
+  font-weight: 700;
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.rad__row--hl {
+  background: #0e1a2b;
+  border-radius: 12px;
+  margin: 0 -14px;
+  padding: 0 40px;
+}
+
+.rad__row-value {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.rad__goal {
+  background: #e3f6fc;
+  border-radius: 16px;
+}
+
+.rad__goal-cell {
+  position: relative;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 19px;
+  color: #16243a;
+}
+
+.rad__goal-cell--lead {
+  font-size: 20px;
+}
+
+.rad__goal-cell:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 0;
+  height: 1px;
+  background: #b9cbd3;
+}
+
+.rad__caption {
+  margin: 20px 0 6px;
+  padding: 0 4px;
+  text-align: left;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14.5px;
+  color: #cdd8e2;
+}
+
+/* ——— right plum panel ——— */
+
+.rad__panel {
+  background: #641d4f;
+  border-radius: 24px;
+  padding: 42px 40px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.rad__panel-intro {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.rad__panel-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: #f0e6da;
+  margin: 26px auto 0;
+}
+
+.rad__panel-icon svg {
+  width: 48px;
+  height: 48px;
+}
+
+.rad__gain {
+  margin-top: 24px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 62px;
+  line-height: 1.05;
+}
+
+.rad__gain-sub {
+  margin-top: 8px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 22px;
+}
+
+.rad__year-chip {
+  display: inline-block;
+  margin-top: 16px;
+  background: #f3e8d6;
+  color: #431232;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 18px;
+  padding: 7px 18px;
+}
+
+.rad__nerds-title {
+  margin-top: 42px;
+  text-align: left;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.rad__nerds-p {
+  margin-top: 16px;
+  text-align: left;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #f3e6ef;
+}
+
+.rad__channel-btn {
+  display: block;
+  margin-top: 32px;
+  background: #f6e5f2;
+  border: 1.5px solid #38102c;
+  box-shadow: 5px 5px 0 #f0e5d8;
+  color: #431232;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 17px;
+  text-decoration: none;
+  text-align: center;
+  padding: 15px 18px;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1150px) {
+  .rad__grid {
+    grid-template-columns: 1fr;
+  }
+  .rad__panel {
+    max-width: 650px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .rad__doodle {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .rad {
+    padding: 72px 16px 80px;
+  }
+  .rad__band {
+    right: 4%;
+    font-size: 15px;
+    padding: 10px 20px;
+  }
+  .rad__chip {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+  }
+  .rad__headline {
+    font-size: 27px;
+  }
+  .rad__hl {
+    padding: 2px 10px 4px;
+  }
+  .rad__sub {
+    font-size: 16px;
+  }
+  .rad__sub br {
+    display: none;
+  }
+  /* whole calculator card fits one phone viewport — no scrolling */
+  .rad__main {
+    padding: 10px 10px 12px;
+  }
+  .rad__slider {
+    padding: 14px 16px 12px;
+    border-radius: 14px;
+  }
+  .rad__slider-label {
+    font-size: 13px;
+  }
+  .rad__slider-value {
+    font-size: 24px;
+  }
+  .rad__range {
+    margin-top: 12px;
+    height: 5px;
+  }
+  .rad__range::-webkit-slider-thumb {
+    width: 18px;
+    height: 18px;
+    border-width: 2.5px;
+  }
+  .rad__ticks {
+    margin-top: 8px;
+    font-size: 10.5px;
+  }
+  .rad__adjust {
+    margin: 10px 0;
+    font-size: 11.5px;
+  }
+  .rad__table {
+    padding: 8px 10px 8px;
+    border-radius: 14px;
+  }
+  .rad__tablegrid {
+    grid-template-columns: 1fr 84px;
+    gap: 8px;
+  }
+  .rad__row {
+    padding: 0 10px;
+    font-size: 12px;
+    height: 42px;
+    gap: 8px;
+  }
+  .rad__row--lead {
+    font-size: 12.5px;
+  }
+  .rad__row--hl {
+    margin: 0 -3px;
+    padding: 0 13px;
+    border-radius: 8px;
+  }
+  .rad__goal {
+    border-radius: 10px;
+  }
+  .rad__goal-cell {
+    font-size: 12px;
+    height: 42px;
+  }
+  .rad__goal-cell--lead {
+    font-size: 12.5px;
+  }
+  .rad__goal-cell:not(:last-child)::after {
+    left: 8px;
+    right: 8px;
+  }
+  .rad__caption {
+    margin: 10px 0 2px;
+    font-size: 10.5px;
+  }
+  .rad__panel {
+    padding: 30px 22px;
+  }
+  .rad__gain {
+    font-size: 42px;
+  }
+}

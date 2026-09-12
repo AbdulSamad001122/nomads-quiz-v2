@@ -1,0 +1,217 @@
+/* "Behind the number" — split section: teal nautical chart left, ice list
+   right with alternating white / offset navy numbered cards. */
+
+.rbn {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* ——— left teal panel ——— */
+
+.rbn__left {
+  background: #12312e url('/assets/results-teal-chart-bg.webp') center / cover no-repeat;
+  display: flex;
+  align-items: flex-end;
+  padding: 110px 48px 86px 85px;
+}
+
+.rbn__chip {
+  display: inline-block;
+  background: #eef8fa;
+  color: #16273b;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 2.5px;
+  padding: 6px 16px;
+}
+
+.rbn__headline {
+  margin-top: 26px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 46px;
+  line-height: 1.32;
+  color: #ffffff;
+}
+
+.rbn__script-w {
+  font-family: var(--font-number);
+  font-weight: 400;
+  font-size: 1.25em;
+  line-height: 0;
+  vertical-align: -0.1em;
+}
+
+.rbn__hl {
+  display: inline-block;
+  background: #ddf2f8;
+  color: #16273b;
+  padding: 2px 18px 6px;
+  margin-top: 8px;
+}
+
+.rbn__sub {
+  margin-top: 32px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #f4fbfc;
+}
+
+/* ——— right ice panel ——— */
+
+.rbn__right {
+  background: #ddf2f8;
+  padding: 88px 80px 96px;
+}
+
+.rbn__rule {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.rbn__rule-chip {
+  background: #16273b;
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 19px;
+  padding: 8px 22px;
+  flex-shrink: 0;
+}
+
+.rbn__rule-line {
+  flex: 1;
+  height: 1.5px;
+  background: #16273b;
+}
+
+.rbn__rule-icon {
+  width: 24px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.rbn__list {
+  list-style: none;
+  margin: 66px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.rbn__item {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: #ffffff;
+  border: 1px solid #b7d5dd;
+  border-radius: 10px;
+  padding: 17px 22px;
+  width: calc(100% - 58px);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #1e3547;
+}
+
+.rbn__item--navy {
+  background: #16273b;
+  border: none;
+  color: #ffffff;
+  margin-left: 58px;
+}
+
+.rbn__num {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #16273b;
+  color: #ffffff;
+  font-family: var(--font-number);
+  font-size: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rbn__item--navy .rbn__num {
+  background: #ffffff;
+  color: #16273b;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rbn__left {
+    padding: 80px 36px 64px 44px;
+  }
+  .rbn__headline {
+    font-size: 34px;
+  }
+  .rbn__right {
+    padding: 64px 36px 72px;
+  }
+  .rbn__item {
+    font-size: 16px;
+    padding: 15px 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .rbn {
+    grid-template-columns: 1fr;
+  }
+  .rbn__left {
+    padding: 72px 26px 60px;
+  }
+  .rbn__headline br {
+    display: none;
+  }
+  .rbn__sub br {
+    display: none;
+  }
+  .rbn__right {
+    padding: 56px 22px 64px;
+  }
+  .rbn__list {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 560px) {
+  .rbn__chip {
+    font-size: 13px;
+    letter-spacing: 2px;
+  }
+  .rbn__headline {
+    font-size: 27px;
+  }
+  .rbn__sub {
+    font-size: 16px;
+  }
+  .rbn__rule-chip {
+    font-size: 16px;
+    padding: 7px 16px;
+  }
+  .rbn__item {
+    width: calc(100% - 24px);
+    gap: 14px;
+    font-size: 14.5px;
+    padding: 13px 16px;
+  }
+  .rbn__item--navy {
+    margin-left: 24px;
+  }
+  .rbn__num {
+    width: 38px;
+    height: 38px;
+    font-size: 17px;
+  }
+}

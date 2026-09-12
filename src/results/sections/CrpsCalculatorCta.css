@@ -1,0 +1,102 @@
+/* CRPS calculator CTA — cream card on the continuing navy texture.
+   Reference: ad-spend design image (top card). */
+
+.rcta {
+  background: #10131c url('/assets/results-navy-texture.webp') center / cover;
+  padding: 0 48px 150px;
+}
+
+.rcta__card {
+  max-width: 1330px;
+  margin: 0 auto;
+  background: #f9f3e6;
+  border-radius: 26px;
+  padding: 64px 60px;
+  display: grid;
+  grid-template-columns: 0.48fr 0.52fr;
+  align-items: center;
+  gap: 48px;
+}
+
+.rcta__media img {
+  width: min(100%, 560px);
+  margin: 0 auto;
+}
+
+.rcta__headline {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 38px;
+  line-height: 1.28;
+  color: #431232;
+}
+
+.rcta__btn {
+  display: inline-block;
+  margin-top: 40px;
+  background: #f2dfee;
+  border: 2px solid #431232;
+  box-shadow: 6px 6px 0 #43123255;
+  color: #431232;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.35;
+  text-decoration: none;
+  text-align: center;
+  padding: 15px 30px;
+  max-width: 420px;
+}
+
+.rcta__sub {
+  margin-top: 40px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #431232;
+}
+
+@media (max-width: 1100px) {
+  .rcta__card {
+    padding: 44px 36px;
+    gap: 32px;
+  }
+  .rcta__headline {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 900px) {
+  .rcta {
+    padding: 0 20px 120px;
+  }
+  .rcta__card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .rcta__headline br,
+  .rcta__sub br {
+    display: none;
+  }
+  .rcta__btn {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .rcta__card {
+    padding: 32px 22px;
+  }
+  .rcta__headline {
+    font-size: 24px;
+  }
+  .rcta__btn {
+    font-size: 16px;
+    margin-top: 26px;
+  }
+  .rcta__sub {
+    font-size: 16px;
+    margin-top: 26px;
+  }
+}

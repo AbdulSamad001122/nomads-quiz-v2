@@ -1,4 +1,4 @@
-import ResultsScreen from './components/results/ResultsScreen.jsx';
+import ResultsPage from './results/ResultsPage.jsx';
 import { calculate } from './calc/calculator.js';
 
 /**
@@ -35,5 +35,5 @@ const SCENARIOS = {
 export default function DevResults({ scenario }) {
   const cfg = SCENARIOS[scenario] || SCENARIOS.fixture;
   const result = calculate(cfg.inputs, cfg.path);
-  return <ResultsScreen result={result} onBack={() => {}} adAdjustable={cfg.adAdjustable} />;
+  return <ResultsPage result={result} onBack={() => {}} adAdjustable={cfg.adAdjustable} />;
 }

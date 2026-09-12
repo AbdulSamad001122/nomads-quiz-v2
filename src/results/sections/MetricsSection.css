@@ -1,0 +1,261 @@
+/* Section 2 — metric table on a tilted cream paper sheet over dark navy.
+   Reference: metric-table design image (angled sheet, inset plum keyline,
+   plum metric cards, lavender current cells, tan goal cells). */
+
+.rmx {
+  position: relative;
+  overflow: hidden;
+  background: #1e3547;
+  padding: 110px 96px 95px;
+}
+
+/* the paper sheet — straight top edge under the hero strip; straight bottom
+   edge: the navy below is a clean horizontal rectangle, and the sheet's clip
+   also cuts the keyline so the border vanishes behind the navy */
+.rmx__sheet {
+  position: absolute;
+  inset: 0;
+  background: #fdfaf1 url('/assets/results-cream-bg.webp') center / cover;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% var(--rmx-navy-top, calc(100% - 540px)),
+    0 var(--rmx-navy-top, calc(100% - 540px))
+  );
+}
+
+.rmx__keyline {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.rmx__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+/* ——— headline + traffic ——— */
+
+.rmx__headline {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 44px;
+  line-height: 1.32;
+  text-align: center;
+  color: #3b1030;
+}
+
+.rmx__script-v {
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: 2.1em;
+  line-height: 0;
+  vertical-align: -0.12em;
+  margin-right: 0.02em;
+}
+
+.rmx__traffic {
+  margin-top: 40px;
+  text-align: center;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  color: #250f1c;
+}
+
+.rmx__traffic strong {
+  font-weight: 800;
+}
+
+/* ——— table ——— */
+
+.rmx__table {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr 1fr;
+  gap: 30px 36px;
+}
+
+.rmx__row {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / -1;
+  gap: inherit;
+}
+
+.rmx__head {
+  background: #1e3547;
+  border-radius: 4px;
+  color: #ffffff;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 19px;
+  letter-spacing: 0.5px;
+  text-align: center;
+  padding: 14px 18px;
+  align-self: center;
+}
+
+.rmx__head--metric {
+  padding: 20px 18px;
+  margin: 0 60px;
+}
+
+.rmx__head-sub {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.2px;
+  margin-top: 2px;
+}
+
+.rmx__metric {
+  background: #5d1b4e;
+  border-radius: 22px;
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 34px;
+  min-height: 110px;
+}
+
+.rmx__value {
+  border-radius: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 31px;
+  color: #3b1030;
+  padding: 20px;
+}
+
+.rmx__value--current {
+  background: #f5eaf6;
+  border: 1.5px solid #d9bfd7;
+}
+
+/* calculator colour states for the current cell (design extrapolation —
+   the reference shows only the neutral lavender style) */
+.rmx__value--red {
+  background: #f9e2e0;
+  border-color: #dfaba4;
+}
+
+.rmx__value--yellow {
+  background: #faf0d3;
+  border-color: #dcc98e;
+}
+
+.rmx__value--green {
+  background: #e7f0e1;
+  border-color: #b9cfae;
+}
+
+.rmx__value--goal {
+  background: #ecdfc9;
+  border: 1.5px solid #d9c6a6;
+}
+
+/* mobile-only labels inside value cards */
+.rmx__mini {
+  display: none;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+  opacity: 0.75;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rmx {
+    padding: 72px 48px 85px;
+  }
+  .rmx__headline {
+    font-size: 34px;
+  }
+  .rmx__table {
+    gap: 22px 24px;
+  }
+  .rmx__head--metric {
+    margin: 0 24px;
+  }
+  .rmx__metric {
+    font-size: 15px;
+    padding: 22px 24px;
+  }
+  .rmx__value {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 700px) {
+  .rmx {
+    padding: 56px 20px 170px;
+  }
+  .rmx__sheet {
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% var(--rmx-navy-top, calc(100% - 560px)),
+      0 var(--rmx-navy-top, calc(100% - 560px))
+    );
+  }
+  .rmx__keyline {
+    display: none;
+  }
+  .rmx__headline {
+    font-size: 25px;
+  }
+  .rmx__headline br {
+    display: none;
+  }
+  .rmx__traffic {
+    margin-top: 28px;
+    font-size: 16px;
+  }
+  .rmx__table {
+    margin-top: 32px;
+    display: block;
+  }
+  .rmx__head {
+    display: none;
+  }
+  .rmx__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+  .rmx__metric {
+    grid-column: 1 / -1;
+    min-height: 0;
+    padding: 18px 20px;
+    font-size: 15px;
+    border-radius: 16px;
+  }
+  .rmx__value {
+    font-size: 24px;
+    padding: 14px;
+    border-radius: 16px;
+  }
+  .rmx__mini {
+    display: block;
+  }
+}

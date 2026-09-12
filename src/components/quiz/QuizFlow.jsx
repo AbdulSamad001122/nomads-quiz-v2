@@ -21,7 +21,7 @@ import Advice12D from './Advice12D.jsx';
 import FiveMetricsScreen from './FiveMetricsScreen.jsx';
 import HighlightSweep from '../primitives/HighlightSweep.jsx';
 import SlideScreen from '../slides/SlideScreen.jsx';
-import ResultsScreen from '../results/ResultsScreen.jsx';
+import ResultsPage from '../../results/ResultsPage.jsx';
 import { themes } from '../../data/themes.js';
 import { QUESTIONS, resolveQuestion, salesModel } from '../../data/questions.js';
 import { resolveInputs } from '../../calc/backendValues.js';
@@ -767,7 +767,7 @@ export default function QuizFlow() {
         inputs.q7b != null &&
         (answers.q7c === 'not-sure' || answers.q7c == null);
       return (
-        <ResultsScreen
+        <ResultsPage
           result={result}
           onBack={back}
           adAdjustable={adGuessed}

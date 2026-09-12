@@ -1,0 +1,95 @@
+TOTAL PARAS: 94
+[0000] CRPV Quiz — Non-Question Slides & Pages
+[0001] Every screen in the quiz that is NOT a question — what it is, when it appears, and how many versions it needs. 13 slides + 2 system screens = 15 screens to build.
+[0002] Prepared 29 August 2026 · Source: Quiz Questions.docx (wireframe v2.0) + Quiz Logics.docx
+[0003] A — Slides between the questions (13)
+[0004] These are the story screens. They educate, build belief, and keep momentum while the questions collect data.
+[0005] #
+[0006] Slide / Page
+[0007] When it shows
+[0008] Versions
+[0009] What it’s about (simple)
+[0010] 1
+[0011] First page of the quiz
+[0012] The very first screen, before Q1
+[0013] 1
+[0014] The welcome screen. Introduces the diagnostic, tells them it takes about 5 minutes, and has the start button. Its only job: get them to tap start.
+[0015] 2
+[0016] Benchmark slide
+[0017] After Q4, before Q5
+[0018] 2 — SLG (Q4 A, C, D) and PLG (Q4 B)
+[0019] A quick education moment: shows what a high-performing funnel does with 5,000 visitors. It plants the benchmark numbers in their head so Q5 (“what would you obsess over to make 60 sales?”) makes sense.
+[0020] 3
+[0021] Transition before belief slides
+[0022] Right after Q5, before the case study
+[0023] 1
+[0024] One line — “Okay, let’s get real about what it actually takes to hit 60 sales.” A short bridge that sets up the proof slides coming next.
+[0025] 4
+[0026] Case-study slide
+[0027] After the transition, matched to their Q5 answer
+[0028] 5 — one per Q5 option (user sees only 1)
+[0029] The proof. Whatever problem they picked in Q5, this slide shows a real client story that challenges their current belief about that exact problem. This is the main persuasion moment of the quiz.
+[0030] 5
+[0031] Transition to calculator
+[0032] After the case study, before Q6
+[0033] 1
+[0034] Explains why the number questions are coming: most businesses don’t know how much revenue each visitor brings, and that’s exactly what the RPV™ calculator will show them. Hands them into the math section.
+[0035] 6
+[0036] Loading screen
+[0037] After Q11, before the five-metrics slide
+[0038] 1
+[0039] A 1.5-second compass-shaped loading animation with “Calculating your current and potential Revenue per Visitor™”. Makes the calculation feel real and earned.
+[0040] 7
+[0041] Five-metrics slide
+[0042] Right after the loading screen
+[0043] 1
+[0044] Teaches the core idea while they wait: most businesses track data in isolation, so they can’t tell what’s causing a slow month. The RPV™ OS tracks five metrics together, so every action ties to a revenue outcome.
+[0045] 8
+[0046] “Your RPV is almost ready” transition
+[0047] Before Q12
+[0048] 1
+[0049] A tiny momentum screen — “Your RPV is almost ready. Before we show you the numbers…”. Keeps them moving into the last few questions.
+[0050] 9
+[0051] Slide after option 12A
+[0052] After Q12 — only if they picked option A
+[0053] 1 (PLG/SLG wording per copy doc)
+[0054] A tailored advice slide responding directly to the challenge in option A. The quiz “replies” to what they said they’re trying to crack — like a good salesperson would on a call.
+[0055] 10
+[0056] Slide after option 12B
+[0057] After Q12 — only if they picked option B
+[0058] 1 (PLG/SLG wording per copy doc)
+[0059] Same idea, for option B: a short, specific insight about that exact challenge, bridging them toward their results.
+[0060] 11
+[0061] Slide after option 12C
+[0062] After Q12 — only if they picked option C
+[0063] 1 (PLG/SLG wording per copy doc)
+[0064] Same idea, for option C: speaks directly to that challenge so the quiz feels like it’s listening, right before the results.
+[0065] 12
+[0066] Slide after option 12D
+[0067] After Q12 — only if they picked option D
+[0068] 1 (PLG/SLG wording per copy doc)
+[0069] Same idea, for option D: the matched insight for that answer. Each taker only ever sees ONE of the four 12A–12D slides.
+[0070] 13
+[0071] Opt-in slide
+[0072] After Q14, right before results
+[0073] 1
+[0074] “Your RPV™ is calculated.” Tells them two things are waiting — their current & potential RPV, and the workshop — then asks for email + first name to “send them”. This is the lead-capture moment.
+[0075] Note on 12A–12D: Q12 is marked “different options for PLG & SLG” in the wireframe. If PLG and SLG each get their own option set, each of these four slides needs its matching variant — confirm the option lists (and exact slide copy) in the master copy doc.
+[0076] B — System screens (2)
+[0077] Not part of the story flow — these are the exits and the payoff.
+[0078] #
+[0079] Slide / Page
+[0080] When it shows
+[0081] Versions
+[0082] What it’s about (simple)
+[0083] 14
+[0084] Disqualification screen
+[0085] From Q2B = “No”, or Q7A = “Under 3,000”
+[0086] 1 (two entry reasons: revenue gate / traffic gate)
+[0087] The polite exit for businesses that are too early for the diagnostic. No email is captured here — they get tagged later only if they opt into the workshop.
+[0088] 15
+[0089] Results page
+[0090] After the opt-in
+[0091] 1 page, with conditional blocks
+[0092] The payoff. Shows current vs goal RPV, the five-metric table with red/yellow/green colours, and then only the blocks that apply to them (revenue split, no-email warning, goal-reached or capped-state messages, and the ad module if they answered Q7C). Ends with the workshop / call CTAs.
+[0093] Quick math for the build: 13 slide slots + 2 system screens = 15 screens. Each taker only ever sees one case-study slide (of 5) and one advice slide (of 12A–12D). With content versions counted (2 benchmark + 5 case studies + 4 advice slides), the total number of unique content pieces is ~21 (more if 12A–12D have separate PLG and SLG sets).

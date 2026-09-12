@@ -1,0 +1,156 @@
+/* "Your Next $125k/Mo Game Plan" opener — 125k brush bg, keyline frame,
+   pink/ice labelled cards. Reference: game-plan intro design image. */
+
+.rgi {
+  position: relative;
+  background: #17131a url('/assets/results-125k-bg.webp') center / cover;
+  padding: 100px 48px 96px;
+  text-align: center;
+}
+
+.rgi__keyline {
+  position: absolute;
+  inset: 30px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  pointer-events: none;
+}
+
+.rgi__headline {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 46px;
+  color: #ffffff;
+}
+
+.rgi__sub {
+  margin-top: 30px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #e8e4ea;
+}
+
+/* ——— cards ——— */
+
+.rgi__cards {
+  margin: 54px auto 0;
+  max-width: 1000px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  text-align: left;
+}
+
+.rgi__card {
+  border-radius: 14px;
+  padding: 34px 38px 38px;
+}
+
+.rgi__card--pink {
+  background: #f8e4f2;
+}
+
+.rgi__card--ice {
+  background: #ddf2f8;
+}
+
+.rgi__card-label {
+  display: inline-block;
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 17px;
+  padding: 3px 12px;
+}
+
+.rgi__card--pink .rgi__card-label {
+  background: #5d1b4e;
+}
+
+.rgi__card--ice .rgi__card-label {
+  background: #16273b;
+}
+
+.rgi__card-text {
+  margin-top: 18px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #241522;
+}
+
+.rgi__card--ice .rgi__card-text {
+  color: #16273b;
+}
+
+/* ——— arrows + closing ——— */
+
+.rgi__arrows {
+  position: absolute;
+  left: 11%;
+  bottom: 120px;
+  height: 88px;
+  width: auto;
+}
+
+.rgi__closing {
+  margin-top: 60px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #f2eef4;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rgi__headline {
+    font-size: 34px;
+  }
+  .rgi__cards {
+    gap: 32px;
+  }
+  .rgi__arrows {
+    left: 6%;
+    height: 66px;
+  }
+}
+
+@media (max-width: 900px) {
+  .rgi {
+    padding: 72px 24px 72px;
+  }
+  .rgi__keyline {
+    inset: 16px 14px;
+  }
+  .rgi__cards {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    max-width: 560px;
+  }
+  .rgi__card-text br,
+  .rgi__closing br {
+    display: none;
+  }
+  .rgi__arrows {
+    display: none;
+  }
+  .rgi__closing {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 560px) {
+  .rgi__headline {
+    font-size: 26px;
+  }
+  .rgi__card {
+    padding: 24px 22px 26px;
+  }
+  .rgi__card-label {
+    font-size: 14px;
+  }
+}

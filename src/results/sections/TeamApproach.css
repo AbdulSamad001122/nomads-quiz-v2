@@ -1,0 +1,119 @@
+/* Team approach — compass image left, paper-texture right with the
+   four-heads bars. Reference: team-approach design image. */
+
+.rta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.rta__left img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.rta__right {
+  background: #f7f4ea url('/assets/results-paper-texture.webp') center / cover;
+  padding: 122px 80px 110px 75px;
+}
+
+.rta__lead {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  color: #16273b;
+}
+
+.rta__bars {
+  margin-top: 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.rta__bar {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  border-radius: 10px;
+  padding: 14px 22px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.rta__bar-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.rta__bar--cream {
+  background: #f2e6d7;
+  border: 1px solid rgba(93, 27, 78, 0.45);
+  color: #16273b;
+}
+
+.rta__bar--navy {
+  background: #16273b;
+  color: #ffffff;
+}
+
+.rta__bar--plum {
+  background: #641d4f;
+  color: #ffffff;
+}
+
+.rta__para {
+  margin-top: 40px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #1e3547;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rta__right {
+    padding: 80px 40px 72px;
+  }
+  .rta__bar {
+    font-size: 15.5px;
+    padding: 12px 16px;
+  }
+  .rta__lead {
+    font-size: 16px;
+  }
+  .rta__para {
+    font-size: 16px;
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 900px) {
+  .rta {
+    grid-template-columns: 1fr;
+  }
+  .rta__right {
+    padding: 60px 22px 64px;
+  }
+  .rta__para br {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .rta__bars {
+    margin-top: 30px;
+    gap: 14px;
+  }
+  .rta__bar {
+    font-size: 14px;
+    gap: 12px;
+  }
+  .rta__bar-icon {
+    width: 20px;
+    height: 20px;
+  }
+}

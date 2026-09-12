@@ -1,0 +1,156 @@
+/* "Take my Client David." — dark left with the David composition, ice right
+   with swoosh bullets and the navy-bordered box. Round badge on the top seam. */
+
+.rcd {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.rcd__badge {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -42%);
+  width: 124px;
+  height: auto;
+  z-index: 5;
+}
+
+/* ——— left dark panel ——— */
+
+.rcd__left {
+  /* reference shows a dark fabric-photo bg — asset not in the folder, flat
+     near-black stand-in for now */
+  background: radial-gradient(120% 90% at 30% 25%, #1c1015 0%, #120a0d 55%, #0d0709 100%);
+  display: flex;
+  justify-content: center;
+  padding: 108px 40px 90px;
+}
+
+.rcd__david {
+  width: min(100%, 533px);
+  height: fit-content;
+}
+
+/* ——— right ice panel ——— */
+
+.rcd__right {
+  background: #ddf2f8;
+  padding: 130px 80px 110px 83px;
+}
+
+.rcd__headline {
+  display: inline-block;
+  background: #16273b;
+  color: #ffffff;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 29px;
+  padding: 8px 22px;
+}
+
+.rcd__bullet {
+  margin-top: 44px;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.rcd__bullet-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.rcd__bullet-bold {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #16273b;
+}
+
+.rcd__bullet-text {
+  margin-top: 22px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1e3547;
+}
+
+/* ——— outcome box ——— */
+
+.rcd__box {
+  margin-top: 56px;
+  background: #ffffff;
+  border: 3px solid #16273b;
+  padding: 32px 36px 36px;
+}
+
+.rcd__box-para {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1e3547;
+}
+
+.rcd__box-para + .rcd__box-para {
+  margin-top: 24px;
+}
+
+.rcd__box-bold {
+  margin-top: 24px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  color: #16273b;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rcd__right {
+    padding: 100px 40px 80px;
+  }
+  .rcd__headline {
+    font-size: 23px;
+  }
+}
+
+@media (max-width: 900px) {
+  .rcd {
+    grid-template-columns: 1fr;
+  }
+  .rcd__badge {
+    width: 96px;
+  }
+  .rcd__left {
+    padding: 90px 24px 60px;
+  }
+  .rcd__david {
+    width: min(100%, 420px);
+  }
+  .rcd__right {
+    padding: 56px 22px 64px;
+  }
+  .rcd__bullet-text br,
+  .rcd__box-para br {
+    display: none;
+  }
+  .rcd__bullet {
+    margin-top: 32px;
+    gap: 14px;
+  }
+  .rcd__bullet-icon {
+    width: 20px;
+    height: 20px;
+  }
+  .rcd__box {
+    margin-top: 40px;
+    padding: 22px 20px 26px;
+  }
+}

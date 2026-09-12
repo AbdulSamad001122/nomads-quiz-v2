@@ -1,0 +1,125 @@
+/* "So this isn't a hollow…" — dark maroon compass banner with keyline frame,
+   brush-script accent, cream highlight, chip on the bottom keyline. */
+
+.rpb {
+  position: relative;
+  background: #2c1018 url('/assets/results-maroon-compass-banner.webp') center / cover no-repeat;
+  padding: 150px 48px 175px;
+  text-align: center;
+}
+
+.rpb__keyline {
+  position: absolute;
+  inset: 30px 34px 71px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  pointer-events: none;
+}
+
+.rpb__headline {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 45px;
+  line-height: 1.55;
+  color: #ffffff;
+}
+
+.rpb__l1 {
+  font-size: 37px;
+  color: #f2e8da;
+}
+
+.rpb__script {
+  font-family: var(--font-number);
+  font-weight: 400;
+  font-size: 1.3em;
+  line-height: 0;
+  vertical-align: -0.18em;
+  color: #f2e8da;
+  margin-left: 0.06em;
+}
+
+.rpb__hl {
+  background: #f2e6d7;
+  color: #4b1240;
+  padding: 3px 14px 5px;
+}
+
+.rpb__sub {
+  margin-top: 34px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  color: #f4ede6;
+}
+
+/* chip resting on top of the bottom keyline */
+.rpb__chip {
+  position: absolute;
+  left: 50%;
+  bottom: 71px;
+  transform: translate(-50%, 0);
+  background: #f2e6d7;
+  color: #5d1b4e;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 21px;
+  white-space: nowrap;
+  padding: 11px 26px;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rpb__headline {
+    font-size: 36px;
+  }
+  .rpb__l1 {
+    font-size: 30px;
+  }
+  .rpb__chip {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 700px) {
+  .rpb {
+    padding: 76px 26px 110px;
+  }
+  .rpb__keyline {
+    inset: 14px 14px 52px;
+  }
+  .rpb__headline {
+    font-size: 23px;
+    line-height: 1.6;
+  }
+  .rpb__headline br {
+    display: none;
+  }
+  .rpb__l1 {
+    font-size: 20px;
+  }
+  .rpb__l1::after {
+    content: '';
+    display: block;
+  }
+  .rpb__script {
+    font-size: 1.9em;
+  }
+  .rpb__hl {
+    padding: 2px 8px 3px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .rpb__sub {
+    margin-top: 24px;
+    font-size: 16px;
+  }
+  .rpb__chip {
+    bottom: 52px;
+    font-size: 13px;
+    white-space: normal;
+    width: max-content;
+    max-width: 86vw;
+    padding: 9px 16px;
+  }
+}

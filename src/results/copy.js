@@ -1,0 +1,352 @@
+/**
+ * Result page copy — VERBATIM from "Quiz Questions and logic/Result Page Copy.docx"
+ * (the copy source of truth; supersedes Quiz Logics.docx except the blue
+ * conditional blocks which defer to the Logic Doc). {{tokens}} are dynamic
+ * values resolved in resolveTokens.js.
+ *
+ * Flagged doc↔design mismatches (doc wins per user rule, Sep 11):
+ * - Nav labels + formula keep the ™ (design image drops it).
+ * - "$1.5M/Year" capital Y per doc (design image shows "/year").
+ * - The bottom strip copy exists only in the design image (no doc conflict).
+ */
+
+export const NAV = {
+  links: [
+    { label: 'Your RPV™ Score', href: '#rpv-score' },
+    { label: 'How we calculated your RPV™', href: '#how-we-calculated' },
+  ],
+  ctas: [
+    // TODO: real workshop / booking URLs when provided.
+    { label: 'Watch the hands-on workshop with your team', id: 'watch_workshop', variant: 'blue', href: '#' },
+    { label: 'Book your Next $125k/mo game-plan call', id: 'book_call', variant: 'pink', href: '#' },
+  ],
+};
+
+export const METRICS = {
+  // Doc ends this sentence with ":" (design image drops it — doc wins, flagged).
+  // Line map from the reference image; the "v" of visitor renders as a script glyph.
+  headlineLines: [
+    'Here’s what the same visitor could be worth',
+    'once four pillars in your customer’s buying',
+    'journey work in sync, supporting each other:',
+  ],
+  totalTraffic: 'Total traffic:',
+  headers: {
+    metric: 'METRIC',
+    current: 'YOUR BUSINESS',
+    currentSub: '(Currently)', // design casing; doc has "(CURRENTLY)" — flagged
+    goal: 'YOUR NEW GOAL',
+    // Design-added header note (not in the copy doc) — flagged, kept.
+    goalSub: '(After optimising 4 pillars that scale average revenue per visitor)',
+  },
+  rowLabels: {
+    rpv: 'Revenue Per Visitor™',
+    optIn: 'How many visitors are becoming email or SMS subscribers?',
+    lead: {
+      plg: 'Out of every 100 new subscribers joining your list, how many take a buying action within the first 14 days?',
+      slg: 'Out of every 100 new subscribers joining your list, how many book a call or demo within the first 14 days?',
+    },
+    close: {
+      plg: 'And out of every 100 who take that action, how many complete it?',
+      slg: 'And out of every 100 who book, how many become paying clients?',
+    },
+    rps: 'Revenue Per Subscriber™ (what each subscriber is worth per year)',
+  },
+};
+
+export const BEYOND = {
+  // Doc: "Your Revenue per Visitor ™ beyond the first 14-day window" — the
+  // design image drops the ™; doc wins (flagged). Line map from the design.
+  bannerLines: ['Your Revenue per', 'Visitor™ beyond the', 'first 14-day window'],
+  bannerAccent: '14-day window', // stone-coloured span in line 3
+  intro:
+    'You’ve just seen how much more revenue you could generate by increasing the Revenue Per Visitor™ from the traffic you already have, by improving the five metrics behind it.',
+  // Desktop line map for the intro (reference image, 2 lines)
+  introBreakAfter: 'increasing the Revenue',
+  questionLines: ['But what happens to the subscribers', 'who don’t buy in those first 14 days?'],
+  tape: 'They don’t disappear.',
+  // Doc has the comma after "ecosystem" (design image shows a double space) — doc wins, flagged.
+  closingLines: ['They’re still sitting in your ecosystem, and they can', 'continue generating revenue for months to come.'],
+};
+
+export const CRPS_INTRO = {
+  // Doc: "This is where Compounding Revenue Per Subscriber™ comes in." —
+  // design drops the ™; doc wins (flagged). Line map from the design.
+  headlineLines: ['This is where Compounding', 'Revenue Per Subscriber™ comes in.'],
+  cards: [
+    {
+      icon: '/assets/results-icon-funnel.png',
+      // Design line map (3 lines)
+      lines: ['Your RPV opportunity shows', 'you how to make more from the', 'visitors you’re already getting.'],
+    },
+    {
+      icon: '/assets/results-icon-calendar.svg',
+      // Design line map (4 lines)
+      lines: [
+        'Your RPS opportunity shows you',
+        'how to make more from the subscribers',
+        'you’re already acquiring over and over',
+        'again throughout the year.',
+      ],
+    },
+  ],
+  // Doc has the trailing colon (design drops it) — doc wins, flagged.
+  potentialLabel: 'So your potential isn’t just:',
+  potentialBig: '+$1.5M/year',
+  potentialSub: 'from your existing traffic',
+  becomeChip: 'It can become:',
+  // Doc: "+$1.5M+ from RPV optimisation" — design shows "+$1.5M/year" instead
+  // of the trailing "+"; doc wins (flagged for review).
+  becomeBig: '+$1.5M+',
+  becomeSub: 'from RPV optimisation',
+  // Doc's "PLUS" line renders as the plum "+" badge per the design (flagged).
+  iceText: 'Additional revenue from compounding the value of every subscriber you acquire.', // design capitalises "Additional" (doc lowercase) — flagged
+};
+
+export const CRPS_CTA = {
+  headlineLines: ['Want to see what’s sitting', 'inside your subscriber base?'],
+  // Doc includes the ™ (design drops it) — doc wins, flagged.
+  button: 'Calculate Your Compounding Revenue Per Subscriber™ →',
+  subLines: [
+    'Find out how much more revenue you could generate from',
+    'the subscribers you already have beyond the first 14 days.',
+  ],
+};
+
+export const AD_SPEND = {
+  // Design-only transition band (not in doc) — flagged.
+  bandLines: ['Now, Let’s Look At', 'Your Ad Spend ↓'],
+  // Doc: "About your ad budget." — design renders as uppercase mono chip.
+  chip: 'ABOUT YOUR AD BUDGET',
+  // Doc ends with "?" (design drops it) — doc wins, flagged.
+  headlineTop: 'What happens when every',
+  headlineHighlight: 'visitor becomes more profitable?',
+  subLines: [
+    'From what you told us, here’s what your same ad spend',
+    'could produce today vs. when you reach your RPV™ goal',
+  ],
+  sliderLabel: 'Your Monthly Spend',
+  adjustNote: 'You can adjust your ad spend for it to accurately match your current ad spend',
+  // Table labels are design-sourced (the copy doc has no table copy) — mapped
+  // to the Logic Doc calculator fields; flagged.
+  tableLabels: {
+    spend: 'Your Monthly Spend',
+    visitors: 'Visitors it buys you',
+    rpv: 'Return per visitor',
+    revenue: 'Revenue from that spend',
+    roas: 'Return on ad spend',
+  },
+  // Design-only caption (not in doc) — flagged.
+  caption: 'Same budget. Same visitors. The only thing that changed is what each one is worth on the way through.',
+  // Design-only panel copy (not in doc) — flagged.
+  panelIntroLines: ['Sitting inside spend you’ve', 'already committed to:'],
+  panelGainSub: 'more a month',
+  panelYearChip: (year) => `Call it ${year} a year`,
+  // Doc has "For the data nerds 🧮" — emoji removed per the exact-match
+  // calculator close-up (user instruction Sep 11); flagged.
+  nerdsTitle: 'For the data nerds',
+  nerdsP1: 'This diagnostic can’t peek inside your Google Analytics, CRM, ad dashboards, or other data sources.',
+  nerdsP2: 'So if you want to go deeper and nerd out, grab your numbers to see your Revenue Per Visitor™ by channel — and find which channels are most profitable.',
+  nerdsP3Plain: 'Paid. Organic. Referral. Email. Social.',
+  nerdsP3Bold: 'Whatever you’ve got.',
+  channelButton: '→ Calculate My RPV By Channel',
+};
+
+export const PROMISE_BANNER = {
+  // "hollow" renders in the brush script per the design
+  line1Before: 'So this isn’t a',
+  line1Script: 'hollow',
+  // Highlight span per the design: "million dollars overnight"
+  line2Before: '“We’ll add a',
+  line2Highlight: 'million dollars overnight',
+  line3: 'to your bottom line” promise',
+  sub: 'There is a solid data-led approach to it.',
+  // Doc writes "not **just** a" (emphasis marks) — design shows uniform bold
+  // chip text; rendered plain per exact-match, flagged.
+  chip: 'Revenue Per Visitor™ is not just a traffic metric.',
+};
+
+export const BEHIND_NUMBER = {
+  chip: 'BEHIND THE NUMBER', // design chip (doc phrase rendered as mono label)
+  // Doc: "Here's what it took us to calculate your RPV ™ number:" — the ™ and
+  // trailing colon are kept per doc (design drops both) — flagged.
+  // The "W" of "What" renders as a script glyph per the design.
+  headlineLines: ['Here’s what it took', 'us to calculate your', 'RPV™ number:'],
+  sub: 'Behind every RPV™ number sits a much bigger revenue story. To calculate your RPV, we analysed:',
+  subBreakAfter: 'bigger',
+  // Doc: "We looked at:" — colon kept per doc (design chip drops it) — flagged.
+  lookedAt: 'We looked at:',
+  // Doc marks items 3–5 as dynamic (pink) but gives no variants — rendered
+  // as written; flagged.
+  items: [
+    'How much traffic do you bring in',
+    'How many visitors become subscribers',
+    'How many subscribers take a buying action (lead conversion)',
+    'How many of those complete the purchase (close rate)',
+    'How much each subscriber is worth over a year (Revenue Per Subscriber™)',
+  ],
+};
+
+export const GAMEPLAN_CTA = {
+  // Two-tone headline per the design: the tail phrase renders in lighter plum.
+  headlinePlain: 'But if you already know you want a second set of',
+  headlineAccent: 'expert eyes on your business?',
+  // Design line map: "But if you already know you / want a second set of expert / eyes on your business?"
+  bodyLines: [
+    'Bring your numbers straight to Your',
+    'Next $125k Game Plan Call, and I’ll',
+    'analyse the between-the-numbers',
+    'story your scorecard is telling.',
+  ],
+  // Doc: "→ Book Next $125k Game Plan Call" — arrow kept per doc (design
+  // drops it) — flagged.
+  button: '→ Book Next $125k Game Plan Call',
+};
+
+export const THE_CATCH = {
+  // Doc: "More on both below." — design renders title case; design casing
+  // kept per the reference-casing rule, flagged.
+  band: 'More On Both Below.',
+  chip: 'HERE’S THE CATCH',
+  // Design line map (3 lines)
+  headlineLines: [
+    'From the inside, it’s genuinely',
+    'hard to tell which of the four',
+    'pillars is the one holding you back.',
+  ],
+  subLines: ['They can all look like they’re working, or you', 'feel like all of them need work.'],
+  // Doc ends with a period ("You score.") — kept per doc (design drops it), flagged.
+  scoreBox: 'So you don’t guess. You score.',
+  paraLines: [
+    'In the workshop, you and your team rate your business',
+    'across the four pillars, one at a time. For each, you',
+    'answer a short set of questions (the same ones a paid',
+    'audit would start with) and score yourself out of five.',
+  ],
+  para2Lines: [
+    'By the end, you’re holding four numbers. Optimising the',
+    'lowest one will have the largest impact on your revenue.',
+  ],
+  boldLines: ['That’s your first move. Not a list of twelve', 'competing priorities.'],
+  // Doc continues "And here's why I recommend doing it with your team:" —
+  // that tail opens the next (team) section per the design split.
+};
+
+export const TEAM_APPROACH = {
+  lead: 'The four scores live in four different heads.',
+  // Doc runs these as one block; design splits them into three bars.
+  bars: [
+    { text: 'Your content lead knows the traffic.', variant: 'cream' },
+    { text: 'Sales knows what happens on the calls.', variant: 'navy' },
+    { text: 'Nobody in the building is holding all four at once.', variant: 'plum' },
+  ],
+  para1: 'Which is exactly why a slow month feels like a mystery.',
+  para2Lines: ['The workshop is the first time your team', 'looks at one shared goal.'],
+  para3Lines: [
+    'Instead of marketing saying “traffic is up” while sales says',
+    '“the leads are a poor fit,”  everyone is finally on the same',
+    'page (literally, and figuratively!)',
+  ],
+};
+
+export const GAMEPLAN_INTRO = {
+  // Doc: "Your Next $125k/mo Game Plan" — design renders "/Mo"; design casing
+  // kept per the reference-casing rule, flagged.
+  headline: 'Your Next $125k/Mo Game Plan',
+  subLines: ['The scorecard shows you your scores.', 'The highest. The lowest.'],
+  // Card labels are design-added (not in the doc) — flagged. Card bodies are
+  // the doc paragraph split across the two cards, verbatim.
+  cards: [
+    {
+      label: 'Too Close to See It',
+      variant: 'pink',
+      lines: [
+        'But when you’re workshopping this',
+        'with your team: your team is too close',
+        'to the product, to sales, to the',
+        'customers.',
+      ],
+    },
+    {
+      label: 'Closeness Creates Blind Spots',
+      variant: 'ice',
+      lines: [
+        'That closeness is a strength on most',
+        'days. But when you’re that near to it,',
+        'it\'s also the reason the obvious thing',
+        'hides in plain sight.',
+      ],
+    },
+  ],
+  closingLines: [
+    'I help you and your team read the story your numbers',
+    'are telling, the one that\'s hard to hear from the inside.',
+  ],
+};
+
+export const CLIENT_DAVID = {
+  // Doc: "Take my client David." — design capitalises "Client" (kept, casing
+  // rule) and drops the period (restored per doc) — flagged.
+  headline: 'Take my Client David.',
+  bullets: [
+    {
+      bold: 'He had a genuinely strong course:',
+      // Doc continues lowercase "how" after the colon — design capitalises
+      // the paragraph start (kept, casing rule).
+      lines: [
+        'How agencies win and survive enterprise deals.',
+        'His funnel opened with an "Enterprise Readiness',
+        'Checklist," good lead magnet, sharp emails, a top',
+        'copywriter behind them. Still, nothing sold.',
+      ],
+    },
+    {
+      bold: 'So he did what most founders do.',
+      lines: [
+        'He assumed the top of the funnel was too quiet,',
+        'and paid a cold email agency to push a thousand',
+        'more people in. Almost nothing came back. By',
+        'the time he reached me, David had decided the',
+        'offer was a dud.',
+      ],
+    },
+    {
+      bold: 'It wasn\'t. "Enterprise readiness" is a someday problem no founder lies awake over.',
+      lines: [
+        'And it spoke to the founder, when the person',
+        'actually feeling the pain was the AE, the one with',
+        'a deal stalling right now.',
+      ],
+    },
+  ],
+  boxParas: [
+    ['We changed who it spoke to and what it', 'opened with. Same course. That\'s when it moved.'],
+    [
+      'What David read as an offer problem was really a',
+      'who and where problem. He could have rebuilt',
+      'that offer ten times and never fixed a thing.',
+    ],
+    ['That\'s the read you can\'t easily do on yourself.'],
+  ],
+  boxBold: 'It\'s exactly what the call is for.',
+};
+
+export const HERO = {
+  introBefore: 'You’re here for the spoils of adding',
+  introChip: '$1.5M/Year',
+  introAfter: 'without increasing your marketing spend.',
+  basedOn: 'Based on your answers…',
+  headlineLines: ['Right now, every visitor landing', 'in your ecosystem is generating'],
+  numberToken: '{{current_annual_revenue}}',
+  numberChip: 'in revenue.',
+  formula: {
+    lead: 'Revenue Per Visitor™ =',
+    numerator: 'Total Revenue',
+    denominator: 'Total Visitors your business is attracting [online and offline]',
+  },
+  strip: {
+    left: 'YOUR RPV TODAY: {{current_rpv}}',
+    divider: '|',
+    right: 'NOW LET’S SEE WHAT EACH VISITOR COULD BE WORTH',
+  },
+};

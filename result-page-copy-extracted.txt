@@ -1,0 +1,283 @@
+[shade:f9d5e5] How to read this doc
+⟪PINK:Pink highlight⟫ = a dynamic value, replaced at runtime with the taker’s number. The {{name}} is the token from the Token Map.
+Blue box = a conditional section or row. It only renders when its trigger fires (written in the blue label). Some blocks replace others — see the Logic Doc.
+Everything else is final copy — unchanged from the approved result page. (Note: some yellow highlights are the original doc’s own; only pink marks dynamic tokens.)
+
+
+################################################################################
+
+━━━━━━━━━━ SECTION CELL [row 0 · cell 0] ━━━━━━━━━━
+Your Revenue per Visitor™ today
+How we calculated your RPV™
+your potential rpv™ to add $1.5m/year
+Can you grow beyond $1.5m?
+The 4 quadrants behind RPV™
+
+
+  ┌─ NESTED TABLE ─┐
+  ROW: Your RPV™ Score ║ How we calculated your RPV™ ║  ║  ║ (shd:f4dddd)Watch the hands-on workshop with your team ║ (shd:4c1130)Book your Next $125k/mo game-plan call
+  └─ END NESTED ─┘
+
+
+━━━━━━━━━━ SECTION CELL [row 1 · cell 0] ━━━━━━━━━━
+You’re here for the spoils of adding $1.5M/Year without increasing your marketing spend.Based on your answers…Right now, every visitor landing in your ecosystem is generating ⟪PINK:{{current_annual_revenue}}⟫ in revenue.
+  ┌─ NESTED TABLE ─┐
+  ROW: Revenue Per Visitor ™  = Total Revenue / Total Visitors your business is attracting [online and offline]
+  └─ END NESTED ─┘
+
+Here's what the same visitor could be worth once four pillars in your customer's buying journey work in sync, supporting each other:
+
+⟪PINK:Total traffic: {{annual_visitors}}⟫
+  ┌─ NESTED TABLE ─┐
+  ROW: METRIC ║ YOUR BUSINESS (CURRENTLY) ║ YOUR NEW GOAL
+  ROW: Revenue Per Visitor™ ║ ⟪PINK:{{current_rpv}}⟫ ║ ⟪PINK:{{goal_rpv}}⟫
+  ROW: How many visitors are becoming email or SMS subscribers? ║ ⟪PINK:{{optin_current}}⟫  ⟪PINK:[cell colour = {{optin_colour}}]⟫ ║ ⟪PINK:{{optin_goal}}⟫   
+  ROW: Out of every 100 new subscribers joining your list, how many take a buying action within the first 14 days? ║ ⟪PINK:{{lead_current}}⟫  ⟪PINK:[cell colour = {{lead_colour}}]⟫ ║ ⟪PINK:{{lead_goal}}⟫  
+  ROW: And out of every 100 who take that action, how many complete it? ║ ⟪PINK:{{close_current}}⟫  ⟪PINK:[cell colour = {{close_colour}}]⟫ ║ ⟪PINK:{{close_goal}}⟫ 
+  ROW: Out of every 100 new subscribers joining your list, how many book a call or demo within the first 14 days?  ║ ⟪PINK:{{lead_current}}⟫  ⟪PINK:[cell colour = {{lead_colour}}]⟫ ║ ⟪PINK:{{lead_goal}}⟫ 
+  ROW: And out of every 100 who book, how many become paying clients? ║ ⟪PINK:{{close_current}}⟫  ⟪PINK:[cell colour = {{close_colour}}]⟫ ║ ⟪PINK:{{close_goal}}⟫  
+  ROW: Revenue Per Subscriber™ (what each subscriber is worth per year) ║ ⟪PINK:{{rps_current}}⟫  ⟪PINK:[cell colour = {{rps_colour}}]⟫ ║ ⟪PINK:{{rps_goal}}⟫ 
+  └─ END NESTED ─┘
+[shade:d6e4f0] ▸ Blocks 4–7 · Capped-state outcomes  — renders one of four ways depending on the calculator. See Logic Doc Blocks 4–7 for which copy fires and the {{achievable_gain}} / {{remaining_gap}} / {{additional_daily_visitors}} values.
+(micro copy: based reds and yellow- optimise)
+
+You can stop at $1.5M. Or push all 5 metrics to their max.
+By increasing your Revenue Per Visitor™ from ⟪PINK:{{current_rpv}} → {{goal_rpv}}⟫, you could add $1.5M/year ($125K/mo) without adding a penny to your current marketing and ad spend.
+And nope, you don't need to max out all 5 metrics to get there. 
+
+
+
+But... what if you did?
+If you hit the maximum benchmark across all five conversion points, your existing traffic could add ⟪PINK:{{achievable_gain}}/year⟫ (yep, with the same traffic!)
+⟪HL-yellow:More on how to max these metrics in the upcoming workshop.⟫
+
+
+
+  ┌─ NESTED TABLE ─┐
+  ROW: (shd:ffff00)GolfBays generated £97,000+ ($131K USD) in just 20 days after launching their Conversion Quiz Ecosystem™ — without increasing traffic. They also increased demo conversions by 15.25X using the same traffic they already had. 
+  └─ END NESTED ─┘
+
+
+Your Revenue per Visitor ™ beyond the first 14-day window
+You’ve just seen how much more revenue you could generate by increasing the Revenue Per Visitor™⟪PINK: from the traffic you already have, by improving the five metrics behind it.⟫
+But what happens to the subscribers who don't buy in those first 14 days?
+They don't disappear.
+They’re still sitting in your ecosystem, and they can continue generating revenue for months to come.
+[shade:d6e4f0] ▸ Block 3 · No email marketing  — the RPS section adapts when RPS = $0. See Logic Doc Blocks 1–3 for the revenue-split copy that renders here.
+This is where Compounding Revenue Per Subscriber™ comes in.
+Your RPV opportunity shows you how to make more from the visitors you're already getting.
+Your RPS opportunity shows you how to make more from the subscribers you're already acquiring over and over again throughout the year.
+So your potential isn't just:
++$1.5M/year from your existing traffic
+It can become:
++$1.5M+ from RPV optimisation
+PLUS
+additional revenue from compounding the value of every subscriber you acquire.
+Want to see what's sitting inside your subscriber base?
+⟪HL-yellow:Calculate Your Compounding Revenue Per Subscriber™ →⟫
+Find out how much more revenue you could generate from the subscribers you already have beyond the first 14 days.
+
+
+
+[shade:d6e4f0] ▸ Ad-spend module  — shows only if the taker answered Q7c (ad-traffic share). Hidden if skipped.
+About your ad budget.
+What happens when every visitor becomes more profitable?
+From what you told us, here's what your same ad spend could produce today vs. when you reach your RPV™ goal
+
+^ You can adjust your ad spend for it to accurately match your current ad spend
+
+
+
+For the data nerds 🧮
+This diagnostic can't peek inside your Google Analytics, CRM, ad dashboards, or other data sources.
+So if you want to go deeper and nerd out, grab your numbers to see your Revenue Per Visitor™ by channel — and find which channels are most profitable.
+Paid. Organic. Referral. Email. Social. Whatever you've got.
+⟪HL-yellow:→ Calculate My RPV By Channel⟫
+
+
+━━━━━━━━━━ SECTION CELL [row 2 · cell 0] ━━━━━━━━━━
+So this isn’t a hollow
+“We’ll add a million dollars overnight to your bottom line” promise
+
+There is a solid data-led approach to it.Revenue Per Visitor™ is not **just** a traffic metric.
+
+
+Here’s what it took us to calculate your RPV ™ number:
+
+Behind every RPV™ number sits a much bigger revenue story. To calculate your RPV, we analysed:
+
+We looked at:
+How much traffic do you bring in
+How many visitors become subscribers
+⟪PINK:How many subscribers take a buying action (lead conversion)⟫
+⟪PINK:How many of those complete the purchase (close rate)⟫
+⟪PINK:How much each subscriber is worth over a year (Revenue Per Subscriber™)⟫
+
+Because… revenue rarely scales by millions from one isolated metric.
+
+Most of the time, traffic is disconnected from monetisation, email growth is disconnected from conversion, sales calls are disconnected from positioning
+
+…and teams keep optimising isolated channels without fully knowing which actions are directly influencing revenue growth across their funnel…
+
+━━━━━━━━━━ SECTION CELL [row 3 · cell 0] ━━━━━━━━━━
+So before you spend another dollar on marketing, it’s worth seeing how they're connected, which one needs the most attention from your team, and which one has the potential to scale your RPV ™ the fastest.
+Grab a pen and paper (and your marketing, product and sales team) for 👇this👇 hands-on workshop to see how you can scale your RPV ™ from ⟪PINK:{{current_rpv}}⟫ to ⟪PINK:{{goal_rpv}}⟫ by optimising 4 key pillars in your customer’s buying journey. 
+→ Watch the Workshop
+
+  ┌─ NESTED TABLE ─┐
+  ROW: ⟪HL-yellow:Add workshop CLICKABLE THUMBNAIL THAT REDIRECTS THEM TO WORKSHOP PAGE⟫
+  └─ END NESTED ─┘
+
+But if you already know you want a second set of expert eyes on your business?Bring your numbers straight to Your Next $125k Game Plan Call, and I’ll analyse the between-the-numbers story your scorecard is telling.
+→ Book Next $125k Game Plan Call
+
+More on both below.
+
+
+━━━━━━━━━━ SECTION CELL [row 4 · cell 0] ━━━━━━━━━━
+Here's the catchFrom the inside, it's genuinely hard to tell which of the four pillars is the one holding you back. They can all look like they're working, or you feel like all of them need work.
+So you don't guess. You score.
+In the workshop, you and your team rate your business across the four pillars, one at a time. For each, you answer a short set of questions (the same ones a paid audit would start with) and score yourself out of five.
+By the end, you're holding four numbers. Optimising the lowest one will have the largest impact on your revenue. That's your first move. Not a list of twelve competing priorities. And here's why I recommend doing it with your team:
+The four scores live in four different heads.
+Your content lead knows the traffic. Sales knows what happens on the calls. Nobody in the building is holding all four at once.
+Which is exactly why a slow month feels like a mystery.
+The workshop is the first time your team looks at one shared goal.Instead of marketing saying “traffic is up” while sales says “the leads are a poor fit,”  everyone is finally on the same page (literally, and figuratively!)
+
+
+━━━━━━━━━━ SECTION CELL [row 5 · cell 0] ━━━━━━━━━━
+Your Next $125k/mo Game Plan
+The scorecard shows you your scores. The highest. The lowest.
+But when you’re workshopping this with your team: your team is too close to the product, to sales, to the customers. That closeness is a strength on most days. But when you’re that near to it, it's also the reason the obvious thing hides in plain sight. I help you and your team read the story your numbers are telling, the one that's hard to hear from the inside.
+Take my client David.
+He had a genuinely strong course: how agencies win and survive enterprise deals. His funnel opened with an "Enterprise Readiness Checklist," good lead magnet, sharp emails, a top copywriter behind them. Still, nothing sold. So he did what most founders do. He assumed the top of the funnel was too quiet, and paid a cold email agency to push a thousand more people in. Almost nothing came back. By the time he reached me, David had decided the offer was a dud.
+It wasn't. "Enterprise readiness" is a someday problem no founder lies awake over. And it spoke to the founder, when the person actually feeling the pain was the AE, the one with a deal stalling right now. 
+We changed who it spoke to and what it opened with. Same course. That's when it moved.
+What David read as an offer problem was really a who and where problem. He could have rebuilt that offer ten times and never fixed a thing.
+That's the read you can't easily do on yourself. It's exactly what the call is for.
+So here's what you walk away with.
+Which of your numbers is genuinely costing you, and which just looks scary. One client was proud of a 6% email click rate, until they saw a comparable list running at 45%. Another had 440,000 sessions and a 0.044% demo rate, and hadn't clocked it. We took it to 14%. You've mostly had yourself to compare to. I don’t.
+[VISUAL — the two "looked fine from the inside" reads, below]
+My judgment comes from building Compounding RPV ™ system across ecom, coaching, SaaS, B2B firms, clinics, law firms, and the list goes on.Your diagnostic already shows your current RPV and your potential RPV. On the call, we take the weakest pillar and get specific: 
+Why is it that we only got 29 sales from this ad campaign? 
+Why is the ROAS 15X but the website has 69% bounce rate? 
+Why is your browse abandonment so high? 
+Why are you only closing 1 in 8 sales calls? Why are you not generating clients from your content? << We go deep into your numbers so you don't leave with "improve your positioning." You leave with a clear next step like "All sales calls start at this message, so we’ll use this message top of funnel to lift opt-ins from 11% to 25% and that shall add $40,000/mo to our revenue", an action with a number attached to it.
+I don't guess at these. When I was working with Lara Acosta on her launches, early on we audited why she wasn't pulling enough people into her lead magnets and her launch events. My verdict: she kept partnering with the same handful of collaborators, launch after launch. Same audiences, over and over. They'd seen it all before, so registrations had quietly flattened due to audience fatigue.
+So we partnered with fresh collaborators and reached audiences that hadn't been tapped yet. And the next launch pulled so many registrations that Zoom crashed and Lara had to apologise to her email list.
+That’s what you get on the call.
+Then it's your call. Run it in-house, or hand it to our dream team that's done it across 15+ industries. No pressure to pick the second one. Either way, you leave seeing your funnel more clearly than you walked in. → Book your Next $125k/mo Game Plan
+It's free, takes about 30 minutes, and you're welcome to bring your team.
+
+
+
+━━━━━━━━━━ SECTION CELL [row 6 · cell 0] ━━━━━━━━━━
+So let's open the pillars, one at a time. Starting with the first one your scorecard just asked about.
+Pillar one — Maximise Revenue Per Visitor™
+90% of the people who find you online aren’t ready to buy yet
+
+Which is why your (and your competitors’) marketing completely ignores this huge group and only speaks to the *TINY 10 %* who are ready to buy.
+3% Ready to Buy7% Open to it
+
+Say you're selling medicine for ulcers. Out of 100 people, 3 know they have ulcers and buy immediately. 70 have stomach pain, but they don't know ulcers cause it. So when your messaging targets the problem ("medicine for ulcers"), you lose the 70 people who genuinely believe they don't have ulcers. Even though they do.
+[VISUAL — the 100-visitor market split, below]
+Even if your content, ads, podcasts, and books are reaching everyone, 90% of them automatically self-select themselves out by believing they don’t NEED what you have to offer (even if they do).
+And when your marketing only speaks to this tiny percentage, you have to reach a lot more eyeballs to hit your sales goals (so you’re bleeding time or money for low conversions — sound familiar?).But what if you could pull the other 60% of the market pie in and make them curious enough to consider your offer?
+
+
+  ┌─ NESTED TABLE ─┐
+  ROW: (shd:ffff00)Samar Owais generated 350+ quiz signups in 72 hours and grew her list by 7706% without spending a dollar on ads by creating curiosity around strategic blind spots her audience didn't know they had. The result? 350+ marketers and founders took the quiz within 72 hours. Her email list grew by 7706%. And the funnel attracted exactly the type of buyers who were most likely to become future customers. 
+  └─ END NESTED ─┘
+
+
+If they’re curious, they enter the open to it category. You expand your market from 10% to 70%. 
+Symptom Aware (could be ideal customers, just not ready yet!)Problem Aware (becoming ready to buy!)Solution & Product Aware (ready to buy!)Most marketing meets people here Most marketing ignores these people“My stomach hurts, but I don’t know why.”“I have stomach ulcers, but I don’t know what to do about it.”“I’m looking for the best gastroenterologist to cure my ulcers.”Symptom Aware (could be ideal customers, just not ready yet!)Problem Aware (becoming ready to buy!)Solution & Product Aware (ready to buy!)Most marketing meets people here Most marketing ignores these people“My stomach hurts, but I don’t know why.”“I have stomach ulcers, but I don’t know what to do about it.”“I’m looking for the best gastroenterologist to cure my ulcers.”
+
+↑ Based on the Pyramid of Awareness by the Godfather of Advertising himself, Eugene Schwartz.
+                                     Curiosity → Consideration → Conviction →Conversion
+
+Evoking curiosity about their symptoms is how you make more money out of every visitor. 
+And leading with diagnosing their symptoms is how you evoke maximum curiosity.
+This is the first Pillar of the Compounding RPV™ OS. 
+After the diagnostic workshop, if your Maximise Revenue Per Visitor™ score came back low, this is usually the reason. The page is built for the 10% ready-to-buy customers, not the 97% in consideration mode.
+
+━━━━━━━━━━ SECTION CELL [row 7 · cell 0] ━━━━━━━━━━
+So that's the first metric: turning more of your visitors, especially the 97% who aren't ready yet, into email or SMS subscribers.
+But just growing your email list doesn’t add $1.5m/year to your bottom line.Revenue becomes inconsistent when a business sets agendas and goals in isolation.
+“We want to add 10,000 subscribers in 6 months.”“We want to increase ads ROAS by 5%.”“We want to go from closing one in eight calls to four in eight calls.”Because of that…Most businesses can't tell if a slow month is a traffic problem, an email problem, a sales problem or a positioning problem — because their teams work in isolation.Very few know how much revenue each visitor is bringing. And without that, scaling becomes expensive guessing. 
+
+Here’s how that manifests:
+
+
+  ┌─ NESTED TABLE ─┐
+  ROW: You set a goal to increase your close rate, so you hire a sales trainer. ⏐ They train on better discovery, negotiation, and objection handling skills.  ⏐ But after spending months applying the new technique, the close rate still doesn’t significantly improve.  ⏐ Why? Because it was a positioning problem.  ║ ⟪HL-yellow:[INSERT IMAGE: THE PART OF FUNNEL MAP TO VISUALLY SHOW POSITIONING ACTIVITIES]⟫ ⏐ ⟪HL-yellow:https://www.canva.com/design/DAHFFCAJuwY/E5H_QLNZ17KyrmWf9o7asA/edit⟫⟪HL-yellow: ⟫
+  ROW: ⟪HL-yellow:[INSERT IMAGE: THE PART OF FUNNEL MAP TO VISUALLY SHOW MESSAGING ACTIVITIES]⟫ ║ You set a goal to get 10,000 new visitors on your website each month. ⏐ So you scale your ad spend and double down on SEO. ⏐ You do get 10,000 new visitors, but that doesn’t move your revenue.Why? Because your older messaging was for a warm audience, and that messaging didn’t support the cold audience. 
+  ROW: You set a goal to book 20 sales calls a week. ⏐ You hire more SDRs, and your content team really doubles down. ⏐ And you’re pretty close to the target. ⏐ But the content directly pushed people to a call. ⏐ Now the sales team is frustrated because they spend 45 minutes educating a doubtful buyer, and the close rate has dramatically decreased. ⏐ Why? Because the ones coming on the call weren’t pre-educated.  ║ ⟪HL-yellow:[INSERT IMAGE: THE PART OF FUNNEL MAP TO VISUALLY SHOW PRE-SALES ENGAGEMENT ACTIVITIES]⟫
+  └─ END NESTED ─┘
+
+So you keep setting new targets, new goals, and your team even achieves that. But yet…scaling still feels unpredictable.
+
+
+  ┌─ NESTED TABLE ─┐
+  ROW: ⟪HL-yellow:“Alefiya to me became almost like a second brain when it came to the execution of how to launch things⟫ ⏐ ⟪HL-yellow:Alefiya gave me the structure that I didn't know that I needed because I didn't know how to structure sales emails the way she would.”⟫ ⏐ ⟪HL-yellow:Lara Acosta ⟫ ⏐ ⟪HL-yellow:Founder, Literally Academy & LA Digital⟫ ⏐ ⟪HL-yellow:Co-Founder, Kleo ⟫ ⏐ ⟪HL-yellow:Forbes 30 Under 30 ⟫
+  └─ END NESTED ─┘
+
+⟪HL-white:☝️⟫ 491 students joined against a goal of 200 and the launch generated approximately $186K ⟪HL-white:☝️⟫ 
+
+Get predictable, consistent revenue by letting your entire team track, obsess, and optimise metrics that move revenue — together, not in isolation.
+
+And of the four they track together, here’s the one that I want you to pay the MOST attention to.
+
+
+━━━━━━━━━━ SECTION CELL [row 8 · cell 0] ━━━━━━━━━━
+
+  ┌─ NESTED TABLE ─┐
+  ROW: Pillar two — Contrarian POV™ ⏐ Why do some businesses become the ONLY option while charging the most in their category, and others get quietly dragged into price wars? ⏐ After sitting inside dozens of funnels, one pattern kept showing up. Generic positioning slowly starts sounding like everybody else. The same promises, the same "we help you scale faster" every competitor is also, word for word, promising. ⏐ And over time, buyers stop seeing the difference. ⏐ If you sell through calls, that's when you hear "can you send over your pricing?" and "how are you different from Competitor X?"  ⏐ If buyers self-serve, you don't hear it at all, which is worse. They open your page next to two competitor tabs, can't tell you apart in a few seconds, and quietly pick the cheaper or more familiar name. No call, no objection, just a closed tab. ⏐ Either way, the same thing is happening. When a buyer can't see what sets you apart, price becomes the easiest thing left to compare. So they compare it. ⏐ That's the quiet cost of blending in. ⏐ Think about Apple. It didn't win on processor speed. While everyone else talked specs, Apple talked creativity and identity, and that shifted how buyers saw the whole category. (Netflix did it. Liquid Death did it. None of them the cheapest.) ⏐ So the question worth sitting with: how do you become the ONLY option before a buyer starts comparing, on a call or in a browser tab? That's the work we do with the LEAPS™ Framework (inside the workshop).  ⏐ Because when someone finally gets why you're different, the question changes. They stop asking "what's your price?" and start asking "how do we start?" ⏐ In just 19 days, Estelle Winsette went from 3 calls per month to 3 calls per week while closing 2 out of every 3 calls for a $5K offer with her new “It’s not your body, it’s your clothes” positioning. ⏐ Louis went from closing 1 in 29 calls to closing 29 out of 31 calls with his “Creative Delivery” Positioning.  ⏐ Nausheen I Chen went from never selling to her list to selling out her first bootcamp. ⏐ Chris made 23X more sales from 829 quiz takers than from a list of 10,0000 subscribers.^ We’ll go deeper into our positioning process on the workshop. ⏐ A strong positioning strategy is rarely built once and left untouched. ⏐ The best-performing conversion funnels are constantly learning from the people moving through them. ⏐ Every sales call, every objection, every hesitation, every drop in conversion, every pattern showing up across buyer conversations. All of it becomes feedback.  ⏐ We capture it through 14 feedback loops running across the funnel, from the first ad click or opt-in to a post-delivery support ticket.  ⏐ Some are behavioral:  where people drop off in the quiz, how far into the workshop they watch, which sales page version wins.  ⏐ Others are qualitative:  the thank-you page survey, the why-you-didn't-book survey, buyer interviews after purchase.  ⏐ Which means the messaging keeps evolving and the positioning keeps sharpening. ⏐ The funnel keeps adapting to what buyers are actually thinking right now rather than refurbishing the messaging from what worked 6 months ago. ⏐ Watch the workshop to discover how category leaders use Contrarian POVs™ to escape price wars and become the ONLY option in crowded markets.  ⏐ If your Contrarian POV™ score came back low, it's worth sitting with. It's the pillar most teams quietly believe is fine. And 99% of the time, it's the one holding the score down. ║ 
+  └─ END NESTED ─┘
+
+
+━━━━━━━━━━ SECTION CELL [row 9 · cell 0] ━━━━━━━━━━
+
+  ┌─ NESTED TABLE ─┐
+  ROW:  ║ Pillar three — Speed to Decision™ ⏐ "If I can just get them on a call, I'll close them." ⏐ It sounds like a strength. Sit with it a second, though, because it's the opposite. ⏐ If a buyer needs 45 minutes with you to finally understand why your product or service matters, why the problem is urgent, and why you're different, then the call is carrying the entire sales journey. And most buyers never book the call. The self-serve ones never reach checkout. They leave, still unsure, and you can’t learn why. ⏐ What's actually slowing them isn't a missing feature or a wrong price. It's unanswered hesitations and objections. When we audited sales funnels across industries, we saw seven common hesitations show up again and again, whatever the industry.[VISUAL — the hesitation gap, below] ⏐ Smart marketers and CRO experts handle those hesitations before the call or the cart, so certainty builds early, and the sales call is reserved for closing, not educating.In the workshop, we walk you through exactly where in the customer journey each of those seven hesitations gets handled. ⏐ If your Speed to Decision™ score came back low, it's likely you're pushing traffic straight to a booked call, or to a product page, with no education bridge in between.
+  ROW: Pillar four — Compounding Revenue per Subscriber™ ⏐ Most teams treat a subscriber as a one-off. They join, maybe they buy, and if they don't, they sit in a newsletter list going quietly cold. ⏐ But a subscriber has no ceiling on what they're worth to you. ⏐ It costs you maybe $5 to get them onto your list. What they return after that has no fixed limit, and it comes down entirely to your email and SMS strategy: why they joined, what happens in their first 14 days, and what happens every month after. ⏐ That's where compounding comes in. Here's what a year of it can look like. ⏐ [VISUAL — the compounding table] ⏐ Notice what the table doesn't do: your list never doubles. And yet the revenue does. ⏐ In the workshop, I walk you through the whole table, step by step. You'll see the one small number you nudge up each month, how to reinvest so your list and your revenue per subscriber grow at the same time, and the month-by-month math that lets you forecast this strategically (brace yourself! lots of math tbd here). ⏐ Which is why how someone joins your list matters so much. My client Chris sent the same emails to two lists: 1 sale from 10,000 old subscribers, and 23 from 829 who'd joined through a diagnostic. The smaller list was worth far more, purely because of the intent they arrived with. ⏐ If your Compounding Revenue per Subscriber™ score came back low, it's almost never a list-size problem. It's a how-they-joined and what-happens-next problem. ║ 
+  └─ END NESTED ─┘
+
+
+━━━━━━━━━━ SECTION CELL [row 10 · cell 0] ━━━━━━━━━━
+Here are variations of the same problem a dozen marketing teams scaling 7-figure businesses to 8 figures have shared with mePerhaps you can relate?
+
+
+  ┌─ NESTED TABLE ─┐
+  ROW: “⟪HL-yellow:We’re growing, but growth is fuzzy. ⟫Things are working, but I don’t fully know why, and I don’t trust that they’ll keep working if I push harder. “ ~ 7-figure Concierge Medical Clinic Owner ║ We don’t know who’s serious until the call.” - B2B Content Agency owner
+  └─ END NESTED ─┘
+
+
+
+  ┌─ NESTED TABLE ─┐
+  ROW: “The majority of leads aren’t relevant. People show interest but don’t convert.” - CMO @ Sports Ecommerce store in the UK ║ “Lowest quality but highest volume is from paid ads. We don’t trust what’s converting. The calls we book, sales is explaining basics.” - Founder of a Cold Email SaaS
+  └─ END NESTED ─┘
+
+Here's what they have in common. AI made content easy, so everyone is producing more visibility than ever, and feeling less sure where revenue is actually coming from.
+More LinkedIn posts. More YouTube. More influencer collabs. More ad spend. All on the belief that more distribution means more revenue.And you do see the correlation too.You hired a content agency, your Influencer UGC spend has tripled this quarter, you’ve doubled your ad spend and you see how your revenue doubled too.That’s where most teams stop.
+But when I audit the assets underneath all that traffic, I keep seeing the same thing: sites with 50, 60, 70% bounce rates. Thousands of visitors, on a page built only for the person ready to buy today.
+
+  ┌─ NESTED TABLE ─┐
+  ROW:  ║  ║ 
+  └─ END NESTED ─┘
+And it's not just the site. 9 in 10 teams run their top-of-funnel ads and influencer campaigns straight to a product page or a web page, to people who were never going to buy on the first visit.
+So what if you could earn more from each visitor by meeting them where they are in their buying journey? Hook the non-buyers onto your email list, and compound revenue from traffic you're already paying for.
+Because here's what usually happens instead. Revenue gets inconsistent, and the response is to throw more money at acquisition, more pressure on the sales team, more content into the void, more random experiments at the wall, hoping something finally moves the needle.
+But compounding businesses don't do more random marketing.
+They scale because they know which specific actions move revenue, where buyers lose certainty, and how to build a system where each new visitor becomes more valuable over time instead of disappearing after one interaction.
+That's the real goal of the Compounding RPV™ OS. Not another funnel duct-taped onto an already chaotic customer journey.It's the difference between guessing and a team that can look at the numbers and say:
+“Let’s double down on testing top-of-funnel hooks for our opt-in page because if we increase email opt-in rate by 20%, it adds $357,000 this quarter.”
+So there's a fork here.
+Keep spending more to reach more people. Or earn more from the people already finding you, using the four pillars you just walked through.
+If you've made it this far, part of you probably already knows your business has more sitting inside it than it's currently pulling out, especially in the 70% of the market you've been walking past.
+Watch the workshop with your team, or bring your numbers to a call, and let’s plan how we can add your next $125k to your existing monthly revenue with your current marketing spend. 
+→ Watch the workshop | → Book your Next +$125k/mo Game Plan Call
+
+
+################################################################################
+
