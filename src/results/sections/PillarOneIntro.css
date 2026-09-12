@@ -1,0 +1,65 @@
+/* Pillar one — opening banner inside the accordion panel. */
+
+.rp1 {
+  background: #1a1420 url('/assets/results-banner-dark.webp') center / cover;
+  border-radius: 0; /* flush inside the accordion card; the card clips corners */
+  padding: 56px 40px 64px;
+  text-align: center;
+}
+
+.rp1__chip {
+  display: inline-block;
+  background: #f7f0f6;
+  color: #641d4f;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 19px;
+  padding: 4px 16px;
+}
+
+.rp1__sub {
+  margin-top: 26px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  color: #f4ede6;
+}
+
+.rp1__headline {
+  margin: 26px auto 0;
+  max-width: 880px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 36px;
+  line-height: 1.35;
+  color: #ffffff;
+}
+
+.rp1__hl {
+  background: #f2e6d7;
+  color: #5d1b4e;
+  padding: 1px 10px;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rp1 {
+    padding: 44px 26px 50px;
+  }
+  .rp1__headline {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  .rp1 {
+    padding: 34px 18px 40px;
+  }
+  .rp1__chip {
+    font-size: 16px;
+  }
+  .rp1__headline {
+    font-size: 21px;
+  }
+}

@@ -7,10 +7,17 @@
   padding: 110px 96px 120px;
 }
 
+/* one shared content column — headline, sub and bars share the same left edge */
+.rpl__inner {
+  position: relative;
+  max-width: 1190px;
+  margin: 0 auto;
+}
+
 .rpl__doodle {
   position: absolute;
-  top: 44px;
-  right: 5%;
+  top: -40px;
+  right: 0;
   width: 300px;
   height: auto;
   pointer-events: none;
@@ -36,8 +43,7 @@
 /* ——— bars ——— */
 
 .rpl__list {
-  margin: 64px auto 0;
-  max-width: 1190px;
+  margin-top: 64px;
   display: flex;
   flex-direction: column;
   gap: 46px;
@@ -45,6 +51,8 @@
 
 .rpl__item {
   border-radius: 20px;
+  /* clips squared-off panel content to the card's rounded corners */
+  overflow: hidden;
 }
 
 .rpl__bar {
@@ -103,7 +111,7 @@
 }
 
 .rpl__panel {
-  padding: 0 44px 36px;
+  padding: 0;
 }
 
 /* ——— variants ——— */
@@ -217,6 +225,6 @@
     width: 16px;
   }
   .rpl__panel {
-    padding: 0 18px 24px;
+    padding: 0;
   }
 }

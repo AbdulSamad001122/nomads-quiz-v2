@@ -1,0 +1,43 @@
+/* Pillar one — awareness pyramid infographic, flush inside the accordion. */
+
+.rpp {
+  background: #f7f3e8 url('/assets/results-cream-bg.webp') center / cover;
+  padding: 64px 64px 56px;
+  text-align: center;
+}
+
+.rpp__img {
+  width: min(100%, 1160px);
+  margin: 0 auto;
+}
+
+.rpp__caption {
+  margin: 30px auto 0;
+  max-width: 900px;
+  font-family: var(--font-headline);
+  font-size: 14px;
+  line-height: 1.4;
+  color: #16273b;
+}
+
+.rpp__arrow {
+  color: #641d4f;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rpp {
+    padding: 44px 32px 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .rpp {
+    padding: 32px 16px 32px;
+  }
+  .rpp__caption {
+    font-size: 13px;
+    margin-top: 22px;
+  }
+}

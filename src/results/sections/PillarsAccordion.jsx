@@ -1,5 +1,11 @@
 import { useState } from 'react';
 import { PILLARS } from '../copy.js';
+import PillarOneIntro from './PillarOneIntro.jsx';
+import PillarOneUlcers from './PillarOneUlcers.jsx';
+import PillarOneCurious from './PillarOneCurious.jsx';
+import PillarOneSamar from './PillarOneSamar.jsx';
+import PillarOnePyramid from './PillarOnePyramid.jsx';
+import PillarOneFlow from './PillarOneFlow.jsx';
 import './PillarsAccordion.css';
 
 /**
@@ -8,7 +14,16 @@ import './PillarsAccordion.css';
  * pass them via the PANELS map below.
  */
 const PANELS = {
-  // '01': <PillarOneContent />, …added as each pillar section is built
+  '01': (
+    <>
+      <PillarOneIntro />
+      <PillarOneUlcers />
+      <PillarOneCurious />
+      <PillarOneSamar />
+      <PillarOnePyramid />
+      <PillarOneFlow />
+    </>
+  ),
 };
 
 export default function PillarsAccordion() {
@@ -16,12 +31,13 @@ export default function PillarsAccordion() {
 
   return (
     <section className="rpl">
-      <img className="rpl__doodle" src="/assets/results-this-way.png" alt="" aria-hidden="true" />
+      <div className="rpl__inner">
+        <img className="rpl__doodle" src="/assets/results-this-way.png" alt="" aria-hidden="true" />
 
-      <h2 className="rpl__headline">{PILLARS.headline}</h2>
-      <p className="rpl__sub">{PILLARS.sub}</p>
+        <h2 className="rpl__headline">{PILLARS.headline}</h2>
+        <p className="rpl__sub">{PILLARS.sub}</p>
 
-      <div className="rpl__list">
+        <div className="rpl__list">
         {PILLARS.items.map((p) => {
           const isOpen = open === p.num;
           return (
@@ -49,6 +65,7 @@ export default function PillarsAccordion() {
             </div>
           );
         })}
+        </div>
       </div>
     </section>
   );

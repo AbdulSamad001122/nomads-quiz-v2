@@ -1,0 +1,56 @@
+/* Pillar one — "pull the other 60% in" banner, flush inside the accordion. */
+
+.rpc {
+  background: #1d3230 url('/assets/results-topo-bg.webp') center / cover;
+  padding: 84px 40px 96px;
+  text-align: center;
+}
+
+.rpc__para {
+  margin: 0 auto;
+  max-width: 620px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #f4ede6;
+}
+
+.rpc__headline {
+  margin: 48px auto 0;
+  max-width: 900px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 37px;
+  line-height: 1.4;
+  color: #ffffff;
+}
+
+.rpc__hl {
+  background: #f2e6d7;
+  color: #641d4f;
+  padding: 2px 12px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rpc {
+    padding: 60px 28px 70px;
+  }
+  .rpc__headline {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  .rpc {
+    padding: 44px 18px 52px;
+  }
+  .rpc__headline {
+    margin-top: 30px;
+    font-size: 21px;
+  }
+}

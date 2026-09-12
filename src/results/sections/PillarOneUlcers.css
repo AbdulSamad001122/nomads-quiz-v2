@@ -1,0 +1,129 @@
+/* Pillar one — ulcer example split, flush inside the accordion card
+   (no radii; the card clips corners). */
+
+.rpu {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* ——— left bear panel with pie ——— */
+
+.rpu__left {
+  background: #2a0f1c url('/assets/results-bear-bg.webp') center / cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 70px 44px;
+}
+
+.rpu__pie {
+  width: min(100%, 480px);
+}
+
+/* ——— right cream panel ——— */
+
+.rpu__right {
+  background: #f7f3e8 url('/assets/results-paper-texture.webp') center / cover;
+  padding: 64px 56px 60px;
+}
+
+.rpu__lead {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  color: #16273b;
+}
+
+.rpu__card {
+  margin-top: 26px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  background: #ffffff;
+  border: 1px solid #d9cbdb;
+  border-radius: 14px;
+  padding: 20px 28px;
+  max-width: 520px;
+}
+
+.rpu__card:first-of-type {
+  margin-top: 30px;
+}
+
+.rpu__picto {
+  width: 52px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.rpu__num {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 46px;
+  line-height: 1;
+  color: #641d4f;
+  flex-shrink: 0;
+}
+
+.rpu__card-text {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.45;
+  color: #1e3547;
+}
+
+.rpu__para {
+  margin-top: 30px;
+  max-width: 480px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1e3547;
+}
+
+.rpu__band {
+  display: inline-block;
+  margin-top: 30px;
+  background: #641d4f;
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 17px;
+  padding: 7px 18px;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rpu__right {
+    padding: 44px 32px 48px;
+  }
+  .rpu__num {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 900px) {
+  .rpu {
+    grid-template-columns: 1fr;
+  }
+  .rpu__left {
+    padding: 44px 24px;
+  }
+  .rpu__pie {
+    width: min(100%, 380px);
+  }
+  .rpu__right {
+    padding: 40px 20px 44px;
+  }
+  .rpu__card {
+    max-width: 100%;
+    gap: 16px;
+    padding: 16px 18px;
+  }
+  .rpu__para {
+    max-width: 100%;
+  }
+}

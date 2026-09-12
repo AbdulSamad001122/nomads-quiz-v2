@@ -1,0 +1,135 @@
+/* Pillar one — Samar Owais proof split, flush inside the accordion. */
+
+.rps {
+  display: grid;
+  grid-template-columns: 0.36fr 0.64fr;
+}
+
+/* ——— left dark panel ——— */
+
+.rps__left {
+  background: radial-gradient(120% 100% at 30% 20%, #241019 0%, #150a10 60%, #0e0609 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 36px;
+}
+
+.rps__pie {
+  width: min(100%, 400px);
+}
+
+.rps__caption {
+  margin-top: 40px;
+  max-width: 340px;
+  text-align: center;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #f4ede6;
+}
+
+/* ——— right card ——— */
+
+.rps__right {
+  background: #f9f4ec;
+  display: flex;
+  align-items: center;
+  padding: 56px 56px;
+}
+
+.rps__rim {
+  background: linear-gradient(135deg, #f3e3d3 0%, #e9c9c4 55%, #b87c96 100%);
+  border-radius: 24px;
+  padding: 8px;
+  width: 100%;
+}
+
+.rps__card {
+  background: #faf5e9;
+  border: 1.5px solid #641d4f;
+  border-radius: 18px;
+  padding: 44px 48px 40px;
+}
+
+.rps__headline {
+  max-width: 620px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 1.35;
+  color: #641d4f;
+}
+
+.rps__para {
+  margin-top: 26px;
+  max-width: 660px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.65;
+  color: #3c1a30;
+}
+
+.rps__para strong {
+  font-weight: 700;
+  color: #641d4f;
+}
+
+.rps__who {
+  margin-top: 34px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.rps__avatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+}
+
+.rps__name {
+  display: block;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 20px;
+  color: #641d4f;
+}
+
+.rps__role {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  color: #3c1a30;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rps__right {
+    padding: 36px 28px;
+  }
+  .rps__card {
+    padding: 28px 26px;
+  }
+  .rps__headline {
+    font-size: 21px;
+  }
+}
+
+@media (max-width: 900px) {
+  .rps {
+    grid-template-columns: 1fr;
+  }
+  .rps__left {
+    padding: 44px 24px;
+  }
+  .rps__right {
+    padding: 28px 18px 36px;
+  }
+}

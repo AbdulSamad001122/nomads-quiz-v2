@@ -443,6 +443,84 @@ export const PILLARS = {
   ],
 };
 
+export const PILLAR_ONE = {
+  // Design mock's chip reads "Pillar 03" — clearly a designer slip (this is
+  // Pillar one's copy, doc row 6); rendered "Pillar 01" — flagged.
+  chip: 'Pillar 01',
+  sub: '90% of the people who find you online aren’t ready to buy yet',
+  // Doc: "…only speaks to the *TINY 10 %* who are ready to buy." — the
+  // asterisk emphasis renders as the cream highlight; doc's "10 %" spacing
+  // normalised to "10%" per the design — flagged.
+  headBefore: 'Which is why your (and your competitors’) marketing completely ignores this huge group and only speaks to the',
+  headHighlight: 'TINY 10%',
+  headAfter: 'who are ready to buy.',
+};
+
+export const PILLAR_ONE_ULCERS = {
+  lead: 'Say you\'re selling medicine for ulcers.',
+  // Doc runs "Out of 100 people, 3 know they have ulcers and buy immediately."
+  // — split across the two stat cards per the design.
+  card1Num: '100',
+  card1Text: 'Out of 100 people',
+  card2Num: '03',
+  card2Text: '3 know they have ulcers and buy immediately.',
+  para1: '70 have stomach pain, but they don\'t know ulcers cause it.',
+  para2: 'So when your messaging targets the problem ("medicine for ulcers"), you lose the 70 people who genuinely believe they don\'t have ulcers.',
+  band: 'Even though they do.',
+  closing: 'Even if your content, ads, podcasts, and books are reaching everyone, 90% of them automatically self-select themselves out by believing they don’t NEED what you have to offer (even if they do).',
+};
+
+export const PILLAR_ONE_CURIOUS = {
+  // Doc: "(…for low conversions — sound familiar?)." — the design drops the
+  // em-dash; doc wins, flagged.
+  para: 'And when your marketing only speaks to this tiny percentage, you have to reach a lot more eyeballs to hit your sales goals (so you’re bleeding time or money for low conversions — sound familiar?).',
+  headBefore: 'But what if you could pull the other 60% of the market pie in and make them',
+  headHighlight: 'curious enough to consider your offer?',
+};
+
+export const PILLAR_ONE_SAMAR = {
+  // Design repeats the doc's opening clause as the card heading, then runs
+  // the doc paragraph in full below — doc words verbatim throughout.
+  headline: 'Samar Owais generated 350+ quiz signups in 72 hours and grew her list by 7706%',
+  para1: 'Samar Owais generated 350+ quiz signups in 72 hours and grew her list by 7706% without spending a dollar on ads by creating curiosity around strategic blind spots her audience didn\'t know they had. The result?',
+  para2Plain: '350+ marketers and founders took the quiz within 72 hours.',
+  para2Bold: 'Her email list grew by 7706%.',
+  para3: 'And the funnel attracted exactly the type of buyers who were most likely to become future customers.',
+  // Attribution row is design-added (not in the doc) — flagged.
+  name: 'Samar Owais',
+  role: 'Email Marketing Strategist',
+  caption: 'If they’re curious, they enter the open to it category. You expand your market from 10% to 70%.',
+};
+
+export const PILLAR_ONE_PYRAMID = {
+  // Whole pyramid infographic is a supplied image; only the caption is text.
+  // Doc: "↑ Based on the Pyramid of Awareness by the Godfather of Advertising
+  // himself, Eugene Schwartz." — verbatim.
+  caption: 'Based on the Pyramid of Awareness by the Godfather of Advertising himself, Eugene Schwartz.',
+};
+
+export const PILLAR_ONE_FLOW = {
+  // Doc: "Curiosity → Consideration → Conviction →Conversion" — rendered as
+  // the design's four cards.
+  steps: [
+    { label: 'Curiosity', icon: '/assets/results-4c-curiosity.png', variant: 'plum' },
+    { label: 'Consideration', icon: '/assets/results-4c-consideration.png', variant: 'navy' },
+    { label: 'Conviction', icon: '/assets/results-4c-conviction.png', variant: 'plum' },
+    { label: 'Conversion', icon: '/assets/results-4c-conversion.png', variant: 'navy' },
+  ],
+  line1: 'Evoking curiosity about their symptoms is how you make more money out of every visitor.',
+  line2: 'And leading with diagnosing their symptoms is how you evoke maximum curiosity.',
+  // Doc: "This is the first Pillar of the Compounding RPV™ OS." — design chip
+  // drops the ™; doc wins, flagged.
+  chip: 'This is the first Pillar of the Compounding RPV™ OS.',
+  // ⚠ Doc says "built for the 10% ready-to-buy customers"; the design image
+  // says "3%" (matching the pie chart). Doc wins per the copy rule —
+  // FLAGGED for Alefiya's ruling, since it's a number not punctuation.
+  para1: 'After the diagnostic workshop, if your Maximise Revenue Per Visitor™ score came back low, this is usually the reason. The page is built for the 10% ready-to-buy customers, not the 97% in consideration mode.',
+  // Doc ends with a period (design drops it) — doc wins, flagged.
+  para2: 'So that’s the first metric: turning more of your visitors, especially the 97% who aren’t ready yet, into email or SMS subscribers.',
+};
+
 export const HERO = {
   introBefore: 'You’re here for the spoils of adding',
   introChip: '$1.5M/Year',
