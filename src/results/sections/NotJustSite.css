@@ -40,7 +40,7 @@
   margin-left: 26px;
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: clamp(14px, 1.18vw, 17px);
+  font-size: 16px;
   line-height: 1.65;
   color: #7d3160;
 }
@@ -88,7 +88,7 @@
   margin-top: 24px;
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: clamp(14px, 1.18vw, 17px);
+  font-size: 16px;
   line-height: 1.55;
   color: #e8edf3;
 }
@@ -111,7 +111,7 @@
   margin-top: 10px;
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: clamp(14px, 1.18vw, 17px);
+  font-size: 16px;
   line-height: 1.5;
   color: #e8edf3;
 }
@@ -139,6 +139,15 @@
 
 /* ——— responsive ——— */
 
+/* fixed 16px body + manual line maps need the full column: release the
+   body brs before the columns get too narrow */
+@media (max-width: 1220px) {
+  .rns__p br,
+  .rns__sub br {
+    display: none;
+  }
+}
+
 @media (max-width: 900px) {
   .rns {
     grid-template-columns: 1fr;
@@ -153,9 +162,6 @@
     margin: 40px 0 0;
     font-size: 16px;
   }
-  .rns__sub br {
-    display: none;
-  }
   .rns__stick {
     position: static; /* stacked layout — nothing to stick against */
     width: min(480px, 88%);
@@ -167,8 +173,7 @@
     margin-top: 44px;
     font-size: 21px;
   }
-  .rns__heading br,
-  .rns__p br {
+  .rns__heading br {
     display: none;
   }
   .rns__p,
