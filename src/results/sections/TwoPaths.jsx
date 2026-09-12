@@ -68,7 +68,7 @@ export default function TwoPaths() {
           </div>
         </div>
         <div className="rtp__panel-photo">
-          <img src="/assets/results-fork-photo.webp" alt="Alefiya in a rattan chair" width="1069" height="1600" />
+          <img src="/assets/results-fork-photo.webp" alt="Alefiya in a rattan chair" width="2515" height="3793" />
         </div>
       </div>
     </section>

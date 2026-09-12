@@ -247,16 +247,6 @@
   overflow: hidden;
 }
 
-/* soft shadow down the photo's left edge, where it meets the copy */
-.rtp__panel-photo::before {
-  content: '';
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 64px;
-  background: linear-gradient(to right, rgba(20, 8, 14, 0.4), rgba(20, 8, 14, 0));
-  z-index: 2;
-  pointer-events: none;
-}
 
 .rtp__panel-photo img {
   position: absolute;
@@ -264,7 +254,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 20%;
+  object-position: center 30%;
 }
 
 /* ——— responsive ——— */
@@ -322,10 +312,6 @@
     width: 58px;
     height: 58px;
     font-size: 20px;
-  }
-  /* mobile: photo left-shadow would darken the top edge instead — drop it */
-  .rtp__panel-photo::before {
-    display: none;
   }
   .rtp__panel {
     grid-template-columns: 1fr;
