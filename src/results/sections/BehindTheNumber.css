@@ -11,8 +11,15 @@
 .rbn__left {
   background: #12312e url('/assets/results-teal-chart-bg.webp') center / cover no-repeat;
   display: flex;
-  align-items: flex-end;
-  padding: 110px 48px 86px 85px;
+  align-items: center;
+  justify-content: center;
+  padding: 110px 48px 100px;
+}
+
+/* the chip / headline / sub block sits centred in the panel as a unit */
+.rbn__left-inner {
+  width: 100%;
+  max-width: 480px;
 }
 
 .rbn__chip {
@@ -37,19 +44,21 @@
 }
 
 .rbn__script-w {
-  font-family: var(--font-number);
+  font-family: var(--font-number); /* Better Brush */
   font-weight: 400;
-  font-size: 1.25em;
+  font-size: 0.45em; /* the glyph inks ~2× its size → sits ~1.3× cap height */
   line-height: 0;
-  vertical-align: -0.1em;
+  vertical-align: 0.1em;
+  margin: 0 0.06em 0 0.02em;
 }
 
 .rbn__hl {
   display: inline-block;
-  background: #ddf2f8;
+  background: #e4fbff;
   color: #16273b;
-  padding: 2px 18px 6px;
-  margin-top: 8px;
+  line-height: 1.1;
+  padding: 2px 14px 5px;
+  margin-top: 10px;
 }
 
 .rbn__sub {
@@ -67,6 +76,13 @@
 .rbn__right {
   background: #ddf2f8;
   padding: 88px 80px 96px;
+}
+
+/* keeps the laptop proportions on wide screens: rule + cards cap at 760px
+   and sit centred in the panel instead of stretching edge to edge */
+.rbn__right-inner {
+  max-width: 760px;
+  margin: 0 auto;
 }
 
 .rbn__rule {
