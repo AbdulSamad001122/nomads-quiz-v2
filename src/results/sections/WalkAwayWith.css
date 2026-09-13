@@ -12,11 +12,13 @@
   align-items: center;
 }
 
-/* "This way" doodle — dashed loop runs off the top-right like the reference */
+/* "This way" doodle — anchored to the screen edge: the dashed tail runs off
+   the right of the viewport and the loop apex is clipped by the section top,
+   as in the reference (the PNG has ~9% transparent margin on its right). */
 .rwa__doodle {
   position: absolute;
-  top: -22px;
-  right: 8px;
+  top: -44px;
+  right: -30px;
   width: 270px;
   height: auto;
   pointer-events: none;
@@ -186,8 +188,8 @@
   }
   .rwa__doodle {
     width: 240px;
-    top: -26px;
-    right: 16px;
+    top: -38px;
+    right: -26px;
   }
   .rwa__headline {
     font-size: 34px;
@@ -216,8 +218,8 @@
   }
   .rwa__doodle {
     width: 200px;
-    top: 8px;
-    right: 12px;
+    top: -30px;
+    right: -22px;
   }
   .rwa__headline {
     margin-top: 44px;
