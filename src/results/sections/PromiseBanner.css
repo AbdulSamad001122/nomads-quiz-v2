@@ -16,11 +16,11 @@
 }
 
 .rpb__headline {
-  max-width: 960px;
+  max-width: 811px;
   margin: 0 auto;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: 45px;
+  font-size: 38px;
   line-height: 1.55;
   color: #ffffff;
 }

@@ -28,11 +28,11 @@
 }
 
 .rb__headline {
-  max-width: 540px;
+  max-width: 526px;
   margin: 0 auto;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: 39px;
+  font-size: 38px;
   line-height: 1.38;
   color: #ffffff;
   text-align: center;
@@ -91,10 +91,10 @@
 
 .rb__question {
   margin: 42px auto 0;
-  max-width: 730px;
+  max-width: 711px;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: 39px;
+  font-size: 38px;
   line-height: 1.35;
   color: #1c3850;
   padding: 0 24px;

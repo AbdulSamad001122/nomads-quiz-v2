@@ -79,7 +79,7 @@
   margin-top: 78px;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: clamp(19px, 1.74vw, 25px);
+  font-size: 29px; /* column too narrow for 38px without adding a line */
   line-height: 1.5;
   color: #ffffff;
 }

@@ -30,7 +30,8 @@
   margin-top: 26px;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: 46px;
+  max-width: 479px;
+  font-size: 38px;
   line-height: 1.32;
   color: #ffffff;
 }

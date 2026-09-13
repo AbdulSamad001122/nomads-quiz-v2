@@ -54,7 +54,8 @@
 .rad__headline {
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: 44px;
+  max-width: 1148px;
+  font-size: 38px;
   line-height: 1.2;
   color: #431232;
 }

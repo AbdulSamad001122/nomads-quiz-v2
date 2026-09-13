@@ -64,7 +64,8 @@
   margin-top: 22px;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: clamp(30px, 3.4vw, 49px);
+  max-width: 931px;
+  font-size: 38px;
   line-height: 1.28;
   color: #ffffff;
 }
@@ -207,7 +208,7 @@
   margin-top: 40px;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: clamp(24px, 2.3vw, 33px);
+  font-size: 33px; /* column too narrow for 38px without adding a line */
   line-height: 1.32;
   color: #5d1b4e;
 }
@@ -297,6 +298,14 @@
   .rtp__badge img {
     width: 86px;
     height: 86px;
+  }
+  /* the desktop sizes are fixed now; restore the phone sizes the old
+     clamp() minimums gave */
+  .rtp__headline {
+    font-size: 30px;
+  }
+  .rtp__panel-heading {
+    font-size: 24px;
   }
   .rtp__headline br {
     display: none;

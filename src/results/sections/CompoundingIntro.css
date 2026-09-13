@@ -8,11 +8,11 @@
 }
 
 .rcx__headline {
-  max-width: 640px;
+  max-width: 553px;
   margin: 0 auto;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: 44px;
+  font-size: 38px;
   line-height: 1.32;
   color: #ffffff;
 }

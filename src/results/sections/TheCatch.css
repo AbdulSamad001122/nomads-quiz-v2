@@ -63,7 +63,7 @@
   margin-top: 52px;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: 27.5px;
+  font-size: 28px; /* column too narrow for 38px without adding a line */
   line-height: 1.45;
   color: #16273b;
 }

@@ -41,11 +41,11 @@
 /* ——— headline + traffic ——— */
 
 .rmx__headline {
-  max-width: 1240px;
+  max-width: 967px;
   margin: 0 auto;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: 44px;
+  font-size: 38px;
   line-height: 1.32;
   text-align: center;
   color: #3b1030;

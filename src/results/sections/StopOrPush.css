@@ -73,7 +73,8 @@
   margin-top: 26px;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: clamp(28px, 3.2vw, 48px);
+  max-width: 956px;
+  font-size: 38px;
   line-height: 1.4;
   color: #ffffff;
 }
