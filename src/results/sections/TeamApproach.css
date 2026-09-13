@@ -13,7 +13,17 @@
 
 .rta__right {
   background: #f7f4ea url('/assets/results-paper-texture.webp') center / cover;
-  padding: 122px 80px 110px 75px;
+  padding: 116px 78px;
+  display: flex;
+  align-items: center; /* content block centred in the panel */
+}
+
+/* keeps the laptop width on wide screens: at 1440 the column is 565px,
+   so the block caps there and sits centred instead of stretching */
+.rta__right-inner {
+  width: 100%;
+  max-width: 565px;
+  margin: 0 auto;
 }
 
 .rta__lead {
@@ -41,24 +51,31 @@
   font-size: 16px;
 }
 
+/* Nomads swoosh drawn through a mask so each bar sets its own colour */
 .rta__bar-icon {
-  width: 24px;
+  width: 26px;
   height: 24px;
   flex-shrink: 0;
+  background-color: var(--icon, #ffffff);
+  -webkit-mask: url('/assets/results-swoosh-white.png') center / contain no-repeat;
+  mask: url('/assets/results-swoosh-white.png') center / contain no-repeat;
 }
 
 .rta__bar--cream {
+  --icon: #641d4f; /* maroon on the stone bar */
   background: #f2e6d7;
   border: 1px solid rgba(93, 27, 78, 0.45);
   color: #16273b;
 }
 
 .rta__bar--navy {
+  --icon: #ffffff;
   background: #16273b;
   color: #ffffff;
 }
 
 .rta__bar--plum {
+  --icon: #ffffff;
   background: #641d4f;
   color: #ffffff;
 }
@@ -110,7 +127,7 @@
     gap: 12px;
   }
   .rta__bar-icon {
-    width: 20px;
+    width: 22px;
     height: 20px;
   }
 }
