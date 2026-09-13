@@ -30,7 +30,7 @@
 }
 
 .rwi__headline {
-  margin-top: 18px;
+  margin: 18px auto 0;
   font-family: var(--font-headline);
   font-weight: 800;
   max-width: 1111px;

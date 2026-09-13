@@ -70,7 +70,7 @@
 }
 
 .rso__headline {
-  margin-top: 26px;
+  margin: 26px auto 0;
   font-family: var(--font-headline);
   font-weight: 800;
   max-width: 956px;

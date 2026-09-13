@@ -55,6 +55,7 @@
   font-family: var(--font-headline);
   font-weight: 800;
   max-width: 1148px;
+  margin: 0 auto;
   font-size: 38px;
   line-height: 1.2;
   color: #431232;

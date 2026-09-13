@@ -48,7 +48,7 @@
 
 .rsp__headline {
   position: relative;
-  margin-top: 32px;
+  margin: 32px auto 0;
   font-family: var(--font-headline);
   font-weight: 800;
   max-width: 1052px;
