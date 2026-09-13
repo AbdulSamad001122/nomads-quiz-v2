@@ -37,7 +37,7 @@ export default function BeyondFourteenDays() {
       <div className="rb__body">
         <div className="rb__rule" aria-hidden="true">
           <span className="rb__rule-line" />
-          <img className="rb__rule-icon" src="/assets/nomads-icon-dark.png" alt="" />
+          <img className="rb__rule-icon" src="/assets/results-compass-navy.png" alt="" width="426" height="426" />
         </div>
 
         <p className="rb__intro">
