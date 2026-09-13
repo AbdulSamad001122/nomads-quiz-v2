@@ -32,9 +32,26 @@
   z-index: 2;
 }
 
+/* compass art rotates continuously, same as the quiz seam badge */
 .rso__badge img {
   width: 90%;
   height: 90%;
+  animation: rso-badge-spin 18s linear infinite;
+}
+
+@keyframes rso-badge-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rso__badge img {
+    animation: none;
+  }
 }
 
 .rso__inner {
