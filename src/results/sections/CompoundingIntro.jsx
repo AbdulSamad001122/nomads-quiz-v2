@@ -28,7 +28,7 @@ export default function CompoundingIntro() {
           <p className="rcx__left-sub">{CRPS_INTRO.potentialSub}</p>
         </div>
 
-        <img className="rcx__arrow" src="/assets/curve-white-arrow.png" alt="" aria-hidden="true" />
+        <img className="rcx__arrow" src="/assets/results-swoosh-white.png" alt="" aria-hidden="true" width="230" height="218" />
 
         <div className="rcx__becard">
           <span className="rcx__chip">{CRPS_INTRO.becomeChip}</span>
@@ -43,9 +43,8 @@ export default function CompoundingIntro() {
           </div>
         </div>
 
-        <span className="rcx__vdiv" aria-hidden="true" />
-        <span className="rcx__plus" aria-hidden="true">
-          +
+        <span className="rcx__plus-wrap" aria-hidden="true">
+          <img className="rcx__plus" src="/assets/results-plus-plum.png" alt="" width="521" height="530" />
         </span>
 
         <div className="rcx__icecard">

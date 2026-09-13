@@ -148,26 +148,32 @@
   color: #1e3547;
 }
 
-.rcx__vdiv {
-  width: 1px;
+/* plum plus badge (Group 704) centred on a vertical rule — the rule shows
+   above and below the badge */
+.rcx__plus-wrap {
+  position: relative;
+  width: 54px;
   height: 165px;
-  background: rgba(255, 255, 255, 0.35);
+  display: grid;
+  place-items: center;
   flex-shrink: 0;
 }
 
+.rcx__plus-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.35);
+  transform: translateX(-50%);
+}
+
 .rcx__plus {
+  position: relative;
   width: 54px;
   height: 54px;
-  border-radius: 50%;
-  background: #5d1b4e;
-  color: #ffffff;
-  font-family: var(--font-headline);
-  font-weight: 800;
-  font-size: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
 }
 
 .rcx__icecard {
@@ -210,7 +216,10 @@
     flex-wrap: wrap;
     padding: 44px 32px;
   }
-  .rcx__vdiv {
+  .rcx__plus-wrap {
+    height: auto;
+  }
+  .rcx__plus-wrap::before {
     display: none;
   }
 }
