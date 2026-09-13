@@ -10,7 +10,13 @@
 
 .rwp__left {
   background: #3a1626 url('/assets/results-bear-bg.webp') center right / cover no-repeat;
-  padding: 110px 60px 90px 66px;
+  padding: 110px 63px 90px;
+}
+
+/* keeps the laptop width on wide screens: at 1440 the column content is 594px */
+.rwp__left-inner {
+  max-width: 594px;
+  margin: 0 auto;
 }
 
 .rwp__para {
@@ -22,7 +28,7 @@
 }
 
 .rwp__bold {
-  margin-top: 96px;
+  margin-top: 40px;
   font-family: var(--font-headline);
   font-weight: 800;
   font-size: 29px;
@@ -35,7 +41,7 @@
 .rwp__right {
   position: relative;
   background: #f6e8dc url('/assets/results-peach-bg.webp') center / cover;
-  padding: 76px 90px 84px 78px;
+  padding: 76px 84px 84px;
 }
 
 .rwp__footprints {
@@ -45,6 +51,13 @@
   height: 250px;
   width: auto;
   pointer-events: none;
+}
+
+/* keeps the laptop width on wide screens: at 1440 the column content is 552px */
+.rwp__right-inner {
+  position: relative;
+  max-width: 552px;
+  margin: 0 auto;
 }
 
 .rwp__header {
@@ -156,6 +169,11 @@
 @media (max-width: 1100px) {
   .rwp {
     grid-template-columns: 1fr;
+  }
+  .rwp__left-inner,
+  .rwp__right-inner {
+    max-width: none;
+    margin: 0;
   }
   /* compact intro band — no dead bear space under the text */
   .rwp__left {
