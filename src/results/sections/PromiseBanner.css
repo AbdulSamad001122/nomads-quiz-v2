@@ -4,19 +4,19 @@
 .rpb {
   position: relative;
   background: #2c1018 url('/assets/results-maroon-compass-banner.webp') center / cover no-repeat;
-  padding: 150px 48px 175px;
+  padding: 150px 48px 150px;
   text-align: center;
 }
 
 .rpb__keyline {
   position: absolute;
-  inset: 30px 34px 71px;
+  inset: 30px 34px 30px;
   border: 1px solid rgba(255, 255, 255, 0.8);
   pointer-events: none;
 }
 
 .rpb__headline {
-  max-width: 860px;
+  max-width: 960px;
   margin: 0 auto;
   font-family: var(--font-headline);
   font-weight: 800;
@@ -26,7 +26,6 @@
 }
 
 .rpb__l1 {
-  font-size: 37px;
   color: #f2e8da;
 }
 
@@ -58,7 +57,7 @@
 .rpb__chip {
   position: absolute;
   left: 50%;
-  bottom: 71px;
+  bottom: 30px;
   transform: translate(-50%, 0);
   background: #f2e6d7;
   color: #5d1b4e;
@@ -75,9 +74,6 @@
   .rpb__headline {
     font-size: 36px;
   }
-  .rpb__l1 {
-    font-size: 30px;
-  }
   .rpb__chip {
     font-size: 17px;
   }
@@ -85,10 +81,10 @@
 
 @media (max-width: 700px) {
   .rpb {
-    padding: 76px 26px 110px;
+    padding: 76px 26px 76px;
   }
   .rpb__keyline {
-    inset: 14px 14px 52px;
+    inset: 14px 14px 14px;
   }
   .rpb__headline {
     font-size: 23px;
@@ -96,9 +92,6 @@
   }
   .rpb__headline br {
     display: none;
-  }
-  .rpb__l1 {
-    font-size: 20px;
   }
   .rpb__l1::after {
     content: '';
@@ -117,7 +110,7 @@
     font-size: 16px;
   }
   .rpb__chip {
-    bottom: 52px;
+    bottom: 14px;
     font-size: 13px;
     white-space: normal;
     width: max-content;
