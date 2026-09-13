@@ -41,7 +41,7 @@
 /* ——— headline + traffic ——— */
 
 .rmx__headline {
-  max-width: 1020px;
+  max-width: 1240px;
   margin: 0 auto;
   font-family: var(--font-headline);
   font-weight: 800;
@@ -52,11 +52,11 @@
 }
 
 .rmx__script-v {
-  font-family: var(--font-script);
+  font-family: var(--font-number); /* Better Brush */
   font-weight: 400;
-  font-size: 2.1em;
+  font-size: 1.25em;
   line-height: 0;
-  vertical-align: -0.12em;
+  vertical-align: -0.14em;
   margin-right: 0.02em;
 }
 
@@ -146,26 +146,13 @@
 }
 
 .rmx__value--current {
-  background: #f5eaf6;
+  background: #f2e5f6;
   border: 1.5px solid #d9bfd7;
 }
 
-/* calculator colour states for the current cell (design extrapolation —
-   the reference shows only the neutral lavender style) */
-.rmx__value--red {
-  background: #f9e2e0;
-  border-color: #dfaba4;
-}
-
-.rmx__value--yellow {
-  background: #faf0d3;
-  border-color: #dcc98e;
-}
-
-.rmx__value--green {
-  background: #e7f0e1;
-  border-color: #b9cfae;
-}
+/* The calculator's red/yellow/green cell states are intentionally not
+   styled — the "Your Business" column is one flat tone per the design
+   (Sep 13). metricColour still flows through the class name for later use. */
 
 .rmx__value--goal {
   background: #ecdfc9;
