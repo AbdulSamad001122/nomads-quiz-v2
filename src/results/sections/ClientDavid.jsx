@@ -14,7 +14,9 @@ function Lines({ lines }) {
 export default function ClientDavid() {
   return (
     <section className="rcd">
-      <img className="rcd__badge" src="/assets/results-badge-playful.png" alt="" aria-hidden="true" />
+      <span className="rcd__badge" aria-hidden="true">
+        <img src="/assets/results-badge-playful.png" alt="" />
+      </span>
 
       <div className="rcd__left">
         <img
@@ -25,6 +27,7 @@ export default function ClientDavid() {
       </div>
 
       <div className="rcd__right">
+        <div className="rcd__right-inner">
         <h2 className="rcd__headline">{CLIENT_DAVID.headline}</h2>
 
         {CLIENT_DAVID.bullets.map((b, i) => (
@@ -46,6 +49,7 @@ export default function ClientDavid() {
             </p>
           ))}
           <p className="rcd__box-bold">{CLIENT_DAVID.boxBold}</p>
+        </div>
         </div>
       </div>
     </section>
