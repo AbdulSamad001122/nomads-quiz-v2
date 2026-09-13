@@ -27,7 +27,9 @@ export default function TheCatch() {
         </div>
 
         <h2 className="rtc__headline">
-          <Lines lines={THE_CATCH.headlineLines} />
+          {THE_CATCH.headlineLines[0]}{' '}
+          <span className="rtc__keep">{THE_CATCH.headlineLines[1]}</span>{' '}
+          {THE_CATCH.headlineLines[2]}
         </h2>
 
         <p className="rtc__sub">

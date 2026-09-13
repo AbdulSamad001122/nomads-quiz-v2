@@ -60,16 +60,17 @@
 }
 
 .rtc__headline {
-  margin-top: 52px;
+  margin-top: 30px;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: 28px; /* column too narrow for 38px without adding a line */
+  max-width: 565px; /* [547, 581) at 29px: "hard…pillars" fits, "+ is" wraps */
+  font-size: 29px;
   line-height: 1.45;
   color: #16273b;
 }
 
 .rtc__sub {
-  margin-top: 30px;
+  margin-top: 16px;
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 16px;
@@ -79,7 +80,7 @@
 
 .rtc__scorebox {
   display: inline-block;
-  margin-top: 38px;
+  margin-top: 20px;
   background: #ddf2f8;
   border: 2px solid rgba(21, 38, 55, 0.5);
   border-radius: 14px;
@@ -91,7 +92,7 @@
 }
 
 .rtc__para {
-  margin-top: 38px;
+  margin-top: 22px;
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 16px;
@@ -100,7 +101,7 @@
 }
 
 .rtc__bold {
-  margin-top: 38px;
+  margin-top: 22px;
   font-family: var(--font-body);
   font-weight: 700;
   font-size: 16px;
@@ -134,6 +135,14 @@
 
 .rtc__map-card img {
   width: 100%;
+}
+
+/* holds line 2 together so the heading breaks after "genuinely" — only
+   while the columns sit side by side; it wraps freely on mobile */
+@media (min-width: 901px) {
+  .rtc__keep {
+    white-space: nowrap;
+  }
 }
 
 /* ——— responsive ——— */

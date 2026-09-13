@@ -209,10 +209,12 @@ export const THE_CATCH = {
   band: 'More On Both Below.',
   chip: 'HERE’S THE CATCH',
   // Design line map (3 lines)
+  // Line structure per the user (Sep 13); line 2 is kept together on
+  // desktop so the break lands after "genuinely".
   headlineLines: [
     'From the inside, it’s genuinely',
-    'hard to tell which of the four',
-    'pillars is the one holding you back.',
+    'hard to tell which of the four pillars',
+    'is the one holding you back.',
   ],
   subLines: ['They can all look like they’re working, or you', 'feel like all of them need work.'],
   // Doc ends with a period ("You score.") — kept per doc (design drops it), flagged.
