@@ -78,10 +78,10 @@
   padding: 88px 80px 96px;
 }
 
-/* keeps the laptop proportions on wide screens: rule + cards cap at 760px
-   and sit centred in the panel instead of stretching edge to edge */
+/* wide screens keep the laptop width: at 1440 the column is 560px, so the
+   rule + cards cap there and sit centred instead of stretching */
 .rbn__right-inner {
-  max-width: 760px;
+  max-width: 560px;
   margin: 0 auto;
 }
 
