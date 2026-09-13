@@ -9,7 +9,7 @@
 .rrq__heading {
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: 38px;
+  font-size: 25px;
   color: #16273b;
   text-align: center;
 }
@@ -58,8 +58,8 @@
 /* plum comma graphic, recoloured per tone via mask */
 .rrq__mark {
   display: inline-block;
-  width: 34px;
-  height: 23px;
+  width: 22px;
+  height: 15px;
   flex: none;
   background-color: var(--mark);
   -webkit-mask: url('/assets/results-relate-quote.png') center / contain no-repeat;
@@ -68,8 +68,6 @@
 
 .rrq__mark--close {
   transform: rotate(180deg);
-  width: 28px;
-  height: 19px;
 }
 
 .rrq__quote {
@@ -125,9 +123,6 @@
   }
   .rrq__card {
     min-height: 320px;
-  }
-  .rrq__heading {
-    font-size: 27px;
   }
 }
 
