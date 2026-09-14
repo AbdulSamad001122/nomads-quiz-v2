@@ -433,7 +433,8 @@ export const LARA_STORY = {
 };
 
 export const YOUR_CALL = {
-  para1: 'Run it in-house, or hand it to our dream team that\'s done it across 15+ industries.',
+  // Updated wording (user, 2026-09-14): opens with "Then it's your call."
+  para1: 'Then it\'s your call. Run it in-house, or hand it to our dream team that\'s done it across 15+ industries.',
   band: 'No pressure to pick the second one.',
   // Doc: "…you leave seeing your funnel more clearly…" — the design shows a
   // "customer journey" rewrite (with a missing-space typo); doc wins, flagged.
