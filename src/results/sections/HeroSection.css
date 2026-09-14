@@ -145,7 +145,7 @@
 
 @media (max-width: 1100px) {
   .rhero {
-    padding: 72px 48px 220px;
+    padding: 72px 48px 160px;
   }
   .rhero__headline {
     font-size: 36px;
@@ -154,7 +154,7 @@
 
 @media (max-width: 900px) {
   .rhero {
-    padding: 56px 28px 200px;
+    padding: 56px 28px 130px;
   }
   .rhero__grid {
     grid-template-columns: 1fr;
@@ -173,7 +173,7 @@
 
 @media (max-width: 560px) {
   .rhero {
-    padding: 40px 18px 190px;
+    padding: 40px 18px 100px;
   }
   .rhero__intro {
     font-size: 16px;
