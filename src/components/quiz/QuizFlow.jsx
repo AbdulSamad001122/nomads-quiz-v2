@@ -24,7 +24,9 @@ import SlideScreen from '../slides/SlideScreen.jsx';
 import ResultsPage from '../../results/ResultsPage.jsx';
 import { themes } from '../../data/themes.js';
 import { QUESTIONS, resolveQuestion, salesModel } from '../../data/questions.js';
+import AnswerCheckModal from './AnswerCheckModal.jsx';
 import { resolveInputs } from '../../calc/backendValues.js';
+import { impossibleCheck } from '../../calc/validation.js';
 import { calculate } from '../../calc/calculator.js';
 import { ga } from '../../analytics/ga.js';
 import { buildKitFields } from '../../kit/kitPayload.js';
@@ -366,6 +368,11 @@ export default function QuizFlow() {
   const [otherText, setOtherText] = useState('');
   const [vocText, setVocText] = useState('');
   const [dqReason, setDqReason] = useState(DEV_INIT?.dq ?? null);
+  // Impossible-answer check currently on screen, and the questions the taker
+  // pushed past with "Keep my answers" (Quiz Logics.docx · Manual entry &
+  // validation). Overrides tag the Kit record unverified.
+  const [answerCheck, setAnswerCheck] = useState(null);
+  const [overrides, setOverrides] = useState([]);
   const advanceTimer = useRef(null);
 
   const totalQuestions = QUESTIONS.length;
@@ -379,6 +386,46 @@ export default function QuizFlow() {
   };
 
   const next = () => goTo(index, 1);
+
+  /**
+   * Quiz Logics.docx · Manual entry & validation: "Two impossible-answer
+   * checks fire on advancing." Runs the check against the answers as they
+   * will be, and either shows the confirmation or advances. Both of the
+   * modal's routes preserve what the taker typed.
+   */
+  const advanceChecked = (qid, ans = answers, man = manualValues) => {
+    // Already asked and answered with "Keep my answers" — don't ask again on a
+    // re-advance. The clamp lands on the ceiling itself (q8 = q7), and the
+    // doc's trip condition is ">=", so without this the same prompt returns
+    // every time they step forward through the question.
+    if (overrides.includes(qid)) {
+      goTo(index, 1, ans);
+      return;
+    }
+    const trip = impossibleCheck(qid, resolveInputs(ans, man, salesModel(ans)));
+    if (trip) {
+      setAnswerCheck({ ...trip, qid, ans, man });
+      return;
+    }
+    goTo(index, 1, ans);
+  };
+
+  // "Keep my answers" — the doc says it advances, clamps at the ceiling and
+  // tags the record unverified. Writing the capped figure back as a manual
+  // value is what makes the clamp real everywhere downstream.
+  const CLAMP_TO = { q8: (i) => i.q7, q11: (i) => i.q2 };
+
+  const keepAnswers = () => {
+    const { qid, ans, man } = answerCheck;
+    const cap = CLAMP_TO[qid]?.(resolveInputs(ans, man, salesModel(ans)));
+    const nextAns = { ...ans, [qid]: 'manual' };
+    const nextMan = { ...man, [qid]: String(cap) };
+    setAnswers(nextAns);
+    setManualValues(nextMan);
+    setOverrides((o) => (o.includes(qid) ? o : [...o, qid]));
+    setAnswerCheck(null);
+    goTo(index, 1, nextAns);
+  };
   const back = () => {
     if (dqReason) {
       setDqReason(null);
@@ -469,7 +516,10 @@ export default function QuizFlow() {
         return;
       }
       clearTimeout(advanceTimer.current);
-      advanceTimer.current = setTimeout(() => goTo(index, 1, nextAnswers), 350);
+      advanceTimer.current = setTimeout(
+        () => advanceChecked(q.id, nextAnswers),
+        350
+      );
     };
 
     // Answer event for multi / manual / text screens (fired on Continue).
@@ -529,6 +579,14 @@ export default function QuizFlow() {
     }
 
     return (
+      <>
+      {answerCheck ? (
+        <AnswerCheckModal
+          message={answerCheck.message}
+          onBack={() => setAnswerCheck(null)}
+          onKeep={keepAnswers}
+        />
+      ) : null}
       <QuizScreen
         theme={theme}
         qid={q.id}
@@ -564,12 +622,13 @@ export default function QuizFlow() {
           needsContinue
             ? () => {
                 fireDeferredAnswer();
-                next();
+                advanceChecked(q.id);
               }
             : undefined
         }
         continueDisabled={continueDisabled}
       />
+      </>
     );
   }
 
@@ -736,6 +795,7 @@ export default function QuizFlow() {
                   otherText,
                   vocText,
                   result,
+                  overrides,
                 }),
               });
             }

@@ -88,6 +88,15 @@ const GROUPS = [
     ],
   },
   {
+    title: 'Impossible-answer checks',
+    note: 'Fires on advancing when two answers contradict each other. Message and button labels are verbatim from Quiz Logics.docx · Manual entry & validation. “Keep my answers” clamps the value at its ceiling and tags the Kit record unverified.',
+    links: [
+      ['Q8 · more subscribers than visitors', '/?check=subs'],
+      ['Q11 · more email revenue than total revenue', '/?check=email'],
+      ['Walk it in the quiz — Q7A (then enter 4000)', '/?goto=q7a'],
+    ],
+  },
+  {
     title: 'Question slides',
     links: [
       ['Q1 · Role', '/?goto=q1'],

@@ -54,6 +54,9 @@ export function buildKitFields({
   otherText = '',
   vocText = '',
   result = null,
+  // Question ids where the taker hit an impossible-answer check and chose
+  // "Keep my answers" (Quiz Logics.docx: "…tags the record unverified").
+  overrides = [],
 }) {
   const path = salesModel(answers);
   const inputs = resolveInputs(answers, manualValues, path);
@@ -105,7 +108,7 @@ export function buildKitFields({
     for (const [key, value] of Object.entries(result.tags)) {
       fields[`quiz_taker_${key}`] = value;
     }
-    fields.quiz_taker_record_unverified = false;
+    fields.quiz_taker_record_unverified = overrides.length > 0;
   }
 
   // Kit rejects nulls in the fields hash — drop empty values entirely.

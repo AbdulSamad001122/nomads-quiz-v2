@@ -3,6 +3,7 @@ import TemplatePreview from './TemplatePreview.jsx';
 import DevResults from './DevResults.jsx';
 import LoadingScreen from './components/quiz/LoadingScreen.jsx';
 import DevSlides from './DevSlides.jsx';
+import DevAnswerCheck from './DevAnswerCheck.jsx';
 import { themes } from './data/themes.js';
 
 /**
@@ -16,6 +17,9 @@ import { themes } from './data/themes.js';
 export default function App() {
   const params = new URLSearchParams(window.location.search);
   if (params.has('slides')) return <DevSlides />;
+  // ?check=subs | email → the impossible-answer confirmation on its own, so
+  // it can be reviewed without walking the quiz to Q8/Q11.
+  if (params.has('check')) return <DevAnswerCheck which={params.get('check')} />;
   if (params.has('preview')) return <TemplatePreview />;
   if (params.has('results')) return <DevResults scenario={params.get('results')} />;
   if (params.has('loading'))
