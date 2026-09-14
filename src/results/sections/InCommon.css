@@ -27,6 +27,22 @@
   width: 145px;
   height: auto;
   z-index: 2;
+  animation: ric-badge-spin 18s linear infinite;
+}
+
+@keyframes ric-badge-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ric__badge {
+    animation: none;
+  }
 }
 
 .ric__card {
@@ -43,7 +59,7 @@
 .ric__heading {
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: 38px;
+  font-size: 25px;
   color: #5d1b4e;
 }
 
