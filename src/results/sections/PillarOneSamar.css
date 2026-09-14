@@ -22,7 +22,7 @@
 
 .rps__caption {
   margin-top: 40px;
-  max-width: 340px;
+  max-width: 419px;
   text-align: center;
   font-family: var(--font-body);
   font-weight: 500;
@@ -126,10 +126,16 @@
   .rps {
     grid-template-columns: 1fr;
   }
+  /* stacked: Samar's story first, then the pie panel (and its caption) */
+  .rps__right {
+    order: 1;
+    padding: 28px 8px 36px;
+  }
   .rps__left {
+    order: 2;
     padding: 44px 24px;
   }
-  .rps__right {
-    padding: 28px 18px 36px;
+  .rps__card {
+    padding: 28px 14px;
   }
 }

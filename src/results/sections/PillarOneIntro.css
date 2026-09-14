@@ -32,6 +32,7 @@
   font-weight: 800;
   font-size: 36px;
   line-height: 1.35;
+  text-wrap: balance;
   color: #ffffff;
 }
 
@@ -61,5 +62,13 @@
   }
   .rp1__headline {
     font-size: 21px;
+  }
+}
+
+/* the headline goes flush left below 500 (PillarsAccordion.css) — keep the
+   sub-line with it rather than leaving it centred underneath */
+@media (max-width: 500px) {
+  .rp1__sub {
+    text-align: left;
   }
 }

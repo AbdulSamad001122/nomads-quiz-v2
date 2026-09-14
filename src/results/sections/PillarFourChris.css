@@ -1,0 +1,88 @@
+/* Pillar four — Chris two-lists quote card on navy. Flush inside the
+   accordion card. */
+
+.rfq {
+  background: #16273b;
+  padding: 78px 48px 86px;
+  display: flex;
+  justify-content: center;
+}
+
+.rfq__card {
+  position: relative;
+  margin: 0;
+  width: min(100%, 620px);
+  background: #f2e4d5;
+  border-radius: 18px;
+  box-shadow: 12px 12px 0 #641d4f;
+  padding: 40px 46px 44px;
+}
+
+.rfq__mark {
+  width: 27px;
+  height: auto;
+  display: block;
+}
+
+.rfq__mark--close {
+  margin-left: auto;
+  margin-top: 20px;
+  transform: rotate(180deg);
+}
+
+.rfq__headline {
+  margin-top: 34px;
+  max-width: 420px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 25px;
+  line-height: 1.4;
+  color: #641d4f;
+}
+
+.rfq__para {
+  margin-top: 26px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 1.65;
+  color: #2c1a26;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 900px) {
+  .rfq {
+    padding: 56px 26px 64px;
+  }
+  .rfq__card {
+    padding: 32px 30px 34px;
+    box-shadow: 9px 9px 0 #641d4f;
+  }
+  .rfq__headline {
+    font-size: 21px;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .rfq {
+    padding: 40px 16px 48px;
+  }
+  .rfq__card {
+    padding: 24px 20px 26px;
+    border-radius: 14px;
+    box-shadow: 7px 7px 0 #641d4f;
+  }
+  .rfq__mark {
+    width: 22px;
+  }
+  .rfq__headline {
+    margin-top: 24px;
+    font-size: 18px;
+  }
+  .rfq__para {
+    font-size: 15.5px;
+    margin-top: 20px;
+  }
+}

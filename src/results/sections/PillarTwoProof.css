@@ -1,0 +1,208 @@
+/* Pillar two — four positioning-proof quote cards on a cream sheet over the
+   maroon texture. Flush inside the accordion card. */
+
+.rqp {
+  background: #2a0f1c url('/assets/results-maroon-crumple.webp') center / cover;
+  padding: 56px 48px 64px;
+}
+
+.rqp__sheet {
+  background: #f7f3e8 url('/assets/results-paper-texture.webp') center / cover;
+  border-radius: 26px;
+  padding: 52px 52px 44px;
+  max-width: 1330px;
+  margin: 0 auto;
+}
+
+.rqp__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px 60px;
+}
+
+/* ——— cards ——— */
+
+.rqp__card {
+  position: relative;
+  border-radius: 16px;
+  padding: 34px 36px 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.rqp__card--plum {
+  background: #4a1533;
+  color: #ffffff;
+  box-shadow: -11px 11px 0 #f0dfd2;
+}
+
+.rqp__card--tan {
+  background: #f1e0d3;
+  color: #641d4f;
+  box-shadow: 11px 11px 0 #641d4f;
+}
+
+.rqp__card--ice {
+  background: #ddf2f8;
+  color: #16273b;
+  box-shadow: 11px 11px 0 #16273b;
+}
+
+.rqp__card--navy {
+  background: #16273b;
+  color: #ffffff;
+  box-shadow: -11px 11px 0 #ddf2f8;
+}
+
+.rqp__mark {
+  width: 26px;
+  height: auto;
+}
+
+.rqp__mark--close {
+  align-self: flex-end;
+  transform: rotate(180deg);
+  margin-top: 18px;
+}
+
+.rqp__headline {
+  margin-top: 26px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 1.42;
+  color: inherit;
+}
+
+.rqp__body {
+  margin-top: 22px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.65;
+  color: inherit;
+}
+
+.rqp__who {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.rqp__avatar {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.rqp__name {
+  display: block;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 21px;
+  color: inherit;
+}
+
+.rqp__role {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 15px;
+  color: inherit;
+  opacity: 0.9;
+}
+
+.rqp__caption {
+  margin-top: 46px;
+  text-align: center;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  color: #3c1a30;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1200px) {
+  .rqp {
+    padding: 40px 28px 48px;
+  }
+  .rqp__sheet {
+    padding: 36px 32px 32px;
+  }
+  .rqp__grid {
+    gap: 40px 36px;
+  }
+  .rqp__card {
+    padding: 26px 24px 24px;
+  }
+  .rqp__headline {
+    font-size: 19px;
+  }
+  .rqp__name {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 900px) {
+  .rqp__grid {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+}
+
+@media (max-width: 560px) {
+  /* Three nested boxes (section → sheet → card) were eating 152px of a 403px
+     screen, leaving the quote only 251px and wrapping it every three words.
+     Trim each level; the sheet keeps >7px so the card shadows still clear. */
+  .rqp {
+    padding: 4px 8px 8px;
+  }
+  /* the cream sheet is vestigial once its padding is down to 10px — drop the
+     surface and let the cards sit straight on the section's maroon texture */
+  .rqp__sheet {
+    background: none;
+    padding: 24px 10px 24px;
+    border-radius: 18px;
+  }
+  /* ...which means each card now needs its own edge against the dark ground */
+  .rqp__card {
+    padding: 22px 16px 22px;
+    border: 2px solid #ffffff;
+  }
+  /* the caption is the only copy left sitting directly on the maroon, so its
+     dark plum has to go light with it */
+  .rqp__caption {
+    color: #ffffff;
+  }
+  /* tighter offsets so the shadows never push past the sheet */
+  .rqp__card--plum,
+  .rqp__card--navy {
+    box-shadow: -7px 7px 0 var(--rqp-shadow, #f0dfd2);
+  }
+  .rqp__card--navy {
+    --rqp-shadow: #ddf2f8;
+  }
+  .rqp__card--tan {
+    box-shadow: 7px 7px 0 #641d4f;
+  }
+  .rqp__card--ice {
+    box-shadow: 7px 7px 0 #16273b;
+  }
+  .rqp__headline {
+    font-size: 17px;
+  }
+  .rqp__avatar {
+    width: 48px;
+    height: 48px;
+  }
+  .rqp__name {
+    font-size: 16px;
+  }
+  .rqp__role {
+    font-size: 13.5px;
+  }
+}

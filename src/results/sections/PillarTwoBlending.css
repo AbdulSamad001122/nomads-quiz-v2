@@ -1,0 +1,122 @@
+/* Pillar two — "the quiet cost of blending in": cards left, copy right on
+   cream. Flush inside the accordion card. */
+
+.rqc {
+  background: #faf5e9 url('/assets/results-cream-bg.webp') center / cover;
+  padding: 72px 64px 80px;
+  display: grid;
+  grid-template-columns: 0.46fr 0.54fr;
+  align-items: center;
+  gap: 56px;
+}
+
+.rqc__media {
+  display: flex;
+  justify-content: center;
+}
+
+.rqc__media img {
+  width: min(100%, 460px);
+}
+
+.rqc__body {
+  max-width: 620px;
+}
+
+.rqc__headline {
+  max-width: 430px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 42px;
+  line-height: 1.24;
+  color: #4a1533;
+}
+
+.rqc__para {
+  margin-top: 16px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #3c1a30;
+}
+
+.rqc__chip {
+  display: inline-block;
+  margin-top: 24px;
+  background: #641d4f;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  padding: 5px 12px;
+}
+
+.rqc__question {
+  margin-top: 26px;
+  max-width: 540px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 25px;
+  line-height: 1.45;
+  color: #641d4f;
+}
+
+.rqc__question + .rqc__para {
+  margin-top: 22px;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1200px) {
+  .rqc {
+    padding: 56px 36px 60px;
+    gap: 36px;
+  }
+  .rqc__headline {
+    font-size: 32px;
+  }
+  .rqc__question {
+    font-size: 21px;
+  }
+}
+
+@media (max-width: 900px) {
+  .rqc {
+    grid-template-columns: 1fr;
+    padding: 48px 22px 56px;
+  }
+  .rqc__headline,
+  .rqc__question,
+  .rqc__body {
+    max-width: 100%;
+  }
+  /* full-width column leaves a stubby last line — even the lines out */
+  .rqc__headline {
+    text-wrap: balance;
+  }
+  /* stacked: copy first, then the cards artwork it explains */
+  .rqc__body {
+    order: 1;
+  }
+  .rqc__media {
+    order: 2;
+  }
+  .rqc__media img {
+    width: min(100%, 400px);
+  }
+}
+
+@media (max-width: 560px) {
+  .rqc__headline {
+    font-size: 26px;
+  }
+  .rqc__question {
+    font-size: 19px;
+  }
+  .rqc__chip {
+    font-size: 13px;
+    letter-spacing: 0.3px;
+  }
+}

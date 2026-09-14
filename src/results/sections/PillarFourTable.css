@@ -1,0 +1,189 @@
+/* Pillar four — "walk you through the whole table": copy left, calculator
+   artwork right, on the cream→plum gradient. Flush inside the accordion. */
+
+.rft {
+  background: #f6ecdf url('/assets/results-peach-bg.webp') center / cover;
+  padding: 76px 64px 88px;
+  display: grid;
+  grid-template-columns: 0.5fr 0.5fr;
+  align-items: center;
+  gap: 56px;
+}
+
+.rft__body {
+  max-width: 560px;
+}
+
+.rft__chip {
+  display: inline-block;
+  color: #ffffff;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  padding: 5px 16px;
+}
+
+.rft__chip--navy {
+  background: #16273b;
+  font-size: 20px;
+}
+
+/* "In the workshop" is the opening clause of the headline, not a separate
+   chip — it keeps the plum highlight but sits inline in the sentence, painted
+   on by a sweep. The panel only mounts when its pillar is opened, so a plain
+   CSS animation fires at exactly the right moment; no JS, no observer. */
+.rft__sweep {
+  color: #ffffff;
+  padding: 2px 12px;
+  background-image: linear-gradient(#641d4f, #641d4f);
+  background-repeat: no-repeat;
+  background-position: left center;
+  /* the end state is also the no-animation fallback, so the text can never
+     be left white-on-cream if the animation doesn't run */
+  background-size: 100% 100%;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  animation: rft-sweep 0.75s cubic-bezier(0.22, 0.7, 0.3, 1) 0.15s both;
+}
+
+@keyframes rft-sweep {
+  from {
+    background-size: 0% 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rft__sweep {
+    animation: none;
+  }
+}
+
+.rft__notice {
+  margin-top: 14px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.65;
+  color: #2c1a26;
+}
+
+.rft__headline {
+  /* carries the gap the plum chip used to hold above it */
+  margin-top: 46px;
+  max-width: 470px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 34px;
+  line-height: 1.3;
+  color: #3c1028;
+}
+
+/* ——— bullets ——— */
+
+.rft__bullets {
+  list-style: none;
+  margin: 44px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.rft__bullet {
+  display: flex;
+  align-items: flex-start;
+  gap: 22px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #2c1a26;
+}
+
+.rft__bullet img {
+  width: 24px;
+  height: auto;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.rft__closing {
+  margin-top: 54px;
+  max-width: 430px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 1.35;
+  color: #641d4f;
+}
+
+/* ——— media ——— */
+
+.rft__media {
+  display: flex;
+  justify-content: center;
+}
+
+.rft__media img {
+  width: min(100%, 620px);
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1200px) {
+  .rft {
+    padding: 56px 36px 64px;
+    gap: 34px;
+  }
+  .rft__headline {
+    font-size: 26px;
+    margin-top: 34px;
+  }
+  .rft__sweep {
+    padding: 2px 9px;
+  }
+  .rft__closing {
+    font-size: 22px;
+    margin-top: 40px;
+  }
+  .rft__bullets {
+    gap: 16px;
+    margin-top: 26px;
+  }
+}
+
+@media (max-width: 900px) {
+  .rft {
+    grid-template-columns: 1fr;
+    padding: 48px 22px 56px;
+  }
+  .rft__body,
+  .rft__headline,
+  .rft__closing {
+    max-width: 100%;
+  }
+  /* artwork reads better under the copy it explains */
+  .rft__media {
+    order: 2;
+  }
+}
+
+@media (max-width: 560px) {
+  .rft__chip--navy {
+    font-size: 16px;
+  }
+  .rft__chip--plum {
+    font-size: 21px;
+  }
+  .rft__headline {
+    font-size: 22px;
+  }
+  .rft__closing {
+    font-size: 19px;
+  }
+  .rft__bullet {
+    gap: 16px;
+  }
+  .rft__bullet img {
+    width: 19px;
+  }
+}

@@ -24,6 +24,7 @@
   font-size: 37px;
   line-height: 1.4;
   color: #ffffff;
+  text-wrap: balance;
 }
 
 .rpc__hl {
@@ -52,5 +53,18 @@
   .rpc__headline {
     margin-top: 30px;
     font-size: 21px;
+  }
+}
+
+/* centred copy gets too ragged at phone width — flush left instead */
+@media (max-width: 500px) {
+  .rpc {
+    text-align: left;
+  }
+  /* line-breaking doesn't reserve room for an inline fragment's own padding,
+     so at the 26px phone heading size 12px sides push the highlight past the
+     text column — trim it back */
+  .rpc__hl {
+    padding: 2px 6px;
   }
 }

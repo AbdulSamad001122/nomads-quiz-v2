@@ -1,0 +1,84 @@
+/* Pillar two — closing workshop banner. Flush inside the accordion card. */
+
+.rqw {
+  position: relative;
+  background: #0e0e12 url('/assets/results-navy-texture.webp') center / cover;
+  padding: 96px 48px 104px;
+  text-align: center;
+}
+
+.rqw__arrows {
+  position: absolute;
+  top: 62px;
+  right: 7%;
+  height: 96px;
+  width: auto;
+}
+
+.rqw__headline {
+  margin: 0 auto;
+  max-width: 900px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 1.32;
+  color: #ffffff;
+}
+
+.rqw__hl {
+  background: #e3f6fc;
+  color: #16273b;
+  padding: 2px 12px 5px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.rqw__sub {
+  margin: 46px auto 0;
+  max-width: 700px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #f4ede6;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rqw {
+    padding: 68px 32px 76px;
+  }
+  .rqw__arrows {
+    height: 72px;
+    top: 36px;
+    right: 5%;
+  }
+  .rqw__headline {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 700px) {
+  .rqw {
+    padding: 48px 20px 56px;
+  }
+  /* arrows would crowd the headline at this width */
+  .rqw__arrows {
+    display: none;
+  }
+  .rqw__headline {
+    font-size: 22px;
+  }
+  .rqw__sub {
+    margin-top: 32px;
+  }
+}
+
+/* at the 26px phone heading size the highlight's own side padding no longer
+   fits the line the browser broke for it — trim it back */
+@media (max-width: 500px) {
+  .rqw__hl {
+    padding: 2px 6px 5px;
+  }
+}

@@ -109,21 +109,53 @@
   .rpu {
     grid-template-columns: 1fr;
   }
+  /* stacked: copy first, then the pie it refers to */
+  .rpu__right {
+    order: 1;
+    padding: 40px 20px 44px;
+  }
   .rpu__left {
+    order: 2;
     padding: 44px 24px;
   }
   .rpu__pie {
     width: min(100%, 380px);
   }
-  .rpu__right {
-    padding: 40px 20px 44px;
-  }
+  /* icon | number | text in one row squeezes the text into a narrow column
+     that breaks every two words. Drop the icon onto its own row so the number
+     and its text share the full width below it. */
   .rpu__card {
     max-width: 100%;
-    gap: 16px;
     padding: 16px 18px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      'icon icon'
+      'num  text';
+    justify-items: start;
+    align-items: center;
+    column-gap: 16px;
+    row-gap: 10px;
   }
-  .rpu__para {
-    max-width: 100%;
+  .rpu__picto {
+    grid-area: icon;
+  }
+  .rpu__num {
+    grid-area: num;
+  }
+  .rpu__card-text {
+    grid-area: text;
+    /* the grid sets justify-items: start, which shrink-wraps every cell —
+       stretch this one so it fills the 1fr column and the lines can centre */
+    justify-self: stretch;
+    text-align: center;
+  }
+}
+
+@media (max-width: 500px) {
+  /* short standalone lead-in above the stat cards — centred reads better than
+     a ragged two-line left block at this width */
+  .rpu__lead {
+    text-align: center;
   }
 }

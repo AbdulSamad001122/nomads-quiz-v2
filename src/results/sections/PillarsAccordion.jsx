@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { PILLARS } from '../copy.js';
 import PillarOneIntro from './PillarOneIntro.jsx';
 import PillarOneUlcers from './PillarOneUlcers.jsx';
@@ -10,6 +10,15 @@ import PillarOneIsolation from './PillarOneIsolation.jsx';
 import PillarOneSituations from './PillarOneSituations.jsx';
 import PillarOneSituation3 from './PillarOneSituation3.jsx';
 import PillarOnePredictable from './PillarOnePredictable.jsx';
+import PillarTwoIntro from './PillarTwoIntro.jsx';
+import PillarTwoBlending from './PillarTwoBlending.jsx';
+import PillarTwoProof from './PillarTwoProof.jsx';
+import PillarTwoLoops from './PillarTwoLoops.jsx';
+import PillarTwoWorkshop from './PillarTwoWorkshop.jsx';
+import PillarFourIntro from './PillarFourIntro.jsx';
+import PillarFourTable from './PillarFourTable.jsx';
+import PillarFourChris from './PillarFourChris.jsx';
+import PillarFourClosing from './PillarFourClosing.jsx';
 import './PillarsAccordion.css';
 
 /**
@@ -32,10 +41,47 @@ const PANELS = {
       <PillarOnePredictable />
     </>
   ),
+  '02': (
+    <>
+      <PillarTwoIntro />
+      <PillarTwoBlending />
+      <PillarTwoProof />
+      <PillarTwoLoops />
+      <PillarTwoWorkshop />
+    </>
+  ),
+  '04': (
+    <>
+      <PillarFourIntro />
+      <PillarFourTable />
+      <PillarFourChris />
+      <PillarFourClosing />
+    </>
+  ),
 };
 
 export default function PillarsAccordion() {
   const [open, setOpen] = useState(null);
+
+  // The open panel runs to ~11,000px. Switching pillars collapses all of that
+  // from *above* the bar you tapped, and the browser holds scrollY where it
+  // was — so you land thousands of px deeper into the new pillar. Pin the
+  // tapped bar to the same viewport position it had before the toggle.
+  const pinned = useRef(null);
+
+  useLayoutEffect(() => {
+    const p = pinned.current;
+    if (!p) return;
+    pinned.current = null;
+    const delta = p.el.getBoundingClientRect().top - p.top;
+    if (delta) window.scrollBy(0, delta);
+  }, [open]);
+
+  const toggle = (event, num, isOpen) => {
+    const el = event.currentTarget;
+    pinned.current = { el, top: el.getBoundingClientRect().top };
+    setOpen(isOpen ? null : num);
+  };
 
   return (
     <section className="rpl">
@@ -54,7 +100,7 @@ export default function PillarsAccordion() {
                 type="button"
                 className="rpl__bar"
                 aria-expanded={isOpen}
-                onClick={() => setOpen(isOpen ? null : p.num)}
+                onClick={(e) => toggle(e, p.num, isOpen)}
               >
                 <span className="rpl__num">{p.num}</span>
                 <span className="rpl__labels">

@@ -24,9 +24,7 @@ export default function PillarOneSamar() {
             <h3 className="rps__headline">{PILLAR_ONE_SAMAR.headline}</h3>
             <p className="rps__para">{PILLAR_ONE_SAMAR.para1}</p>
             <p className="rps__para">
-              {PILLAR_ONE_SAMAR.para2Plain}
-              <br />
-              <strong>{PILLAR_ONE_SAMAR.para2Bold}</strong>
+              {PILLAR_ONE_SAMAR.para2Plain} <strong>{PILLAR_ONE_SAMAR.para2Bold}</strong>
             </p>
             <p className="rps__para">{PILLAR_ONE_SAMAR.para3}</p>
             <div className="rps__who">

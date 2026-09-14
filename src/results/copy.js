@@ -473,7 +473,7 @@ export const PILLAR_ONE_ULCERS = {
 export const PILLAR_ONE_CURIOUS = {
   // Doc: "(…for low conversions — sound familiar?)." — the design drops the
   // em-dash; doc wins, flagged.
-  para: 'And when your marketing only speaks to this tiny percentage, you have to reach a lot more eyeballs to hit your sales goals (so you’re bleeding time or money for low conversions — sound familiar?).',
+  para: 'And when your marketing only speaks to this tiny percentage, you have to reach a lot more eyeballs to hit your sales goals (so you’re bleeding time or money for low conversions sound familiar?).',
   headBefore: 'But what if you could pull the other 60% of the market pie in and make them',
   headHighlight: 'curious enough to consider your offer?',
 };
@@ -536,7 +536,7 @@ export const PILLAR_ONE_ISOLATION = {
   // Doc: "…or a positioning problem — because their teams work in isolation."
   // The design drops the em-dash and highlights the tail; doc dash kept
   // (outside the highlight), flagged.
-  head2Before: 'Most businesses can’t tell if a slow month is a traffic problem, an email problem, a sales problem or a positioning problem —',
+  head2Before: 'Most businesses can’t tell if a slow month is a traffic problem, an email problem, a sales problem or a positioning problem',
   head2Highlight: 'because their teams work in isolation.',
   sub: 'Very few know how much revenue each visitor is bringing. And without that, scaling becomes expensive guessing.',
 };
@@ -596,8 +596,193 @@ export const PILLAR_ONE_LARA_QUOTE = {
 export const PILLAR_ONE_PREDICTABLE = {
   // Doc: "…metrics that move revenue — together, not in isolation." The
   // design drops the em-dash and the comma; doc punctuation kept, flagged.
-  headline: 'Get predictable, consistent revenue by letting your entire team track, obsess, and optimise metrics that move revenue — together, not in isolation.',
+  headline: 'Get predictable, consistent revenue by letting your entire team track, obsess, and optimise metrics that move revenue together, not in isolation.',
   sub: 'And of the four they track together, here’s the one that I want you to pay the MOST attention to.',
+};
+
+export const PILLAR_TWO_INTRO = {
+  chip: 'Pillar 02', // design-added label (doc heads this "Pillar two — Contrarian POV™")
+  // Doc: "…become the ONLY option…" (caps for emphasis); the design renders
+  // "The only option" — doc wins, flagged.
+  headline: 'Why do some businesses become the ONLY option while charging the most in their category, and others get quietly dragged into price wars?',
+  para: 'After sitting inside dozens of funnels, one pattern kept showing up. Generic positioning slowly starts sounding like everybody else. The same promises, the same "we help you scale faster" every competitor is also, word for word, promising.',
+  boxLead: 'And over time, buyers stop seeing the difference.',
+  boxParas: [
+    'If you sell through calls, that\'s when you hear "can you send over your pricing?" and "how are you different from Competitor X?"',
+    'If buyers self-serve, you don\'t hear it at all, which is worse.',
+    'They open your page next to two competitor tabs, can\'t tell you apart in a few seconds, and quietly pick the cheaper or more familiar name.',
+  ],
+  // Doc runs these as one lowercase sentence ("No call, no objection, just a
+  // closed tab."); the design splits them into three capitalised swoosh
+  // bullets — design presentation kept, flagged.
+  bullets: ['No call', 'No objection', 'Just a closed tab'],
+  closing: 'Either way, the same thing is happening. When a buyer can’t see what sets you apart, price becomes the easiest thing left to compare.',
+  chipClose: 'So they compare it.',
+  // Design-only diagram labels (not in the doc) — flagged. The cards, brace
+  // and "Take a stand → chosen on sight" label are baked into the image.
+  diagramHeading: 'Look the same → compared on price',
+  diagramCaption: 'A market of one. No cheaper option to compare you to.',
+};
+
+export const PILLAR_TWO_BLENDING = {
+  headline: 'That’s the quiet cost of blending in.',
+  para: 'Think about Apple. It didn\'t win on processor speed. While everyone else talked specs, Apple talked creativity and identity, and that shifted how buyers saw the whole category. (Netflix did it. Liquid Death did it. None of them the cheapest.)',
+  // Doc runs this as one sentence ("So the question worth sitting with: how do
+  // you become the ONLY option…"); the design splits it into a mono chip +
+  // plum question — design presentation kept, flagged.
+  chip: 'SO THE QUESTION WORTH SITTING WITH:',
+  // Doc: "the ONLY option" (caps); design shows "The only option" — doc wins,
+  // flagged (same call as the Pillar 02 opener).
+  question: 'How do you become the ONLY option before a buyer starts comparing, on a call or in a browser tab?',
+  // Doc parenthesises "(inside the workshop)"; the design drops the brackets
+  // — doc wins, flagged.
+  leaps: 'That’s the work we do with the LEAPS™ Framework (inside the workshop).',
+  closing: 'Because when someone finally gets why you\'re different, the question changes. They stop asking "what\'s your price?" and start asking "how do we start?"',
+};
+
+export const PILLAR_TWO_PROOF = {
+  // Card headlines, names-with-surnames and role lines are all design-added
+  // (the doc has only the body sentences) — flagged.
+  cards: [
+    {
+      variant: 'plum',
+      // Design reads "for a $5K n just 19 days" — an obvious typo for
+      // "in just 19 days"; corrected here, flagged.
+      headline: 'Estelle went from 3 calls per month to 3 calls per week for a $5K in just 19 days',
+      body: 'In just 19 days, Estelle Winsette went from 3 calls per month to 3 calls per week while closing 2 out of every 3 calls for a $5K offer with her new “It’s not your body, it’s your clothes” positioning.',
+      avatar: '/assets/results-t-estelle.webp',
+      name: 'Estelle Winsette',
+      role: 'Stylist for lawyers',
+    },
+    {
+      variant: 'tan',
+      headline: 'Louis went from closing 1 in 29 calls to closing 29 out of 31 calls',
+      body: 'Louis went from closing 1 in 29 calls to closing 29 out of 31 calls with his “Creative Delivery” Positioning.',
+      avatar: '/assets/results-t-louis.webp',
+      name: 'Louis Butterfield',
+      role: 'Awesome business videos',
+    },
+    {
+      variant: 'ice',
+      headline: 'Nausheen I Chen went from never selling to her list to selling out her first bootcamp.',
+      body: 'Nausheen I Chen went from never selling to her list to selling out her first bootcamp.',
+      avatar: '/assets/results-t-nausheen.webp',
+      name: 'Nausheen I Chen',
+      role: 'Public Speaking',
+    },
+    {
+      variant: 'navy',
+      headline: 'Chris made 23X more sales from 829 quiz takers',
+      // "10,0000" is verbatim from the doc (and the design) — a five-digit
+      // figure that looks like a typo for 10,000; left as written, flagged.
+      body: 'Chris made 23X more sales from 829 quiz takers than from a list of 10,0000 subscribers.',
+      avatar: '/assets/results-t-chris.webp',
+      name: 'Chris Ritson',
+      role: 'Helping sales teams',
+    },
+  ],
+  // Doc: "^ We'll go deeper into our positioning process on the workshop."
+  // (the caret is a doc production marker) — dropped, flagged.
+  caption: 'We’ll go deeper into our positioning process on the workshop.',
+};
+
+export const PILLAR_TWO_LOOPS = {
+  headline: 'A strong positioning strategy is rarely built once and left untouched.',
+  intro: 'The best-performing conversion funnels are constantly learning from the people moving through them.',
+  // Doc runs these as one sentence; the design splits them into five swoosh
+  // bullets (the last one carrying the "All of it becomes feedback." tail).
+  // Doc's period after "conversations" is kept — the design drops it, flagged.
+  bullets: [
+    'Every sales call',
+    'Every objection',
+    'Every hesitation',
+    'Every drop in conversion',
+    'Every pattern showing up across buyer conversations. All of it becomes feedback.',
+  ],
+  captureBefore: 'We capture it through',
+  captureBold: '14 feedback loops',
+  captureAfter: 'running across the funnel, from the first ad click or opt-in to a post-delivery support ticket.',
+  // Doc: "Some are behavioral:  where people drop off…" / "Others are
+  // qualitative:  the thank-you page survey…" — the design lifts each label
+  // into a navy chip and drops the colon; design presentation kept, flagged.
+  behavioralChip: 'Some are behavioral',
+  behavioral: 'where people drop off in the quiz, how far into the workshop they watch, which sales page version wins.',
+  qualitativeChip: 'Others are qualitative',
+  qualitative: 'The thank-you page survey, the why-you-didn\'t-book survey, buyer interviews after purchase.',
+  closing1: 'Which means the messaging keeps evolving and the positioning keeps sharpening.',
+  closing2: 'The funnel keeps adapting to what buyers are actually thinking right now rather than refurbishing the messaging from what worked 6 months ago.',
+};
+
+export const PILLAR_TWO_WORKSHOP = {
+  // Doc: "…use Contrarian POVs™ to escape price wars and become the ONLY
+  // option in crowded markets." The design shows singular "POV™" and lower
+  // case "only" — doc wins on both, flagged.
+  headBefore: 'Watch the workshop to discover how category leaders use Contrarian POVs™ to escape price wars and become',
+  headHighlight: 'the ONLY option in crowded markets.',
+  // Doc ends "…it's the one holding the score down." — the design inserts
+  // "RPV™" before "score"; doc wins, flagged.
+  sub: 'If your Contrarian POV™ score came back low, it’s worth sitting with. It’s the pillar most teams quietly believe is fine. And 99% of the time, it’s the one holding the score down.',
+};
+
+export const PILLAR_FOUR_INTRO = {
+  chip: 'Pillar 04', // design-added label (doc heads this "Pillar four — Compounding Revenue per Subscriber™")
+  lead: 'Most teams treat a subscriber as a one-off.',
+  para1: 'They join, maybe they buy, and if they don\'t, they sit in a newsletter list going quietly cold.',
+  para2: 'But a subscriber has no ceiling on what they’re worth to you.',
+  // Doc: "It costs you maybe $5…" — the design drops the "s"; doc wins, flagged.
+  boxLeadBold: 'It costs you maybe $5 to get them onto your list',
+  boxLeadTail: '.',
+  boxPara: 'What they return after that has no fixed limit, and it comes down entirely to your email and SMS strategy:',
+  // Doc runs these as one lowercase clause; the design splits them into three
+  // capitalised swoosh bullets — design presentation kept, flagged.
+  // ⚠ Doc says "their first 14 days"; the design says "10 days" — doc wins,
+  // FLAGGED (a number, not punctuation).
+  bullets: ['Why they joined', 'What happens in their first 14 days', 'And what happens every month after'],
+  closing: 'That’s where compounding comes in.',
+  closingBold: 'Here’s what a year of it can look like.',
+  imageAlt: 'Compounding Revenue per Subscriber — a growing plant',
+};
+
+export const PILLAR_FOUR_TABLE = {
+  // Doc: "Notice what the table doesn't do: your list never doubles. And yet
+  // the revenue does." — the design lifts the clause before the colon into a
+  // navy chip and drops the final period; doc's period kept, flagged.
+  noticeChip: 'Notice what the table doesn’t do',
+  noticeText: 'your list never doubles. And yet the revenue does.',
+  // Doc: "In the workshop, I walk you through the whole table, step by step."
+  // Rendered as one sentence again — "In the workshop" keeps the plum
+  // highlight inline (with its comma restored), so this now matches the doc
+  // exactly. The key name is kept so nothing else has to change.
+  workshopChip: 'In the workshop',
+  headline: 'I walk you through the whole table, step by step.',
+  // Doc runs these as one sentence; the design splits them into three swoosh
+  // bullets (capitalised) — design presentation kept, flagged.
+  bullets: [
+    'You’ll see the one small number you nudge up each month,',
+    'How to reinvest so your list and your revenue per subscriber grow at the same time, and',
+    'The month-by-month math that lets you forecast this strategically (brace yourself! lots of math tbd here).',
+  ],
+  closing: 'Which is why how someone joins your list matters so much.',
+  imageAlt: 'The ad-spend calculator — monthly spend slider, today vs goal comparison table, and the monthly gain panel',
+};
+
+export const PILLAR_FOUR_CHRIS = {
+  // Headline is a design-added pull-out of the body's tail — flagged.
+  headline: '23 from 829 who’d joined through a diagnostic.',
+  para1: 'My client Chris sent the same emails to two lists:',
+  para2: '1 sale from 10,000 old subscribers, and 23 from 829 who’d joined through a diagnostic.',
+  // NOTE: the doc's next sentence — "The smaller list was worth far more,
+  // purely because of the intent they arrived with." — isn't in this design;
+  // flagged as not yet placed.
+};
+
+export const PILLAR_FOUR_CLOSING = {
+  // The doc sentence flagged as unplaced on the Chris card lands here.
+  sub: 'The smaller list was worth far more, purely because of the intent they arrived with.',
+  // Doc: "Compounding Revenue per Subscriber™ score" — the design drops the
+  // ™; doc wins, flagged.
+  headBefore: 'If your Compounding Revenue per Subscriber™ score came back low, it’s almost never a list-size problem. It’s a how-they-joined and',
+  headHighlight: 'what-happens-next problem.',
 };
 
 export const HERO = {

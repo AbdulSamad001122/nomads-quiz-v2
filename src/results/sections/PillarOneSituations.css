@@ -15,6 +15,26 @@
   width: 116px;
   height: auto;
   z-index: 5;
+  /* same slow spin as the quiz seam badge (QuizScreen.css) */
+  animation: rpm-stamp-spin 18s linear infinite;
+}
+
+/* The stamp is centred on the seam with a transform, and `animation` on
+   `transform` replaces it wholesale — so the translate has to be repeated in
+   both keyframes. If the positioning above ever changes, change it here too. */
+@keyframes rpm-stamp-spin {
+  from {
+    transform: translate(-50%, -34%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -34%) rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rpm__stamp {
+    animation: none;
+  }
 }
 
 .rpm__cell {
@@ -23,6 +43,8 @@
   justify-content: center;
   padding: 74px 56px;
   min-height: 460px;
+  /* inherits down to the chip/para/list inside each quadrant */
+  text-wrap: balance;
 }
 
 .rpm__cell--ice {
@@ -44,7 +66,7 @@
 /* ——— copy ——— */
 
 .rpm__body {
-  max-width: 470px;
+  width: 90%;
 }
 
 .rpm__chip {
@@ -120,12 +142,17 @@
   }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 900px) {
   .rpm {
     grid-template-columns: 1fr;
   }
-  /* keep each situation with its own image: copy 01, phone, laptop, copy 02
-     already reads correctly top-to-bottom when stacked */
+  /* Each situation must read copy-then-image when stacked. Pair 01 (ice copy →
+     phone) is already in that order; pair 02 is mirrored on desktop (laptop →
+     white copy), so push the laptop below its copy. Final order: copy 01,
+     phone, copy 02, laptop. */
+  .rpm__cell--teal {
+    order: 1;
+  }
   .rpm__cell {
     padding: 44px 22px;
   }
@@ -140,7 +167,7 @@
 
 @media (max-width: 560px) {
   .rpm__cell {
-    padding: 36px 18px;
+    padding: 36px 10px;
   }
   .rpm__chip {
     font-size: 18px;
@@ -151,6 +178,19 @@
   }
   .rpm__para,
   .rpm__bold {
-    margin-top: 22px;
+    margin-top: 16px;
+  }
+}
+
+/* Stacked, the ice copy cell is first, so the compass stamp straddling the
+   section's top edge sits over it — give that cell room to clear it.
+   Declared last so the `padding` shorthands above don't reset it. */
+@media (max-width: 900px) {
+  .rpm__cell--ice {
+    padding-top: 66px;
+  }
+  /* balancing costs line length in a narrow column — let it fill instead */
+  .rpm__cell {
+    text-wrap: wrap;
   }
 }

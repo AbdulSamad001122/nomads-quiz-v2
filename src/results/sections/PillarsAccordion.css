@@ -3,21 +3,34 @@
 
 .rpl {
   position: relative;
-  background: #f7f3e8 url('/assets/results-paper-texture.webp') center / cover;
-  padding: 110px 96px 120px;
+  /* Same paper texture as the rest of the page — but an open pillar makes this
+     section ~10,000px tall, and `cover` would blow the image up ~9x to fill it.
+     Tile it at its natural 1536x1024 instead so it never scales. The -seamless
+     copy is that identical texture with the 7/255 brightness step between its
+     opposite edges removed, so the tile joins itself with no visible line. */
+  background: #f7f3e8 url('/assets/results-paper-texture-seamless.webp') top center repeat;
+  padding: 36px 96px 120px;
+  /* The doodle hangs past the content column — clip it so it never widens the
+     page. `clip` rather than `hidden` because `hidden` makes this a scroll
+     container, which kills `position: sticky` for anything in the panels
+     (.rq2__diagram). `hidden` stays first as the fallback for browsers without
+     `clip` — they lose sticky but keep the clipping. */
+  overflow: hidden;
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 /* one shared content column — headline, sub and bars share the same left edge */
 .rpl__inner {
   position: relative;
-  max-width: 1190px;
+  max-width: 1350px;
   margin: 0 auto;
 }
 
 .rpl__doodle {
   position: absolute;
-  top: -40px;
-  right: 0;
+  top: -100px;
+  right: -170px;
   width: 300px;
   height: auto;
   pointer-events: none;
@@ -51,8 +64,11 @@
 
 .rpl__item {
   border-radius: 20px;
-  /* clips squared-off panel content to the card's rounded corners */
+  /* Clips squared-off panel content to the card's rounded corners. `clip`
+     for the same reason as .rpl above — `hidden` would break sticky inside
+     the panel; `hidden` first as the pre-`clip` fallback. */
   overflow: hidden;
+  overflow: clip;
 }
 
 .rpl__bar {
@@ -191,7 +207,7 @@
 
 @media (max-width: 640px) {
   .rpl {
-    padding: 60px 20px 70px;
+    padding: 60px 16px 70px;
   }
   .rpl__doodle {
     display: none;
@@ -226,5 +242,47 @@
   }
   .rpl__panel {
     padding: 0;
+  }
+}
+
+/* below 900 the section headline breaks to a stub last line — even it out */
+@media (max-width: 900px) {
+  .rpl__headline {
+    text-wrap: balance;
+  }
+
+  /* Headings and running copy go flush left for the whole stacked range.
+     CSS can't express "when this wraps to 3+ lines", so this is unconditional
+     rather than measured — deterministic, and it can't fail to apply.
+
+     Kept here rather than in each section file so all the pillar mobile
+     alignment lives in one place and shares one breakpoint. Two classes deep
+     (0,2,0) so it outranks the per-section rules without !important.
+
+     Deliberately NOT listed: .rpu__lead, which stays centred by request. */
+  .rpl__panel h2,
+  .rpl__panel h3,
+  .rpl__panel .rps__caption,
+  .rpl__panel .rpp__caption,
+  .rpl__panel .rp4__lines,
+  .rpl__panel .rp4__para,
+  .rpl__panel .rpi__sub,
+  .rpl__panel .rpd__sub,
+  .rpl__panel .rqp__caption,
+  .rpl__panel .rqw__sub,
+  .rpl__panel .rfz__sub {
+    text-align: left;
+  }
+}
+
+/* Mobile for the pillar content starts below 500px. Every section headline
+   inside an open pillar shares one size there, instead of the 19/21/22/26px
+   mix each section set for itself. Scoped to .rpl__panel so the main page is
+   untouched; the descendant selector also outranks the per-section rules.
+   h4 card titles (e.g. .rqp__headline) are a smaller tier and stay as-is. */
+@media (max-width: 500px) {
+  .rpl__panel h2,
+  .rpl__panel h3 {
+    font-size: 26px;
   }
 }

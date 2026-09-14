@@ -11,6 +11,8 @@
   align-items: center;
   justify-content: center;
   padding: 64px 56px;
+  /* inherits down to the copy inside each quadrant */
+  text-wrap: balance;
 }
 
 .rpt__cell--ice {
@@ -32,7 +34,7 @@
 /* ——— situation copy ——— */
 
 .rpt__body {
-  max-width: 500px;
+  width: 90%;
 }
 
 .rpt__chip {
@@ -55,7 +57,7 @@
 }
 
 .rpt__para {
-  margin-top: 24px;
+  margin-top: 16px;
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 16px;
@@ -86,7 +88,7 @@
 
 .rpt__quote {
   position: relative;
-  max-width: 520px;
+  width: 90%;
   padding: 26px 0 30px;
 }
 
@@ -171,16 +173,24 @@
   }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 900px) {
   .rpt {
     grid-template-columns: 1fr;
   }
-  /* stacked order reads: situation copy → flow → Lara → her quote */
+  /* Each pair must read copy-then-image when stacked. Pair 1 (situation copy →
+     flow) is already in that order; pair 2 is mirrored on desktop (Lara photo →
+     her quote), so push the photo below the quote. Final order: situation copy,
+     flow, quote, Lara. */
+  .rpt__cell--maroon {
+    order: 1;
+  }
   .rpt__cell {
     padding: 44px 22px;
+    /* balancing costs line length in a narrow column — let it fill instead */
+    text-wrap: wrap;
   }
   .rpt__flow {
-    width: min(100%, 300px);
+    width: 200px;
   }
   .rpt__lara {
     width: min(100%, 380px);
@@ -189,7 +199,7 @@
 
 @media (max-width: 560px) {
   .rpt__cell {
-    padding: 36px 18px;
+    padding: 36px 10px;
   }
   .rpt__chip {
     font-size: 18px;
