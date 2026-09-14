@@ -126,8 +126,13 @@ const SCENARIOS = {
 
 export { SCENARIOS };
 
+/**
+ * Bare `?results` (and any unknown name) lands on the clean page — neither
+ * conditional slot renders, so what's left is what every taker shares.
+ * Named scenarios below it show one conditional case each.
+ */
 export default function DevResults({ scenario }) {
-  const cfg = SCENARIOS[scenario] || SCENARIOS.fixture;
+  const cfg = SCENARIOS[scenario] || SCENARIOS['no-blocks'];
   const result = calculate(cfg.inputs, cfg.path);
   return <ResultsPage result={result} onBack={() => {}} adAdjustable={!!cfg.adAdjustable} />;
 }
