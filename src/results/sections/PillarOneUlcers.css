@@ -134,7 +134,7 @@
      that breaks every two words. Drop the icon onto its own row so the number
      and its text share the full width below it. */
   .rpu__card {
-    max-width: 70%;
+    max-width: 100%;
     padding: 16px 18px;
     display: grid;
     grid-template-columns: auto 1fr;

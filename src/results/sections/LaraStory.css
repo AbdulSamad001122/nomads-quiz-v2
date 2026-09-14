@@ -118,11 +118,13 @@
     max-width: none;
     margin: 0;
   }
+  /* stacked: Lara's portrait on top, her story below */
+  .rls__right {
+    order: -1;
+    padding: 56px 24px;
+  }
   .rls__left {
     padding: 64px 40px 60px;
-  }
-  .rls__right {
-    padding: 56px 24px;
   }
   .rls__lara {
     width: min(100%, 420px);
