@@ -49,7 +49,7 @@ export default function AnswerCheckModal({ message, onBack, onKeep }) {
           >
             Go back and check
           </button>
-          <button type="button" className="qac__btn qac__btn--keep" onClick={onKeep}>
+          <button type="button" className="q-btn qac__btn qac__btn--keep" onClick={onKeep}>
             Keep my answers
           </button>
         </div>
