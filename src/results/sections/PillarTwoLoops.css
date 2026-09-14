@@ -11,7 +11,7 @@
 
 .rqf__left {
   background: #ffffff;
-  padding: 76px 60px 84px;
+  padding: 76px 44px 84px; /* side padding trimmed so the headline can hold 3 lines at 38px */
   display: flex;
   align-items: center;
 }
@@ -21,7 +21,7 @@
 }
 
 .rqf__headline {
-  max-width: 484px;
+  max-width: 520px; /* 3 lines at 38px: "A strong positioning" / "strategy is rarely built" / "once and left untouched." */
   font-family: var(--font-headline);
   font-weight: 800;
   font-size: 38px;
@@ -112,6 +112,14 @@
 }
 
 /* ——— responsive ——— */
+
+/* 1201–1439: the copy column narrows faster than the headline; a fluid size
+   (38px at 1440, ~30px at 1201) keeps the three-line break intact */
+@media (max-width: 1439px) {
+  .rqf__headline {
+    font-size: min(38px, calc(3.3vw - 9.5px));
+  }
+}
 
 @media (max-width: 1200px) {
   .rqf__left {
