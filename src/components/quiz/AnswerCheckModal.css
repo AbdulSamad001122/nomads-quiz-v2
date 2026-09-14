@@ -20,8 +20,9 @@
   max-width: 540px;
   background: #f7f1e6;
   border: 2px solid #391129;
+  border-radius: 20px;
   box-shadow: 9px 9px 0 0 #391129;
-  padding: 34px 38px 32px;
+  padding: 55px 55px 55px;
   text-align: center;
   animation: qac-rise 0.2s ease-out;
 }
