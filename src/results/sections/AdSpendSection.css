@@ -392,9 +392,15 @@
   }
   .rad__headline {
     font-size: 26px;
+    line-height: 1.5; /* room for the per-line highlight padding */
   }
+  /* inline so the purple hugs the words on each line instead of one box
+     behind the whole wrapped run; clone repeats the padding per fragment */
   .rad__hl {
+    display: inline;
     padding: 2px 10px 4px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
   }
   .rad__sub {
     font-size: 16px;
