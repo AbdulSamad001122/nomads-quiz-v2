@@ -18,10 +18,10 @@
 
 .rpc__headline {
   margin: 48px auto 0;
-  max-width: 900px;
+  max-width: 924px;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: 37px;
+  font-size: 38px;
   line-height: 1.4;
   color: #ffffff;
   text-wrap: balance;

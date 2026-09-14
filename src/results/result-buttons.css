@@ -1,0 +1,125 @@
+/* ============================================================
+   Result-page button hover — the same motion as .q-btn
+   (src/styles/button.css), which the quiz slides and the landing
+   page share: lift up-left 2px, scale 1.04, and deepen the hard
+   offset shadow by 2px. Press resets to flat.
+
+   MOTION ONLY. .q-btn also swaps to plum/white on hover; that is
+   deliberately NOT copied, because every result CTA has its own
+   palette (ice blue, pink, plum, cream) and recolouring them
+   would change the design. Nothing here sets a colour, a size,
+   a border or a padding.
+
+   Each button keeps its own shadow colour and offset — the hover
+   rules below only add 2px to whatever that button already uses,
+   so the buttons stay visually distinct.
+
+   Scoped under .results-page (0,2,x) so these win over the
+   per-section rules (0,1,x) regardless of CSS import order —
+   two sections already had a hover that moved the button the
+   wrong way (down-right, shrinking the shadow).
+   ============================================================ */
+
+.results-page .rnav__cta,
+.results-page .rad__channel-btn,
+.results-page .rcta__btn,
+.results-page .rgp__btn,
+.results-page .rtp__btn,
+.results-page .rwk__btn,
+.results-page .ryc__btn {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.results-page .rnav__cta:hover,
+.results-page .rad__channel-btn:hover,
+.results-page .rcta__btn:hover,
+.results-page .rgp__btn:hover,
+.results-page .rtp__btn:hover,
+.results-page .rwk__btn:hover,
+.results-page .ryc__btn:hover {
+  transform: translate(-2px, -2px) scale(1.04);
+}
+
+.results-page .rnav__cta:active,
+.results-page .rad__channel-btn:active,
+.results-page .rcta__btn:active,
+.results-page .rgp__btn:active,
+.results-page .rtp__btn:active,
+.results-page .rwk__btn:active,
+.results-page .ryc__btn:active {
+  transform: translate(0, 0) scale(1);
+}
+
+/* ——— shadow deepen: each button's own colour, +2px ——— */
+
+.results-page .rnav__cta:hover {
+  box-shadow: 7px 7px 0 #152638;
+}
+.results-page .rnav__cta:active {
+  box-shadow: 3px 3px 0 #152638;
+}
+
+.results-page .rad__channel-btn:hover {
+  box-shadow: 7px 7px 0 #f0e5d8;
+}
+.results-page .rad__channel-btn:active {
+  box-shadow: 3px 3px 0 #f0e5d8;
+}
+
+.results-page .rcta__btn:hover {
+  box-shadow: 8px 8px 0 #43123255;
+}
+.results-page .rcta__btn:active {
+  box-shadow: 3px 3px 0 #43123255;
+}
+
+.results-page .rgp__btn:hover {
+  box-shadow: 8px 8px 0 #431232;
+}
+.results-page .rgp__btn:active {
+  box-shadow: 3px 3px 0 #431232;
+}
+
+.results-page .rtp__btn:hover {
+  box-shadow: 7px 7px 0 #16273b;
+}
+.results-page .rtp__btn:active {
+  box-shadow: 3px 3px 0 #16273b;
+}
+
+.results-page .rwk__btn:hover {
+  box-shadow: 7px 7px 0 #5d1b4e;
+}
+.results-page .rwk__btn:active {
+  box-shadow: 3px 3px 0 #5d1b4e;
+}
+
+.results-page .ryc__btn:hover {
+  box-shadow: 8px 8px 0 #431232;
+}
+.results-page .ryc__btn:active {
+  box-shadow: 3px 3px 0 #431232;
+}
+
+/* Respect the OS setting — the buttons still get their hover shadow,
+   they just don't move. */
+@media (prefers-reduced-motion: reduce) {
+  .results-page .rnav__cta,
+  .results-page .rad__channel-btn,
+  .results-page .rcta__btn,
+  .results-page .rgp__btn,
+  .results-page .rtp__btn,
+  .results-page .rwk__btn,
+  .results-page .ryc__btn {
+    transition: box-shadow 0.15s ease;
+  }
+  .results-page .rnav__cta:hover,
+  .results-page .rad__channel-btn:hover,
+  .results-page .rcta__btn:hover,
+  .results-page .rgp__btn:hover,
+  .results-page .rtp__btn:hover,
+  .results-page .rwk__btn:hover,
+  .results-page .ryc__btn:hover {
+    transform: none;
+  }
+}

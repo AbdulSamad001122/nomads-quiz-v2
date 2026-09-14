@@ -17,6 +17,12 @@
 .rwp__left-inner {
   max-width: 594px;
   margin: 0 auto;
+  /* The question bubbles make the right column far taller than this copy, so
+     pin it while the reader scrolls through them. 94px clears the sticky nav
+     (70px) plus breathing room — same offset as the pillar sections. Turned
+     off at 1100 below, where the two columns stack. */
+  position: sticky;
+  top: 94px;
 }
 
 .rwp__para {
@@ -174,6 +180,11 @@
   .rwp__right-inner {
     max-width: none;
     margin: 0;
+  }
+  /* stacked — the left panel is only as tall as its copy, nothing to stick
+     within, so drop back to normal flow */
+  .rwp__left-inner {
+    position: static;
   }
   /* compact intro band — no dead bear space under the text */
   .rwp__left {

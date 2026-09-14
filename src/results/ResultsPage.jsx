@@ -28,6 +28,8 @@ import NotJustSite from './sections/NotJustSite.jsx';
 import TwoPaths from './sections/TwoPaths.jsx';
 import { resolveTokens } from './resolveTokens.js';
 import './results.css';
+// last, so the shared button hover wins over the per-section rules
+import './result-buttons.css';
 
 /**
  * The designed results page. Every section lives in src/results/sections/,

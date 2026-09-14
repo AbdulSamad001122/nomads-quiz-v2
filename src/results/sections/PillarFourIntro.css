@@ -122,35 +122,12 @@
   padding: 60px 56px;
 }
 
-.rfs__keyline {
-  position: absolute;
-  inset: 28px 30px;
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  pointer-events: none;
-}
-
+/* The keyline frame and the corner compass badge used to be drawn here in
+   CSS; the re-exported artwork has both baked in, so they're gone rather than
+   doubled up. */
 .rfs__art {
   position: relative;
   width: min(100%, 560px);
-}
-
-/* compass badge boxed into the frame's bottom-right corner */
-.rfs__badge {
-  position: absolute;
-  right: 30px;
-  bottom: 28px;
-  width: 72px;
-  height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-left: 1px solid rgba(255, 255, 255, 0.8);
-  border-top: 1px solid rgba(255, 255, 255, 0.8);
-}
-
-.rfs__badge img {
-  width: 34px;
-  height: auto;
 }
 
 /* ——— responsive ——— */
@@ -168,13 +145,6 @@
   .rfs__right {
     padding: 48px 34px;
   }
-  .rfs__badge {
-    width: 58px;
-    height: 58px;
-  }
-  .rfs__badge img {
-    width: 28px;
-  }
 }
 
 @media (max-width: 900px) {
@@ -191,15 +161,8 @@
     padding: 44px 26px;
     min-height: 420px;
   }
-  .rfs__keyline {
-    inset: 18px 18px;
-  }
   .rfs__art {
     width: min(100%, 380px);
-  }
-  .rfs__badge {
-    right: 18px;
-    bottom: 18px;
   }
 }
 
@@ -217,12 +180,5 @@
   }
   .rfs__bullet img {
     width: 18px;
-  }
-  .rfs__badge {
-    width: 48px;
-    height: 48px;
-  }
-  .rfs__badge img {
-    width: 23px;
   }
 }

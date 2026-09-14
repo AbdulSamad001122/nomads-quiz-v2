@@ -21,10 +21,10 @@
 }
 
 .rqf__headline {
-  max-width: 420px;
+  max-width: 484px;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: 33px;
+  font-size: 38px;
   line-height: 1.3;
   color: #16273b;
 }
@@ -94,13 +94,21 @@
 .rqf__right {
   background: #2c4a4a url('/assets/results-mint-gradient.webp') center / cover;
   display: flex;
-  align-items: center;
+  /* top-aligned so the loop has room to travel as a sticky item — centred, it
+     would sit mid-column with nothing above it to scroll through */
+  align-items: flex-start;
   justify-content: center;
   padding: 60px 48px;
 }
 
 .rqf__loop {
   width: min(100%, 520px);
+  /* desktop + tablet only — cleared at 900 below, where the panel stacks */
+  margin-top: 8px;
+  /* pinned while the copy column scrolls past, same as .rq2__diagram — the
+     94px clears the sticky nav (70px) plus breathing room */
+  position: sticky;
+  top: 94px;
 }
 
 /* ——— responsive ——— */
@@ -134,6 +142,10 @@
   }
   .rqf__loop {
     width: min(100%, 420px);
+    /* stacked — the panel is only as tall as the loop, nothing to stick
+       within, so drop back to normal flow */
+    position: static;
+    margin-top: 0;
   }
 }
 

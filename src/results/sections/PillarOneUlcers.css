@@ -11,13 +11,19 @@
 .rpu__left {
   background: #2a0f1c url('/assets/results-bear-bg.webp') center / cover;
   display: flex;
-  align-items: center;
+  /* top-aligned so the pie has room to travel as a sticky item — centred, it
+     would sit mid-column with nothing above it to scroll through */
+  align-items: flex-start;
   justify-content: center;
   padding: 70px 44px;
 }
 
 .rpu__pie {
   width: min(100%, 480px);
+  /* pinned while the copy column scrolls past, same as .rqf__loop and
+     .rq2__diagram — 94px clears the sticky nav (70px) plus breathing room */
+  position: sticky;
+  top: 94px;
 }
 
 /* ——— right cream panel ——— */
@@ -120,12 +126,15 @@
   }
   .rpu__pie {
     width: min(100%, 380px);
+    /* stacked — the panel is only as tall as the pie, nothing to stick
+       within, so drop back to normal flow */
+    position: static;
   }
   /* icon | number | text in one row squeezes the text into a narrow column
      that breaks every two words. Drop the icon onto its own row so the number
      and its text share the full width below it. */
   .rpu__card {
-    max-width: 100%;
+    max-width: 70%;
     padding: 16px 18px;
     display: grid;
     grid-template-columns: auto 1fr;
