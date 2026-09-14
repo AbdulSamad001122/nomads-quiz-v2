@@ -41,11 +41,8 @@ export default function PillarFourIntro() {
       </div>
 
       <div className="rfs__right">
-        <div className="rfs__keyline" aria-hidden="true" />
+        {/* the keyline frame and corner compass are baked into the artwork */}
         <img className="rfs__art" src="/assets/results-p4-crps.webp" alt={p.imageAlt} />
-        <span className="rfs__badge" aria-hidden="true">
-          <img src="/assets/results-icon-nomads-white.png" alt="" />
-        </span>
       </div>
     </div>
   );

@@ -32,7 +32,7 @@
   margin-top: 44px;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: 25px;
+  font-size: 25px; /* copy column is only 496px here; 38px would take this from 4 lines to 8 */
   line-height: 1.45;
   color: #16273b;
 }
@@ -129,6 +129,7 @@
      is no taller than the diagram, so there'd be nothing to stick within. */
   position: sticky;
   top: 94px;
+  padding-top: 25px;
 }
 
 .rq2__diagram-head {

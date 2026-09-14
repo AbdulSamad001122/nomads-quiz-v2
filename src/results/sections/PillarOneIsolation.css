@@ -20,10 +20,10 @@
 
 .rpi__headline {
   margin: 26px auto 0;
-  max-width: 780px;
+  max-width: 801px;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: 37px;
+  font-size: 38px;
   line-height: 1.3;
   color: #3c1028;
   text-wrap: balance;
@@ -87,10 +87,10 @@
 
 .rpi__headline2 {
   margin: 0 auto;
-  max-width: 900px;
+  max-width: 924px;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: 37px;
+  font-size: 38px;
   line-height: 1.32;
   color: #ffffff;
   text-wrap: balance;

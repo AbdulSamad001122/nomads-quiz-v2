@@ -69,10 +69,10 @@
 .rft__headline {
   /* carries the gap the plum chip used to hold above it */
   margin-top: 46px;
-  max-width: 470px;
+  max-width: 524px;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: 34px;
+  font-size: 38px;
   line-height: 1.3;
   color: #3c1028;
 }

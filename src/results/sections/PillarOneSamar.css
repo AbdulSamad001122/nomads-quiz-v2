@@ -58,7 +58,7 @@
   max-width: 620px;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: 26px;
+  font-size: 36px; /* card column too narrow for 38px without adding a line */
   line-height: 1.35;
   color: #641d4f;
 }
