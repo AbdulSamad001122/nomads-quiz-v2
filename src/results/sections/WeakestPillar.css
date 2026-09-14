@@ -18,11 +18,11 @@
   max-width: 594px;
   margin: 0 auto;
   /* The question bubbles make the right column far taller than this copy, so
-     pin it while the reader scrolls through them. 94px clears the sticky nav
-     (70px) plus breathing room — same offset as the pillar sections. Turned
-     off at 1100 below, where the two columns stack. */
+     pin it while the reader scrolls through them. The nav grows to ~100px at
+     laptop widths when its CTA buttons wrap, so 130px keeps clear of it with
+     breathing room. Turned off at 1100 below, where the two columns stack. */
   position: sticky;
-  top: 94px;
+  top: 130px;
 }
 
 .rwp__para {
@@ -46,16 +46,20 @@
 
 .rwp__right {
   position: relative;
+  overflow: clip; /* the footprints art is shifted past the right edge */
   background: #f6e8dc url('/assets/results-peach-bg.webp') center / cover;
   padding: 76px 84px 84px;
 }
 
+/* hugs the bottom-right corner: the PNG carries ~19% transparent margin on
+   its right, so it is shifted by that much to bring the ink flush */
 .rwp__footprints {
   position: absolute;
-  right: 3%;
-  bottom: 24px;
+  right: 0;
+  bottom: 0;
   height: 250px;
   width: auto;
+  transform: translateX(19%);
   pointer-events: none;
 }
 
@@ -207,7 +211,6 @@
   }
   .rwp__footprints {
     height: 170px;
-    bottom: 14px;
   }
 }
 
@@ -243,6 +246,5 @@
   }
   .rwp__footprints {
     height: 120px;
-    right: 4%;
   }
 }
