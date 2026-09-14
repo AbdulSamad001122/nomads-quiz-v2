@@ -4,6 +4,11 @@
 
 .ric {
   position: relative;
+  /* the spinning badge's rotated box would poke past the right edge on
+     mobile and add a 2px horizontal scroll; clip x only (y stays visible so
+     the badge can straddle the top seam) */
+  overflow-x: clip;
+  overflow-y: visible;
   background: #f7f4ea url('/assets/results-paper-texture.webp') center / cover;
   padding: 73px 40px 81px;
 }
