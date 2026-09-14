@@ -114,7 +114,8 @@
     margin-top: 24px;
   }
   .qac .qac__btn {
-    width: 100%;
+    width: fit-content;
     padding: 13px 18px;
+    min-width: 200px;
   }
 }
