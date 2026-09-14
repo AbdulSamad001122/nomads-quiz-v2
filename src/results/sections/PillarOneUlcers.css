@@ -131,15 +131,16 @@
     position: static;
   }
   /* icon | number | text in one row squeezes the text into a narrow column
-     that breaks every two words. Drop the icon onto its own row so the number
-     and its text share the full width below it. */
+     that breaks every two words. Stack the icon above the number in the left
+     column instead, and let the text span both rows so it sits at the card's
+     true vertical middle rather than down on the number's line. */
   .rpu__card {
     max-width: 100%;
     padding: 16px 18px;
     display: grid;
     grid-template-columns: auto 1fr;
     grid-template-areas:
-      'icon icon'
+      'icon text'
       'num  text';
     justify-items: start;
     align-items: center;
