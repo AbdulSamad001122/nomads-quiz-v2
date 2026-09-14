@@ -499,7 +499,8 @@ export const LARA_STORY = {
 };
 
 export const YOUR_CALL = {
-  para1: 'Run it in-house, or hand it to our dream team that\'s done it across 15+ industries.',
+  // Updated wording (user, 2026-09-14): opens with "Then it's your call."
+  para1: 'Then it\'s your call. Run it in-house, or hand it to our dream team that\'s done it across 15+ industries.',
   band: 'No pressure to pick the second one.',
   // Doc: "…you leave seeing your funnel more clearly…" — the design shows a
   // "customer journey" rewrite (with a missing-space typo); doc wins, flagged.
@@ -619,6 +620,8 @@ export const PILLAR_ONE_ISOLATION = {
   head2Before: 'Most businesses can’t tell if a slow month is a traffic problem, an email problem, a sales problem or a positioning problem',
   head2Highlight: 'because their teams work in isolation.',
   sub: 'Very few know how much revenue each visitor is bringing. And without that, scaling becomes expensive guessing.',
+  // Bold lead-in to the situations below (doc row 7, added 2026-09-14).
+  subLead: 'Here’s how that manifests:',
 };
 
 export const PILLAR_ONE_SITUATIONS = {

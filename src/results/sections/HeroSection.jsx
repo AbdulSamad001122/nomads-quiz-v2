@@ -22,7 +22,9 @@ export default function HeroSection({ tokens }) {
 
           <div className="rhero__number-row">
             <span className="rhero__number">{fill(HERO.numberToken, tokens)}</span>
-            <span className="rhero__number-chip">{HERO.numberChip}</span>
+            <span className="rhero__number-chip">
+              <span className="rhero__number-chip-text">{HERO.numberChip}</span>
+            </span>
           </div>
 
           <div className="rhero__formula">

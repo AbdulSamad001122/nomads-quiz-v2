@@ -51,7 +51,12 @@ export default function AdSpendSection({ result, adAdjustable = false }) {
   ];
 
   // Ticks span 0–100 while the input runs 10–100, mirroring how the reference
-  // labels a "$0" tick below the slider's real $500 floor.
+  // labels a "$0" tick below the slider's real floor.
+  //
+  // MERGE NOTE (section/results-responsive-2): that branch relabelled these
+  // ticks "$500 … $50,000" for the old ad-SPEND slider. Logic Doc · 7 makes
+  // this control the ad-traffic SHARE, so the spend ticks and their sliderMax
+  // no longer exist. Dropped deliberately, not lost in the merge.
   const ticks = [0, 20, 40, 60, 80, 100];
   const fmtTick = (v) => `${v}%`;
   const fillPct = ((sharePct - 10) / 90) * 100;
