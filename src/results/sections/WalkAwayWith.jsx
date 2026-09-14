@@ -1,4 +1,5 @@
 import { WALK_AWAY } from '../copy.js';
+import { emphasize } from '../emphasize.jsx';
 import './WalkAwayWith.css';
 
 function Lines({ lines }) {
@@ -44,7 +45,7 @@ export default function WalkAwayWith() {
               <span className="rwa__chip">{card.chip}</span>
               {card.paras.map((para, i) => (
                 <p key={i} className="rwa__card-text">
-                  <Lines lines={para} />
+                  {emphasize(para.join(' '), card.bold)}
                 </p>
               ))}
             </div>

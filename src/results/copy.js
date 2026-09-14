@@ -348,6 +348,7 @@ export const WALK_AWAY = {
       icon: '/assets/results-icon-envelope-plum.svg',
       stat: '45%',
       chip: 'Email click rate',
+      bold: ['6%', '45%', 'most profitable channel'],
       paras: [
         [
           'One client was proud of a 6%',
@@ -364,6 +365,7 @@ export const WALK_AWAY = {
       icon: '/assets/results-icon-laptop-plum.png',
       stat: '14%',
       chip: 'Demo conversion rate',
+      bold: ['440,000 shopify sessions', '0.04%', '14%'],
       paras: [
         ['Another clocked 440,000 shopify', 'sessions with 6X ad ROAS. So ads', 'were healthy, but were they?'],
         ['I found behind the 6X ROAS', 'was a measly 0.04% traffic to', 'demo conversion rate.'],
@@ -417,6 +419,16 @@ export const LARA_STORY = {
   ],
   para3:
     'So we partnered with fresh collaborators and reached audiences that hadn\'t been tapped yet. And the next launch pulled so many registrations that Zoom crashed and Lara had to apologise to her email list.',
+  // Phrases set a touch bolder inside the copy (see emphasize.jsx) — the
+  // strings above stay verbatim.
+  bold: [
+    'wasn\'t pulling enough people',
+    'same handful of collaborators',
+    'Same audiences',
+    'audience fatigue',
+    'fresh collaborators',
+    'Zoom crashed',
+  ],
   band: 'That\'s what you get on the call.',
 };
 
@@ -955,6 +967,9 @@ export const BOUNCE_RATES = {
     'the same thing: sites with 50, 60, 70% bounce rates. Thousands of',
     'visitors, on a page built only for the person ready to buy today.',
   ],
+  // Phrases set a touch bolder (see emphasize.jsx); "Thousands of" +
+  // "visitors" are listed separately because the line map splits them.
+  bold: ['tripled', 'revenue doubled', '50, 60, 70% bounce rates', 'Thousands of', 'visitors'],
   // The three bounce-rate cards are fully baked design art (Groups 841–843:
   // ice card, AVG-duration chip, laptop + Similarweb popup, name, bounce
   // badge). The doc holds only an empty visual row here — design-only,
@@ -1005,6 +1020,7 @@ export const TWO_PATHS = {
     'business has more sitting inside it than it’s currently pulling out,',
     'especially in the 70% of the market you’ve been walking past.',
   ],
+  panelBold: ['more sitting inside it', '70% of the market'],
   // Doc runs this as one sentence ("Watch the workshop with your team, or
   // bring your numbers to a call, and let’s plan how we can add your next
   // $125k…"). The design splits it into heading + sub and drops the comma
