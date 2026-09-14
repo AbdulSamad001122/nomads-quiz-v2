@@ -69,14 +69,23 @@
   white-space: nowrap;
 }
 
+/* the white run is painted by the inner inline span so a wrapped chip gets
+   one highlight per line (hugging the words) instead of one wide box */
 .rhero__number-chip {
-  background: #ffffff;
-  color: #10131f;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: 19px;
-  padding: 7px 13px;
+  font-size: 38px;
+  line-height: 1.5;
   margin-bottom: 18px;
+}
+
+.rhero__number-chip-text {
+  display: inline;
+  background: #ffffff;
+  color: #10131f;
+  padding: 4px 13px 6px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
 /* ——— formula card ——— */
@@ -175,6 +184,12 @@
   .rhero {
     padding: 40px 18px 100px;
   }
+  /* number + chip no longer fit side by side; let the chip drop under the
+     number instead of forcing the column (and the headline) past the edge */
+  .rhero__number-row {
+    flex-wrap: wrap;
+    row-gap: 10px;
+  }
   .rhero__intro {
     font-size: 16px;
   }
@@ -190,8 +205,10 @@
   }
   .rhero__number-chip {
     font-size: 15px;
-    padding: 5px 10px;
     margin-bottom: 8px;
+  }
+  .rhero__number-chip-text {
+    padding: 3px 10px 4px;
   }
   .rhero__formula {
     font-size: 16px;
