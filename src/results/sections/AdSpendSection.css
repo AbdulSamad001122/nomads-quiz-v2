@@ -158,16 +158,6 @@
   cursor: pointer;
 }
 
-.rad__ticks {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 12px;
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 15px;
-  color: #f4ede6;
-}
-
 .rad__adjust {
   margin: 20px 0;
   text-align: center;
@@ -438,10 +428,6 @@
     width: 18px;
     height: 18px;
     border-width: 2.5px;
-  }
-  .rad__ticks {
-    margin-top: 8px;
-    font-size: 10.5px;
   }
   .rad__adjust {
     margin: 10px 0;

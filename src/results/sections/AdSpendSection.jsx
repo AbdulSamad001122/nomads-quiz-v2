@@ -50,15 +50,14 @@ export default function AdSpendSection({ result, adAdjustable = false }) {
     { key: 'roas', label: AD_SPEND.tableLabels.roas, today: roas(d.currentROAS), goal: roas(d.goalROAS) },
   ];
 
-  // Ticks span 0–100 while the input runs 10–100, mirroring how the reference
-  // labels a "$0" tick below the slider's real floor.
+  // Track fill behind the thumb. The copy doc's slider mockup (image4.png) is
+  // label / track / value with no tick row, so there are no scale labels —
+  // the live value sits above the track instead.
   //
-  // MERGE NOTE (section/results-responsive-2): that branch relabelled these
-  // ticks "$500 … $50,000" for the old ad-SPEND slider. Logic Doc · 7 makes
-  // this control the ad-traffic SHARE, so the spend ticks and their sliderMax
-  // no longer exist. Dropped deliberately, not lost in the merge.
-  const ticks = [0, 20, 40, 60, 80, 100];
-  const fmtTick = (v) => `${v}%`;
+  // MERGE NOTE (section/results-responsive-2): that branch relabelled a tick
+  // row "$500 … $50,000" for the old ad-SPEND slider. Logic Doc · 7 makes this
+  // control the ad-traffic SHARE, so those ticks and their sliderMax no longer
+  // exist. Dropped deliberately, not lost in the merge.
   const fillPct = ((sharePct - 10) / 90) * 100;
 
   return (
@@ -103,11 +102,6 @@ export default function AdSpendSection({ result, adAdjustable = false }) {
                   }}
                   aria-label={AD_SPEND.shareLabel}
                 />
-                <div className="rad__ticks">
-                  {ticks.map((t) => (
-                    <span key={t}>{fmtTick(t)}</span>
-                  ))}
-                </div>
               </div>
 
               <p className="rad__adjust">{AD_SPEND.adjustNote}</p>
