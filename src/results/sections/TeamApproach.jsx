@@ -17,21 +17,13 @@ export default function TeamApproach() {
       </div>
 
       <div className="rta__right">
+        <div className="rta__right-inner">
         <p className="rta__lead">{TEAM_APPROACH.lead}</p>
 
         <div className="rta__bars">
           {TEAM_APPROACH.bars.map((bar) => (
             <div key={bar.variant} className={`rta__bar rta__bar--${bar.variant}`}>
-              <img
-                className="rta__bar-icon"
-                src={
-                  bar.variant === 'cream'
-                    ? '/assets/results-icon-nomads-plum.png'
-                    : '/assets/results-icon-nomads-white.png'
-                }
-                alt=""
-                aria-hidden="true"
-              />
+              <span className="rta__bar-icon" aria-hidden="true" />
               {bar.text}
             </div>
           ))}
@@ -42,6 +34,7 @@ export default function TeamApproach() {
         <p className="rta__para">{TEAM_APPROACH.para2Lines.join(' ')}</p>
 
         <p className="rta__para">{TEAM_APPROACH.para3Lines.join(' ')}</p>
+        </div>
       </div>
     </section>
   );

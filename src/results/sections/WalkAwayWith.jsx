@@ -7,25 +7,30 @@ function Lines({ lines }) {
 
 /**
  * Section — "So here's what you walk away with." Cream speckle bg: left rule
- * + compass, EB headline with the big plum brush-script line; right: the two
- * stat cards (45% email / 14% demo) and the plum comparison band.
+ * + compass, EB headline with the big plum brush-script line (vertically
+ * centred on the cards); right: the two stat cards (45% email / 14% demo) and
+ * the maroon comparison band. "This way" doodle peeks in from the top-right.
  */
 export default function WalkAwayWith() {
   return (
     <section className="rwa">
+      <img className="rwa__doodle" src="/assets/results-this-way.png" alt="" aria-hidden="true" />
+
       <div className="rwa__left">
         <div className="rwa__rule" aria-hidden="true">
           <span className="rwa__rule-line" />
-          <img className="rwa__rule-icon" src="/assets/nomads-icon-dark.png" alt="" />
+          <img className="rwa__rule-icon" src="/assets/results-compass-plum.png" alt="" />
         </div>
-        <h2 className="rwa__headline">
-          {WALK_AWAY.headlinePlain}
-          <br />
-          <span className="rwa__script">{WALK_AWAY.headlineScript}</span>
-        </h2>
-        <p className="rwa__sub">
-          <Lines lines={WALK_AWAY.subLines} />
-        </p>
+        <div className="rwa__intro">
+          <h2 className="rwa__headline">
+            {WALK_AWAY.headlinePlain}
+            <br />
+            <span className="rwa__script">{WALK_AWAY.headlineScript}</span>
+          </h2>
+          <p className="rwa__sub">
+            <Lines lines={WALK_AWAY.subLines} />
+          </p>
+        </div>
       </div>
 
       <div className="rwa__right">

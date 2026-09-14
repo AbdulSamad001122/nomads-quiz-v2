@@ -2,8 +2,8 @@
    Reference: ad-spend design image (top card). */
 
 .rcta {
-  background: #10131c url('/assets/results-navy-texture.webp') center / cover;
-  padding: 0 48px 150px;
+  background: var(--midnight-blue); /* flat #152638 — reads as its own section */
+  padding: 90px 48px 130px;
 }
 
 .rcta__card {
@@ -18,8 +18,11 @@
   gap: 48px;
 }
 
-.rcta__media img {
+.rcta__media img,
+.rcta__media .rcta__video {
+  display: block;
   width: min(100%, 560px);
+  height: auto;
   margin: 0 auto;
 }
 
@@ -70,7 +73,7 @@
 
 @media (max-width: 900px) {
   .rcta {
-    padding: 0 20px 120px;
+    padding: 56px 20px 96px;
   }
   .rcta__card {
     grid-template-columns: 1fr;

@@ -10,7 +10,13 @@
 
 .rls__left {
   background: #f7f3e8 url('/assets/results-paper-texture.webp') center / cover;
-  padding: 108px 70px 96px 95px;
+  padding: 108px 82px 96px;
+}
+
+/* keeps the laptop width on wide screens: at 1440 the column content is 556px */
+.rls__left-inner {
+  max-width: 556px;
+  margin: 0 auto;
 }
 
 .rls__para {
@@ -28,7 +34,7 @@
 
 .rls__chip {
   display: inline-block;
-  margin-top: 40px;
+  margin-top: 24px;
   background: #641d4f;
   color: #ffffff;
   font-family: var(--font-body);
@@ -38,16 +44,16 @@
 }
 
 .rls__chip + .rls__para {
-  margin-top: 28px;
+  margin-top: 18px;
 }
 
 .rls__bullets {
   list-style: none;
-  margin: 34px 0 0;
+  margin: 22px 0 0;
   padding: 0 0 0 26px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 14px;
 }
 
 .rls__bullet {
@@ -62,20 +68,24 @@
   color: #3c1a30;
 }
 
-.rls__bullet img {
-  width: 20px;
+/* single-colour swoosh PNG recoloured plum via mask */
+.rls__bullet-icon {
+  width: 22px;
   height: 20px;
   flex-shrink: 0;
   margin-top: 2px;
+  background-color: #5d1b4e;
+  -webkit-mask: url('/assets/results-swoosh-white.png') center / contain no-repeat;
+  mask: url('/assets/results-swoosh-white.png') center / contain no-repeat;
 }
 
 .rls__bullets + .rls__para {
-  margin-top: 40px;
+  margin-top: 24px;
 }
 
 .rls__band {
   display: inline-block;
-  margin-top: 44px;
+  margin-top: 28px;
   background: #641d4f;
   color: #ffffff;
   font-family: var(--font-headline);
@@ -104,6 +114,10 @@
   .rls {
     grid-template-columns: 1fr;
   }
+  .rls__left-inner {
+    max-width: none;
+    margin: 0;
+  }
   .rls__left {
     padding: 64px 40px 60px;
   }
@@ -119,13 +133,8 @@
   .rls__left {
     padding: 52px 22px 52px;
   }
-  .rls__chip {
-    margin-top: 30px;
-  }
   .rls__bullets {
     padding-left: 8px;
-    gap: 18px;
-    margin-top: 26px;
   }
   .rls__band {
     font-size: 19px;

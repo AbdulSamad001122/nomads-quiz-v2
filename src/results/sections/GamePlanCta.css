@@ -21,7 +21,7 @@
 .rgp__headline {
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: 31px;
+  font-size: 32px; /* column too narrow for 38px without adding a line */
   line-height: 1.35;
   color: #4a1533;
 }

@@ -48,10 +48,11 @@
 
 .rsp__headline {
   position: relative;
-  margin-top: 32px;
+  margin: 32px auto 0;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: clamp(30px, 3.34vw, 48px);
+  max-width: 1052px;
+  font-size: 38px;
   line-height: 1.22;
   color: #ffffff;
 }

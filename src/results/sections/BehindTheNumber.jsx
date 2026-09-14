@@ -29,10 +29,11 @@ export default function BehindTheNumber() {
       </div>
 
       <div className="rbn__right">
+        <div className="rbn__right-inner">
         <div className="rbn__rule">
           <span className="rbn__rule-chip">{BEHIND_NUMBER.lookedAt}</span>
           <span className="rbn__rule-line" aria-hidden="true" />
-          <img className="rbn__rule-icon" src="/assets/nomads-icon-dark.png" alt="" aria-hidden="true" />
+          <img className="rbn__rule-icon" src="/assets/results-compass-navy.png" alt="" aria-hidden="true" width="426" height="426" />
         </div>
 
         <ol className="rbn__list">
@@ -43,6 +44,7 @@ export default function BehindTheNumber() {
             </li>
           ))}
         </ol>
+        </div>
       </div>
     </section>
   );

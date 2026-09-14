@@ -23,11 +23,13 @@ export default function TheCatch() {
         <div className="rtc__rule">
           <span className="rtc__chip">{THE_CATCH.chip}</span>
           <span className="rtc__rule-line" aria-hidden="true" />
-          <img className="rtc__rule-icon" src="/assets/nomads-icon-dark.png" alt="" aria-hidden="true" />
+          <img className="rtc__rule-icon" src="/assets/results-compass-navy.png" alt="" aria-hidden="true" width="426" height="426" />
         </div>
 
         <h2 className="rtc__headline">
-          <Lines lines={THE_CATCH.headlineLines} />
+          {THE_CATCH.headlineLines[0]}{' '}
+          <span className="rtc__keep">{THE_CATCH.headlineLines[1]}</span>{' '}
+          {THE_CATCH.headlineLines[2]}
         </h2>
 
         <p className="rtc__sub">

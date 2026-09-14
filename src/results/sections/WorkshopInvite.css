@@ -50,7 +50,8 @@
   margin: 30px 0 34px;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: clamp(28px, 3.4vw, 50px);
+  max-width: 838px;
+  font-size: 38px;
   line-height: 1.32;
   color: #ffffff;
 }

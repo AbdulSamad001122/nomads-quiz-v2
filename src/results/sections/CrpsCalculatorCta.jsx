@@ -12,7 +12,22 @@ export default function CrpsCalculatorCta() {
     <section className="rcta">
       <div className="rcta__card">
         <div className="rcta__media">
-          <img src="/assets/results-crps-mockup.webp" alt="Revenue Per Visitor calculator on laptop and tablet" />
+          {/* Quiz.gif (37MB) served as a muted looping video — same visual,
+              ~2MB. Poster is the first frame. */}
+          <video
+            className="rcta__video"
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster="/assets/results-crps-quiz-poster.webp"
+            aria-label="Revenue Per Visitor calculator on laptop and tablet"
+            width="1400"
+            height="929"
+          >
+            <source src="/assets/results-crps-quiz.webm" type="video/webm" />
+            <source src="/assets/results-crps-quiz.mp4" type="video/mp4" />
+          </video>
         </div>
         <div className="rcta__content">
           <h2 className="rcta__headline">{CRPS_CTA.headlineLines.join(' ')}</h2>

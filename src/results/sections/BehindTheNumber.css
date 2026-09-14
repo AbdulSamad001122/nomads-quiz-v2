@@ -11,8 +11,15 @@
 .rbn__left {
   background: #12312e url('/assets/results-teal-chart-bg.webp') center / cover no-repeat;
   display: flex;
-  align-items: flex-end;
-  padding: 110px 48px 86px 85px;
+  align-items: center;
+  justify-content: center;
+  padding: 110px 48px 100px;
+}
+
+/* the chip / headline / sub block sits centred in the panel as a unit */
+.rbn__left-inner {
+  width: 100%;
+  max-width: 480px;
 }
 
 .rbn__chip {
@@ -30,25 +37,28 @@
   margin-top: 26px;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: 46px;
+  max-width: 479px;
+  font-size: 38px;
   line-height: 1.32;
   color: #ffffff;
 }
 
 .rbn__script-w {
-  font-family: var(--font-number);
+  font-family: var(--font-number); /* Better Brush */
   font-weight: 400;
-  font-size: 1.25em;
+  font-size: 0.45em; /* the glyph inks ~2× its size → sits ~1.3× cap height */
   line-height: 0;
-  vertical-align: -0.1em;
+  vertical-align: 0.1em;
+  margin: 0 0.06em 0 0.02em;
 }
 
 .rbn__hl {
   display: inline-block;
-  background: #ddf2f8;
+  background: #e4fbff;
   color: #16273b;
-  padding: 2px 18px 6px;
-  margin-top: 8px;
+  line-height: 1.1;
+  padding: 2px 14px 5px;
+  margin-top: 10px;
 }
 
 .rbn__sub {
@@ -66,6 +76,13 @@
 .rbn__right {
   background: #ddf2f8;
   padding: 88px 80px 96px;
+}
+
+/* wide screens keep the laptop width: at 1440 the column is 560px, so the
+   rule + cards cap there and sit centred instead of stretching */
+.rbn__right-inner {
+  max-width: 560px;
+  margin: 0 auto;
 }
 
 .rbn__rule {
