@@ -110,7 +110,7 @@
   }
   /* heading wraps past 3 lines at this width → left-aligned (design 0.9) */
   .rsp__headline {
-    font-size: 23px;
+    font-size: 26px;
     line-height: 1.45;
     text-align: left;
     margin-top: 26px;

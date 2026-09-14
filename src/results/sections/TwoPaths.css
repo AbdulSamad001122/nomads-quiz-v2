@@ -305,7 +305,7 @@
   /* the desktop sizes are fixed now; restore the phone sizes the old
      clamp() minimums gave */
   .rtp__headline {
-    font-size: 30px;
+    font-size: 26px;
   }
   .rtp__panel-heading {
     font-size: 24px;
