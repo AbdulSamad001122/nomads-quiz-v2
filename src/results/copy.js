@@ -554,6 +554,8 @@ export const PILLAR_ONE_ISOLATION = {
   head2Before: 'Most businesses can’t tell if a slow month is a traffic problem, an email problem, a sales problem or a positioning problem',
   head2Highlight: 'because their teams work in isolation.',
   sub: 'Very few know how much revenue each visitor is bringing. And without that, scaling becomes expensive guessing.',
+  // Bold lead-in to the situations below (doc row 7, added 2026-09-14).
+  subLead: 'Here’s how that manifests:',
 };
 
 export const PILLAR_ONE_SITUATIONS = {

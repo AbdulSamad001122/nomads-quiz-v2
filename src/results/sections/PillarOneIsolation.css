@@ -115,6 +115,13 @@
   text-wrap: balance;
 }
 
+/* bold lead-in to the situations that follow */
+.rpi__sub--lead {
+  margin-top: 22px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
 /* ——— responsive ——— */
 
 @media (max-width: 1100px) {

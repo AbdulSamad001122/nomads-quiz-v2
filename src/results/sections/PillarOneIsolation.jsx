@@ -32,6 +32,7 @@ export default function PillarOneIsolation() {
           <span className="rpi__hl2">{PILLAR_ONE_ISOLATION.head2Highlight}</span>
         </h3>
         <p className="rpi__sub">{PILLAR_ONE_ISOLATION.sub}</p>
+        <p className="rpi__sub rpi__sub--lead">{PILLAR_ONE_ISOLATION.subLead}</p>
       </div>
     </div>
   );
