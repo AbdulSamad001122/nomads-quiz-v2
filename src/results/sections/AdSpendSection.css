@@ -402,10 +402,16 @@
     letter-spacing: 1.5px;
   }
   .rad__headline {
-    font-size: 27px;
+    font-size: 26px;
+    line-height: 1.5; /* room for the per-line highlight padding */
   }
+  /* inline so the purple hugs the words on each line instead of one box
+     behind the whole wrapped run; clone repeats the padding per fragment */
   .rad__hl {
+    display: inline;
     padding: 2px 10px 4px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
   }
   .rad__sub {
     font-size: 16px;
@@ -487,5 +493,12 @@
   }
   .rad__gain {
     font-size: 42px;
+  }
+}
+
+/* mobile: copy that runs past three lines reads left-aligned (site rule) */
+@media (max-width: 700px) {
+  .rad__headline {
+    text-align: left;
   }
 }

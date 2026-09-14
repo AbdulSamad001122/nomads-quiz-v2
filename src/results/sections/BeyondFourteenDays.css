@@ -153,7 +153,7 @@
     font-size: 26px;
   }
   .rb__brush-r {
-    font-size: 1.55em;
+    font-size: 1.1em;
     vertical-align: -0.06em;
   }
   .rb__body {
@@ -170,7 +170,7 @@
     font-size: 16px;
   }
   .rb__question {
-    font-size: 24px;
+    font-size: 26px;
     margin-top: 20px;
   }
   .rb__tape {
@@ -181,5 +181,13 @@
   .rb__closing {
     margin-top: 24px;
     font-size: 16px;
+  }
+}
+
+/* mobile: copy that runs past three lines reads left-aligned (site rule) */
+@media (max-width: 700px) {
+  .rb__intro,
+  .rb__question {
+    text-align: left;
   }
 }

@@ -196,7 +196,7 @@
 
 @media (max-width: 700px) {
   .rmx {
-    padding: 56px 20px 170px;
+    padding: 56px 20px 100px;
   }
   .rmx__sheet {
     clip-path: polygon(
@@ -210,7 +210,7 @@
     display: none;
   }
   .rmx__headline {
-    font-size: 25px;
+    font-size: 26px;
   }
   .rmx__traffic {
     margin-top: 28px;
@@ -243,5 +243,12 @@
   }
   .rmx__mini {
     display: block;
+  }
+}
+
+/* mobile: copy that runs past three lines reads left-aligned (site rule) */
+@media (max-width: 700px) {
+  .rmx__headline {
+    text-align: left;
   }
 }

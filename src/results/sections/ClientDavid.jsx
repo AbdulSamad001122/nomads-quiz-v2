@@ -7,8 +7,8 @@ function Lines({ lines }) {
 
 /**
  * Section — "Take my Client David.": dark left panel with the David
- * composition image, ice right panel with headline chip, three swoosh
- * bullets and the navy-bordered outcome box. The round "playful, yet
+ * composition image (pinned while the copy scrolls), ice right panel with
+ * headline chip, three navy swoosh bullets and the navy-bordered outcome box. The round "playful, yet
  * highly profitable" badge straddles the top seam at centre.
  */
 export default function ClientDavid() {
@@ -32,7 +32,7 @@ export default function ClientDavid() {
 
         {CLIENT_DAVID.bullets.map((b, i) => (
           <div key={i} className="rcd__bullet">
-            <img className="rcd__bullet-icon" src="/assets/nomads-icon-dark.png" alt="" aria-hidden="true" />
+            <span className="rcd__bullet-icon" aria-hidden="true" />
             <div>
               <p className="rcd__bullet-bold">{b.bold}</p>
               <p className="rcd__bullet-text">

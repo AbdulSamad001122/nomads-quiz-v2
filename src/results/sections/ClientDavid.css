@@ -55,6 +55,23 @@
   height: fit-content;
 }
 
+/* pinned while the copy column scrolls past — 94px clears the sticky nav
+   (70px) plus breathing room. Only from 901px up: below that the grid stacks
+   and there is nothing to stick within. */
+@media (min-width: 901px) {
+  .rcd__david {
+    position: sticky;
+    top: 94px;
+  }
+}
+
+/* wide desktop only: a little more presence for the portrait */
+@media (min-width: 1600px) {
+  .rcd__david {
+    width: min(100%, 620px);
+  }
+}
+
 /* ——— right ice panel ——— */
 
 .rcd__right {
@@ -85,11 +102,15 @@
   gap: 18px;
 }
 
+/* single-colour swoosh PNG recoloured navy via mask */
 .rcd__bullet-icon {
   width: 24px;
-  height: 24px;
+  height: 23px;
   flex-shrink: 0;
   margin-top: 1px;
+  background-color: #152638;
+  -webkit-mask: url('/assets/results-swoosh-white.png') center / contain no-repeat;
+  mask: url('/assets/results-swoosh-white.png') center / contain no-repeat;
 }
 
 .rcd__bullet-bold {
@@ -171,7 +192,7 @@
   }
   .rcd__bullet-icon {
     width: 20px;
-    height: 20px;
+    height: 19px;
   }
   .rcd__box {
     margin-top: 40px;

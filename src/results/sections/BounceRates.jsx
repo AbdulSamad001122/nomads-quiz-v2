@@ -1,10 +1,11 @@
 import { BOUNCE_RATES } from '../copy.js';
+import { emphasize } from '../emphasize.jsx';
 import './BounceRates.css';
 
 const brJoin = (lines) =>
   lines.map((line, i) => (
     <span key={line.slice(0, 14)}>
-      {line}
+      {emphasize(line, BOUNCE_RATES.bold)}
       {i < lines.length - 1 ? ' ' : ''}
       {i < lines.length - 1 ? <br /> : null}
     </span>

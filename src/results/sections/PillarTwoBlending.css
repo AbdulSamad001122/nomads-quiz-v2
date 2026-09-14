@@ -24,7 +24,7 @@
 }
 
 .rqc__headline {
-  max-width: 389px;
+  max-width: 480px; /* 2 lines at 38px: "…cost of" / "blending in." */
   font-family: var(--font-headline);
   font-weight: 800;
   font-size: 38px;

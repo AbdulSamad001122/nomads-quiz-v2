@@ -4,6 +4,11 @@
 
 .ric {
   position: relative;
+  /* the spinning badge's rotated box would poke past the right edge on
+     mobile and add a 2px horizontal scroll; clip x only (y stays visible so
+     the badge can straddle the top seam) */
+  overflow-x: clip;
+  overflow-y: visible;
   background: #f7f4ea url('/assets/results-paper-texture.webp') center / cover;
   padding: 73px 40px 81px;
 }
@@ -27,6 +32,22 @@
   width: 145px;
   height: auto;
   z-index: 2;
+  animation: ric-badge-spin 18s linear infinite;
+}
+
+@keyframes ric-badge-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ric__badge {
+    animation: none;
+  }
 }
 
 .ric__card {
@@ -43,7 +64,7 @@
 .ric__heading {
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: 38px;
+  font-size: 25px;
   color: #5d1b4e;
 }
 
@@ -213,5 +234,12 @@
   .ric__chip {
     font-size: 15px;
     margin-top: 14px;
+  }
+}
+
+/* mobile: copy that runs past three lines reads left-aligned (site rule) */
+@media (max-width: 760px) {
+  .ric__sub {
+    text-align: left;
   }
 }

@@ -203,7 +203,17 @@
     letter-spacing: 2px;
   }
   .rbn__headline {
-    font-size: 27px;
+    font-size: 26px;
+    line-height: 1.5; /* room for the per-line highlight padding */
+  }
+  /* inline so the ice runs hug the words on each line instead of one box
+     behind the whole wrapped run; clone repeats the padding per fragment */
+  .rbn__hl {
+    display: inline;
+    line-height: inherit;
+    margin-top: 0;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
   }
   .rbn__sub {
     font-size: 16px;

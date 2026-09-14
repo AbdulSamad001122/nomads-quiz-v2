@@ -1,10 +1,11 @@
 import { TWO_PATHS } from '../copy.js';
+import { emphasize } from '../emphasize.jsx';
 import './TwoPaths.css';
 
-const brJoin = (lines) =>
+const brJoin = (lines, bold) =>
   lines.map((line, i) => (
     <span key={line.slice(0, 14)}>
-      {line}
+      {bold ? emphasize(line, bold) : line}
       {i < lines.length - 1 ? ' ' : ''}
       {i < lines.length - 1 ? <br /> : null}
     </span>
@@ -58,7 +59,7 @@ export default function TwoPaths() {
       </div>
       <div className="rtp__panel">
         <div className="rtp__panel-copy">
-          <p className="rtp__p">{brJoin(c.panelP1Lines)}</p>
+          <p className="rtp__p">{brJoin(c.panelP1Lines, c.panelBold)}</p>
           <h3 className="rtp__panel-heading">{brJoin(c.panelHeadingLines)}</h3>
           <p className="rtp__p rtp__panel-sub">{brJoin(c.panelSubLines)}</p>
           <div className="rtp__btns">

@@ -172,3 +172,11 @@
     display: none;
   }
 }
+
+/* mobile: copy that runs past three lines reads left-aligned (site rule) */
+@media (max-width: 760px) {
+  .rso__headline,
+  .rso__body {
+    text-align: left;
+  }
+}

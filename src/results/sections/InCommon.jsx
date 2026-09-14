@@ -33,6 +33,7 @@ export default function InCommon() {
                 {c.lines[0]}
                 {c.lines[1] ? (
                   <>
+                    {' '}
                     <br />
                     {c.lines[1]}
                   </>

@@ -4,3 +4,8 @@
   min-height: 100%;
   background: #f8f1e4; /* paper cream that peeks under the hero's angled cut */
 }
+
+/* a few key words / numbers inside body copy, see emphasize.jsx */
+.results-em {
+  font-weight: 700;
+}

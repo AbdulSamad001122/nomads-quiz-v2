@@ -87,7 +87,7 @@
     inset: 14px 14px 14px;
   }
   .rpb__headline {
-    font-size: 23px;
+    font-size: 26px;
     line-height: 1.6;
   }
   .rpb__headline br {
@@ -98,7 +98,7 @@
     display: block;
   }
   .rpb__script {
-    font-size: 1.9em;
+    font-size: 1.3em;
   }
   .rpb__hl {
     padding: 2px 8px 3px;
@@ -116,5 +116,12 @@
     width: max-content;
     max-width: 86vw;
     padding: 9px 16px;
+  }
+}
+
+/* mobile: copy that runs past three lines reads left-aligned (site rule) */
+@media (max-width: 700px) {
+  .rpb__headline {
+    text-align: left;
   }
 }
