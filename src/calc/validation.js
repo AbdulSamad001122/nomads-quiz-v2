@@ -13,12 +13,32 @@ export const BOUNDS = {
   q11: { type: 'currency', min: 0, max: 1_000_000_000 },
 };
 
+/**
+ * Parse a manual-entry string strictly. People do type "$17,500" and "45%",
+ * so currency/percent signs, spaces and thousands separators are accepted —
+ * but whatever is left must be a plain number. Anything else returns null
+ * rather than being coerced.
+ *
+ * The old approach stripped every non-digit, which silently turned "1e6" into
+ * 16 and "-2000" into 2000. A negative now parses through to the bounds check
+ * so the taker gets the doc's "out of range" message instead of a wrong value.
+ */
+export function parseNumeric(raw) {
+  const cleaned = String(raw ?? '')
+    .trim()
+    .replace(/[$%\s]/g, '')
+    .replace(/,/g, '');
+  if (!/^-?\d+(\.\d+)?$/.test(cleaned)) return null;
+  const n = Number(cleaned);
+  return Number.isFinite(n) ? n : null;
+}
+
 /** Validate one manual-entry field. Returns { ok, value?, message? }. */
 export function validateManual(qid, raw) {
   const b = BOUNDS[qid];
   if (!b) return { ok: true, value: raw };
-  const n = parseFloat(String(raw).replace(/[^0-9.]/g, ''));
-  if (!isFinite(n)) return { ok: false, message: 'Please enter a number.' };
+  const n = parseNumeric(raw);
+  if (n === null) return { ok: false, message: 'Please enter a number.' };
   if (b.type === 'integer' && !Number.isInteger(n))
     return { ok: false, message: 'Please enter a whole number.' };
   if (n < b.min || n > b.max)

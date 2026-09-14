@@ -5,6 +5,8 @@
  * resolveInputs() below.
  */
 
+import { parseNumeric } from './validation.js';
+
 export const Q2 = {
   'under-10k': 60000,
   '10k-35k': 270000,
@@ -110,10 +112,18 @@ export const Q11 = {
   'no-email': 0, // → RPS = 0
 };
 
-/** Parse a manual-entry string; percent inputs come in as 0–100 → decimal. */
+/**
+ * Parse a manual-entry string; percent inputs come in as 0–100 → decimal.
+ * Shares the strict parser with validateManual, so the value the taker is
+ * validated against is the value the calculator receives.
+ *
+ * Returns undefined (not null) when the input isn't a number: the q8 fallback
+ * below tests `=== undefined`, so a null would stick and the calculator would
+ * run on a missing value instead of dropping back to the bracket.
+ */
 function parseManual(raw, kind) {
-  const n = parseFloat(String(raw).replace(/[^0-9.]/g, ''));
-  if (!isFinite(n)) return null;
+  const n = parseNumeric(raw);
+  if (n === null) return undefined;
   return kind === 'percent' ? n / 100 : n;
 }
 
