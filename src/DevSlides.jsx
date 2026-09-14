@@ -47,6 +47,7 @@ const GROUPS = [
       ['Block 1 + 2 — share under 5%', '/?results=split-low'],
       ['Block 1 + 3 — no email at all (RPS $0)', '/?results=split-noemail'],
       ['Block 1 hidden — split would be nonsense', '/?results=split-hidden'],
+      ['No blocks at all — both slots empty', '/?results=no-blocks'],
     ],
   },
   {

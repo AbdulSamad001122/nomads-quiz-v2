@@ -45,6 +45,19 @@ const SCENARIOS = {
     inputs: { q2: 810000, q7: 1000, q7b: null, q7c: undefined, q8: 500, q9a: 0.005, q9b: 0.05, q10: 25, q11: 900000 },
   },
 
+  /* ——— no conditional blocks at all ——— */
+
+  // The clean page: both conditional slots render nothing, so what's left is
+  // the page every taker shares. Needs Block 1 suppressed (email revenue >
+  // total revenue, which also puts the share over 5% so Block 2 can't fire,
+  // and keeps RPS above 0 so Block 3 can't either) AND the goal reached, which
+  // is Block 4 — the one capped case with no copy of its own.
+  'no-blocks': {
+    blocks: 'none — both slots empty',
+    path: 'plg',
+    inputs: { q2: 60000, q7: 7500, q7b: null, q7c: undefined, q8: 375, q9a: 0.03, q9b: 0.375, q10: 175, q11: 63000 },
+  },
+
   /* ——— Blocks 4–7 · the capped-state outcome ——— */
 
   // Block 4: goal reached. Doc says standard page, no capped-state copy — so
