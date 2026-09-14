@@ -118,3 +118,10 @@
     padding: 9px 16px;
   }
 }
+
+/* mobile: copy that runs past three lines reads left-aligned (site rule) */
+@media (max-width: 700px) {
+  .rpb__headline {
+    text-align: left;
+  }
+}

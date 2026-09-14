@@ -61,7 +61,7 @@ export default function AdSpendSection({ result }) {
       <div className="rad__head">
         <img className="rad__doodle" src="/assets/results-spend-smarter.png" alt="" aria-hidden="true" />
         <h2 className="rad__headline">
-          {AD_SPEND.headlineTop}
+          {AD_SPEND.headlineTop}{' '}
           <br />
           <span className="rad__hl">{AD_SPEND.headlineHighlight}</span>
         </h2>
@@ -140,7 +140,7 @@ export default function AdSpendSection({ result }) {
           <p className="rad__nerds-p">{AD_SPEND.nerdsP1}</p>
           <p className="rad__nerds-p">{AD_SPEND.nerdsP2}</p>
           <p className="rad__nerds-p">
-            {AD_SPEND.nerdsP3Plain}
+            {AD_SPEND.nerdsP3Plain}{' '}
             <br />
             <strong>{AD_SPEND.nerdsP3Bold}</strong>
           </p>

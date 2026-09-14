@@ -347,3 +347,10 @@
     text-align: center;
   }
 }
+
+/* mobile: copy that runs past three lines reads left-aligned (site rule) */
+@media (max-width: 860px) {
+  .rtp__path p {
+    text-align: left;
+  }
+}

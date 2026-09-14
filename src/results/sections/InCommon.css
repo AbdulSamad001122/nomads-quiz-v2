@@ -236,3 +236,10 @@
     margin-top: 14px;
   }
 }
+
+/* mobile: copy that runs past three lines reads left-aligned (site rule) */
+@media (max-width: 760px) {
+  .ric__sub {
+    text-align: left;
+  }
+}

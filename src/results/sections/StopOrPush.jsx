@@ -20,17 +20,17 @@ export default function StopOrPush({ tokens }) {
       <div className="rso__inner">
         <p className="rso__lead">{c.lead}</p>
         <h2 className="rso__headline">
-          {c.headLine1}
+          {c.headLine1}{' '}
           <br />
           {c.headLine2Before}{' '}
           <span className="rso__box rso__box--current">{tokens.current_rpv}</span>
           <span className="rso__arrow" aria-hidden="true">→</span>
-          <span className="rso__box rso__box--goal">{tokens.goal_rpv}</span>
+          <span className="rso__box rso__box--goal">{tokens.goal_rpv}</span>{' '}
           <br />
           {c.headLine3}
         </h2>
         <p className="rso__body">
-          {c.bodyLine1}
+          {c.bodyLine1}{' '}
           <br />
           {c.bodyLine2}
         </p>
