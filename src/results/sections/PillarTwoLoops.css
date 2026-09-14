@@ -129,16 +129,17 @@
   .rqf {
     grid-template-columns: 1fr;
   }
-  /* diagram first reads oddly here — keep copy on top, loop beneath */
+  /* stacked: the loop diagram on top, the copy explaining it below */
+  .rqf__right {
+    order: -1;
+    padding: 44px 22px 52px;
+  }
   .rqf__left {
     padding: 48px 22px 52px;
   }
   .rqf__body,
   .rqf__headline {
     max-width: 100%;
-  }
-  .rqf__right {
-    padding: 44px 22px 52px;
   }
   .rqf__loop {
     width: min(100%, 420px);

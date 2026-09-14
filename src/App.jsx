@@ -8,7 +8,8 @@ import { themes } from './data/themes.js';
 /**
  * Default: the real quiz flow (welcome → Q1…Q14 → opt-in → results).
  * ?preview            → the original 9-template preview page.
- * ?results=<scenario> → dev preview of the results page (fixture/capped/noemail/adslider).
+ * ?results=<scenario> → dev preview of the results page. One scenario per
+ *   conditional case; see SCENARIOS in DevResults.jsx, or ?slides for links.
  * ?loading            → dev preview of the loading slide (stays on screen).
  * (dev harness routes — removed before launch)
  */

@@ -177,12 +177,21 @@
   .rpt {
     grid-template-columns: 1fr;
   }
-  /* Each pair must read copy-then-image when stacked. Pair 1 (situation copy →
-     flow) is already in that order; pair 2 is mirrored on desktop (Lara photo →
-     her quote), so push the photo below the quote. Final order: situation copy,
-     flow, quote, Lara. */
-  .rpt__cell--maroon {
+  /* Each pair reads image-then-copy when stacked. Pair 1 is mirrored in the DOM
+     (situation copy → flow), so the flow is pulled above its copy; pair 2 is
+     already Lara photo → her quote. Final order: flow, situation copy, Lara,
+     quote. */
+  .rpt__cell--navy {
     order: 1;
+  }
+  .rpt__cell--ice {
+    order: 2;
+  }
+  .rpt__cell--maroon {
+    order: 3;
+  }
+  .rpt__cell--cream {
+    order: 4;
   }
   .rpt__cell {
     padding: 44px 22px;

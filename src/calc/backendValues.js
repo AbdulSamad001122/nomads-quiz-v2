@@ -156,12 +156,20 @@ export function resolveInputs(answers, manualValues, path) {
   // Q11 email revenue (annual)
   const q11 = man('q11', 'currency') ?? Q11[answers.q11];
 
-  // Ad module (conditional)
-  const q7b = man('q7b', 'currency') ?? Q7B[answers.q7b];
-  // Skipped Q7C on the ads path → doc default 0.50 (+ adjustable results
-  // slider, same as "Not sure"). Off the ads path it stays undefined.
+  // Ad module (conditional). Mirror the questions.js showIf chain here, so a
+  // taker who answers the ad questions and then goes back and un-ticks "Paid
+  // ads" on Q6 doesn't leak stale ad answers into the results page or Kit.
+  // The raw answers stay in state, so re-ticking Q6 restores them.
+  const onAdsPath = Array.isArray(answers.q6) && answers.q6.includes('paid-ads');
+  const q7b = onAdsPath ? man('q7b', 'currency') ?? Q7B[answers.q7b] : undefined;
+  // Q7c is skippable. Logic Doc Q7c table: "If Q7c Skipped → No ad section on
+  // result", so a skip (answers.q7c === null) must stay undefined — never fall
+  // back to a default. The 0.50 default belongs to the explicit "Not sure"
+  // answer only (Q7C['not-sure']), which also turns the results slider on.
   const q7c =
-    answers.q7c != null ? Q7C[answers.q7c] : q7b != null ? 0.5 : undefined;
+    onAdsPath && q7b != null && answers.q7c != null
+      ? Q7C[answers.q7c]
+      : undefined;
 
   return { q2, q7, q7b, q7c, q8, q9a, q9b, q10, q11 };
 }

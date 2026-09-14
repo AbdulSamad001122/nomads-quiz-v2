@@ -54,6 +54,57 @@ export const METRICS = {
   },
 };
 
+/**
+ * Conditional result blocks — VERBATIM from Quiz Logics.docx · Results-page
+ * logic ("Copy Shown" for each block). Result Page Copy.docx marks these as
+ * blue conditional boxes and defers to the Logic Doc for the wording.
+ *
+ * Doc order on the page:  metric table → Block 1 → (Block 2 or 3) → (Block 4,
+ * 5, 6 or 7). Block 4 has no copy of its own — the doc says "standard results
+ * page, no capped-state copy", so nothing renders for it.
+ *
+ * Blocks 5–7 are split into parts so the doc's guard ("suppress any sentence
+ * containing it") can drop individual sentences without rewording the rest.
+ */
+export const RESULT_BLOCKS = {
+  // trigger: otherRevenue ≥ 0 (suppressed when < 0; tag split_suppressed)
+  block1:
+    'Around {{email_percentage}}% of your revenue comes through the five metrics that influence your RPV™. Everything else comes from: repeat purchases, referrals, direct traffic, social, and word of mouth. The {{email_percentage}}% is the part you can track, control, and systematically optimise. The bigger this number, the more predictable your revenue.',
+
+  // trigger: emailPercentage < 5 (suppressed if Block 3 or 7 fires)
+  block2:
+    'Almost none of your revenue is coming through the five metrics used to calculate Revenue Per Visitor™. That usually means you\'re not making the most of the visitors you\'re already attracting. Too much of your revenue depends on channels and outcomes you can\'t reliably predict or control.',
+
+  // trigger: RPS = 0 (suppresses Block 2)
+  block3:
+    'You\'re not using email to bring people back, so every visitor is mostly a one-shot opportunity. They either buy today or you may lose them. That means Revenue Per Subscriber™ is currently $0. You\'re leaving a major revenue lever unused: turning the people you already attracted into repeat revenue.',
+
+  // trigger: capped, gain positive, traffic within reach (≤ 20× current)
+  block5: {
+    lead: 'You\'ve maximised every metric in the Compounding Revenue Per Visitor™ OS. Following the system, you could add another {{achievable_gain}} a year without increasing your traffic.',
+    // Dropped when the metrics alone already clear $1.5M — otherwise this
+    // reads "you're still $0 short … 0 more visitors a day". FLAGGED: the doc
+    // has no Block for "capped but gap already closed"; this follows its own
+    // guard style ("suppress any sentence containing it").
+    gap: 'You\'re still {{remaining_gap}} short of $1.5M. So now, the answer really is more traffic: {{additional_daily_visitors}} more visitors a day.',
+    tail: 'But before you scale, build the feedback loop. Every buyer and non-buyer gives you data to improve your messaging and positioning, making each new visitor more valuable. Want to see how it works?',
+    cta: 'Watch the workshop →',
+  },
+
+  // trigger: capped, gain positive, traffic out of reach (> 20× current)
+  block6: {
+    lead: 'You\'ve maximised every metric in the Compounding Revenue Per Visitor™ OS. Following the system, you could add another {{achievable_gain}} a year without increasing your traffic.',
+    tail: 'But getting all the way to $1.5M would require far more traffic than your business can realistically handle. So this isn\'t a conversion problem. And more traffic isn\'t the answer either. Want to understand what is?',
+    cta: 'Watch the workshop →',
+  },
+
+  // trigger: capped, achievableGain ≤ 0 (suppresses Blocks 2, 5, 6)
+  block7: {
+    body: 'Almost none of your revenue is coming through the five metrics used to calculate Revenue Per Visitor™. That usually means you\'re not making the most of the visitors you\'re already attracting. Too much of your revenue depends on channels and outcomes you can\'t reliably predict or control. Want to see how to change that?',
+    cta: 'Watch the workshop →',
+  },
+};
+
 export const BEYOND = {
   // Doc: "Your Revenue per Visitor ™ beyond the first 14-day window" — the
   // design image drops the ™; doc wins (flagged). Line map from the design.
@@ -125,12 +176,27 @@ export const AD_SPEND = {
     'From what you told us, here’s what your same ad spend',
     'could produce today vs. when you reach your RPV™ goal',
   ],
-  sliderLabel: 'Your Monthly Spend',
+  // Unused while the slider is a share control (see shareLabel below). Casing
+  // matches the copy doc's slider mockup (word/media/image4.png).
+  sliderLabel: 'Your monthly spend',
+  // Logic Doc · 7 makes the slider an AD-TRAFFIC SHARE control (10–100%,
+  // "Not sure" takers only), so it needs its own label. The copy doc has no
+  // wording for it — this is dev-added, FLAGGED for Alefiya.
+  shareLabel: 'What % of your traffic comes from ads?',
+  // DOC CONFLICT — FLAGGED: Result Page Copy.docx says "You can adjust your ad
+  // spend…", but Quiz Logics.docx · 7 says the slider adjusts ad-traffic share.
+  // Logic Doc wins on behaviour (user ruling), so this line now sits above a
+  // share control and reads wrong. Kept verbatim pending Alefiya's decision.
   adjustNote: 'You can adjust your ad spend for it to accurately match your current ad spend',
-  // Table labels are design-sourced (the copy doc has no table copy) — mapped
-  // to the Logic Doc calculator fields; flagged.
+  // Column heads + row labels come from the copy doc's own ad-module mockup
+  // (Result Page Copy.docx · word/media/image9.png, anchored under "From what
+  // you told us…"). Quiz Logics.docx 666–668 gives the same five rows.
+  tableHeads: {
+    today: 'Today',
+    goal: 'At goal RPV',
+  },
   tableLabels: {
-    spend: 'Your Monthly Spend',
+    spend: 'Monthly ad spend',
     visitors: 'Visitors it buys you',
     rpv: 'Return per visitor',
     revenue: 'Revenue from that spend',

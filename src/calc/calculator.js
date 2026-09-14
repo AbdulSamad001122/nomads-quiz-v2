@@ -159,6 +159,10 @@ export function computeAdModule({ q7, q7b, share, currentRPV, goalRPV, additiona
   const goalAdRev = adVisitors * goalRPV;
   const currentAdRevD = round100(currentAdRev);
   const goalAdRevD = round100(goalAdRev);
+  // ROAS divides by spend. Every Q7b bracket is positive, but manual entry can
+  // still land on 0 — without this guard both cells render "Infinity×".
+  // null means "no ROAS to show"; the section renders an em dash.
+  const spendOk = Number.isFinite(q7b) && q7b > 0;
   return {
     monthlySpend: q7b,
     share,
@@ -171,8 +175,8 @@ export function computeAdModule({ q7, q7b, share, currentRPV, goalRPV, additiona
       goalAdRev: goalAdRevD,
       monthlyGain: goalAdRevD - currentAdRevD,
       annualGain: round100(adVisitors * additionalRPVNeeded * 12),
-      currentROAS: roas1(currentAdRev / q7b),
-      goalROAS: roas1(goalAdRev / q7b),
+      currentROAS: spendOk ? roas1(currentAdRev / q7b) : null,
+      goalROAS: spendOk ? roas1(goalAdRev / q7b) : null,
     },
   };
 }

@@ -146,12 +146,21 @@
   .rpm {
     grid-template-columns: 1fr;
   }
-  /* Each situation must read copy-then-image when stacked. Pair 01 (ice copy →
-     phone) is already in that order; pair 02 is mirrored on desktop (laptop →
-     white copy), so push the laptop below its copy. Final order: copy 01,
-     phone, copy 02, laptop. */
-  .rpm__cell--teal {
+  /* Each situation reads image-then-copy when stacked. Pair 01 is mirrored in
+     the DOM (ice copy → phone), so the phone is pulled above its copy; pair 02
+     is already laptop → white copy. Final order: phone, copy 01, laptop,
+     copy 02. */
+  .rpm__cell--dark {
     order: 1;
+  }
+  .rpm__cell--ice {
+    order: 2;
+  }
+  .rpm__cell--teal {
+    order: 3;
+  }
+  .rpm__cell--white {
+    order: 4;
   }
   .rpm__cell {
     padding: 44px 22px;
@@ -182,11 +191,11 @@
   }
 }
 
-/* Stacked, the ice copy cell is first, so the compass stamp straddling the
+/* Stacked, the dark phone cell is first, so the compass stamp straddling the
    section's top edge sits over it — give that cell room to clear it.
    Declared last so the `padding` shorthands above don't reset it. */
 @media (max-width: 900px) {
-  .rpm__cell--ice {
+  .rpm__cell--dark {
     padding-top: 66px;
   }
   /* balancing costs line length in a narrow column — let it fill instead */

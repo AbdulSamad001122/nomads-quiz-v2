@@ -1,4 +1,4 @@
-import { money, rpvMoney } from '../calc/rounding.js';
+import { money, rpvMoney, dailyVisitors } from '../calc/rounding.js';
 import { metricColour } from '../calc/calculator.js';
 
 /**
@@ -15,6 +15,16 @@ export function resolveTokens(result) {
     // "But… what if you did?" — max-benchmark gain (Logic Doc capped maths;
     // display rounds money to the nearest $100).
     achievable_gain: money(result.capped.achievableGain),
+    // Block 1 — share of revenue running through the five metrics, already
+    // rounded to the nearest 5 by the calculator.
+    email_percentage: String(result.block1.emailPercentage),
+    // Blocks 5–6 capped maths. Money → nearest $100; the daily visitor figure
+    // uses the doc's visitor rounding, floored at 1 so a small-but-real number
+    // never displays as 0.
+    remaining_gap: money(result.capped.remainingGap),
+    additional_daily_visitors: dailyVisitors(
+      result.capped.additionalDailyVisitors
+    ).toLocaleString('en-US'),
   };
 }
 

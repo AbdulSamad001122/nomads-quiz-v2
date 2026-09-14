@@ -1,6 +1,7 @@
 import ResultsNav from './sections/ResultsNav.jsx';
 import HeroSection from './sections/HeroSection.jsx';
 import MetricsSection from './sections/MetricsSection.jsx';
+import ResultBlocks from './sections/ResultBlocks.jsx';
 import StopOrPush from './sections/StopOrPush.jsx';
 import WhatIfYouDid from './sections/WhatIfYouDid.jsx';
 import BeyondFourteenDays from './sections/BeyondFourteenDays.jsx';
@@ -44,18 +45,21 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
       <ResultsNav />
       <HeroSection tokens={tokens} />
       <MetricsSection result={result} tokens={tokens} />
+      {/* Copy doc blue box "Blocks 4–7 — Capped-state outcomes" sits here,
+          between the metric table and "You can stop at $1.5M." */}
+      <ResultBlocks result={result} tokens={tokens} slot="capped" />
       <StopOrPush tokens={tokens} />
       <WhatIfYouDid result={result} tokens={tokens} />
-      {/* TODO (doc order): Blocks 4–7 capped outcome copy slots in here
-          once its design arrives. */}
       <BeyondFourteenDays />
-      {/* TODO: Block 3 no-email conditional (Logic Doc) adapts the RPS story
-          here when RPS = $0. */}
+      {/* Copy doc blue box "Block 3 — No email marketing … See Logic Doc
+          Blocks 1–3 for the revenue-split copy that renders here" sits
+          between the 14-day section and the Compounding intro. */}
+      <ResultBlocks result={result} tokens={tokens} slot="split" />
       <CompoundingIntro />
       <CrpsCalculatorCta />
       {/* Ad module is conditional — doc: only when the taker answered the
           ad-spend questions (result.ad exists). */}
-      {result.ad && <AdSpendSection result={result} />}
+      {result.ad && <AdSpendSection result={result} adAdjustable={adAdjustable} />}
       <PromiseBanner />
       <BehindTheNumber />
       <WorkshopInvite tokens={tokens} />

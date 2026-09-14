@@ -1,0 +1,89 @@
+/* Conditional result blocks (Logic Doc · Results-page logic). Deliberately
+   plain — cream paper, page body type — so it sits quietly between the metric
+   table and the sections after it until a design reference arrives. */
+
+.rbk {
+  background: #f7f3e8 url('/assets/results-paper-texture.webp') center / cover;
+  padding: 90px 96px 96px;
+}
+
+.rbk__inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.rbk__para {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #2c1a26;
+}
+
+.rbk__para + .rbk__para {
+  margin-top: 22px;
+}
+
+/* Blocks 2 and 3 are the "this is a problem" reads — plum rule to set them
+   apart from the neutral Block 1 split. */
+.rbk__para--note {
+  margin-top: 30px;
+  border-left: 3px solid #641d4f;
+  padding-left: 22px;
+  color: #431232;
+}
+
+.rbk__capped {
+  margin-top: 40px;
+  background: #ffffff;
+  border: 1px solid #e0d3d9;
+  border-radius: 14px;
+  padding: 34px 36px 32px;
+}
+
+.rbk__capped .rbk__para:first-child {
+  margin-top: 0;
+}
+
+.rbk__cta {
+  display: inline-block;
+  margin-top: 26px;
+  background: #f3e6f6;
+  color: #4b1240;
+  border: 2px solid #5d1b4e;
+  box-shadow: 5px 5px 0 #5d1b4e;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+  padding: 14px 30px;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rbk {
+    padding: 70px 40px 76px;
+  }
+}
+
+@media (max-width: 900px) {
+  .rbk {
+    padding: 60px 22px 64px;
+  }
+  .rbk__capped {
+    padding: 26px 22px 24px;
+  }
+}
+
+@media (max-width: 560px) {
+  .rbk {
+    padding: 48px 16px 52px;
+  }
+  .rbk__para--note {
+    padding-left: 16px;
+  }
+  .rbk__cta {
+    padding: 13px 22px;
+  }
+}

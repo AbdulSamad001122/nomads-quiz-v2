@@ -188,7 +188,28 @@
 .rad__tablegrid {
   display: grid;
   grid-template-columns: 1fr 205px;
-  gap: 26px;
+  column-gap: 26px;
+  row-gap: 10px;
+}
+
+/* Column heads sit on the navy, above the floating ice column. */
+.rad__colhead {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1;
+  padding-bottom: 2px;
+}
+
+.rad__colhead--today {
+  text-align: right;
+  padding-right: 26px;
+  color: #ffffff;
+}
+
+.rad__colhead--goal {
+  text-align: center;
+  color: #7fcdec;
 }
 
 .rad__row {
@@ -204,14 +225,8 @@
   color: #dfe7ee;
 }
 
-.rad__row:not(.rad__row--lead):not(.rad__row--hl):not(:last-child) {
+.rad__row:not(.rad__row--hl):not(:last-child) {
   border-bottom: 1px solid rgba(255, 255, 255, 0.14);
-}
-
-.rad__row--lead {
-  font-weight: 700;
-  font-size: 20px;
-  color: #ffffff;
 }
 
 .rad__row--hl {
@@ -241,10 +256,6 @@
   font-weight: 700;
   font-size: 19px;
   color: #16243a;
-}
-
-.rad__goal-cell--lead {
-  font-size: 20px;
 }
 
 .rad__goal-cell:not(:last-child)::after {
@@ -436,16 +447,20 @@
   }
   .rad__tablegrid {
     grid-template-columns: 1fr 84px;
-    gap: 8px;
+    column-gap: 8px;
+    row-gap: 6px;
+  }
+  .rad__colhead {
+    font-size: 10.5px;
+  }
+  .rad__colhead--today {
+    padding-right: 10px;
   }
   .rad__row {
     padding: 0 10px;
     font-size: 12px;
     height: 42px;
     gap: 8px;
-  }
-  .rad__row--lead {
-    font-size: 12.5px;
   }
   .rad__row--hl {
     margin: 0 -3px;
@@ -458,9 +473,6 @@
   .rad__goal-cell {
     font-size: 12px;
     height: 42px;
-  }
-  .rad__goal-cell--lead {
-    font-size: 12.5px;
   }
   .rad__goal-cell:not(:last-child)::after {
     left: 8px;

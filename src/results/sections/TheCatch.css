@@ -173,11 +173,13 @@
   .rtc {
     grid-template-columns: 1fr;
   }
-  .rtc__left {
-    padding: 96px 22px 60px;
-  }
+  /* stacked: map card on top, copy underneath */
   .rtc__right {
+    order: -1;
     padding: 90px 22px 70px;
+  }
+  .rtc__left {
+    padding: 56px 22px 60px;
   }
   .rtc__arrows {
     top: 22px;

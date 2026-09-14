@@ -40,7 +40,45 @@ const GROUPS = [
     ],
   },
   {
-    title: 'Placeholder slides (fancy design pending)',
+    title: 'Results page — Blocks 1–3 · revenue split',
+    note: 'Sits near the bottom, between "…revenue for months to come." and "This is where Compounding Revenue Per Subscriber™ comes in."',
+    links: [
+      ['Block 1 only — 20% runs through the metrics', '/?results=split-normal'],
+      ['Block 1 + 2 — share under 5%', '/?results=split-low'],
+      ['Block 1 + 3 — no email at all (RPS $0)', '/?results=split-noemail'],
+      ['Block 1 hidden — split would be nonsense', '/?results=split-hidden'],
+    ],
+  },
+  {
+    title: 'Results page — Blocks 4–7 · capped outcome',
+    note: 'Sits straight under the metric table, before "You can stop at $1.5M."',
+    links: [
+      ['Block 4 — goal reached (renders nothing)', '/?results=capped4'],
+      ['Block 5 — short, but more traffic is reachable', '/?results=capped5'],
+      ['Block 6 — short, and traffic is not the answer', '/?results=capped6'],
+      ['Block 7 — nothing left to gain from the metrics', '/?results=capped7'],
+    ],
+  },
+  {
+    title: 'Results page — ad-spend module',
+    note: 'Sits between the CRPS calculator CTA and "So this isn’t a hollow… promise". Hidden unless Q7c was answered.',
+    links: [
+      ['No ad module — Q7c never answered', '/?results=ad-none'],
+      ['Ad module — fixed share (doc fixture, 2.5× → 7.2×)', '/?results=ad-fixed'],
+      ['Ad module + slider — Q7c = "Not sure"', '/?results=ad-slider'],
+      ['Ad module — $0 spend, ROAS shows “—”', '/?results=ad-zero'],
+    ],
+  },
+  {
+    title: 'Results page — known issue · “For the data nerds” is trapped in the ad module',
+    note: '“For the data nerds” + the “→ Calculate My RPV By Channel” button sit inside the ad module’s purple panel, so they disappear with it. The copy doc scopes its conditional note to the ad module only — that block is meant to render for everyone. Open both links and compare the same spot on the page. Awaiting a design call on where the block lands once it moves out.',
+    links: [
+      ['A · Has ads → data-nerds block + button PRESENT', '/?results=ad-fixed'],
+      ['B · No ads → data-nerds block + button MISSING', '/?results=ad-none'],
+    ],
+  },
+  {
+    title: 'Results page — original scenarios',
     links: [
       ['Results — worked fixture', '/?results=fixture'],
       ['Results — capped scenario', '/?results=capped'],
@@ -145,6 +183,11 @@ export default function DevSlides() {
               Open all ({g.links.length}) ↗
             </button>
           </h2>
+          {g.note ? (
+            <p style={{ fontSize: 12.5, lineHeight: 1.6, opacity: 0.65, margin: '6px 0 0', maxWidth: 760 }}>
+              {g.note}
+            </p>
+          ) : null}
           <ul style={{ listStyle: 'none', padding: 0, margin: '12px 0 0', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '8px 24px' }}>
             {g.links.map(([label, href]) => (
               <li key={href + label}>

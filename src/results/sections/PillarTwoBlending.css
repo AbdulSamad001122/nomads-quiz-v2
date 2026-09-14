@@ -96,11 +96,11 @@
   .rqc__headline {
     text-wrap: balance;
   }
-  /* stacked: copy first, then the cards artwork it explains */
-  .rqc__body {
+  /* stacked: the cards artwork on top, the copy explaining it below */
+  .rqc__media {
     order: 1;
   }
-  .rqc__media {
+  .rqc__body {
     order: 2;
   }
   .rqc__media img {

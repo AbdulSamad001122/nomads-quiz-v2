@@ -761,11 +761,10 @@ export default function QuizFlow() {
         );
       }
       const result = calculate(inputs, path);
-      // Slider shows when the ad share is a guess: "Not sure" OR skipped
-      // (both default to 50% per the logic doc).
-      const adGuessed =
-        inputs.q7b != null &&
-        (answers.q7c === 'not-sure' || answers.q7c == null);
+      // Logic Doc · 7: 'Slider (only if Q7c = "Not sure")'. A skipped Q7c gets
+      // no ad section at all (resolveInputs leaves q7c undefined), so "Not
+      // sure" is the only case that needs the adjustable share.
+      const adGuessed = inputs.q7c != null && answers.q7c === 'not-sure';
       return (
         <ResultsPage
           result={result}

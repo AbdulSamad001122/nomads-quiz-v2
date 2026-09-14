@@ -5,50 +5,56 @@ import { money, rpvMoney } from '../../calc/rounding.js';
 import { ga } from '../../analytics/ga.js';
 import './AdSpendSection.css';
 
+/** ROAS is null when the taker's ad spend is 0 — there is no ratio to show. */
+const roas = (x) => (x == null ? '—' : `${x}×`);
+
 /**
  * Conditional ad-spend module (doc: only when the taker answered the ad
  * questions). Live calculator: the slider adjusts the monthly ad spend and
  * everything recomputes through computeAdModule. Rendered only when
  * result.ad exists (QuizFlow already gates on q7b).
  */
-export default function AdSpendSection({ result }) {
+export default function AdSpendSection({ result, adAdjustable = false }) {
   const r = result;
-  const [spend, setSpend] = useState(r.ad.monthlySpend);
 
-  const sliderMax = useMemo(() => {
-    const base = Math.max(50000, r.ad.monthlySpend * 2);
-    return Math.ceil(base / 10000) * 10000;
-  }, [r.ad.monthlySpend]);
+  // Logic Doc · 7: the slider adjusts the AD-TRAFFIC SHARE (Q7c) from 10–100%,
+  // and only renders when the taker answered Q7c with "Not sure" — the spend
+  // (Q7b) is what they told us and stays fixed. Driving spend instead leaves
+  // adVisitors/revenue/monthlyGain inert, since adVisitors = Q7 × share.
+  const [share, setShare] = useState(r.ad.share);
+  const sharePct = Math.round(share * 100);
 
   const ad = useMemo(
     () =>
       computeAdModule({
         q7: r.inputs.q7,
-        q7b: spend,
-        share: r.ad.share,
+        q7b: r.ad.monthlySpend,
+        share,
         currentRPV: r.currentRPV,
         goalRPV: r.goalRPV,
         additionalRPVNeeded: r.additionalRPVNeeded,
       }),
-    [r, spend]
+    [r, share]
   );
   const d = ad.display;
+  const spend = ad.monthlySpend;
 
-  // Row set mirrors the reference design exactly, including the bold lead
-  // row that repeats "Your Monthly Spend" above the regular rows.
+  // Five rows, in the order of the copy doc's ad-module mockup (image9.png)
+  // and Quiz Logics.docx 666–668. "Revenue from that spend" is the emphasised
+  // row; the spend row is a plain one and appears once.
   const rows = [
-    { key: 'spend-lead', label: AD_SPEND.tableLabels.spend, today: money(spend), goal: money(spend), lead: true },
     { key: 'spend', label: AD_SPEND.tableLabels.spend, today: money(spend), goal: money(spend) },
     { key: 'visitors', label: AD_SPEND.tableLabels.visitors, today: d.adVisitors.toLocaleString('en-US'), goal: d.adVisitors.toLocaleString('en-US') },
     { key: 'rpv', label: AD_SPEND.tableLabels.rpv, today: rpvMoney(r.currentRPV), goal: rpvMoney(r.goalRPV) },
     { key: 'revenue', label: AD_SPEND.tableLabels.revenue, today: money(d.currentAdRev), goal: money(d.goalAdRev), highlight: true },
-    { key: 'roas', label: AD_SPEND.tableLabels.roas, today: `${d.currentROAS}×`, goal: `${d.goalROAS}×` },
+    { key: 'roas', label: AD_SPEND.tableLabels.roas, today: roas(d.currentROAS), goal: roas(d.goalROAS) },
   ];
 
-  const ticks = [0, 1, 2, 3, 4, 5].map((i) => (sliderMax / 5) * i);
-  // Reference labels the scale "$0 $10 $20…" (thousands, no "k")
-  const fmtTick = (v) => `$${Math.round(v / 1000)}`;
-  const fillPct = ((spend - 500) / (sliderMax - 500)) * 100;
+  // Ticks span 0–100 while the input runs 10–100, mirroring how the reference
+  // labels a "$0" tick below the slider's real $500 floor.
+  const ticks = [0, 20, 40, 60, 80, 100];
+  const fmtTick = (v) => `${v}%`;
+  const fillPct = ((sharePct - 10) / 90) * 100;
 
   return (
     <section className="rad">
@@ -71,41 +77,49 @@ export default function AdSpendSection({ result }) {
 
       <div className="rad__grid">
         <div className="rad__main">
-          <div className="rad__slider">
-            <div className="rad__slider-top">
-              <span className="rad__slider-label">{AD_SPEND.sliderLabel}</span>
-              {/* Reference shows the big value without a thousands comma */}
-              <span className="rad__slider-value">${spend}</span>
-            </div>
-            <input
-              className="rad__range"
-              type="range"
-              min={500}
-              max={sliderMax}
-              step={500}
-              value={spend}
-              onChange={(e) => setSpend(Number(e.target.value))}
-              style={{
-                background: `linear-gradient(to right, #ecd9c5 0%, #ecd9c5 ${fillPct}%, rgba(236, 217, 197, 0.38) ${fillPct}%, rgba(236, 217, 197, 0.38) 100%)`,
-              }}
-              aria-label={AD_SPEND.sliderLabel}
-            />
-            <div className="rad__ticks">
-              {ticks.map((t) => (
-                <span key={t}>{fmtTick(t)}</span>
-              ))}
-            </div>
-          </div>
+          {/* Logic Doc · 7: slider only when Q7c was answered "Not sure". */}
+          {adAdjustable && (
+            <>
+              <div className="rad__slider">
+                <div className="rad__slider-top">
+                  <span className="rad__slider-label">{AD_SPEND.shareLabel}</span>
+                  <span className="rad__slider-value">{sharePct}%</span>
+                </div>
+                <input
+                  className="rad__range"
+                  type="range"
+                  min={10}
+                  max={100}
+                  step={5}
+                  value={sharePct}
+                  onChange={(e) => setShare(Number(e.target.value) / 100)}
+                  style={{
+                    background: `linear-gradient(to right, #ecd9c5 0%, #ecd9c5 ${fillPct}%, rgba(236, 217, 197, 0.38) ${fillPct}%, rgba(236, 217, 197, 0.38) 100%)`,
+                  }}
+                  aria-label={AD_SPEND.shareLabel}
+                />
+                <div className="rad__ticks">
+                  {ticks.map((t) => (
+                    <span key={t}>{fmtTick(t)}</span>
+                  ))}
+                </div>
+              </div>
 
-          <p className="rad__adjust">{AD_SPEND.adjustNote}</p>
+              <p className="rad__adjust">{AD_SPEND.adjustNote}</p>
+            </>
+          )}
 
           <div className="rad__table">
             <div className="rad__tablegrid">
+              {/* Column heads, per the copy doc mockup — without them the two
+                  money columns are unlabelled. */}
+              <div className="rad__colhead rad__colhead--today">{AD_SPEND.tableHeads.today}</div>
+              <div className="rad__colhead rad__colhead--goal">{AD_SPEND.tableHeads.goal}</div>
               <div className="rad__rows">
                 {rows.map((row) => (
                   <div
                     key={row.key}
-                    className={`rad__row${row.lead ? ' rad__row--lead' : ''}${row.highlight ? ' rad__row--hl' : ''}`}
+                    className={`rad__row${row.highlight ? ' rad__row--hl' : ''}`}
                   >
                     <span className="rad__row-label">{row.label}</span>
                     <span className="rad__row-value">{row.today}</span>
@@ -114,7 +128,7 @@ export default function AdSpendSection({ result }) {
               </div>
               <div className="rad__goal">
                 {rows.map((row) => (
-                  <div key={row.key} className={`rad__goal-cell${row.lead ? ' rad__goal-cell--lead' : ''}`}>
+                  <div key={row.key} className="rad__goal-cell">
                     {row.goal}
                   </div>
                 ))}
