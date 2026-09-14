@@ -52,10 +52,13 @@ const SCENARIOS = {
   // total revenue, which also puts the share over 5% so Block 2 can't fire,
   // and keeps RPS above 0 so Block 3 can't either) AND the goal reached, which
   // is Block 4 — the one capped case with no copy of its own.
+  // Carries the ad answers too, so the ad calculator is on screen — the blocks
+  // and the ad module are independent, so this stays block-free either way.
   'no-blocks': {
-    blocks: 'none — both slots empty',
+    blocks: 'none — both slots empty, ad module shown',
     path: 'plg',
-    inputs: { q2: 60000, q7: 7500, q7b: null, q7c: undefined, q8: 375, q9a: 0.03, q9b: 0.375, q10: 175, q11: 63000 },
+    inputs: { q2: 60000, q7: 7500, q7b: 17500, q7c: 0.5, q8: 375, q9a: 0.03, q9b: 0.375, q10: 175, q11: 63000 },
+    adAdjustable: true,
   },
 
   /* ——— Blocks 4–7 · the capped-state outcome ——— */
