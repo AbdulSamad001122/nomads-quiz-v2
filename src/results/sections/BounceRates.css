@@ -11,7 +11,7 @@
 .rbr__band {
   position: relative;
   background: #122b2e url('/assets/results-bounce-teal-bg.webp') center / 100% 100% no-repeat;
-  padding: 104px 40px 118px 361px;
+  padding: 104px 40px 118px;
 }
 
 /* white part of the frame — top + sides, inside the band */
@@ -27,6 +27,8 @@
 .rbr__copy {
   position: relative;
   max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .rbr__p {
@@ -84,7 +86,7 @@
 
 @media (max-width: 1100px) {
   .rbr__band {
-    padding: 72px 36px 84px 20%;
+    padding: 72px 36px 84px;
   }
   .rbr__band::after {
     inset: 22px 20px 0;
