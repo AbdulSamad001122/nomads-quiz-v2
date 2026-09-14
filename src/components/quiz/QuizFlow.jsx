@@ -27,7 +27,7 @@ import { QUESTIONS, resolveQuestion, salesModel } from '../../data/questions.js'
 import AnswerCheckModal from './AnswerCheckModal.jsx';
 import { resolveInputs } from '../../calc/backendValues.js';
 import { impossibleCheck } from '../../calc/validation.js';
-import { calculate } from '../../calc/calculator.js';
+import { calculate, CEILINGS } from '../../calc/calculator.js';
 import { ga } from '../../analytics/ga.js';
 import { buildKitFields } from '../../kit/kitPayload.js';
 import { pushToKit } from '../../kit/push.js';
@@ -394,14 +394,6 @@ export default function QuizFlow() {
    * modal's routes preserve what the taker typed.
    */
   const advanceChecked = (qid, ans = answers, man = manualValues) => {
-    // Already asked and answered with "Keep my answers" — don't ask again on a
-    // re-advance. The clamp lands on the ceiling itself (q8 = q7), and the
-    // doc's trip condition is ">=", so without this the same prompt returns
-    // every time they step forward through the question.
-    if (overrides.includes(qid)) {
-      goTo(index, 1, ans);
-      return;
-    }
     const trip = impossibleCheck(qid, resolveInputs(ans, man, salesModel(ans)));
     if (trip) {
       setAnswerCheck({ ...trip, qid, ans, man });
@@ -413,7 +405,17 @@ export default function QuizFlow() {
   // "Keep my answers" — the doc says it advances, clamps at the ceiling and
   // tags the record unverified. Writing the capped figure back as a manual
   // value is what makes the clamp real everywhere downstream.
-  const CLAMP_TO = { q8: (i) => i.q7, q11: (i) => i.q2 };
+  //
+  // "at ceiling" = the doc's own ceilings table, not the raw comparison value.
+  // For Q8 that is the opt-in ceiling (0.60 of visitors). Clamping to visitors
+  // instead would leave q8 === q7, which still satisfies the doc's own ">="
+  // trip condition — evidence that the metric ceiling is what it means.
+  // Q11's check is "> total revenue", so total revenue itself already clears.
+  // FLAGGED: the doc says "ceiling" without naming which.
+  const CLAMP_TO = {
+    q8: (i) => Math.round(i.q7 * CEILINGS.optIn),
+    q11: (i) => i.q2,
+  };
 
   const keepAnswers = () => {
     const { qid, ans, man } = answerCheck;
