@@ -45,9 +45,11 @@ export default function AdSpendSection({ result }) {
     { key: 'roas', label: AD_SPEND.tableLabels.roas, today: `${d.currentROAS}×`, goal: `${d.goalROAS}×` },
   ];
 
-  const ticks = [0, 1, 2, 3, 4, 5].map((i) => (sliderMax / 5) * i);
-  // Reference labels the scale "$0 $10 $20…" (thousands, no "k")
-  const fmtTick = (v) => `$${Math.round(v / 1000)}`;
+  // Scale labels run from the $500 minimum to the slider max in full values
+  // ("$500, $10,000 … $50,000") — user request, replacing the reference's
+  // "$0 $10 $20…" thousands shorthand.
+  const ticks = [500, ...[1, 2, 3, 4, 5].map((i) => (sliderMax / 5) * i)];
+  const fmtTick = (v) => `$${Math.round(v).toLocaleString('en-US')}`;
   const fillPct = ((spend - 500) / (sliderMax - 500)) * 100;
 
   return (
