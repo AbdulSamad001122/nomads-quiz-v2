@@ -72,11 +72,11 @@ const GROUPS = [
     ],
   },
   {
-    title: 'Results page — known issue · “For the data nerds” is trapped in the ad module',
-    note: '“For the data nerds” + the “→ Calculate My RPV By Channel” button sit inside the ad module’s purple panel, so they disappear with it. The copy doc scopes its conditional note to the ad module only — that block is meant to render for everyone. Open both links and compare the same spot on the page. Awaiting a design call on where the block lands once it moves out.',
+    title: 'Results page — “For the data nerds” (own section since 2026-09-15)',
+    note: 'Designed and moved out of the ad module’s purple panel: white card on the topo/dice texture, playful-compass badge on the seam, swoosh channel bullets. Renders for EVERYONE now — compare the two links: the ad module comes and goes, the data-nerds card is on both.',
     links: [
-      ['A · Has ads → data-nerds block + button PRESENT', '/?results=ad-fixed'],
-      ['B · No ads → data-nerds block + button MISSING', '/?results=ad-none'],
+      ['Has ads → ad module + data-nerds card', '/?results=ad-fixed'],
+      ['No ads → data-nerds card still there', '/?results=ad-none'],
     ],
   },
   {

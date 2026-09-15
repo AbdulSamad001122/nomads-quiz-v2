@@ -87,7 +87,10 @@
   display: grid;
   grid-template-columns: 1fr 430px;
   gap: 32px;
-  align-items: stretch;
+  /* start, not stretch — with the data-nerds block moved out (2026-09-15)
+     the plum panel is shorter than the table card; stretching either one
+     left a tall empty area (the old white-gap complaint). */
+  align-items: start;
   text-align: left;
 }
 
@@ -327,39 +330,6 @@
   font-weight: 700;
   font-size: 18px;
   padding: 7px 18px;
-}
-
-.rad__nerds-title {
-  margin-top: 42px;
-  text-align: left;
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 17px;
-}
-
-.rad__nerds-p {
-  margin-top: 16px;
-  text-align: left;
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.55;
-  color: #f3e6ef;
-}
-
-.rad__channel-btn {
-  display: block;
-  margin-top: 32px;
-  background: #f6e5f2;
-  border: 1.5px solid #38102c;
-  box-shadow: 5px 5px 0 #f0e5d8;
-  color: #431232;
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 17px;
-  text-decoration: none;
-  text-align: center;
-  padding: 15px 18px;
 }
 
 /* ——— responsive ——— */

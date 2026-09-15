@@ -21,7 +21,6 @@
    ============================================================ */
 
 .results-page .rnav__cta,
-.results-page .rad__channel-btn,
 .results-page .rcta__btn,
 .results-page .rgp__btn,
 .results-page .rtp__btn,
@@ -31,7 +30,6 @@
 }
 
 .results-page .rnav__cta:hover,
-.results-page .rad__channel-btn:hover,
 .results-page .rcta__btn:hover,
 .results-page .rgp__btn:hover,
 .results-page .rtp__btn:hover,
@@ -41,7 +39,6 @@
 }
 
 .results-page .rnav__cta:active,
-.results-page .rad__channel-btn:active,
 .results-page .rcta__btn:active,
 .results-page .rgp__btn:active,
 .results-page .rtp__btn:active,
@@ -59,12 +56,8 @@
   box-shadow: 3px 3px 0 #152638;
 }
 
-.results-page .rad__channel-btn:hover {
-  box-shadow: 7px 7px 0 #f0e5d8;
-}
-.results-page .rad__channel-btn:active {
-  box-shadow: 3px 3px 0 #f0e5d8;
-}
+/* .rad__channel-btn moved out of the ad module — it's the DataNerds section's
+   plain .q-btn now (design, 2026-09-15), which carries its own hover. */
 
 .results-page .rcta__btn:hover {
   box-shadow: 8px 8px 0 #43123255;
@@ -105,8 +98,7 @@
    they just don't move. */
 @media (prefers-reduced-motion: reduce) {
   .results-page .rnav__cta,
-  .results-page .rad__channel-btn,
-  .results-page .rcta__btn,
+    .results-page .rcta__btn,
   .results-page .rgp__btn,
   .results-page .rtp__btn,
   .results-page .rwk__btn,
@@ -114,8 +106,7 @@
     transition: box-shadow 0.15s ease;
   }
   .results-page .rnav__cta:hover,
-  .results-page .rad__channel-btn:hover,
-  .results-page .rcta__btn:hover,
+    .results-page .rcta__btn:hover,
   .results-page .rgp__btn:hover,
   .results-page .rtp__btn:hover,
   .results-page .rwk__btn:hover,

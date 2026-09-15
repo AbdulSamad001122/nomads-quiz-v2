@@ -2,7 +2,6 @@ import { useMemo, useState } from 'react';
 import { AD_SPEND } from '../copy.js';
 import { computeAdModule } from '../../calc/calculator.js';
 import { money, rpvMoney } from '../../calc/rounding.js';
-import { ga } from '../../analytics/ga.js';
 import './AdSpendSection.css';
 
 /** ROAS is null when the taker's ad spend is 0 — there is no ratio to show. */
@@ -148,19 +147,8 @@ export default function AdSpendSection({ result, adAdjustable = false }) {
           <p className="rad__gain">{money(d.monthlyGain)}</p>
           <p className="rad__gain-sub">{AD_SPEND.panelGainSub}</p>
           <span className="rad__year-chip">{AD_SPEND.panelYearChip(money(d.annualGain))}</span>
-
-          <h4 className="rad__nerds-title">{AD_SPEND.nerdsTitle}</h4>
-          <p className="rad__nerds-p">{AD_SPEND.nerdsP1}</p>
-          <p className="rad__nerds-p">{AD_SPEND.nerdsP2}</p>
-          <p className="rad__nerds-p">
-            {AD_SPEND.nerdsP3Plain}{' '}
-            <br />
-            <strong>{AD_SPEND.nerdsP3Bold}</strong>
-          </p>
-          {/* TODO: real RPV-by-channel URL when provided */}
-          <a className="rad__channel-btn" href="#" onClick={() => ga.ctaClick('rpv_by_channel')}>
-            {AD_SPEND.channelButton}
-          </a>
+          {/* "For the data nerds" used to live here — it's the unconditional
+              DataNerds section below the module now (design, 2026-09-15). */}
         </aside>
       </div>
     </section>

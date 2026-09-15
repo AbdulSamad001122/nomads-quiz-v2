@@ -219,14 +219,30 @@ export const AD_SPEND = {
   panelIntroLines: ['Sitting inside spend you’ve', 'already committed to:'],
   panelGainSub: 'more a month',
   panelYearChip: (year) => `Call it ${year} a year`,
-  // Doc has "For the data nerds 🧮" — emoji removed per the exact-match
-  // calculator close-up (user instruction Sep 11); flagged.
-  nerdsTitle: 'For the data nerds',
-  nerdsP1: 'This diagnostic can’t peek inside your Google Analytics, CRM, ad dashboards, or other data sources.',
-  nerdsP2: 'So if you want to go deeper and nerd out, grab your numbers to see your Revenue Per Visitor™ by channel — and find which channels are most profitable.',
-  nerdsP3Plain: 'Paid. Organic. Referral. Email. Social.',
-  nerdsP3Bold: 'Whatever you’ve got.',
-  channelButton: '→ Calculate My RPV By Channel',
+};
+
+/**
+ * "For the data nerds" — its own always-visible section under the ad module
+ * (design reference received 2026-09-15). The copy doc gives it its own
+ * Heading3 OUTSIDE the ad module's conditional blue box, so it renders for
+ * everyone — including non-advertisers who never see the ad module.
+ *
+ * Doc↔design flags:
+ * - Doc has "For the data nerds 🧮" — emoji dropped (design + Sep 11 rule).
+ * - Doc p2 has "by channel — and find"; the design mockup drops the dash.
+ *   Doc wins per standing rule; flagged.
+ * - Doc writes the channels as one sentence "Paid. Organic. Referral. Email.
+ *   Social." — the design renders them as a swoosh-bulleted row; casing kept.
+ * - Doc/old build had the arrow leading ("→ Calculate…"); the design puts it
+ *   trailing. Design wins on presentation; flagged.
+ */
+export const DATA_NERDS = {
+  title: 'For the data nerds',
+  p1: 'This diagnostic can’t peek inside your Google Analytics, CRM, ad dashboards, or other data sources.',
+  p2: 'So if you want to go deeper and nerd out, grab your numbers to see your Revenue Per Visitor™ by channel — and find which channels are most profitable.',
+  channels: ['Paid', 'Organic', 'Referral', 'Email', 'Social'],
+  chip: 'Whatever you’ve got.',
+  button: 'Calculate My RPV By Channel →',
 };
 
 export const PROMISE_BANNER = {

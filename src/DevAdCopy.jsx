@@ -1,4 +1,4 @@
-import { AD_SPEND } from './results/copy.js';
+import { AD_SPEND, DATA_NERDS } from './results/copy.js';
 
 /**
  * DEV ONLY — `?copy=ad` — the ad-spend module's full copy as a flat sheet,
@@ -39,12 +39,13 @@ export default function DevAdCopy() {
     ['Gain figure', '$81,200  → computed per person', ['dynamic']],
     ['Under the figure', c.panelGainSub, ['dev']],
     ['Yearly chip', c.panelYearChip('$975,000') + '  → the $ is computed', ['dev', 'dynamic']],
-    ['— “FOR THE DATA NERDS” (inside the panel today; moving out once designed) —', null, null],
-    ['Title', c.nerdsTitle, ['static']],
-    ['Paragraph 1', c.nerdsP1, ['static']],
-    ['Paragraph 2', c.nerdsP2, ['static']],
-    ['Paragraph 3', `${c.nerdsP3Plain} ${c.nerdsP3Bold}  (second sentence bold)`, ['static']],
-    ['Button', c.channelButton, ['static']],
+    ['— “FOR THE DATA NERDS” (its own always-visible section below the module — renders for EVERYONE) —', null, null],
+    ['Title', DATA_NERDS.title, ['static']],
+    ['Paragraph 1', DATA_NERDS.p1, ['static']],
+    ['Paragraph 2', DATA_NERDS.p2, ['static']],
+    ['Channels row (plum swoosh bullets; the doc writes it as one sentence)', DATA_NERDS.channels.join('   ·   '), ['static']],
+    ['Chip (plum band)', DATA_NERDS.chip, ['static']],
+    ['Button', DATA_NERDS.button, ['static']],
   ];
 
   return (

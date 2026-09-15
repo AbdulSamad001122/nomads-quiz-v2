@@ -8,6 +8,7 @@ import BeyondFourteenDays from './sections/BeyondFourteenDays.jsx';
 import CompoundingIntro from './sections/CompoundingIntro.jsx';
 import CrpsCalculatorCta from './sections/CrpsCalculatorCta.jsx';
 import AdSpendSection from './sections/AdSpendSection.jsx';
+import DataNerds from './sections/DataNerds.jsx';
 import PromiseBanner from './sections/PromiseBanner.jsx';
 import BehindTheNumber from './sections/BehindTheNumber.jsx';
 import WorkshopInvite from './sections/WorkshopInvite.jsx';
@@ -64,6 +65,10 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
       {/* Ad module is conditional — doc: only when the taker answered the
           ad-spend questions (result.ad exists). */}
       {result.ad && <AdSpendSection result={result} adAdjustable={adAdjustable} />}
+      {/* "For the data nerds" — its own Heading3 in the copy doc, OUTSIDE the
+          ad module's blue box, so it renders for everyone (design 2026-09-15).
+          It used to be nested in the ad panel and vanished for non-advertisers. */}
+      <DataNerds />
       <PromiseBanner />
       <BehindTheNumber />
       <WorkshopInvite tokens={tokens} />
