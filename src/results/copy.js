@@ -68,14 +68,29 @@ export const METRICS = {
  */
 export const RESULT_BLOCKS = {
   // trigger: otherRevenue ≥ 0 (suppressed when < 0; tag split_suppressed)
-  block1:
-    'Around {{email_percentage}}% of your revenue comes through the five metrics that influence your RPV™. Everything else comes from: repeat purchases, referrals, direct traffic, social, and word of mouth. The {{email_percentage}}% is the part you can track, control, and systematically optimise. The bigger this number, the more predictable your revenue.',
+  //
+  // Block 1's design (reference 2026-09-15) breaks the doc's middle sentence
+  // "Everything else comes from: repeat purchases, referrals, direct traffic,
+  // social, and word of mouth." into a bold intro + five tick cards — the
+  // design drops the colon and keeps the sentence's own casing mid-list
+  // ("direct traffic", "social") plus the full stop on the last card. Split
+  // at sentence boundaries only; no wording changed.
+  block1: {
+    head: 'Around {{email_percentage}}% of your revenue comes through the five metrics that influence your RPV™.',
+    foot: 'The {{email_percentage}}% is the part you can track, control, and systematically optimise. The bigger this number, the more predictable your revenue.',
+  },
 
   // Yemi ruling (2026-09-15, Q5): when the true share is under 2.5% the
   // rounded figure collapses to 0, so Block 1 switches to this wording
   // instead of printing "Around 0%". Copy approved by Yemi (Tab 2 draft).
-  block1Small:
-    'Less than 5% of your revenue comes through the five metrics that influence your RPV™. Everything else comes from: repeat purchases, referrals, direct traffic, social, and word of mouth. That small slice is the part you can track, control, and systematically optimise — the bigger it gets, the more predictable your revenue.',
+  block1Small: {
+    head: 'Less than 5% of your revenue comes through the five metrics that influence your RPV™.',
+    foot: 'That small slice is the part you can track, control, and systematically optimise — the bigger it gets, the more predictable your revenue.',
+  },
+
+  // Shared by both Block 1 wordings — the "everything else" list as cards.
+  splitIntro: 'Everything else comes from',
+  splitChannels: ['Repeat purchases', 'Referrals', 'direct traffic', 'social', 'and word of mouth.'],
 
   // trigger: emailPercentage < 5 (suppressed if Block 3 or 7 fires)
   block2:

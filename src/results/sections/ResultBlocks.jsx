@@ -50,17 +50,35 @@ export default function ResultBlocks({ result, tokens, slot }) {
 
   if (slot === 'split') {
     if (result.block1.splitSuppressed && !showBlock2 && !showBlock3) return null;
+    const b1 = tinyShare ? b.block1Small : b.block1;
     return (
-      <section className="rbk">
-        <div className="rbk__inner">
-          {!result.block1.splitSuppressed && (
-            <p className="rbk__para">
-              {fill(tinyShare ? b.block1Small : b.block1, tokens)}
-            </p>
-          )}
-          {showBlock3 && <p className="rbk__para rbk__para--note">{b.block3}</p>}
-          {showBlock2 && <p className="rbk__para rbk__para--note">{b.block2}</p>}
-        </div>
+      <section className="rsb">
+        {!result.block1.splitSuppressed && (
+          <>
+            <p className="rsb__head">{fill(b1.head, tokens)}</p>
+            <p className="rsb__intro">{b.splitIntro}</p>
+            <ul className="rsb__cards">
+              {b.splitChannels.map((ch) => (
+                <li className="rsb__card" key={ch}>
+                  <img
+                    className="rsb__tick"
+                    src="/assets/results-tick-circle.png"
+                    alt=""
+                    aria-hidden="true"
+                    width="160"
+                    height="148"
+                  />
+                  {ch}
+                </li>
+              ))}
+            </ul>
+            <p className="rsb__foot">{fill(b1.foot, tokens)}</p>
+          </>
+        )}
+        {/* Blocks 2/3 have no design reference yet — restrained outline note
+            in the card language, FLAGGED as dev-styled. */}
+        {showBlock3 && <p className="rsb__note">{b.block3}</p>}
+        {showBlock2 && <p className="rsb__note">{b.block2}</p>}
       </section>
     );
   }
