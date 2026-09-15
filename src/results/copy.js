@@ -85,7 +85,7 @@ export const RESULT_BLOCKS = {
   // instead of printing "Around 0%". Copy approved by Yemi (Tab 2 draft).
   block1Small: {
     head: 'Less than 5% of your revenue comes through the five metrics that influence your RPV™.',
-    foot: 'That small slice is the part you can track, control, and systematically optimise — the bigger it gets, the more predictable your revenue.',
+    foot: 'That small slice is the part you can track, control, and systematically optimise. The bigger it gets, the more predictable your revenue.',
   },
 
   // Shared by both Block 1 wordings — the "everything else" list as cards.
@@ -137,7 +137,7 @@ export const RESULT_BLOCKS = {
   // opposite of this trigger (no headroom left = the STRONGEST takers).
   // Copy approved by Yemi (Tab 2 draft).
   block7: {
-    leadBefore: 'Your five metrics are already performing past the benchmark ceiling — there\'s not much left to squeeze out of conversion alone.',
+    leadBefore: 'Your five metrics are already performing past the benchmark ceiling. There\'s not much left to squeeze out of conversion alone.',
     leadBold: '',
     leadAfter: '',
     tail: 'That means the next stage of growth doesn\'t come from fixing your funnel. It comes from compounding what\'s already working and scaling what feeds it.',
@@ -269,7 +269,7 @@ export const AD_SPEND = {
 export const DATA_NERDS = {
   title: 'For the data nerds',
   p1: 'This diagnostic can’t peek inside your Google Analytics, CRM, ad dashboards, or other data sources.',
-  p2: 'So if you want to go deeper and nerd out, grab your numbers to see your Revenue Per Visitor™ by channel — and find which channels are most profitable.',
+  p2: 'So if you want to go deeper and nerd out, grab your numbers to see your Revenue Per Visitor™ by channel and find which channels are most profitable.',
   channels: ['Paid', 'Organic', 'Referral', 'Email', 'Social'],
   chip: 'Whatever you’ve got.',
   button: 'Calculate My RPV By Channel →',
