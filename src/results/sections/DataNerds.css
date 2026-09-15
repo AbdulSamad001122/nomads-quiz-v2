@@ -146,6 +146,12 @@
   }
 }
 
+@media (max-width: 800px) {
+  .rdn__ring {
+    width: 85%;
+  }
+}
+
 @media (max-width: 760px) {
   /* centre the badge on the seam, same treatment as the stop-or-push stamp */
   .rdn__badge {
