@@ -298,3 +298,36 @@
     text-align: left;
   }
 }
+
+/* Narrow phones: the 42px nowrap "+$1.5M/year" and the becard's rigid
+   icon+number row both outgrow ~430px viewports (14px page overflow at 320,
+   clipped headline below 400). Step the type down and let the row wrap. */
+@media (max-width: 430px) {
+  .rcx__left-big {
+    font-size: 34px;
+  }
+  .rcx__benum {
+    font-size: 32px;
+  }
+  .rcx__becard {
+    max-width: 100%;
+  }
+  .rcx__becard-row {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 10px;
+  }
+  .rcx__bicon {
+    width: 58px;
+    height: 58px;
+  }
+}
+
+@media (max-width: 350px) {
+  .rcx__left-big {
+    font-size: 29px;
+  }
+  .rcx__benum {
+    font-size: 28px;
+  }
+}
