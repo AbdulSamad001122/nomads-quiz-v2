@@ -96,10 +96,20 @@ const near = (a, b, tol = 1e-6) => Math.abs(a - b) <= tol;
    4 · BLOCK SELECTION
    ========================================================= */
 {
-  // No email → Block 3 + capped
+  // No email → Block 3, and (Yemi ruling 2026-09-15, Q1) RPS grows from $0 to
+  // the $50 benchmark — so with this much traffic the goal is reached and the
+  // old "maximised every metric next to RPS $0" contradiction is gone.
   const noEmail = calculate({ q2: 810000, q7: 30000, q7b: null, q7c: undefined, q8: 3000, q9a: 0.03, q9b: 0.375, q10: 175, q11: 0 }, 'plg');
   ok('block · no-email → noEmail flag + rps=0', noEmail.noEmail && noEmail.current.rps === 0);
-  ok('block · no-email → capped (never Block 4)', noEmail.cappedBlock !== 4);
+  ok('yemi Q1 · no-email goal RPS = $50 benchmark', noEmail.goal.rps === 50, `goal.rps=${noEmail.goal.rps}`);
+  ok('yemi Q1 · no-email with real traffic reaches goal (Block 4)', noEmail.cappedBlock === 4, `block=${noEmail.cappedBlock}`);
+
+  // Yemi ruling Q4: any metric at 0 grows to its ceiling (0 × 1.1 stuck it
+  // at 0 forever and span the loop into the safety guard).
+  const zeroClose = calculate({ q2: 810000, q7: 30000, q7b: null, q7c: undefined, q8: 3000, q9a: 0.03, q9b: 0, q10: 175, q11: 175000 }, 'plg');
+  ok('yemi Q4 · close rate 0 → goal is the 75% ceiling', zeroClose.goal.close === 0.75, `goal.close=${zeroClose.goal.close}`);
+  const zeroOptIn = calculate({ q2: 810000, q7: 30000, q7b: null, q7c: undefined, q8: 0, q9a: 0.03, q9b: 0.375, q10: 175, q11: 0 }, 'plg');
+  ok('yemi Q4 · opt-in 0 → goal is the 60% ceiling', zeroOptIn.goal.optIn === 0.6, `goal.optIn=${zeroOptIn.goal.optIn}`);
 
   // Block 7 → achievableGain ≤ 0 (high email rev, low traffic)
   const b7 = calculate({ q2: 2100000, q7: 4000, q7b: null, q7c: undefined, q8: 400, q9a: 0.03, q9b: 0.375, q10: 175, q11: 1750000 }, 'plg');

@@ -27,13 +27,15 @@ const SCENARIOS = {
   // Block 2 fires: share is under 5%, so the "too much of your revenue is
   // unpredictable" warning renders under the split.
   'split-low': {
-    blocks: '1 + 2 + 4',
+    blocks: '1(small) + 2 + 4',
     path: 'plg',
     inputs: { q2: 810000, q7: 7500, q7b: null, q7c: undefined, q8: 500, q9a: 0.005, q9b: 0.05, q10: 25, q11: 12500 },
   },
-  // Block 3 fires: no email revenue at all, so RPS is $0.
+  // Block 3 fires: no email revenue at all, so RPS is $0. Yemi ruling Q1:
+  // RPS grows to the $50 benchmark, so this taker now reaches the goal —
+  // Block 4, no capped card. Block 1 renders the "less than 5%" wording (Q5).
   'split-noemail': {
-    blocks: '1 + 3 + 5',
+    blocks: '1(small) + 3 + 4',
     path: 'plg',
     inputs: { q2: 810000, q7: 30000, q7b: null, q7c: undefined, q8: 3000, q9a: 0.03, q9b: 0.375, q10: 175, q11: 0 },
   },
@@ -123,7 +125,7 @@ const SCENARIOS = {
   /* ——— original scenario names, kept so existing links still work ——— */
   fixture: { blocks: '1 + 4 · ad module', path: 'slg', inputs: { q2: 810000, q7: 30000, q7b: 17500, q7c: 0.65, q8: 3000, q9a: 0.03, q9b: 0.375, q10: 3500, q11: 175000 } },
   capped: { blocks: '1 + 5', path: 'plg', inputs: { q2: 270000, q7: 4000, q7b: null, q7c: undefined, q8: 400, q9a: 0.03, q9b: 0.375, q10: 175, q11: 62500 } },
-  noemail: { blocks: '1 + 3 + 5', path: 'plg', inputs: { q2: 810000, q7: 30000, q7b: null, q7c: undefined, q8: 3000, q9a: 0.03, q9b: 0.375, q10: 175, q11: 0 } },
+  noemail: { blocks: '1(small) + 3 + 4', path: 'plg', inputs: { q2: 810000, q7: 30000, q7b: null, q7c: undefined, q8: 3000, q9a: 0.03, q9b: 0.375, q10: 175, q11: 0 } },
   adslider: { blocks: '1 + 4 · ad module + slider', path: 'plg', inputs: { q2: 810000, q7: 30000, q7b: 17500, q7c: 0.5, q8: 3000, q9a: 0.03, q9b: 0.375, q10: 175, q11: 175000 }, adAdjustable: true },
 };
 

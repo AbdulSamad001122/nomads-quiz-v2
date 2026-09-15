@@ -14,7 +14,15 @@ export function resolveTokens(result) {
     goal_rpv: rpvMoney(result.goalRPV),
     // "But… what if you did?" — max-benchmark gain (Logic Doc capped maths;
     // display rounds money to the nearest $100).
-    achievable_gain: money(result.capped.achievableGain),
+    // Yemi ruling (2026-09-15, Q3): the DISPLAYED figure caps at the page's
+    // own $1.5M promise — 77% of takers landed above it, half above 10× their
+    // own revenue. Raw maths and the Kit tag stay untouched. Blocks 5/6 only
+    // fire below $1.5M, so the capped form only ever renders in the
+    // "what if you did" headline.
+    achievable_gain:
+      result.capped.achievableGain >= 1_500_000
+        ? '$1.5M+'
+        : money(result.capped.achievableGain),
     // Block 1 — share of revenue running through the five metrics, already
     // rounded to the nearest 5 by the calculator.
     email_percentage: String(result.block1.emailPercentage),

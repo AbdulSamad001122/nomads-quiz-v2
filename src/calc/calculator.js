@@ -202,9 +202,6 @@ export function runImprovementLoop(current, ceil, targetRevenue, annualVisitors,
       frozen[k] = true;
     }
   }
-  // RPS = 0 → freeze (can never grow by ×1.1); run on the other three.
-  if (m.rps === 0) frozen.rps = true;
-
   const revenue = () => annualVisitors * m.optIn * m.rps + nonListRevenue;
 
   const clampGoal = () => {
@@ -223,7 +220,12 @@ export function runImprovementLoop(current, ceil, targetRevenue, annualVisitors,
     if (++guard > 100000) break; // safety — never expected to trip
     for (const k of order) {
       if (frozen[k]) continue;
-      const candidate = m[k] * 1.1; // multiplicative: a tenth of current
+      // Yemi ruling (2026-09-15, Q1 + Q4): a metric at 0 grows to its
+      // benchmark ceiling — "if they were doing it, they could earn the
+      // benchmark". ×1.1 can't grow 0, so the first pass jumps straight to
+      // the ceiling. (This replaced the old RPS-freeze-at-0, which produced
+      // "you've maximised every metric" beside "your RPS is $0".)
+      const candidate = m[k] === 0 ? ceil[k] : m[k] * 1.1; // multiplicative: a tenth of current
       if (candidate >= ceil[k]) {
         m[k] = ceil[k];
         frozen[k] = true;

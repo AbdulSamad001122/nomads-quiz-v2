@@ -5,7 +5,10 @@
 
 export const BOUNDS = {
   q7a: { type: 'integer', min: 1, max: 100_000_000 },
-  q7b: { type: 'currency', min: 0, max: 1_000_000_000 },
+  // Yemi ruling (2026-09-15, Q7): the Logic Doc's bounds table has no Q7b
+  // row; min $1 approved. A guessed min of 0 previously let "$0 spend" divide
+  // to an Infinity× ROAS.
+  q7b: { type: 'currency', min: 1, max: 1_000_000_000 },
   q8: { type: 'integer', min: 0, max: 100_000_000 },
   q9a: { type: 'percent', min: 0, max: 100 },
   q9b: { type: 'percent', min: 0, max: 100 },

@@ -42,13 +42,21 @@ export default function ResultBlocks({ result, tokens, slot }) {
   // Fires when maxing the metrics already clears $1.5M, so there is no gap.
   const showGapSentence = capped === 5 && !result.capped.gapClosedByMetrics;
 
+  // Yemi ruling (2026-09-15, Q5): a true share under 2.5% rounds to 0, so
+  // Block 1 switches to the "less than 5%" wording instead of "Around 0%".
+  // round5 sends exactly the raw values below 2.5 to 0, so the rounded
+  // figure being under 5 is the same condition.
+  const tinyShare = result.block1.emailPercentage < 5;
+
   if (slot === 'split') {
     if (result.block1.splitSuppressed && !showBlock2 && !showBlock3) return null;
     return (
       <section className="rbk">
         <div className="rbk__inner">
           {!result.block1.splitSuppressed && (
-            <p className="rbk__para">{fill(b.block1, tokens)}</p>
+            <p className="rbk__para">
+              {fill(tinyShare ? b.block1Small : b.block1, tokens)}
+            </p>
           )}
           {showBlock3 && <p className="rbk__para rbk__para--note">{b.block3}</p>}
           {showBlock2 && <p className="rbk__para rbk__para--note">{b.block2}</p>}
@@ -85,7 +93,8 @@ export default function ResultBlocks({ result, tokens, slot }) {
 
         {capped === 7 && (
           <div className="rbk__capped">
-            <p className="rbk__para">{b.block7.body}</p>
+            <p className="rbk__para">{b.block7.lead}</p>
+            <p className="rbk__para">{b.block7.tail}</p>
             <a className="rbk__cta" href="#">
               {b.block7.cta}
             </a>

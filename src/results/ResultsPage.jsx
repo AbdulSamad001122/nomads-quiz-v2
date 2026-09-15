@@ -48,7 +48,11 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
       {/* Copy doc blue box "Blocks 4–7 — Capped-state outcomes" sits here,
           between the metric table and "You can stop at $1.5M." */}
       <ResultBlocks result={result} tokens={tokens} slot="capped" />
-      <StopOrPush tokens={tokens} />
+      {/* Yemi ruling (2026-09-15, Q6): capped takers just read "you can't get
+          there with the traffic you have" in Blocks 5–7 — the generic "push
+          all 5 metrics and add $1.5M/year" would contradict it one section
+          later, so they don't get this one. */}
+      {!result.cappedState && <StopOrPush tokens={tokens} />}
       <WhatIfYouDid result={result} tokens={tokens} />
       <BeyondFourteenDays />
       {/* Copy doc blue box "Block 3 — No email marketing … See Logic Doc

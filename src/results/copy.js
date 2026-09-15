@@ -71,6 +71,12 @@ export const RESULT_BLOCKS = {
   block1:
     'Around {{email_percentage}}% of your revenue comes through the five metrics that influence your RPV™. Everything else comes from: repeat purchases, referrals, direct traffic, social, and word of mouth. The {{email_percentage}}% is the part you can track, control, and systematically optimise. The bigger this number, the more predictable your revenue.',
 
+  // Yemi ruling (2026-09-15, Q5): when the true share is under 2.5% the
+  // rounded figure collapses to 0, so Block 1 switches to this wording
+  // instead of printing "Around 0%". Copy approved by Yemi (Tab 2 draft).
+  block1Small:
+    'Less than 5% of your revenue comes through the five metrics that influence your RPV™. Everything else comes from: repeat purchases, referrals, direct traffic, social, and word of mouth. That small slice is the part you can track, control, and systematically optimise — the bigger it gets, the more predictable your revenue.',
+
   // trigger: emailPercentage < 5 (suppressed if Block 3 or 7 fires)
   block2:
     'Almost none of your revenue is coming through the five metrics used to calculate Revenue Per Visitor™. That usually means you\'re not making the most of the visitors you\'re already attracting. Too much of your revenue depends on channels and outcomes you can\'t reliably predict or control.',
@@ -99,8 +105,13 @@ export const RESULT_BLOCKS = {
   },
 
   // trigger: capped, achievableGain ≤ 0 (suppresses Blocks 2, 5, 6)
+  // Yemi ruling (2026-09-15, Q2): trigger kept, copy replaced. The doc's
+  // original body reused Block 2's "almost none" wording, which means the
+  // opposite of this trigger (no headroom left = the STRONGEST takers).
+  // Copy approved by Yemi (Tab 2 draft).
   block7: {
-    body: 'Almost none of your revenue is coming through the five metrics used to calculate Revenue Per Visitor™. That usually means you\'re not making the most of the visitors you\'re already attracting. Too much of your revenue depends on channels and outcomes you can\'t reliably predict or control. Want to see how to change that?',
+    lead: 'Your five metrics are already performing past the benchmark ceiling — there\'s not much left to squeeze out of conversion alone.',
+    tail: 'That means the next stage of growth doesn\'t come from fixing your funnel. It comes from compounding what\'s already working and scaling what feeds it. Want to see what that looks like?',
     cta: 'Watch the workshop →',
   },
 };
