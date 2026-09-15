@@ -82,7 +82,7 @@
   align-items: center;
   gap: 48px;
   background: #ffffff;
-  border: 4px solid #5d1b4e;
+  border: 3px solid #5d1b4e;
   border-radius: 40px;
   /* cream ring hugging the keyline: no offset, no blur, 9px spread */
   box-shadow: 0 0 0 9px #f2e6d8;
