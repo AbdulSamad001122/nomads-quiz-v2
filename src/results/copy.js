@@ -85,22 +85,34 @@ export const RESULT_BLOCKS = {
   block3:
     'You\'re not using email to bring people back, so every visitor is mostly a one-shot opportunity. They either buy today or you may lose them. That means Revenue Per Subscriber™ is currently $0. You\'re leaving a major revenue lever unused: turning the people you already attracted into repeat revenue.',
 
+  // Blocks 5–7 share the capped-card design (reference 2026-09-15): lead
+  // paragraph with the money bolded, an optional plum headline, body copy,
+  // the closing question pulled out bold, then the workshop CTA. The strings
+  // are the doc's (Blocks 5–6) / Yemi's approved rewrite (Block 7) split at
+  // sentence boundaries only — no wording changed.
+
   // trigger: capped, gain positive, traffic within reach (≤ 20× current)
   block5: {
-    lead: 'You\'ve maximised every metric in the Compounding Revenue Per Visitor™ OS. Following the system, you could add another {{achievable_gain}} a year without increasing your traffic.',
-    // Dropped when the metrics alone already clear $1.5M — otherwise this
-    // reads "you're still $0 short … 0 more visitors a day". FLAGGED: the doc
-    // has no Block for "capped but gap already closed"; this follows its own
-    // guard style ("suppress any sentence containing it").
-    gap: 'You\'re still {{remaining_gap}} short of $1.5M. So now, the answer really is more traffic: {{additional_daily_visitors}} more visitors a day.',
-    tail: 'But before you scale, build the feedback loop. Every buyer and non-buyer gives you data to improve your messaging and positioning, making each new visitor more valuable. Want to see how it works?',
+    leadBefore: 'You\'ve maximised every metric in the Compounding Revenue Per Visitor™ OS. Following the system, you could add another ',
+    leadBold: '{{achievable_gain}} a year',
+    leadAfter: ' without increasing your traffic.',
+    // The gap pair is dropped when the metrics alone already clear $1.5M
+    // (unreachable since Yemi Q1, kept as a guard) — otherwise it reads
+    // "you're still $0 short … 0 more visitors a day".
+    gapHead: 'You\'re still {{remaining_gap}} short of $1.5M.',
+    gapBody: 'So now, the answer really is more traffic: {{additional_daily_visitors}} more visitors a day.',
+    tail: 'But before you scale, build the feedback loop. Every buyer and non-buyer gives you data to improve your messaging and positioning, making each new visitor more valuable.',
+    question: 'Want to see how it works?',
     cta: 'Watch the workshop →',
   },
 
   // trigger: capped, gain positive, traffic out of reach (> 20× current)
   block6: {
-    lead: 'You\'ve maximised every metric in the Compounding Revenue Per Visitor™ OS. Following the system, you could add another {{achievable_gain}} a year without increasing your traffic.',
-    tail: 'But getting all the way to $1.5M would require far more traffic than your business can realistically handle. So this isn\'t a conversion problem. And more traffic isn\'t the answer either. Want to understand what is?',
+    leadBefore: 'You\'ve maximised every metric in the Compounding Revenue Per Visitor™ OS. Following the system, you could add another ',
+    leadBold: '{{achievable_gain}} a year',
+    leadAfter: ' without increasing your traffic.',
+    tail: 'But getting all the way to $1.5M would require far more traffic than your business can realistically handle. So this isn\'t a conversion problem. And more traffic isn\'t the answer either.',
+    question: 'Want to understand what is?',
     cta: 'Watch the workshop →',
   },
 
@@ -110,8 +122,11 @@ export const RESULT_BLOCKS = {
   // opposite of this trigger (no headroom left = the STRONGEST takers).
   // Copy approved by Yemi (Tab 2 draft).
   block7: {
-    lead: 'Your five metrics are already performing past the benchmark ceiling — there\'s not much left to squeeze out of conversion alone.',
-    tail: 'That means the next stage of growth doesn\'t come from fixing your funnel. It comes from compounding what\'s already working and scaling what feeds it. Want to see what that looks like?',
+    leadBefore: 'Your five metrics are already performing past the benchmark ceiling — there\'s not much left to squeeze out of conversion alone.',
+    leadBold: '',
+    leadAfter: '',
+    tail: 'That means the next stage of growth doesn\'t come from fixing your funnel. It comes from compounding what\'s already working and scaling what feeds it.',
+    question: 'Want to see what that looks like?',
     cta: 'Watch the workshop →',
   },
 };

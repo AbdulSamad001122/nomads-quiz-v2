@@ -33,30 +33,110 @@
   color: #431232;
 }
 
-.rbk__capped {
-  margin-top: 40px;
-  background: #ffffff;
-  border: 1px solid #e0d3d9;
-  border-radius: 14px;
-  padding: 34px 36px 32px;
+/* ——— Blocks 5–7 · the capped card (design reference 2026-09-15) ———
+   White card in a plum keyline on the paper texture, playful-compass badge
+   straddling the top-left seam, copy + workshop CTA left, laptop mockup
+   right. */
+
+.rcb {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f7f3e8 url('/assets/results-paper-texture.webp') center / cover;
+  padding: 118px 24px 126px;
 }
 
-.rbk__capped .rbk__para:first-child {
+/* same seam badge + slow spin as the data-nerds card */
+.rcb__badge {
+  --badge: clamp(120px, 11vw, 158px);
+  position: absolute;
+  top: 0;
+  left: clamp(24px, 8vw, 160px);
+  width: var(--badge);
+  height: var(--badge);
+  transform: translateY(-45%);
+  z-index: 2;
+  animation: rcb-badge-spin 18s linear infinite;
+}
+
+@keyframes rcb-badge-spin {
+  from {
+    transform: translateY(-45%) rotate(0deg);
+  }
+  to {
+    transform: translateY(-45%) rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rcb__badge {
+    animation: none;
+  }
+}
+
+.rcb__card {
+  width: min(100%, 1240px);
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: 48px;
+  background: #ffffff;
+  border: 2px solid #5d1b4e;
+  border-radius: 40px;
+  padding: 64px 64px 60px;
+}
+
+.rcb__p {
+  margin-top: 22px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.65;
+  color: #431232;
+}
+
+.rcb__copy > .rcb__p:first-child {
   margin-top: 0;
 }
 
-.rbk__cta {
-  display: inline-block;
+.rcb__p strong {
+  font-weight: 700;
+}
+
+.rcb__head {
   margin-top: 26px;
-  background: #f3e6f6;
-  color: #4b1240;
-  border: 2px solid #5d1b4e;
-  box-shadow: 5px 5px 0 #5d1b4e;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 30px;
+  line-height: 1.3;
+  color: #5d1b4e;
+}
+
+.rcb__head + .rcb__p {
+  margin-top: 24px;
+}
+
+.rcb__q {
+  margin-top: 24px;
   font-family: var(--font-body);
   font-weight: 700;
   font-size: 16px;
-  text-decoration: none;
-  padding: 14px 30px;
+  color: #431232;
+}
+
+/* sitewide .q-btn carries fill/border/shadow/hover — only sizing here */
+.rcb__btn {
+  display: inline-block;
+  margin-top: 30px;
+  font-size: 16px;
+  padding: 16px 30px;
+}
+
+.rcb__media img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 /* ——— responsive ——— */
@@ -71,9 +151,6 @@
   .rbk {
     padding: 60px 22px 64px;
   }
-  .rbk__capped {
-    padding: 26px 22px 24px;
-  }
 }
 
 @media (max-width: 560px) {
@@ -83,7 +160,65 @@
   .rbk__para--note {
     padding-left: 16px;
   }
-  .rbk__cta {
-    padding: 13px 22px;
+}
+
+/* ——— capped card responsive ——— */
+
+@media (max-width: 1100px) {
+  .rcb__card {
+    gap: 36px;
+    padding: 48px 40px 46px;
+  }
+}
+
+@media (max-width: 900px) {
+  .rcb {
+    padding: 100px 20px 108px;
+  }
+  /* stacked: laptop mockup on top, copy below (site-wide mobile rule) */
+  .rcb__card {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .rcb__media {
+    order: -1;
+  }
+  .rcb__media img {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .rcb__head {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 760px) {
+  /* centre the badge on the seam, same as the data-nerds card */
+  .rcb__badge {
+    left: 50%;
+    transform: translate(-50%, -45%);
+  }
+  @keyframes rcb-badge-spin {
+    from {
+      transform: translate(-50%, -45%) rotate(0deg);
+    }
+    to {
+      transform: translate(-50%, -45%) rotate(360deg);
+    }
+  }
+}
+
+@media (max-width: 560px) {
+  .rcb {
+    padding: 84px 14px 92px;
+  }
+  .rcb__card {
+    border-radius: 24px;
+    padding: 32px 20px 34px;
+  }
+  .rcb__btn {
+    width: 100%;
+    text-align: center;
+    padding: 15px 18px;
   }
 }

@@ -67,39 +67,54 @@ export default function ResultBlocks({ result, tokens, slot }) {
 
   if (capped === 4) return null;
 
+  // Blocks 5–7 share one card design (reference 2026-09-15): white card in a
+  // plum keyline on the paper texture, playful badge on the seam, copy left
+  // with the workshop CTA, the workshop-laptop mockup right.
+  const c = capped === 5 ? b.block5 : capped === 6 ? b.block6 : b.block7;
+
   return (
-    <section className="rbk">
-      <div className="rbk__inner">
-        {capped === 5 && (
-          <div className="rbk__capped">
-            <p className="rbk__para">{fill(b.block5.lead, tokens)}</p>
-            {showGapSentence && <p className="rbk__para">{fill(b.block5.gap, tokens)}</p>}
-            <p className="rbk__para">{b.block5.tail}</p>
-            <a className="rbk__cta" href="#">
-              {b.block5.cta}
-            </a>
-          </div>
-        )}
+    <section className="rcb">
+      <img
+        className="rcb__badge"
+        src="/assets/results-badge-playful-2x.png"
+        alt=""
+        aria-hidden="true"
+        width="804"
+        height="805"
+      />
 
-        {capped === 6 && (
-          <div className="rbk__capped">
-            <p className="rbk__para">{fill(b.block6.lead, tokens)}</p>
-            <p className="rbk__para">{b.block6.tail}</p>
-            <a className="rbk__cta" href="#">
-              {b.block6.cta}
-            </a>
-          </div>
-        )}
+      <div className="rcb__card">
+        <div className="rcb__copy">
+          <p className="rcb__p">
+            {fill(c.leadBefore, tokens)}
+            {c.leadBold ? <strong>{fill(c.leadBold, tokens)}</strong> : null}
+            {c.leadAfter}
+          </p>
 
-        {capped === 7 && (
-          <div className="rbk__capped">
-            <p className="rbk__para">{b.block7.lead}</p>
-            <p className="rbk__para">{b.block7.tail}</p>
-            <a className="rbk__cta" href="#">
-              {b.block7.cta}
-            </a>
-          </div>
-        )}
+          {capped === 5 && showGapSentence && (
+            <>
+              <h3 className="rcb__head">{fill(c.gapHead, tokens)}</h3>
+              <p className="rcb__p">{fill(c.gapBody, tokens)}</p>
+            </>
+          )}
+
+          <p className="rcb__p">{c.tail}</p>
+          <p className="rcb__q">{c.question}</p>
+
+          {/* TODO: real workshop URL when provided (same as NAV). */}
+          <a className="q-btn rcb__btn" href="#">
+            {c.cta}
+          </a>
+        </div>
+
+        <div className="rcb__media">
+          <img
+            src="/assets/results-workshop-laptop.webp"
+            alt="The workshop playing on a laptop"
+            width="827"
+            height="564"
+          />
+        </div>
       </div>
     </section>
   );
