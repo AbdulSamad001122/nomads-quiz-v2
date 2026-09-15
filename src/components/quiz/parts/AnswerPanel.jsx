@@ -37,6 +37,7 @@ export default function AnswerPanel({
   manualOpen = false,
   manualType = 'number',
   manualValue = '',
+  manualError = null,
   onManualChange,
   textValue = '',
   onTextChange,
@@ -117,14 +118,21 @@ export default function AnswerPanel({
               {manualType === 'text' ? 'Tell us more' : 'Your exact number'}
             </span>
             <input
-              className="qa-manual__input"
+              className={`qa-manual__input${manualError ? ' qa-manual__input--error' : ''}`}
               type="text"
               inputMode="decimal"
               value={manualValue}
               onChange={(e) => onManualChange?.(e.target.value)}
               placeholder={MANUAL_PLACEHOLDER[manualType] || MANUAL_PLACEHOLDER.number}
+              aria-invalid={manualError ? true : undefined}
+              aria-describedby={manualError ? 'qa-manual-error' : undefined}
               autoFocus
             />
+            {manualError ? (
+              <p className="qa-manual__error" id="qa-manual-error" role="alert">
+                {manualError}
+              </p>
+            ) : null}
           </div>
         ) : null}
 

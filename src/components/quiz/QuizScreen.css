@@ -1057,6 +1057,22 @@
   border-width: 2px;
 }
 
+/* Doc: "Reject out-of-bounds values with an inline message" — the rejection
+   sits directly under the field it belongs to. */
+.qa-manual__input--error {
+  border-color: #b42318;
+  border-width: 2px;
+}
+
+.qa-manual__error {
+  margin: 8px 2px 0;
+  font-family: var(--font-body, 'Montserrat', sans-serif);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #b42318;
+}
+
 /* Continue + skip row */
 .qa-actions {
   display: flex;

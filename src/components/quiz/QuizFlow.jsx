@@ -26,7 +26,7 @@ import { themes } from '../../data/themes.js';
 import { QUESTIONS, resolveQuestion, salesModel } from '../../data/questions.js';
 import AnswerCheckModal from './AnswerCheckModal.jsx';
 import { resolveInputs } from '../../calc/backendValues.js';
-import { impossibleCheck } from '../../calc/validation.js';
+import { impossibleCheck, validateManual } from '../../calc/validation.js';
 import { calculate, CEILINGS } from '../../calc/calculator.js';
 import { ga } from '../../analytics/ga.js';
 import { buildKitFields } from '../../kit/kitPayload.js';
@@ -373,6 +373,10 @@ export default function QuizFlow() {
   // validation). Overrides tag the Kit record unverified.
   const [answerCheck, setAnswerCheck] = useState(null);
   const [overrides, setOverrides] = useState([]);
+  // Doc: "Reject out-of-bounds values with an inline message; do not silently
+  // clamp." Set on Continue when the manual entry fails validateManual;
+  // cleared as soon as they type again or the screen changes.
+  const [manualError, setManualError] = useState(null);
   const advanceTimer = useRef(null);
 
   const totalQuestions = QUESTIONS.length;
@@ -382,7 +386,10 @@ export default function QuizFlow() {
     while (i >= 0 && i < SCREENS.length && !screenVisible(SCREENS[i], ans)) {
       i += dir;
     }
-    if (i >= 0 && i < SCREENS.length) setIndex(i);
+    if (i >= 0 && i < SCREENS.length) {
+      setManualError(null); // an inline error belongs to the screen it was raised on
+      setIndex(i);
+    }
   };
 
   const next = () => goTo(index, 1);
@@ -608,11 +615,11 @@ export default function QuizFlow() {
         manualValue={
           q.otherEntry ? otherText : manualValues[q.id] || ''
         }
-        onManualChange={(v) =>
-          q.otherEntry
-            ? setOtherText(v)
-            : setManualValues({ ...manualValues, [q.id]: v })
-        }
+        onManualChange={(v) => {
+          setManualError(null); // typing again clears the rejection
+          if (q.otherEntry) setOtherText(v);
+          else setManualValues({ ...manualValues, [q.id]: v });
+        }}
         textValue={vocText}
         onTextChange={setVocText}
         allowSkip={q.allowSkip}
@@ -620,9 +627,21 @@ export default function QuizFlow() {
           setAnswers({ ...answers, [q.id]: null });
           goTo(index, 1);
         }}
+        manualError={manualError?.id === q.id ? manualError.message : null}
         onContinue={
           needsContinue
             ? () => {
+                // Doc bounds check for exact-number entries — reject with an
+                // inline message rather than advancing on a bad value. (VOC
+                // "other" text fields have no bounds.)
+                if (manualOpen && !q.otherEntry) {
+                  const v = validateManual(q.id, manualValues[q.id]);
+                  if (!v.ok) {
+                    setManualError({ id: q.id, message: v.message });
+                    return;
+                  }
+                }
+                setManualError(null);
                 fireDeferredAnswer();
                 advanceChecked(q.id);
               }
