@@ -8,9 +8,16 @@
   text-align: center;
 }
 
-.rsb__head,
+.rsb__head {
+  max-width: 715px;
+}
+
 .rsb__foot {
   max-width: 560px;
+}
+
+.rsb__head,
+.rsb__foot {
   margin: 0 auto;
   font-family: var(--font-body);
   font-weight: 500;
