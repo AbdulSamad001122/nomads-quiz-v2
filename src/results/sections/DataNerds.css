@@ -172,6 +172,15 @@
   .rdn {
     padding: 84px 14px 96px;
   }
+}
+
+@media (max-width: 500px) {
+  .rdn__ring {
+    width: 95%;
+  }
+}
+
+@media (max-width: 560px) {
   .rdn__ring {
     border-radius: 28px;
     padding: 9px;
