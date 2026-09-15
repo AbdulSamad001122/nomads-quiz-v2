@@ -17,12 +17,15 @@ import { themes } from './data/themes.js';
  */
 export default function App() {
   const params = new URLSearchParams(window.location.search);
-  // Dev harness routes exist ONLY in the dev build. In production every one
-  // of these params falls through to the real quiz — before this gate,
-  // ?results / ?slides on the live site served the whole result page and a
-  // 64-link gallery with no quiz and no email capture. (?goto is gated the
-  // same way inside QuizFlow's devInitialState.)
-  if (import.meta.env.DEV) {
+  // Dev harness routes exist only where explicitly enabled: always in the
+  // dev build, and in deployed builds ONLY when VITE_DEV_ROUTES=true was set
+  // at build time (meant for Vercel's Preview environment, so the team can
+  // open ?results / ?slides on a deployment without walking the quiz).
+  // Leave the var unset on Production: before this gate, those params served
+  // the whole result page and a 64-link gallery on the live site with no
+  // quiz and no email capture — and unset, the harness is tree-shaken out of
+  // the bundle entirely. (?goto is gated the same way in devInitialState.)
+  if (import.meta.env.DEV || import.meta.env.VITE_DEV_ROUTES === 'true') {
     if (params.has('slides')) return <DevSlides />;
     // ?check=subs | email → the impossible-answer confirmation on its own, so
     // it can be reviewed without walking the quiz to Q8/Q11.
