@@ -4,6 +4,7 @@ import DevResults from './DevResults.jsx';
 import LoadingScreen from './components/quiz/LoadingScreen.jsx';
 import DevSlides from './DevSlides.jsx';
 import DevAnswerCheck from './DevAnswerCheck.jsx';
+import DevAdCopy from './DevAdCopy.jsx';
 import { themes } from './data/themes.js';
 
 /**
@@ -20,6 +21,8 @@ export default function App() {
   // ?check=subs | email → the impossible-answer confirmation on its own, so
   // it can be reviewed without walking the quiz to Q8/Q11.
   if (params.has('check')) return <DevAnswerCheck which={params.get('check')} />;
+  // ?copy=ad → the ad-spend module's full copy as a flat sheet, for design work.
+  if (params.has('copy')) return <DevAdCopy />;
   if (params.has('preview')) return <TemplatePreview />;
   if (params.has('results')) return <DevResults scenario={params.get('results')} />;
   if (params.has('loading'))

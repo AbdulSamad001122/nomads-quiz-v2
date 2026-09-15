@@ -68,6 +68,7 @@ const GROUPS = [
       ['Ad module — fixed share (doc fixture, 2.5× → 7.2×)', '/?results=ad-fixed'],
       ['Ad module + slider — Q7c = "Not sure"', '/?results=ad-slider'],
       ['Ad module — $0 spend, ROAS shows “—”', '/?results=ad-zero'],
+      ['Copy sheet — every word of the module, tagged', '/?copy=ad'],
     ],
   },
   {
