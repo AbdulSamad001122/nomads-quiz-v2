@@ -31,6 +31,7 @@ import { calculate, CEILINGS } from '../../calc/calculator.js';
 import { ga } from '../../analytics/ga.js';
 import { buildKitFields } from '../../kit/kitPayload.js';
 import { pushToKit } from '../../kit/push.js';
+import { DEV_ROUTES_ENABLED } from '../../devRoutes.js';
 
 /**
  * QuizFlow — the sequencer. Wireframe order: welcome → Q1…Q14 with the
@@ -319,7 +320,7 @@ function screenVisible(screen, answers) {
  * disqualification screen. Part of the dev harness — removed before launch.
  */
 function devInitialState() {
-  if (!(import.meta.env.DEV || import.meta.env.VITE_DEV_ROUTES === 'true')) return null;
+  if (!(import.meta.env.DEV || DEV_ROUTES_ENABLED)) return null;
   const p = new URLSearchParams(window.location.search);
   if (!p.has('goto')) return null;
   const g = p.get('goto');

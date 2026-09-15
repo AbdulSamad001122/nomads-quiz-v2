@@ -6,6 +6,7 @@ import DevSlides from './DevSlides.jsx';
 import DevAnswerCheck from './DevAnswerCheck.jsx';
 import DevAdCopy from './DevAdCopy.jsx';
 import { themes } from './data/themes.js';
+import { DEV_ROUTES_ENABLED } from './devRoutes.js';
 
 /**
  * Default: the real quiz flow (welcome → Q1…Q14 → opt-in → results).
@@ -17,15 +18,10 @@ import { themes } from './data/themes.js';
  */
 export default function App() {
   const params = new URLSearchParams(window.location.search);
-  // Dev harness routes exist only where explicitly enabled: always in the
-  // dev build, and in deployed builds ONLY when VITE_DEV_ROUTES=true was set
-  // at build time (meant for Vercel's Preview environment, so the team can
-  // open ?results / ?slides on a deployment without walking the quiz).
-  // Leave the var unset on Production: before this gate, those params served
-  // the whole result page and a 64-link gallery on the live site with no
-  // quiz and no email capture — and unset, the harness is tree-shaken out of
-  // the bundle entirely. (?goto is gated the same way in devInitialState.)
-  if (import.meta.env.DEV || import.meta.env.VITE_DEV_ROUTES === 'true') {
+  // Dev harness routes: always in local dev; on deployed builds they follow
+  // the one switch in src/devRoutes.js (user-controlled — see the warning
+  // there, and flip it OFF before launch).
+  if (import.meta.env.DEV || DEV_ROUTES_ENABLED) {
     if (params.has('slides')) return <DevSlides />;
     // ?check=subs | email → the impossible-answer confirmation on its own, so
     // it can be reviewed without walking the quiz to Q8/Q11.
