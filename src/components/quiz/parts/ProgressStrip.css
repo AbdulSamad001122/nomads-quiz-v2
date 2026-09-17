@@ -11,7 +11,7 @@
   display: flex;
   align-items: center;
   gap: 55px;
-  padding: 10px clamp(16px, 4vw, 40px);
+  padding: 18px clamp(16px, 4vw, 40px);
   /* white, not theme-tinted — it now carries the Nomads logo that used to sit
      in each screen's own white logo box (Alefiya review, 2026-09-17) */
   background: #ffffff;
@@ -53,14 +53,19 @@
    classes (quiz-screen, cs5a, belief-screen, a12, loading-screen, …) and
    chasing each one would miss the next screen someone adds. The body class
    is toggled by the component, so only strip screens get the inset.
-   Measured from the rendered strip: 10px padding around the 34px-tall logo
-   (150px wide) = 54px; the mobile step below uses the 76px logo = 33px. */
+
+   --qps-height is MEASURED from the rendered strip by the component (a
+   ResizeObserver writes it), so changing the padding, the logo size or the
+   label font can never leave the inset stale — the value below is only the
+   first-paint fallback. --qps-gap is the breathing room between the strip
+   and the screen below it. */
 :root {
-  --qps-height: 54px;
+  --qps-height: 70px;
+  --qps-gap: 14px;
 }
 
 body.has-qps #root {
-  padding-top: var(--qps-height);
+  padding-top: calc(var(--qps-height) + var(--qps-gap));
   box-sizing: border-box;
 }
 
@@ -70,8 +75,8 @@ body.has-qps .quiz-screen,
 body.has-qps .loading-screen,
 body.has-qps .belief-screen,
 body.has-qps .slide-screen {
-  min-height: calc(100vh - var(--qps-height));
-  min-height: calc(100dvh - var(--qps-height));
+  min-height: calc(100vh - var(--qps-height) - var(--qps-gap));
+  min-height: calc(100dvh - var(--qps-height) - var(--qps-gap));
 }
 
 /* The logo now lives in the strip, so each screen's own white logo box and
@@ -122,6 +127,7 @@ body.has-qps .ld__top {
     width: 76px;
   }
   :root {
-    --qps-height: 33px;
+    --qps-height: 49px;
+    --qps-gap: 10px;
   }
 }

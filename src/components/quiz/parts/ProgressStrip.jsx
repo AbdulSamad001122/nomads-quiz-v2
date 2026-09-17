@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import './ProgressStrip.css';
 
 /**
@@ -11,6 +11,7 @@ import './ProgressStrip.css';
  * read two or three slides in a row.
  */
 export default function ProgressStrip({ percent, theme }) {
+  const el = useRef(null);
   // Insets the app below the fixed strip (see the CSS) — a body class so it
   // works for every screen root without naming them one by one, and it
   // disappears cleanly on the welcome/results screens where there's no strip.
@@ -19,9 +20,30 @@ export default function ProgressStrip({ percent, theme }) {
     return () => document.body.classList.remove('has-qps');
   }, []);
 
+  // Publish the strip's REAL height so the page inset always matches it.
+  // Hardcoding it meant every padding / logo / font tweak silently left
+  // content sitting under the strip until someone re-measured by hand.
+  useEffect(() => {
+    const node = el.current;
+    if (!node) return;
+    const publish = () =>
+      document.documentElement.style.setProperty(
+        '--qps-height',
+        `${Math.round(node.getBoundingClientRect().height)}px`
+      );
+    publish();
+    const ro = new ResizeObserver(publish);
+    ro.observe(node);
+    return () => {
+      ro.disconnect();
+      document.documentElement.style.removeProperty('--qps-height');
+    };
+  }, []);
+
   const clamped = Math.max(0, Math.min(100, percent));
   return (
     <div
+      ref={el}
       className="qps"
       style={{
         '--qps-fill': theme?.progressFill || '#5d1b4e',
