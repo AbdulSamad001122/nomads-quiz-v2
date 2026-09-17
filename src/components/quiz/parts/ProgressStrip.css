@@ -73,10 +73,9 @@ body.has-qps .slide-screen {
 }
 
 /* The logo now lives in the strip, so each screen's own white logo box and
-   the keyline rule beside it come out — and with the logo row gone, every
-   screen frame loses its top border so the frame meets the strip cleanly.
-   Done here, globally, rather than in 18 separate screen stylesheets.
-   Alefiya review 2026-09-17. */
+   the keyline rule beside it come out. The screen frames keep their own top
+   border (user, 2026-09-17). Done here, globally, rather than in 18 separate
+   screen stylesheets. Alefiya review 2026-09-17. */
 body.has-qps .question-panel__logo-box,
 body.has-qps .slide-screen__logo,
 /* Q14's mobile-only white logo bar — same job as the logo box, so it goes
@@ -100,15 +99,6 @@ body.has-qps .ld__top {
   border: none;
   padding: 0;
   min-height: 0;
-}
-
-body.has-qps .question-panel__frame,
-body.has-qps .cs5a__frame,
-body.has-qps .belief__frame,
-body.has-qps .a12__frame,
-body.has-qps .dq__frame,
-body.has-qps .ld__frame {
-  border-top: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
