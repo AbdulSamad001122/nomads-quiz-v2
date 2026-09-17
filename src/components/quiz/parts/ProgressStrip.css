@@ -62,15 +62,18 @@
    --qps-height is MEASURED from the rendered strip by the component (a
    ResizeObserver writes it), so changing the padding, the logo size or the
    label font can never leave the inset stale — the value below is only the
-   first-paint fallback. --qps-gap is the breathing room between the strip
-   and the screen below it. */
+   first-paint fallback.
+
+   There is deliberately NO gap under the strip: the page behind it is white,
+   so any gap read as extra strip and made the logo look high even though its
+   own padding is symmetrical. The screens' own top padding supplies the
+   breathing room instead. */
 :root {
-  --qps-height: 70px;
-  --qps-gap: 14px;
+  --qps-height: 62px;
 }
 
 body.has-qps #root {
-  padding-top: calc(var(--qps-height) + var(--qps-gap));
+  padding-top: var(--qps-height);
   box-sizing: border-box;
 }
 
@@ -80,8 +83,8 @@ body.has-qps .quiz-screen,
 body.has-qps .loading-screen,
 body.has-qps .belief-screen,
 body.has-qps .slide-screen {
-  min-height: calc(100vh - var(--qps-height) - var(--qps-gap));
-  min-height: calc(100dvh - var(--qps-height) - var(--qps-gap));
+  min-height: calc(100vh - var(--qps-height));
+  min-height: calc(100dvh - var(--qps-height));
 }
 
 /* The logo now lives in the strip, so each screen's own white logo box and
@@ -132,7 +135,6 @@ body.has-qps .ld__top {
     width: 76px;
   }
   :root {
-    --qps-height: 49px;
-    --qps-gap: 10px;
+    --qps-height: 29px;
   }
 }
