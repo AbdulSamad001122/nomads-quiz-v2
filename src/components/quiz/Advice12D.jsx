@@ -35,6 +35,16 @@ export default function Advice12D({ onBack, onContinue }) {
             But when there is no clear differentiation, price becomes the
             only thing left to compare.
           </p>
+          <div className="a12__frame-cta">
+            <button
+              type="button"
+              className="q-btn q-btn--onDark a12__frame-continue"
+              onClick={onContinue}
+            >
+              Continue
+            </button>
+          </div>
+
           <div className="a12__info-card a12__info-card--top">
             <img
               className="a12__info-img"

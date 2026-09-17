@@ -162,6 +162,16 @@
   text-align: center;
 }
 
+/* Continue, repeated inside the dark keyline frame directly above the
+   infographic, so the taker can move on without scrolling to the footer
+   CTA (user, 2026-09-17). Shared by 12A–D and five-metrics; sits on the
+   dark panel at every width, hence the onDark shadow. */
+.a12__frame-cta {
+  margin-top: clamp(28px, 4.5vh, 52px);
+  display: flex;
+  justify-content: center;
+}
+
 /* white infographic card — overlaps the dark section above */
 .a12__info-card {
   position: relative;

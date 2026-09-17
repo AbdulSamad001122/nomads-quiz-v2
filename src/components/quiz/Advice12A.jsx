@@ -42,6 +42,16 @@ export default function Advice12A({ onBack, onContinue }) {
               educating buyers on the call.
             </HighlightSweep>
           </h1>
+          <div className="a12__frame-cta">
+            <button
+              type="button"
+              className="q-btn q-btn--onDark a12__frame-continue"
+              onClick={onContinue}
+            >
+              Continue
+            </button>
+          </div>
+
           <div className="a12__info-card a12__info-card--top">
             <img
               className="a12__info-img"

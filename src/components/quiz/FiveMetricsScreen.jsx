@@ -60,6 +60,16 @@ export default function FiveMetricsScreen({ onBack, onContinue }) {
             <strong>without knowing what has a direct impact on sales.</strong>
           </p>
 
+          <div className="a12__frame-cta">
+            <button
+              type="button"
+              className="q-btn q-btn--onDark a12__frame-continue"
+              onClick={onContinue}
+            >
+              Continue
+            </button>
+          </div>
+
           <div className="a12__info-card a12__info-card--top">
             <img
               className="a12__info-img"
