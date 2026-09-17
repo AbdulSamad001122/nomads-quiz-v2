@@ -12,8 +12,15 @@
   align-items: center;
   gap: 14px;
   padding: 10px clamp(16px, 4vw, 40px);
-  background: var(--qps-bg);
-  border-bottom: 1px solid rgba(21, 38, 55, 0.12);
+  /* white, not theme-tinted — it now carries the Nomads logo that used to sit
+     in each screen's own white logo box (Alefiya review, 2026-09-17) */
+  background: #ffffff;
+}
+
+.qps__logo {
+  flex-shrink: 0;
+  width: clamp(88px, 7vw, 132px);
+  height: auto;
 }
 
 .qps__track {
@@ -65,6 +72,45 @@ body.has-qps .slide-screen {
   min-height: calc(100dvh - var(--qps-height));
 }
 
+/* The logo now lives in the strip, so each screen's own white logo box and
+   the keyline rule beside it come out — and with the logo row gone, every
+   screen frame loses its top border so the frame meets the strip cleanly.
+   Done here, globally, rather than in 18 separate screen stylesheets.
+   Alefiya review 2026-09-17. */
+body.has-qps .question-panel__logo-box,
+body.has-qps .slide-screen__logo,
+/* Q14's mobile-only white logo bar — same job as the logo box, so it goes
+   too, or the logo shows twice on a phone. */
+body.has-qps .fl__mobile-bar,
+body.has-qps .question-panel__top-line,
+body.has-qps .belief__top-line,
+body.has-qps .belief__top-line--long,
+body.has-qps .dq__top-line,
+body.has-qps .ld__top-line {
+  display: none;
+}
+
+/* Only the thin logo BARS collapse. .a12__top is deliberately absent — that
+   one is the advice slide's whole dark panel (its own padding + background),
+   not a logo bar, and zeroing it clipped the Back link. */
+body.has-qps .question-panel__top,
+body.has-qps .belief__top,
+body.has-qps .dq__top,
+body.has-qps .ld__top {
+  border: none;
+  padding: 0;
+  min-height: 0;
+}
+
+body.has-qps .question-panel__frame,
+body.has-qps .cs5a__frame,
+body.has-qps .belief__frame,
+body.has-qps .a12__frame,
+body.has-qps .dq__frame,
+body.has-qps .ld__frame {
+  border-top: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .qps__fill {
     transition: none;
@@ -80,7 +126,10 @@ body.has-qps .slide-screen {
     font-size: 11px;
     letter-spacing: 0;
   }
+  .qps__logo {
+    width: 76px;
+  }
   :root {
-    --qps-height: 30px;
+    --qps-height: 34px;
   }
 }

@@ -30,6 +30,12 @@ export default function ProgressStrip({ percent, theme }) {
         '--qps-bg': theme?.rightBg || '#f2e6d8',
       }}
     >
+      <img
+        className="qps__logo"
+        src="/assets/nomads-logo-dark.png"
+        alt="Nomads"
+      />
+
       <div
         className="qps__track"
         role="progressbar"
