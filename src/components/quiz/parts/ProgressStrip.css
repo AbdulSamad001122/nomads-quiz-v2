@@ -124,8 +124,8 @@ body.has-qps .ld__top {
 
 @media (max-width: 560px) {
   .qps {
-    gap: 10px;
-    padding: 8px 14px;
+    gap: 18px;
+    padding: 14px 14px;
   }
   .qps__label {
     font-size: 11px;
@@ -134,7 +134,8 @@ body.has-qps .ld__top {
   .qps__logo {
     width: 76px;
   }
+  /* first-paint fallback only — the component measures the real height */
   :root {
-    --qps-height: 29px;
+    --qps-height: 41px;
   }
 }
