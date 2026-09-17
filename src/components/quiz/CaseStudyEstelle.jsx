@@ -82,6 +82,15 @@ export default function CaseStudyEstelle({ theme, onBack, onContinue }) {
                 <strong>9000+ women</strong>
                 {' hungry for better presence and positioning through their style.'}
               </p>
+              <div className="cs5a__hero-cta">
+                <button
+                  type="button"
+                  className="q-btn q-btn--onDark cs5a__continue"
+                  onClick={onContinue}
+                >
+                  Follow along
+                </button>
+              </div>
             </div>
 
             <div className="cs5a__script-band">your traffic is worth more.</div>

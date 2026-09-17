@@ -93,6 +93,15 @@
   line-height: 1.55;
 }
 
+/* Follow along, repeated at the foot of the hero copy so the taker can move
+   on without scrolling the whole case study first (user, 2026-09-17).
+   Shared by all five case-study screens. */
+.cs5a__hero-cta {
+  margin-top: clamp(18px, 3vh, 34px);
+  display: flex;
+  justify-content: flex-start;
+}
+
 /* script band — bordered row closing the keyline frame */
 .cs5a__script-band {
   border-top: 1px solid rgba(255, 255, 255, 0.55);
