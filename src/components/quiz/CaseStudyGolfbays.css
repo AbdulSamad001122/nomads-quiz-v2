@@ -494,14 +494,11 @@
     min-height: 0;
   }
 
+  /* Badge is out below 900 (user, 2026-09-17). It used to hang off the seam
+     under the white logo bar; the progress strip took that bar away, so it
+     landed on top of the Back link. All five case studies share this rule. */
   .cs5a__left .seam-badge {
-    display: flex;
-    left: 50%;
-    right: auto;
-    top: 0;
-    transform: translateX(-50%);
-    width: 70px;
-    height: 70px;
+    display: none;
   }
 
   .cs5a__mobile-back {
