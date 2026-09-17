@@ -15,7 +15,7 @@ import './Advice12A.css';
 export default function Advice12B({ onBack, onContinue }) {
   const firstRef = useRef(null);
   const [continuous, setContinuous] = useState(false);
-  const [headRef, headLeft] = useLeftAlignOnWrap(3);
+  const [headRef, headLeft, headWidth] = useLeftAlignOnWrap(3);
   const [midRef, midLeft] = useLeftAlignOnWrap(3);
 
   // the CTA head keeps its forced break only while the first sentence
@@ -70,7 +70,10 @@ export default function Advice12B({ onBack, onContinue }) {
           >
             Revenue Plateaus → Revenue Compounds
           </p>
-          <div className="a12__frame-cta">
+          <div
+            className={`a12__frame-cta${headLeft ? ' a12__frame-cta--left' : ''}`}
+            style={headWidth ? { maxWidth: headWidth } : undefined}
+          >
             <button
               type="button"
               className="q-btn q-btn--onDark a12__frame-continue"

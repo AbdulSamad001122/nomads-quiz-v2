@@ -14,7 +14,7 @@ import './FiveMetrics.css';
  * punch line and the 50-seconds handoff.
  */
 export default function FiveMetricsScreen({ onBack, onContinue }) {
-  const [headRef, headLeft] = useLeftAlignOnWrap(3);
+  const [headRef, headLeft, headWidth] = useLeftAlignOnWrap(3);
   const [paraRef, paraLeft] = useLeftAlignOnWrap(3);
   const [punchRef, punchLeft] = useLeftAlignOnWrap(3);
 
@@ -60,7 +60,10 @@ export default function FiveMetricsScreen({ onBack, onContinue }) {
             <strong>without knowing what has a direct impact on sales.</strong>
           </p>
 
-          <div className="a12__frame-cta">
+          <div
+            className={`a12__frame-cta${headLeft ? ' a12__frame-cta--left' : ''}`}
+            style={headWidth ? { maxWidth: headWidth } : undefined}
+          >
             <button
               type="button"
               className="q-btn q-btn--onDark a12__frame-continue"
