@@ -1,0 +1,86 @@
+/* Progress strip pinned to the top of every quiz screen. Colours come from
+   the active theme via custom properties, so it recolours with the
+   blue/maroon/green rotation instead of fighting it. */
+
+.qps {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px clamp(16px, 4vw, 40px);
+  background: var(--qps-bg);
+  border-bottom: 1px solid rgba(21, 38, 55, 0.12);
+}
+
+.qps__track {
+  flex: 1;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--qps-track);
+  overflow: hidden;
+}
+
+.qps__fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--qps-fill);
+  transition: width 0.35s ease;
+}
+
+.qps__label {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  color: var(--qps-label);
+  white-space: nowrap;
+}
+
+/* The strip is fixed, so the app below it clears that height. Done once on
+   the app root rather than per screen — the quiz has a dozen different root
+   classes (quiz-screen, cs5a, belief-screen, a12, loading-screen, …) and
+   chasing each one would miss the next screen someone adds. The body class
+   is toggled by the component, so only strip screens get the inset. */
+:root {
+  --qps-height: 36px;
+}
+
+body.has-qps #root {
+  padding-top: var(--qps-height);
+  box-sizing: border-box;
+}
+
+/* full-height screens must subtract the strip so they still fill one viewport
+   instead of overflowing by its height */
+body.has-qps .quiz-screen,
+body.has-qps .loading-screen,
+body.has-qps .belief-screen,
+body.has-qps .slide-screen {
+  min-height: calc(100vh - var(--qps-height));
+  min-height: calc(100dvh - var(--qps-height));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .qps__fill {
+    transition: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .qps {
+    gap: 10px;
+    padding: 8px 14px;
+  }
+  .qps__label {
+    font-size: 11px;
+    letter-spacing: 0;
+  }
+  :root {
+    --qps-height: 30px;
+  }
+}
