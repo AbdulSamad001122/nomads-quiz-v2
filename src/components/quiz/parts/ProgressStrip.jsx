@@ -54,7 +54,7 @@ export default function ProgressStrip({ percent, theme }) {
     >
       <img
         className="qps__logo"
-        src="/assets/nomads-logo-dark.png"
+        src="/assets/nomads-logo-dark-trim.png"
         alt="Nomads"
       />
 

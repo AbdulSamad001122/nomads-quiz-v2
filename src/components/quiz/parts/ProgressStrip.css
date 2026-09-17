@@ -21,6 +21,11 @@
   flex-shrink: 0;
   width: 150px;
   height: auto;
+  /* trimmed copy of the logo: the original PNG carries uneven transparent
+     margin (22px above the artwork, 26px below), so centring the file still
+     left the visible logo sitting off-centre in the strip. This one is
+     cropped to the artwork, so flex centring is exact. */
+  display: block;
 }
 
 .qps__track {
