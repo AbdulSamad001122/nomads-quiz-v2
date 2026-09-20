@@ -179,6 +179,16 @@
   background: #4caf50;
 }
 
+/* tiny phones: the cell is too narrow for the corner dot — it lands on the
+   "YOUR BUSINESS" mini-label — so the fill + the key below carry the colour */
+@media (max-width: 360px) {
+  .rmx__value--red::after,
+  .rmx__value--yellow::after,
+  .rmx__value--green::after {
+    display: none;
+  }
+}
+
 .rmx__value--goal {
   background: #ecdfc9;
   border: 1.5px solid #d9c6a6;
