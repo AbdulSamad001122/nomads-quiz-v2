@@ -1,5 +1,6 @@
 import { GAMEPLAN_CTA } from '../copy.js';
 import { ga } from '../../analytics/ga.js';
+import TidyCalEmbed from './TidyCalEmbed.jsx';
 import './GamePlanCta.css';
 
 /**
@@ -29,7 +30,9 @@ export default function GamePlanCta() {
           </a>
         </div>
         <div className="rgp__media">
-          <img src="/assets/results-calendly-card.webp" alt="Calendly reservation page — pick a date and time for the call" />
+          {/* live TidyCal widget replaces the static Calendly mock
+              (Yemi "Embed Calendar" comment, code supplied Sep 19) */}
+          <TidyCalEmbed />
         </div>
       </div>
     </section>

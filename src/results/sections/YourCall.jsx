@@ -1,5 +1,6 @@
 import { YOUR_CALL } from '../copy.js';
 import { ga } from '../../analytics/ga.js';
+import TidyCalEmbed from './TidyCalEmbed.jsx';
 import './YourCall.css';
 
 /**
@@ -39,7 +40,9 @@ export default function YourCall() {
           </div>
 
           <div className="ryc__media">
-            <img src="/assets/results-calendly-card.webp" alt="Calendly reservation page — pick a date and time for the call" />
+            {/* live TidyCal widget replaces the static Calendly mock
+                (Yemi "Embed Calendar" comment, code supplied Sep 19) */}
+            <TidyCalEmbed />
           </div>
         </div>
       </div>
