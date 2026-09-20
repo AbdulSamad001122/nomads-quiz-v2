@@ -1,0 +1,26 @@
+/* Live TidyCal widget wrapper — sits where the static Calendly mock image
+   used to. White card so the widget reads as one piece while it loads; the
+   min-height reserves roughly the widget's month-view footprint so the
+   section doesn't collapse-then-jump when embed.js injects the iframe. */
+
+.rtcal {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* matches BOTH phases: the placeholder div, and the <iframe> embed.js
+   swaps in for it (the iframe keeps the .tidycal-embed class) */
+.rtcal .tidycal-embed {
+  display: block;
+  width: 100%;
+  min-height: 480px;
+  border: 0;
+}
+
+@media (max-width: 560px) {
+  .rtcal .tidycal-embed {
+    min-height: 420px;
+  }
+}
