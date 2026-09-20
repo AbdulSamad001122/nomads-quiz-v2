@@ -130,21 +130,53 @@
 
 /* Red/yellow/green cell states — reinstated per Yemi's Sep 19 doc comment
    ("You missed implementing the color logic for the cells"), reversing the
-   Sep 13 flat-tone ruling. Swatches are the ones removed back then (commit
-   02d2b70) until Yemi supplies different ones. The rpv row stays --none. */
+   Sep 13 flat-tone ruling. The old removed pastels read as pink/cream, not
+   as the key's red/yellow/green (user, Sep 20), so: one notch deeper tints
+   + a solid corner dot in the exact key colour, so cell and 🔴🟡🟢 legend
+   match one-to-one. The rpv row stays --none (no dot, flat lavender). */
+.rmx__value--red,
+.rmx__value--yellow,
+.rmx__value--green {
+  position: relative;
+}
+
+.rmx__value--red::after,
+.rmx__value--yellow::after,
+.rmx__value--green::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+
 .rmx__value--red {
-  background: #f9e2e0;
-  border-color: #dfaba4;
+  background: #f6d0cb;
+  border-color: #d3766a;
+}
+
+.rmx__value--red::after {
+  background: #dd3f3d;
 }
 
 .rmx__value--yellow {
-  background: #faf0d3;
-  border-color: #dcc98e;
+  background: #f8e8ab;
+  border-color: #ce9f31;
+}
+
+.rmx__value--yellow::after {
+  background: #f3c218;
 }
 
 .rmx__value--green {
-  background: #e7f0e1;
-  border-color: #b9cfae;
+  background: #d3ecce;
+  border-color: #79ac6e;
+}
+
+.rmx__value--green::after {
+  background: #4caf50;
 }
 
 .rmx__value--goal {
