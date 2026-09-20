@@ -1,8 +1,9 @@
 /**
- * Result page copy — VERBATIM from "Quiz Questions and logic/Result Page Copy.docx"
- * (the copy source of truth; supersedes Quiz Logics.docx except the blue
- * conditional blocks which defer to the Logic Doc). {{tokens}} are dynamic
- * values resolved in resolveTokens.js.
+ * Result page copy — VERBATIM from "Quiz Questions and logic/Result Page Copy.docx",
+ * as amended by "Updated Result Page Copy.docx" (Yemi, 2026-09-19: hero +
+ * around-the-table rewrite). The docs are the copy source of truth; they
+ * supersede Quiz Logics.docx except the blue conditional blocks which defer
+ * to the Logic Doc. {{tokens}} are dynamic values resolved in resolveTokens.js.
  *
  * Flagged doc↔design mismatches (doc wins per user rule, Sep 11):
  * - Nav labels + formula keep the ™ (design image drops it).
@@ -16,21 +17,28 @@ export const NAV = {
     { label: 'How we calculated your RPV™', href: '#how-we-calculated' },
   ],
   ctas: [
-    // TODO: real workshop / booking URLs when provided.
+    // TODO: real workshop URL when provided. Booking URL is live (Yemi,
+    // Sep 19 doc comments — TidyCal).
     { label: 'Watch the hands-on workshop with your team', id: 'watch_workshop', variant: 'blue', href: '#' },
-    { label: 'Book your Next $125k/mo game-plan call', id: 'book_call', variant: 'pink', href: '#' },
+    { label: 'Book your Next $125k/mo game-plan call', id: 'book_call', variant: 'pink', href: 'https://tidycal.com/alefiya/crpv-game-plan-call' },
   ],
 };
 
 export const METRICS = {
-  // Doc ends this sentence with ":" (design image drops it — doc wins, flagged).
-  // Line map from the reference image; the "v" of visitor renders as a script glyph.
-  headlineLines: [
-    'Here’s what the same visitor could be worth',
-    'once four pillars in your customer’s buying',
-    'journey work in sync, supporting each other:',
+  // Sep 19 doc rewrite (Updated Result Page Copy.docx): single sentence with
+  // live RPV tokens replaces the old three-line headline, and the
+  // "Total traffic:" line is deleted. Lowercase "per" is verbatim from the
+  // doc. Wraps naturally (no line map, per the Sep 12 no-<br> rule).
+  headline:
+    'So…how do you scale your Revenue per Visitor™ from {{current_rpv}} → {{goal_rpv}}? By optimising all 5 metrics below until they’re green:',
+  // 🔴🟡🟢 key under the rps row — ALWAYS shown. Yemi's "show only if red"
+  // comment (#6) anchors BELOW this key, on the workshop section that
+  // follows it, so the key itself is not conditional.
+  key: [
+    '🔴 Red: The metric with the most room to improve.',
+    '🟡 Yellow: The metric that’s close to healthy.',
+    '🟢 Green: The metric that’s performing at its goal.',
   ],
-  totalTraffic: 'Total traffic:',
   headers: {
     metric: 'METRIC',
     current: 'YOUR BUSINESS',
@@ -930,9 +938,15 @@ export const HERO = {
   introChip: '$1.5M/Year',
   introAfter: 'without increasing your marketing spend.',
   basedOn: 'Based on your answers…',
-  headlineLines: ['Right now, every visitor landing', 'in your ecosystem is generating'],
-  numberToken: '{{current_annual_revenue}}',
-  numberChip: 'in revenue.',
+  // Sep 19 doc rewrite: the giant annual-revenue number is replaced by the
+  // RPV-increase framing. The sentence is verbatim from Updated Result Page
+  // Copy.docx; its two inline tokens render as the big number row (current →
+  // goal), keeping the doc's reading order.
+  headline: 'To add an additional $1.5M/year ($125K/mo), your Revenue Per Visitor™ needs to increase from:',
+  rpvFrom: '{{current_rpv}}',
+  rpvArrow: '→',
+  rpvTo: '{{goal_rpv}}',
+  calcLine: 'Revenue Per Visitor™ is calculated by dividing your total revenue by your total visitors.',
   formula: {
     lead: 'Revenue Per Visitor™ =',
     numerator: 'Total Revenue',

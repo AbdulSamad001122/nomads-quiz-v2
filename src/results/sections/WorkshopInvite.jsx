@@ -1,4 +1,5 @@
 import { WORKSHOP_INVITE } from '../copy.js';
+import { ga } from '../../analytics/ga.js';
 import './WorkshopInvite.css';
 
 const brJoin = (lines) =>
@@ -54,10 +55,17 @@ export default function WorkshopInvite({ tokens }) {
             {tokens.goal_rpv} {c.grabAfter}
           </p>
           {/* TODO: real workshop URL when provided (same as NAV). */}
-          <a className="rwk__btn" href="#">{c.button}</a>
+          <a className="rwk__btn" href="#" onClick={() => ga.ctaClick('watch_workshop')}>
+            {c.button}
+          </a>
         </div>
         {/* TODO: swap for the clickable workshop thumbnail when the asset lands. */}
-        <a className="rwk__thumb" href="#" aria-label="Watch the workshop">
+        <a
+          className="rwk__thumb"
+          href="#"
+          aria-label="Watch the workshop"
+          onClick={() => ga.ctaClick('watch_workshop')}
+        >
           <span>{c.thumbPlaceholder}</span>
         </a>
       </div>

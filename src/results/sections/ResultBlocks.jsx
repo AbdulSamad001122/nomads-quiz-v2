@@ -1,5 +1,6 @@
 import { RESULT_BLOCKS } from '../copy.js';
 import { fill } from '../resolveTokens.js';
+import { ga } from '../../analytics/ga.js';
 import './ResultBlocks.css';
 
 /**
@@ -120,7 +121,7 @@ export default function ResultBlocks({ result, tokens, slot }) {
           <p className="rcb__q">{c.question}</p>
 
           {/* TODO: real workshop URL when provided (same as NAV). */}
-          <a className="q-btn rcb__btn" href="#">
+          <a className="q-btn rcb__btn" href="#" onClick={() => ga.ctaClick('watch_workshop')}>
             {c.cta}
           </a>
         </div>

@@ -24,8 +24,15 @@ export default function YourCall() {
             <p className="ryc__para">{YOUR_CALL.para1}</p>
             <p className="ryc__band">{YOUR_CALL.band}</p>
             <p className="ryc__para">{YOUR_CALL.para2}</p>
-            {/* TODO: real booking URL when provided */}
-            <a className="ryc__btn" href="#" onClick={() => ga.ctaClick('book_call')}>
+            {/* Booking URL live (Yemi, Sep 19 doc comments). New tab so the
+                taker keeps their result page — it can't be regenerated. */}
+            <a
+              className="ryc__btn"
+              href="https://tidycal.com/alefiya/crpv-game-plan-call"
+              target="_blank"
+              rel="noopener"
+              onClick={() => ga.ctaClick('book_call')}
+            >
               {YOUR_CALL.button}
             </a>
             <p className="ryc__para">{YOUR_CALL.sub}</p>

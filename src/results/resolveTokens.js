@@ -8,8 +8,10 @@ import { metricColour } from '../calc/calculator.js';
  */
 export function resolveTokens(result) {
   return {
-    current_annual_revenue: money(result.inputs.q2),
-    annual_visitors: (result.inputs.q7 * 12).toLocaleString('en-US'),
+    // current_annual_revenue and annual_visitors were dropped here when the
+    // Sep 19 doc rewrite removed their only two render sites (hero giant
+    // number, "Total traffic:" line). Recompute from result.inputs.q2 /
+    // q7*12 if a future copy round brings them back.
     current_rpv: rpvMoney(result.currentRPV),
     goal_rpv: rpvMoney(result.goalRPV),
     // "But… what if you did?" — max-benchmark gain (Logic Doc capped maths;

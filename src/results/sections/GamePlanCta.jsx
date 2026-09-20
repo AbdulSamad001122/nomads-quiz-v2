@@ -16,8 +16,15 @@ export default function GamePlanCta() {
             {GAMEPLAN_CTA.headlinePlain} <span className="rgp__accent">{GAMEPLAN_CTA.headlineAccent}</span>
           </h2>
           <p className="rgp__body">{GAMEPLAN_CTA.bodyLines.join(' ')}</p>
-          {/* TODO: real booking URL when provided */}
-          <a className="rgp__btn" href="#" onClick={() => ga.ctaClick('book_call')}>
+          {/* Booking URL live (Yemi, Sep 19 doc comments). New tab so the
+              taker keeps their result page — it can't be regenerated. */}
+          <a
+            className="rgp__btn"
+            href="https://tidycal.com/alefiya/crpv-game-plan-call"
+            target="_blank"
+            rel="noopener"
+            onClick={() => ga.ctaClick('book_call')}
+          >
             {GAMEPLAN_CTA.button}
           </a>
         </div>

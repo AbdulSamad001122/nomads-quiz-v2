@@ -51,28 +51,6 @@
   color: #3b1030;
 }
 
-.rmx__script-v {
-  font-family: var(--font-number); /* Better Brush */
-  font-weight: 400;
-  font-size: 1.25em;
-  line-height: 0;
-  vertical-align: -0.14em;
-  margin-right: 0.02em;
-}
-
-.rmx__traffic {
-  margin-top: 40px;
-  text-align: center;
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 22px;
-  color: #250f1c;
-}
-
-.rmx__traffic strong {
-  font-weight: 800;
-}
-
 /* ——— table ——— */
 
 .rmx__table {
@@ -150,13 +128,48 @@
   border: 1.5px solid #d9bfd7;
 }
 
-/* The calculator's red/yellow/green cell states are intentionally not
-   styled — the "Your Business" column is one flat tone per the design
-   (Sep 13). metricColour still flows through the class name for later use. */
+/* Red/yellow/green cell states — reinstated per Yemi's Sep 19 doc comment
+   ("You missed implementing the color logic for the cells"), reversing the
+   Sep 13 flat-tone ruling. Swatches are the ones removed back then (commit
+   02d2b70) until Yemi supplies different ones. The rpv row stays --none. */
+.rmx__value--red {
+  background: #f9e2e0;
+  border-color: #dfaba4;
+}
+
+.rmx__value--yellow {
+  background: #faf0d3;
+  border-color: #dcc98e;
+}
+
+.rmx__value--green {
+  background: #e7f0e1;
+  border-color: #b9cfae;
+}
 
 .rmx__value--goal {
   background: #ecdfc9;
   border: 1.5px solid #d9c6a6;
+}
+
+/* ——— 🔴🟡🟢 key under the table (Sep 19 doc) ———
+   Sits below the sheet's clip line, i.e. on the NAVY rectangle (the cream
+   sheet ends at the middle of the second-to-last row), so it reads light. */
+
+.rmx__key {
+  margin: 34px auto 0;
+  max-width: 967px;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 34px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #f4ede6;
 }
 
 /* mobile-only labels inside value cards */
@@ -212,9 +225,12 @@
   .rmx__headline {
     font-size: 26px;
   }
-  .rmx__traffic {
-    margin-top: 28px;
-    font-size: 16px;
+  .rmx__key {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 26px;
+    font-size: 14px;
   }
   .rmx__table {
     margin-top: 32px;

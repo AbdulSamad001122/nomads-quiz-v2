@@ -1,5 +1,6 @@
 import { TWO_PATHS } from '../copy.js';
 import { emphasize } from '../emphasize.jsx';
+import { ga } from '../../analytics/ga.js';
 import './TwoPaths.css';
 
 const brJoin = (lines, bold) =>
@@ -63,9 +64,20 @@ export default function TwoPaths() {
           <h3 className="rtp__panel-heading">{brJoin(c.panelHeadingLines)}</h3>
           <p className="rtp__p rtp__panel-sub">{brJoin(c.panelSubLines)}</p>
           <div className="rtp__btns">
-            {/* TODO: real workshop / booking URLs when provided (same as NAV). */}
-            <a className="rtp__btn" href="#">{c.btnWorkshop}</a>
-            <a className="rtp__btn" href="#">{c.btnCall}</a>
+            {/* TODO: real workshop URL when provided (same as NAV). Booking
+                URL live (Yemi, Sep 19); new tab keeps the result page. */}
+            <a className="rtp__btn" href="#" onClick={() => ga.ctaClick('watch_workshop')}>
+              {c.btnWorkshop}
+            </a>
+            <a
+              className="rtp__btn"
+              href="https://tidycal.com/alefiya/crpv-game-plan-call"
+              target="_blank"
+              rel="noopener"
+              onClick={() => ga.ctaClick('book_call')}
+            >
+              {c.btnCall}
+            </a>
           </div>
         </div>
         <div className="rtp__panel-photo">

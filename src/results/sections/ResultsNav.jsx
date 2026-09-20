@@ -22,6 +22,11 @@ export default function ResultsNav() {
             key={c.id}
             className={`rnav__cta rnav__cta--${c.variant}`}
             href={c.href}
+            // external links (TidyCal) open in a new tab so the taker keeps
+            // their result page — it can't be regenerated without retaking
+            {...(c.href.startsWith('http')
+              ? { target: '_blank', rel: 'noopener' }
+              : null)}
             onClick={() => ga.ctaClick(c.id)}
           >
             {c.label}

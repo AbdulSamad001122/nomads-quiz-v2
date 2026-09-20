@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef } from 'react';
 import { METRICS } from '../copy.js';
-import { metricRows } from '../resolveTokens.js';
+import { metricRows, fill } from '../resolveTokens.js';
 import './MetricsSection.css';
 
 /**
@@ -38,10 +38,6 @@ export default function MetricsSection({ result, tokens }) {
     return typeof l === 'string' ? l : l[result.path];
   };
 
-  // Script "v" on "visitor" in line 1, per the reference headline treatment.
-  const [l1, l2, l3] = METRICS.headlineLines;
-  const [beforeV, afterV] = l1.split(/visitor/);
-
   return (
     <section className="rmx" ref={sectionRef}>
       <div className="rmx__sheet" aria-hidden="true">
@@ -58,14 +54,9 @@ export default function MetricsSection({ result, tokens }) {
       </div>
 
       <div className="rmx__inner">
-        <h2 className="rmx__headline">
-          {beforeV}
-          <span className="rmx__script-v">v</span>isitor{afterV} {l2} {l3}
-        </h2>
-
-        <p className="rmx__traffic">
-          {METRICS.totalTraffic} <strong>{tokens.annual_visitors}</strong>
-        </p>
+        {/* Sep 19 doc rewrite: single-sentence headline with live RPV tokens
+            (the old three-line headline + "Total traffic:" line are gone). */}
+        <h2 className="rmx__headline">{fill(METRICS.headline, tokens)}</h2>
 
         <div className="rmx__table">
           <div className="rmx__head rmx__head--metric">{METRICS.headers.metric}</div>
@@ -92,6 +83,14 @@ export default function MetricsSection({ result, tokens }) {
             </div>
           ))}
         </div>
+
+        {/* 🔴🟡🟢 key — always shown (Yemi comment #5; the "only if red"
+            gate in comment #6 starts on the section BELOW this key). */}
+        <ul className="rmx__key">
+          {METRICS.key.map((line) => (
+            <li key={line.slice(0, 12)}>{line}</li>
+          ))}
+        </ul>
       </div>
     </section>
   );
