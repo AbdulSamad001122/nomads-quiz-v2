@@ -75,6 +75,15 @@ export default function CaseStudyCreative({ theme, onBack, onContinue }) {
                 <strong>A Contrarian POV™</strong>
                 {' as we call it.'}
               </p>
+              <div className="cs5a__hero-cta">
+                <button
+                  type="button"
+                  className="q-btn q-btn--onDark cs5a__continue"
+                  onClick={onContinue}
+                >
+                  Follow along
+                </button>
+              </div>
             </div>
 
             <div className="cs5a__script-band">your traffic is worth more.</div>

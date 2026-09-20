@@ -93,6 +93,15 @@
   line-height: 1.55;
 }
 
+/* Follow along, repeated at the foot of the hero copy so the taker can move
+   on without scrolling the whole case study first (user, 2026-09-17).
+   Shared by all five case-study screens. */
+.cs5a__hero-cta {
+  margin-top: clamp(18px, 3vh, 34px);
+  display: flex;
+  justify-content: flex-start;
+}
+
 /* script band — bordered row closing the keyline frame */
 .cs5a__script-band {
   border-top: 1px solid rgba(255, 255, 255, 0.55);
@@ -485,14 +494,11 @@
     min-height: 0;
   }
 
+  /* Badge is out below 900 (user, 2026-09-17). It used to hang off the seam
+     under the white logo bar; the progress strip took that bar away, so it
+     landed on top of the Back link. All five case studies share this rule. */
   .cs5a__left .seam-badge {
-    display: flex;
-    left: 50%;
-    right: auto;
-    top: 0;
-    transform: translateX(-50%);
-    width: 70px;
-    height: 70px;
+    display: none;
   }
 
   .cs5a__mobile-back {

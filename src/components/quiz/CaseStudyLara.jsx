@@ -79,6 +79,15 @@ export default function CaseStudyLara({ theme, onBack, onContinue }) {
                 <strong>6% click-through rate</strong>
                 {'.'}
               </p>
+              <div className="cs5a__hero-cta">
+                <button
+                  type="button"
+                  className="q-btn q-btn--onDark cs5a__continue"
+                  onClick={onContinue}
+                >
+                  Follow along
+                </button>
+              </div>
             </div>
 
             <div className="cs5a__script-band">your traffic is worth more.</div>

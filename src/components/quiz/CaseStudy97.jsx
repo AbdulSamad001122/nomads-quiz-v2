@@ -68,6 +68,15 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
                 {" while your opt-in rate stays flat is a strategy borrowed from bigger players with deeper pockets. It's not the best use of your marketing budget."}
               </p>
 
+              <div className="cs5a__hero-cta">
+                <button
+                  type="button"
+                  className="q-btn q-btn--onDark cs5a__continue"
+                  onClick={onContinue}
+                >
+                  Follow along
+                </button>
+              </div>
             </div>
 
             <div className="cs5a__script-band">your traffic is worth more.</div>

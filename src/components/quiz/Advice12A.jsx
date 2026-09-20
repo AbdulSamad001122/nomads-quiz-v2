@@ -14,7 +14,7 @@ import './Advice12A.css';
  * theme-rotated).
  */
 export default function Advice12A({ onBack, onContinue }) {
-  const [headRef, leftAlign] = useLeftAlignOnWrap(4);
+  const [headRef, leftAlign, headWidth] = useLeftAlignOnWrap(4);
   const [midRef, midLeftAlign] = useLeftAlignOnWrap(3);
 
   return (
@@ -42,6 +42,19 @@ export default function Advice12A({ onBack, onContinue }) {
               educating buyers on the call.
             </HighlightSweep>
           </h1>
+          <div
+            className={`a12__frame-cta${leftAlign ? ' a12__frame-cta--left' : ''}`}
+            style={headWidth ? { maxWidth: headWidth } : undefined}
+          >
+            <button
+              type="button"
+              className="q-btn q-btn--onDark a12__frame-continue"
+              onClick={onContinue}
+            >
+              Continue
+            </button>
+          </div>
+
           <div className="a12__info-card a12__info-card--top">
             <img
               className="a12__info-img"

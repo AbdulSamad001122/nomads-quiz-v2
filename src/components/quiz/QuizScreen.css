@@ -1203,3 +1203,11 @@
     line-height: 1.4;
   }
 }
+
+
+/* The old bottom bar inside the answer panel is gone — the fixed strip
+   (parts/ProgressStrip.css) replaces it, so the same number isn't shown
+   twice on the question screens. Alefiya review 2026-09-17. */
+.progress {
+  display: none;
+}

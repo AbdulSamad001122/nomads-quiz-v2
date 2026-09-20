@@ -19,17 +19,20 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: clamp(16px, 1.7vw, 26px);
+  padding: 50px clamp(16px, 1.7vw, 26px) clamp(16px, 1.7vw, 26px);
   background-image: url('/assets/blue-bg.webp');
   background-size: cover;
   background-position: center;
 }
 
-/* badge sits top-center on this full-bleed slide (like the DQ) */
+/* badge sits top-center on this full-bleed slide (like the DQ). This rule and
+   the padding above are shared by 12A–D AND five-metrics — they all render
+   the .a12 shell — so the top spacing is identical on every one of them
+   (user, 2026-09-17). */
 .a12__top .seam-badge {
   left: 50%;
   right: auto;
-  top: 5px;
+  top: 18px;
   transform: translateX(-50%);
 }
 
@@ -160,6 +163,35 @@
   background: #e4fbff;
   padding: 0 clamp(20px, 5.5vw, 100px) 65px;
   text-align: center;
+}
+
+/* Continue, repeated inside the dark keyline frame directly above the
+   infographic, so the taker can move on without scrolling to the footer
+   CTA (user, 2026-09-17). Shared by 12A–D and five-metrics; sits on the
+   dark panel at every width, hence the onDark shadow. */
+.a12__frame-cta {
+  margin-top: clamp(28px, 4.5vh, 52px);
+  display: flex;
+  justify-content: center;
+}
+
+/* It follows the headline: when useLeftAlignOnWrap flips the heading to
+   left (the heading has wrapped past its threshold — in practice phones),
+   the button goes with it instead of floating centred under left copy.
+   Driven by the same flag, so the two can never disagree. 12C/12D headings
+   never left-align, so their button stays centred. */
+.a12__frame-cta--left {
+  justify-content: flex-start;
+}
+
+/* The heading is a centred max-width block, so its text edge is NOT the
+   frame's padding edge until it fills the frame. useLeftAlignOnWrap hands
+   back the heading's measured box width and the wrapper takes it as an
+   inline max-width, so the button lines up with the heading's text at every
+   width — centred or left — without a second copy of the `NNch` measure. */
+.a12__frame-cta {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* white infographic card — overlaps the dark section above */

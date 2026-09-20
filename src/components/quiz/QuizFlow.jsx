@@ -25,6 +25,7 @@ import ResultsPage from '../../results/ResultsPage.jsx';
 import { themes } from '../../data/themes.js';
 import { QUESTIONS, resolveQuestion, salesModel } from '../../data/questions.js';
 import AnswerCheckModal from './AnswerCheckModal.jsx';
+import ProgressStrip from './parts/ProgressStrip.jsx';
 import { resolveInputs } from '../../calc/backendValues.js';
 import { impossibleCheck, validateManual } from '../../calc/validation.js';
 import { calculate, CEILINGS } from '../../calc/calculator.js';
@@ -449,6 +450,26 @@ export default function QuizFlow() {
   const percentFor = (qid) =>
     Math.round((QUESTION_INDEX[qid] / totalQuestions) * 100);
 
+  /* ---------- progress across the whole journey ----------
+     Alefiya review (2026-09-17): progress must be visible on every slide and
+     must never sit frozen. Basing it on the question number would freeze it
+     for the two or three educational slides that run between questions, so
+     it counts EVERY screen the taker actually sees instead — skipped
+     conditionals (Q2B / Q7B / Q7C) drop out, so the scale always matches
+     their real route. Welcome is the 0% start, opt-in the 100% end; the
+     results page sits outside the quiz and has no strip. */
+  const journey = SCREENS.filter(
+    (s) => s.id !== 'results' && screenVisible(s, answers)
+  );
+  const journeyPercent = () => {
+    const pos = journey.findIndex((s) => s.id === screen.id);
+    if (pos < 0 || journey.length < 2) return 0;
+    return Math.round((pos / (journey.length - 1)) * 100);
+  };
+  // No strip on the welcome screen (nothing started yet), the results page,
+  // or the disqualification dead end.
+  const showStrip = !dqReason && screen.id !== 'welcome' && screen.id !== 'results';
+
   // Theme alternates blue → maroon → green across the SPLIT-SCREEN slides the
   // taker actually sees — questions plus the benchmark and
   // transition-to-calculator slides (skipped conditionals don't consume a
@@ -489,6 +510,8 @@ export default function QuizFlow() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index, dqReason]);
 
+  /* ---------- render ---------- */
+  const screenEl = (() => {
   /* ---------- disqualification ---------- */
   if (dqReason) {
     return (
@@ -859,4 +882,14 @@ export default function QuizFlow() {
     default:
       return null;
   }
+  })();
+
+  return (
+    <>
+      {showStrip ? (
+        <ProgressStrip percent={journeyPercent()} theme={themeAt(index)} />
+      ) : null}
+      {screenEl}
+    </>
+  );
 }

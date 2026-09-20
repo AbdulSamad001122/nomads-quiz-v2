@@ -66,6 +66,15 @@ export default function CaseStudyGolfbays({ theme, onBack, onContinue }) {
             <p className="cs5a__para">
               {'GolfBays went from having a discount opt-in to a quiz opt-in that landed them an additional 530 demos a month and £97,000+ in direct site revenue from the same Shopify traffic they were already paying for.'}
             </p>
+              <div className="cs5a__hero-cta">
+                <button
+                  type="button"
+                  className="q-btn q-btn--onDark cs5a__continue"
+                  onClick={onContinue}
+                >
+                  Follow along
+                </button>
+              </div>
             </div>
 
             <div className="cs5a__script-band">your traffic is worth more.</div>

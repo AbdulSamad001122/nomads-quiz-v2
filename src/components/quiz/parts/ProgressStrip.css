@@ -1,0 +1,141 @@
+/* Progress strip pinned to the top of every quiz screen. Colours come from
+   the active theme via custom properties, so it recolours with the
+   blue/maroon/green rotation instead of fighting it. */
+
+.qps {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 55px;
+  padding: 18px clamp(16px, 4vw, 40px);
+  /* white, not theme-tinted — it now carries the Nomads logo that used to sit
+     in each screen's own white logo box (Alefiya review, 2026-09-17) */
+  background: #ffffff;
+}
+
+.qps__logo {
+  flex-shrink: 0;
+  width: 150px;
+  height: auto;
+  /* trimmed copy of the logo: the original PNG carries uneven transparent
+     margin (22px above the artwork, 26px below), so centring the file still
+     left the visible logo sitting off-centre in the strip. This one is
+     cropped to the artwork, so flex centring is exact. */
+  display: block;
+}
+
+.qps__track {
+  flex: 1;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--qps-track);
+  overflow: hidden;
+}
+
+.qps__fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--qps-fill);
+  transition: width 0.35s ease;
+}
+
+.qps__label {
+  flex-shrink: 0;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  color: var(--qps-label);
+  white-space: nowrap;
+}
+
+/* The strip is fixed, so the app below it clears that height. Done once on
+   the app root rather than per screen — the quiz has a dozen different root
+   classes (quiz-screen, cs5a, belief-screen, a12, loading-screen, …) and
+   chasing each one would miss the next screen someone adds. The body class
+   is toggled by the component, so only strip screens get the inset.
+
+   --qps-height is MEASURED from the rendered strip by the component (a
+   ResizeObserver writes it), so changing the padding, the logo size or the
+   label font can never leave the inset stale — the value below is only the
+   first-paint fallback.
+
+   There is deliberately NO gap under the strip: the page behind it is white,
+   so any gap read as extra strip and made the logo look high even though its
+   own padding is symmetrical. The screens' own top padding supplies the
+   breathing room instead. */
+:root {
+  --qps-height: 62px;
+}
+
+body.has-qps #root {
+  padding-top: var(--qps-height);
+  box-sizing: border-box;
+}
+
+/* full-height screens must subtract the strip so they still fill one viewport
+   instead of overflowing by its height */
+body.has-qps .quiz-screen,
+body.has-qps .loading-screen,
+body.has-qps .belief-screen,
+body.has-qps .slide-screen {
+  min-height: calc(100vh - var(--qps-height));
+  min-height: calc(100dvh - var(--qps-height));
+}
+
+/* The logo now lives in the strip, so each screen's own white logo box and
+   the keyline rule beside it come out. The screen frames keep their own top
+   border (user, 2026-09-17). Done here, globally, rather than in 18 separate
+   screen stylesheets. Alefiya review 2026-09-17. */
+body.has-qps .question-panel__logo-box,
+body.has-qps .slide-screen__logo,
+/* Q14's mobile-only white logo bar — same job as the logo box, so it goes
+   too, or the logo shows twice on a phone. */
+body.has-qps .fl__mobile-bar,
+body.has-qps .question-panel__top-line,
+body.has-qps .belief__top-line,
+body.has-qps .belief__top-line--long,
+body.has-qps .dq__top-line,
+body.has-qps .ld__top-line {
+  display: none;
+}
+
+/* Only the thin logo BARS collapse. .a12__top is deliberately absent — that
+   one is the advice slide's whole dark panel (its own padding + background),
+   not a logo bar, and zeroing it clipped the Back link. */
+body.has-qps .question-panel__top,
+body.has-qps .belief__top,
+body.has-qps .dq__top,
+body.has-qps .ld__top {
+  border: none;
+  padding: 0;
+  min-height: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .qps__fill {
+    transition: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .qps {
+    gap: 18px;
+    padding: 14px 14px;
+  }
+  .qps__label {
+    font-size: 11px;
+    letter-spacing: 0;
+  }
+  .qps__logo {
+    width: 76px;
+  }
+  /* first-paint fallback only — the component measures the real height */
+  :root {
+    --qps-height: 41px;
+  }
+}
