@@ -18,14 +18,19 @@ export default function HeroSection({ tokens }) {
 
           <p className="rhero__based">{HERO.basedOn}</p>
 
-          <h1 className="rhero__headline">{HERO.headlineLines.join(' ')}</h1>
+          <h1 className="rhero__headline">{HERO.headline}</h1>
 
           <div className="rhero__number-row">
-            <span className="rhero__number">{fill(HERO.numberToken, tokens)}</span>
-            <span className="rhero__number-chip">
-              <span className="rhero__number-chip-text">{HERO.numberChip}</span>
+            <span className="rhero__number">{fill(HERO.rpvFrom, tokens)}</span>
+            <span className="rhero__number-arrow" aria-hidden="true">
+              {HERO.rpvArrow}
+            </span>
+            <span className="rhero__number rhero__number--goal">
+              {fill(HERO.rpvTo, tokens)}
             </span>
           </div>
+
+          <p className="rhero__calc-line">{HERO.calcLine}</p>
 
           <div className="rhero__formula">
             <p className="rhero__formula-lead">{HERO.formula.lead}</p>

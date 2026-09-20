@@ -51,28 +51,6 @@
   color: #3b1030;
 }
 
-.rmx__script-v {
-  font-family: var(--font-number); /* Better Brush */
-  font-weight: 400;
-  font-size: 1.25em;
-  line-height: 0;
-  vertical-align: -0.14em;
-  margin-right: 0.02em;
-}
-
-.rmx__traffic {
-  margin-top: 40px;
-  text-align: center;
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 22px;
-  color: #250f1c;
-}
-
-.rmx__traffic strong {
-  font-weight: 800;
-}
-
 /* ——— table ——— */
 
 .rmx__table {
@@ -150,13 +128,80 @@
   border: 1.5px solid #d9bfd7;
 }
 
-/* The calculator's red/yellow/green cell states are intentionally not
-   styled — the "Your Business" column is one flat tone per the design
-   (Sep 13). metricColour still flows through the class name for later use. */
+/* Red/yellow/green cell states — reinstated per Yemi's Sep 19 doc comment
+   ("You missed implementing the color logic for the cells"), reversing the
+   Sep 13 flat-tone ruling. The old removed pastels read as pink/cream, not
+   as the key's red/yellow/green (user, Sep 20), so: one notch deeper tints
+   + a solid corner dot in the exact key colour, so cell and 🔴🟡🟢 legend
+   match one-to-one. The rpv row stays --none (no dot, flat lavender). */
+.rmx__value--red,
+.rmx__value--yellow,
+.rmx__value--green {
+  position: relative;
+}
+
+.rmx__value--red::after,
+.rmx__value--yellow::after,
+.rmx__value--green::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+
+.rmx__value--red {
+  background: #f6d0cb;
+  border-color: #d3766a;
+}
+
+.rmx__value--red::after {
+  background: #dd3f3d;
+}
+
+.rmx__value--yellow {
+  background: #f8e8ab;
+  border-color: #ce9f31;
+}
+
+.rmx__value--yellow::after {
+  background: #f3c218;
+}
+
+.rmx__value--green {
+  background: #d3ecce;
+  border-color: #79ac6e;
+}
+
+.rmx__value--green::after {
+  background: #4caf50;
+}
 
 .rmx__value--goal {
   background: #ecdfc9;
   border: 1.5px solid #d9c6a6;
+}
+
+/* ——— 🔴🟡🟢 key under the table (Sep 19 doc) ———
+   Sits below the sheet's clip line, i.e. on the NAVY rectangle (the cream
+   sheet ends at the middle of the second-to-last row), so it reads light. */
+
+.rmx__key {
+  margin: 34px auto 0;
+  max-width: 967px;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 34px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #f4ede6;
 }
 
 /* mobile-only labels inside value cards */
@@ -212,9 +257,12 @@
   .rmx__headline {
     font-size: 26px;
   }
-  .rmx__traffic {
-    margin-top: 28px;
-    font-size: 16px;
+  .rmx__key {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 26px;
+    font-size: 14px;
   }
   .rmx__table {
     margin-top: 32px;
