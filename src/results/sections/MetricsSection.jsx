@@ -87,14 +87,8 @@ export default function MetricsSection({ result, tokens }) {
         {/* 🔴🟡🟢 key — always shown (Yemi comment #5; the "only if red"
             gate in comment #6 starts on the section BELOW this key). */}
         <ul className="rmx__key">
-          {METRICS.key.map((k) => (
-            <li key={k.state}>
-              <span
-                className={`rmx__key-dot rmx__key-dot--${k.state}`}
-                aria-hidden="true"
-              />
-              {k.text}
-            </li>
+          {METRICS.key.map((line) => (
+            <li key={line.slice(0, 12)}>{line}</li>
           ))}
         </ul>
       </div>

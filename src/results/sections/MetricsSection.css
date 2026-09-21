@@ -128,65 +128,75 @@
   border: 1.5px solid #d9bfd7;
 }
 
-/* Metric-state cells — brand identity palette (user, Sep 21): the doc's
-   red/yellow/green stay as LOGIC names only; on the page each state wears a
-   site colour and the key's dot repeats it. Corner dots on the cells are
-   gone — with non-literal colours the cell fill + key dot ARE the mapping.
-   The rpv row (--none) and the goal column read white with the ink border. */
-.rmx__value--red {
-  background: #f2e5f6;
-  border-color: #d9bfd7;
-}
-
-.rmx__value--yellow {
-  background: #ecdfc9;
-  border-color: #d9c6a6;
-}
-
+/* Red/yellow/green cell states — reinstated per Yemi's Sep 19 doc comment
+   ("You missed implementing the color logic for the cells"), reversing the
+   Sep 13 flat-tone ruling. The old removed pastels read as pink/cream, not
+   as the key's red/yellow/green (user, Sep 20), so: one notch deeper tints
+   + a solid corner dot in the exact key colour, so cell and 🔴🟡🟢 legend
+   match one-to-one. The rpv row stays --none (no dot, flat lavender). */
+.rmx__value--red,
+.rmx__value--yellow,
 .rmx__value--green {
-  background: #d4ecf8;
-  border-color: #a9cfe0;
+  position: relative;
 }
 
-.rmx__value--none {
-  background: #ffffff;
-  border-color: #3b1030;
-}
-
-.rmx__value--goal {
-  background: #ffffff;
-  border: 1.5px solid #3b1030;
-}
-
-/* ——— key under the table (Sep 19 doc) ———
-   Sits below the sheet's clip line, i.e. on the NAVY rectangle (the cream
-   sheet ends at the middle of the second-to-last row), so it reads light. */
-
-.rmx__key li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.rmx__key-dot {
-  flex-shrink: 0;
+.rmx__value--red::after,
+.rmx__value--yellow::after,
+.rmx__value--green::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  right: 12px;
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-.rmx__key-dot--red {
-  background: #f2e5f6;
+.rmx__value--red {
+  background: #f6d0cb;
+  border-color: #d3766a;
 }
 
-.rmx__key-dot--yellow {
+.rmx__value--red::after {
+  background: #dd3f3d;
+}
+
+.rmx__value--yellow {
+  background: #f8e8ab;
+  border-color: #ce9f31;
+}
+
+.rmx__value--yellow::after {
+  background: #f3c218;
+}
+
+.rmx__value--green {
+  background: #d3ecce;
+  border-color: #79ac6e;
+}
+
+.rmx__value--green::after {
+  background: #4caf50;
+}
+
+/* tiny phones: the cell is too narrow for the corner dot — it lands on the
+   "YOUR BUSINESS" mini-label — so the fill + the key below carry the colour */
+@media (max-width: 360px) {
+  .rmx__value--red::after,
+  .rmx__value--yellow::after,
+  .rmx__value--green::after {
+    display: none;
+  }
+}
+
+.rmx__value--goal {
   background: #ecdfc9;
+  border: 1.5px solid #d9c6a6;
 }
 
-.rmx__key-dot--green {
-  background: #d4ecf8;
-}
+/* ——— 🔴🟡🟢 key under the table (Sep 19 doc) ———
+   Sits below the sheet's clip line, i.e. on the NAVY rectangle (the cream
+   sheet ends at the middle of the second-to-last row), so it reads light. */
 
 .rmx__key {
   margin: 34px auto 0;
