@@ -1,6 +1,7 @@
 import ResultsNav from './sections/ResultsNav.jsx';
 import HeroSection from './sections/HeroSection.jsx';
 import MetricsSection from './sections/MetricsSection.jsx';
+import RedMetricsWorkshop from './sections/RedMetricsWorkshop.jsx';
 import ResultBlocks from './sections/ResultBlocks.jsx';
 import StopOrPush from './sections/StopOrPush.jsx';
 import WhatIfYouDid from './sections/WhatIfYouDid.jsx';
@@ -28,7 +29,7 @@ import InCommon from './sections/InCommon.jsx';
 import BounceRates from './sections/BounceRates.jsx';
 import NotJustSite from './sections/NotJustSite.jsx';
 import TwoPaths from './sections/TwoPaths.jsx';
-import { resolveTokens } from './resolveTokens.js';
+import { resolveTokens, anyMetricRed } from './resolveTokens.js';
 import './results.css';
 // last, so the shared button hover wins over the per-section rules
 import './result-buttons.css';
@@ -46,6 +47,10 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
       <ResultsNav />
       <HeroSection tokens={tokens} />
       <MetricsSection result={result} tokens={tokens} />
+      {/* Red-metrics workshop (Sep 19 doc insert). Yemi ruling 2026-09-21:
+          shows for ANY taker with a red table cell — capped included; hides
+          only when nothing is red. */}
+      {anyMetricRed(result) && <RedMetricsWorkshop tokens={tokens} />}
       {/* Copy doc blue box "Blocks 4–7 — Capped-state outcomes" sits here,
           between the metric table and "You can stop at $1.5M." */}
       <ResultBlocks result={result} tokens={tokens} slot="capped" />

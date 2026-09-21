@@ -185,6 +185,8 @@
 
 /* sitewide .q-btn carries fill/border/shadow/hover — only sizing here */
 .rcb__btn {
+  /* renders caps like the red-metrics workshop button (user, Sep 21) */
+  text-transform: uppercase;
   display: inline-block;
   margin-top: 30px;
   font-size: 16px;
@@ -256,10 +258,9 @@
 }
 
 @media (max-width: 760px) {
-  /* centre the badge on the seam, same as the data-nerds card */
+  /* badge is out on mobile (user, Sep 21) */
   .rcb__badge {
-    left: 50%;
-    transform: translate(-50%, -45%);
+    display: none;
   }
   @keyframes rcb-badge-spin {
     from {
