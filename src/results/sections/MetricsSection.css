@@ -251,7 +251,7 @@
 
 @media (max-width: 700px) {
   .rmx {
-    padding: 56px 20px 100px;
+    padding: 56px 20px 55px;
   }
   .rmx__sheet {
     clip-path: polygon(
