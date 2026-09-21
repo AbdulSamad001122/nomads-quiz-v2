@@ -59,6 +59,14 @@
   width: 100%;
 }
 
+/* the copy column rides along while the taller calendar scrolls past
+   (user, Sep 21). Works because the grid is align-items: start; top
+   clears the 100px sticky nav. */
+.ryc__content {
+  position: sticky;
+  top: 124px;
+}
+
 .ryc__para {
   max-width: 440px;
   font-family: var(--font-body);
@@ -121,6 +129,10 @@
   .ryc__grid {
     grid-template-columns: 1fr;
     gap: 32px;
+  }
+  /* stacked layout: sticky text would hover over the calendar below it */
+  .ryc__content {
+    position: static;
   }
   .ryc__para {
     max-width: 100%;
