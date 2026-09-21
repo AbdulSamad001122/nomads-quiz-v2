@@ -59,14 +59,21 @@ export default function WorkshopInvite({ tokens }) {
             {c.button}
           </a>
         </div>
-        {/* TODO: swap for the clickable workshop thumbnail when the asset lands. */}
+        {/* TODO: wire the workshop video/page URL when it lands — the
+            thumbnail asset arrived Sep 21 (same one as the red-metrics
+            section). */}
         <a
           className="rwk__thumb"
           href="#"
           aria-label="Watch the workshop"
           onClick={() => ga.ctaClick('watch_workshop')}
         >
-          <span>{c.thumbPlaceholder}</span>
+          <img
+            src="/assets/results-workshop-video-thumb.webp"
+            alt="Diagnostic video — Alefiya scoring the four pillars on the board"
+            width="2080"
+            height="1170"
+          />
         </a>
       </div>
     </section>

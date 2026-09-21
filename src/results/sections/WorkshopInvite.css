@@ -113,21 +113,22 @@
   box-shadow: 3px 3px 0 #5d1b4e;
 }
 
-/* clickable thumbnail — ice placeholder until the asset lands */
+/* clickable thumbnail — real asset, sized like .rmw__thumb (user, Sep 21) */
 .rwk__thumb {
-  display: grid;
-  place-items: center;
-  max-width: 90%;
+  display: block;
+  width: 90%;
+  max-width: 1140px;
   margin: 56px auto 0;
-  aspect-ratio: 1410 / 760;
-  background: #e4fbff;
   border: 1px solid #5d1b4e;
   border-radius: 16px;
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 18px;
-  color: #3a2130;
+  overflow: hidden;
   text-decoration: none;
+}
+
+.rwk__thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 /* ——— responsive ——— */
@@ -185,8 +186,8 @@
     padding: 16px 20px;
   }
   .rwk__thumb {
+    width: 100%;
     margin-top: 32px;
-    border-radius: 12px;
-    font-size: 15px;
+    border-radius: 4px;
   }
 }
