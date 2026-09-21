@@ -1,0 +1,309 @@
+/* Red-metrics workshop — reference design (Sep 21): dark maroon-crumple top
+   with the playful badge, centred headline with cream sweep + curve arrow,
+   cream panel holding the 2×2 quadrant cards (landing FourAreas card
+   language), triple down-arrows, then a white close with the answer copy,
+   workshop button and the ice thumbnail placeholder. */
+
+.rmw__dark {
+  position: relative;
+  background: #150a10 url('/assets/results-maroon-crumple.webp') center / cover;
+  padding: 100px clamp(20px, 5vw, 80px) 90px;
+}
+
+.rmw__badge {
+  position: absolute;
+  top: 34px;
+  left: clamp(20px, 6vw, 96px);
+  width: 118px;
+}
+
+.rmw__badge img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.rmw__lead {
+  max-width: 46ch;
+  margin: 0 auto;
+  text-align: center;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(14px, 1.2vw, 18px);
+  line-height: 1.5;
+  color: #f4ede6;
+}
+
+.rmw__headline {
+  /* em-based + balance: reproduces the reference's even 3-line wrap at
+     every font size without a forced line map */
+  max-width: 20em;
+  text-wrap: balance;
+  margin: 22px auto 0;
+  text-align: center;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: clamp(28px, 3.2vw, 46px);
+  line-height: 1.25;
+  color: #ffffff;
+}
+
+.rmw__hl {
+  display: inline;
+  background: #f2e6d8;
+  color: #5d1b4e;
+  padding: 0.04em 0.22em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.rmw__curve {
+  position: absolute;
+  right: clamp(24px, 12%, 190px);
+  top: 210px;
+  width: clamp(48px, 6vw, 84px);
+  height: auto;
+  pointer-events: none;
+}
+
+.rmw__keeping {
+  max-width: 45ch;
+  margin: 26px auto 0;
+  text-align: center;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(14px, 1.2vw, 18px);
+  line-height: 1.75;
+  color: #f4ede6;
+}
+
+/* the two live RPV values, chipped per the design */
+.rmw__val {
+  font-weight: 700;
+  padding: 1px 8px;
+  white-space: nowrap;
+}
+
+.rmw__val--current {
+  background: #f2e6d8;
+  color: #391129;
+}
+
+.rmw__val--goal {
+  background: #5d1b4e;
+  color: #ffffff;
+}
+
+/* ——— cream panel with the quadrant cards ——— */
+
+.rmw__panel {
+  max-width: 1060px;
+  margin: 54px auto 0;
+  background: #f2e6d8;
+  border-radius: 24px;
+  padding: clamp(28px, 4vw, 52px) clamp(20px, 3.4vw, 48px);
+}
+
+.rmw__ten {
+  max-width: 56ch;
+  margin: 0 auto;
+  text-align: center;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(15px, 1.25vw, 19px);
+  line-height: 1.5;
+  color: #250f1c;
+}
+
+.rmw__chip {
+  display: block;
+  width: fit-content;
+  margin: 18px auto 0;
+  background: #5d1b4e;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: clamp(12px, 1vw, 15px);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+}
+
+.rmw__grid {
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 3vw, 42px);
+  align-items: stretch;
+}
+
+/* landing FourAreas card language: white, plum keyline, hard offset shadow */
+.rmw__card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #ffffff;
+  border: 1px solid #5d1b4e;
+  border-radius: 12px;
+  padding: clamp(22px, 2.4vw, 32px) clamp(18px, 2vw, 28px);
+  box-shadow: 8px 8px 0 0 #5d1b4e;
+}
+
+.rmw__icon {
+  display: block;
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+.rmw__card-chip {
+  margin-top: 16px;
+  background: #5d1b4e;
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(13px, 1vw, 15px);
+  padding: 2px 10px;
+}
+
+.rmw__card-title {
+  margin-top: 12px;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: clamp(17px, 1.4vw, 21px);
+  line-height: 1.3;
+  color: #250f1c;
+}
+
+.rmw__card-q {
+  margin-top: 12px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(14px, 1.15vw, 17px);
+  line-height: 1.55;
+  color: #250f1c;
+}
+
+.rmw__card-q .results-em {
+  font-weight: 800;
+}
+
+.rmw__down {
+  position: absolute;
+  right: clamp(16px, 4.5%, 70px);
+  bottom: 44px;
+  width: clamp(44px, 5vw, 70px);
+  height: auto;
+  pointer-events: none;
+}
+
+/* ——— white close ——— */
+
+.rmw__light {
+  background: #ffffff;
+  padding: clamp(48px, 6vw, 80px) clamp(20px, 5vw, 80px) clamp(56px, 7vw, 96px);
+}
+
+.rmw__light-inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.rmw__answer {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(15px, 1.25vw, 19px);
+  line-height: 1.65;
+  color: #250f1c;
+}
+
+.rmw__answer .rmw__val--goal {
+  padding: 0 6px;
+}
+
+.rmw__btn {
+  display: block;
+  width: fit-content;
+  margin-top: 34px;
+  text-align: center;
+  max-width: 340px;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.rmw__thumb {
+  display: grid;
+  place-items: center;
+  max-width: 1140px;
+  margin: 56px auto 0;
+  aspect-ratio: 1410 / 760;
+  background: #e4fbff;
+  border: 1px solid #5d1b4e;
+  border-radius: 16px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(14px, 1.2vw, 18px);
+  color: #250f1c;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rmw__curve {
+    top: 250px;
+  }
+}
+
+@media (max-width: 900px) {
+  .rmw__dark {
+    padding: 120px 20px 80px;
+  }
+  .rmw__badge {
+    width: 92px;
+    top: 20px;
+  }
+  .rmw__curve,
+  .rmw__down {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .rmw__grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .rmw__dark {
+    padding: 104px 16px 64px;
+  }
+  .rmw__badge {
+    width: 80px;
+    left: 16px;
+  }
+  .rmw__lead {
+    text-align: left;
+  }
+  .rmw__headline {
+    font-size: 26px;
+  }
+  .rmw__keeping {
+    text-align: left;
+    line-height: 2;
+  }
+  .rmw__panel {
+    padding: 24px 16px;
+    border-radius: 18px;
+  }
+  .rmw__ten {
+    text-align: left;
+  }
+  .rmw__thumb {
+    aspect-ratio: auto;
+    min-height: 220px;
+  }
+}

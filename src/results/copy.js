@@ -77,39 +77,67 @@ export const METRICS = {
  */
 export const RED_METRICS = {
   lead: 'It’s one thing to know WHICH metrics are red, but another to know WHAT is keeping them red.',
-  find: 'Find the reason behind your red metrics with the Compounding Revenue Per Visitor™ OS Workshop.',
-  keeping: 'Your red metric is what’s keeping your RPV™ at {{current_rpv}} instead of {{goal_rpv}}',
+  // Headline split for the cream sweep on "Reason Behind". Title Case per
+  // the reference (casing rule); the ™ stays per the doc even though the
+  // design drops it (same standing flag as NAV/formula).
+  headBefore: 'Find The',
+  headHighlight: 'Reason Behind',
+  headAfter: 'Your Red Metrics With The Compounding Revenue Per Visitor™ OS Workshop.',
+  // "…at {{current_rpv}} instead of {{goal_rpv}}" — the two values render as
+  // chips (cream current, plum goal) between these parts, per the design.
+  keepingBefore: 'Your red metric is what’s keeping your RPV™ at',
+  keepingMid: 'instead of',
   tenQuestions:
     'The workshop takes you and your team through 10 questions across 4 quadrants to find out exactly why each red metric is red.',
-  forExample: 'For example:',
+  // Renders as the mono chip "FOR EXAMPLE" (uppercase via CSS).
+  forExample: 'For example',
+  // Chip + title split per the design ("Quadrant 01" chip above the name);
+  // doc writes them inline ("Quadrant 1 – …"). Card 1 shows "per" lowercase
+  // and card 4 "Per" capital exactly as the reference does. `bold` = the
+  // design's bold run inside each question (emphasize()).
   quadrants: [
     {
-      title: 'Quadrant 1 – Maximise Revenue Per Visitor™',
+      chip: 'Quadrant 01',
+      title: 'Maximise Revenue per Visitor™',
       q: 'Is it because you don’t know the trigger that helps you sell to a 20X bigger market?',
+      bold: 'the trigger that helps you sell to a 20X bigger market?',
+      icon: '/assets/results-quadrant-icon-1.png',
     },
     {
-      title: 'Quadrant 2 – Contrarian POV™',
+      chip: 'Quadrant 02',
+      title: 'Contrarian POV™',
       q: 'Is it because buyers can’t see your category-dominating differentiation and keep comparing you to cheaper alternatives?',
+      bold: 'can’t see your category-dominating differentiation',
+      icon: '/assets/results-quadrant-icon-2.png',
     },
     {
-      title: 'Quadrant 3 – Speed to Decision™',
+      chip: 'Quadrant 03',
+      title: 'Speed to Decision™',
       q: 'Is it because buyers with different objections are being dumped into the same buying journey, instead of getting a personalised path that answers their questions without ever needing to speak with you?',
+      bold: 'instead of getting a personalised path that answers their questions',
+      icon: '/assets/results-quadrant-icon-3.png',
     },
     {
-      title: 'Quadrant 4 – Compounding Revenue Per Subscriber™',
+      chip: 'Quadrant 04',
+      title: 'Compounding Revenue Per Subscriber™',
       q: 'Is it because you aren’t nurturing non-buyers until they’re ready to buy?',
+      bold: 'aren’t nurturing non-buyers',
+      icon: '/assets/results-quadrant-icon-4.png',
     },
   ],
-  answerAll:
-    'Answer all 10 questions, and you’ll know exactly what’s keeping your red metric red — and what to optimise to move your RPV™ toward {{goal_rpv}} and add $125K/month without spending another penny on marketing or ads.',
+  // Split around the {{goal_rpv}} chip per the design.
+  answerBefore:
+    'Answer all 10 questions, and you’ll know exactly what’s keeping your red metric red — and what to optimise to move your RPV™ toward',
+  answerAfter:
+    'and add $125K/month without spending another penny on marketing or ads.',
   ctaWorkshop: 'WATCH THE WORKSHOP WITH YOUR MARKETING TEAM',
   // Diagnostic video thumbnail slot — asset blocked on video approval
-  // (doc comment #7).
-  alreadyKnow: 'Already know you want a second set of expert eyes on your business?',
-  pickDay:
-    'Pick a day and time, and bring your Revenue Per Visitor (RPV) number to the C-RPV Game Plan Call with me.',
-  // The section closes with its own calendar (doc comments #8-10) — reuse
-  // <TidyCalEmbed /> when building.
+  // (doc comment #7); placeholder box per the design.
+  thumbPlaceholder: 'Thumbnail After Workshop',
+  // NOT in the design (doc keeps them; the bottom sections carry the same
+  // content and the user approved the duplication): "Already know you want
+  // a second set of expert eyes…", "Pick a day and time…", and the third
+  // calendar cluster (#8-10). Add here if a design revision includes them.
 };
 
 /**

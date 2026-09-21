@@ -16,6 +16,15 @@ import { calculate } from './calc/calculator.js';
  * calculator, not by eye. Keep it in step if the inputs ever change.
  */
 const SCENARIOS = {
+  // No red metric anywhere (all four scored metrics yellow): proves the
+  // red-metrics workshop section HIDES (Yemi gate ruling 2026-09-21).
+  // optIn 40% · lead 12.5% · close 37.5% · rps $16.67 — all in-band.
+  healthy: {
+    blocks: 'no red — RedMetricsWorkshop hidden',
+    path: 'plg',
+    inputs: { q2: 810000, q7: 7500, q7b: null, q7c: undefined, q8: 3000, q9a: 0.125, q9b: 0.375, q10: 175, q11: 600000 },
+  },
+
   /* ——— Blocks 1–3 · the revenue-split paragraph ——— */
 
   // Block 1 alone: 20% of revenue runs through the five metrics.
