@@ -17,7 +17,8 @@
   pointer-events: none;
 }
 
-/* compass stamp on a white disc, straddling the top-left seam */
+/* compass stamp straddling the top-left seam (white disc dropped —
+   user, Sep 21) */
 .rso__badge {
   --badge: clamp(112px, 11vw, 160px);
   position: absolute;
@@ -26,7 +27,6 @@
   width: var(--badge);
   height: var(--badge);
   border-radius: 50%;
-  background: #ffffff;
   display: grid;
   place-items: center;
   z-index: 2;
