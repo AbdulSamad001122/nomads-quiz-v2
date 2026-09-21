@@ -6,11 +6,9 @@
   padding: 60px 54px 76px;
 }
 
-/* Single column since the live TidyCal widget replaced the static Calendly
-   image (user, Sep 21): in the old 58% column the widget stacked its info
-   card above the calendar and ran ~1500px tall — the taker had to scroll to
-   even see the month. Full-width it lays out side-by-side and the calendar
-   is visible immediately. */
+/* Text | calendar side by side with the copy column sticky, matching
+   YourCall (user, Sep 21). align-items: start is required for the sticky
+   column to travel inside its grid cell. */
 .rgp__card {
   max-width: 1330px;
   margin: 0 auto;
@@ -18,14 +16,20 @@
   border-radius: 28px;
   padding: 60px 56px;
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 40px;
+  grid-template-columns: 0.42fr 0.58fr;
+  align-items: start;
+  gap: 58px;
 }
 
 .rgp__media {
   width: 100%;
-  max-width: 1080px;
-  margin: 0 auto;
+}
+
+/* copy rides along while the taller calendar scrolls; 124px clears the
+   100px sticky nav */
+.rgp__content {
+  position: sticky;
+  top: 124px;
 }
 
 .rgp__headline {
@@ -86,6 +90,10 @@
   .rgp__card {
     grid-template-columns: 1fr;
     gap: 32px;
+  }
+  /* stacked layout: sticky text would hover over the calendar below it */
+  .rgp__content {
+    position: static;
   }
 }
 
