@@ -31,13 +31,16 @@ export const METRICS = {
   // doc. Wraps naturally (no line map, per the Sep 12 no-<br> rule).
   headline:
     'So…how do you scale your Revenue per Visitor™ from {{current_rpv}} → {{goal_rpv}}? By optimising all 5 metrics below until they’re green:',
-  // 🔴🟡🟢 key under the rps row — ALWAYS shown. Yemi's "show only if red"
+  // Key under the rps row — ALWAYS shown. Yemi's "show only if red"
   // comment (#6) anchors BELOW this key, on the workshop section that
   // follows it, so the key itself is not conditional.
+  // User (Sep 21): colour NAMES and emojis dropped from the doc lines; the
+  // swatch dot is rendered in CSS in the cell's actual colour (the doc's
+  // red/yellow/green stay as the LOGIC names only).
   key: [
-    '🔴 Red: The metric with the most room to improve.',
-    '🟡 Yellow: The metric that’s close to healthy.',
-    '🟢 Green: The metric that’s performing at its goal.',
+    { state: 'red', text: 'The metric with the most room to improve.' },
+    { state: 'yellow', text: 'The metric that’s close to healthy.' },
+    { state: 'green', text: 'The metric that’s performing at its goal.' },
   ],
   headers: {
     metric: 'METRIC',
