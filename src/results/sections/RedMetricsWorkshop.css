@@ -194,9 +194,8 @@
   color: #250f1c;
 }
 
-.rmw__card-q .results-em {
-  font-weight: 800;
-}
+/* bold runs in the card questions keep the browser's default <strong>
+   weight (700) — the 800 read too heavy (user, Sep 21) */
 
 .rmw__down {
   position: absolute;
