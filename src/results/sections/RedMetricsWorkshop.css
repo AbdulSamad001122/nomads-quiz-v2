@@ -67,7 +67,7 @@
 }
 
 .rmw__keeping {
-  max-width: 45ch;
+  max-width: 35ch;
   margin: 26px auto 0;
   text-align: center;
   font-family: var(--font-body);
