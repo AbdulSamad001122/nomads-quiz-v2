@@ -6,6 +6,7 @@
 import { calculate, runImprovementLoop, metricColour, CEILINGS } from './calculator.js';
 import { resolveInputs } from './backendValues.js';
 import { validateManual, impossibleCheck } from './validation.js';
+import { anyMetricRed } from '../results/resolveTokens.js';
 
 let pass = 0,
   fail = 0;
@@ -221,6 +222,60 @@ const near = (a, b, tol = 1e-6) => Math.abs(a - b) <= tol;
   ok('tags · goal_rpv = 6.42', r.tags.goal_rpv === 6.42, r.tags.goal_rpv);
   ok('tags · required_lift is whole %', Number.isInteger(r.tags.required_lift));
   ok('tags · capped_block set', [4, 5, 6, 7].includes(r.tags.capped_block));
+}
+
+/* =========================================================
+   9 · anyMetricRed — gate for the red-metrics workshop section
+   (Yemi 2026-09-21: any red cell → show, capped included)
+   ========================================================= */
+{
+  // Synthetic results pin the four scored metrics exactly at/around the
+  // Logic Doc thresholds; goal values are irrelevant to the gate.
+  const fake = (current, path = 'plg') => ({
+    currentRPV: 1,
+    goalRPV: 2,
+    path,
+    current,
+    goal: { optIn: 0.6, lead: 0.3, close: 0.75, rps: 50 },
+  });
+  ok(
+    'gate · all green (at ceilings) → hidden',
+    anyMetricRed(fake({ optIn: 0.6, lead: 0.3, close: 0.75, rps: 50 })) === false
+  );
+  ok(
+    'gate · all yellow → hidden (yellow never triggers)',
+    anyMetricRed(fake({ optIn: 0.2, lead: 0.1, close: 0.3, rps: 20 })) === false
+  );
+  ok(
+    'gate · opt-in 17% red → shown',
+    anyMetricRed(fake({ optIn: 0.17, lead: 0.1, close: 0.3, rps: 20 })) === true
+  );
+  ok(
+    'gate · opt-in exactly 18% is yellow → hidden',
+    anyMetricRed(fake({ optIn: 0.18, lead: 0.1, close: 0.3, rps: 20 })) === false
+  );
+  ok(
+    'gate · rps $0 (no email marketing) → shown',
+    anyMetricRed(fake({ optIn: 0.2, lead: 0.1, close: 0.3, rps: 0 })) === true
+  );
+  ok(
+    'gate · SLG lead 6% red → shown',
+    anyMetricRed(fake({ optIn: 0.2, lead: 0.06, close: 0.3, rps: 20 }, 'slg')) === true
+  );
+  ok(
+    'gate · SLG lead 7% is yellow → hidden',
+    anyMetricRed(fake({ optIn: 0.2, lead: 0.07, close: 0.3, rps: 20 }, 'slg')) === false
+  );
+
+  // Real calculator run: the capped5 dev fixture (Blocks 5 path). Per the
+  // Yemi ruling the gate stays TRUE for capped takers with reds — no
+  // cappedState exclusion.
+  const capped = calculate(
+    { q2: 270000, q7: 4000, q7b: null, q7c: undefined, q8: 400, q9a: 0.03, q9b: 0.375, q10: 175, q11: 62500 },
+    'plg'
+  );
+  ok('gate · capped5 fixture is cappedState', capped.cappedState === true);
+  ok('gate · capped taker with reds → still shown', anyMetricRed(capped) === true);
 }
 
 /* =========================================================

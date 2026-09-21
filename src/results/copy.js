@@ -63,6 +63,56 @@ export const METRICS = {
 };
 
 /**
+ * Red-metrics workshop section (the Sep 19 doc's new insert between the
+ * metric table and the capped blocks). COPY LOCKED, section awaiting its
+ * design reference — nothing renders this yet. Gate: anyMetricRed() in
+ * resolveTokens.js (Yemi 2026-09-21: any red cell → show, capped takers
+ * included).
+ *
+ * Deviations from the doc, all ruled:
+ * - "$ {{goal_rpv}}" → "{{goal_rpv}}" (token already carries the $; user
+ *   2026-09-20, Yemi asked to fix the doc).
+ * - "$Y.YY" → "{{goal_rpv}}" (Yemi 2026-09-21, fixed in the doc too).
+ * - "Maximize" → "Maximise" (site-wide spelling; user 2026-09-20).
+ */
+export const RED_METRICS = {
+  lead: 'It’s one thing to know WHICH metrics are red, but another to know WHAT is keeping them red.',
+  find: 'Find the reason behind your red metrics with the Compounding Revenue Per Visitor™ OS Workshop.',
+  keeping: 'Your red metric is what’s keeping your RPV™ at {{current_rpv}} instead of {{goal_rpv}}',
+  tenQuestions:
+    'The workshop takes you and your team through 10 questions across 4 quadrants to find out exactly why each red metric is red.',
+  forExample: 'For example:',
+  quadrants: [
+    {
+      title: 'Quadrant 1 – Maximise Revenue Per Visitor™',
+      q: 'Is it because you don’t know the trigger that helps you sell to a 20X bigger market?',
+    },
+    {
+      title: 'Quadrant 2 – Contrarian POV™',
+      q: 'Is it because buyers can’t see your category-dominating differentiation and keep comparing you to cheaper alternatives?',
+    },
+    {
+      title: 'Quadrant 3 – Speed to Decision™',
+      q: 'Is it because buyers with different objections are being dumped into the same buying journey, instead of getting a personalised path that answers their questions without ever needing to speak with you?',
+    },
+    {
+      title: 'Quadrant 4 – Compounding Revenue Per Subscriber™',
+      q: 'Is it because you aren’t nurturing non-buyers until they’re ready to buy?',
+    },
+  ],
+  answerAll:
+    'Answer all 10 questions, and you’ll know exactly what’s keeping your red metric red — and what to optimise to move your RPV™ toward {{goal_rpv}} and add $125K/month without spending another penny on marketing or ads.',
+  ctaWorkshop: 'WATCH THE WORKSHOP WITH YOUR MARKETING TEAM',
+  // Diagnostic video thumbnail slot — asset blocked on video approval
+  // (doc comment #7).
+  alreadyKnow: 'Already know you want a second set of expert eyes on your business?',
+  pickDay:
+    'Pick a day and time, and bring your Revenue Per Visitor (RPV) number to the C-RPV Game Plan Call with me.',
+  // The section closes with its own calendar (doc comments #8-10) — reuse
+  // <TidyCalEmbed /> when building.
+};
+
+/**
  * Conditional result blocks — VERBATIM from Quiz Logics.docx · Results-page
  * logic ("Copy Shown" for each block). Result Page Copy.docx marks these as
  * blue conditional boxes and defers to the Logic Doc for the wording.

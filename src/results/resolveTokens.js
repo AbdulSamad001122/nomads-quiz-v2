@@ -57,6 +57,17 @@ export function metricRows(result) {
   ];
 }
 
+/**
+ * Gate for the red-metrics workshop section (Updated Result Page Copy.docx,
+ * comment #6). Yemi's ruling, 2026-09-21: purely "any metric-table cell shows
+ * red" — capped takers included; hide only when nothing is red. The rpv row
+ * never counts (colour 'none' by spec). Section renders once its design
+ * lands; the gate ships tested ahead of it.
+ */
+export function anyMetricRed(result) {
+  return metricRows(result).some((row) => row.colour === 'red');
+}
+
 /** Replace every {{token}} in a copy string with its resolved value. */
 export function fill(str, tokens) {
   return str.replace(/\{\{(\w+)\}\}/g, (m, key) => tokens[key] ?? m);
