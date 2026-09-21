@@ -354,3 +354,11 @@
     text-align: left;
   }
 }
+
+/* ——— TidyCal at the foot (user, Sep 21) ——— */
+
+.rtp__calendar {
+  max-width: 1080px;
+  margin: clamp(40px, 5vw, 64px) auto 0;
+  padding: 0 20px clamp(56px, 7vw, 96px);
+}

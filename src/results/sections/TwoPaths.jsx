@@ -1,6 +1,7 @@
 import { TWO_PATHS } from '../copy.js';
 import { emphasize } from '../emphasize.jsx';
 import { ga } from '../../analytics/ga.js';
+import TidyCalEmbed from './TidyCalEmbed.jsx';
 import './TwoPaths.css';
 
 const brJoin = (lines, bold) =>
@@ -83,6 +84,13 @@ export default function TwoPaths() {
         <div className="rtp__panel-photo">
           <img src="/assets/results-fork-photo.webp" alt="Alefiya in a rattan chair" width="2515" height="3793" />
         </div>
+      </div>
+
+      {/* live TidyCal at the section foot — same widget as the game-plan
+          sections, so the fork's "book the call" path ends on a calendar the
+          taker can use right here */}
+      <div className="rtp__calendar">
+        <TidyCalEmbed />
       </div>
     </section>
   );
