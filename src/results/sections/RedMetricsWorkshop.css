@@ -302,6 +302,8 @@
   }
   .rmw__headline {
     font-size: 26px;
+    text-align: left;
+    text-wrap: balance;
   }
   .rmw__keeping {
     text-align: left;
