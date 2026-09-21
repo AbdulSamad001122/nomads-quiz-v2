@@ -156,6 +156,15 @@
   object-fit: contain;
 }
 
+/* the envelope's landscape artwork reads bigger than the others at the same
+   height — smaller image inside the same 40px slot (content-box padding), so
+   the four icons feel equal and the chips stay row-aligned */
+.rmw__card:nth-child(4) .rmw__icon {
+  height: 28px;
+  padding: 6px 0;
+  box-sizing: content-box;
+}
+
 .rmw__card-chip {
   margin-top: 16px;
   background: #5d1b4e;
