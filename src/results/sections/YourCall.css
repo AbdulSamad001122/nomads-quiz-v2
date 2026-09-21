@@ -43,20 +43,20 @@
   flex-shrink: 0;
 }
 
-/* Single column since the live TidyCal widget replaced the static image
-   (user, Sep 21) — full width keeps the widget short enough that the
-   calendar is visible without scrolling. Mirrors GamePlanCta. */
+/* Text | calendar side by side (user, Sep 21 — wants the horizontal
+   layout back even though the TidyCal widget stacks internally in a
+   column this narrow). align-items: start so the copy hugs the top of
+   the tall widget instead of floating at its middle. */
 .ryc__grid {
   margin-top: 56px;
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 40px;
+  grid-template-columns: 0.42fr 0.58fr;
+  align-items: start;
+  gap: 56px;
 }
 
 .ryc__media {
   width: 100%;
-  max-width: 1080px;
-  margin: 0 auto;
 }
 
 .ryc__para {
