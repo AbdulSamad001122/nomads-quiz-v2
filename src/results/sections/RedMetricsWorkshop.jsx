@@ -29,12 +29,6 @@ export default function RedMetricsWorkshop({ tokens }) {
           {c.headAfter}
         </h2>
 
-        <img
-          className="rmw__curve"
-          src="/assets/curve-white-arrow.png"
-          alt=""
-          aria-hidden="true"
-        />
 
         <p className="rmw__keeping">
           {c.keepingBefore}{' '}

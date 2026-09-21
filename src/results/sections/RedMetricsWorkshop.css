@@ -62,14 +62,6 @@
   -webkit-box-decoration-break: clone;
 }
 
-.rmw__curve {
-  position: absolute;
-  right: clamp(24px, 12%, 190px);
-  top: 210px;
-  width: clamp(48px, 6vw, 84px);
-  height: auto;
-  pointer-events: none;
-}
 
 .rmw__keeping {
   max-width: 35ch;
@@ -259,9 +251,6 @@
 /* ——— responsive ——— */
 
 @media (max-width: 1100px) {
-  .rmw__curve {
-    top: 250px;
-  }
   .rmw__headline {
     font-size: 34px;
   }
@@ -274,7 +263,6 @@
   .rmw__badge {
     width: 92px;
   }
-  .rmw__curve,
   .rmw__down {
     display: none;
   }
