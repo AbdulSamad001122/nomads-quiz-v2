@@ -256,10 +256,9 @@
 }
 
 @media (max-width: 760px) {
-  /* centre the badge on the seam, same as the data-nerds card */
+  /* badge is out on mobile (user, Sep 21) */
   .rcb__badge {
-    left: 50%;
-    transform: translate(-50%, -45%);
+    display: none;
   }
   @keyframes rcb-badge-spin {
     from {

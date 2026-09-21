@@ -281,6 +281,10 @@
 }
 
 @media (max-width: 760px) {
+  /* badge is out on mobile (user, Sep 21) */
+  .rmw__badge {
+    display: none;
+  }
   .rmw__grid {
     grid-template-columns: 1fr;
     max-width: 480px;
@@ -292,10 +296,6 @@
 @media (max-width: 560px) {
   .rmw__dark {
     padding: 104px 16px 64px;
-  }
-  .rmw__badge {
-    width: 80px;
-    left: 16px;
   }
   .rmw__lead {
     text-align: left;
