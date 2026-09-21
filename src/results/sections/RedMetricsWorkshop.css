@@ -205,7 +205,9 @@
 /* ——— white close ——— */
 
 .rmw__light {
-  background: #f7f4ea url('/assets/results-paper-texture.webp') center / cover;
+  /* tiled at natural size (1536x1024) rather than cover — the section is
+     taller than the texture, and cover stretched/blurred it (user, Sep 21) */
+  background: #f7f4ea url('/assets/results-paper-texture.webp') top left repeat;
   padding: clamp(48px, 6vw, 80px) clamp(20px, 5vw, 80px) clamp(56px, 7vw, 96px);
 }
 
