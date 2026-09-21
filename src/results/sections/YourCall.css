@@ -43,12 +43,20 @@
   flex-shrink: 0;
 }
 
+/* Single column since the live TidyCal widget replaced the static image
+   (user, Sep 21) — full width keeps the widget short enough that the
+   calendar is visible without scrolling. Mirrors GamePlanCta. */
 .ryc__grid {
   margin-top: 56px;
   display: grid;
-  grid-template-columns: 0.42fr 0.58fr;
-  align-items: center;
-  gap: 56px;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+.ryc__media {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
 }
 
 .ryc__para {

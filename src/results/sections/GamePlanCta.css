@@ -6,6 +6,11 @@
   padding: 60px 54px 76px;
 }
 
+/* Single column since the live TidyCal widget replaced the static Calendly
+   image (user, Sep 21): in the old 58% column the widget stacked its info
+   card above the calendar and ran ~1500px tall — the taker had to scroll to
+   even see the month. Full-width it lays out side-by-side and the calendar
+   is visible immediately. */
 .rgp__card {
   max-width: 1330px;
   margin: 0 auto;
@@ -13,9 +18,14 @@
   border-radius: 28px;
   padding: 60px 56px;
   display: grid;
-  grid-template-columns: 0.42fr 0.58fr;
-  align-items: center;
-  gap: 58px;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+.rgp__media {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
 }
 
 .rgp__headline {
