@@ -1,0 +1,26 @@
+/* Booking-calendar band — the TidyCal card on the maroon-crumple texture
+   (user, Sep 21). The white widget card pops on the dark ground, so it
+   needs no keyline; rounded to match the page's card language. */
+
+.rbc {
+  background: #150a10 url('/assets/results-maroon-crumple.webp') center / cover;
+  padding: clamp(48px, 6vw, 88px) 20px;
+}
+
+.rbc__inner {
+  max-width: 1235px;
+  margin: 0 auto;
+}
+
+.rbc__inner .rtcal {
+  border-radius: 16px;
+}
+
+@media (max-width: 560px) {
+  .rbc {
+    padding: 40px 16px;
+  }
+  .rbc__inner .rtcal {
+    border-radius: 10px;
+  }
+}

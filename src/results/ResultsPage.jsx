@@ -29,6 +29,7 @@ import InCommon from './sections/InCommon.jsx';
 import BounceRates from './sections/BounceRates.jsx';
 import NotJustSite from './sections/NotJustSite.jsx';
 import TwoPaths from './sections/TwoPaths.jsx';
+import BookCallCalendar from './sections/BookCallCalendar.jsx';
 import { resolveTokens, anyMetricRed } from './resolveTokens.js';
 import './results.css';
 // last, so the shared button hover wins over the per-section rules
@@ -95,6 +96,8 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
       <BounceRates />
       <NotJustSite />
       <TwoPaths />
+      {/* standalone booking calendar on the maroon band (user, Sep 21) */}
+      <BookCallCalendar />
       {/* Next sections land here as they're designed. */}
     </div>
   );
