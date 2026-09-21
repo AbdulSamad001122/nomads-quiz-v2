@@ -12,9 +12,13 @@
 
 .rmw__badge {
   position: absolute;
-  top: 34px;
+  /* straddles the seam with the navy section above — vertically centred on
+     the boundary (user, Sep 21) */
+  top: 0;
+  transform: translateY(-50%);
   left: clamp(20px, 6vw, 96px);
   width: 118px;
+  z-index: 2;
 }
 
 .rmw__badge img {
@@ -269,7 +273,6 @@
   }
   .rmw__badge {
     width: 92px;
-    top: 20px;
   }
   .rmw__curve,
   .rmw__down {

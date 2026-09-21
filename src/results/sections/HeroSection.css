@@ -40,7 +40,7 @@
   font-weight: 500;
   font-size: 16px;
   color: #f4ede6;
-  margin-top: 44px;
+  margin-top: 30px;
 }
 
 .rhero__headline {
@@ -101,7 +101,7 @@
 /* ——— formula card ——— */
 
 .rhero__formula {
-  margin-top: 64px;
+  margin-top: 36px;
   max-width: 310px;
   background: rgba(228, 222, 226, 0.18);
   border-radius: 10px;
