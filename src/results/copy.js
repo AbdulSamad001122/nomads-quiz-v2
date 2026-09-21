@@ -132,7 +132,9 @@ export const RED_METRICS = {
     'Answer all 10 questions, and you’ll know exactly what’s keeping your red metric red, and what to optimise to move your RPV™ toward',
   answerAfter:
     'and add $125K/month without spending another penny on marketing or ads.',
-  ctaWorkshop: 'WATCH THE WORKSHOP WITH YOUR MARKETING TEAM',
+  // Doc/design show this in ALL CAPS; user (Sep 21) chose sentence case to
+  // match every other button on the page.
+  ctaWorkshop: 'Watch the workshop with your marketing team',
   // Diagnostic video thumbnail slot — asset blocked on video approval
   // (doc comment #7); placeholder box per the design.
   thumbPlaceholder: 'Thumbnail After Workshop',
