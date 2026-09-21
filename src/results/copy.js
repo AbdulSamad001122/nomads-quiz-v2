@@ -125,9 +125,11 @@ export const RED_METRICS = {
       icon: '/assets/results-quadrant-icon-4.png',
     },
   ],
-  // Split around the {{goal_rpv}} chip per the design.
+  // Split around the {{goal_rpv}} chip per the design. The doc's em dash
+  // after "red" reads as a comma here (user rule: no em dashes in the new
+  // sections, same as Spot A/B).
   answerBefore:
-    'Answer all 10 questions, and you’ll know exactly what’s keeping your red metric red — and what to optimise to move your RPV™ toward',
+    'Answer all 10 questions, and you’ll know exactly what’s keeping your red metric red, and what to optimise to move your RPV™ toward',
   answerAfter:
     'and add $125K/month without spending another penny on marketing or ads.',
   ctaWorkshop: 'WATCH THE WORKSHOP WITH YOUR MARKETING TEAM',
