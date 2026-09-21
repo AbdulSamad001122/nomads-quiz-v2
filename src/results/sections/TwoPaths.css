@@ -364,8 +364,15 @@
 }
 
 /* the widget's white card gets the section's plum frame so it reads as a
-   proper box on the cream footer (same 4px keyline as .rtp__panel) */
+   proper box on the cream footer (same 4px keyline as .rtp__panel).
+   Capped height: TidyCal sizes its iframe to the FULL meeting description,
+   which made the box ~1500px with a dead zone under the calendar — the cap
+   keeps month + time slots in one view and the description tail scrolls
+   inside the frame instead of stretching the page (user, Sep 21). */
 .rtp__calendar .rtcal {
   border: 4px solid #5d1b4e;
   border-radius: 14px;
+  max-height: 640px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
