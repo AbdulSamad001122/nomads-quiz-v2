@@ -241,18 +241,13 @@
 }
 
 .rmw__thumb {
-  display: grid;
-  place-items: center;
+  display: block;
+  width: 100%;
   max-width: 1140px;
+  height: auto;
   margin: 56px auto 0;
-  aspect-ratio: 1410 / 760;
-  background: #e4fbff;
   border: 1px solid #5d1b4e;
   border-radius: 16px;
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 16px;
-  color: #250f1c;
 }
 
 /* ——— responsive ——— */
@@ -317,7 +312,7 @@
     text-align: left;
   }
   .rmw__thumb {
-    aspect-ratio: auto;
-    min-height: 220px;
+    margin-top: 36px;
+    border-radius: 12px;
   }
 }

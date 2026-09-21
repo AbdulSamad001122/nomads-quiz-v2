@@ -85,11 +85,15 @@ export default function RedMetricsWorkshop({ tokens }) {
           </a>
         </div>
 
-        {/* TODO: swap for the diagnostic-video thumbnail once the video is
-            approved (doc comment #7). */}
-        <div className="rmw__thumb" aria-hidden="true">
-          <span>{c.thumbPlaceholder}</span>
-        </div>
+        {/* TODO: wire the diagnostic video when it's approved (doc comment
+            #7) — the thumbnail asset landed Sep 21, playback link pending. */}
+        <img
+          className="rmw__thumb"
+          src="/assets/results-workshop-video-thumb.webp"
+          alt="Diagnostic video — Alefiya scoring the four pillars on the board"
+          width="2080"
+          height="1170"
+        />
       </div>
     </section>
   );
