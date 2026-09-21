@@ -71,7 +71,6 @@ export default function AdSpendSection({ result, adAdjustable = false }) {
         <img className="rad__doodle" src="/assets/results-spend-smarter.png" alt="" aria-hidden="true" />
         <h2 className="rad__headline">
           {AD_SPEND.headlineTop}{' '}
-          <br />
           <span className="rad__hl">{AD_SPEND.headlineHighlight}</span>
         </h2>
       </div>
