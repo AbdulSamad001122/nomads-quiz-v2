@@ -185,6 +185,8 @@
 
 /* sitewide .q-btn carries fill/border/shadow/hover — only sizing here */
 .rcb__btn {
+  /* renders caps like the red-metrics workshop button (user, Sep 21) */
+  text-transform: uppercase;
   display: inline-block;
   margin-top: 30px;
   font-size: 16px;

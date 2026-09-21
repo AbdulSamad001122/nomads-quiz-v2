@@ -231,6 +231,8 @@
 }
 
 .rmw__btn {
+  /* these two workshop buttons render caps (user, Sep 21) */
+  text-transform: uppercase;
   display: block;
   width: fit-content;
   margin-top: 34px;
