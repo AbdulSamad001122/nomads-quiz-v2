@@ -47,12 +47,20 @@
   background: radial-gradient(120% 90% at 30% 25%, #1c1015 0%, #120a0d 55%, #0d0709 100%);
   display: flex;
   justify-content: center;
+  /* flex-start, or the default stretch pulls the portrait to the (taller)
+     right column's height and distorts it — also gives the sticky image
+     room to actually travel */
+  align-items: flex-start;
   padding: 108px 40px 90px;
 }
 
 .rcd__david {
+  display: block;
   width: min(100%, 533px);
-  height: fit-content;
+  /* height: auto, NOT fit-content — iOS Safari mis-computes fit-content on
+     replaced elements and stretched the portrait to the column height
+     (user, Sep 22, iPhone) */
+  height: auto;
 }
 
 /* pinned while the copy column scrolls past — 94px clears the sticky nav

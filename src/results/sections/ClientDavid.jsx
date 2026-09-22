@@ -23,6 +23,8 @@ export default function ClientDavid() {
           className="rcd__david"
           src="/assets/results-david.webp"
           alt="David Ledgerwood"
+          width="876"
+          height="1011"
         />
       </div>
 
