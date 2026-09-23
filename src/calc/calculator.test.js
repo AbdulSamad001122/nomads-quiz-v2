@@ -146,6 +146,25 @@ const near = (a, b, tol = 1e-6) => Math.abs(a - b) <= tol;
 }
 
 /* =========================================================
+   5b · BLOCK 1 split_suppressed boundary (live Kit Run 3, Sep 23)
+   The "Keep my answers" clamp sets q11 = q2 exactly. subs × (q11/subs)
+   picked up float noise (−1e-11 < 0) and flipped suppressed true; the
+   doc's "true if otherRevenue < 0" says exactly-zero is false.
+   ========================================================= */
+{
+  const boundary = calculate({ q2: 60000, q7: 100, q8: 60, q9a: 0.1, q9b: 0.3, q10: 500, q11: 60000 }, 'slg');
+  ok('block1 · q11 == q2 boundary → NOT suppressed', boundary.tags.split_suppressed === false, boundary.block1.otherRevenue);
+  ok('block1 · boundary otherRevenue exactly 0', boundary.block1.otherRevenue === 0, boundary.block1.otherRevenue);
+
+  const over = calculate({ q2: 60000, q7: 100, q8: 60, q9a: 0.1, q9b: 0.3, q10: 500, q11: 70000 }, 'slg');
+  ok('block1 · q11 > q2 → suppressed', over.tags.split_suppressed === true);
+
+  const zero = calculate({ q2: 60000, q7: 100, q8: 0, q9a: 0, q9b: 0, q10: 500, q11: 0 }, 'slg');
+  ok('block1 · zero subscribers → emailPathRevenue 0, not suppressed',
+    zero.block1.emailPathRevenue === 0 && zero.tags.split_suppressed === false);
+}
+
+/* =========================================================
    6 · METRIC COLOURS
    ========================================================= */
 {

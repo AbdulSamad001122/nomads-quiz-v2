@@ -49,7 +49,12 @@ export function calculate(inputs, path) {
 
   /* ---------- 5 · The improvement loop ---------- */
   // Only opt-in × RPS drive revenue; lead & close are improved for display.
-  const currentListRevenue = annualSubscribers * rps; // == q11
+  // q11 directly, NOT subs×rps: that round-trip (subs × q11/subs) picks up
+  // float noise, and at the q11==q2 boundary (the impossible-check clamp
+  // sets exactly that) it made otherRevenue -1e-11 < 0, flipping
+  // split_suppressed true when the doc's "< 0" says false (live Kit run,
+  // Sep 23). Zero subscribers still means zero list revenue.
+  const currentListRevenue = annualSubscribers > 0 ? q11 : 0;
   const nonListRevenue = currentAnnualRevenue - currentListRevenue;
 
   const ceil = { optIn: CEILINGS.optIn, lead: leadCeiling, close: CEILINGS.close, rps: CEILINGS.rps };
@@ -58,9 +63,11 @@ export function calculate(inputs, path) {
   const goalReached = loop.reached;
 
   /* ---------- Results-page logic ---------- */
-  // Block 1 — revenue split
-  const emailPathRevenue = annualSubscribers * rps; // == q11
-  const otherRevenue = currentAnnualRevenue - emailPathRevenue;
+  // Block 1 — revenue split. Reuses the guarded figures above: subs × rps
+  // here re-introduced the exact float round-trip described at
+  // currentListRevenue and flipped split_suppressed at the boundary.
+  const emailPathRevenue = currentListRevenue; // == q11
+  const otherRevenue = nonListRevenue;
   const splitSuppressed = otherRevenue < 0;
   const emailPercentage = round5((emailPathRevenue / currentAnnualRevenue) * 100);
 
