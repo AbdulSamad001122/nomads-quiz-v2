@@ -17,8 +17,8 @@
 const ENABLED =
   import.meta.env.PROD || import.meta.env.VITE_KIT_DEV === 'true';
 
-export async function pushToKit({ email, firstName, fields }) {
-  const payload = { email, first_name: firstName, fields };
+export async function pushToKit({ email, firstName, fields, tags = [] }) {
+  const payload = { email, first_name: firstName, fields, tags };
 
   if (!ENABLED) {
     console.info('[kit] DEV — push skipped, payload would be:', payload);

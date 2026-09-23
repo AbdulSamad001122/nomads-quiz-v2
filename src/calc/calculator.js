@@ -139,6 +139,11 @@ export function calculate(inputs, path) {
       current_rpv: rpv2(currentRPV),
       goal_rpv: rpv2(goalRPV),
       required_lift: Math.round(requiredLift * 100), // whole %
+      // Kit handover doc (Sep 23): "Required Lift in $$" — the same lift as
+      // a per-visitor dollar amount (goalRPV − currentRPV), the doc's
+      // "$4.17 more per visitor" figure. Separate field per Nomads' ruling
+      // so the % field stays untouched for any existing automations.
+      required_lift_amount: rpv2(goalRPV - currentRPV),
       capped_state: cappedState,
       capped_block: cappedBlock,
       achievable_gain: cappedState ? round100(achievableGain) : null,

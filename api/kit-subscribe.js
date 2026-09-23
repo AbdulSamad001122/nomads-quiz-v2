@@ -13,12 +13,17 @@
  * If no KIT_FORM_ID is configured we find-or-create the entry tag once and
  * cache its id for the lifetime of the lambda.
  *
- * POST body: { email, first_name, fields: { quiz_taker_*, current_rpv, … } }
+ * POST body: { email, first_name, fields: { quiz_taker_*, … },
+ *              tags?: string[] } — tag NAMES applied after the subscribe
+ *              (find-or-create), e.g. "Quiz Taker Capped State" for capped
+ *              takers (handover doc, Sep 23).
  */
 
 const KIT_API = 'https://api.convertkit.com/v3';
 
 let cachedTagId = null;
+// name → id cache for extra tags (e.g. "Quiz Taker Capped State")
+const cachedTagIds = {};
 
 async function kitJson(url, options) {
   const res = await fetch(url, options);
@@ -28,6 +33,30 @@ async function kitJson(url, options) {
     throw new Error(message);
   }
   return body;
+}
+
+/** Find-or-create any tag by name; cached per lambda instance. */
+async function resolveTagIdByName(apiSecret, tagName) {
+  if (cachedTagIds[tagName]) return cachedTagIds[tagName];
+  const list = await kitJson(
+    `${KIT_API}/tags?api_secret=${encodeURIComponent(apiSecret)}`,
+    { method: 'GET' }
+  );
+  const existing = (list.tags || []).find(
+    (t) => t.name.toLowerCase() === tagName.toLowerCase()
+  );
+  if (existing) {
+    cachedTagIds[tagName] = existing.id;
+    return existing.id;
+  }
+  const created = await kitJson(`${KIT_API}/tags`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ api_secret: apiSecret, tag: { name: tagName } }),
+  });
+  const id = created.id || (created.tag && created.tag.id);
+  cachedTagIds[tagName] = id;
+  return id;
 }
 
 async function resolveEntryTagId(apiSecret, tagName) {
@@ -67,7 +96,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  const { email, first_name: firstName, fields } = req.body || {};
+  const { email, first_name: firstName, fields, tags } = req.body || {};
   if (!email || typeof email !== 'string' || !email.includes('@')) {
     res.status(400).json({ error: 'valid email required' });
     return;
@@ -98,9 +127,31 @@ export default async function handler(req, res) {
       body: JSON.stringify(subscription),
     });
 
+    // Extra TAGS by name (handover doc Sep 23: "Quiz Taker Capped State"
+    // is a tag applied only to capped takers). Best-effort: the subscriber
+    // already exists with all fields, so a tag hiccup logs but doesn't
+    // fail the request.
+    const tagsApplied = [];
+    if (Array.isArray(tags)) {
+      for (const name of tags.filter((t) => typeof t === 'string' && t.trim())) {
+        try {
+          const tagId = await resolveTagIdByName(apiSecret, name.trim());
+          await kitJson(`${KIT_API}/tags/${tagId}/subscribe`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ api_key: apiKey, email }),
+          });
+          tagsApplied.push(name.trim());
+        } catch (err) {
+          console.error(`kit tag "${name}" failed:`, err.message);
+        }
+      }
+    }
+
     res.status(200).json({
       ok: true,
       subscriber_id: out.subscription?.subscriber?.id ?? null,
+      tags_applied: tagsApplied,
     });
   } catch (err) {
     console.error('kit-subscribe failed:', err.message);

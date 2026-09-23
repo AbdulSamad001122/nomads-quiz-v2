@@ -101,18 +101,44 @@ export function buildKitFields({
     quiz_taker_feedback_loop_what_led_you_here: vocText.trim() || null,
   };
 
-  // Computed results (logic doc's computed table). The calculator outputs
-  // the doc's snake_case names; Kit's custom fields carry a quiz_taker_
-  // prefix (checked live against the account), so map them here.
+  // Computed results — Kit custom-field keys VERBATIM from the updated
+  // handover doc ("updated new one kithandover doc.docx", Sep 23). Note the
+  // doc's naming split: the RPV/lift fields are quiz_taker_ (singular) and
+  // every computed field Burhan added in this round is quiz_takers_
+  // (plural). capped_state is deliberately ABSENT: per the doc it is a TAG
+  // ("Quiz Taker Capped State", applied only when capped), not a field —
+  // see buildKitTags below.
+  const TAG_FIELD_KEYS = {
+    current_rpv: 'quiz_taker_current_rpv',
+    goal_rpv: 'quiz_taker_goal_rpv',
+    required_lift: 'quiz_taker_required_lift', // doc: "Required Lift in %"
+    required_lift_amount: 'quiz_taker_required_lift_amount', // "…in $$"
+    capped_block: 'quiz_takers_capped_block',
+    achievable_gain: 'quiz_takers_achievable_gain',
+    remaining_gap: 'quiz_takers_remaining_gap',
+    additional_daily_visitors: 'quiz_takers_additional_daily_visitors',
+    split_suppressed: 'quiz_takers_split_suppressed',
+  };
   if (result && result.tags) {
     for (const [key, value] of Object.entries(result.tags)) {
-      fields[`quiz_taker_${key}`] = value;
+      const fieldKey = TAG_FIELD_KEYS[key];
+      if (fieldKey) fields[fieldKey] = value;
     }
-    fields.quiz_taker_record_unverified = overrides.length > 0;
+    fields.quiz_takers_record_unverified = overrides.length > 0;
   }
 
   // Kit rejects nulls in the fields hash — drop empty values entirely.
   return Object.fromEntries(
     Object.entries(fields).filter(([, v]) => v !== null && v !== undefined)
   );
+}
+
+/**
+ * Kit TAGS (not fields) for a finished quiz. Handover doc, Sep 23:
+ * capped_state → tag "Quiz Taker Capped State" — applied when the taker is
+ * capped (Blocks 5–7), absent otherwise ("If the state is capped, tag them
+ * this. If not, don’t tag them.").
+ */
+export function buildKitTags({ result = null } = {}) {
+  return result && result.cappedState ? ['Quiz Taker Capped State'] : [];
 }

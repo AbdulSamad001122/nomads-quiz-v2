@@ -6,7 +6,7 @@
  * Q13 sentence format, computed tags).
  */
 import assert from 'node:assert';
-import { buildKitFields, sentenceJoin } from './kitPayload.js';
+import { buildKitFields, buildKitTags, sentenceJoin } from './kitPayload.js';
 import { resolveInputs } from '../calc/backendValues.js';
 import { calculate } from '../calc/calculator.js';
 
@@ -82,8 +82,34 @@ eq(
 );
 eq(typeof slg.quiz_taker_current_rpv, 'number', 'computed current_rpv present');
 eq(typeof slg.quiz_taker_goal_rpv, 'number', 'computed goal_rpv present');
-eq(slg.quiz_taker_record_unverified, false, 'record_unverified false');
+eq(slg.quiz_takers_record_unverified, false, 'record_unverified false (plural key per Sep 23 doc)');
 eq('quiz_taker_ad_spend' in slg, false, 'no ad spend on organic path');
+
+/* ---------- Sep 23 handover doc: computed keys + the capped TAG ---------- */
+eq(typeof slg.quiz_taker_required_lift, 'number', 'required lift %% present');
+eq(
+  slg.quiz_taker_required_lift_amount,
+  Math.round((slgResult.goalRPV - slgResult.currentRPV) * 100) / 100,
+  'required lift $$ = goalRPV − currentRPV (2dp)'
+);
+eq('quiz_taker_capped_state' in slg, false, 'capped_state is NOT a field');
+eq('quiz_takers_capped_state' in slg, false, 'capped_state is NOT a field (plural either)');
+for (const k of Object.keys(slg)) {
+  if (
+    ['capped_block', 'achievable_gain', 'remaining_gap', 'additional_daily_visitors', 'split_suppressed', 'record_unverified']
+      .some((c) => k.endsWith(c))
+  ) {
+    eq(k.startsWith('quiz_takers_'), true, `computed field ${k} uses the plural quiz_takers_ prefix`);
+  }
+}
+eq(
+  buildKitTags({ result: slgResult }),
+  slgResult.cappedState ? ['Quiz Taker Capped State'] : [],
+  'capped tag follows cappedState'
+);
+eq(buildKitTags({ result: { cappedState: true } }), ['Quiz Taker Capped State'], 'capped → tag applied');
+eq(buildKitTags({ result: { cappedState: false } }), [], 'not capped → no tag');
+eq(buildKitTags({}), [], 'no result → no tag');
 
 /* ---------- PLG run (manual entries + hybrid checks) ---------- */
 const plgAnswers = {

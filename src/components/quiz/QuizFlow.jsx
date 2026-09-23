@@ -30,7 +30,7 @@ import { resolveInputs } from '../../calc/backendValues.js';
 import { impossibleCheck, validateManual } from '../../calc/validation.js';
 import { calculate, CEILINGS } from '../../calc/calculator.js';
 import { ga } from '../../analytics/ga.js';
-import { buildKitFields } from '../../kit/kitPayload.js';
+import { buildKitFields, buildKitTags } from '../../kit/kitPayload.js';
 import { pushToKit } from '../../kit/push.js';
 import { DEV_ROUTES_ENABLED } from '../../devRoutes.js';
 
@@ -842,6 +842,9 @@ export default function QuizFlow() {
                   result,
                   overrides,
                 }),
+                // capped takers get the "Quiz Taker Capped State" TAG
+                // (handover doc Sep 23 — tag, not field)
+                tags: buildKitTags({ result }),
               });
             }
 
