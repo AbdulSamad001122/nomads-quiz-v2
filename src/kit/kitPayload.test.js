@@ -82,7 +82,8 @@ eq(
 );
 eq(typeof slg.quiz_taker_current_rpv, 'number', 'computed current_rpv present');
 eq(typeof slg.quiz_taker_goal_rpv, 'number', 'computed goal_rpv present');
-eq(slg.quiz_takers_record_unverified, false, 'record_unverified false (plural key per Sep 23 doc)');
+eq(slg.quiz_takers_record_unverified, 'false', 'record_unverified is the STRING false (Kit drops boolean false)');
+eq(slg.quiz_takers_split_suppressed, 'false', 'split_suppressed is the STRING false');
 eq('quiz_taker_ad_spend' in slg, false, 'no ad spend on organic path');
 
 /* ---------- Sep 23 handover doc: computed keys + the capped TAG ---------- */
@@ -110,6 +111,10 @@ eq(
 eq(buildKitTags({ result: { cappedState: true } }), ['Quiz Taker Capped State'], 'capped → tag applied');
 eq(buildKitTags({ result: { cappedState: false } }), [], 'not capped → no tag');
 eq(buildKitTags({}), [], 'no result → no tag');
+{
+  const withOverride = buildKitFields({ answers: slgAnswers, result: slgResult, overrides: ['q8'] });
+  eq(withOverride.quiz_takers_record_unverified, 'true', 'override → record_unverified STRING true');
+}
 
 /* ---------- PLG run (manual entries + hybrid checks) ---------- */
 const plgAnswers = {

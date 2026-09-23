@@ -122,9 +122,12 @@ export function buildKitFields({
   if (result && result.tags) {
     for (const [key, value] of Object.entries(result.tags)) {
       const fieldKey = TAG_FIELD_KEYS[key];
-      if (fieldKey) fields[fieldKey] = value;
+      // booleans go as 'true'/'false' STRINGS — Kit's API coerces a raw
+      // boolean false to an empty field (seen live, Sep 23), which made
+      // "false" indistinguishable from "never sent".
+      if (fieldKey) fields[fieldKey] = typeof value === 'boolean' ? String(value) : value;
     }
-    fields.quiz_takers_record_unverified = overrides.length > 0;
+    fields.quiz_takers_record_unverified = String(overrides.length > 0);
   }
 
   // Kit rejects nulls in the fields hash — drop empty values entirely.
