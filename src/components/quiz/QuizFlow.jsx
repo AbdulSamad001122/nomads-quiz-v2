@@ -375,6 +375,10 @@ export default function QuizFlow() {
   // validation). Overrides tag the Kit record unverified.
   const [answerCheck, setAnswerCheck] = useState(null);
   const [overrides, setOverrides] = useState([]);
+  // Questions whose stored "manual" value was written by the clamp, not typed:
+  // the taker picked a range and hit "Keep my answers". Kit's qXX_answer_type
+  // must still read "Bracket" for these. Typing on that question clears it.
+  const [clampedBrackets, setClampedBrackets] = useState([]);
   // Doc: "Reject out-of-bounds values with an inline message; do not silently
   // clamp." Set on Continue when the manual entry fails validateManual;
   // cleared as soon as they type again or the screen changes.
@@ -434,6 +438,9 @@ export default function QuizFlow() {
     setAnswers(nextAns);
     setManualValues(nextMan);
     setOverrides((o) => (o.includes(qid) ? o : [...o, qid]));
+    if (ans[qid] !== 'manual') {
+      setClampedBrackets((c) => (c.includes(qid) ? c : [...c, qid]));
+    }
     setAnswerCheck(null);
     goTo(index, 1, nextAns);
   };
@@ -642,7 +649,10 @@ export default function QuizFlow() {
         onManualChange={(v) => {
           setManualError(null); // typing again clears the rejection
           if (q.otherEntry) setOtherText(v);
-          else setManualValues({ ...manualValues, [q.id]: v });
+          else {
+            setManualValues({ ...manualValues, [q.id]: v });
+            setClampedBrackets((c) => c.filter((x) => x !== q.id));
+          }
         }}
         textValue={vocText}
         onTextChange={setVocText}
@@ -841,6 +851,7 @@ export default function QuizFlow() {
                   vocText,
                   result,
                   overrides,
+                  clampedBrackets,
                 }),
                 // capped takers get the "Quiz Taker Capped State" TAG
                 // (handover doc Sep 23 — tag, not field)

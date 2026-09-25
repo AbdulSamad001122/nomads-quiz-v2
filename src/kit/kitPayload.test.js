@@ -9,6 +9,7 @@ import assert from 'node:assert';
 import { buildKitFields, buildKitTags, sentenceJoin } from './kitPayload.js';
 import { resolveInputs } from '../calc/backendValues.js';
 import { calculate } from '../calc/calculator.js';
+import { impossibleCheck } from '../calc/validation.js';
 
 let passed = 0;
 const eq = (actual, expected, label) => {
@@ -164,6 +165,64 @@ eq(hybD.quiz_taker_sales_model, 'SLG (Hybrid)', 'Q4 D → SLG (Hybrid)');
 /* ---------- no result (missing inputs) ---------- */
 const noCalc = buildKitFields({ answers: { q1: 'founder' } });
 eq('quiz_taker_current_rpv' in noCalc, false, 'no computed fields without result');
+
+/* ---------- Sep 25 handover doc: exact-vs-bracket answer-type fields ---------- */
+// Keys VERBATIM from "New latest kit handover doc.docx" — bare qXX_answer_type,
+// NO quiz_taker_ prefix. Option picked (incl. don't-track / no-email) →
+// "Bracket"; typed number → "Exact"; unanswered question → field absent.
+eq(slg.q7a_answer_type, 'Bracket', 'SLG Q7A bracket pick → Bracket');
+eq(slg.q8_answer_type, 'Bracket', 'SLG Q8 bracket pick → Bracket');
+eq(slg.q9a_answer_type, 'Bracket', 'SLG Q9A bracket pick → Bracket');
+eq(slg.q9b_answer_type, 'Bracket', 'SLG Q9B bracket pick → Bracket');
+eq(slg.q10_answer_type, 'Bracket', 'SLG Q10 bracket pick → Bracket');
+eq(slg.q11_answer_type, 'Bracket', 'SLG Q11 bracket pick → Bracket');
+eq('q7b_answer_type' in slg, false, 'no Q7B answer type off the ads path');
+eq('quiz_taker_q7a_answer_type' in slg, false, 'answer-type keys carry NO quiz_taker_ prefix');
+
+eq(plg.q7a_answer_type, 'Exact', 'PLG Q7A typed → Exact');
+eq(plg.q8_answer_type, 'Exact', 'PLG Q8 typed → Exact');
+eq(plg.q7b_answer_type, 'Bracket', 'PLG Q7B bracket on ads path → Bracket');
+eq(plg.q11_answer_type, 'Bracket', "Q11 no-email is a selected option → Bracket (doc's binary rule)");
+
+{
+  const dontTrack = buildKitFields({
+    answers: { ...slgAnswers, q7a: 'dont-track' },
+    manualValues: {},
+  });
+  eq(dontTrack.q7a_answer_type, 'Bracket', "don't-track is a selected option → Bracket");
+  eq(dontTrack.quiz_taker_monthly_visitors, 10000, "don't-track still sends the default value");
+}
+{
+  // Range picked → impossible check trips → "Keep my answers". keepAnswers()
+  // rewrites the answer to 'manual' + the clamped number and records the
+  // question in clampedBrackets. The taker never typed → still "Bracket".
+  // (Reviewer repro: Q7A 3,000–5,000 + Q8 5,001–10,000 → 7,500 ≥ 4,000 trips.)
+  const pickedAnswers = { ...slgAnswers, q7a: '3000-5000', q8: '5001-10000' };
+  const trip = impossibleCheck('q8', resolveInputs(pickedAnswers, {}, 'slg'));
+  eq(trip != null, true, 'repro: the picked Q8 range really trips the check');
+  const clampedRange = buildKitFields({
+    answers: { ...pickedAnswers, q8: 'manual' },
+    manualValues: { q8: '2400' },
+    overrides: ['q8'],
+    clampedBrackets: ['q8'],
+    result: slgResult,
+  });
+  eq(clampedRange.q8_answer_type, 'Bracket', 'range + Keep (clamped, never typed) → Bracket');
+  eq(clampedRange.quiz_taker_new_monthly_email_subscribers, 2400, 'and the clamped value is what is sent');
+  eq(clampedRange.quiz_takers_record_unverified, 'true', 'and record_unverified is true');
+  eq(clampedRange.q7a_answer_type, 'Bracket', 'the other questions are unaffected');
+
+  // Typed an impossible number → Keep. The doc's literal rule: they typed → "Exact".
+  const clampedTyped = buildKitFields({
+    answers: { ...slgAnswers, q11: 'manual' },
+    manualValues: { q11: '810000' },
+    overrides: ['q11'],
+    clampedBrackets: [],
+    result: slgResult,
+  });
+  eq(clampedTyped.q11_answer_type, 'Exact', 'typed + Keep → Exact (they did type a number)');
+}
+eq('q7a_answer_type' in noCalc, false, 'unanswered question → no answer-type field');
 
 console.log(`\nkitPayload: all ${passed} checks passed ✓`);
 console.log('\nSample SLG payload that would reach Kit:');

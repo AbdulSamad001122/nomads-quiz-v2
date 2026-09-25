@@ -57,6 +57,9 @@ export function buildKitFields({
   // Question ids where the taker hit an impossible-answer check and chose
   // "Keep my answers" (Quiz Logics.docx: "…tags the record unverified").
   overrides = [],
+  // Question ids whose "manual" value came from that clamp over a picked
+  // range, not from typing (QuizFlow keepAnswers). Still "Bracket" in Kit.
+  clampedBrackets = [],
 }) {
   const path = salesModel(answers);
   const inputs = resolveInputs(answers, manualValues, path);
@@ -100,6 +103,32 @@ export function buildKitFields({
     quiz_taker_solution_tried_already_for_revenue_growth: tried,
     quiz_taker_feedback_loop_what_led_you_here: vocText.trim() || null,
   };
+
+  // "Exact vs bracket answers" — New latest kit handover doc (Sep 25): one
+  // field per calculator question, keys VERBATIM from the doc (note: these
+  // have NO quiz_taker_ prefix — {{ subscriber.q7a_answer_type }} etc.).
+  // Doc rule is binary: an option that was selected → "Bracket" (that
+  // includes "We don't track this number yet" and Q11's "We don't do email
+  // marketing" — the doc's "one of the options (selected)"), a typed number
+  // → "Exact". Sent only when the question actually produced a value, so
+  // Q7B's flag stays absent off the paid-ads path exactly like
+  // quiz_taker_ad_spend does. A range that "Keep my answers" rewrote to a
+  // manual clamp is still "Bracket": the taker never typed that number.
+  const ANSWER_TYPE_FIELDS = [
+    ['q7a', 'q7', 'q7a_answer_type'],
+    ['q7b', 'q7b', 'q7b_answer_type'],
+    ['q8', 'q8', 'q8_answer_type'],
+    ['q9a', 'q9a', 'q9a_answer_type'],
+    ['q9b', 'q9b', 'q9b_answer_type'],
+    ['q10', 'q10', 'q10_answer_type'],
+    ['q11', 'q11', 'q11_answer_type'],
+  ];
+  for (const [qid, inputKey, fieldKey] of ANSWER_TYPE_FIELDS) {
+    if (inputs[inputKey] != null) {
+      const typed = answers[qid] === 'manual' && !clampedBrackets.includes(qid);
+      fields[fieldKey] = typed ? 'Exact' : 'Bracket';
+    }
+  }
 
   // Computed results — Kit custom-field keys VERBATIM from the updated
   // handover doc ("updated new one kithandover doc.docx", Sep 23). Note the
