@@ -1,15 +1,11 @@
 /* ============================================================
    CaseStudyCreative — case study 5C (Creative Delivery).
    Extends the shared cs5a__* shell (hero, ba-grid, chips, CTA).
-   5C-specific: hook band, Results column in the grid, closing band.
+   5C-specific: hero-panel stat cards, Results column in the grid,
+   closing band.
    ============================================================ */
 
 /* ---------- 1. Hero left content ---------- */
-
-/* hero art sized like 5D/5E */
-.cs5c .cs5a__hero-img {
-  width: 65%;
-}
 
 /* slightly smaller than 5A's headline — three short lines */
 .cs5c__headline {
@@ -28,44 +24,47 @@
   font-weight: 800;
 }
 
-/* ---------- 2. Hook band (accent, like 5B's happens band) ---------- */
+/* ---------- Hero right panel: the founder, whitelabelled ----------
+   Sits where his portrait was (5B's right panel carries copy the same
+   way), so the stat reads on the light panel: ink text, white cards. */
 
-.cs5c__hook {
-  background: var(--cs-accent);
-  padding: 70px clamp(20px, 5.5vw, 100px) 70px;
+.cs5c__intro {
+  container-type: inline-size;
+  width: min(88%, 560px);
+  margin-top: clamp(44px, 7vh, 84px);
+  padding-bottom: clamp(24px, 4vh, 48px);
   text-align: center;
 }
 
 .cs5c__hook-lead {
-  margin-bottom: 35px;
+  margin-bottom: clamp(20px, 3vh, 35px);
   font-family: var(--font-body);
-  font-weight: 500;
-  color: #ffffff;
+  font-weight: 600;
+  color: #250f1c;
   font-size: clamp(14px, 1.2vw, 22px);
   line-height: 1.5;
 }
 
 /* the losing → closing stat contrast */
 .cs5c__hook-row {
-  margin-top: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(24px, 4.5vw, 80px);
+  gap: clamp(16px, 2.4vw, 40px);
   flex-wrap: wrap; /* ultra-narrow safety: cards stack instead of overflowing */
 }
 
-/* each stat wrapped in a card — 5B card language on the dark band */
+/* each stat wrapped in a card — 5B card language */
 .cs5c__hook-stat {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 15px;
-  background: var(--cs-card);
+  background: #ffffff;
   border: 2px solid var(--cs-accent); /* #5d1b4e on the maroon route */
   box-shadow: 8px 8px 0 var(--cs-ink); /* #391129 maroon / #152638 green */
-  padding: clamp(18px, 2.2vh, 30px) clamp(26px, 3vw, 54px);
-  min-width: clamp(170px, 17vw, 250px);
+  padding: clamp(18px, 2.2vh, 30px) clamp(18px, 2vw, 40px);
+  min-width: clamp(150px, 13vw, 210px);
 }
 
 .cs5c__hook-label {
@@ -89,22 +88,25 @@
   width: clamp(38px, 3.6vw, 64px);
 }
 
+/* dark arrow on the light panel, same treatment as 5B's journey arrows */
 .cs5c__hook-arrow img {
   width: 100%;
   height: auto;
+  filter: brightness(0);
+  opacity: 0.85;
 }
 
 .cs5c__hook-close {
-  margin-top: 35px;
+  margin-top: clamp(22px, 3.2vh, 35px);
   font-family: var(--font-body);
   font-weight: 600;
-  color: #ffffff;
+  color: #250f1c;
   font-size: clamp(15px, 1.3vw, 24px);
 }
 
 .cs5c__hook-close strong {
   font-weight: 800;
-  color: #f2e6d8;
+  color: var(--cs-accent);
 }
 
 /* ---------- 3. Grid — third "Results" column ---------- */
@@ -131,12 +133,6 @@
 .cs5c .cs5a__ba-head--after,
 .cs5c .cs5c__results-head {
   color: var(--cs-ink);
-}
-
-/* green route: the hook band bg equals the green ink, so the stat
-   cards' shadow flips to white for contrast */
-.quiz-screen--green .cs5c__hook-stat {
-  box-shadow: 8px 8px 0 #ffffff;
 }
 
 .cs5c__results-card {
@@ -185,21 +181,8 @@
   text-align: center;
 }
 
-/* mono label strip — same language as the question labels */
-.cs5c__closing-label {
-  display: inline-block;
-  background: #f2e6d8;
-  color: #250f1c;
-  font-family: var(--font-mono);
-  font-weight: 500;
-  font-size: clamp(12px, 1vw, 17px);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 6px 14px;
-}
-
 .cs5c__closing-head {
-  margin: clamp(18px, 2.8vh, 30px) auto 0;
+  margin: 0 auto;
   max-width: 900px;
   text-wrap: balance;
   font-family: var(--font-headline);
@@ -256,10 +239,6 @@
     width: 80%;
   }
 
-  .cs5c__hook {
-    padding: 60px clamp(16px, 5vw, 28px);
-  }
-
   .cs5c__closing {
     padding: 48px clamp(16px, 5vw, 28px);
   }
@@ -293,12 +272,14 @@
   }
 }
 
-@media (max-width: 480px) {
+/* Too narrow for card → arrow → card in one row (the split hero's half
+   panel just above 900px, and phones): stack them, arrow pointing down.
+   Keyed to the panel's own width so the row never wraps half-way. */
+@container (max-width: 400px) {
   .cs5c__hook-row {
     flex-direction: column;
   }
 
-  /* arrow points down between the stacked cards */
   .cs5c__hook-arrow {
     transform: rotate(90deg);
   }

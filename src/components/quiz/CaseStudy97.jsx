@@ -11,7 +11,7 @@ import './CaseStudy97.css';
  * reference for the designed sections and extends the 5A style system
  * for the rest:
  *   1. split hero (problem framing + script band | Case Study phone art)
- *   2. "But what happens When you don't?" + Mary intro
+ *   2. "But what happens When you don't?" + Maria intro
  *   3. After the Compounding RPV™ OS — 4 zigzag numbered cards
  *      (cards 01/04 show the doc screenshots inside the blank laptop)
  *   4. Samar Owais — dark band, Lara panel left, testimonial screenshot
@@ -65,7 +65,7 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
                 <HighlightSweep tone={sweepToneFor(theme.name)}>
                   {'"top of mind"'}
                 </HighlightSweep>
-                {" while your opt-in rate stays flat is a strategy borrowed from bigger players with deeper pockets. It's not the best use of your marketing budget."}
+                {" (while your opt-in rate stays flat) is a strategy borrowed from bigger players with deeper pockets. It's not the best use of your marketing budget."}
               </p>
 
               <div className="cs5a__hero-cta">
@@ -116,7 +116,7 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
               </div>
             </div>
             <p className="cs5b__problem-para">
-              {"You're targeting Alex who doesn't believe he needs you and Sam who's actively looking for you exactly the same way."}
+              {"You're targeting Alex, who doesn't believe he needs you, and Sam who's actively looking for you — exactly the same way."}
             </p>
           </div>
         </div>
@@ -134,7 +134,7 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
           </span>
         </h2>
         <p className="cs5b__happens-para">
-          {'Mary an executive coach pulling 60,000+ monthly LinkedIn views had fewer than 500 new email subscribers a month. Every sale for her $5,000 offer depended on lengthy back-and-forth DMs. The moment she stepped back, revenue stepped back with her.'}
+          {'Maria (full name redacted for privacy), an executive coach pulling 60,000+ monthly LinkedIn views, had fewer than 500 new email subscribers a month. Every sale for her $5,000 offer depended on lengthy back-and-forth DMs. The moment she stepped back, revenue stepped back with her.'}
         </p>
       </section>
 
@@ -242,7 +242,7 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
         <div className="cs5b__audio-content">
           <p className="cs5b__audio-para">
             <strong>An audio-tech SaaS</strong>
-            {' for gamers was spending heavily on influencer marketing '}
+            {' for gamers was spending heavily on influencer marketing — '}
             <strong>140,000 monthly visits</strong>
             {" landing on a website that couldn't answer the one question every gamer was quietly asking:"}
           </p>

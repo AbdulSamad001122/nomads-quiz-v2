@@ -55,9 +55,9 @@ export default function CaseStudyLara({ theme, onBack, onContinue }) {
               <p className="cs5a__lead">
                 {'There was a time when more email subscribers meant '}
                 <HighlightSweep tone={sweepToneFor(theme.name)}>
-                  more money
+                  more money.
                 </HighlightSweep>
-                {'. That time has passed.'}
+                {' That time has passed.'}
               </p>
 
               <p className="cs5d__hero-para">
@@ -69,8 +69,6 @@ export default function CaseStudyLara({ theme, onBack, onContinue }) {
                 <strong>180,000+ followers</strong>
                 {'.'}
               </p>
-
-              <hr className="cs5a__rule" />
 
               <p className="cs5d__hero-para">
                 {'However, her first launch drew only '}
@@ -138,14 +136,16 @@ export default function CaseStudyLara({ theme, onBack, onContinue }) {
             </span>
           </div>
         </div>
+
+        {/* closes Lara's story here, not the SDR section (Yemi, Sep 26) */}
+        <h2 className="cs5d__strategy-close">
+          Email is the most profitable channel in her business today.
+        </h2>
       </section>
 
       {/* ============ 3. SDR COACH — the frame experiment ============ */}
       <section className="cs5d__sdr">
         <div className="cs5d__sdr-frame">
-        <h2 className="cs5d__sdr-head">
-          Email is the most profitable channel in her business today.
-        </h2>
         <p className="cs5d__sdr-another">
           <HighlightSweep tone="white">{"Here's another one…"}</HighlightSweep>
         </p>
@@ -153,7 +153,7 @@ export default function CaseStudyLara({ theme, onBack, onContinue }) {
         <hr className="cs5d__sdr-rule" />
 
         <p className="cs5d__sdr-para">
-          {'The '}
+          {'A '}
           <strong>#1 SDR Sales Coach</strong>
           {' had built a list of '}
           <strong>10,000 subscribers</strong>
@@ -220,7 +220,7 @@ export default function CaseStudyLara({ theme, onBack, onContinue }) {
               What happens in the first 14 days
             </h3>
             <p className="cs5d__three-text">
-              A subscriber is most engaged within the first 10 days of joining
+              A subscriber is most engaged within the first 14 days of joining
               your list. Your email strategy should look very different in
               this window.
             </p>

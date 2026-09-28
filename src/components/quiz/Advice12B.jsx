@@ -119,7 +119,7 @@ export default function Advice12B({ onBack, onContinue }) {
               <img src="/assets/icon-12b-hourglass.svg" alt="" aria-hidden="true" />
             </span>
             <h3 className="a12__card-title">
-              Are more people buying in the first 10 days?
+              Are more people buying in the first 14 days?
             </h3>
             <p className="a12__card-text">
               {"Every 100 people who are considering buying from you can give you feedback on why they bought or didn't."}
@@ -172,8 +172,7 @@ export default function Advice12B({ onBack, onContinue }) {
             <h2 className="a12__cta-head">
               <span ref={firstRef}>
                 {"Believe it or not, you don't have a "}
-                <HighlightSweep tone="navy">traffic problem</HighlightSweep>
-                {'.'}
+                <HighlightSweep tone="navy">traffic problem.</HighlightSweep>
               </span>
               <span className={continuous ? undefined : 'a12__cta-line'}>
                 {(continuous ? ' ' : '') +

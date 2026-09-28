@@ -138,8 +138,8 @@
   border-top: 1px solid rgba(255, 255, 255, 0.4);
 }
 
-.cs5d__sdr-head {
-  margin: 0 auto 30px;
+.cs5d__strategy-close {
+  margin: 55px auto 0;
   max-width: 25ch;
   font-family: var(--font-headline);
   font-weight: 800;
@@ -149,7 +149,7 @@
 }
 
 .cs5d__sdr-another {
-  margin-top: 10px;
+  margin-top: 0;
   font-family: var(--font-headline);
   font-weight: 800;
   color: #f2e6d8;
@@ -411,11 +411,16 @@
   }
 
   .cs5d__strategy-lead,
-  .cs5d__sdr-head,
+  .cs5d__strategy-close,
   .cs5d__sdr-para,
   .cs5d__sdr-closer,
   .cs5d__three-head {
     text-align: left;
+  }
+
+  /* full column width, so its left edge lines up with the lead above */
+  .cs5d__strategy-close {
+    max-width: none;
   }
 }
 

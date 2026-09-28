@@ -112,14 +112,12 @@ export default function Advice12C({ onBack, onContinue }) {
         </p>
         <p className="a12__punch">
           {"Without that loop, you're not making data-led decisions. You're making "}
-          <HighlightSweep tone="navy">expensive guesses</HighlightSweep>
-          {'.'}
+          <HighlightSweep tone="navy">expensive guesses.</HighlightSweep>
         </p>
 
         <h2 className="a12__mid-head">
           {"And this is what's usually happening "}
-          <HighlightSweep tone="navy">behind the inconsistency</HighlightSweep>
-          {':'}
+          <HighlightSweep tone="navy">behind the inconsistency:</HighlightSweep>
         </h2>
 
         <div className="a12__cards">

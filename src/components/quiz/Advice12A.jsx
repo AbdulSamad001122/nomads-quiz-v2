@@ -81,8 +81,8 @@ export default function Advice12A({ onBack, onContinue }) {
           className={`a12__mid-head${midLeftAlign ? ' a12__headline--left' : ''}`}
         >
           {'If you want to bring your '}
-          <HighlightSweep tone="navy">close rate up</HighlightSweep>
-          {', and shrink your sales cycle:'}
+          <HighlightSweep tone="navy">close rate up,</HighlightSweep>
+          {' and shrink your sales cycle:'}
         </h2>
 
         <div className="a12__cards">
@@ -147,9 +147,9 @@ export default function Advice12A({ onBack, onContinue }) {
             <h2 className="a12__cta-head">
               {'Reserve the calls for buyers to '}
               <HighlightSweep tone="navy">
-                confirm their commitment
+                confirm their commitment,
               </HighlightSweep>
-              {', not to build it from scratch.'}
+              {' not to build it from scratch.'}
             </h2>
             <img
               className="a12__cta-arrow"

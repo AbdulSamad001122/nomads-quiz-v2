@@ -79,14 +79,9 @@
   font-size: clamp(13px, 1.1vw, 20px);
 }
 
-.cs5a__rule {
-  margin: clamp(14px, 2.4vh, 28px) 0;
-  border: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.55);
-  width: 90%;
-}
-
+/* no divider between hero paragraphs (Yemi, Sep 26) — spacing only */
 .cs5a__para {
+  margin-top: clamp(14px, 2.4vh, 26px);
   font-weight: 400;
   color: #ffffff;
   font-size: clamp(13px, 1.15vw, 21px);
@@ -304,31 +299,6 @@
 }
 
 
-.cs5a__abullets {
-  margin-top: clamp(10px, 1.4vh, 16px);
-  display: flex;
-  flex-direction: column;
-  gap: clamp(8px, 1.2vh, 14px);
-}
-
-.cs5a__abullet {
-  display: flex;
-  gap: 10px;
-}
-
-.cs5a__abullet img {
-  width: clamp(16px, 1.3vw, 24px);
-  height: auto;
-  align-self: flex-start;
-  flex-shrink: 0;
-  margin-top: 4px;
-}
-
-.cs5a__abullet p {
-  font-weight: 500;
-  font-size: clamp(13px, 1.1vw, 20px);
-  line-height: 1.5;
-}
 
 /* stat cards */
 .cs5a__scard {

@@ -75,8 +75,6 @@ export default function CaseStudyEstelle({ theme, onBack, onContinue }) {
                 {'.'}
               </p>
 
-              <hr className="cs5a__rule" />
-
               <p className="cs5e__hero-para">
                 {'She had built an engaged audience of '}
                 <strong>9000+ women</strong>
@@ -261,8 +259,10 @@ export default function CaseStudyEstelle({ theme, onBack, onContinue }) {
           </h2>
 
           <div className="cs5e__stat-row">
+            {/* each big number says what it measures (Yemi, Sep 26) */}
             <div className="cs5e__stat-card">
-              <span className="cs5e__stat-num">05</span>
+              <span className="cs5e__stat-num">5.2%</span>
+              <span className="cs5e__stat-tag">book a call rate</span>
               <span className="cs5e__stat-label">
                 Five out of every 100 quiz takers book a call with her in the
                 first 10 days of taking the quiz
@@ -271,6 +271,7 @@ export default function CaseStudyEstelle({ theme, onBack, onContinue }) {
 
             <div className="cs5e__stat-card">
               <span className="cs5e__stat-num">75%</span>
+              <span className="cs5e__stat-tag">close rate</span>
               <span className="cs5e__stat-label">
                 {'She went from '}
                 <strong>3 sales calls per month</strong>

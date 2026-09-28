@@ -188,6 +188,11 @@
   align-self: flex-start;
 }
 
+/* …except "That's the bigger pool.", which sits between centered rows */
+.cs5b .cs5b__journey-pool .cs5a__chip {
+  align-self: center;
+}
+
 /* ---------- 4. Samar Owais — dark band ---------- */
 
 .cs5b__samar {
@@ -698,6 +703,11 @@
   .cs5b__cta-para,
   .cs5b__eyes-head {
     text-align: left;
+  }
+
+  /* the pool paragraph goes left here, so its label follows it */
+  .cs5b .cs5b__journey-pool .cs5a__chip {
+    align-self: flex-start;
   }
 
   .cs5b__happens {

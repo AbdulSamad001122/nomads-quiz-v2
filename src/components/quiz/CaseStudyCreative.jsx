@@ -9,13 +9,13 @@ import './CaseStudyCreative.css';
 /**
  * Case study 5C — Creative Delivery ("differentiation" route off Q5).
  * No mock existed for this one; the layout extends the 5A/5B system:
- *   1. split hero (trust-recession lead + Contrarian POV™ setup | Case
- *      Study phone art, keyline frame, Moontime script band)
- *   2. accent hook band — the Video Mastermind 27 → 29-of-31 line
- *   3. Before / The Contrarian POV™ / Results grid (5A's ba-grid with a
+ *   1. split hero (trust-recession lead + Contrarian POV™ setup | the
+ *      Video Mastermind 27 → 29-of-31 stat cards, keyline frame, Moontime
+ *      script band)
+ *   2. Before / The Contrarian POV™ / Results grid (5A's ba-grid with a
  *      Results column: tall stat card, verbatim copy)
- *   4. closing accent band — "your ownable category" (sweep highlight)
- *   5. Your Turn CTA (same as 5A/5B)
+ *   3. closing accent band — "your ownable category" (sweep highlight)
+ *   4. Your Turn CTA (same as 5A/5B)
  */
 export default function CaseStudyCreative({ theme, onBack, onContinue }) {
   const themeVars = {
@@ -58,17 +58,15 @@ export default function CaseStudyCreative({ theme, onBack, onContinue }) {
               <p className="cs5a__lead">
                 {"We keep hearing we're in a "}
                 <HighlightSweep tone={sweepToneFor(theme.name)}>
-                  trust recession
+                  trust recession.
                 </HighlightSweep>
-                {'. That buyers are more sceptical than ever.'}
+                {' That buyers are more sceptical than ever.'}
               </p>
 
               <p className="cs5c__hero-para">
                 {"But if that were true, the most trusted creators and celebrities wouldn't launch products that flop. "}
                 <strong>They do. All the time.</strong>
               </p>
-
-              <hr className="cs5a__rule" />
 
               <p className="cs5c__hero-para">
                 {"Turns out there's something that matters more than trust: whether they can tell you apart from the other five tabs they have open. "}
@@ -101,39 +99,34 @@ export default function CaseStudyCreative({ theme, onBack, onContinue }) {
               aria-hidden="true"
             />
           </div>
-          <img
-            className="cs5a__hero-img"
-            src="/assets/cs-5c-louis.webp"
-            alt="Louis, the Video Mastermind founder"
-          />
-        </div>
-      </section>
-
-      {/* ============ 2. HOOK BAND ============ */}
-      <section className="cs5c__hook">
-        <p className="cs5c__hook-lead">
-          A Video Mastermind founder went from
-        </p>
-        <div className="cs5c__hook-row">
-          <div className="cs5c__hook-stat">
-            <span className="cs5c__hook-label">losing</span>
-            <span className="cs5c__hook-num">27</span>
-            <span className="cs5c__hook-label">sales calls</span>
+          {/* Whitelabelled (Alefiya, Sep 27): the founder's name and photo
+              must not appear, so he is introduced by his numbers. */}
+          <div className="cs5c__intro">
+            <p className="cs5c__hook-lead">
+              A Video Mastermind founder went from
+            </p>
+            <div className="cs5c__hook-row">
+              <div className="cs5c__hook-stat">
+                <span className="cs5c__hook-label">losing</span>
+                <span className="cs5c__hook-num">27</span>
+                <span className="cs5c__hook-label">sales calls</span>
+              </div>
+              <span className="cs5c__hook-arrow" aria-hidden="true">
+                <img src="/assets/arrow-white.png" alt="" />
+              </span>
+              <div className="cs5c__hook-stat">
+                <span className="cs5c__hook-label">to closing</span>
+                <span className="cs5c__hook-num">29</span>
+                <span className="cs5c__hook-label">of the next 31</span>
+              </div>
+            </div>
+            <p className="cs5c__hook-close">
+              {'with a '}
+              <strong>Contrarian POV™</strong>
+              {'.'}
+            </p>
           </div>
-          <span className="cs5c__hook-arrow" aria-hidden="true">
-            <img src="/assets/arrow-white.png" alt="" />
-          </span>
-          <div className="cs5c__hook-stat">
-            <span className="cs5c__hook-label">to closing</span>
-            <span className="cs5c__hook-num">29</span>
-            <span className="cs5c__hook-label">of the next 31</span>
-          </div>
         </div>
-        <p className="cs5c__hook-close">
-          {'with a '}
-          <strong>Contrarian POV™</strong>
-          {'.'}
-        </p>
       </section>
 
       {/* ============ 3. BEFORE / POV / RESULTS grid ============ */}
@@ -228,9 +221,9 @@ export default function CaseStudyCreative({ theme, onBack, onContinue }) {
 
       {/* ============ 4. CLOSING BAND ============ */}
       <section className="cs5c__closing">
-        <span className="cs5c__closing-label">Contrarian POV</span>
+        {/* no label above: it made the line read like a question (Yemi, Sep 26) */}
         <h2 className="cs5c__closing-head">
-          {'Is your stand against the majority of look-alike competitors, so you can become '}
+          {'Contrarian POV is your stand against the majority of look-alike competitors, so you can become '}
           <HighlightSweep tone={sweepToneFor(theme.name)}>
             the default choice
           </HighlightSweep>

@@ -35,6 +35,8 @@ export default function Advice12D({ onBack, onContinue }) {
             But when there is no clear differentiation, price becomes the
             only thing left to compare.
           </p>
+          {/* directly under the line it answers (Yemi, Sep 26) */}
+          <p className="a12__subline">{"That's a positioning problem."}</p>
           <div className="a12__frame-cta">
             <button
               type="button"
@@ -65,15 +67,10 @@ export default function Advice12D({ onBack, onContinue }) {
           />
         </div>
 
-
-        <p className="a12__punch a12__punch--spaced">
-          {"That's a positioning problem."}
-        </p>
-
         <h2 className="a12__mid-head">
           {'To own a category, you need a '}
-          <HighlightSweep tone="navy">Contrarian POV™</HighlightSweep>
-          {". Here's why:"}
+          <HighlightSweep tone="navy">Contrarian POV™.</HighlightSweep>
+          {" Here's why:"}
         </h2>
 
         <div className="a12__cards">

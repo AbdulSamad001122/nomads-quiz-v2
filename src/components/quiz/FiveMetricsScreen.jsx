@@ -14,7 +14,9 @@ import './FiveMetrics.css';
  * punch line and the 50-seconds handoff.
  */
 export default function FiveMetricsScreen({ onBack, onContinue }) {
-  const [headRef, headLeft, headWidth] = useLeftAlignOnWrap(3);
+  // 4, not 3: the one-sentence headline (Yemi, Sep 26) is three lines on
+  // desktop and must stay centred there; phones still wrap past four.
+  const [headRef, headLeft, headWidth] = useLeftAlignOnWrap(4);
   const [paraRef, paraLeft] = useLeftAlignOnWrap(3);
   const [punchRef, punchLeft] = useLeftAlignOnWrap(3);
 
@@ -43,12 +45,11 @@ export default function FiveMetricsScreen({ onBack, onContinue }) {
           >
             {'Most businesses '}
             <HighlightSweep tone="iceblue">{"can't tell"}</HighlightSweep>
-            {' if a slow month is a traffic problem, an email problem, or a positioning problem.'}
+            {" if a slow month is a traffic problem, an email problem, or a positioning problem — because they're tracking data in isolation."}
           </h1>
 
           <p className="fm__dark-para">
-            <strong>{"Because they're tracking data in isolation."}</strong>
-            {' You might be clocking '}
+            {'You might be clocking '}
             <strong>40,000 TikTok views</strong>
             {' and celebrating, without knowing how many of those views became subscribers, or how many subscribers bought within the '}
             <strong>first 14 days</strong>
@@ -136,8 +137,7 @@ export default function FiveMetricsScreen({ onBack, onContinue }) {
           <div className="a12__cta-card">
             <h2 className="a12__cta-head">
               {'In 50 seconds, your results will reveal the average revenue you earn per visitor, and exactly which metrics to focus on to add '}
-              <HighlightSweep tone="navy">$125k to your MRR</HighlightSweep>
-              {'.'}
+              <HighlightSweep tone="navy">$125k to your MRR.</HighlightSweep>
             </h2>
             <img
               className="a12__cta-arrow"

@@ -8,8 +8,8 @@ import './OptinScreen.css';
  * Opt-in slide — fancy design per the reference: split screen on the
  * QuizScreen shell, slotting into the blue → maroon → green rotation.
  *
- * Left: arrows doodle, "Your RPV is calculated" (sweep highlight), the
- * two numbered promises, script footer line.
+ * Left: arrows doodle, "Your RPV™ is calculated." (sweep highlight), the
+ * benchmark line, the two numbered promises, script footer line.
  * Right: "Where should / we send them?" (brush script), email + first
  * name inputs, Continue.
  */
@@ -51,9 +51,12 @@ export default function OptinScreen({ theme, onBack, onSubmit }) {
               />
               <h1 className="optin__headline">
                 <HighlightSweep tone={sweepToneFor(theme.name)}>
-                  Your RPV is calculated
+                  Your RPV™ is calculated.
                 </HighlightSweep>
               </h1>
+              <p className="optin__sub">
+                {"We've run your numbers against the funnels pulling the highest revenue per visitor we've seen."}
+              </p>
               <p className="optin__sub">
                 Two things are waiting on the other side of this:
               </p>

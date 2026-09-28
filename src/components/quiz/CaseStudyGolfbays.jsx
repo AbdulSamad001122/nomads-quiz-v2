@@ -54,14 +54,12 @@ export default function CaseStudyGolfbays({ theme, onBack, onContinue }) {
             <p className="cs5a__lead">
               {"Strange thing about ROAS: if you're spending "}
               <HighlightSweep tone={sweepToneFor(theme.name)}>
-                $10k+/mo on ads
+                $10k+/mo on ads,
               </HighlightSweep>
-              {', ROAS shows you the handful who bought and ignores the potential buyers who clicked, browsed, and bounced'}
+              {' ROAS shows you the handful who bought and ignores the potential buyers who clicked, browsed, and bounced'}
             </p>
 
             <p className="cs5a__paren">(and you paid for every one of them)</p>
-
-            <hr className="cs5a__rule" />
 
             <p className="cs5a__para">
               {'GolfBays went from having a discount opt-in to a quiz opt-in that landed them an additional 530 demos a month and £97,000+ in direct site revenue from the same Shopify traffic they were already paying for.'}
@@ -140,19 +138,14 @@ export default function CaseStudyGolfbays({ theme, onBack, onContinue }) {
             <span className="cs5a__chip cs5a__chip--light">
               Personalised Recommendations
             </span>
+            {/* one paragraph, no pointers (Yemi, Sep 26) — the copy doc's
+                single sentence, its bold kept */}
             <p className="cs5a__atext">
-              {'We reverse-engineered hundreds of their best demos into a personalised product recommendation engine'}
+              {'We reverse-engineered hundreds of their best demos into a personalised product recommendation engine, coupled with '}
+              <strong>
+                {'emotional messaging around the real payoff, such as bonding over Christmas holidays in the room that was of no use before installing a GolfBay'}
+              </strong>
             </p>
-            <div className="cs5a__abullets">
-              <div className="cs5a__abullet">
-                <img src="/assets/arrow-white.png" alt="" aria-hidden="true" />
-                <p>{'Coupled with emotional messaging around the real payoff,'}</p>
-              </div>
-              <div className="cs5a__abullet">
-                <img src="/assets/arrow-white.png" alt="" aria-hidden="true" />
-                <p>{'Such as bonding over Christmas holidays in the room that was of no use before installing a GolfBay'}</p>
-              </div>
-            </div>
           </div>
 
           <div className="cs5a__scard cs5a__scard--1">
