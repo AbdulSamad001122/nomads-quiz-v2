@@ -169,7 +169,7 @@
 /* number with what it measures on its right (user, Sep 28) */
 .cs5e__stat-top {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: center;
   column-gap: 12px;
 }
