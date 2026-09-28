@@ -235,6 +235,10 @@
 }
 
 @media (max-width: 600px) {
+  .cs5e__stat-num {
+    font-size: 21px;
+  }
+
   .cs5e__ba-grid {
     grid-template-columns: 1fr;
     gap: 26px;
