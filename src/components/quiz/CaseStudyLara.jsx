@@ -150,8 +150,6 @@ export default function CaseStudyLara({ theme, onBack, onContinue }) {
           <HighlightSweep tone="white">{"Here's another one…"}</HighlightSweep>
         </p>
 
-        <hr className="cs5d__sdr-rule" />
-
         <p className="cs5d__sdr-para">
           {'A '}
           <strong>#1 SDR Sales Coach</strong>

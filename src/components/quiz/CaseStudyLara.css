@@ -130,14 +130,6 @@
   margin: 22px 0;
 }
 
-/* short centered divider under the header pair */
-.cs5d__sdr-rule {
-  width: min(240px, 40%);
-  margin: 25px auto 0;
-  border: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.4);
-}
-
 .cs5d__strategy-close {
   margin: 55px auto 0;
   max-width: 25ch;
