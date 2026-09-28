@@ -166,17 +166,28 @@
   max-width: 100%;
 }
 
+/* number with what it measures on its right (user, Sep 28) */
+.cs5e__stat-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  column-gap: 12px;
+}
+
+/* on the narrowest phones the tag wraps onto two lines, still on the right */
+.cs5e__stat-top .cs5e__stat-tag {
+  min-width: 0;
+}
+
 .cs5e__stat-num {
   font-family: 'Kilimanjaro Sans', sans-serif;
   font-weight: 400;
   color: var(--cs-accent);
-  font-size: 65px;
+  font-size: 46px;
   line-height: 1.25;
 }
 
-/* what the big number measures — hugs the number, above the sentence */
 .cs5e__stat-tag {
-  margin-top: -12px;
   font-family: var(--font-body);
   font-weight: 700;
   color: var(--cs-accent);
@@ -185,6 +196,8 @@
 }
 
 .cs5e__stat-label {
+  align-self: stretch;
+  text-align: left;
   font-family: var(--font-body);
   color: #250f1c;
   font-size: clamp(14px, 1.15vw, 21px);
