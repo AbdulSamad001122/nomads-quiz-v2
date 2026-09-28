@@ -1,8 +1,8 @@
 /* ============================================================
    CaseStudyCreative — case study 5C (Creative Delivery).
    Extends the shared cs5a__* shell (hero, ba-grid, chips, CTA).
-   5C-specific: hero-panel stat cards, Results column in the grid,
-   closing band.
+   5C-specific: full-width centred hero, hook band, Results column in
+   the grid, closing band.
    ============================================================ */
 
 /* ---------- 1. Hero left content ---------- */
@@ -24,47 +24,106 @@
   font-weight: 800;
 }
 
-/* ---------- Hero right panel: the founder, whitelabelled ----------
-   Sits where his portrait was (5B's right panel carries copy the same
-   way), so the stat reads on the light panel: ink text, white cards. */
+/* Full-width hero (user, Sep 28): one centred column, no right panel —
+   the whitelabelled founder's stat has its own band below instead. */
+.cs5c .cs5a__hero {
+  grid-template-columns: 1fr;
+}
 
-.cs5c__intro {
-  container-type: inline-size;
-  width: min(88%, 560px);
-  margin-top: clamp(44px, 7vh, 84px);
-  padding-bottom: clamp(24px, 4vh, 48px);
+.cs5c .cs5a__frame {
+  position: relative;
+}
+
+.cs5c .cs5a__left-body {
+  align-items: center;
+  text-align: center;
+}
+
+/* Back stays left like the other case studies, not centred with the copy */
+.cs5c .cs5a__mobile-back {
+  align-self: flex-start;
+}
+
+/* readable measures on the full-width stage */
+.cs5c .cs5a__lead {
+  max-width: 24em;
+  text-wrap: balance;
+}
+
+.cs5c .cs5c__hero-para {
+  max-width: 65ch;
+}
+
+.cs5c .cs5a__hero-cta {
+  justify-content: center;
+}
+
+/* desktop: no right panel to carry Back or the seam badge, so the badge
+   sits top-centre (the full-bleed 12A–D treatment) and Back goes top-left
+   inside the frame; ≤900 keeps the shared mobile rules. Written as the
+   exact complement of (max-width: 900px) so a fractional viewport width
+   between 900 and 901 can't fall between the two. */
+@media not all and (max-width: 900px) {
+  .cs5c .cs5a__left .seam-badge {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+
+  .cs5c .cs5a__left-body {
+    padding-top: clamp(110px, 10vw, 170px);
+  }
+
+  .cs5c .cs5a__mobile-back {
+    display: flex;
+    position: absolute;
+    top: clamp(18px, 3vh, 34px);
+    left: clamp(20px, 3vw, 54px);
+  }
+
+  .cs5c .cs5a__mobile-back .back-link {
+    color: #ffffff;
+  }
+}
+
+/* ---------- 2. Hook band (accent, like 5B's happens band) ---------- */
+
+.cs5c__hook {
+  background: var(--cs-accent);
+  padding: 70px clamp(20px, 5.5vw, 100px) 70px;
   text-align: center;
 }
 
 .cs5c__hook-lead {
-  margin-bottom: clamp(20px, 3vh, 35px);
+  margin-bottom: 35px;
   font-family: var(--font-body);
-  font-weight: 600;
-  color: #250f1c;
+  font-weight: 500;
+  color: #ffffff;
   font-size: clamp(14px, 1.2vw, 22px);
   line-height: 1.5;
 }
 
 /* the losing → closing stat contrast */
 .cs5c__hook-row {
+  margin-top: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(16px, 2.4vw, 40px);
+  gap: clamp(24px, 4.5vw, 80px);
   flex-wrap: wrap; /* ultra-narrow safety: cards stack instead of overflowing */
 }
 
-/* each stat wrapped in a card — 5B card language */
+/* each stat wrapped in a card — 5B card language on the dark band */
 .cs5c__hook-stat {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 15px;
-  background: #ffffff;
+  background: var(--cs-card);
   border: 2px solid var(--cs-accent); /* #5d1b4e on the maroon route */
   box-shadow: 8px 8px 0 var(--cs-ink); /* #391129 maroon / #152638 green */
-  padding: clamp(18px, 2.2vh, 30px) clamp(18px, 2vw, 40px);
-  min-width: clamp(150px, 13vw, 210px);
+  padding: clamp(18px, 2.2vh, 30px) clamp(26px, 3vw, 54px);
+  min-width: clamp(170px, 17vw, 250px);
 }
 
 .cs5c__hook-label {
@@ -88,25 +147,28 @@
   width: clamp(38px, 3.6vw, 64px);
 }
 
-/* dark arrow on the light panel, same treatment as 5B's journey arrows */
 .cs5c__hook-arrow img {
   width: 100%;
   height: auto;
-  filter: brightness(0);
-  opacity: 0.85;
 }
 
 .cs5c__hook-close {
-  margin-top: clamp(22px, 3.2vh, 35px);
+  margin-top: 35px;
   font-family: var(--font-body);
   font-weight: 600;
-  color: #250f1c;
+  color: #ffffff;
   font-size: clamp(15px, 1.3vw, 24px);
 }
 
 .cs5c__hook-close strong {
   font-weight: 800;
-  color: var(--cs-accent);
+  color: #f2e6d8;
+}
+
+/* green route: the hook band bg equals the green ink, so the stat
+   cards' shadow flips to white for contrast */
+.quiz-screen--green .cs5c__hook-stat {
+  box-shadow: 8px 8px 0 #ffffff;
 }
 
 /* ---------- 3. Grid — third "Results" column ---------- */
@@ -239,6 +301,10 @@
     width: 80%;
   }
 
+  .cs5c__hook {
+    padding: 60px clamp(16px, 5vw, 28px);
+  }
+
   .cs5c__closing {
     padding: 48px clamp(16px, 5vw, 28px);
   }
@@ -272,14 +338,12 @@
   }
 }
 
-/* Too narrow for card → arrow → card in one row (the split hero's half
-   panel just above 900px, and phones): stack them, arrow pointing down.
-   Keyed to the panel's own width so the row never wraps half-way. */
-@container (max-width: 400px) {
+@media (max-width: 480px) {
   .cs5c__hook-row {
     flex-direction: column;
   }
 
+  /* arrow points down between the stacked cards */
   .cs5c__hook-arrow {
     transform: rotate(90deg);
   }

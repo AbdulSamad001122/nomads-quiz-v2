@@ -9,13 +9,13 @@ import './CaseStudyCreative.css';
 /**
  * Case study 5C — Creative Delivery ("differentiation" route off Q5).
  * No mock existed for this one; the layout extends the 5A/5B system:
- *   1. split hero (trust-recession lead + Contrarian POV™ setup | the
- *      Video Mastermind 27 → 29-of-31 stat cards, keyline frame, Moontime
- *      script band)
- *   2. Before / The Contrarian POV™ / Results grid (5A's ba-grid with a
+ *   1. full-width centred hero (trust-recession lead + Contrarian POV™
+ *      setup, keyline frame, Moontime script band)
+ *   2. accent hook band — the Video Mastermind 27 → 29-of-31 line
+ *   3. Before / The Contrarian POV™ / Results grid (5A's ba-grid with a
  *      Results column: tall stat card, verbatim copy)
- *   3. closing accent band — "your ownable category" (sweep highlight)
- *   4. Your Turn CTA (same as 5A/5B)
+ *   4. closing accent band — "your ownable category" (sweep highlight)
+ *   5. Your Turn CTA (same as 5A/5B)
  */
 export default function CaseStudyCreative({ theme, onBack, onContinue }) {
   const themeVars = {
@@ -38,7 +38,7 @@ export default function CaseStudyCreative({ theme, onBack, onContinue }) {
 
   return (
     <div className={`cs5a cs5c quiz-screen--${theme.name}`} style={themeVars}>
-      {/* ============ 1. HERO — split ============ */}
+      {/* ============ 1. HERO — full width, centred ============ */}
       <section className="cs5a__hero">
         <div className="cs5a__left">
           <SeamBadge src="/assets/circle-doodle-2.png" />
@@ -87,46 +87,35 @@ export default function CaseStudyCreative({ theme, onBack, onContinue }) {
             <div className="cs5a__script-band">your traffic is worth more.</div>
           </div>
         </div>
+        {/* No right panel: the founder is whitelabelled (Alefiya, Sep 27) —
+            no name or photo — so the hero runs full width (user, Sep 28). */}
+      </section>
 
-        <div className="cs5a__right">
-          <div className="answer-panel__topbar">
-            <BackLink onBack={onBack} />
-            <span className="answer-panel__topbar-line" aria-hidden="true" />
-            <img
-              className="answer-panel__topbar-icon"
-              src="/assets/small-nomads-icon.png"
-              alt=""
-              aria-hidden="true"
-            />
+      {/* ============ 2. HOOK BAND ============ */}
+      <section className="cs5c__hook">
+        <p className="cs5c__hook-lead">
+          A Video Mastermind founder went from
+        </p>
+        <div className="cs5c__hook-row">
+          <div className="cs5c__hook-stat">
+            <span className="cs5c__hook-label">losing</span>
+            <span className="cs5c__hook-num">27</span>
+            <span className="cs5c__hook-label">sales calls</span>
           </div>
-          {/* Whitelabelled (Alefiya, Sep 27): the founder's name and photo
-              must not appear, so he is introduced by his numbers. */}
-          <div className="cs5c__intro">
-            <p className="cs5c__hook-lead">
-              A Video Mastermind founder went from
-            </p>
-            <div className="cs5c__hook-row">
-              <div className="cs5c__hook-stat">
-                <span className="cs5c__hook-label">losing</span>
-                <span className="cs5c__hook-num">27</span>
-                <span className="cs5c__hook-label">sales calls</span>
-              </div>
-              <span className="cs5c__hook-arrow" aria-hidden="true">
-                <img src="/assets/arrow-white.png" alt="" />
-              </span>
-              <div className="cs5c__hook-stat">
-                <span className="cs5c__hook-label">to closing</span>
-                <span className="cs5c__hook-num">29</span>
-                <span className="cs5c__hook-label">of the next 31</span>
-              </div>
-            </div>
-            <p className="cs5c__hook-close">
-              {'with a '}
-              <strong>Contrarian POV™</strong>
-              {'.'}
-            </p>
+          <span className="cs5c__hook-arrow" aria-hidden="true">
+            <img src="/assets/arrow-white.png" alt="" />
+          </span>
+          <div className="cs5c__hook-stat">
+            <span className="cs5c__hook-label">to closing</span>
+            <span className="cs5c__hook-num">29</span>
+            <span className="cs5c__hook-label">of the next 31</span>
           </div>
         </div>
+        <p className="cs5c__hook-close">
+          {'with a '}
+          <strong>Contrarian POV™</strong>
+          {'.'}
+        </p>
       </section>
 
       {/* ============ 3. BEFORE / POV / RESULTS grid ============ */}
