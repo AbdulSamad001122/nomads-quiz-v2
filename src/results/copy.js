@@ -29,8 +29,10 @@ export const METRICS = {
   // live RPV tokens replaces the old three-line headline, and the
   // "Total traffic:" line is deleted. Lowercase "per" is verbatim from the
   // doc. Wraps naturally (no line map, per the Sep 12 no-<br> rule).
-  headline:
-    'So…how do you scale your Revenue per Visitor™ from {{current_rpv}} → {{goal_rpv}}? By optimising all 5 metrics below until they’re green:',
+  // Two lines, as the doc lays them out: the question, then the answer on its
+  // own line (Yemi, Sep 26).
+  headline: 'So…how do you scale your Revenue per Visitor™ from {{current_rpv}} → {{goal_rpv}}?',
+  headlineLine2: 'By optimising all 5 metrics below until they’re green:',
   // 🔴🟡🟢 key under the rps row — ALWAYS shown. Yemi's "show only if red"
   // comment (#6) anchors BELOW this key, on the workshop section that
   // follows it, so the key itself is not conditional.
@@ -87,8 +89,10 @@ export const RED_METRICS = {
   // chips (cream current, plum goal) between these parts, per the design.
   keepingBefore: 'Your red metric is what’s keeping your RPV™ at',
   keepingMid: 'instead of',
+  // First mention of the workshop, so not "The workshop…" (Yemi, Sep 26;
+  // Alefiya confirmed). Yemi's first option.
   tenQuestions:
-    'The workshop takes you and your team through 10 questions across 4 quadrants to find out exactly why each red metric is red.',
+    'I’ve created a workshop that takes you and your team through 10 questions across 4 quadrants to find out exactly why each red metric is red.',
   // Renders as the mono chip "FOR EXAMPLE" (uppercase via CSS).
   forExample: 'For example',
   // Chip + title split per the design ("Quadrant 01" chip above the name);
@@ -138,10 +142,11 @@ export const RED_METRICS = {
   // Diagnostic video thumbnail slot — asset blocked on video approval
   // (doc comment #7); placeholder box per the design.
   thumbPlaceholder: 'Thumbnail After Workshop',
-  // NOT in the design (doc keeps them; the bottom sections carry the same
-  // content and the user approved the duplication): "Already know you want
-  // a second set of expert eyes…", "Pick a day and time…", and the third
-  // calendar cluster (#8-10). Add here if a design revision includes them.
+  // Straight after the thumbnail, with the live calendar — the doc has them
+  // here and Yemi flagged them missing (Sep 26).
+  callHead: 'Already know you want a second set of expert eyes on your business?',
+  callBody:
+    'Pick a day and time, and bring your Revenue Per Visitor (RPV) number to the C-RPV Game Plan Call with me.',
 };
 
 /**
@@ -385,7 +390,8 @@ export const BEHIND_NUMBER = {
   // trailing colon are kept per doc (design drops both) — flagged.
   // The "W" of "What" renders as a script glyph per the design.
   headlineLines: ['Here’s what it took', 'us to calculate your', 'RPV™ number:'],
-  sub: 'Behind every RPV™ number sits a much bigger revenue story. To calculate your RPV, we analysed:',
+  // Ending per Yemi (Sep 26), so the "We looked at:" chip opposite reads on.
+  sub: 'Behind every RPV™ number sits a much bigger revenue story. To calculate your RPV, here’s what we analysed.',
   subBreakAfter: 'bigger',
   // Doc: "We looked at:" — colon kept per doc (design chip drops it) — flagged.
   lookedAt: 'We looked at:',
@@ -623,12 +629,11 @@ export const LARA_STORY = {
   // Doc: "My verdict:" — colon kept per doc (design chip drops it) — flagged.
   chip: 'My verdict:',
   para2: 'She kept partnering with the same handful of collaborators, launch after launch.',
-  // Doc runs these as one sentence; the design splits them into three bullets
-  // (bullet 3 capitalises "So" as its own line start).
+  // Two bullets: the second is the doc's single sentence, not split in two
+  // (Yemi, Sep 26).
   bullets: [
     'Same audiences, over and over.',
-    'They\'d seen it all before,',
-    'So registrations had quietly flattened due to audience fatigue.',
+    'They\'d seen it all before, so registrations had quietly flattened due to audience fatigue.',
   ],
   para3:
     'So we partnered with fresh collaborators and reached audiences that hadn\'t been tapped yet. And the next launch pulled so many registrations that Zoom crashed and Lara had to apologise to her email list.',
@@ -741,10 +746,9 @@ export const PILLAR_ONE_FLOW = {
   // Doc: "This is the first Pillar of the Compounding RPV™ OS." — design chip
   // drops the ™; doc wins, flagged.
   chip: 'This is the first Pillar of the Compounding RPV™ OS.',
-  // ⚠ Doc says "built for the 10% ready-to-buy customers"; the design image
-  // says "3%" (matching the pie chart). Doc wins per the copy rule —
-  // FLAGGED for Alefiya's ruling, since it's a number not punctuation.
-  para1: 'After the diagnostic workshop, if your Maximise Revenue Per Visitor™ score came back low, this is usually the reason. The page is built for the 10% ready-to-buy customers, not the 97% in consideration mode.',
+  // Corrected figures (Yemi, Sep 26) — matches the rewritten Pillar One pie
+  // (3% ready to buy, 7% open to it, 60% not yet considering).
+  para1: 'After the diagnostic workshop, if your Maximise Revenue Per Visitor™ score came back low, this is usually the reason. The page is built for the 3% ready to buy and 7% that are open to it, not the 60% in consideration mode.',
   // Doc ends with a period (design drops it) — doc wins, flagged.
   para2: 'So that’s the first metric: turning more of your visitors, especially the 97% who aren’t ready yet, into email or SMS subscribers.',
 };
@@ -806,6 +810,15 @@ export const PILLAR_ONE_SITUATION3 = {
   // period dropped by the design; doc wins, flagged.
   closing: 'So you keep setting new targets, new goals, and your team even achieves that. But yet…scaling still feels unpredictable.',
 };
+
+// Lara's full title under her name on the portrait, one line per role
+// (Yemi, Sep 26 — replaces the lone "Forbes 30 Under 30" baked into the
+// image). Verbatim from the change doc / copy doc testimonial credit.
+export const LARA_TITLE = [
+  'Founder, Literally Academy & LA Digital',
+  'Co-Founder, Kleo',
+  'Forbes 30 Under 30',
+];
 
 export const PILLAR_ONE_LARA_QUOTE = {
   quoteBefore: 'Alefiya to me became almost like a',
@@ -876,9 +889,9 @@ export const PILLAR_TWO_PROOF = {
   cards: [
     {
       variant: 'plum',
-      // Design reads "for a $5K n just 19 days" — an obvious typo for
-      // "in just 19 days"; corrected here, flagged.
-      headline: 'Estelle went from 3 calls per month to 3 calls per week for a $5K in just 19 days',
+      // "offer" restored (Yemi, Sep 26); the design's "n just" typo was
+      // corrected to "in just" earlier.
+      headline: 'Estelle went from 3 calls per month to 3 calls per week for a $5K offer in just 19 days',
       body: 'In just 19 days, Estelle Winsette went from 3 calls per month to 3 calls per week while closing 2 out of every 3 calls for a $5K offer with her new “It’s not your body, it’s your clothes” positioning.',
       avatar: '/assets/results-t-estelle.webp',
       name: 'Estelle Winsette',
@@ -886,11 +899,15 @@ export const PILLAR_TWO_PROOF = {
     },
     {
       variant: 'tan',
+      // Whitelabelled (Yemi Sep 26, Alefiya's quiz ruling): first name only
+      // — the user's "Maria" style in 5B — a video-player mark instead of
+      // his photo, and the copy doc's own description instead of a line
+      // that could name his business.
       headline: 'Louis went from closing 1 in 29 calls to closing 29 out of 31 calls',
       body: 'Louis went from closing 1 in 29 calls to closing 29 out of 31 calls with his “Creative Delivery” Positioning.',
-      avatar: '/assets/results-t-louis.webp',
-      name: 'Louis Butterfield',
-      role: 'Awesome business videos',
+      avatar: null,
+      name: 'Louis',
+      role: 'Video Mastermind founder',
     },
     {
       variant: 'ice',
@@ -920,15 +937,18 @@ export const PILLAR_TWO_LOOPS = {
   headline: 'A strong positioning strategy is rarely built once and left untouched.',
   intro: 'The best-performing conversion funnels are constantly learning from the people moving through them.',
   // Doc runs these as one sentence; the design splits them into five swoosh
-  // bullets (the last one carrying the "All of it becomes feedback." tail).
-  // Doc's period after "conversations" is kept — the design drops it, flagged.
+  // bullets. Doc's period after "conversations" is kept — the design drops
+  // it, flagged.
   bullets: [
     'Every sales call',
     'Every objection',
     'Every hesitation',
     'Every drop in conversion',
-    'Every pattern showing up across buyer conversations. All of it becomes feedback.',
+    'Every pattern showing up across buyer conversations.',
   ],
+  // Its own highlighted line right above "We capture it through…", not the
+  // tail of the last bullet (Yemi, Sep 26).
+  feedback: 'All of it becomes feedback.',
   captureBefore: 'We capture it through',
   captureBold: '14 feedback loops',
   captureAfter: 'running across the funnel, from the first ad click or opt-in to a post-delivery support ticket.',
@@ -1001,14 +1021,12 @@ export const PILLAR_FOUR_CHRIS = {
   headline: '23 from 829 who’d joined through a diagnostic.',
   para1: 'My client Chris sent the same emails to two lists:',
   para2: '1 sale from 10,000 old subscribers, and 23 from 829 who’d joined through a diagnostic.',
-  // NOTE: the doc's next sentence — "The smaller list was worth far more,
-  // purely because of the intent they arrived with." — isn't in this design;
-  // flagged as not yet placed.
+  // The doc's next sentence belongs in this card, not the closing band
+  // below it (Yemi, Sep 26).
+  para3: 'The smaller list was worth far more, purely because of the intent they arrived with.',
 };
 
 export const PILLAR_FOUR_CLOSING = {
-  // The doc sentence flagged as unplaced on the Chris card lands here.
-  sub: 'The smaller list was worth far more, purely because of the intent they arrived with.',
   // Doc: "Compounding Revenue per Subscriber™ score" — the design drops the
   // ™; doc wins, flagged.
   headBefore: 'If your Compounding Revenue per Subscriber™ score came back low, it’s almost never a list-size problem. It’s a how-they-joined and',
@@ -1033,11 +1051,6 @@ export const HERO = {
     lead: 'Revenue Per Visitor™ =',
     numerator: 'Total Revenue',
     denominator: 'Total Visitors your business is attracting [online and offline]',
-  },
-  strip: {
-    left: 'YOUR RPV TODAY: {{current_rpv}}',
-    divider: '|',
-    right: 'NOW LET’S SEE WHAT EACH VISITOR COULD BE WORTH',
   },
 };
 

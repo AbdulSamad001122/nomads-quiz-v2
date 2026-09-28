@@ -3,12 +3,12 @@ import './TidyCalEmbed.css';
 
 /**
  * Live TidyCal booking widget — replaces the static Calendly mock image in
- * the two booking sections (Yemi's "Embed Calendar" doc comments, embed code
+ * the booking sections (Yemi's "Embed Calendar" doc comments, embed code
  * supplied Sep 19). Same dynamic-script pattern as GA4/Clarity (ga.js).
  *
  * embed.js scans the DOM for .tidycal-embed divs when it executes, so it has
- * to run AFTER the div mounts. Both booking sections mount in the same
- * ResultsPage render, so one script execution initialises both; the
+ * to run AFTER the div mounts. Every booking section mounts in the same
+ * ResultsPage render, so one script execution initialises all; the
  * module-level flag stops the second instance from loading it twice. If a
  * div is ever remounted empty after the script already ran, a fresh <script>
  * tag re-executes the (browser-cached) file, which re-scans.

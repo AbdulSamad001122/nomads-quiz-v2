@@ -15,6 +15,7 @@ export default function PillarFourChris() {
         <p className="rfq__headline">{p.headline}</p>
         <p className="rfq__para">{p.para1}</p>
         <p className="rfq__para">{p.para2}</p>
+        <p className="rfq__para">{p.para3}</p>
         <img className="rfq__mark rfq__mark--close" src="/assets/results-quote-mark.png" alt="" aria-hidden="true" />
       </blockquote>
     </div>

@@ -4,8 +4,8 @@ import './PromiseBanner.css';
 /**
  * Section — "So this isn't a hollow …" compass-map banner (opens the
  * "How we calculated your RPV™" story; nav anchor target). Keyline frame,
- * brush-script "hollow", cream highlight span, chip straddling the bottom
- * keyline.
+ * brush-script "hollow", cream highlight span, chip inside the frame under
+ * the sub (clear of the keyline, Yemi Sep 26).
  */
 export default function PromiseBanner() {
   return (

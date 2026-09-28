@@ -4,8 +4,8 @@ import './HeroSection.css';
 
 /**
  * Section 1 — score hero. Dark gradient bg, left copy column with the live
- * annual-revenue number + RPV formula card, Alefiya circle right, angled
- * stone strip along the bottom cut.
+ * annual-revenue number + RPV formula card, Alefiya circle right. (The
+ * "YOUR RPV TODAY…" stone strip is gone — not in the copy doc, Yemi Sep 26.)
  */
 export default function HeroSection({ tokens }) {
   return (
@@ -46,12 +46,6 @@ export default function HeroSection({ tokens }) {
             alt="Alefiya — keep scrolling to learn more"
           />
         </div>
-      </div>
-
-      <div className="rhero__strip">
-        <span>{fill(HERO.strip.left, tokens)}</span>
-        <span className="rhero__strip-divider">{HERO.strip.divider}</span>
-        <span>{HERO.strip.right}</span>
       </div>
     </section>
   );

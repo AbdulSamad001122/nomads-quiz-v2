@@ -1,6 +1,7 @@
 import { RED_METRICS } from '../copy.js';
 import { emphasize } from '../emphasize.jsx';
 import { ga } from '../../analytics/ga.js';
+import TidyCalEmbed from './TidyCalEmbed.jsx';
 import './RedMetricsWorkshop.css';
 
 /**
@@ -12,6 +13,8 @@ import './RedMetricsWorkshop.css';
  * Quadrant cards reuse the landing page's FourAreas card language (white
  * card, plum keyline + 8px offset shadow, hand-drawn icon) per the user;
  * icons are the landing set copied to results-quadrant-icon-1..4.png.
+ * Closes with the call option + live TidyCal calendar under the thumbnail
+ * (the doc's order; Yemi flagged it missing Sep 26).
  */
 export default function RedMetricsWorkshop({ tokens }) {
   const c = RED_METRICS;
@@ -88,6 +91,12 @@ export default function RedMetricsWorkshop({ tokens }) {
           width="2080"
           height="1170"
         />
+
+        <div className="rmw__call">
+          <p className="rmw__call-head">{c.callHead}</p>
+          <p className="rmw__call-body">{c.callBody}</p>
+          <TidyCalEmbed />
+        </div>
       </div>
     </section>
   );

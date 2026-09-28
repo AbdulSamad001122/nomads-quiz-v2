@@ -1,4 +1,5 @@
 import { PILLAR_ONE_SITUATION3, PILLAR_ONE_LARA_QUOTE } from '../copy.js';
+import LaraPortrait from './LaraPortrait.jsx';
 import './PillarOneSituation3.css';
 
 /**
@@ -35,7 +36,7 @@ export default function PillarOneSituation3() {
       </div>
 
       <div className="rpt__cell rpt__cell--maroon">
-        <img className="rpt__lara" src="/assets/results-lara.webp" alt="Lara Acosta — Forbes 30 Under 30" />
+        <LaraPortrait className="rpt__lara" />
       </div>
 
       <div className="rpt__cell rpt__cell--cream">

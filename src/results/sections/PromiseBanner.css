@@ -4,7 +4,7 @@
 .rpb {
   position: relative;
   background: #2c1018 url('/assets/results-maroon-compass-banner.webp') center / cover no-repeat;
-  padding: 150px 48px 150px;
+  padding: 150px 48px 100px;
   text-align: center;
 }
 
@@ -53,12 +53,11 @@
   color: #f4ede6;
 }
 
-/* chip resting on top of the bottom keyline */
+/* chip inside the frame, clear of the bottom keyline — it used to rest on
+   the line, which Yemi flagged as straddling it (Sep 26) */
 .rpb__chip {
-  position: absolute;
-  left: 50%;
-  bottom: 30px;
-  transform: translate(-50%, 0);
+  display: inline-block;
+  margin-top: 40px;
   background: #f2e6d7;
   color: #5d1b4e;
   font-family: var(--font-headline);
@@ -81,7 +80,7 @@
 
 @media (max-width: 700px) {
   .rpb {
-    padding: 76px 26px 76px;
+    padding: 76px 26px 56px;
   }
   .rpb__keyline {
     inset: 14px 14px 14px;
@@ -110,11 +109,10 @@
     font-size: 16px;
   }
   .rpb__chip {
-    bottom: 14px;
+    margin-top: 28px;
     font-size: 13px;
     white-space: normal;
-    width: max-content;
-    max-width: 86vw;
+    max-width: 100%;
     padding: 9px 16px;
   }
 }

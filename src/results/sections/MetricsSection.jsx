@@ -54,9 +54,13 @@ export default function MetricsSection({ result, tokens }) {
       </div>
 
       <div className="rmx__inner">
-        {/* Sep 19 doc rewrite: single-sentence headline with live RPV tokens
-            (the old three-line headline + "Total traffic:" line are gone). */}
-        <h2 className="rmx__headline">{fill(METRICS.headline, tokens)}</h2>
+        {/* Sep 19 doc rewrite: headline with live RPV tokens (the old
+            three-line headline + "Total traffic:" line are gone); its second
+            sentence sits on its own line (Sep 26). */}
+        <h2 className="rmx__headline">
+          {fill(METRICS.headline, tokens)}
+          <span className="rmx__headline-line">{METRICS.headlineLine2}</span>
+        </h2>
 
         <div className="rmx__table">
           <div className="rmx__head rmx__head--metric">{METRICS.headers.metric}</div>

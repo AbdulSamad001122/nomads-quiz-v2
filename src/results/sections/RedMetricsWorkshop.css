@@ -248,6 +248,40 @@
   border-radius: 16px;
 }
 
+/* call option + live calendar under the thumbnail — same 16px body size
+   as the rest of this section */
+.rmw__call {
+  width: 90%;
+  max-width: 1140px;
+  margin: 56px auto 0;
+  text-align: center;
+}
+
+.rmw__call-head {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #250f1c;
+}
+
+.rmw__call-body {
+  max-width: 62ch;
+  margin: 6px auto 0;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.65;
+  color: #250f1c;
+}
+
+/* white widget on the white panel: the thumbnail's keyline gives it an edge */
+.rmw__call .rtcal {
+  margin-top: 28px;
+  border: 1px solid #5d1b4e;
+  border-radius: 16px;
+}
+
 /* ——— responsive ——— */
 
 @media (max-width: 1100px) {
@@ -307,6 +341,14 @@
   .rmw__thumb {
     width: 100%;
     margin-top: 36px;
+    border-radius: 4px;
+  }
+  /* the calendar follows the thumbnail's phone treatment */
+  .rmw__call {
+    width: 100%;
+    margin-top: 36px;
+  }
+  .rmw__call .rtcal {
     border-radius: 4px;
   }
 }

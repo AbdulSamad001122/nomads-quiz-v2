@@ -24,7 +24,16 @@ export default function PillarTwoProof() {
               <h4 className="rqp__headline">{c.headline}</h4>
               <p className="rqp__body">{c.body}</p>
               <div className="rqp__who">
-                <img className="rqp__avatar" src={c.avatar} alt={c.name} />
+                {c.avatar ? (
+                  <img className="rqp__avatar" src={c.avatar} alt={c.name} />
+                ) : (
+                  // no photo (whitelabelled): a video-player mark
+                  <span className="rqp__avatar rqp__avatar--play" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" focusable="false">
+                      <path d="M9.5 7.2v9.6l7.6-4.8z" fill="currentColor" />
+                    </svg>
+                  </span>
+                )}
                 <span>
                   <span className="rqp__name">{c.name}</span>
                   <span className="rqp__role">{c.role}</span>

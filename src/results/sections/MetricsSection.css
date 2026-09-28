@@ -9,7 +9,7 @@
   padding: 110px 96px 95px;
 }
 
-/* the paper sheet — straight top edge under the hero strip; straight bottom
+/* the paper sheet — straight top edge under the hero; straight bottom
    edge: the navy below is a clean horizontal rectangle, and the sheet's clip
    also cuts the keyline so the border vanishes behind the navy */
 .rmx__sheet {
@@ -49,6 +49,11 @@
   line-height: 1.32;
   text-align: center;
   color: #3b1030;
+}
+
+/* the answer sentence starts its own line */
+.rmx__headline-line {
+  display: block;
 }
 
 /* ——— table ——— */

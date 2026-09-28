@@ -78,6 +78,21 @@
 
 /* ——— chips ——— */
 
+/* "All of it becomes feedback." — own line, navy highlight (the section's
+   chip colour), sitting right above the capture line */
+.rqf__hl {
+  background: #16273b;
+  color: #ffffff;
+  font-weight: 700;
+  padding: 3px 10px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.rqf__feedback + .rqf__para {
+  margin-top: 14px;
+}
+
 .rqf__chip {
   display: inline-block;
   margin-top: 34px;

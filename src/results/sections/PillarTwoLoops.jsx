@@ -26,6 +26,9 @@ export default function PillarTwoLoops() {
             ))}
           </ul>
 
+          <p className="rqf__para rqf__feedback">
+            <span className="rqf__hl">{p.feedback}</span>
+          </p>
           <p className="rqf__para">
             {p.captureBefore} <strong>{p.captureBold}</strong> {p.captureAfter}
           </p>

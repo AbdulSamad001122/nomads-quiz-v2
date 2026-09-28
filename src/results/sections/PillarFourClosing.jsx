@@ -11,7 +11,6 @@ export default function PillarFourClosing() {
 
   return (
     <div className="rfz">
-      <p className="rfz__sub">{p.sub}</p>
       <h3 className="rfz__headline">
         {p.headBefore} <span className="rfz__hl">{p.headHighlight}</span>
       </h3>

@@ -1,5 +1,6 @@
 import { LARA_STORY } from '../copy.js';
 import { emphasize } from '../emphasize.jsx';
+import LaraPortrait from './LaraPortrait.jsx';
 import './LaraStory.css';
 
 /**
@@ -36,7 +37,7 @@ export default function LaraStory() {
       </div>
 
       <div className="rls__right">
-        <img className="rls__lara" src="/assets/results-lara.webp" alt="Lara Acosta — Forbes 30 Under 30" />
+        <LaraPortrait className="rls__lara" />
       </div>
     </section>
   );
