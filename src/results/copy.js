@@ -8,7 +8,8 @@
  * Flagged doc↔design mismatches (doc wins per user rule, Sep 11):
  * - Nav labels + formula keep the ™ (design image drops it).
  * - "$1.5M/Year" capital Y per doc (design image shows "/year").
- * - The bottom strip copy exists only in the design image (no doc conflict).
+ * - The hero's bottom strip existed only in the design image; removed
+ *   (Yemi, Sep 26: not in the copy doc).
  */
 
 export const NAV = {
@@ -25,8 +26,8 @@ export const NAV = {
 };
 
 export const METRICS = {
-  // Sep 19 doc rewrite (Updated Result Page Copy.docx): single sentence with
-  // live RPV tokens replaces the old three-line headline, and the
+  // Sep 19 doc rewrite (Updated Result Page Copy.docx): a question with live
+  // RPV tokens replaces the old three-line headline, and the
   // "Total traffic:" line is deleted. Lowercase "per" is verbatim from the
   // doc. Wraps naturally (no line map, per the Sep 12 no-<br> rule).
   // Two lines, as the doc lays them out: the question, then the answer on its
@@ -746,8 +747,9 @@ export const PILLAR_ONE_FLOW = {
   // Doc: "This is the first Pillar of the Compounding RPV™ OS." — design chip
   // drops the ™; doc wins, flagged.
   chip: 'This is the first Pillar of the Compounding RPV™ OS.',
-  // Corrected figures (Yemi, Sep 26) — matches the rewritten Pillar One pie
-  // (3% ready to buy, 7% open to it, 60% not yet considering).
+  // Corrected figures (Yemi, Sep 26): 3% ready to buy, 7% open to it, 60%
+  // not yet considering. The matching pie redesign and the rest of the
+  // Pillar One rewrite (incl. para2's "97%") wait on the new design + copy doc.
   para1: 'After the diagnostic workshop, if your Maximise Revenue Per Visitor™ score came back low, this is usually the reason. The page is built for the 3% ready to buy and 7% that are open to it, not the 60% in consideration mode.',
   // Doc ends with a period (design drops it) — doc wins, flagged.
   para2: 'So that’s the first metric: turning more of your visitors, especially the 97% who aren’t ready yet, into email or SMS subscribers.',
@@ -825,9 +827,9 @@ export const PILLAR_ONE_LARA_QUOTE = {
   quoteHighlight: 'second brain',
   quoteAfter: 'when it came to the execution of how to launch things',
   para: 'Alefiya gave me the structure that I didn\'t know that I needed because I didn\'t know how to structure sales emails the way she would.”',
-  // Doc also lists "Lara Acosta", "Co-Founder, Kleo" and "Forbes 30 Under 30";
-  // the design shows only this chip (the name + Forbes badge are baked into
-  // the Lara image) — "Co-Founder, Kleo" is dropped entirely, flagged.
+  // The design's credit chip. Lara's full title (LARA_TITLE) now also sits
+  // under her portrait in the next cell, so this line shows twice there —
+  // flagged to the user (keep both, or drop this chip?).
   chip: 'Founder, Literally Academy & LA Digital',
   // Doc wraps this line with ☝️ on BOTH sides; the design shows only the
   // leading one — doc kept, flagged for review.

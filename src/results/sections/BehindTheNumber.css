@@ -62,6 +62,7 @@
 }
 
 .rbn__sub {
+  text-wrap: pretty; /* no one-word last line */
   margin-top: 32px;
   max-width: 470px;
   font-family: var(--font-body);

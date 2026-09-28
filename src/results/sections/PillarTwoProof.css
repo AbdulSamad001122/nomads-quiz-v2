@@ -66,6 +66,7 @@
 }
 
 .rqp__headline {
+  text-wrap: pretty; /* no one-word last line */
   margin-top: 26px;
   font-family: var(--font-headline);
   font-weight: 800;

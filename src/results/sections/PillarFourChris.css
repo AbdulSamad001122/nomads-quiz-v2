@@ -41,6 +41,7 @@
 }
 
 .rfq__para {
+  text-wrap: pretty; /* no one-word last line */
   margin-top: 26px;
   font-family: var(--font-body);
   font-weight: 500;

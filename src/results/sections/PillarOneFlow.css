@@ -101,6 +101,7 @@
 }
 
 .rp4__para {
+  text-wrap: pretty; /* no one-word last line */
   margin: 40px auto 0;
   max-width: 680px;
   font-family: var(--font-body);

@@ -1,5 +1,5 @@
 /* "So this isn't a hollow…" — dark maroon compass banner with keyline frame,
-   brush-script accent, cream highlight, chip on the bottom keyline. */
+   brush-script accent, cream highlight, chip inside the frame under the sub. */
 
 .rpb {
   position: relative;
@@ -56,6 +56,7 @@
 /* chip inside the frame, clear of the bottom keyline — it used to rest on
    the line, which Yemi flagged as straddling it (Sep 26) */
 .rpb__chip {
+  text-wrap: pretty; /* no one-word last line */
   display: inline-block;
   margin-top: 40px;
   background: #f2e6d7;

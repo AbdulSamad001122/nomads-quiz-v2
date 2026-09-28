@@ -51,9 +51,11 @@
   color: #3b1030;
 }
 
-/* the answer sentence starts its own line */
+/* the answer sentence starts its own line; "pretty" only stops "green:" being
+   left alone on the last line at desktop widths — it doesn't rebalance */
 .rmx__headline-line {
   display: block;
+  text-wrap: pretty;
 }
 
 /* ——— table ——— */

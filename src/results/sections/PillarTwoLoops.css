@@ -89,6 +89,10 @@
   -webkit-box-decoration-break: clone;
 }
 
+.rqf__feedback {
+  text-wrap: pretty; /* no one-word last line */
+}
+
 .rqf__feedback + .rqf__para {
   margin-top: 14px;
 }

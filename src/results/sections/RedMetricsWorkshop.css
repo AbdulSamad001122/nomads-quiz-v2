@@ -2,7 +2,8 @@
    with the playful badge, centred headline with cream sweep + curve arrow,
    cream panel holding the 2×2 quadrant cards (landing FourAreas card
    language), triple down-arrows, then a white close with the answer copy,
-   workshop button and the ice thumbnail placeholder. */
+   workshop button, the video thumbnail, and the game-plan call copy with
+   the live TidyCal calendar under it. */
 
 .rmw__dark {
   position: relative;
@@ -102,6 +103,7 @@
 }
 
 .rmw__ten {
+  text-wrap: pretty; /* no one-word last line */
   max-width: 52ch;
   margin: 0 auto;
   text-align: center;
@@ -258,6 +260,7 @@
 }
 
 .rmw__call-head {
+  text-wrap: pretty; /* no one-word last line */
   font-family: var(--font-body);
   font-weight: 700;
   font-size: 16px;
@@ -266,6 +269,7 @@
 }
 
 .rmw__call-body {
+  text-wrap: pretty; /* no one-word last line */
   max-width: 62ch;
   margin: 6px auto 0;
   font-family: var(--font-body);
@@ -273,6 +277,10 @@
   font-size: 16px;
   line-height: 1.65;
   color: #250f1c;
+}
+
+.rmw__nowrap {
+  white-space: nowrap;
 }
 
 /* white widget on the white panel: the thumbnail's keyline gives it an edge */

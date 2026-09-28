@@ -94,10 +94,24 @@ export default function RedMetricsWorkshop({ tokens }) {
 
         <div className="rmw__call">
           <p className="rmw__call-head">{c.callHead}</p>
-          <p className="rmw__call-body">{c.callBody}</p>
+          <p className="rmw__call-body">{keepTogether(c.callBody, 'C-RPV')}</p>
           <TidyCalEmbed />
         </div>
       </div>
     </section>
+  );
+}
+
+/** Stops the browser breaking `term` at its hyphen ("C-" / "RPV"). */
+function keepTogether(text, term) {
+  return text.split(term).flatMap((part, i) =>
+    i === 0
+      ? [part]
+      : [
+          <span className="rmw__nowrap" key={i}>
+            {term}
+          </span>,
+          part,
+        ],
   );
 }
