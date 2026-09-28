@@ -134,7 +134,7 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
           </span>
         </h2>
         <p className="cs5b__happens-para">
-          {'Maria (full name redacted for privacy), an executive coach pulling 60,000+ monthly LinkedIn views, had fewer than 500 new email subscribers a month. Every sale for her $5,000 offer depended on lengthy back-and-forth DMs. The moment she stepped back, revenue stepped back with her.'}
+          {'Maria, an executive coach pulling 60,000+ monthly LinkedIn views, had fewer than 500 new email subscribers a month. Every sale for her $5,000 offer depended on lengthy back-and-forth DMs. The moment she stepped back, revenue stepped back with her.'}
         </p>
       </section>
 
