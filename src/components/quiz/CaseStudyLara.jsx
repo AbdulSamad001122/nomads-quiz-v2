@@ -11,9 +11,10 @@ import './CaseStudyLara.css';
  * No mock existed; the layout extends the 5A/5B/5C system:
  *   1. split hero — subscriber-myth headline | Lara Acosta art
  *   2. strategy band (accent) — belief-shifting email strategy +
- *      70 → 500 launch stat cards (5C's boxed style)
- *   3. SDR Coach section (white) — "most profitable channel" lead,
- *      the two-list experiment, 1 sale VS 23 sales cards
+ *      70 → 500 launch stat cards (5C's boxed style), closed by "Email is
+ *      the most profitable channel in her business today."
+ *   3. SDR Coach section — opens "Here's another one…", the two-list
+ *      experiment, 1 sale VS 23 sales cards
  *   4. Three things — numbered cards (01/02/03, 5B card language)
  *   5. Your Turn CTA (same as 5A/5B/5C)
  */

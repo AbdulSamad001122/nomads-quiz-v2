@@ -141,7 +141,7 @@
   font-weight: 800;
 }
 
-/* punchy bold one-liners (12C/12D) */
+/* punchy bold one-liners (12C, five-metrics) */
 .a12__punch {
   margin: clamp(16px, 2.6vh, 28px) auto 0;
   max-width: 64ch;
