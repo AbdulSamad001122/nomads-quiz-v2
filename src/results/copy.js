@@ -691,32 +691,45 @@ export const PILLAR_ONE = {
   // Pillar one's copy, doc row 6); rendered "Pillar 01" — flagged.
   chip: 'Pillar 01',
   sub: '90% of the people who find you online aren’t ready to buy yet',
-  // Doc: "…only speaks to the *TINY 10 %* who are ready to buy." — the
-  // asterisk emphasis renders as the cream highlight; doc's "10 %" spacing
-  // normalised to "10%" per the design — flagged.
+  // Doc: "…only speaks to the *TINY 10 %* who are interested." (Yemi's red
+  // rewrite, Sep 29) — the asterisk emphasis renders as the cream highlight;
+  // doc's "10 %" spacing normalised to "10%" per the design — flagged.
   headBefore: 'Which is why your (and your competitors’) marketing completely ignores this huge group and only speaks to the',
   headHighlight: 'TINY 10%',
-  headAfter: 'who are ready to buy.',
+  headAfter: 'who are interested.',
 };
 
+/**
+ * Pillar one — ulcer example, Yemi's red rewrite (Result Page Copy Changes,
+ * Sep 29): figures now match the new pie (3 / 7 / 30 / 30 / 30). Per Yemi,
+ * "Out of 100 people" is no longer a card — it closes the lead line — and
+ * the five bullets are the cards.
+ */
 export const PILLAR_ONE_ULCERS = {
-  lead: 'Say you\'re selling medicine for ulcers.',
-  // Doc runs "Out of 100 people, 3 know they have ulcers and buy immediately."
-  // — split across the two stat cards per the design.
-  card1Num: '100',
-  card1Text: 'Out of 100 people',
-  card2Num: '03',
-  card2Text: '3 know they have ulcers and buy immediately.',
-  para1: '70 have stomach pain, but they don\'t know ulcers cause it.',
-  para2: 'So when your messaging targets the problem ("medicine for ulcers"), you lose the 70 people who genuinely believe they don\'t have ulcers.',
+  lead: 'Say you\'re selling medicine for ulcers. Out of 100 people,',
+  // The big numeral shows the count (two-digit, as the old "03" card did);
+  // the text is the doc bullet verbatim. Doc bullets 4–5 end without a
+  // period — kept verbatim, flagged.
+  cards: [
+    { num: '03', text: '3 know they have ulcers and buy immediately.' },
+    { num: '07', text: '7 know they have ulcers and are open to buying.' },
+    { num: '30', text: '30 have stomach pain, but they don\'t know it’s caused by ulcers.' },
+    { num: '30', text: '30 have stomach pain, but they aren’t thinking about what’s causing it' },
+    { num: '30', text: '30 know for sure that they don’t have ulcers and are not interested' },
+  ],
+  para: 'So when your messaging targets the problem ("medicine for ulcers"), you lose the 60 people who genuinely believe they don\'t have ulcers.',
   band: 'Even though they do.',
-  closing: 'Even if your content, ads, podcasts, and books are reaching everyone, 90% of them automatically self-select themselves out by believing they don’t NEED what you have to offer (even if they do).',
+  closing: 'Even if your content, ads, podcasts, and books are reaching everyone, 60% of them automatically self-select themselves out by believing they don’t NEED what you have to offer (even if they do).',
+  pieAlt:
+    'Pie chart — 3% ready to buy now, 7% are open to it, 30% not thinking about it, 30% don’t think they’re interested, 30% know they’re not interested',
 };
 
 export const PILLAR_ONE_CURIOUS = {
-  // Doc: "(…for low conversions — sound familiar?)." — the design drops the
-  // em-dash; doc wins, flagged.
-  para: 'And when your marketing only speaks to this tiny percentage, you have to reach a lot more eyeballs to hit your sales goals (so you’re bleeding time or money for low conversions sound familiar?).',
+  // Its own section, after the ulcer example (user, Sep 29). Yemi's red
+  // rewrite names the 3% + 7%. Doc has "(…for low conversions — sound
+  // familiar?)" — no em dash in visible results copy, so it's left out as
+  // before — flagged.
+  para: 'And when your marketing only speaks to the 3% ready to buy and 7% who are open to it, you have to reach a lot more eyeballs to hit your sales goals (so you’re bleeding time or money for low conversions sound familiar?).',
   headBefore: 'But what if you could pull the other 60% of the market pie in and make them',
   headHighlight: 'curious enough to consider your offer?',
 };
@@ -757,11 +770,12 @@ export const PILLAR_ONE_FLOW = {
   // drops the ™; doc wins, flagged.
   chip: 'This is the first Pillar of the Compounding RPV™ OS.',
   // Corrected figures (Yemi, Sep 26): 3% ready to buy, 7% open to it, 60%
-  // not yet considering. The matching pie redesign and the rest of the
-  // Pillar One rewrite (incl. para2's "97%") wait on the new design + copy doc.
+  // not yet considering — matches the Pillar One pie (Sep 29).
   para1: 'After the diagnostic workshop, if your Maximise Revenue Per Visitor™ score came back low, this is usually the reason. The page is built for the 3% ready to buy and 7% that are open to it, not the 60% in consideration mode.',
-  // Doc ends with a period (design drops it) — doc wins, flagged.
-  para2: 'So that’s the first metric: turning more of your visitors, especially the 97% who aren’t ready yet, into email or SMS subscribers.',
+  // Doc ends with a period (design drops it) — doc wins, flagged. "67%" per
+  // the doc (was "97%" here): the 7% open to it + the 60% in consideration,
+  // i.e. the Samar pie's "Open to it" slice. Straight apostrophes, as the doc.
+  para2: "So that's the first metric: turning more of your visitors, especially the 67% who aren't ready yet, into email or SMS subscribers.",
 };
 
 export const PILLAR_ONE_ISOLATION = {

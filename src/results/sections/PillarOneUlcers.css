@@ -20,6 +20,8 @@
 
 .rpu__pie {
   width: min(100%, 480px);
+  /* the img carries width/height attributes (no layout shift) — keep it round */
+  height: auto;
   /* pinned while the copy column scrolls past, same as .rqf__loop and
      .rq2__diagram — 94px clears the sticky nav (70px) plus breathing room */
   position: sticky;
@@ -40,8 +42,10 @@
   color: #16273b;
 }
 
+/* one card per doc bullet (five since Yemi's Sep 29 rewrite) — spaced as a
+   single list, with more air above the first one */
 .rpu__card {
-  margin-top: 26px;
+  margin-top: 14px;
   display: flex;
   align-items: center;
   gap: 22px;
@@ -53,7 +57,7 @@
 }
 
 .rpu__card:first-of-type {
-  margin-top: 30px;
+  margin-top: 26px;
 }
 
 .rpu__picto {

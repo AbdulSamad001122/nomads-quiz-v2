@@ -2,42 +2,48 @@ import { PILLAR_ONE_ULCERS } from '../copy.js';
 import './PillarOneUlcers.css';
 
 /**
- * Pillar one — ulcer example: bear panel with the pie chart image left,
- * cream linen right with the 100/03 stat cards, story paragraphs and the
- * "Even though they do." band. Lives inside the pillars accordion.
+ * Pillar one — ulcer example: bear panel with the market pie left (3 / 7 /
+ * 30 / 30 / 30, Yemi's Sep 29 redesign), cream linen right with the lead,
+ * one stat card per doc bullet, the story paragraph and the "Even though
+ * they do." band. Lives inside the pillars accordion.
  */
 export default function PillarOneUlcers() {
+  const p = PILLAR_ONE_ULCERS;
+
   return (
     <div className="rpu">
       <div className="rpu__left">
         <img
           className="rpu__pie"
-          src="/assets/results-pillar1-pie.webp"
-          alt="Pie chart — 67% have stomach pain but don't know ulcers cause it, 30% aren't interested, 3% know they have ulcers"
+          src="/assets/results-pillar1-pie-market.webp"
+          alt={p.pieAlt}
+          width="1000"
+          height="1000"
         />
       </div>
 
       <div className="rpu__right">
-        <p className="rpu__lead">{PILLAR_ONE_ULCERS.lead}</p>
+        <p className="rpu__lead">{p.lead}</p>
 
-        <div className="rpu__card">
-          <img className="rpu__picto" src="/assets/results-people-many.png" alt="" aria-hidden="true" />
-          <span className="rpu__num">{PILLAR_ONE_ULCERS.card1Num}</span>
-          <span className="rpu__card-text">{PILLAR_ONE_ULCERS.card1Text}</span>
-        </div>
+        {p.cards.map((c) => (
+          <div className="rpu__card" key={c.text}>
+            {/* a small group for the few who are ready/open, a crowd for the 30s */}
+            <img
+              className="rpu__picto"
+              src={Number(c.num) < 10 ? '/assets/results-people-three.png' : '/assets/results-people-many.png'}
+              alt=""
+              aria-hidden="true"
+            />
+            <span className="rpu__num">{c.num}</span>
+            <span className="rpu__card-text">{c.text}</span>
+          </div>
+        ))}
 
-        <div className="rpu__card">
-          <img className="rpu__picto" src="/assets/results-people-three.png" alt="" aria-hidden="true" />
-          <span className="rpu__num">{PILLAR_ONE_ULCERS.card2Num}</span>
-          <span className="rpu__card-text">{PILLAR_ONE_ULCERS.card2Text}</span>
-        </div>
+        <p className="rpu__para">{p.para}</p>
 
-        <p className="rpu__para">{PILLAR_ONE_ULCERS.para1}</p>
-        <p className="rpu__para">{PILLAR_ONE_ULCERS.para2}</p>
+        <p className="rpu__band">{p.band}</p>
 
-        <p className="rpu__band">{PILLAR_ONE_ULCERS.band}</p>
-
-        <p className="rpu__para">{PILLAR_ONE_ULCERS.closing}</p>
+        <p className="rpu__para">{p.closing}</p>
       </div>
     </div>
   );
