@@ -1008,16 +1008,29 @@ export const PILLAR_FOUR_INTRO = {
   // FLAGGED (a number, not punctuation).
   bullets: ['Why they joined', 'What happens in their first 14 days', 'And what happens every month after'],
   closing: 'That’s where compounding comes in.',
-  closingBold: 'Here’s what a year of it can look like.',
   imageAlt: 'Compounding Revenue per Subscriber — a growing plant',
 };
 
-export const PILLAR_FOUR_TABLE = {
+/**
+ * Pillar four — the year of compounding: its own section between the intro
+ * and the workshop copy (Yemi R16, Sep 26; image from the user, Sep 29).
+ * Copy doc order: "Here's what a year of it can look like." → [VISUAL — the
+ * compounding table] → "Notice what the table doesn't do: …".
+ */
+export const PILLAR_FOUR_YEAR = {
+  lead: 'Here’s what a year of it can look like.',
+  // Title from Yemi's reference table image; the supplied table art has none.
+  tableHeading: 'Month-by-Month Data',
+  tableAlt:
+    'Month-by-month data for 12 months — revenue grows from $125,000 to $250,000 and profit from $120,000 to $242,776, while monthly subscribers only go from 5,000 to 7,224',
   // Doc: "Notice what the table doesn't do: your list never doubles. And yet
   // the revenue does." — the design lifts the clause before the colon into a
   // navy chip and drops the final period; doc's period kept, flagged.
   noticeChip: 'Notice what the table doesn’t do',
   noticeText: 'your list never doubles. And yet the revenue does.',
+};
+
+export const PILLAR_FOUR_TABLE = {
   // Doc: "In the workshop, I walk you through the whole table, step by step."
   // Rendered as one sentence again — "In the workshop" keeps the plum
   // highlight inline (with its comma restored), so this now matches the doc
@@ -1032,7 +1045,6 @@ export const PILLAR_FOUR_TABLE = {
     'The month-by-month math that lets you forecast this strategically (brace yourself! lots of math tbd here).',
   ],
   closing: 'Which is why how someone joins your list matters so much.',
-  imageAlt: 'The ad-spend calculator — monthly spend slider, today vs goal comparison table, and the monthly gain panel',
 };
 
 export const PILLAR_FOUR_CHRIS = {

@@ -1,0 +1,135 @@
+/* Pillar four — the year of compounding (PillarFourYear.jsx). Its own section
+   on the dark teal chart texture, so it reads apart from the cream intro
+   above and the peach workshop copy below. Card per Yemi's reference: ice
+   paper, near-black offset shadow down-left, Kilimanjaro heading top-left.
+   Flush inside the accordion. */
+
+.rfy {
+  background: #10272b url('/assets/results-teal-chart-bg.webp') center / cover;
+  padding: 80px 64px 92px;
+}
+
+.rfy__inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.rfy__lead {
+  text-align: center;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 34px;
+  line-height: 1.3;
+  color: #ffffff;
+  text-wrap: pretty;
+}
+
+/* ——— table card ——— */
+
+.rfy__card {
+  /* the shadow sits down-left, so leave room on that side */
+  margin: 52px 0 0 26px;
+  background: #dbeff6 url('/assets/results-ice-paper.webp') center / cover;
+  box-shadow: -26px 26px 0 #0b1216;
+  padding: 44px 48px 48px;
+  container-type: inline-size;
+}
+
+.rfy__heading {
+  font-family: 'Kilimanjaro Sans', sans-serif;
+  font-weight: 400;
+  font-size: clamp(26px, 5cqi, 54px);
+  line-height: 1.1;
+  color: #16273b;
+}
+
+/* the whole table scales with the card at every width (user, Sep 29) */
+.rfy__table {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 26px;
+}
+
+/* ——— notice line ——— */
+
+/* centred under the table like the lead above it; flush left once the
+   accordion's stacked range makes the lead flush left (≤900) */
+.rfy__foot {
+  text-align: center;
+}
+
+.rfy__chip {
+  display: inline-block;
+  margin-top: 64px;
+  background: #ddf2f8;
+  color: #16273b;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 20px;
+  padding: 5px 16px;
+  /* two even lines when it wraps on phones, never "…doesn't / do" */
+  text-wrap: balance;
+}
+
+.rfy__notice {
+  margin-top: 14px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.65;
+  color: #ffffff;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1200px) {
+  .rfy {
+    padding: 56px 36px 64px;
+  }
+  .rfy__lead {
+    font-size: 26px;
+  }
+  .rfy__card {
+    padding: 34px 32px 36px;
+  }
+}
+
+@media (max-width: 900px) {
+  .rfy {
+    padding: 48px 22px 56px;
+  }
+  .rfy__card {
+    margin: 36px 0 0 14px;
+    box-shadow: -14px 14px 0 #0b1216;
+    padding: 26px 20px 28px;
+  }
+  .rfy__table {
+    margin-top: 18px;
+  }
+  .rfy__foot {
+    text-align: left;
+  }
+  .rfy__chip {
+    margin-top: 46px;
+  }
+}
+
+/* below 1100 the lead takes the accordion's shared 26px heading size, and
+   below 900 its flush-left rule (PillarsAccordion.css) */
+@media (max-width: 560px) {
+  .rfy__card {
+    margin-left: 10px;
+    box-shadow: -10px 10px 0 #0b1216;
+    /* thin padding so the scaled-down table gets every pixel of width */
+    padding: 18px 8px 12px;
+  }
+  .rfy__heading {
+    padding-left: 6px;
+  }
+  /* one line down to 360px phones (it wrapped as a wide box at 16px) */
+  .rfy__chip {
+    font-size: 15px;
+    padding: 5px 10px;
+  }
+}

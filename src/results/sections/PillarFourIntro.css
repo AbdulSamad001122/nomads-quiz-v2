@@ -102,15 +102,6 @@
   flex-shrink: 0;
 }
 
-.rfs__closing {
-  margin-top: 24px;
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 17px;
-  line-height: 1.6;
-  color: #16273b;
-}
-
 /* ——— right dark panel ——— */
 
 .rfs__right {

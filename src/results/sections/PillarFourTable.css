@@ -1,30 +1,16 @@
-/* Pillar four — "walk you through the whole table": copy left, calculator
-   artwork right, on the cream→plum gradient. Flush inside the accordion. */
+/* Pillar four — "In the workshop, I walk you through the whole table": the
+   workshop copy on the cream→plum gradient, one centred column. Text only
+   since Yemi's R16 (the table has its own section before this one). Flush
+   inside the accordion. */
 
 .rft {
   background: #f6ecdf url('/assets/results-peach-bg.webp') center / cover;
   padding: 76px 64px 88px;
-  display: grid;
-  grid-template-columns: 0.5fr 0.5fr;
-  align-items: center;
-  gap: 56px;
 }
 
 .rft__body {
-  max-width: 560px;
-}
-
-.rft__chip {
-  display: inline-block;
-  color: #ffffff;
-  font-family: var(--font-headline);
-  font-weight: 800;
-  padding: 5px 16px;
-}
-
-.rft__chip--navy {
-  background: #16273b;
-  font-size: 20px;
+  max-width: 640px;
+  margin: 0 auto;
 }
 
 /* "In the workshop" is the opening clause of the headline, not a separate
@@ -57,19 +43,8 @@
   }
 }
 
-.rft__notice {
-  margin-top: 14px;
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.65;
-  color: #2c1a26;
-}
-
 .rft__headline {
-  /* carries the gap the plum chip used to hold above it */
-  margin-top: 46px;
-  max-width: 524px;
+  max-width: 580px;
   font-family: var(--font-headline);
   font-weight: 800;
   font-size: 38px;
@@ -116,27 +91,14 @@
   color: #641d4f;
 }
 
-/* ——— media ——— */
-
-.rft__media {
-  display: flex;
-  justify-content: center;
-}
-
-.rft__media img {
-  width: min(100%, 620px);
-}
-
 /* ——— responsive ——— */
 
 @media (max-width: 1200px) {
   .rft {
     padding: 56px 36px 64px;
-    gap: 34px;
   }
   .rft__headline {
     font-size: 26px;
-    margin-top: 34px;
   }
   .rft__sweep {
     padding: 2px 9px;
@@ -153,7 +115,6 @@
 
 @media (max-width: 900px) {
   .rft {
-    grid-template-columns: 1fr;
     padding: 48px 22px 56px;
   }
   .rft__body,
@@ -161,19 +122,9 @@
   .rft__closing {
     max-width: 100%;
   }
-  /* artwork reads better under the copy it explains */
-  .rft__media {
-    order: 2;
-  }
 }
 
 @media (max-width: 560px) {
-  .rft__chip--navy {
-    font-size: 16px;
-  }
-  .rft__chip--plum {
-    font-size: 21px;
-  }
   .rft__headline {
     font-size: 22px;
   }

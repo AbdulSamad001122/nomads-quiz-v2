@@ -16,6 +16,7 @@ import PillarTwoProof from './PillarTwoProof.jsx';
 import PillarTwoLoops from './PillarTwoLoops.jsx';
 import PillarTwoWorkshop from './PillarTwoWorkshop.jsx';
 import PillarFourIntro from './PillarFourIntro.jsx';
+import PillarFourYear from './PillarFourYear.jsx';
 import PillarFourTable from './PillarFourTable.jsx';
 import PillarFourChris from './PillarFourChris.jsx';
 import PillarFourClosing from './PillarFourClosing.jsx';
@@ -53,6 +54,7 @@ const PANELS = {
   '04': (
     <>
       <PillarFourIntro />
+      <PillarFourYear />
       <PillarFourTable />
       <PillarFourChris />
       <PillarFourClosing />

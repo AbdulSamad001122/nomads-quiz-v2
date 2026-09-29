@@ -35,8 +35,9 @@ export default function PillarFourIntro() {
             </ul>
           </div>
 
+          {/* "Here's what a year of it can look like." now opens the year
+              section that follows (PillarFourYear, Yemi R16) */}
           <p className="rfs__para">{p.closing}</p>
-          <p className="rfs__closing">{p.closingBold}</p>
         </div>
       </div>
 
