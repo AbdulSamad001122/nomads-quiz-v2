@@ -104,7 +104,7 @@
 
 .rmw__ten {
   text-wrap: pretty; /* no one-word last line */
-  max-width: 52ch;
+  max-width: 60ch;
   margin: 0 auto;
   text-align: center;
   font-family: var(--font-body);
