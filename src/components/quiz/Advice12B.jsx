@@ -87,7 +87,7 @@ export default function Advice12B({ onBack, onContinue }) {
             <img
               className="a12__info-img"
               src="/assets/advice-12b-infographic.webp"
-              alt="Customer feedback loop engine: day-10 buyers, non-buyers, and existing buyers feeding optimised sequences and offers"
+              alt="Customer feedback loop engine: day-14 buyers, non-buyers, and existing buyers feeding optimised sequences and offers"
             />
           </div>
         </div>
@@ -99,7 +99,7 @@ export default function Advice12B({ onBack, onContinue }) {
           <img
             className="a12__info-img"
             src="/assets/advice-12b-infographic.webp"
-            alt="Customer feedback loop engine: day-10 buyers, non-buyers, and existing buyers feeding optimised sequences and offers"
+            alt="Customer feedback loop engine: day-14 buyers, non-buyers, and existing buyers feeding optimised sequences and offers"
           />
         </div>
 
