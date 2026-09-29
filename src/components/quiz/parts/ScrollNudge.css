@@ -3,6 +3,9 @@
    thin ink border. Fixed bottom-left like the Golfbays popup. */
 
 .scroll-nudge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   position: fixed;
   left: 18px;
   bottom: 20px;
@@ -22,6 +25,12 @@
   transform: translateY(8px);
   animation: nudge-in 0.4s ease-out 0.9s forwards;
   transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+/* the triple down-arrow doodle, sized to the text */
+.scroll-nudge__arrow {
+  height: 18px;
+  width: auto;
 }
 
 /* the bubble's tail — a rotated square sharing the fill and two borders */
@@ -75,5 +84,8 @@
     bottom: 16px;
     padding: 8px 13px;
     font-size: 12.5px;
+  }
+  .scroll-nudge__arrow {
+    height: 16px;
   }
 }

@@ -29,7 +29,10 @@ export default function ScrollNudge({ tone = 'ice' }) {
       className={`scroll-nudge scroll-nudge--${tone}${hidden ? ' scroll-nudge--hidden' : ''}`}
       aria-hidden="true"
     >
-      Keep scrolling ↓
+      Keep scrolling
+      {/* triple down-arrow doodle (landing set), recoloured to the dark
+          plum #431232 (user, Sep 29) */}
+      <img className="scroll-nudge__arrow" src="/assets/scroll-nudge-arrow.png" alt="" />
     </div>
   );
 }
