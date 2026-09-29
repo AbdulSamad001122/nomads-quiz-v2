@@ -14,12 +14,13 @@ export function resolveTokens(result) {
     // q7*12 if a future copy round brings them back.
     current_rpv: rpvMoney(result.currentRPV),
     goal_rpv: rpvMoney(result.goalRPV),
-    // Max-benchmark gain (Logic Doc capped maths). Two display forms:
-    //
-    // Blocks 5/6 (fire only below $1.5M) need the real figure — their copy
-    // continues "You're still {{remaining_gap}} short of $1.5M" — so this
-    // token stays the exact money, rounded to the nearest $100 per the doc.
-    achievable_gain: money(result.capped.achievableGain),
+    // Blocks 5/6 token — UNCHANGED original behaviour (Yemi Sep-15 Q3):
+    // $1.5M+ at or above the promise, exact money below. Blocks 5/6 only
+    // fire below $1.5M, so in practice they always show the exact figure.
+    achievable_gain:
+      result.capped.achievableGain >= 1_500_000
+        ? '$1.5M+'
+        : money(result.capped.achievableGain),
     // "But… what if you did?" headline — the Logic Doc's "Display Rule for
     // Achievable Gain" (Yemi, Sep 26; re-confirmed to Samad on Slack Sep 29;
     // REVERSES the Sep-15 Q3 cap): above $1.5M shows the exact number in the
