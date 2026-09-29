@@ -5,6 +5,7 @@ import { ACCENT, CARD, CTA_TONE } from './CaseStudyGolfbays.jsx';
 import './QuizScreen.css';
 import './CaseStudyGolfbays.css';
 import './CaseStudyEstelle.css';
+import ScrollNudge, { scrollToNextSection } from './parts/ScrollNudge.jsx';
 
 /**
  * Case study 5E — Estelle Winsett ("call-convincing" route off Q5).
@@ -42,6 +43,7 @@ export default function CaseStudyEstelle({ theme, onBack, onContinue }) {
 
   return (
     <div className={`cs5a cs5e quiz-screen--${theme.name}`} style={themeVars}>
+      <ScrollNudge tone="pink" />
       {/* ============ 1. HERO — split ============ */}
       <section className="cs5a__hero">
         <div className="cs5a__left">
@@ -84,7 +86,7 @@ export default function CaseStudyEstelle({ theme, onBack, onContinue }) {
                 <button
                   type="button"
                   className="q-btn q-btn--onDark cs5a__continue"
-                  onClick={onContinue}
+                  onClick={scrollToNextSection}
                 >
                   Follow along
                 </button>
@@ -336,7 +338,7 @@ export default function CaseStudyEstelle({ theme, onBack, onContinue }) {
                 className="q-btn cs5a__continue"
                 onClick={onContinue}
               >
-                Follow along
+                Yes, show me
               </button>
             </div>
           </div>

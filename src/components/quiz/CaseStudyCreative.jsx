@@ -5,6 +5,7 @@ import { ACCENT, CARD, CTA_TONE } from './CaseStudyGolfbays.jsx';
 import './QuizScreen.css';
 import './CaseStudyGolfbays.css';
 import './CaseStudyCreative.css';
+import ScrollNudge, { scrollToNextSection } from './parts/ScrollNudge.jsx';
 
 /**
  * Case study 5C — Creative Delivery ("differentiation" route off Q5).
@@ -38,6 +39,7 @@ export default function CaseStudyCreative({ theme, onBack, onContinue }) {
 
   return (
     <div className={`cs5a cs5c quiz-screen--${theme.name}`} style={themeVars}>
+      <ScrollNudge tone="pink" />
       {/* ============ 1. HERO — full width, centred ============ */}
       <section className="cs5a__hero">
         <div className="cs5a__left">
@@ -77,7 +79,7 @@ export default function CaseStudyCreative({ theme, onBack, onContinue }) {
                 <button
                   type="button"
                   className="q-btn q-btn--onDark cs5a__continue"
-                  onClick={onContinue}
+                  onClick={scrollToNextSection}
                 >
                   Follow along
                 </button>
@@ -259,7 +261,7 @@ export default function CaseStudyCreative({ theme, onBack, onContinue }) {
                 className="q-btn cs5a__continue"
                 onClick={onContinue}
               >
-                Follow along
+                Yes, show me
               </button>
             </div>
           </div>

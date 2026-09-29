@@ -5,6 +5,7 @@ import HighlightSweep from '../primitives/HighlightSweep.jsx';
 import useLeftAlignOnWrap from '../primitives/useLeftAlignOnWrap.js';
 import './QuizScreen.css';
 import './Advice12A.css';
+import ScrollNudge, { scrollToNextSection } from './parts/ScrollNudge.jsx';
 
 /**
  * Advice slide 12B ("revenue plateau" answer on Q12) — same fixed
@@ -43,6 +44,7 @@ export default function Advice12B({ onBack, onContinue }) {
 
   return (
     <div className="a12 a12--b">
+      <ScrollNudge tone="ice" />
       {/* ---------- dark top ---------- */}
       <section className="a12__top">
         <SeamBadge src="/assets/circle-doodle-2.png" />
@@ -77,9 +79,9 @@ export default function Advice12B({ onBack, onContinue }) {
             <button
               type="button"
               className="q-btn q-btn--onDark a12__frame-continue"
-              onClick={onContinue}
+              onClick={scrollToNextSection}
             >
-              Continue
+              Follow along
             </button>
           </div>
 
@@ -187,7 +189,7 @@ export default function Advice12B({ onBack, onContinue }) {
             />
             <div className="a12__cta-row">
               <button type="button" className="q-btn" onClick={onContinue}>
-                Continue
+                Continue to next question
               </button>
             </div>
           </div>

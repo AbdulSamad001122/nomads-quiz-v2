@@ -5,6 +5,7 @@ import { ACCENT, CARD, CTA_TONE } from './CaseStudyGolfbays.jsx';
 import './QuizScreen.css';
 import './CaseStudyGolfbays.css';
 import './CaseStudy97.css';
+import ScrollNudge, { scrollToNextSection } from './parts/ScrollNudge.jsx';
 
 /**
  * Case study 5B — The 97% ("low-optin" route off Q5). Follows the 5B
@@ -43,6 +44,7 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
 
   return (
     <div className={`cs5a cs5b quiz-screen--${theme.name}`} style={themeVars}>
+      <ScrollNudge tone="pink" />
       {/* ============ 1. HERO — split ============ */}
       <section className="cs5a__hero">
         <div className="cs5a__left">
@@ -72,7 +74,7 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
                 <button
                   type="button"
                   className="q-btn q-btn--onDark cs5a__continue"
-                  onClick={onContinue}
+                  onClick={scrollToNextSection}
                 >
                   Follow along
                 </button>
@@ -448,7 +450,7 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
                 className="q-btn cs5a__continue"
                 onClick={onContinue}
               >
-                Follow along
+                Yes, show me
               </button>
             </div>
           </div>

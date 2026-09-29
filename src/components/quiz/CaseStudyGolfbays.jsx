@@ -3,6 +3,7 @@ import BackLink from './parts/BackLink.jsx';
 import HighlightSweep, { sweepToneFor } from '../primitives/HighlightSweep.jsx';
 import './QuizScreen.css';
 import './CaseStudyGolfbays.css';
+import ScrollNudge, { scrollToNextSection } from './parts/ScrollNudge.jsx';
 
 /**
  * Case study 5A — GolfBays ("cold-traffic" route off Q5), built to the
@@ -35,6 +36,7 @@ export default function CaseStudyGolfbays({ theme, onBack, onContinue }) {
 
   return (
     <div className={`cs5a quiz-screen--${theme.name}`} style={themeVars}>
+      <ScrollNudge tone="pink" />
       {/* ============ 1. HERO — split ============ */}
       <section className="cs5a__hero">
         <div className="cs5a__left">
@@ -68,7 +70,7 @@ export default function CaseStudyGolfbays({ theme, onBack, onContinue }) {
                 <button
                   type="button"
                   className="q-btn q-btn--onDark cs5a__continue"
-                  onClick={onContinue}
+                  onClick={scrollToNextSection}
                 >
                   Follow along
                 </button>
@@ -232,7 +234,7 @@ export default function CaseStudyGolfbays({ theme, onBack, onContinue }) {
 
           <div className="cs5a__cta-row">
             <button type="button" className="q-btn cs5a__continue" onClick={onContinue}>
-              Follow along
+              Yes, show me
             </button>
           </div>
         </div>

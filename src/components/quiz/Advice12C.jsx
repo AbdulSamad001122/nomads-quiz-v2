@@ -3,6 +3,7 @@ import BackLink from './parts/BackLink.jsx';
 import HighlightSweep from '../primitives/HighlightSweep.jsx';
 import './QuizScreen.css';
 import './Advice12A.css';
+import ScrollNudge, { scrollToNextSection } from './parts/ScrollNudge.jsx';
 
 /**
  * Advice slide 12C ("inconsistent months" answer on Q12) — same fixed
@@ -14,6 +15,7 @@ import './Advice12A.css';
 export default function Advice12C({ onBack, onContinue }) {
   return (
     <div className="a12 a12--c">
+      <ScrollNudge tone="ice" />
       {/* ---------- dark top ---------- */}
       <section className="a12__top">
         <SeamBadge src="/assets/circle-doodle-2.png" />
@@ -38,9 +40,9 @@ export default function Advice12C({ onBack, onContinue }) {
             <button
               type="button"
               className="q-btn q-btn--onDark a12__frame-continue"
-              onClick={onContinue}
+              onClick={scrollToNextSection}
             >
-              Continue
+              Follow along
             </button>
           </div>
         </div>
@@ -203,7 +205,7 @@ export default function Advice12C({ onBack, onContinue }) {
             />
             <div className="a12__cta-row">
               <button type="button" className="q-btn" onClick={onContinue}>
-                Continue
+                Continue to next question
               </button>
             </div>
           </div>

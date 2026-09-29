@@ -1,0 +1,79 @@
+/* "Keep scrolling ↓" hint bubble (ScrollNudge.jsx). Message-bubble shape
+   with a little tail per the user's reference (Sep 29): light brand fill,
+   thin ink border. Fixed bottom-left like the Golfbays popup. */
+
+.scroll-nudge {
+  position: fixed;
+  left: 18px;
+  bottom: 20px;
+  z-index: 40;
+  pointer-events: none;
+  background: var(--nudge-bg);
+  color: var(--nudge-ink);
+  border: 1.5px solid var(--nudge-ink);
+  border-radius: 14px;
+  padding: 9px 16px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13.5px;
+  letter-spacing: 0.2px;
+  /* in after a beat, so it reads as a nudge rather than page furniture */
+  opacity: 0;
+  transform: translateY(8px);
+  animation: nudge-in 0.4s ease-out 0.9s forwards;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+/* the bubble's tail — a rotated square sharing the fill and two borders */
+.scroll-nudge::after {
+  content: '';
+  position: absolute;
+  left: 16px;
+  bottom: -6px;
+  width: 10px;
+  height: 10px;
+  background: var(--nudge-bg);
+  border-left: 1.5px solid var(--nudge-ink);
+  border-bottom: 1.5px solid var(--nudge-ink);
+  transform: rotate(-45deg);
+}
+
+.scroll-nudge--ice {
+  --nudge-bg: #ddf2f8;
+  --nudge-ink: #152638;
+}
+
+.scroll-nudge--pink {
+  --nudge-bg: #f3dfef;
+  --nudge-ink: #431232;
+}
+
+/* hidden once the taker has scrolled — and stays hidden */
+.scroll-nudge--hidden {
+  animation: none;
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+@keyframes nudge-in {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-nudge {
+    animation-duration: 0.01s;
+    animation-delay: 0s;
+  }
+}
+
+@media (max-width: 600px) {
+  .scroll-nudge {
+    left: 14px;
+    bottom: 16px;
+    padding: 8px 13px;
+    font-size: 12.5px;
+  }
+}
