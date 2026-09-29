@@ -767,8 +767,9 @@ export const PILLAR_ONE_FLOW = {
   line1: 'Evoking curiosity about their symptoms is how you make more money out of every visitor.',
   line2: 'And leading with diagnosing their symptoms is how you evoke maximum curiosity.',
   // Doc: "This is the first Pillar of the Compounding RPV™ OS." — design chip
-  // drops the ™; doc wins, flagged.
-  chip: 'This is the first Pillar of the Compounding RPV™ OS.',
+  // drops the ™; doc wins, flagged. OS name in full per Alefiya's C4 rule
+  // (Sep 29): always "Compounding Revenue per Visitor™ OS".
+  chip: 'This is the first Pillar of the Compounding Revenue per Visitor™ OS.',
   // Corrected figures (Yemi, Sep 26): 3% ready to buy, 7% open to it, 60%
   // not yet considering — matches the Pillar One pie (Sep 29).
   para1: 'After the diagnostic workshop, if your Maximise Revenue Per Visitor™ score came back low, this is usually the reason. The page is built for the 3% ready to buy and 7% that are open to it, not the 60% in consideration mode.',
@@ -1228,7 +1229,7 @@ export const NOT_JUST_SITE = {
     'over time instead of disappearing after one interaction.',
   ],
   goalLines: [
-    'That’s the real goal of the Compounding RPV™ OS.',
+    'That’s the real goal of the Compounding Revenue per Visitor™ OS.',
     'Not another funnel duct-taped onto an already',
     'chaotic customer journey.',
   ],

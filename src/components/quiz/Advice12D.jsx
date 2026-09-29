@@ -90,7 +90,7 @@ export default function Advice12D({ onBack, onContinue }) {
             </span>
             <h3 className="a12__card-title">The contradiction</h3>
             <p className="a12__card-text">
-              A Contrarian POV creates that contradiction it makes them
+              A Contrarian POV™ creates that contradiction it makes them
               question their old way and start seeing your way as the obvious
               solution.
             </p>
@@ -102,7 +102,7 @@ export default function Advice12D({ onBack, onContinue }) {
             </span>
             <h3 className="a12__card-title">{"Your customer's words"}</h3>
             <p className="a12__card-text">
-              {"Your customer's words tell you which category to own. Here are 9 reasons people buy and 7 reasons they don't. Your Contrarian POV is built on research that identifies which specific trigger is most dominant for your buyer and which hesitation is keeping them stuck. One big idea speaks to all of it simultaneously."}
+              {"Your customer's words tell you which category to own. Here are 9 reasons people buy and 7 reasons they don't. Your Contrarian POV™ is built on research that identifies which specific trigger is most dominant for your buyer and which hesitation is keeping them stuck. One big idea speaks to all of it simultaneously."}
             </p>
           </div>
         </div>
@@ -120,7 +120,7 @@ export default function Advice12D({ onBack, onContinue }) {
         <div className="a12__cta-frame">
           <div className="a12__cta-card">
             <h2 className="a12__cta-head">
-              {'When your Contrarian POV is doing its job, the question stops being "why should I pick you over them" and starts being "why would I pick anyone else."'}
+              {'When your Contrarian POV™ is doing its job, the question stops being "why should I pick you over them" and starts being "why would I pick anyone else."'}
             </h2>
             <h2 className="a12__cta-head">
               {'Bring your '}

@@ -172,7 +172,7 @@ export default function CaseStudyCreative({ theme, onBack, onContinue }) {
             <p className="cs5c__results-body">
               {'by increasing the close rate from '}
               <strong>3.7% to 93.5%</strong>
-              {' with a Contrarian POV that created a '}
+              {' with a Contrarian POV™ that created a '}
               <strong>{'"Market of One"'}</strong>
               {' for him.'}
             </p>
@@ -201,7 +201,7 @@ export default function CaseStudyCreative({ theme, onBack, onContinue }) {
               Offer Supports POV
             </span>
             <p className="cs5a__atext">
-              {'All the features of the offer now support the Contrarian POV '}
+              {'All the features of the offer now support the Contrarian POV™ '}
               <strong>{'"Creative Delivery."'}</strong>
             </p>
           </div>
@@ -212,7 +212,7 @@ export default function CaseStudyCreative({ theme, onBack, onContinue }) {
       <section className="cs5c__closing">
         {/* no label above: it made the line read like a question (Yemi, Sep 26) */}
         <h2 className="cs5c__closing-head">
-          {'Contrarian POV is your stand against the majority of look-alike competitors, so you can become '}
+          {'Contrarian POV™ is your stand against the majority of look-alike competitors, so you can become '}
           <HighlightSweep tone={sweepToneFor(theme.name)}>
             the default choice
           </HighlightSweep>

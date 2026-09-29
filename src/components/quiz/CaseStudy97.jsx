@@ -140,7 +140,7 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
 
       {/* ============ 3. AFTER THE OS — zigzag cards ============ */}
       <section className="cs5b__after">
-        <h2 className="cs5b__after-head">After the Compounding RPV™ OS:</h2>
+        <h2 className="cs5b__after-head">After the Compounding Revenue per Visitor™ OS:</h2>
 
         <div className="cs5b__cards">
           <div className="cs5b__card cs5b__card--left">

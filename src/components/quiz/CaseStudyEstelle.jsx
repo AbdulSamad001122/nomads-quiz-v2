@@ -120,7 +120,7 @@ export default function CaseStudyEstelle({ theme, onBack, onContinue }) {
           <div className="cs5e__col">
             <h2 className="cs5a__ba-head">
               {'Before'}
-              <span>Compounding RPV OS:</span>
+              <span>Compounding Revenue per Visitor™ OS:</span>
             </h2>
 
             <div className="cs5a__bcard">
@@ -163,7 +163,7 @@ export default function CaseStudyEstelle({ theme, onBack, onContinue }) {
           <div className="cs5e__col">
             <h2 className="cs5a__ba-head">
               {'After'}
-              <span>Compounding RPV OS:</span>
+              <span>Compounding Revenue per Visitor™ OS:</span>
             </h2>
 
             <div className="cs5a__acard">

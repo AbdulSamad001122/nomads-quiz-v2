@@ -103,11 +103,11 @@ export default function CaseStudyGolfbays({ theme, onBack, onContinue }) {
         <div className="cs5a__ba-grid">
           <h2 className="cs5a__ba-head cs5a__ba-head--before">
             BEFORE
-            <span>Compounding RPV™ OS</span>
+            <span>Compounding Revenue per Visitor™ OS</span>
           </h2>
           <h2 className="cs5a__ba-head cs5a__ba-head--after">
             AFTER
-            <span>Compounding RPV™ OS</span>
+            <span>Compounding Revenue per Visitor™ OS</span>
           </h2>
 
           <div className="cs5a__bcard cs5a__bcard--1">
