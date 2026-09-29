@@ -647,3 +647,39 @@
     width: 100%;
   }
 }
+
+/* ============================================================
+   12C: the infographic sits near the end of the body, before "The
+   feedback loop + sales team tells…" (Yemi, Quiz Changes Doc), instead of
+   straddling the hero. Declared last so it outranks the 12A–D defaults.
+   ============================================================ */
+
+/* nothing overlaps the frame any more, so drop the bottom room it kept
+   for the card (mirrors the frame's top padding at each width) */
+.a12--c .a12__frame {
+  padding-bottom: clamp(70px, 12vh, 150px);
+}
+
+/* in the copy flow: no pull-up, no card padding */
+.a12__info-card--inline {
+  margin: clamp(40px, 7vh, 80px) auto 0;
+  padding: 0;
+}
+
+/* two-panel artwork with small labels — use the full body width so the
+   text stays readable (the "barely readable" fix) */
+.a12--c .a12__info-card--inline .a12__info-img {
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .a12--c .a12__frame {
+    padding-bottom: 60px;
+  }
+}
+
+@media (max-width: 600px) {
+  .a12--c .a12__frame {
+    padding-bottom: 44px;
+  }
+}

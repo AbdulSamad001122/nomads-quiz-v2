@@ -7,8 +7,9 @@ import './Advice12A.css';
 /**
  * Advice slide 12C ("inconsistent months" answer on Q12) — same fixed
  * blue-family layout as 12A/12B (shared a12__ classes) plus a story
- * card for the August/Scoreapp narrative. Placeholders for now: the
- * 12A infographic and icons, to be swapped when 12C assets arrive.
+ * card for the August/Scoreapp narrative. Unlike 12A/B/D its infographic
+ * (the readable redesign, Sep 29) sits near the end of the body, not
+ * straddling the hero.
  */
 export default function Advice12C({ onBack, onContinue }) {
   return (
@@ -42,27 +43,13 @@ export default function Advice12C({ onBack, onContinue }) {
               Continue
             </button>
           </div>
-
-          <div className="a12__info-card a12__info-card--top">
-            <img
-              className="a12__info-img"
-              src="/assets/advice-12c-infographic.webp"
-              alt="Teams without a feedback loop working in silos: content, ads, sales, customer service, revenue"
-            />
-          </div>
         </div>
       </section>
 
       {/* ---------- ice-blue body ---------- */}
+      {/* No infographic up here on 12C: it sits near the end, before "The
+          feedback loop + sales team tells…" (Yemi, Quiz Changes Doc). */}
       <section className="a12__body">
-        <div className="a12__info-card a12__info-card--body">
-          <img
-            className="a12__info-img"
-            src="/assets/advice-12c-infographic.webp"
-            alt="Teams without a feedback loop working in silos: content, ads, sales, customer service, revenue"
-          />
-        </div>
-
 
         {/* the August story */}
         <div className="a12__story">
@@ -172,6 +159,16 @@ export default function Advice12C({ onBack, onContinue }) {
         <p className="a12__punch">
           {"You just don't have the number that connects everything."}
         </p>
+
+        <div className="a12__info-card a12__info-card--inline">
+          <img
+            className="a12__info-img"
+            src="/assets/advice-12c-infographic.webp"
+            alt="Without a feedback loop, each team works on its own metrics and good months feel like luck. With a data-led feedback loop, content, ads, sales and customer service each support the next: shared data, better decisions, more revenue."
+            width="2480"
+            height="1452"
+          />
+        </div>
 
         <p className="a12__para-block a12__para-block--spaced">
           The feedback loop + sales team tells which calls have been the best
