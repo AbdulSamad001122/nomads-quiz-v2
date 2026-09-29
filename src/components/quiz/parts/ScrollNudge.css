@@ -15,10 +15,10 @@
   color: var(--nudge-ink);
   border: 2px solid var(--nudge-ink);
   border-radius: 20px;
-  padding: 20px 28px;
+  padding: 26px 36px;
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: 24px;
+  font-size: 33px;
   line-height: 1.15;
   letter-spacing: 0.2px;
   /* in after a beat, so it reads as a nudge rather than page furniture */
@@ -35,7 +35,7 @@
 
 /* the triple down-arrow doodle, sized to the two-line text */
 .scroll-nudge__arrow {
-  height: 48px;
+  height: 55px;
   width: auto;
 }
 
