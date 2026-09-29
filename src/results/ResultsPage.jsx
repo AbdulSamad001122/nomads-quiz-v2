@@ -31,6 +31,7 @@ import NotJustSite from './sections/NotJustSite.jsx';
 import TwoPaths from './sections/TwoPaths.jsx';
 import BookCallCalendar from './sections/BookCallCalendar.jsx';
 import { resolveTokens, anyMetricRed } from './resolveTokens.js';
+import { RED_METRICS_CALL } from './copy.js';
 import './results.css';
 // last, so the shared button hover wins over the per-section rules
 import './result-buttons.css';
@@ -50,8 +51,14 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
       <MetricsSection result={result} tokens={tokens} />
       {/* Red-metrics workshop (Sep 19 doc insert). Yemi ruling 2026-09-21:
           shows for ANY taker with a red table cell — capped included; hides
-          only when nothing is red. */}
-      {anyMetricRed(result) && <RedMetricsWorkshop tokens={tokens} />}
+          only when nothing is red. The call option + calendar after its video
+          is its own section in the GamePlanCta layout (user, Sep 29). */}
+      {anyMetricRed(result) && (
+        <>
+          <RedMetricsWorkshop tokens={tokens} />
+          <GamePlanCta copy={RED_METRICS_CALL} />
+        </>
+      )}
       {/* Copy doc blue box "Blocks 4–7 — Capped-state outcomes" sits here,
           between the metric table and "You can stop at $1.5M." */}
       <ResultBlocks result={result} tokens={tokens} slot="capped" />

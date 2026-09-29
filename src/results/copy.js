@@ -143,11 +143,20 @@ export const RED_METRICS = {
   // Diagnostic video thumbnail slot — asset blocked on video approval
   // (doc comment #7); placeholder box per the design.
   thumbPlaceholder: 'Thumbnail After Workshop',
-  // Straight after the thumbnail, with the live calendar — the doc has them
-  // here and Yemi flagged them missing (Sep 26).
-  callHead: 'Already know you want a second set of expert eyes on your business?',
-  callBody:
-    'Pick a day and time, and bring your Revenue Per Visitor (RPV) number to the C-RPV Game Plan Call with me.',
+};
+
+/**
+ * Call option + live calendar straight after the diagnostic video — the doc
+ * has them there and Yemi flagged them missing (Sep 26). Its own section in
+ * the GamePlanCta layout (user, Sep 29), so the headline is split into the
+ * same plain + accent halves as GAMEPLAN_CTA; words unchanged.
+ */
+export const RED_METRICS_CALL = {
+  headlinePlain: 'Already know you want a second set of',
+  headlineAccent: 'expert eyes on your business?',
+  body: 'Pick a day and time, and bring your Revenue Per Visitor (RPV) number to the C-RPV Game Plan Call with me.',
+  // keeps "C-RPV" from breaking at its hyphen
+  noBreak: 'C-RPV',
 };
 
 /**

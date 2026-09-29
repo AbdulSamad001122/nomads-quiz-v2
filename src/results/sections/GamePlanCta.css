@@ -71,6 +71,10 @@
   width: 100%;
 }
 
+.rgp__nowrap {
+  white-space: nowrap;
+}
+
 /* ——— responsive ——— */
 
 @media (max-width: 1100px) {
