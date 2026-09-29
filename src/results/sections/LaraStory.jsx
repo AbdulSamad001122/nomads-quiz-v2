@@ -1,6 +1,7 @@
 import { LARA_STORY } from '../copy.js';
 import { emphasize } from '../emphasize.jsx';
-import LaraPortrait from './LaraPortrait.jsx';
+import TitledPortrait from './TitledPortrait.jsx';
+import { LARA_PORTRAIT } from './portraits.js';
 import './LaraStory.css';
 
 /**
@@ -37,7 +38,7 @@ export default function LaraStory() {
       </div>
 
       <div className="rls__right">
-        <LaraPortrait className="rls__lara" />
+        <TitledPortrait {...LARA_PORTRAIT} className="rls__lara" />
       </div>
     </section>
   );

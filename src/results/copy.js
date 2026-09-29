@@ -831,6 +831,14 @@ export const LARA_TITLE = [
   'Forbes 30 Under 30',
 ];
 
+// David's title under his name, same treatment as Lara's (Yemi R7, Sep 26;
+// wording from the user, Sep 29 — verbatim).
+export const DAVID_TITLE = [
+  'Owned Media Implementation Partner',
+  'Co-Founder, Riggg + Listen Network',
+  '$50M of B2B services closes',
+];
+
 export const PILLAR_ONE_LARA_QUOTE = {
   quoteBefore: 'Alefiya to me became almost like a',
   quoteHighlight: 'second brain',

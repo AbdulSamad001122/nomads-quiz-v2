@@ -1,0 +1,31 @@
+/* Client portrait + title (TitledPortrait.jsx). Plain white text, no label
+   background (user, Sep 29). Sizes with the portrait (container units) so the
+   title keeps its proportion to the name art at every width, and starts under
+   the name's first letter (--rpo-inset, set per portrait). */
+
+.rpo {
+  container-type: inline-size;
+  margin: 0;
+}
+
+.rpo__img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.rpo__title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 1.6cqi;
+  padding-left: var(--rpo-inset, 0);
+}
+
+.rpo__line {
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(12px, 3.1cqi, 18px);
+  line-height: 1.5;
+}

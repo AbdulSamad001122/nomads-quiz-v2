@@ -1,5 +1,6 @@
 import { PILLAR_ONE_SITUATION3, PILLAR_ONE_LARA_QUOTE } from '../copy.js';
-import LaraPortrait from './LaraPortrait.jsx';
+import TitledPortrait from './TitledPortrait.jsx';
+import { LARA_PORTRAIT } from './portraits.js';
 import './PillarOneSituation3.css';
 
 /**
@@ -36,7 +37,7 @@ export default function PillarOneSituation3() {
       </div>
 
       <div className="rpt__cell rpt__cell--maroon">
-        <LaraPortrait className="rpt__lara" />
+        <TitledPortrait {...LARA_PORTRAIT} className="rpt__lara" />
       </div>
 
       <div className="rpt__cell rpt__cell--cream">

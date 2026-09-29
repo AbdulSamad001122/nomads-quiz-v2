@@ -1,4 +1,6 @@
 import { CLIENT_DAVID } from '../copy.js';
+import TitledPortrait from './TitledPortrait.jsx';
+import { DAVID_PORTRAIT } from './portraits.js';
 import './ClientDavid.css';
 
 function Lines({ lines }) {
@@ -19,13 +21,9 @@ export default function ClientDavid() {
       </span>
 
       <div className="rcd__left">
-        <img
-          className="rcd__david"
-          src="/assets/results-david.webp"
-          alt="David Ledgerwood"
-          width="876"
-          height="1011"
-        />
+        {/* title under his name like Lara's (Yemi R7); the sticky sizing
+            class sits on the figure so photo + title travel together */}
+        <TitledPortrait {...DAVID_PORTRAIT} className="rcd__david" />
       </div>
 
       <div className="rcd__right">

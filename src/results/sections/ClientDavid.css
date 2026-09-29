@@ -54,12 +54,13 @@
   padding: 108px 40px 90px;
 }
 
+/* the portrait figure (photo + title). Its <img> keeps height: auto (in
+   TitledPortrait.css), NOT fit-content — iOS Safari mis-computes fit-content
+   on replaced elements and stretched the portrait to the column height
+   (user, Sep 22, iPhone) */
 .rcd__david {
   display: block;
   width: min(100%, 533px);
-  /* height: auto, NOT fit-content — iOS Safari mis-computes fit-content on
-     replaced elements and stretched the portrait to the column height
-     (user, Sep 22, iPhone) */
   height: auto;
 }
 
