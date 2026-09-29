@@ -5,7 +5,7 @@
 .scroll-nudge {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 14px;
   position: fixed;
   left: 18px;
   bottom: 20px;
@@ -13,12 +13,13 @@
   pointer-events: none;
   background: var(--nudge-bg);
   color: var(--nudge-ink);
-  border: 1.5px solid var(--nudge-ink);
-  border-radius: 14px;
-  padding: 9px 16px;
+  border: 2px solid var(--nudge-ink);
+  border-radius: 20px;
+  padding: 16px 24px;
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: 20.5px;
+  font-size: 24px;
+  line-height: 1.15;
   letter-spacing: 0.2px;
   /* in after a beat, so it reads as a nudge rather than page furniture */
   opacity: 0;
@@ -27,9 +28,14 @@
   transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-/* the triple down-arrow doodle, sized to the text */
+/* two lines: min-content width wraps "Keep scrolling" */
+.scroll-nudge__text {
+  width: min-content;
+}
+
+/* the triple down-arrow doodle, sized to the two-line text */
 .scroll-nudge__arrow {
-  height: 35px;
+  height: 48px;
   width: auto;
 }
 
@@ -37,23 +43,25 @@
 .scroll-nudge::after {
   content: '';
   position: absolute;
-  left: 16px;
-  bottom: -6px;
-  width: 10px;
-  height: 10px;
+  left: 26px;
+  bottom: -10px;
+  width: 17px;
+  height: 17px;
   background: var(--nudge-bg);
-  border-left: 1.5px solid var(--nudge-ink);
-  border-bottom: 1.5px solid var(--nudge-ink);
+  border-left: 2px solid var(--nudge-ink);
+  border-bottom: 2px solid var(--nudge-ink);
   transform: rotate(-45deg);
 }
 
+/* light-blue fill on both families (user, Sep 29); ink follows the slide
+   family — plum on the case studies, navy on the blue a12 family */
 .scroll-nudge--ice {
   --nudge-bg: #ddf2f8;
   --nudge-ink: #152638;
 }
 
 .scroll-nudge--pink {
-  --nudge-bg: #f3dfef;
+  --nudge-bg: #ddf2f8;
   --nudge-ink: #431232;
 }
 
@@ -82,10 +90,17 @@
   .scroll-nudge {
     left: 14px;
     bottom: 16px;
-    padding: 8px 13px;
-    font-size: 12.5px;
+    padding: 12px 18px;
+    font-size: 18px;
+    gap: 11px;
   }
   .scroll-nudge__arrow {
-    height: 16px;
+    height: 37px;
+  }
+  .scroll-nudge::after {
+    left: 20px;
+    bottom: -8px;
+    width: 13px;
+    height: 13px;
   }
 }
