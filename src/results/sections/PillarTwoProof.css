@@ -98,20 +98,6 @@
   flex-shrink: 0;
 }
 
-/* no-photo avatar: plum disc with a white play mark */
-.rqp__avatar--play {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #5d1b4e;
-  color: #ffffff;
-}
-
-.rqp__avatar--play svg {
-  width: 55%;
-  height: 55%;
-}
-
 .rqp__name {
   display: block;
   font-family: var(--font-headline);

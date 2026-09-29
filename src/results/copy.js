@@ -919,9 +919,9 @@ export const PILLAR_TWO_PROOF = {
     {
       variant: 'tan',
       // Whitelabelled (Yemi Sep 26, Alefiya's quiz ruling): first name only
-      // — the user's "Maria" style in 5B — a video-player mark instead of
-      // his photo, and the copy doc's own description instead of a line
-      // that could name his business.
+      // — the user's "Maria" style in 5B — no photo or avatar at all (user,
+      // Sep 29), and the copy doc's own description instead of a line that
+      // could name his business.
       headline: 'Louis went from closing 1 in 29 calls to closing 29 out of 31 calls',
       body: 'Louis went from closing 1 in 29 calls to closing 29 out of 31 calls with his “Creative Delivery” Positioning.',
       avatar: null,
