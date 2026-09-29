@@ -24,7 +24,7 @@ export default function WhatIfYouDid({ result, tokens }) {
           <br />
           {c.headLine2}{' '}
           <br />
-          {c.headLine3Before} <span className="rwi__gain">{tokens.achievable_gain}</span>
+          {c.headLine3Before} <span className="rwi__gain">{tokens.achievable_gain_headline}</span>
           {c.headLine3After}
         </h2>
         <p className="rwi__banner">

@@ -14,17 +14,21 @@ export function resolveTokens(result) {
     // q7*12 if a future copy round brings them back.
     current_rpv: rpvMoney(result.currentRPV),
     goal_rpv: rpvMoney(result.goalRPV),
-    // "But… what if you did?" — max-benchmark gain (Logic Doc capped maths;
-    // display rounds money to the nearest $100).
-    // Yemi ruling (2026-09-15, Q3): the DISPLAYED figure caps at the page's
-    // own $1.5M promise — 77% of takers landed above it, half above 10× their
-    // own revenue. Raw maths and the Kit tag stay untouched. Blocks 5/6 only
-    // fire below $1.5M, so the capped form only ever renders in the
-    // "what if you did" headline.
-    achievable_gain:
-      result.capped.achievableGain >= 1_500_000
-        ? '$1.5M+'
-        : money(result.capped.achievableGain),
+    // Max-benchmark gain (Logic Doc capped maths). Two display forms:
+    //
+    // Blocks 5/6 (fire only below $1.5M) need the real figure — their copy
+    // continues "You're still {{remaining_gap}} short of $1.5M" — so this
+    // token stays the exact money, rounded to the nearest $100 per the doc.
+    achievable_gain: money(result.capped.achievableGain),
+    // "But… what if you did?" headline — the Logic Doc's "Display Rule for
+    // Achievable Gain" (Yemi, Sep 26; re-confirmed to Samad on Slack Sep 29;
+    // REVERSES the Sep-15 Q3 cap): above $1.5M shows the exact number in the
+    // promise's own M-style (the rule's example: "$2.3M/year"), at or under
+    // shows "$1.5M+". Raw maths and the Kit tag stay untouched.
+    achievable_gain_headline:
+      result.capped.achievableGain > 1_500_000
+        ? gainM(result.capped.achievableGain)
+        : '$1.5M+',
     // Block 1 — share of revenue running through the five metrics, already
     // rounded to the nearest 5 by the calculator.
     email_percentage: String(result.block1.emailPercentage),
@@ -37,6 +41,10 @@ export function resolveTokens(result) {
     ).toLocaleString('en-US'),
   };
 }
+
+/* the promise's own "$1.5M" style: one decimal, no trailing .0 ("$2.3M",
+   "$14.8M", "$2M") — the format of the display rule's example */
+const gainM = (x) => `$${(Math.round(x / 100_000) / 10).toFixed(1).replace(/\.0$/, '')}M`;
 
 const pct = (x) => `${Math.round(x * 100)}%`;
 const dollars = (x) => `$${Math.round(x)}`;
