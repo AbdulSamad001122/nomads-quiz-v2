@@ -282,10 +282,14 @@ export default function CaseStudyEstelle({ theme, onBack, onContinue }) {
             </div>
           </div>
 
+          {/* design version without the "0 contacts" / "Tags are changed"
+              parts (Yemi's 5E comment; image from the user, Sep 29) */}
           <img
             className="cs5e__proof"
-            src="/assets/cs-5e-tags.webp"
-            alt="Tags are changed, booked a call is added: 11 were here, 5.2% conversion rate. Leads to sales conversion rate of quiz takers is 5.2%"
+            src="/assets/cs-5e-lead-to-sales.webp"
+            alt="11 were here, 5.2% conversion rate. Leads to sales conversion rate of quiz takers is 5.2%"
+            width="1332"
+            height="1023"
           />
 
           <p className="cs5e__results-closer">
