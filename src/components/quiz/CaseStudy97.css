@@ -461,7 +461,9 @@
 }
 
 .cs5b__eyes-img {
+  display: block;
   width: min(100%, 700px);
+  max-width: 80%;
   height: auto;
 }
 
