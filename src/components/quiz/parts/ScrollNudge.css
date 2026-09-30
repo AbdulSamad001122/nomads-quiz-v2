@@ -1,26 +1,29 @@
-/* "Keep scrolling ↓" hint bubble (ScrollNudge.jsx). Message-bubble shape
-   with a little tail per the user's reference (Sep 29): light brand fill,
-   thin ink border. Fixed bottom-left like the Golfbays popup. */
+/* "KEEP SCROLLING" hint bubble (ScrollNudge.jsx), rebuilt to the user's
+   Sep 30 reference: solid navy message bubble, white Kilimanjaro caps on
+   two lines, centred tail underneath, flick doodle off the top-left
+   corner. Fixed bottom-right per the user's placement screenshot (bubble
+   348x184 at right 110 / bottom 140 on a 1920x1080 window — the values
+   below are those measurements verbatim). */
 
 .scroll-nudge {
-  display: flex;
-  align-items: center;
-  gap: 14px;
   position: fixed;
-  left: 18px;
-  bottom: 20px;
+  right: 110px;
+  bottom: 140px;
   z-index: 40;
   pointer-events: none;
-  background: var(--nudge-bg);
-  color: var(--nudge-ink);
-  border: 2px solid var(--nudge-ink);
-  border-radius: 20px;
-  padding: 26px 36px;
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 33px;
-  line-height: 1.15;
-  letter-spacing: 0.2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #152638;
+  color: #ffffff;
+  border-radius: 16px;
+  padding: 48px 44px 52px;
+  font-family: 'Kilimanjaro Sans', sans-serif;
+  font-weight: 400;
+  font-size: 49px;
+  /* line box hugs the cap height; spacing lives in the gap/padding */
+  line-height: 0.72;
+  text-transform: uppercase;
   /* in after a beat, so it reads as a nudge rather than page furniture */
   opacity: 0;
   transform: translateY(8px);
@@ -28,41 +31,46 @@
   transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-/* two lines: min-content width wraps "Keep scrolling" */
-.scroll-nudge__text {
-  width: min-content;
+.scroll-nudge__line {
+  position: relative;
+  white-space: nowrap;
 }
 
-/* the triple down-arrow doodle, sized to the two-line text */
+.scroll-nudge__line + .scroll-nudge__line {
+  margin-top: 12px;
+}
+
+/* the triple down-arrow doodle rides beside "KEEP", poking above and
+   below the cap height like the reference */
 .scroll-nudge__arrow {
-  height: 55px;
+  position: absolute;
+  left: calc(100% + 12px);
+  top: -11px;
+  height: 61px;
   width: auto;
 }
 
-/* the bubble's tail — a rotated square sharing the fill and two borders */
+/* flick doodle off the top-left corner: right edge on the bubble's left
+   edge, straddling the top edge */
+.scroll-nudge__flick {
+  position: absolute;
+  right: 100%;
+  top: -22px;
+  width: 34px;
+  height: auto;
+}
+
+/* centred tail — a squashed diamond so its sides run steeper than 45° */
 .scroll-nudge::after {
   content: '';
   position: absolute;
-  left: 26px;
-  bottom: -10px;
-  width: 17px;
-  height: 17px;
-  background: var(--nudge-bg);
-  border-left: 2px solid var(--nudge-ink);
-  border-bottom: 2px solid var(--nudge-ink);
-  transform: rotate(-45deg);
-}
-
-/* light-blue fill on both families (user, Sep 29); ink follows the slide
-   family — plum on the case studies, navy on the blue a12 family */
-.scroll-nudge--ice {
-  --nudge-bg: #ddf2f8;
-  --nudge-ink: #152638;
-}
-
-.scroll-nudge--pink {
-  --nudge-bg: #ddf2f8;
-  --nudge-ink: #431232;
+  left: 50%;
+  bottom: -20px;
+  width: 40px;
+  height: 40px;
+  background: #152638;
+  border-radius: 0 0 8px 0;
+  transform: translateX(-50%) scaleX(0.62) rotate(45deg);
 }
 
 /* hidden once the taker has scrolled — and stays hidden */
@@ -86,21 +94,60 @@
   }
 }
 
-@media (max-width: 600px) {
+/* tablets: ~0.7 scale, tucked closer to the corner */
+@media (max-width: 900px) {
   .scroll-nudge {
-    left: 14px;
-    bottom: 16px;
-    padding: 12px 18px;
-    font-size: 18px;
-    gap: 11px;
+    right: 28px;
+    bottom: 70px;
+    border-radius: 12px;
+    padding: 34px 31px 36px;
+    font-size: 34px;
+  }
+  .scroll-nudge__line + .scroll-nudge__line {
+    margin-top: 9px;
   }
   .scroll-nudge__arrow {
-    height: 37px;
+    left: calc(100% + 9px);
+    top: -8px;
+    height: 43px;
+  }
+  .scroll-nudge__flick {
+    top: -16px;
+    width: 24px;
   }
   .scroll-nudge::after {
-    left: 20px;
-    bottom: -8px;
-    width: 13px;
-    height: 13px;
+    bottom: -14px;
+    width: 28px;
+    height: 28px;
+    border-radius: 0 0 6px 0;
+  }
+}
+
+/* phones: ~0.5 scale */
+@media (max-width: 600px) {
+  .scroll-nudge {
+    right: 14px;
+    bottom: 18px;
+    border-radius: 9px;
+    padding: 24px 22px 26px;
+    font-size: 25px;
+  }
+  .scroll-nudge__line + .scroll-nudge__line {
+    margin-top: 6px;
+  }
+  .scroll-nudge__arrow {
+    left: calc(100% + 6px);
+    top: -6px;
+    height: 31px;
+  }
+  .scroll-nudge__flick {
+    top: -11px;
+    width: 17px;
+  }
+  .scroll-nudge::after {
+    bottom: -10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 0 0 4px 0;
   }
 }

@@ -2,16 +2,17 @@ import { useEffect, useState } from 'react';
 import './ScrollNudge.css';
 
 /**
- * "Keep scrolling ↓" hint bubble (Yemi's follow-along ruling, Sep 29 —
- * option 2+3): a small Golfbays-style floating bubble that tells the taker
- * there's more slide below. Fades in shortly after load and hides for good
- * once they've scrolled most of a viewport. Decorative only: aria-hidden,
- * no pointer events, so it can never block a tap.
- *
- * tone: 'pink' on the maroon/green case studies, 'ice' on the blue advice
- * family — the light fills + thin ink border from the user's reference.
+ * "KEEP SCROLLING" hint bubble (Yemi's follow-along ruling, Sep 29 —
+ * option 2+3), rebuilt to the user's Sep 30 reference: solid navy message
+ * bubble fixed at the bottom-right (position per the user's screenshot),
+ * white Kilimanjaro caps on two lines, the triple-arrow doodle beside
+ * "KEEP", a flick doodle off the top-left corner. One design on every
+ * slide family now — callers still pass the old `tone` prop; it's ignored.
+ * Fades in shortly after load and hides for good once they've scrolled
+ * most of a viewport. Decorative only: aria-hidden, no pointer events,
+ * so it can never block a tap.
  */
-export default function ScrollNudge({ tone = 'ice' }) {
+export default function ScrollNudge() {
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
@@ -26,14 +27,16 @@ export default function ScrollNudge({ tone = 'ice' }) {
 
   return (
     <div
-      className={`scroll-nudge scroll-nudge--${tone}${hidden ? ' scroll-nudge--hidden' : ''}`}
+      className={`scroll-nudge${hidden ? ' scroll-nudge--hidden' : ''}`}
       aria-hidden="true"
     >
-      {/* min-content width wraps this onto two lines (user, Sep 29) */}
-      <span className="scroll-nudge__text">Keep scrolling</span>
-      {/* triple down-arrow doodle (landing set), recoloured to the dark
-          plum #431232 (user, Sep 29) */}
-      <img className="scroll-nudge__arrow" src="/assets/scroll-nudge-arrow.png" alt="" />
+      <img className="scroll-nudge__flick" src="/assets/scroll-nudge-flick.png" alt="" />
+      <span className="scroll-nudge__line scroll-nudge__line--keep">
+        Keep
+        {/* triple down-arrow doodle (landing set), white cut */}
+        <img className="scroll-nudge__arrow" src="/assets/scroll-nudge-arrow-white.png" alt="" />
+      </span>
+      <span className="scroll-nudge__line">scrolling</span>
     </div>
   );
 }
