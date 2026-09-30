@@ -27,10 +27,13 @@
 /* ——— table card ——— */
 
 .rfy__card {
-  /* the shadow sits down-left, so leave room on that side */
-  margin: 52px 0 0 26px;
+  /* 68% wide and centred (user, Sep 30) — auto side margins do the
+     centring: justify-self only applies inside grid, and this sits in a
+     block container */
+  width: 68%;
+  margin: 52px auto 0;
   background: #dbeff6 url('/assets/results-ice-paper.webp') center / cover;
-  box-shadow: -26px 26px 0 #0b1216;
+  box-shadow: -16px 16px 0 #16273b;
   padding: 44px 48px 48px;
   container-type: inline-size;
 }
@@ -99,9 +102,12 @@
   .rfy {
     padding: 48px 22px 56px;
   }
+  /* tablet/phones: full width again so the table isn't squeezed further;
+     the left margin leaves room for the shadow */
   .rfy__card {
+    width: auto;
     margin: 36px 0 0 14px;
-    box-shadow: -14px 14px 0 #0b1216;
+    box-shadow: -14px 14px 0 #16273b;
     padding: 26px 20px 28px;
   }
   .rfy__table {
@@ -120,7 +126,7 @@
 @media (max-width: 560px) {
   .rfy__card {
     margin-left: 10px;
-    box-shadow: -10px 10px 0 #0b1216;
+    box-shadow: -10px 10px 0 #16273b;
     /* thin padding so the scaled-down table gets every pixel of width */
     padding: 18px 8px 12px;
   }
