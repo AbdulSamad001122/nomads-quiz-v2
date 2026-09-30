@@ -27,13 +27,6 @@ export default function PillarOneUlcers() {
 
         {p.cards.map((c) => (
           <div className="rpu__card" key={c.text}>
-            {/* a small group for the few who are ready/open, a crowd for the 30s */}
-            <img
-              className="rpu__picto"
-              src={Number(c.num) < 10 ? '/assets/results-people-three.png' : '/assets/results-people-many.png'}
-              alt=""
-              aria-hidden="true"
-            />
             <span className="rpu__num">{c.num}</span>
             <span className="rpu__card-text">{c.text}</span>
           </div>

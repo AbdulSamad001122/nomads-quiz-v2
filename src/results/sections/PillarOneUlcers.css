@@ -60,12 +60,6 @@
   margin-top: 26px;
 }
 
-.rpu__picto {
-  height: 44px;
-  width: auto;
-  flex-shrink: 0;
-}
-
 .rpu__num {
   font-family: var(--font-headline);
   font-weight: 800;
@@ -134,35 +128,10 @@
        within, so drop back to normal flow */
     position: static;
   }
-  /* icon | number | text in one row squeezes the text into a narrow column
-     that breaks every two words. Stack the icon above the number in the left
-     column instead, and let the text span both rows so it sits at the card's
-     true vertical middle rather than down on the number's line. */
   .rpu__card {
     max-width: 100%;
     padding: 16px 18px;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-areas:
-      'icon text'
-      'num  text';
-    justify-items: start;
-    align-items: center;
-    column-gap: 16px;
-    row-gap: 10px;
-  }
-  .rpu__picto {
-    grid-area: icon;
-  }
-  .rpu__num {
-    grid-area: num;
-  }
-  .rpu__card-text {
-    grid-area: text;
-    /* the grid sets justify-items: start, which shrink-wraps every cell —
-       stretch this one so it fills the 1fr column and the lines can centre */
-    justify-self: stretch;
-    text-align: center;
+    gap: 16px;
   }
 }
 
