@@ -56,6 +56,9 @@
 .rmx__headline-line {
   display: block;
   text-wrap: pretty;
+  /* 28px (user, Sep 30), never larger than the question above it — on
+     phones the headline drops to 26px, so this matches it there */
+  font-size: min(28px, 1em);
 }
 
 /* ——— table ——— */

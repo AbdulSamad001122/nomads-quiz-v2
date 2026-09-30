@@ -141,12 +141,10 @@ export default function CaseStudyGolfbays({ theme, onBack, onContinue }) {
               Personalised Recommendations
             </span>
             {/* one paragraph, no pointers (Yemi, Sep 26) — the copy doc's
-                single sentence, its bold kept */}
+                single sentence; no bold (user, Sep 30) */}
             <p className="cs5a__atext">
               {'We reverse-engineered hundreds of their best demos into a personalised product recommendation engine, coupled with '}
-              <strong>
-                {'emotional messaging around the real payoff, such as bonding over Christmas holidays in the room that was of no use before installing a GolfBay'}
-              </strong>
+              {'emotional messaging around the real payoff, such as bonding over Christmas holidays in the room that was of no use before installing a GolfBay'}
             </p>
           </div>
 

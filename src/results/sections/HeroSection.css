@@ -9,7 +9,7 @@
   /* bottom = the old padding minus the removed strip (42px desktop, 66px
      tablet where it wrapped, 49px phone): the same dark space under the
      content that the design showed above the strip */
-  padding: 120px 96px 108px;
+  padding: 70px 96px 108px;
 }
 
 .rhero__grid {
