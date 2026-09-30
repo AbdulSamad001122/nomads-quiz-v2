@@ -649,14 +649,16 @@
 }
 
 /* ============================================================
-   12C: the infographic sits near the end of the body, before "The
-   feedback loop + sales team tells…" (Yemi, Quiz Changes Doc), instead of
-   straddling the hero. Declared last so it outranks the 12A–D defaults.
+   12C and 12D: the infographic sits in the body copy flow instead of
+   straddling the hero (Yemi, Quiz Changes Doc) — 12C before "The feedback
+   loop + sales team tells…", 12D after the three cards. Declared last so
+   it outranks the 12A–D defaults.
    ============================================================ */
 
 /* nothing overlaps the frame any more, so drop the bottom room it kept
    for the card (mirrors the frame's top padding at each width) */
-.a12--c .a12__frame {
+.a12--c .a12__frame,
+.a12--d .a12__frame {
   padding-bottom: clamp(70px, 12vh, 150px);
 }
 
@@ -664,6 +666,12 @@
 .a12__info-card--inline {
   margin: clamp(40px, 7vh, 80px) auto 0;
   padding: 0;
+}
+
+/* 12D keeps the overlap card's side padding, so the brands table renders
+   at the same size it did when it straddled the hero */
+.a12--d .a12__info-card--inline {
+  padding: 0 clamp(18px, 2.4vw, 44px);
 }
 
 /* desktop: 85% of the body width, centred (user, Sep 30) */
@@ -678,7 +686,8 @@
 }
 
 @media (max-width: 900px) {
-  .a12--c .a12__frame {
+  .a12--c .a12__frame,
+  .a12--d .a12__frame {
     padding-bottom: 60px;
   }
   /* two-panel artwork with small labels — tablet and phones keep the full
@@ -689,7 +698,13 @@
 }
 
 @media (max-width: 600px) {
-  .a12--c .a12__frame {
+  .a12--c .a12__frame,
+  .a12--d .a12__frame {
     padding-bottom: 44px;
+  }
+  /* phones: the table takes the full body width, as it did inside the
+     frame before */
+  .a12--d .a12__info-card--inline {
+    padding: 0;
   }
 }

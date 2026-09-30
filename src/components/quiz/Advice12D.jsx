@@ -7,9 +7,9 @@ import ScrollNudge, { scrollToNextSection } from './parts/ScrollNudge.jsx';
 
 /**
  * Advice slide 12D ("price wars / differentiation" answer on Q12) —
- * same fixed blue-family layout as 12A–12C (shared a12__ classes).
- * Placeholders for now per instruction: the 12A infographic and icons,
- * to be swapped when the 12D assets arrive.
+ * same fixed blue-family layout as 12A–12C (shared a12__ classes). Like
+ * 12C, its infographic sits in the body flow (after the three cards), not
+ * straddling the hero.
  */
 export default function Advice12D({ onBack, onContinue }) {
   return (
@@ -48,27 +48,14 @@ export default function Advice12D({ onBack, onContinue }) {
               Follow along
             </button>
           </div>
-
-          <div className="a12__info-card a12__info-card--top">
-            <img
-              className="a12__info-img"
-              src="/assets/advice-12d-infographic.webp"
-              alt="Brands that challenged their category: Patagonia, Slack, HubSpot, Apple, Oatly"
-            />
-          </div>
         </div>
       </section>
 
       {/* ---------- ice-blue body ---------- */}
+      {/* No infographic up here on 12D: the brands table sits after the three
+          cards, before "When your Contrarian POV™ is doing its job…" (copy
+          doc order; Yemi, Quiz Changes Doc row 20). */}
       <section className="a12__body">
-        <div className="a12__info-card a12__info-card--body">
-          <img
-            className="a12__info-img"
-            src="/assets/advice-12d-infographic.webp"
-            alt="Brands that challenged their category: Patagonia, Slack, HubSpot, Apple, Oatly"
-          />
-        </div>
-
         <h2 className="a12__mid-head">
           {'To own a category, you need a '}
           <HighlightSweep tone="navy">Contrarian POV™.</HighlightSweep>
@@ -109,6 +96,17 @@ export default function Advice12D({ onBack, onContinue }) {
           </div>
         </div>
 
+        <div className="a12__info-card a12__info-card--inline">
+          <img
+            className="a12__info-img"
+            src="/assets/advice-12d-infographic.webp"
+            alt="Brands that challenged their category: Patagonia, Slack, HubSpot, Apple, Oatly"
+          />
+        </div>
+
+        <h2 className="a12__closing">
+          {'When your Contrarian POV™ is doing its job, the question stops being "why should I pick you over them" and starts being "why would I pick anyone else."'}
+        </h2>
       </section>
 
       {/* ---------- Your Turn CTA (case-study language) ---------- */}
@@ -121,9 +119,6 @@ export default function Advice12D({ onBack, onContinue }) {
         />
         <div className="a12__cta-frame">
           <div className="a12__cta-card">
-            <h2 className="a12__cta-head">
-              {'When your Contrarian POV™ is doing its job, the question stops being "why should I pick you over them" and starts being "why would I pick anyone else."'}
-            </h2>
             <h2 className="a12__cta-head">
               {'Bring your '}
               <HighlightSweep tone="navy">
