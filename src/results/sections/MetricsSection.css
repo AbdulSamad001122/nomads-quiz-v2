@@ -55,6 +55,7 @@
    left alone on the last line at desktop widths — it doesn't rebalance */
 .rmx__headline-line {
   display: block;
+  margin-top: 22px;
   text-wrap: pretty;
   /* 28px (user, Sep 30), never larger than the question above it — on
      phones the headline drops to 26px, so this matches it there */
