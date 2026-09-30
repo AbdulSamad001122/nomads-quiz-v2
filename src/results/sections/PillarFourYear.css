@@ -124,14 +124,17 @@
 /* below 1100 the lead takes the accordion's shared 26px heading size, and
    below 900 its flush-left rule (PillarsAccordion.css) */
 @media (max-width: 560px) {
+  /* phones: 95% wide, centred (user, Sep 30) */
   .rfy__card {
-    margin-left: 10px;
+    width: 95%;
+    margin: 36px auto 0;
     box-shadow: -10px 10px 0 #16273b;
     /* thin padding so the scaled-down table gets every pixel of width */
     padding: 18px 8px 12px;
   }
   .rfy__heading {
     padding-left: 6px;
+    font-size: 20px;
   }
   /* one line down to 360px phones (it wrapped as a wide box at 16px) */
   .rfy__chip {
