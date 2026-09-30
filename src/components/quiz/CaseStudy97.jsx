@@ -17,7 +17,8 @@ import ScrollNudge, { scrollToNextSection } from './parts/ScrollNudge.jsx';
  *      (cards 01/04 show the doc screenshots inside the blank laptop)
  *   4. Samar Owais — dark band, Lara panel left, testimonial screenshot
  *   5. Audio-tech SaaS — light band, Lara panel right
- *   6. Eyeballs — infographic + the 3% / 97% / third-door blocks +
+ *   6. Eyeballs — market pie (3-7-30-30-30, same art as the results
+ *      page) + the 10%-pool / 60% / third-door blocks +
  *      Curious → Conversion journey chips
  *   7. Your Turn CTA (same structure as 5A)
  * Shares cs5a__* classes for the hero shell, chips and CTA.
@@ -306,8 +307,10 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
         <div className="cs5b__eyes-left">
           <img
             className="cs5b__eyes-img"
-            src="/assets/pie-chart-doodle.png"
-            alt="Out of 100 people, 3% are ready to buy and 97% don't see the problem yet"
+            src="/assets/results-pillar1-pie-market.webp"
+            alt="Pie chart — 3% ready to buy now, 7% are open to it, 30% not thinking about it, 30% don’t think they’re interested, 30% know they’re not interested"
+            width="1000"
+            height="1000"
           />
         </div>
 
@@ -315,27 +318,33 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
           <div className="cs5b__pool">
             <div className="cs5b__pool-block">
               <p className="cs5b__pool-note">
-                Most businesses are fishing in the same crowded 3% pool. The
-                ones already convinced they have a problem, already comparing
-                solutions, already halfway to a decision. That pool is only 3%
-                of your total buyers.
+                Most businesses are fishing in the same crowded 10% pool.
+              </p>
+              <p className="cs5b__pool-note">
+                The 3% who are already convinced they have a problem, already
+                comparing solutions, already halfway to a decision. And the 7%
+                who are open to solving their problem.
               </p>
             </div>
 
             <div className="cs5b__pool-block">
-              <p className="cs5b__pool-lead">
-                {"The other 97% aren't unqualified. They just don't believe they have a problem yet."}
+              <p className="cs5b__pool-note">
+                {"But not all of the other 90% are unqualified — only 30% who know they're not interested."}
               </p>
+              <p className="cs5b__pool-lead">The other 60%?</p>
               <div className="cs5b__bullet">
                 {bulletImg}
-                <p>{"They're not comparing"}</p>
+                <p>
+                  30% are not thinking about it, even though they know they
+                  have a problem.
+                </p>
               </div>
               <div className="cs5b__bullet">
                 {bulletImg}
-                <p>{"They're not even considering"}</p>
+                <p>{"While the other 30% don't think they're interested. They just don't believe they have a problem yet."}</p>
               </div>
               <p className="cs5b__pool-note">
-                {"And a product page won't change that. It'll just confirm what they already thought "}
+                {"They're not comparing; they're not even considering. And a product page won't change that. It'll just confirm what they already thought: "}
                 <strong>{'"not for me."'}</strong>
               </p>
             </div>
@@ -348,7 +357,7 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
                 {"One that challenges their current thinking, surfaces the gap they hadn't named, and educates them without pushing a product."}
               </p>
               <p className="cs5b__pool-strong">
-                A chunk of that 97% starts considering your solution.
+                A chunk of that 60% starts considering your solution.
               </p>
             </div>
           </div>
@@ -409,9 +418,8 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
           <p className="cs5b__cta-para">
             {"And that's exactly what the "}
             <strong>Compounding RPV™ diagnosis</strong>
-            {' is about to show you: '}
-            <strong>your revenue potential</strong>
-            {" when you stop fishing in the 3% and open a door for the 97% who don't yet believe they need you."}
+            {' is about to show you: your revenue potential when you stop fishing in the 3% and open a door for '}
+            <strong>{"the 97% who don't yet believe they need you."}</strong>
           </p>
         </div>
       </section>
