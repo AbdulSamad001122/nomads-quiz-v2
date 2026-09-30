@@ -29,3 +29,14 @@
   font-size: clamp(12px, 3.1cqi, 18px);
   line-height: 1.5;
 }
+
+/* desktop: 20px on all three portraits (user, Sep 30); tablet and phones
+   keep the portrait-relative size above. The 4.74cqi cap only bites when a
+   portrait is too narrow to hold the longest line ("Founder, Literally
+   Academy & LA Digital") at 20px on one line — Situation 03's cell below
+   ~1275px — so it shrinks just enough instead of wrapping. */
+@media (min-width: 1101px) {
+  .rpo__line {
+    font-size: min(20px, 4.74cqi);
+  }
+}
