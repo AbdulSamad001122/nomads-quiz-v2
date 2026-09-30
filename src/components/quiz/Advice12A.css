@@ -666,15 +666,25 @@
   padding: 0;
 }
 
-/* two-panel artwork with small labels — use the full body width so the
-   text stays readable (the "barely readable" fix) */
+/* desktop: 85% of the body width, centred (user, Sep 30) */
 .a12--c .a12__info-card--inline .a12__info-img {
-  width: 100%;
+  width: 85%;
+}
+
+/* the "feedback loop + sales team…" paragraph under the infographic runs
+   wider than 12C's other body copy (user, Sep 30) */
+.a12--c .a12__para-block--loop {
+  max-width: 86ch;
 }
 
 @media (max-width: 900px) {
   .a12--c .a12__frame {
     padding-bottom: 60px;
+  }
+  /* two-panel artwork with small labels — tablet and phones keep the full
+     body width so the text stays readable (the "barely readable" fix) */
+  .a12--c .a12__info-card--inline .a12__info-img {
+    width: 100%;
   }
 }
 

@@ -172,7 +172,7 @@ export default function Advice12C({ onBack, onContinue }) {
           />
         </div>
 
-        <p className="a12__para-block a12__para-block--spaced">
+        <p className="a12__para-block a12__para-block--spaced a12__para-block--loop">
           The feedback loop + sales team tells which calls have been the best
           which messages and positioning is selling. The ad team creates
           5–8 variations of that message, the outlier gets picked by the
