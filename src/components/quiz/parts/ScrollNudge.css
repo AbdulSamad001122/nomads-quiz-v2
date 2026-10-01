@@ -1,14 +1,12 @@
 /* "KEEP SCROLLING" hint bubble (ScrollNudge.jsx), rebuilt to the user's
    Sep 30 reference: solid navy message bubble, white Kilimanjaro caps on
    two lines, centred tail underneath, flick doodle off the top-left
-   corner. Fixed bottom-right per the user's placement screenshot (bubble
-   348x184 at right 110 / bottom 140 on a 1920x1080 window — the values
-   below are those measurements verbatim). */
+   corner. Fixed bottom-right (right 110 / bottom 60 on desktop). */
 
 .scroll-nudge {
   position: fixed;
-  right: 110px;
-  bottom: 140px;
+  right: 45px;
+  bottom: 55px;
   z-index: 40;
   pointer-events: none;
   display: flex;
@@ -16,18 +14,21 @@
   align-items: center;
   background: #152638;
   color: #ffffff;
+  border: 4px solid #ffffff;
   border-radius: 16px;
   padding: 48px 44px 52px;
+  /* soft black halo per the Sep 30 reference (measured: strongest below,
+     ~120px falloff at 2x scale). drop-shadow so the tail + border are
+     included in the silhouette. */
+  filter: drop-shadow(0 10px 32px rgba(0, 0, 0, 0.45));
   font-family: 'Kilimanjaro Sans', sans-serif;
   font-weight: 400;
-  font-size: 49px;
+  font-size: 42px;
   /* line box hugs the cap height; spacing lives in the gap/padding */
   line-height: 0.72;
   text-transform: uppercase;
-  /* in after a beat, so it reads as a nudge rather than page furniture */
-  opacity: 0;
-  transform: translateY(8px);
-  animation: nudge-in 0.4s ease-out 0.9s forwards;
+  /* on screen instantly — no fade-in (user, Oct 1); the transition only
+     eases the fade-out once the taker scrolls */
   transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
@@ -45,8 +46,8 @@
 .scroll-nudge__arrow {
   position: absolute;
   left: calc(100% + 12px);
-  top: -11px;
-  height: 61px;
+  top: -2px;
+  height: 44px;
   width: auto;
 }
 
@@ -60,38 +61,31 @@
   height: auto;
 }
 
-/* centred tail — a squashed diamond so its sides run steeper than 45° */
+/* centred tail — a squashed diamond so its sides run steeper than 45°.
+   Only its two exposed (lower) edges carry the white border; the upper
+   half hides behind the bubble so the outline reads as one silhouette. */
 .scroll-nudge::after {
   content: '';
   position: absolute;
   left: 50%;
-  bottom: -20px;
+  /* dropped by the border width so the diamond's widest points meet the
+     OUTER edge of the bubble's white outline — otherwise its bordered
+     edges poke up past the line as little corner stubs */
+  bottom: -24px;
   width: 40px;
   height: 40px;
+  box-sizing: border-box;
   background: #152638;
+  border-right: 4px solid #ffffff;
+  border-bottom: 4px solid #ffffff;
   border-radius: 0 0 8px 0;
   transform: translateX(-50%) scaleX(0.62) rotate(45deg);
 }
 
 /* hidden once the taker has scrolled — and stays hidden */
 .scroll-nudge--hidden {
-  animation: none;
   opacity: 0;
   transform: translateY(8px);
-}
-
-@keyframes nudge-in {
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .scroll-nudge {
-    animation-duration: 0.01s;
-    animation-delay: 0s;
-  }
 }
 
 /* tablets: ~0.7 scale, tucked closer to the corner */
@@ -99,9 +93,11 @@
   .scroll-nudge {
     right: 28px;
     bottom: 70px;
+    border-width: 3px;
     border-radius: 12px;
     padding: 34px 31px 36px;
     font-size: 34px;
+    filter: drop-shadow(0 7px 22px rgba(0, 0, 0, 0.45));
   }
   .scroll-nudge__line + .scroll-nudge__line {
     margin-top: 9px;
@@ -116,9 +112,11 @@
     width: 24px;
   }
   .scroll-nudge::after {
-    bottom: -14px;
+    bottom: -17px;
     width: 28px;
     height: 28px;
+    border-right-width: 3px;
+    border-bottom-width: 3px;
     border-radius: 0 0 6px 0;
   }
 }
@@ -128,9 +126,11 @@
   .scroll-nudge {
     right: 14px;
     bottom: 18px;
+    border-width: 2px;
     border-radius: 9px;
     padding: 24px 22px 26px;
     font-size: 25px;
+    filter: drop-shadow(0 5px 16px rgba(0, 0, 0, 0.45));
   }
   .scroll-nudge__line + .scroll-nudge__line {
     margin-top: 6px;
@@ -145,9 +145,11 @@
     width: 17px;
   }
   .scroll-nudge::after {
-    bottom: -10px;
+    bottom: -12px;
     width: 20px;
     height: 20px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
     border-radius: 0 0 4px 0;
   }
 }
