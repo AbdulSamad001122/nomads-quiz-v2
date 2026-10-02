@@ -6,10 +6,10 @@ import './Advice12A.css';
 import './Advice12D.css';
 import ScrollNudge, { scrollToNextSection } from './parts/ScrollNudge.jsx';
 
-/* Brands table content, verbatim from the reference image (user, Oct 2 —
-   including Oatly's blue/pink copy repeating Apple's, which is what the
-   reference shows; flagged, awaiting a call). The reference's last ($)
-   column is dropped. */
+/* Brands table content, verbatim from the doc's original table image
+   (user, Oct 2 — it fixes Oatly's boxes, which the designed version had
+   repeating Apple's copy, and adds the "What they all did differently"
+   footer). The designed version's last ($) column stays dropped. */
 const BRANDS = [
   {
     name: 'Patagonia',
@@ -82,12 +82,12 @@ const BRANDS = [
     name: 'Oatly',
     sub: 'FMCG / DTC',
     blue: {
-      quote: '"Faster processors, more RAM, better specs than IBM."',
-      note: 'Competing on features nobody cared about.',
+      quote: '"A dairy-free milk alternative. Better for the lactose intolerant."',
+      note: 'Every alt-milk brand said the same thing.',
     },
     pink: {
-      quote: '"Technology should feel human. Here\'s to the crazy ones who think different."',
-      note: 'Sold identity, not specs. No comparison possible.',
+      quote: '"It\'s like milk, but made for humans. Dairy is weird if you think about it."',
+      note: 'Challenged dairy itself. Became a cult brand.',
     },
     peach: [
       { text: 'Revenue grew from $200M to $700M+ in 3 years.' },
@@ -216,6 +216,13 @@ export default function Advice12D({ onBack, onContinue }) {
               </div>
             </div>
           ))}
+
+          <div className="brt__foot">
+            <p className="brt__foot-head">What they all did differently</p>
+            <p className="brt__foot-text">
+              {"They didn't compete on features. They challenged the category. Price stopped being the comparison. None of them were the cheapest. All of them became the only obvious choice."}
+            </p>
+          </div>
         </div>
 
         <h2 className="a12__closing">
