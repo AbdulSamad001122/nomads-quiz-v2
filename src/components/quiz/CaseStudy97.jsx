@@ -282,7 +282,7 @@ export default function CaseStudy97({ theme, onBack, onContinue }) {
           </p>
         </div>
         <div className="cs5b__photo-panel cs5b__photo-panel--dark">
-          <img src="/assets/cs-5b-innit-audio.webp" alt="" aria-hidden="true" />
+          <img src="/assets/cs-5b-innit-audio-case.webp" alt="" aria-hidden="true" />
         </div>
       </section>
 
