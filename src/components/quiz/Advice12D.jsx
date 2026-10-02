@@ -216,13 +216,6 @@ export default function Advice12D({ onBack, onContinue }) {
               </div>
             </div>
           ))}
-
-          <div className="brt__foot">
-            <p className="brt__foot-head">What they all did differently</p>
-            <p className="brt__foot-text">
-              {"They didn't compete on features. They challenged the category. Price stopped being the comparison. None of them were the cheapest. All of them became the only obvious choice."}
-            </p>
-          </div>
         </div>
 
         <h2 className="a12__closing">
