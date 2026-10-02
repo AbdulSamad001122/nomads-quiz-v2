@@ -40,6 +40,17 @@
   padding: clamp(18px, 2.4vw, 30px) 10px;
 }
 
+/* white brand mark above the name (user, Oct 2). Square glyphs (Slack,
+   HubSpot, Apple) size by height; the wide marks (Patagonia ridge, Oatly
+   wordmark) hit max-width and letterbox via object-fit. */
+.brt__logo {
+  height: clamp(26px, 2.9vw, 36px);
+  width: auto;
+  max-width: 82%;
+  object-fit: contain;
+  margin-bottom: clamp(7px, 0.9vw, 11px);
+}
+
 .brt__brand {
   font-family: var(--font-body);
   font-weight: 700;
@@ -133,6 +144,10 @@
   }
   .brt__name {
     padding: 18px 10px;
+  }
+  .brt__logo {
+    height: 30px;
+    margin-bottom: 8px;
   }
   .brt__brand {
     font-size: 23px;
