@@ -7,7 +7,7 @@
 /* white card on the ice body, same slot the old image card had */
 .brt {
   margin: clamp(40px, 7vh, 80px) auto 0;
-  max-width: 1240px;
+  max-width: 1300px;
   background: #ffffff;
   border: 1px solid #152638;
   border-radius: clamp(14px, 1.9vw, 24px);
