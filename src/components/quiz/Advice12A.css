@@ -668,12 +668,6 @@
   padding: 0;
 }
 
-/* 12D keeps the overlap card's side padding, so the brands table renders
-   at the same size it did when it straddled the hero */
-.a12--d .a12__info-card--inline {
-  padding: 0 clamp(18px, 2.4vw, 44px);
-}
-
 /* desktop: 85% of the body width, centred (user, Sep 30) */
 .a12--c .a12__info-card--inline .a12__info-img {
   width: 85%;
@@ -701,10 +695,5 @@
   .a12--c .a12__frame,
   .a12--d .a12__frame {
     padding-bottom: 44px;
-  }
-  /* phones: the table takes the full body width, as it did inside the
-     frame before */
-  .a12--d .a12__info-card--inline {
-    padding: 0;
   }
 }
