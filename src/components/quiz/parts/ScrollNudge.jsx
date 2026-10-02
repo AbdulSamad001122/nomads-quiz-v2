@@ -30,7 +30,7 @@ export default function ScrollNudge() {
       className={`scroll-nudge${hidden ? ' scroll-nudge--hidden' : ''}`}
       aria-hidden="true"
     >
-      <img className="scroll-nudge__flick" src="/assets/scroll-nudge-flick.png" alt="" />
+      <img className="scroll-nudge__flick" src="/assets/scroll-nudge-flick-white.png" alt="" />
       <span className="scroll-nudge__line scroll-nudge__line--keep">
         Keep
         {/* triple down-arrow doodle (landing set), white cut */}
