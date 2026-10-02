@@ -9,6 +9,7 @@
   margin: clamp(40px, 7vh, 80px) auto 0;
   max-width: 1240px;
   background: #ffffff;
+  border: 1px solid #152638;
   border-radius: clamp(14px, 1.9vw, 24px);
   padding: clamp(14px, 2.2vw, 28px);
   display: grid;
