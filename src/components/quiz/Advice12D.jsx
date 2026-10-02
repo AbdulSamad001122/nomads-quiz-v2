@@ -13,7 +13,6 @@ import ScrollNudge, { scrollToNextSection } from './parts/ScrollNudge.jsx';
 const BRANDS = [
   {
     name: 'Patagonia',
-    logo: '/assets/brt-logo-patagonia.svg',
     sub: 'Retail / DTC',
     blue: {
       quote: '"Premium outdoor gear. Durable. Eco-friendly."',
@@ -31,7 +30,6 @@ const BRANDS = [
   },
   {
     name: 'Slack',
-    logo: '/assets/brt-logo-slack.svg',
     sub: 'SaaS',
     blue: {
       quote: '"A messaging app for teams. Faster than email."',
@@ -49,7 +47,6 @@ const BRANDS = [
   },
   {
     name: 'HubSpot',
-    logo: '/assets/brt-logo-hubspot.svg',
     sub: 'B2B SaaS',
     blue: {
       quote: '"Marketing software to generate more leads faster."',
@@ -66,7 +63,6 @@ const BRANDS = [
   },
   {
     name: 'Apple',
-    logo: '/assets/brt-logo-apple.svg',
     sub: 'Tech',
     blue: {
       quote: '"Faster processors, more RAM, better specs than IBM."',
@@ -84,7 +80,6 @@ const BRANDS = [
   },
   {
     name: 'Oatly',
-    logo: '/assets/brt-logo-oatly.png',
     sub: 'FMCG / DTC',
     blue: {
       quote: '"Faster processors, more RAM, better specs than IBM."',
@@ -198,7 +193,6 @@ export default function Advice12D({ onBack, onContinue }) {
           {BRANDS.map((b) => (
             <div className="brt__co" key={b.name}>
               <div className="brt__name">
-                <img className="brt__logo" src={b.logo} alt="" aria-hidden="true" />
                 <span className="brt__brand">{b.name}</span>
                 <span className="brt__sub">{b.sub}</span>
               </div>
