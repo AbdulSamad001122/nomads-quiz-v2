@@ -13,12 +13,16 @@
   margin: 0 auto;
 }
 
+/* body text, not a heading (user, Oct 4): 20px regular, 48ch measure,
+   centred in the band (flush left ≤900 via PillarsAccordion.css) */
 .r3n__lead {
+  margin: 0 auto;
+  max-width: 48ch;
   text-align: center;
-  font-family: var(--font-headline);
-  font-weight: 800;
-  font-size: 34px;
-  line-height: 1.3;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.6;
   color: #ffffff;
   text-wrap: pretty;
 }
@@ -28,9 +32,6 @@
 @media (max-width: 1200px) {
   .r3n {
     padding: 56px 36px 64px;
-  }
-  .r3n__lead {
-    font-size: 26px;
   }
 }
 

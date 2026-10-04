@@ -272,7 +272,8 @@
   .rpl__panel .rpi__sub,
   .rpl__panel .rpd__sub,
   .rpl__panel .rqp__caption,
-  .rpl__panel .rqw__sub {
+  .rpl__panel .rqw__sub,
+  .rpl__panel .r3n__lead {
     text-align: left;
   }
 }

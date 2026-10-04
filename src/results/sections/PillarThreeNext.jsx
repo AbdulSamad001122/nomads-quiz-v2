@@ -10,7 +10,7 @@ export default function PillarThreeNext() {
   return (
     <div className="r3n">
       <div className="r3n__inner">
-        <h3 className="r3n__lead">{PILLAR_THREE_DEMOS.lead}</h3>
+        <p className="r3n__lead">{PILLAR_THREE_DEMOS.lead}</p>
       </div>
     </div>
   );
