@@ -2,9 +2,9 @@ import { PILLAR_THREE_INTRO } from '../copy.js';
 import './PillarThreeIntro.css';
 
 /**
- * Pillar three — opening split: cream copy panel (the doc's heading as the
- * pillar chip, the tagline, the opening paragraph) and the dark panel with
- * the doc's Jobs-to-be-Done timeline image.
+ * Pillar three — opening split: cream copy panel ("Pillar 03" chip, the
+ * doc's heading, the tagline, the opening paragraph) and the dark panel
+ * with the doc's Jobs-to-be-Done timeline image.
  * Lives inside the pillars accordion (PANELS['03']).
  */
 export default function PillarThreeIntro() {
@@ -16,6 +16,7 @@ export default function PillarThreeIntro() {
         <div className="r3i__body">
           <span className="r3i__chip">{p.chip}</span>
           <h3 className="r3i__headline">{p.headline}</h3>
+          <h4 className="r3i__lead">{p.lead}</h4>
           <p className="r3i__para">{p.para}</p>
         </div>
       </div>

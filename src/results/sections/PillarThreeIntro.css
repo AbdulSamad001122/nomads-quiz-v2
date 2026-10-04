@@ -30,9 +30,6 @@
   font-weight: 800;
   font-size: 27px;
   padding: 5px 18px;
-  /* the doc heading is longer than the siblings' "Pillar 0N" and wraps —
-     even lines, as the other two-line chips do (.rfy__chip) */
-  text-wrap: balance;
 }
 
 .r3i__headline {
@@ -44,8 +41,22 @@
   color: #16273b;
 }
 
-.r3i__para {
+/* the doc's tagline as a subheading, a step below the heading — Pillar
+   two's h4 card-title tier (.rqp__headline: 22 → 19 → 17px), which the
+   accordion's 26px heading rule leaves alone, so it stays smaller than the
+   heading at every width. Gap from the heading as in .rq2__para. */
+.r3i__lead {
   margin-top: 18px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 1.42;
+  color: #16273b;
+}
+
+/* lead-to-paragraph gap as in Pillar four's intro (.rfs__para) */
+.r3i__para {
+  margin-top: 14px;
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 16px;
@@ -85,6 +96,9 @@
     font-size: 21px;
     margin-top: 34px;
   }
+  .r3i__lead {
+    font-size: 19px;
+  }
   .r3i__right {
     padding: 48px 34px;
   }
@@ -117,6 +131,9 @@
   }
   .r3i__headline {
     font-size: 19px;
+  }
+  .r3i__lead {
+    font-size: 17px;
   }
   .r3i__art {
     box-shadow: -7px 7px 0 #ddf2f8;

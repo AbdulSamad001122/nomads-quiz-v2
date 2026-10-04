@@ -1014,10 +1014,10 @@ export const PILLAR_TWO_WORKSHOP = {
    are the CRPV features tabs per Yemi's comments (src/results/crpv). */
 
 export const PILLAR_THREE_INTRO = {
-  // the doc's own heading, in the slot the other pillars' "Pillar 0N" chip
-  // takes — the accordion bar above still reads "Pillar three" (flagged)
-  chip: 'Move Three · Speed to Decision™',
-  headline: 'Take six months of buying arguments, and deliver them in six minutes.',
+  chip: 'Pillar 03', // design-added label, like the other pillars (user, Oct 4)
+  // the doc's heading, under the chip as its own heading (user, Oct 4)
+  headline: 'Move Three · Speed to Decision™',
+  lead: 'Take six months of buying arguments, and deliver them in six minutes.',
   para: 'We all believe customers take loooooonger to buy because they’re more skeptical today. But when we analysed a company’s top customers through Jobs-to-be-Done, we found that the customer who took 6 months to buy versus 6 days went through the same series of messages.',
   imageAlt: 'The Jobs-to-be-Done timeline: First Thought, Passive Looking, Active Looking, Deciding, Buying, Consuming, Satisfaction',
 };
