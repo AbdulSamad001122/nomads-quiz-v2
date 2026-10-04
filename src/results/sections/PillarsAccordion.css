@@ -260,9 +260,11 @@
      alignment lives in one place and shares one breakpoint. Two classes deep
      (0,2,0) so it outranks the per-section rules without !important.
 
-     Deliberately NOT listed: .rpu__lead, which stays centred by request. */
-  .rpl__panel h2,
-  .rpl__panel h3,
+     Deliberately NOT listed: .rpu__lead, which stays centred by request.
+     The Pillar 3 CRPV demos (.crpv-scope) keep their own design, so their
+     headings are excluded — :where() adds no specificity. */
+  .rpl__panel h2:not(:where(.crpv-scope *)),
+  .rpl__panel h3:not(:where(.crpv-scope *)),
   .rpl__panel .rps__caption,
   .rpl__panel .rpp__caption,
   .rpl__panel .rp4__lines,
@@ -281,11 +283,12 @@
    pillar. Scoped to .rpl so the main page is untouched, and the descendant
    selector outranks the per-section rules; declared last so it also beats the
    .rpl__headline sizes set in the 1100px and 640px blocks above.
-   h4 card titles (e.g. .rqp__headline) are a smaller tier and stay as-is. */
+   h4 card titles (e.g. .rqp__headline) are a smaller tier and stay as-is.
+   The Pillar 3 CRPV demos (.crpv-scope) keep their own heading sizes. */
 @media (max-width: 1100px) {
   .rpl__headline,
-  .rpl__panel h2,
-  .rpl__panel h3 {
+  .rpl__panel h2:not(:where(.crpv-scope *)),
+  .rpl__panel h3:not(:where(.crpv-scope *)) {
     font-size: 26px;
   }
 }

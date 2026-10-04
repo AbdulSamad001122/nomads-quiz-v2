@@ -1,0 +1,21 @@
+/* Pillar three — a CRPV features demo as its own full-width section. The
+   demo brings its own white canvas, padding and responsive rules
+   (src/results/crpv/crpv.css); nothing here restyles it. Flush inside the
+   accordion. */
+
+.r3x {
+  background: #ffffff;
+}
+
+/* holds the space while the demo chunk loads, so the page doesn't jump */
+.r3x__wait {
+  min-height: 560px;
+}
+
+/* The Skepticism Sequence's email deck sticks 16px from the viewport top on
+   its own page; here the results nav (70px) is pinned there, so it uses the
+   page's sticky offset instead (the pillar images stick at 94px too). Above
+   900px only — below that the demo makes the deck static itself. */
+.r3x .crpv-scope .deckwrap {
+  top: 94px;
+}

@@ -1,0 +1,79 @@
+/* Fonts for the CRPV demos, under private family names (the generator
+   renames them in the demos' CSS, markup and scripts). The demos were
+   designed against Google Fonts' Montserrat 400–900 + 500 italic and Roboto
+   Mono 500/600, so these families carry exactly those faces — self-hosted:
+   the page's own files from fonts.css plus three latin-subset files it
+   doesn't have. Private names keep these faces out of the page's Montserrat
+   / Roboto Mono families, so nothing outside the demos can change. */
+
+@font-face {
+  font-family: 'CRPV Montserrat';
+  src: url('/fonts/Montserrat-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CRPV Montserrat';
+  src: url('/fonts/Montserrat-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CRPV Montserrat';
+  src: url('/fonts/Montserrat-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CRPV Montserrat';
+  src: url('/fonts/Montserrat-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CRPV Montserrat';
+  src: url('/fonts/Montserrat-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CRPV Montserrat';
+  src: url('/fonts/Montserrat-Black-latin.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CRPV Montserrat';
+  src: url('/fonts/Montserrat-MediumItalic-latin.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CRPV Roboto Mono';
+  src: url('/fonts/RobotoMono-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CRPV Roboto Mono';
+  src: url('/fonts/RobotoMono-SemiBold-latin.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}

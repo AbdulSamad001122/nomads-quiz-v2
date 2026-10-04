@@ -1008,6 +1008,31 @@ export const PILLAR_TWO_WORKSHOP = {
   sub: 'If your Contrarian POV™ score came back low, it’s worth sitting with. It’s the pillar most teams quietly believe is fine. And 99% of the time, it’s the one holding the score down.',
 };
 
+/* ——— Pillar three: Speed to Decision™ ———
+   Source: "speed to decision doc", V5 (Yemi, Oct 1), verbatim. The doc's
+   "V5:" is its version label, not copy. The two "[Insert demo here]" slots
+   are the CRPV features tabs per Yemi's comments (src/results/crpv). */
+
+export const PILLAR_THREE_INTRO = {
+  // the doc's own heading, in the slot the other pillars' "Pillar 0N" chip
+  // takes — the accordion bar above still reads "Pillar three" (flagged)
+  chip: 'Move Three · Speed to Decision™',
+  headline: 'Take six months of buying arguments, and deliver them in six minutes.',
+  para: 'We all believe customers take loooooonger to buy because they’re more skeptical today. But when we analysed a company’s top customers through Jobs-to-be-Done, we found that the customer who took 6 months to buy versus 6 days went through the same series of messages.',
+  imageAlt: 'The Jobs-to-be-Done timeline: First Thought, Passive Looking, Active Looking, Deciding, Buying, Consuming, Satisfaction',
+};
+
+export const PILLAR_THREE_HYPOTHESIS = {
+  para: 'So I had a hypothesis: what if I compressed the time it took to go through those messages, while delivering the architected messages in the order that actually moves the customer toward a decision? Would that increase Revenue Per Visitor™?',
+  chip: 'Guess what? It did.',
+  headBefore: 'Enter the',
+  headHighlight: 'Conversion Quiz™.',
+};
+
+export const PILLAR_THREE_DEMOS = {
+  lead: 'And what follows the Conversion Quiz™ is a Diagnostic Workshop and Skepticism Sequence to help accelerate a customer’s speed to decision within the first 14 days.',
+};
+
 export const PILLAR_FOUR_INTRO = {
   chip: 'Pillar 04', // design-added label (doc heads this "Pillar four — Compounding Revenue per Subscriber™")
   lead: 'Most teams treat a subscriber as a one-off.',

@@ -15,6 +15,10 @@ import PillarTwoBlending from './PillarTwoBlending.jsx';
 import PillarTwoProof from './PillarTwoProof.jsx';
 import PillarTwoLoops from './PillarTwoLoops.jsx';
 import PillarTwoWorkshop from './PillarTwoWorkshop.jsx';
+import PillarThreeIntro from './PillarThreeIntro.jsx';
+import PillarThreeHypothesis from './PillarThreeHypothesis.jsx';
+import PillarThreeDemo from './PillarThreeDemo.jsx';
+import PillarThreeNext from './PillarThreeNext.jsx';
 import PillarFourIntro from './PillarFourIntro.jsx';
 import PillarFourYear from './PillarFourYear.jsx';
 import PillarFourTable from './PillarFourTable.jsx';
@@ -49,6 +53,15 @@ const PANELS = {
       <PillarTwoProof />
       <PillarTwoLoops />
       <PillarTwoWorkshop />
+    </>
+  ),
+  '03': (
+    <>
+      <PillarThreeIntro />
+      <PillarThreeHypothesis />
+      <PillarThreeDemo demo="quiz" />
+      <PillarThreeNext />
+      <PillarThreeDemo demo="workSkep" />
     </>
   ),
   '04': (

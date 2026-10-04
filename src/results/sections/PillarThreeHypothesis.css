@@ -1,0 +1,92 @@
+/* Pillar three — hypothesis banner. Pillar one's "pull the other 60% in"
+   banner (PillarOneCurious.css): topo texture, centred paragraph, 38px
+   headline with one cream/plum highlight. The short "Guess what? It did."
+   line takes Pillar four's notice chip (PillarFourYear.css .rfy__chip).
+   Flush inside the accordion. */
+
+.r3h {
+  background: #1d3230 url('/assets/results-topo-bg.webp') center / cover;
+  padding: 84px 40px 96px;
+  text-align: center;
+}
+
+.r3h__para {
+  margin: 0 auto;
+  max-width: 620px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #f4ede6;
+}
+
+.r3h__line {
+  margin-top: 30px;
+}
+
+.r3h__chip {
+  display: inline-block;
+  background: #ddf2f8;
+  color: #16273b;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 20px;
+  padding: 5px 16px;
+  text-wrap: balance;
+}
+
+.r3h__headline {
+  margin: 26px auto 0;
+  max-width: 924px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 38px;
+  line-height: 1.4;
+  color: #ffffff;
+  text-wrap: balance;
+}
+
+.r3h__hl {
+  background: #f2e6d7;
+  color: #641d4f;
+  padding: 2px 12px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .r3h {
+    padding: 60px 28px 70px;
+  }
+  .r3h__headline {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  .r3h {
+    padding: 44px 18px 52px;
+  }
+  .r3h__headline {
+    font-size: 21px;
+  }
+}
+
+@media (max-width: 560px) {
+  .r3h__chip {
+    font-size: 15px;
+    padding: 5px 10px;
+  }
+}
+
+/* centred copy gets too ragged at phone width — flush left instead */
+@media (max-width: 500px) {
+  .r3h {
+    text-align: left;
+  }
+  .r3h__hl {
+    padding: 2px 6px;
+  }
+}
