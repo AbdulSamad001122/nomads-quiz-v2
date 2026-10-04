@@ -43,6 +43,48 @@
   }
 }
 
+/* Workshop video thumbnail on phones (user, Oct 4): a smaller play button
+   (58 → 44px, its ring and icon scaled to match), and the caption sits right
+   beside it — vertically centred on the button whether it runs one line or
+   two, kept inside the thumbnail. Desktop and tablet stay as designed. */
+@media (max-width: 640px) {
+  .r3x .crpv-scope .thumb .play {
+    left: 14px;
+    bottom: 14px;
+    width: 44px;
+    height: 44px;
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.35);
+  }
+  .r3x .crpv-scope .thumb .play svg {
+    width: 20px;
+    height: 20px;
+    margin-left: 2px;
+  }
+  .r3x .crpv-scope .thumb .thumb-cap {
+    left: 74px;
+    right: 12px;
+    bottom: 36px;
+    transform: translateY(50%);
+    line-height: 1.3;
+  }
+}
+
+/* smallest phones (the demo's own 380px tier): 13px keeps the caption to two
+   lines beside the button */
+@media (max-width: 380px) {
+  .r3x .crpv-scope .thumb .thumb-cap {
+    font-size: 13px;
+  }
+}
+
+/* small phones: the two tab buttons get 8px side padding (user, Oct 4) —
+   the demo's own rule at this width is 8px 2px */
+@media (max-width: 340px) {
+  .r3x .crpv-scope .tab {
+    padding: 8px 8px;
+  }
+}
+
 /* holds the space while the demo chunk loads, so the page doesn't jump */
 .r3x__wait {
   min-height: 560px;

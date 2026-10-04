@@ -283,13 +283,17 @@
    pillar. Scoped to .rpl so the main page is untouched, and the descendant
    selector outranks the per-section rules; declared last so it also beats the
    .rpl__headline sizes set in the 1100px and 640px blocks above.
-   h4 card titles (e.g. .rqp__headline) are a smaller tier and stay as-is.
+   Pillar headings (h3) are 18px; the section headline and h2s stay 26px.
+   h4 card titles (e.g. .rqp__headline) are a separate tier and stay as-is.
    The Pillar 3 CRPV demos (.crpv-scope) keep their own heading sizes. */
 @media (max-width: 1100px) {
   .rpl__headline,
-  .rpl__panel h2:not(:where(.crpv-scope *)),
-  .rpl__panel h3:not(:where(.crpv-scope *)) {
+  .rpl__panel h2:not(:where(.crpv-scope *)) {
     font-size: 26px;
+  }
+  /* 18px pillar headings below desktop (user, Oct 4) */
+  .rpl__panel h3:not(:where(.crpv-scope *)) {
+    font-size: 18px;
   }
 }
 

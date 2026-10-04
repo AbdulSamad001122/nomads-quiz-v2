@@ -26,8 +26,8 @@ export default function PillarThreeIntro() {
           className="r3i__art"
           src="/assets/results-p3-timeline.webp"
           alt={p.imageAlt}
-          width="560"
-          height="403"
+          width="548"
+          height="396"
         />
       </div>
     </div>

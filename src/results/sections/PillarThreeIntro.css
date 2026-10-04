@@ -42,9 +42,10 @@
 }
 
 /* the doc's tagline as a subheading, a step below the heading — Pillar
-   two's h4 card-title tier (.rqp__headline: 22 → 19 → 17px), which the
-   accordion's 26px heading rule leaves alone, so it stays smaller than the
-   heading at every width. Gap from the heading as in .rq2__para. */
+   two's h4 card-title tier (.rqp__headline: 22 → 19px), then the pillars'
+   16px bold lead size below 1100, where the accordion sets the heading
+   itself to 18px; so it stays smaller than the heading at every width.
+   Gap from the heading as in .rq2__para. */
 .r3i__lead {
   margin-top: 18px;
   font-family: var(--font-headline);
@@ -105,6 +106,12 @@
   }
 }
 
+@media (max-width: 1100px) {
+  .r3i__lead {
+    font-size: 16px;
+  }
+}
+
 @media (max-width: 900px) {
   .r3i {
     grid-template-columns: 1fr;
@@ -132,9 +139,6 @@
   }
   .r3i__headline {
     font-size: 19px;
-  }
-  .r3i__lead {
-    font-size: 17px;
   }
   .r3i__art {
     box-shadow: -7px 7px 0 #641d4f;
