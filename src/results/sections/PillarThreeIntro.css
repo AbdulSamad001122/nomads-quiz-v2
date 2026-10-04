@@ -76,11 +76,12 @@
 }
 
 /* the doc's timeline is a white slide — it sits on the dark panel as a card
-   with the navy/ice hard offset shadow the proof cards use (PillarTwoProof) */
+   with a hard offset shadow (PillarTwoProof's offsets) in the results plum
+   the other card shadows use (user, Oct 4: purple) */
 .r3i__art {
   width: min(100%, 560px);
   height: auto;
-  box-shadow: -11px 11px 0 #ddf2f8;
+  box-shadow: -11px 11px 0 #641d4f;
 }
 
 /* ——— responsive ——— */
@@ -136,6 +137,6 @@
     font-size: 17px;
   }
   .r3i__art {
-    box-shadow: -7px 7px 0 #ddf2f8;
+    box-shadow: -7px 7px 0 #641d4f;
   }
 }
