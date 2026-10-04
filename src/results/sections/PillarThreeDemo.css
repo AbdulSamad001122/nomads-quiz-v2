@@ -43,6 +43,15 @@
   }
 }
 
+/* demo section headings 18px on phones (user, Oct 4), matching the pillar
+   headings there — the demo's own size is clamp(28px, 4vw, 44px). The
+   demo's phone tier starts at 640px. */
+@media (max-width: 640px) {
+  .r3x .crpv-scope .p-head h2 {
+    font-size: 18px;
+  }
+}
+
 /* Workshop video thumbnail on phones (user, Oct 4): a smaller play button
    (58 → 44px, its ring and icon scaled to match), and the caption sits right
    beside it — vertically centred on the button whether it runs one line or
