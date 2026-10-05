@@ -4,6 +4,8 @@ dist/
 # secrets — never commit (Kit credentials live in .env.local / Vercel env vars)
 .env
 .env.*
+# …except the template, which only has placeholder values
+!.env.example
 
 # The Kit handover docs in this folder contain the API secret — folder stays
 # ignored; the safe content docs are whitelisted below.
