@@ -1,0 +1,7 @@
+{
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/diagnostic-start-now", "destination": "/index.html" },
+    { "source": "/diagnostic-results", "destination": "/index.html" }
+  ]
+}

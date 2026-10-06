@@ -33,6 +33,15 @@ import { ga } from '../../analytics/ga.js';
 import { buildKitFields, buildKitTags } from '../../kit/kitPayload.js';
 import { pushToKit } from '../../kit/push.js';
 import { DEV_ROUTES_ENABLED } from '../../devRoutes.js';
+import {
+  saveResults,
+  loadResults,
+  clearResults,
+  resultSignature,
+  STORAGE_KEY,
+} from '../../results/savedResults.js';
+import { resultFor } from '../../results/restoreResults.js';
+import { currentRoute, RESULTS_PATH } from '../../routes.js';
 
 /**
  * QuizFlow — the sequencer. Wireframe order: welcome → Q1…Q14 with the
@@ -363,13 +372,38 @@ function devInitialState() {
 
 const DEV_INIT = devInitialState();
 
-export default function QuizFlow() {
-  const [index, setIndex] = useState(DEV_INIT ? DEV_INIT.index : 0);
-  const [answers, setAnswers] = useState(DEV_INIT ? DEV_INIT.answers : {});
-  const [manualValues, setManualValues] = useState({});
+const RESULTS_INDEX = SCREENS.findIndex((s) => s.id === 'results');
+
+/** Address bar → /diagnostic-results without reloading the page. */
+function showResultsAddress() {
+  try {
+    if (currentRoute() !== 'results') {
+      window.history.replaceState(window.history.state, '', RESULTS_PATH);
+    }
+  } catch {
+    /* history API unavailable: the results still show */
+  }
+}
+
+/**
+ * `restored` = { answers, manualValues, sig } from SavedResultsRoute: the
+ * taker's saved results reopened at /diagnostic-results. It starts on the
+ * results screen and never re-fires the completion events (and Kit only ever
+ * fires from the opt-in submit, which a restored page never shows).
+ */
+export default function QuizFlow({ restored = null } = {}) {
+  const [index, setIndex] = useState(
+    restored ? RESULTS_INDEX : DEV_INIT ? DEV_INIT.index : 0
+  );
+  const [answers, setAnswers] = useState(
+    restored ? restored.answers : DEV_INIT ? DEV_INIT.answers : {}
+  );
+  const [manualValues, setManualValues] = useState(
+    restored ? restored.manualValues : {}
+  );
   const [otherText, setOtherText] = useState('');
   const [vocText, setVocText] = useState('');
-  const [dqReason, setDqReason] = useState(DEV_INIT?.dq ?? null);
+  const [dqReason, setDqReason] = useState(restored ? null : DEV_INIT?.dq ?? null);
   // Impossible-answer check currently on screen, and the questions the taker
   // pushed past with "Keep my answers" (Quiz Logics.docx · Manual entry &
   // validation). Overrides tag the Kit record unverified.
@@ -384,6 +418,9 @@ export default function QuizFlow() {
   // cleared as soon as they type again or the screen changes.
   const [manualError, setManualError] = useState(null);
   const advanceTimer = useRef(null);
+  // Signature of the saved results this page is showing (null = not saved,
+  // e.g. storage blocked or a dev jump) — see the stale-results check below.
+  const shownSig = useRef(restored ? restored.sig : null);
 
   const totalQuestions = QUESTIONS.length;
 
@@ -493,8 +530,56 @@ export default function QuizFlow() {
     return themes[themeCycle[(seenPosition - 1) % 3]];
   };
 
+  /* ---------- finished: save the answers + switch the address ----------
+     Runs before the GA effect below, so the completion events already carry
+     the /diagnostic-results address. A restored page was saved on its first
+     showing, and dev ?goto= jumps never touch the visitor's saved results. */
+  useEffect(() => {
+    if (restored || DEV_INIT || dqReason) return;
+    if (SCREENS[index].id !== 'results') return;
+    const result = resultFor(answers, manualValues);
+    if (!result) return; // "missing numbers" screen: nothing to keep
+    const sig = resultSignature(result);
+    if (saveResults({ answers, manualValues, sig })) shownSig.current = sig;
+    showResultsAddress();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [index, dqReason]);
+
+  /* ---------- never leave old results on screen ----------
+     A results page that is already open must not keep showing results the
+     taker has since replaced: a new attempt started in another tab (the save
+     was deleted), another tab finished a newer quiz, or the browser brought
+     this page back from its back/forward cache after a retake. When the save
+     no longer matches what this page shows, reopen /diagnostic-results, which
+     shows the latest saved results or sends the taker to the start. Pages
+     whose results were never saved (storage blocked, dev jumps) are left
+     alone. */
+  useEffect(() => {
+    if (dqReason || SCREENS[index].id !== 'results') return undefined;
+    const recheck = () => {
+      if (!shownSig.current) return;
+      const saved = loadResults();
+      if (!saved || saved.sig !== shownSig.current) {
+        window.location.replace(RESULTS_PATH + window.location.search);
+      }
+    };
+    const onStorage = (e) => {
+      if (e.key === null || e.key === STORAGE_KEY) recheck();
+    };
+    const onPageShow = (e) => {
+      if (e.persisted) recheck();
+    };
+    window.addEventListener('storage', onStorage);
+    window.addEventListener('pageshow', onPageShow);
+    return () => {
+      window.removeEventListener('storage', onStorage);
+      window.removeEventListener('pageshow', onPageShow);
+    };
+  }, [index, dqReason]);
+
   /* ---------- GA4 view/outcome events (fire when a screen appears) ---------- */
   useEffect(() => {
+    if (restored) return; // reopened results: already counted when first shown
     if (dqReason) {
       ga.disqualified(dqReason);
       return;
@@ -695,6 +780,8 @@ export default function QuizFlow() {
       return (
         <WelcomeScreen
           onStart={() => {
+            // A new attempt: earlier saved results must never show again.
+            clearResults();
             ga.quizStart();
             next();
           }}

@@ -30,6 +30,10 @@ export async function pushToKit({ email, firstName, fields, tags = [] }) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
+      // The results show while this is still in flight; keepalive lets the
+      // browser finish sending it even if the taker refreshes /diagnostic-
+      // results or closes the tab straight away.
+      keepalive: true,
     });
     const body = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(body.error || `HTTP ${res.status}`);

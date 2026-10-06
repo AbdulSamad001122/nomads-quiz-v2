@@ -7,9 +7,12 @@ import DevAnswerCheck from './DevAnswerCheck.jsx';
 import DevAdCopy from './DevAdCopy.jsx';
 import { themes } from './data/themes.js';
 import { DEV_ROUTES_ENABLED } from './devRoutes.js';
+import { currentRoute } from './routes.js';
+import SavedResultsRoute from './results/SavedResultsRoute.jsx';
 
 /**
  * Default: the real quiz flow (welcome → Q1…Q14 → opt-in → results).
+ * /diagnostic-results → the taker's saved results (SavedResultsRoute).
  * ?preview            → the original 9-template preview page.
  * ?results=<scenario> → dev preview of the results page. One scenario per
  *   conditional case; see SCENARIOS in DevResults.jsx, or ?slides for links.
@@ -39,5 +42,7 @@ export default function App() {
         />
       );
   }
+  // /diagnostic-results: the taker's saved results (or back to the start).
+  if (currentRoute() === 'results') return <SavedResultsRoute />;
   return <QuizFlow />;
 }

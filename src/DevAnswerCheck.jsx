@@ -73,11 +73,11 @@ export default function DevAnswerCheck({ which }) {
 
       <p style={{ marginTop: 30, fontSize: 13, opacity: 0.6 }}>
         Other case:{' '}
-        <a href={which === 'email' ? '/?check=subs' : '/?check=email'} style={{ color: '#e4fbff' }}>
+        <a href={which === 'email' ? '/diagnostic-start-now?check=subs' : '/diagnostic-start-now?check=email'} style={{ color: '#e4fbff' }}>
           {which === 'email' ? 'subscribers vs visitors' : 'email revenue vs total revenue'}
         </a>
         {'  ·  '}
-        <a href="/?slides" style={{ color: '#e4fbff' }}>back to the slide gallery</a>
+        <a href="/diagnostic-start-now?slides" style={{ color: '#e4fbff' }}>back to the slide gallery</a>
       </p>
 
       {open ? (

@@ -65,9 +65,9 @@ export default function DevAdCopy() {
         Read live from AD_SPEND in copy.js, in page order — this sheet can’t drift from the real page.
         The whole module is hidden when Q7c was skipped (no paid ads). No copy ever swaps in this
         module — only the numbers change and whether the slider/section exist.
-        See it rendered: <a href="/?results=ad-fixed" style={{ color: '#e4fbff' }}>fixed share</a> ·{' '}
-        <a href="/?results=ad-slider" style={{ color: '#e4fbff' }}>with slider</a> ·{' '}
-        <a href="/?slides" style={{ color: '#e4fbff' }}>slide gallery</a>
+        See it rendered: <a href="/diagnostic-start-now?results=ad-fixed" style={{ color: '#e4fbff' }}>fixed share</a> ·{' '}
+        <a href="/diagnostic-start-now?results=ad-slider" style={{ color: '#e4fbff' }}>with slider</a> ·{' '}
+        <a href="/diagnostic-start-now?slides" style={{ color: '#e4fbff' }}>slide gallery</a>
       </p>
       <p style={{ fontSize: 12, opacity: 0.7, maxWidth: 760 }}>
         {Object.values(TAGS).map((t) => (
