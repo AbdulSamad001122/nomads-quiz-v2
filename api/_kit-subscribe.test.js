@@ -1,5 +1,7 @@
 /**
- * Serverless handler validation — run with:  node api/kit-subscribe.test.js
+ * Serverless handler validation — run with:  node api/_kit-subscribe.test.js
+ *   (the leading underscore keeps Vercel from publishing this file as a
+ *   function — every other file in api/ becomes a public endpoint)
  * Mocks the Kit API (no network) and asserts the handler's behavior:
  * method guard, env guard, email guard, tag find-or-create, subscribe call
  * shape, and error propagation.
