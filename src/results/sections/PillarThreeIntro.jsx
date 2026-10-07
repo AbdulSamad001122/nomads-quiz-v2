@@ -4,7 +4,8 @@ import './PillarThreeIntro.css';
 /**
  * Pillar three — opening split: cream copy panel ("Pillar 03" chip, the
  * doc's heading, the tagline, the opening paragraph) and the dark panel
- * with the doc's Jobs-to-be-Done timeline image.
+ * with the "THE TIMELINE" title (coded) over the Jobs-to-be-Done
+ * timeline image.
  * Lives inside the pillars accordion (PANELS['03']).
  */
 export default function PillarThreeIntro() {
@@ -22,13 +23,16 @@ export default function PillarThreeIntro() {
       </div>
 
       <div className="r3i__right">
-        <img
-          className="r3i__art"
-          src="/assets/results-p3-timeline.webp"
-          alt={p.imageAlt}
-          width="548"
-          height="396"
-        />
+        <div className="r3i__figure">
+          <h4 className="r3i__art-title">{p.imageTitle}</h4>
+          <img
+            className="r3i__art"
+            src="/assets/results-p3-timeline-journey.webp"
+            alt={p.imageAlt}
+            width="1120"
+            height="808"
+          />
+        </div>
       </div>
     </div>
   );

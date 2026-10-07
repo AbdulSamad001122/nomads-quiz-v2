@@ -76,11 +76,30 @@
   padding: 60px 56px;
 }
 
-/* the doc's timeline is a white slide — it sits on the dark panel as a card
-   with a hard offset shadow (PillarTwoProof's offsets) in the results plum
-   the other card shadows use (user, Oct 4: purple) */
-.r3i__art {
+/* title + timeline card share one column, so the title lines up with the
+   card's left edge at every width */
+.r3i__figure {
   width: min(100%, 560px);
+}
+
+/* "THE TIMELINE" — coded above the image (user, Oct 7) in the pillar's
+   heading style (.r3i__headline: font, weight, and the same size at every
+   width: 25 → 21 → the accordion's 18px), white on the dark panel */
+.r3i__art-title {
+  margin-bottom: 22px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 25px;
+  line-height: 1.45;
+  color: #ffffff;
+}
+
+/* the timeline image sits on the dark panel as a card with a hard offset
+   shadow (PillarTwoProof's offsets) in the results plum the other card
+   shadows use (user, Oct 4: purple) */
+.r3i__art {
+  display: block;
+  width: 100%;
   height: auto;
   box-shadow: -11px 11px 0 #641d4f;
 }
@@ -104,11 +123,20 @@
   .r3i__right {
     padding: 48px 34px;
   }
+  .r3i__art-title {
+    font-size: 21px;
+    margin-bottom: 18px;
+  }
 }
 
 @media (max-width: 1100px) {
   .r3i__lead {
     font-size: 16px;
+  }
+  /* the accordion sets the pillar heading to 18px here (PillarsAccordion.css);
+     the image title follows it so it's never bigger than the heading */
+  .r3i__art-title {
+    font-size: 18px;
   }
 }
 
@@ -128,7 +156,7 @@
   .r3i__right {
     padding: 44px 26px;
   }
-  .r3i__art {
+  .r3i__figure {
     width: min(100%, 380px);
   }
 }
@@ -139,6 +167,9 @@
   }
   .r3i__headline {
     font-size: 19px;
+  }
+  .r3i__art-title {
+    margin-bottom: 14px;
   }
   .r3i__art {
     box-shadow: -7px 7px 0 #641d4f;
