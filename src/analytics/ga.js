@@ -35,8 +35,10 @@ export function initGA() {
   window.gtag('js', new Date());
   // In dev, tag traffic as "internal" so a GA4 Internal-Traffic data filter
   // (Active + Exclude) keeps local testing out of production reports.
-  const config = { debug_mode: DEBUG };
-  if (DEBUG) config.traffic_type = 'internal';
+  // Production must NOT send debug_mode at all: GA4 treats the parameter's
+  // presence as debug traffic, even when it is false ("setting the parameter
+  // to false doesn't disable debug mode", GA4 Help 7201382).
+  const config = DEBUG ? { debug_mode: true, traffic_type: 'internal' } : {};
   window.gtag('config', GA_ID, config);
 }
 
