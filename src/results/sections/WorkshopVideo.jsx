@@ -69,35 +69,57 @@ export default function WorkshopVideo({ className = '', posterAlt = '' }) {
     let created = false;
     let player = null;
     let playerReady = false;
-    let inView = false;
+    let readyTimer = null;
+    let inView = false; // reached the play line (half visible) since last leaving
+    let ratio = canObserve ? 0 : 1; // latest visible share of the frame
     let viewerStopped = false; // the viewer paused it, or it ended
-    let ourPause = false; // the next PAUSED event is our scroll-out pause
+    let ourPauseAt = -Infinity; // when we last paused it ourselves
 
     // YouTube swaps this element for its iframe. It lives in a slot React
     // renders empty, so React never touches what YouTube puts there.
     const mount = document.createElement('div');
     slot.appendChild(mount);
 
+    let playAsked = false; // we asked it to play and haven't paused it since
+
     const play = () => {
-      if (autoplay && playerReady && inView && !viewerStopped) player.playVideo();
+      if (autoplay && playerReady && inView && !viewerStopped) {
+        playAsked = true;
+        player.playVideo();
+      }
     };
 
+    const pauseNow = () => {
+      playAsked = false;
+      ourPauseAt = Date.now();
+      player.pauseVideo();
+    };
+
+    // also when the player hasn't yet reported a play we just asked for
     const pause = () => {
       if (!playerReady) return;
-      const YT = window.YT;
+      const S = window.YT.PlayerState;
       const state = player.getPlayerState();
-      if (state === YT.PlayerState.PLAYING || state === YT.PlayerState.BUFFERING) {
-        ourPause = true;
-        player.pauseVideo();
-      }
+      if (playAsked || state === S.PLAYING || state === S.BUFFERING) pauseNow();
+    };
+
+    const clearReadyTimer = () => {
+      if (readyTimer) clearTimeout(readyTimer);
+      readyTimer = null;
     };
 
     const create = () => {
       if (created) return;
       created = true;
+      // YouTube never got going (script or player blocked, or stalled): the
+      // thumbnail becomes a link to the video instead of a dead image
+      readyTimer = setTimeout(() => {
+        if (!cancelled && !playerReady) setFailed(true);
+      }, 15000);
       loadYouTubeApi()
         .then((YT) => {
           if (cancelled) return;
+          const S = YT.PlayerState;
           player = new YT.Player(mount, {
             videoId: WORKSHOP_VIDEO_ID,
             host: 'https://www.youtube-nocookie.com',
@@ -105,19 +127,43 @@ export default function WorkshopVideo({ className = '', posterAlt = '' }) {
             events: {
               onReady: () => {
                 if (cancelled) return;
+                clearReadyTimer();
                 const iframe = player.getIframe();
                 if (iframe) iframe.title = VIDEO_TITLE;
                 playerReady = true;
+                setFailed(false);
                 setReady(true);
                 play();
               },
+              onError: () => {
+                if (cancelled) return;
+                clearReadyTimer();
+                setReady(false);
+                setFailed(true);
+              },
               onStateChange: (e) => {
-                if (e.data === YT.PlayerState.PLAYING) {
-                  viewerStopped = false;
-                } else if (e.data === YT.PlayerState.PAUSED) {
-                  if (ourPause) ourPause = false;
-                  else viewerStopped = true;
-                } else if (e.data === YT.PlayerState.ENDED) {
+                if (e.data === S.PLAYING || e.data === S.BUFFERING) {
+                  // a play we asked for can land after a fast scroll has
+                  // already taken the frame off screen: stop it there
+                  if (ratio < PAUSE_BELOW) {
+                    pauseNow();
+                    return;
+                  }
+                  if (e.data === S.PLAYING) {
+                    viewerStopped = false;
+                    ourPauseAt = -Infinity;
+                  }
+                } else if (e.data === S.PAUSED) {
+                  // the viewer's pause, unless it was ours or the browser's
+                  // (hidden tab, or the frame off screen). Our pause counts
+                  // for the first PAUSED only, so a viewer pause right after
+                  // still sticks.
+                  const ours = Date.now() - ourPauseAt < 1500;
+                  ourPauseAt = -Infinity;
+                  if (!ours && ratio >= PAUSE_BELOW && !document.hidden) {
+                    viewerStopped = true;
+                  }
+                } else if (e.data === S.ENDED) {
                   viewerStopped = true;
                 }
               },
@@ -125,7 +171,9 @@ export default function WorkshopVideo({ className = '', posterAlt = '' }) {
           });
         })
         .catch(() => {
-          if (!cancelled) setFailed(true);
+          if (cancelled) return;
+          clearReadyTimer();
+          setFailed(true);
         });
     };
 
@@ -133,6 +181,7 @@ export default function WorkshopVideo({ className = '', posterAlt = '' }) {
       create();
       return () => {
         cancelled = true;
+        clearReadyTimer();
         if (player && typeof player.destroy === 'function') player.destroy();
         slot.replaceChildren();
       };
@@ -151,16 +200,18 @@ export default function WorkshopVideo({ className = '', posterAlt = '' }) {
     );
 
     const viewObserver = new IntersectionObserver(
-      ([entry]) => {
+      (entries) => {
+        // several updates can queue up on a busy page: the last is current
+        const entry = entries[entries.length - 1];
+        ratio = entry.intersectionRatio;
         // a frame taller than a short screen can never be half visible, so
         // filling half the screen counts as well
         const shown =
-          entry.intersectionRatio >= PLAY_AT ||
-          entry.intersectionRect.height >= window.innerHeight * PLAY_AT;
+          ratio >= PLAY_AT || entry.intersectionRect.height >= window.innerHeight * PLAY_AT;
         if (shown) {
           inView = true;
           play();
-        } else if (entry.intersectionRatio < PAUSE_BELOW) {
+        } else if (ratio < PAUSE_BELOW) {
           inView = false;
           pause();
         }
@@ -173,6 +224,7 @@ export default function WorkshopVideo({ className = '', posterAlt = '' }) {
 
     return () => {
       cancelled = true;
+      clearReadyTimer();
       loadObserver.disconnect();
       viewObserver.disconnect();
       if (player && typeof player.destroy === 'function') player.destroy();
@@ -194,7 +246,7 @@ export default function WorkshopVideo({ className = '', posterAlt = '' }) {
         width="2080"
         height="1170"
       />
-      {failed && (
+      {failed && !ready && (
         <a
           className="wv__fallback"
           href={WATCH_URL}
