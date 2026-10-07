@@ -276,7 +276,7 @@ function (document, window, setInterval, setTimeout, ResizeObserver) {
         +'<div class="res-block"><b>Your result</b><span>What their answers add up to, in their language.</span></div>'
         +'<div class="res-block"><b>Workshop video</b><span>Your IP, proving the argument they just agreed with.</span></div>'
         +'<div class="res-block"><b>Book a call</b><span>The offer, and the reasons to say yes now.</span></div>'
-        +'<a class="ph-cta" href="https://rpv-landing-page-v3.vercel.app/" target="_blank" rel="noopener">Take the Nomads quiz for a live demo</a>'
+        +'<a class="ph-cta" href="https://diagnostic.nomadsmarketing.co/opt-in" target="_blank" rel="noopener">Take the Nomads quiz for a live demo</a>'
         +'<p class="real">That was 1 of multiple routes. A real Conversion Quiz\u2122 is built on your Contrarian POV\u2122, mapped across the four Cs, and written from customer research.</p>';
     } else if(sc.q){
       html+='<p class="ph-q">'+esc(sc.q)+'</p><div class="opts">'
