@@ -1,6 +1,7 @@
 import { RED_METRICS } from '../copy.js';
 import { emphasize } from '../emphasize.jsx';
 import { ga } from '../../analytics/ga.js';
+import WorkshopVideo from './WorkshopVideo.jsx';
 import './RedMetricsWorkshop.css';
 
 /**
@@ -81,14 +82,10 @@ export default function RedMetricsWorkshop({ tokens }) {
           </a>
         </div>
 
-        {/* TODO: wire the diagnostic video when it's approved (doc comment
-            #7) — the thumbnail asset landed Sep 21, playback link pending. */}
-        <img
+        {/* the workshop video, autoplaying (muted) once it's in view */}
+        <WorkshopVideo
           className="rmw__thumb"
-          src="/assets/results-workshop-video-thumb.webp"
-          alt="Diagnostic video — Alefiya scoring the four pillars on the board"
-          width="2080"
-          height="1170"
+          posterAlt="Diagnostic video — Alefiya scoring the four pillars on the board"
         />
       </div>
     </section>

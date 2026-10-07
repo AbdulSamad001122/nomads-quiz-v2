@@ -1,5 +1,6 @@
 import { WORKSHOP_INVITE } from '../copy.js';
 import { ga } from '../../analytics/ga.js';
+import WorkshopVideo from './WorkshopVideo.jsx';
 import './WorkshopInvite.css';
 
 const brJoin = (lines) =>
@@ -18,7 +19,7 @@ const brJoin = (lines) =>
  * channels copy and the "revenue growth" highlight headline, the plum
  * "See What's Working" stamp on the seam, then the white half with the
  * pen-and-paper invite (live RPV tokens), the Watch the Workshop button
- * and the clickable thumbnail placeholder.
+ * and the workshop video (WorkshopVideo).
  */
 export default function WorkshopInvite({ tokens }) {
   const c = WORKSHOP_INVITE;
@@ -59,22 +60,12 @@ export default function WorkshopInvite({ tokens }) {
             {c.button}
           </a>
         </div>
-        {/* TODO: wire the workshop video/page URL when it lands — the
-            thumbnail asset arrived Sep 21 (same one as the red-metrics
-            section). */}
-        <a
+        {/* the workshop video (same one as the red-metrics section),
+            autoplaying (muted) once it's in view */}
+        <WorkshopVideo
           className="rwk__thumb"
-          href="#"
-          aria-label="Watch the workshop"
-          onClick={() => ga.ctaClick('watch_workshop')}
-        >
-          <img
-            src="/assets/results-workshop-video-thumb.webp"
-            alt="Diagnostic video — Alefiya scoring the four pillars on the board"
-            width="2080"
-            height="1170"
-          />
-        </a>
+          posterAlt="Diagnostic video — Alefiya scoring the four pillars on the board"
+        />
       </div>
     </section>
   );

@@ -1,0 +1,45 @@
+/* Workshop video frame. The section's own class (rmw__thumb / rwk__thumb)
+   sets the width, margins, border and corners exactly as the thumbnail had
+   them; this adds the 16:9 box the player fills (the thumbnail is 16:9). */
+
+.wv {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #101c28;
+}
+
+.wv .wv__slot,
+.wv .wv__slot > *,
+.wv iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* the thumbnail sits on top until the player is ready */
+.wv .wv__poster {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.wv--ready .wv__poster {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* the player couldn't load: the thumbnail opens the video on YouTube */
+.wv__fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
