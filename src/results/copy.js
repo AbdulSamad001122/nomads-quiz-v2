@@ -1019,6 +1019,8 @@ export const PILLAR_THREE_INTRO = {
   headline: 'Move Three · Speed to Decision™',
   lead: 'Take six months of buying arguments, and deliver them in six minutes.',
   para: 'We all believe customers take loooooonger to buy because they’re more skeptical today. But when we analysed a company’s top customers through Jobs-to-be-Done, we found that the customer who took 6 months to buy versus 6 days went through the same series of messages.',
+  // the timeline image's title, coded above the image (user, Oct 7)
+  imageTitle: 'THE TIMELINE',
   imageAlt: 'The Jobs-to-be-Done timeline: First Thought, Passive Looking, Active Looking, Deciding, Buying, Consuming, Satisfaction',
 };
 
