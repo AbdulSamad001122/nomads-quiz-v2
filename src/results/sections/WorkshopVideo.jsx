@@ -8,8 +8,9 @@ import './WorkshopVideo.css';
  *
  * It plays by itself once it scrolls into view and pauses when it scrolls
  * out. Browsers only allow that with the sound off, so it starts muted and
- * the YouTube controls let the viewer turn the sound on. If the viewer
- * pauses it (or it ends), scrolling back doesn't restart it. Visitors whose
+ * the YouTube controls let the viewer turn the sound on. Once the viewer
+ * takes over (plays or pauses it, turns the sound on, goes fullscreen) or it
+ * ends, the page stops playing and pausing it by itself. Visitors whose
  * device asks for reduced motion get the player without the autoplay.
  *
  * The thumbnail stays on top until the player is ready, so the frame looks
@@ -72,18 +73,27 @@ export default function WorkshopVideo({ className = '', posterAlt = '' }) {
     let readyTimer = null;
     let inView = false; // reached the play line (half visible) since last leaving
     let ratio = canObserve ? 0 : 1; // latest visible share of the frame
-    let viewerStopped = false; // the viewer paused it, or it ended
+    let viewerControl = false; // the viewer took over, or it ended
+    let playAsked = false; // we asked it to play and it hasn't started yet
     let ourPauseAt = -Infinity; // when we last paused it ourselves
+    let lastWidth = window.innerWidth;
+    let widthChangedAt = -Infinity; // phone turned / window resized sideways
 
     // YouTube swaps this element for its iframe. It lives in a slot React
     // renders empty, so React never touches what YouTube puts there.
     const mount = document.createElement('div');
     slot.appendChild(mount);
 
-    let playAsked = false; // we asked it to play and haven't paused it since
+    const ourPauseRecent = () => Date.now() - ourPauseAt < 1500;
+    const fullscreen = () => !!(document.fullscreenElement || document.webkitFullscreenElement);
+
+    const takeOver = () => {
+      viewerControl = true;
+      playAsked = false;
+    };
 
     const play = () => {
-      if (autoplay && playerReady && inView && !viewerStopped) {
+      if (autoplay && playerReady && inView && !viewerControl) {
         playAsked = true;
         player.playVideo();
       }
@@ -95,9 +105,16 @@ export default function WorkshopVideo({ className = '', posterAlt = '' }) {
       player.pauseVideo();
     };
 
-    // also when the player hasn't yet reported a play we just asked for
+    // scroll-out pause, also before the player has reported a play we asked for
     const pause = () => {
-      if (!playerReady) return;
+      if (!playerReady || viewerControl) return;
+      // fullscreen or turning the phone reflows the page; that isn't a scroll
+      if (fullscreen() || Date.now() - widthChangedAt < 1000) return;
+      // the viewer turned the sound on: it's theirs now
+      if (typeof player.isMuted === 'function' && !player.isMuted()) {
+        takeOver();
+        return;
+      }
       const S = window.YT.PlayerState;
       const state = player.getPlayerState();
       if (playAsked || state === S.PLAYING || state === S.BUFFERING) pauseNow();
@@ -143,28 +160,32 @@ export default function WorkshopVideo({ className = '', posterAlt = '' }) {
               },
               onStateChange: (e) => {
                 if (e.data === S.PLAYING || e.data === S.BUFFERING) {
-                  // a play we asked for can land after a fast scroll has
-                  // already taken the frame off screen: stop it there
-                  if (ratio < PAUSE_BELOW) {
-                    pauseNow();
-                    return;
+                  if (playAsked) {
+                    // a play we asked for can land after a fast scroll has
+                    // already taken the frame off screen: stop it there
+                    if (ratio < PAUSE_BELOW && !fullscreen()) {
+                      pauseNow();
+                      return;
+                    }
+                    if (e.data === S.PLAYING) playAsked = false;
+                  } else if (e.data === S.PLAYING && !ourPauseRecent()) {
+                    // a play we didn't ask for: the viewer (or their media
+                    // keys, or picture-in-picture) is in charge now
+                    takeOver();
                   }
-                  if (e.data === S.PLAYING) {
-                    viewerStopped = false;
-                    ourPauseAt = -Infinity;
-                  }
+                  if (e.data === S.PLAYING) ourPauseAt = -Infinity;
                 } else if (e.data === S.PAUSED) {
                   // the viewer's pause, unless it was ours or the browser's
                   // (hidden tab, or the frame off screen). Our pause counts
                   // for the first PAUSED only, so a viewer pause right after
                   // still sticks.
-                  const ours = Date.now() - ourPauseAt < 1500;
+                  const ours = ourPauseRecent();
                   ourPauseAt = -Infinity;
-                  if (!ours && ratio >= PAUSE_BELOW && !document.hidden) {
-                    viewerStopped = true;
+                  if (!ours && !document.hidden && (ratio >= PAUSE_BELOW || fullscreen())) {
+                    takeOver();
                   }
                 } else if (e.data === S.ENDED) {
-                  viewerStopped = true;
+                  takeOver();
                 }
               },
             },
@@ -177,11 +198,35 @@ export default function WorkshopVideo({ className = '', posterAlt = '' }) {
         });
     };
 
+    // the viewer made this video fullscreen: it's theirs now
+    const onFullscreen = () => {
+      const iframe = player && typeof player.getIframe === 'function' && player.getIframe();
+      const el = document.fullscreenElement || document.webkitFullscreenElement;
+      if (iframe && el === iframe) takeOver();
+    };
+    // a sideways resize (turning the phone) reflows the page under a
+    // fullscreen video; the visibility change it causes isn't a scroll
+    const onResize = () => {
+      if (window.innerWidth !== lastWidth) {
+        lastWidth = window.innerWidth;
+        widthChangedAt = Date.now();
+      }
+    };
+    document.addEventListener('fullscreenchange', onFullscreen);
+    document.addEventListener('webkitfullscreenchange', onFullscreen);
+    window.addEventListener('resize', onResize);
+    const removeListeners = () => {
+      document.removeEventListener('fullscreenchange', onFullscreen);
+      document.removeEventListener('webkitfullscreenchange', onFullscreen);
+      window.removeEventListener('resize', onResize);
+    };
+
     if (!canObserve) {
       create();
       return () => {
         cancelled = true;
         clearReadyTimer();
+        removeListeners();
         if (player && typeof player.destroy === 'function') player.destroy();
         slot.replaceChildren();
       };
@@ -225,12 +270,23 @@ export default function WorkshopVideo({ className = '', posterAlt = '' }) {
     return () => {
       cancelled = true;
       clearReadyTimer();
+      removeListeners();
       loadObserver.disconnect();
       viewObserver.disconnect();
       if (player && typeof player.destroy === 'function') player.destroy();
       slot.replaceChildren();
     };
   }, []);
+
+  // while the thumbnail covers the player (loading, or YouTube failed), keep
+  // the hidden player out of the tab order and away from screen readers
+  useEffect(() => {
+    const slot = slotRef.current;
+    if (!slot) return;
+    slot.inert = !ready;
+    if (ready) slot.removeAttribute('aria-hidden');
+    else slot.setAttribute('aria-hidden', 'true');
+  }, [ready]);
 
   return (
     <div
