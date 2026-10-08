@@ -165,12 +165,24 @@ export function buildKitFields({
   );
 }
 
+/** Every quiz taker who gives their email ("Diagnostic Complete"). */
+export const QUIZ_TAKER_TAG = 'Quiz Taker';
+/** Capped takers only (capped_state). */
+export const CAPPED_STATE_TAG = 'Quiz Taker Capped State';
+
 /**
- * Kit TAGS (not fields) for a finished quiz. Handover doc, Sep 23:
- * capped_state → tag "Quiz Taker Capped State" — applied when the taker is
- * capped (Blocks 5–7), absent otherwise ("If the state is capped, tag them
- * this. If not, don’t tag them.").
+ * Kit TAGS (not fields) for a finished quiz. Only built for the opt-in push,
+ * i.e. someone who completed the quiz and entered their email.
+ *  - "Quiz Taker" — always (latest handover doc, Oct 8, "Diagnostic
+ *    Complete": marks every quiz taker and triggers Nomads' email
+ *    automations). Kit only fires a tag trigger when the tag is newly
+ *    added, so a retake with the same email doesn't re-trigger it.
+ *  - "Quiz Taker Capped State" — when the taker is capped (Blocks 5–7),
+ *    absent otherwise (handover doc, Sep 23: "If the state is capped, tag
+ *    them this. If not, don’t tag them.").
  */
 export function buildKitTags({ result = null } = {}) {
-  return result && result.cappedState ? ['Quiz Taker Capped State'] : [];
+  const tags = [QUIZ_TAKER_TAG];
+  if (result && result.cappedState) tags.push(CAPPED_STATE_TAG);
+  return tags;
 }

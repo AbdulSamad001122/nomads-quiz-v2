@@ -106,12 +106,13 @@ for (const k of Object.keys(slg)) {
 }
 eq(
   buildKitTags({ result: slgResult }),
-  slgResult.cappedState ? ['Quiz Taker Capped State'] : [],
-  'capped tag follows cappedState'
+  slgResult.cappedState ? ['Quiz Taker', 'Quiz Taker Capped State'] : ['Quiz Taker'],
+  'capped tag follows cappedState; Quiz Taker always'
 );
-eq(buildKitTags({ result: { cappedState: true } }), ['Quiz Taker Capped State'], 'capped → tag applied');
-eq(buildKitTags({ result: { cappedState: false } }), [], 'not capped → no tag');
-eq(buildKitTags({}), [], 'no result → no tag');
+eq(buildKitTags({ result: { cappedState: true } }), ['Quiz Taker', 'Quiz Taker Capped State'], 'capped → Quiz Taker + capped tag');
+eq(buildKitTags({ result: { cappedState: false } }), ['Quiz Taker'], 'not capped → Quiz Taker only');
+eq(buildKitTags({}), ['Quiz Taker'], 'no result (missing numbers) → still a quiz taker');
+eq(buildKitTags(), ['Quiz Taker'], 'no args → still a quiz taker');
 {
   const withOverride = buildKitFields({ answers: slgAnswers, result: slgResult, overrides: ['q8'] });
   eq(withOverride.quiz_takers_record_unverified, 'true', 'override → record_unverified STRING true');
