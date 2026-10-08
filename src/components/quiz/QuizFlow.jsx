@@ -940,8 +940,8 @@ export default function QuizFlow({ restored = null } = {}) {
                   overrides,
                   clampedBrackets,
                 }),
-                // capped takers get the "Quiz Taker Capped State" TAG
-                // (handover doc Sep 23 — tag, not field)
+                // every taker gets the "Quiz Taker" TAG (handover doc Oct 8);
+                // capped takers also get "Quiz Taker Capped State" (Sep 23)
                 tags: buildKitTags({ result }),
               });
             }

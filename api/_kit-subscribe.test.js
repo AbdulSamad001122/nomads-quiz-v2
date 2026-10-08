@@ -113,6 +113,39 @@ ok(
   'tags: main subscribe happens BEFORE the tag'
 );
 
+/* Oct 8: every taker gets "Quiz Taker" (+ the capped tag when capped). "Quiz
+   Taker" is a prefix of "Quiz Taker Capped State" — it must resolve to its
+   OWN tag, not the capped one. */
+const qtCalls = [];
+globalThis.fetch = async (url, options = {}) => {
+  qtCalls.push({ url, options });
+  const json = (data) => ({ ok: true, json: async () => data });
+  if (url.includes('/tags?') && (!options.method || options.method === 'GET'))
+    return json({ tags: [{ id: 777, name: 'crpv-quiz' }, { id: 888, name: 'Quiz Taker Capped State' }, { id: 999, name: 'Quiz Taker' }] });
+  if (url.includes('/subscribe'))
+    return json({ subscription: { subscriber: { id: 557 } } });
+  return { ok: false, status: 404, json: async () => ({ message: 'nope' }) };
+};
+res = await run({
+  method: 'POST',
+  body: { email: 'taker@example.com', tags: ['Quiz Taker', 'Quiz Taker Capped State'] },
+});
+ok(res.statusCode === 200, 'quiz taker: 200 on success');
+ok(
+  res.body.tags_applied.join('|') === 'Quiz Taker|Quiz Taker Capped State',
+  'quiz taker: both tags reported applied'
+);
+ok(qtCalls.some((c) => c.url.endsWith('/tags/999/subscribe')), 'quiz taker: "Quiz Taker" applied by its own id');
+ok(
+  qtCalls.filter((c) => c.url.endsWith('/tags/888/subscribe')).length === 1,
+  'quiz taker: capped tag applied once (not mistaken for "Quiz Taker")'
+);
+{
+  const sub = qtCalls.findIndex((c) => c.url.endsWith('/tags/777/subscribe'));
+  const qt = qtCalls.findIndex((c) => c.url.endsWith('/tags/999/subscribe'));
+  ok(sub >= 0 && sub < qt, 'quiz taker: subscriber (with fields) exists BEFORE the tag that triggers automations');
+}
+
 /* tag failure must not fail the request (subscriber already created) */
 globalThis.fetch = async (url, options = {}) => {
   const json = (data) => ({ ok: true, json: async () => data });
