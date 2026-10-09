@@ -30,6 +30,7 @@ import { resolveInputs } from '../../calc/backendValues.js';
 import { impossibleCheck, validateManual } from '../../calc/validation.js';
 import { calculate, CEILINGS } from '../../calc/calculator.js';
 import { ga } from '../../analytics/ga.js';
+import { rememberPopupSource } from '../../analytics/popupSource.js';
 import { buildKitFields, buildKitTags } from '../../kit/kitPayload.js';
 import { pushToKit } from '../../kit/push.js';
 import { DEV_ROUTES_ENABLED } from '../../devRoutes.js';
@@ -540,7 +541,10 @@ export default function QuizFlow({ restored = null } = {}) {
     const result = resultFor(answers, manualValues);
     if (!result) return; // "missing numbers" screen: nothing to keep
     const sig = resultSignature(result);
-    if (saveResults({ answers, manualValues, sig })) shownSig.current = sig;
+    if (saveResults({ answers, manualValues, sig })) {
+      shownSig.current = sig;
+      rememberPopupSource(); // a reopened results page keeps the popup source
+    }
     showResultsAddress();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index, dqReason]);
