@@ -8,10 +8,18 @@
  * (workshop_progress helper is included, ready to fire from the video player
  *  once the real workshop video is added.)
  *
+ * Takers who arrive from a website popup (?popup=97&page=home&type=inline)
+ * carry popup_id / page / popup_type on every event (custom and automatic) —
+ * the same params the Framer site sends with popup_view / popup_click — so
+ * one GA4 report can follow a popup from view to lead_submit and on to the
+ * results CTAs, also after a reload of /diagnostic-results (popupSource.js).
+ *
  * The Measurement ID is public (it ships in the client bundle), so once you
  * have it, paste it into GA_ID below (or set VITE_GA_ID). Until then every
  * track() call safely no-ops, so the wiring can ship now and light up later.
  */
+import { popupGaParams, popupSource } from './popupSource.js';
+
 const GA_ID = import.meta.env.VITE_GA_ID || 'G-HP0WTDLWJ7'; // public — committed like Clarity
 // Production always tracks. Dev is OFF by default (keeps prod reports clean) —
 // set VITE_GA_DEV=true in .env to fire dev events into GA4 DebugView for testing.
@@ -39,14 +47,16 @@ export function initGA() {
   // presence as debug traffic, even when it is false ("setting the parameter
   // to false doesn't disable debug mode", GA4 Help 7201382).
   const config = DEBUG ? { debug_mode: true, traffic_type: 'internal' } : {};
-  window.gtag('config', GA_ID, config);
+  // Popup takers: the automatic page_view / enhanced-measurement events carry
+  // the popup params too, not only the custom events sent through track().
+  window.gtag('config', GA_ID, { ...config, ...popupGaParams(popupSource) });
 }
 
 /** Low-level event send — safe no-op until GA is configured. */
 export function track(event, params = {}) {
   if (!ENABLED || typeof window === 'undefined' || !window.gtag) return;
   // strip undefined/null params so GA reports stay clean
-  const clean = {};
+  const clean = { ...popupGaParams(popupSource) };
   for (const k in params) if (params[k] != null) clean[k] = params[k];
   // dev events carry traffic_type=internal → excluded by the GA4 filter
   if (DEBUG) clean.traffic_type = 'internal';
