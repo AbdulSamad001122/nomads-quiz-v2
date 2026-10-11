@@ -31,6 +31,7 @@ import { impossibleCheck, validateManual } from '../../calc/validation.js';
 import { calculate, CEILINGS } from '../../calc/calculator.js';
 import { ga } from '../../analytics/ga.js';
 import { rememberPopupSource } from '../../analytics/popupSource.js';
+import { hasEmailGivenCookie, markEmailGiven } from '../../popups/emailGivenCookie.js';
 import { buildKitFields, buildKitTags } from '../../kit/kitPayload.js';
 import { pushToKit } from '../../kit/push.js';
 import { DEV_ROUTES_ENABLED } from '../../devRoutes.js';
@@ -531,6 +532,17 @@ export default function QuizFlow({ restored = null } = {}) {
     return themes[themeCycle[(seenPosition - 1) % 3]];
   };
 
+  /* ---------- reopened results: this browser already gave its email ------
+     Results are only saved after a live run passed the opt-in submit, so a
+     restored page proves it. Fills in a MISSING cookie (takers from before
+     it existed); an existing one is left alone, because rewriting it from a
+     script would shorten a long-lived cookie to 7 days in Safari / Brave.
+     No Kit / GA events involved. */
+  useEffect(() => {
+    if (restored && !hasEmailGivenCookie()) markEmailGiven();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   /* ---------- finished: save the answers + switch the address ----------
      Runs before the GA effect below, so the completion events already carry
      the /diagnostic-results address. A restored page was saved on its first
@@ -927,6 +939,9 @@ export default function QuizFlow({ restored = null } = {}) {
             // Push everything to Kit (answers + computed results). Fire and
             // forget — a Kit hiccup must never block the results screen.
             if (email) {
+              // The Framer site reads this and stops showing quiz popups.
+              markEmailGiven();
+
               let result = null;
               const inputs = resolveInputs(answers, manualValues, path);
               if (inputs.q2 != null && inputs.q7 != null) {
