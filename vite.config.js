@@ -2,7 +2,7 @@ import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 
 /**
- * Dev-only API bridge: serves /api/kit-subscribe through the SAME handler
+ * Dev-only API bridge: serves /api/kit-subscribe (and /api/email-given) through the SAME handler
  * Vercel runs in production, so real end-to-end Kit tests work under
  * `npm run dev`. Credentials come from .env.local (gitignored, server-side
  * only — no VITE_ prefix, so they never enter the client bundle).
@@ -38,6 +38,27 @@ function devApiBridge(env) {
         };
         const { default: handler } = await import('./api/kit-subscribe.js');
         await handler(req, vercelRes);
+      });
+
+      // /api/email-given: no body, no secrets — only sets a cookie.
+      server.middlewares.use('/api/email-given', async (req, res) => {
+        const vercelRes = {
+          status(code) {
+            res.statusCode = code;
+            return vercelRes;
+          },
+          setHeader(name, value) {
+            res.setHeader(name, value);
+            return vercelRes;
+          },
+          json(obj) {
+            res.setHeader('content-type', 'application/json');
+            res.end(JSON.stringify(obj));
+            return vercelRes;
+          },
+        };
+        const { default: handler } = await import('./api/email-given.js');
+        handler(req, vercelRes);
       });
     },
   };
