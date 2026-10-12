@@ -2,8 +2,9 @@
  * Which website popup sent this visitor to the quiz.
  *
  * Popup buttons on nomadsmarketing.co (Framer) open the quiz as
- *   /diagnostic-start-now?popup=97&page=home&type=inline
- * (the Framer tracking script adds page + type to the designer's ?popup=97).
+ *   /diagnostic-start-now?popup=97&page=home&type=inline&position=2
+ * (the Framer tracking script adds page + type to the designer's ?popup=97,
+ * and position 1 / 2 when a page has two inline blocks, "Popup Inline 1" / "2").
  *
  * Read ONCE when the app loads: when the taker finishes, the address bar is
  * replaced with /diagnostic-results (no query) before quiz_complete fires.
@@ -33,12 +34,22 @@ export function slug(value) {
   return v || null;
 }
 
-function fromParts(popup, page, type) {
-  const p = slug(popup);
-  return p ? { popup: p, page: slug(page), type: slug(type) } : null;
+/** Which inline block on the page: '1'–'99', or null (anything else is dropped). */
+function positionOf(value) {
+  const v = String(value ?? '').trim();
+  return /^[1-9][0-9]?$/.test(v) ? v : null;
 }
 
-/** { popup, page, type } from a query string, or null when no popup. */
+function fromParts(popup, page, type, position) {
+  const p = slug(popup);
+  if (!p) return null;
+  const out = { popup: p, page: slug(page), type: slug(type) };
+  const n = positionOf(position);
+  if (n) out.position = n; // only numbered inline blocks have one
+  return out;
+}
+
+/** { popup, page, type[, position] } from a query string, or null when no popup. */
 export function readPopupSource(search) {
   let params;
   try {
@@ -46,7 +57,7 @@ export function readPopupSource(search) {
   } catch {
     return null;
   }
-  return fromParts(params.get('popup'), params.get('page'), params.get('type'));
+  return fromParts(params.get('popup'), params.get('page'), params.get('type'), params.get('position'));
 }
 
 function browserStorage() {
@@ -61,7 +72,7 @@ function loadRemembered(storage) {
   if (!storage) return null;
   try {
     const raw = JSON.parse(storage.getItem(SOURCE_KEY));
-    return raw && typeof raw === 'object' ? fromParts(raw.popup, raw.page, raw.type) : null;
+    return raw && typeof raw === 'object' ? fromParts(raw.popup, raw.page, raw.type, raw.position) : null;
   } catch {
     return null;
   }
@@ -118,5 +129,6 @@ export function popupGaParams(source) {
   const out = { popup_id: source.popup };
   if (source.page) out.page = source.page;
   if (source.type) out.popup_type = source.type;
+  if (source.position) out.popup_position = source.position;
   return out;
 }

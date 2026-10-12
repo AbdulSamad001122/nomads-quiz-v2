@@ -9,7 +9,8 @@
  *  once the real workshop video is added.)
  *
  * Takers who arrive from a website popup (?popup=97&page=home&type=inline)
- * carry popup_id / page / popup_type on every event (custom and automatic) —
+ * carry popup_id / page / popup_type (+ popup_position for a numbered inline
+ * block, &position=2) on every event (custom and automatic) —
  * the same params the Framer site sends with popup_view / popup_click — so
  * one GA4 report can follow a popup from view to lead_submit and on to the
  * results CTAs, also after a reload of /diagnostic-results (popupSource.js).
