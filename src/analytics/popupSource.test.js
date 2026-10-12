@@ -41,6 +41,26 @@ test('designer-only link (?popup=97) → page and type null', () => {
   assert.deepEqual(readPopupSource('?popup=97'), { popup: '97', page: null, type: null });
 });
 
+test('numbered inline block ("Popup Inline 2") → position kept', () => {
+  assert.deepEqual(readPopupSource('?popup=97&page=home&type=inline&position=2'), {
+    popup: '97',
+    page: 'home',
+    type: 'inline',
+    position: '2',
+  });
+  assert.equal(readPopupSource('?popup=97&type=inline&position=12').position, '12');
+});
+
+test('bad position → left out, the rest still read', () => {
+  for (const bad of ['0', '100', '-1', '2.5', 'abc', '', '%20', '02']) {
+    assert.deepEqual(readPopupSource(`?popup=97&page=home&type=inline&position=${bad}`), {
+      popup: '97',
+      page: 'home',
+      type: 'inline',
+    }, bad);
+  }
+});
+
 test('no popup → null (banner/landing traffic, plain reloads)', () => {
   assert.equal(readPopupSource(''), null);
   assert.equal(readPopupSource('?page=home&type=inline'), null);
@@ -180,6 +200,21 @@ test('GA4 params use the custom-dimension names; missing parts omitted', () => {
   });
   assert.deepEqual(popupGaParams({ popup: '97', page: null, type: null }), { popup_id: '97' });
   assert.deepEqual(popupGaParams(null), {});
+  assert.deepEqual(popupGaParams({ popup: '97', page: 'home', type: 'inline', position: '2' }), {
+    popup_id: '97',
+    page: 'home',
+    popup_type: 'inline',
+    popup_position: '2',
+  });
+});
+
+test('position survives a reopened /diagnostic-results page', () => {
+  const storage = memoryStorage();
+  rememberPopupSource({ source: readPopupSource('?popup=97&page=home&type=inline&position=2'), storage });
+  assert.deepEqual(
+    resolvePopupSource({ search: '', pathname: '/diagnostic-results', storage, resultsReopen: () => true }),
+    { popup: '97', page: 'home', type: 'inline', position: '2' },
+  );
 });
 
 test('no window (Node) → popupSource is null', () => {
