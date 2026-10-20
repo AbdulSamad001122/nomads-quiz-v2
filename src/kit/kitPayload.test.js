@@ -157,6 +157,23 @@ eq(plg.quiz_taker_ad_traffic_share, 50, 'Q7C 0.5 → 50%');
 eq(plg.quiz_taker_annual_email_revenue, 0, 'no-email → 0');
 eq('quiz_taker_feedback_loop_what_led_you_here' in plg, false, 'empty VOC dropped');
 
+/* ---------- Oct 20 copy doc: Q5 title + Q12 PLG wording ---------- */
+eq(
+  slg.quiz_taker_biggest_problem,
+  'We attract potential buyers, but most leave without buying.',
+  'Q5 sends the option title, not its description'
+);
+eq(
+  plg.quiz_taker_biggest_problem,
+  'We need more people on our email list, or we don’t have one yet.',
+  'Q5 title on the PLG path'
+);
+eq(
+  plg.quiz_taker_problem_they_are_cracking_right_now,
+  'We’re getting visitors, but not enough buyers',
+  'Q12 PLG option a label verbatim'
+);
+
 /* ---------- hybrid mapping ---------- */
 const hybC = buildKitFields({ answers: { ...slgAnswers, q4: 'hybrid-call' } });
 eq(hybC.quiz_taker_sales_model, 'SLG (Hybrid)', 'Q4 C → SLG (Hybrid)');

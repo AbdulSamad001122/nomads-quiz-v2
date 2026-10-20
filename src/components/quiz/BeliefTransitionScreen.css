@@ -127,14 +127,10 @@
 /* Highlight on "hit 60 sales" — animated HighlightSweep (see
    primitives/HighlightSweep.css); tone picked per theme in the JSX. */
 
-/* Body line under the headline (almost-ready slide) */
-.belief__line {
-  margin-top: clamp(16px, 2.4vh, 30px);
-  font-family: var(--font-body);
-  font-weight: 500;
-  color: var(--t-question-text);
-  font-size: clamp(15px, 1.25vw, 22px);
-  line-height: 1.55;
+/* Almost-ready headline is a full sentence — the max-width stacks it into
+   short centred lines instead of one long run */
+.almost-ready__headline {
+  max-width: 30ch;
 }
 
 /* Label strip above the almost-ready headline (centered in this layout) */
