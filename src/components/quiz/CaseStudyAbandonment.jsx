@@ -1,5 +1,7 @@
-import CardHost from './cards/CardHost.jsx';
-import { mount, css } from './cards/q5ep/index.js';
+import CardHost, { prefetchCard } from './cards/CardHost.jsx';
+
+const load = () => import('./cards/q5ep/index.js');
+prefetchCard(load);
 
 /**
  * Case study 5E (PLG) — abandoned carts (GolfBays + the B2B2C audio company;
@@ -10,8 +12,7 @@ import { mount, css } from './cards/q5ep/index.js';
 export default function CaseStudyAbandonment({ onBack, onContinue }) {
   return (
     <CardHost
-      mount={mount}
-      css={css}
+      load={load}
       label="Case studies: abandoned carts"
       onBack={onBack}
       onContinue={onContinue}
