@@ -13,7 +13,8 @@
    User rule (Oct 21, all HTML slides): Roboto Mono stays on small labels
    only; body text set in mono on the card is set in Montserrat here, same
    size, weight and colour (Q4: the "Next:" line and the sources note). The
-   400 face below is for that sources note. */
+   table's mono text (column headers, counts under the rates) is Montserrat
+   too (user, Oct 21). The 400 face below is for the sources note. */
 @font-face {
   font-family: 'Q4 Card Montserrat';
   src: url('/fonts/Montserrat-Regular.ttf') format('truetype');
@@ -273,7 +274,7 @@
   padding-right: 2px;
 }
 .bmc__th > * {
-  font: 500 10.5px var(--mono);
+  font: 500 10.5px var(--display); /* mono on the card */
   letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--purple);
@@ -329,7 +330,7 @@
   padding-left: 16px;
 }
 .bmc__v small {
-  font: 500 11px var(--mono);
+  font: 500 11px var(--display); /* mono on the card */
   color: var(--ink-quiet);
   margin-top: 3px;
 }
@@ -488,6 +489,14 @@
   .bmc__cta {
     font-size: 17px;
     padding: 16px 18px;
+  }
+}
+/* Small phones (not on the card): at 17px the revenue figures leave the
+   label column so narrow that "Monthly" ran under the next cell's ice box
+   (PLG at 320px). 15px gives the labels ~18px more room. */
+@media (max-width: 360px) {
+  .bmc__rev .bmc__v {
+    font-size: 15px;
   }
 }
 .bmc__next {
