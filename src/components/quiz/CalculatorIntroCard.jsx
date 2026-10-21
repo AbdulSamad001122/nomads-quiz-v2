@@ -1,5 +1,7 @@
-import CardHost from './cards/CardHost.jsx';
-import { mount, css } from './cards/calc/index.js';
+import CardHost, { prefetchCard } from './cards/CardHost.jsx';
+
+const load = () => import('./cards/calc/index.js');
+prefetchCard(load);
 
 /**
  * Calculator intro — after the Q5 case studies, before Q6. Yemi's
@@ -10,8 +12,7 @@ import { mount, css } from './cards/calc/index.js';
 export default function CalculatorIntroCard({ track, onBack, onContinue }) {
   return (
     <CardHost
-      mount={mount}
-      css={css}
+      load={load}
       label="Revenue Per Visitor Calculator"
       data={{ track }}
       onBack={onBack}
