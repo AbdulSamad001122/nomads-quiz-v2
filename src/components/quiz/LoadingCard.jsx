@@ -1,5 +1,7 @@
-import CardHost from './cards/CardHost.jsx';
-import { mount, css } from './cards/loading/index.js';
+import CardHost, { prefetchCard } from './cards/CardHost.jsx';
+
+const load = () => import('./cards/loading/index.js');
+prefetchCard(load);
 
 /**
  * Loading screen after the Q11 One Table card — Yemi's "Loading Screen
@@ -10,8 +12,7 @@ import { mount, css } from './cards/loading/index.js';
 export default function LoadingCard({ track, onDone }) {
   return (
     <CardHost
-      mount={mount}
-      css={css}
+      load={load}
       label="Calculating your Revenue Per Visitor"
       data={{ track }}
       onContinue={onDone}
