@@ -202,10 +202,17 @@ export const QUESTIONS = [
     question:
       'What’s the #1 constraint you’d need to solve to add $1.5M/year on top of your current annual revenue from 10,000 qualified visitors?',
     subline: 'Select the ONE most pressing problem right now.',
-    // Option E is SLG-only. The doc's PLG-only E (abandoned carts) waits for
-    // its 5E-PLG case study, so PLG takers see A–D until it arrives.
+    // Option E differs by path (doc: "SLG ONLY" / "PLG ONLY"): SLG = sales
+    // calls, PLG = abandoned carts; each routes to its own 5E case study.
     options: {
-      plg: Q5_SHARED,
+      plg: [
+        ...Q5_SHARED,
+        {
+          id: 'cart-abandonment',
+          label: 'People browse our products or add items to their cart, but leave without buying.',
+          desc: 'We’re getting too many browse abandonments and abandoned carts, and we’re not bringing enough of those potential customers back to complete their purchase.',
+        },
+      ],
       slg: [
         ...Q5_SHARED,
         {
