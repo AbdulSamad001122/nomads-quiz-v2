@@ -1,79 +1,91 @@
+import { useLayoutEffect, useRef } from 'react';
 import SeamBadge from './parts/SeamBadge.jsx';
 import BackLink from './parts/BackLink.jsx';
-import ProgressBar from './parts/ProgressBar.jsx';
 import HighlightSweep, { sweepToneFor } from '../primitives/HighlightSweep.jsx';
+import {
+  BENCHMARK_COPY,
+  benchmarkFigures,
+  rateText,
+  toneParts,
+  sourceLines,
+} from '../../data/benchmarkCard.js';
 import './QuizScreen.css';
 import './BenchmarkScreen.css';
 
+/* Same breakpoint as the QuizScreen shell's stacked layout. */
+const STACKED_QUERY = '(max-width: 900px), (max-width: 1160px) and (orientation: portrait)';
+/* Yemi's card: "Text may shrink up to 15% to fit before … scrolling." */
+const MIN_ZOOM = 0.85;
+
+function Toned({ text }) {
+  return toneParts(text).map((p, i) =>
+    p.tone ? (
+      // eslint-disable-next-line react/no-array-index-key
+      <span key={i} className={`bm__tone bm__tone--${p.tone}`}>
+        {p.t}
+      </span>
+    ) : (
+      p.t
+    ),
+  );
+}
+
 /**
- * Benchmark slide (before Q5) — split-screen layout per the
- * "Blue theme - FOR SLG" design reference. Theme-driven like QuizScreen,
- * so it slots into the blue → maroon → green rotation.
+ * Q4 benchmark card (after Q4, before Q5) — Yemi's "Q4 Benchmark" HTML card
+ * (Slack, Oct 20) set in the quiz's split-screen shell. Content order is the
+ * card's: claim (left) → table → gap card → next line → CTA → up next →
+ * sources (right). Stacked on phones, that is the card's single column.
  *
- * Left: headline, subhead, arrow-doodle bullet points, CONTINUE.
- * Right: intro copy, model label + AOV, funnel benchmark table, outro,
- * progress bar.
+ * Behaviour kept from the card: one screen, text shrinks up to 15% to fit,
+ * then the page scrolls; the sources note opens/closes; the CTA moves on.
  */
-export default function BenchmarkScreen({
-  theme,
-  isSlg,
-  onBack,
-  onContinue,
-  progressPercent,
-}) {
+export default function BenchmarkScreen({ theme, isSlg, onBack, onContinue }) {
+  const mode = isSlg ? 'slg' : 'plg';
+  const s = BENCHMARK_COPY.shared;
+  const c = BENCHMARK_COPY[mode];
+  const f = benchmarkFigures(mode);
+  const stackRef = useRef(null);
+
+  // Fit-to-screen (desktop only): measure at full size, then shrink the
+  // right-hand stack just enough to remove the page scroll, never past 85%.
+  useLayoutEffect(() => {
+    const el = stackRef.current;
+    if (!el) return undefined;
+    const stacked = window.matchMedia(STACKED_QUERY);
+    const fit = () => {
+      el.style.zoom = '';
+      if (stacked.matches) return;
+      const over = document.documentElement.scrollHeight - window.innerHeight;
+      if (over <= 0) return;
+      const h = el.offsetHeight;
+      el.style.zoom = String(Math.max(MIN_ZOOM, (h - over) / h));
+    };
+    fit();
+    let t;
+    const onResize = () => {
+      clearTimeout(t);
+      t = setTimeout(fit, 120);
+    };
+    window.addEventListener('resize', onResize);
+    stacked.addEventListener?.('change', fit);
+    document.fonts?.ready.then(fit);
+    return () => {
+      clearTimeout(t);
+      window.removeEventListener('resize', onResize);
+      stacked.removeEventListener?.('change', fit);
+    };
+  }, [mode]);
+
   const themeVars = {
     '--t-left-bg-image': `url(${theme.leftBgImage})`,
     '--t-question-text': theme.questionText,
     '--t-label-bg': theme.labelBg,
     '--t-label-text': theme.labelText,
-    '--t-step-badge-bg': theme.stepBadgeBg,
-    '--t-step-badge-text': theme.stepBadgeText,
     '--t-right-bg': theme.rightBg,
     '--t-back-text': theme.backText,
-    '--t-option-bg': theme.optionBg,
     '--t-option-text': theme.optionText,
-    '--t-option-number-bg': theme.optionNumberBg,
-    '--t-option-number-text': theme.optionNumberText,
     '--t-option-selected-bg': theme.optionSelectedBg,
-    '--t-option-selected-text': theme.optionSelectedText,
-    '--t-progress-track': theme.progressTrack,
-    '--t-progress-fill': theme.progressFill,
-    '--t-progress-label': theme.progressLabel,
   };
-
-  const points = [
-    'Convert a minimum of ~35% of your 5,000 visitors into subscribers',
-    "That's equivalent to 1,750 subscribers entering your brand ecosystem",
-    isSlg
-      ? 'Ideally, roughly 3% of them should convert into 50-60 sales conversations'
-      : 'Ideally, roughly 3% of them should convert into 50-60 sales',
-  ];
-
-  // Verbatim from the table images embedded in Quiz Questions.docx
-  // (word/media/image5.png = SLG, image4.png = PLG — copies live in
-  // "Design Refrence/benchmark-table-*.png").
-  const table = isSlg
-    ? {
-        model: 'Sales-Led Growth (SLG)',
-        sub: 'Average Deal Size: $5,000',
-        rows: [
-          ['Visitors', '1,000', '1,000'],
-          ['Email/SMS Subscribers', '200 (20%)', '400 (40%)'],
-          ['Book Sales Calls', '2–4 (1–2% of subscribers)', '20 (5%)'],
-          ['Sales Call → Client', '20–25%', '60%'],
-          ['Revenue', '$10,000–$20,000', '$60,000'],
-        ],
-      }
-    : {
-        model: 'PLG (Product-Led Growth)',
-        sub: 'Average Order Value: $100',
-        rows: [
-          ['Visitors', '1,000', '1,000'],
-          ['Email/SMS Subscribers', '200 (20%)', '400 (40%)'],
-          ['Paying Customers', '10 (5% of subscribers)', '40 (10% of subscribers)'],
-          ['Revenue', '$1,000', '$4,000'],
-        ],
-      };
 
   return (
     <div
@@ -93,38 +105,21 @@ export default function BenchmarkScreen({
             <div className="question-panel__mobile-back">
               <BackLink onBack={onBack} />
             </div>
-            <div className="question-panel__content benchmark__content">
-              <h1 className="benchmark__headline">
-                {'If 5,000 more qualified'}
-                <br />
-                {' visitors landed on your'}
-                <br />
-                {' business tomorrow, what'}
-                <br />{' '}
-                <HighlightSweep tone={sweepToneFor(theme.name)}>
-                  would actually happen?
-                </HighlightSweep>
-              </h1>
-              <p className="benchmark__subhead">
-                {'If your funnel is working the way'}
-                <br />
-                {' it should, you’d expect to'}
+            <div className="question-panel__content bm__claim">
+              <p className="question-panel__label bm__eyebrow">
+                {s.myth_lead} <s>{s.myth_struck}</s>
               </p>
-              <ul className="benchmark__points">
-                {points.map((text) => (
-                  <li key={text}>
-                    <img src="/assets/arrow-white.png" alt="" aria-hidden="true" />
-                    <span>{text}</span>
-                  </li>
-                ))}
-              </ul>
-              <button
-                type="button"
-                className="q-btn q-btn--onDark benchmark__continue"
-                onClick={onContinue}
-              >
-                Continue
-              </button>
+              <h1 className="bm__headline">
+                {s.headline}
+                <span className="bm__payoff">
+                  <HighlightSweep tone={sweepToneFor(theme.name)}>
+                    {s.headline_payoff}
+                  </HighlightSweep>
+                </span>
+              </h1>
+              <p className="bm__context">
+                <Toned text={s.context} />
+              </p>
             </div>
           </div>
           <div className="question-panel__footer">
@@ -136,7 +131,7 @@ export default function BenchmarkScreen({
         </div>
       </section>
 
-      <section className="answer-panel benchmark__panel">
+      <section className="answer-panel bm__panel">
         <div className="answer-panel__topbar">
           <BackLink onBack={onBack} />
           <span className="answer-panel__topbar-line" aria-hidden="true" />
@@ -148,43 +143,96 @@ export default function BenchmarkScreen({
           />
         </div>
 
-        <div className="benchmark__panel-body">
-          <p className="benchmark__intro">
-            These numbers come from high-performing funnels with the highest
-            Revenue Per Visitor™. We'll compare them with yours to find your
-            biggest opportunity.
-          </p>
-          <p className="benchmark__model">{table.model}</p>
-          <p className="benchmark__aov">{table.sub}</p>
-
-          <table className="benchmark-table">
-            <thead>
-              <tr>
-                <th>Funnel Stage</th>
-                <th>Typical Industry</th>
-                <th>RPV™ Optimized</th>
-              </tr>
-            </thead>
-            <tbody>
-              {table.rows.map((cells) => (
-                <tr key={cells[0]}>
-                  {cells.map((cell, i) => (
-                    <td key={i}>{cell}</td>
-                  ))}
-                </tr>
+        <div className="bm__body">
+          <div className="bm__stack" ref={stackRef}>
+            <div className="bm__table" role="table" aria-label={s.table_heading}>
+              <div className="bm__tr bm__th" role="row">
+                <span role="columnheader">{s.table_heading}</span>
+                <span role="columnheader" className="bm__col bm__col--t">
+                  <i className="bm__dot" aria-hidden="true" />
+                  {s.label_typical}
+                </span>
+                <span role="columnheader" className="bm__col bm__col--o">
+                  <i className="bm__dot" aria-hidden="true" />
+                  {s.label_optimised}
+                </span>
+              </div>
+              {c.rows.map((r, i) => (
+                <div className="bm__tr bm__row" role="row" key={r.label}>
+                  <span className="bm__lab" role="rowheader">
+                    {r.label}
+                    <small>{r.sub}</small>
+                  </span>
+                  <span className="bm__v bm__v--t" role="cell">
+                    <span>{rateText(r.typical_rate)}%</span>
+                    <small>
+                      {f.counts[i].typical}
+                      {r.unit ? ` ${r.unit}` : ''}
+                    </small>
+                  </span>
+                  <span className="bm__v bm__v--o" role="cell">
+                    <span>{rateText(r.optimised_rate)}%</span>
+                    <small>
+                      {f.counts[i].optimised}
+                      {r.unit ? ` ${r.unit}` : ''}
+                    </small>
+                  </span>
+                </div>
               ))}
-            </tbody>
-          </table>
+              <div className="bm__tr bm__row bm__rev" role="row">
+                <span className="bm__lab" role="rowheader">
+                  {c.revenue_label}
+                  <small>{c.revenue_sub}</small>
+                </span>
+                <span className="bm__v bm__v--t" role="cell">
+                  <span>{f.revTypical}</span>
+                </span>
+                <span className="bm__v bm__v--o" role="cell">
+                  <span>{f.revOptimised}</span>
+                </span>
+              </div>
+            </div>
 
-          <p className="benchmark__outro">
-            In the next few questions, you will get visibility into your sales
-            and marketing system. You'll also find out what needs optimization
-            to stack $125k MRR ($1.5M/year) on top of your existing monthly
-            revenue.
-          </p>
+            <div className="bm__gap">
+              <div className="bm__gap-top">
+                <span className="bm__big">
+                  {f.gapMonth}
+                  <small>{s.gap_month_suffix}</small>
+                </span>
+                <span className="bm__yr">
+                  <b>{f.gapYear}</b>
+                  {s.gap_year_suffix}
+                </span>
+              </div>
+              <div className="bm__tot">
+                <span className="bm__x">{f.multiple}</span>
+                <span>
+                  {s.year_sentence_a}{' '}
+                  <span className="bm__tone bm__tone--t">{f.totalTypical}</span>{' '}
+                  {s.year_sentence_b}{' '}
+                  <span className="bm__tone bm__tone--o">{f.gapYearPlain}</span>{' '}
+                  {s.year_sentence_c}
+                </span>
+              </div>
+            </div>
+
+            <p className="bm__next">{s.next}</p>
+            <button type="button" className="q-btn bm__cta" onClick={onContinue}>
+              <span>{s.cta}</span>
+              <span aria-hidden="true">→</span>
+            </button>
+            <p className="bm__upnext">{s.up_next}</p>
+            <details className="bm__src">
+              <summary>{s.source_q}</summary>
+              {sourceLines().map((line) => (
+                <p key={line}>
+                  <Toned text={line} />
+                </p>
+              ))}
+            </details>
+          </div>
         </div>
 
-        <ProgressBar percent={progressPercent} />
         <div className="answer-panel__mobile-footer" aria-hidden="true">
           <div className="answer-panel__mobile-hint" />
           <div className="answer-panel__mobile-cell">

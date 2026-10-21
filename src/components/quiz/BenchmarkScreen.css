@@ -1,233 +1,634 @@
 /* ============================================================
-   BenchmarkScreen — split-screen benchmark slide (before Q5)
-   Reuses the QuizScreen shell (.quiz-screen / .question-panel /
-   .answer-panel + theme vars); this file styles only the
-   benchmark-specific content.
+   BenchmarkScreen — Q4 benchmark card (after Q4, before Q5)
+   Yemi's "Q4 Benchmark" HTML card set in the QuizScreen shell
+   (.quiz-screen / .question-panel / .answer-panel + theme vars).
+   Left (dark ground): the claim. Right (light ground): the card's
+   light-ground variant — Midnight table, white gap card.
+   Colours are the Nomads palette only (design-v2 0.2): the card's
+   typical/optimised pairing maps to Stone (typical) and Ice Blue
+   (optimised) — text on dark surfaces, highlight boxes on light ones;
+   Plum is the accent for the one hero figure.
    ============================================================ */
 
-/* The new circle doodle export is a square image on a white ground —
-   mask it into the badge's white disc so the spin reads as a disc. */
+.benchmark-screen {
+  --bm-midnight: #152638; /* foundation */
+  --bm-stone: #e4c8bc; /* foundation — typical */
+  --bm-ice: #cae1f4; /* accent — optimised */
+  --bm-plum: #5d1b4e; /* accent — hero figures */
+  --bm-cream: #f4ede6; /* text on dark */
+  --bm-paper: #e4fbff; /* the quiz's ice tint */
+  --bm-quiet-dark: rgba(244, 237, 230, 0.7);
+  --bm-ink-quiet: rgba(21, 38, 56, 0.7);
+  --bm-line-dark: rgba(202, 225, 244, 0.16);
+}
+
+/* Square circle-doodle export → mask into the white disc */
 .benchmark-screen .seam-badge {
   background: #ffffff;
   overflow: hidden;
 }
 
-/* ---------- Left panel content ---------- */
-
-.benchmark__content {
-  justify-content: center;
-  padding-bottom: 0; /* the question-slide bottom air would push past 100vh */
-}
+/* ---------- Left panel: the claim ---------- */
 
 .benchmark-screen .question-panel__body {
   padding-top: clamp(20px, 3vh, 44px);
   padding-bottom: clamp(20px, 3vh, 44px);
 }
 
-/* Headline — same voice as question slides, sized so the reference's
-   4 forced lines each hold on one line at desktop widths */
-.benchmark__headline {
+.bm__claim {
+  justify-content: center;
+  padding-bottom: 0;
+}
+
+.bm__eyebrow {
+  letter-spacing: 0.05em;
+  max-width: 100%;
+}
+
+.bm__eyebrow s {
+  text-decoration-color: #5d1b4e;
+  text-decoration-thickness: 2px;
+}
+
+.bm__headline {
   font-family: var(--font-headline);
   font-weight: 800;
   color: var(--t-question-text);
-  font-size: clamp(22px, 2.2vw, 42px);
-  line-height: 1.5;
-  letter-spacing: 0.01em;
+  font-size: clamp(28px, 2.9vw, 54px);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  /* wide enough for the boxed payoff line on one line; still breaks
+     "Same 10,000 / visitors a month." like the card */
+  max-width: 17.5ch;
 }
 
-.benchmark__subhead {
-  margin-top: clamp(18px, 2.6vh, 36px);
-  font-family: var(--font-headline);
-  font-weight: 700;
-  color: var(--t-question-text);
-  font-size: clamp(16px, 1.45vw, 28px);
-  line-height: 1.5;
+/* the payoff line carries the quiz's highlight box (HighlightSweep) */
+.bm__payoff {
+  display: block;
+  margin-top: 0.12em;
 }
 
-/* Arrow-doodle bullet points */
-.benchmark__points {
-  list-style: none;
-  margin: clamp(16px, 2.4vh, 32px) 0 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(14px, 2vh, 24px);
-}
-
-.benchmark__points li {
-  display: flex;
-  align-items: flex-start;
-  gap: clamp(12px, 1.2vw, 22px);
-}
-
-.benchmark__points img {
-  width: clamp(20px, 1.7vw, 32px);
-  height: auto;
-  flex-shrink: 0;
-  margin-top: 0.15em;
-}
-
-.benchmark__points span {
+.bm__context {
+  margin-top: clamp(16px, 2.6vh, 30px);
   font-family: var(--font-body);
   font-weight: 500;
   color: var(--t-question-text);
-  font-size: clamp(14px, 1.15vw, 21px);
-  line-height: 1.5;
-  max-width: 34ch;
+  opacity: 0.92;
+  font-size: clamp(15px, 1.25vw, 22px);
+  line-height: 1.55;
+  max-width: 44ch;
 }
 
-/* CONTINUE — visual style comes from the shared .q-btn (landing-v3
-   button); this class only positions it inside the panel */
-.benchmark__continue {
-  align-self: flex-start;
-  margin-top: clamp(22px, 3.4vh, 44px);
+/* "optimised" / "typical" in the paragraph: small brand highlight boxes
+   in the same Ice / Stone that key the table below */
+.bm__tone {
+  font-weight: 700;
+  color: var(--bm-midnight);
+  padding: 0.02em 0.28em;
+  border-radius: 2px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
-/* ---------- Right panel content ---------- */
+.bm__tone--o {
+  background: var(--bm-ice);
+}
 
-/* Tighter vertical rhythm than question slides so the whole slide
-   (incl. progress bar) fits a 720p viewport like the reference */
-.benchmark__panel {
+.bm__tone--t {
+  background: var(--bm-stone);
+}
+
+/* ---------- Right panel: table → gap card → CTA ---------- */
+
+.bm__panel {
   padding-top: clamp(24px, 3.6vh, 44px);
 }
 
-.benchmark__panel-body {
+/* `safe center` keeps the stack centred when it fits and top-aligned when
+   it doesn't, so the table never clips above the scroll */
+.bm__body {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: safe center;
-  padding: clamp(12px, 1.8vh, 26px) 0;
+  padding: clamp(14px, 2.2vh, 28px) 0 clamp(8px, 1.2vh, 16px);
 }
 
-.benchmark__intro,
-.benchmark__outro {
-  font-family: var(--font-body);
-  font-weight: 500;
-  color: var(--t-option-text);
-  font-size: clamp(14px, 1.15vw, 20px);
-  line-height: 1.55;
-}
-
-.benchmark__model {
-  margin-top: clamp(14px, 2vh, 26px);
-  font-family: var(--font-body);
-  font-weight: 700;
-  color: var(--t-option-text);
-  font-size: clamp(15px, 1.2vw, 21px);
-}
-
-.benchmark__aov {
-  margin-top: clamp(8px, 1.1vh, 14px);
-  font-family: var(--font-body);
-  font-weight: 700;
-  color: var(--t-option-text);
-  font-size: clamp(15px, 1.2vw, 21px);
-}
-
-/* Funnel benchmark table — dark header bar, white rounded body,
-   thin column separators (reference style) */
-.benchmark-table {
-  margin-top: clamp(14px, 2vh, 24px);
+.bm__stack {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 2vh, 22px);
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  background: #ffffff;
-  border: 1px solid var(--t-option-selected-bg);
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: var(--card-shadow);
+  max-width: 680px;
+  margin: 0 auto;
 }
 
-.benchmark-table th {
-  background: var(--t-option-selected-bg);
-  color: var(--t-option-selected-text);
+/* Table: one grid so every column lines up */
+.bm__table {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  background: var(--bm-midnight);
+  color: var(--bm-cream);
+  border-radius: 16px;
+  padding: 14px 18px 16px;
+  box-shadow: 0 22px 44px -22px rgba(21, 38, 56, 0.55);
+  font-variant-numeric: tabular-nums;
+}
+
+.bm__tr {
+  display: contents;
+}
+
+.bm__tr > * {
+  padding: 10px 8px;
+}
+
+.bm__tr > *:first-child {
+  padding-left: 2px;
+}
+
+.bm__tr > *:last-child {
+  padding-right: 2px;
+}
+
+.bm__th > * {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: clamp(10.5px, 0.82vw, 12px);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--bm-quiet-dark);
+  padding-top: 0;
+  padding-bottom: 9px;
+  border-bottom: 2px solid var(--bm-stone);
+}
+
+.bm__col {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.bm__col--t {
+  color: var(--bm-stone);
+}
+
+.bm__col--o {
+  color: var(--bm-ice);
+}
+
+.bm__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+
+.bm__row > * {
+  border-bottom: 1px solid var(--bm-line-dark);
+}
+
+.bm__lab {
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: clamp(13px, 1.05vw, 19px);
-  text-align: center;
-  padding: clamp(9px, 1.1vh, 14px) clamp(8px, 0.8vw, 14px);
+  font-size: clamp(14px, 1.1vw, 16px);
+  line-height: 1.25;
+  color: var(--bm-cream);
+  min-width: 0;
 }
 
-.benchmark-table td {
-  font-family: var(--font-body);
+.bm__lab small {
+  display: block;
+  margin-top: 3px;
   font-weight: 500;
-  color: var(--t-option-text);
-  font-size: clamp(12px, 0.95vw, 17px);
+  font-size: clamp(12px, 0.9vw, 13px);
+  line-height: 1.35;
+  color: var(--bm-quiet-dark);
+}
+
+.bm__v {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  text-align: right;
+  white-space: nowrap;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: clamp(16px, 1.35vw, 19px);
+  padding-left: clamp(12px, 1.8vw, 28px);
+}
+
+.bm__v small {
+  margin-top: 3px;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: clamp(10.5px, 0.85vw, 12px);
+  color: var(--bm-quiet-dark);
+}
+
+.bm__v--t {
+  color: var(--bm-stone);
+}
+
+.bm__v--o {
+  color: var(--bm-ice);
+}
+
+/* revenue row: tinted pill across all three columns */
+.bm__rev > * {
+  border-bottom: 0;
+  margin-top: 8px;
+  background: rgba(202, 225, 244, 0.12);
+}
+
+.bm__rev > *:first-child {
+  border-radius: 12px 0 0 12px;
+  padding-left: 14px;
+}
+
+.bm__rev > *:last-child {
+  border-radius: 0 12px 12px 0;
+  padding-right: 14px;
+}
+
+.bm__rev .bm__lab {
+  font-size: clamp(14.5px, 1.15vw, 16px);
+}
+
+.bm__rev .bm__v {
+  font-size: clamp(17px, 1.5vw, 22px);
+}
+
+/* Gap card: the payoff */
+.bm__gap {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: #ffffff;
+  color: var(--bm-midnight);
+  border: 1.5px solid rgba(21, 38, 56, 0.08);
+  border-radius: 16px;
+  padding: clamp(16px, 1.6vw, 22px);
+  box-shadow: 0 22px 44px -22px rgba(21, 38, 56, 0.45);
+  font-variant-numeric: tabular-nums;
+}
+
+.bm__gap-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+}
+
+.bm__big {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: clamp(32px, 3vw, 46px);
+  line-height: 1;
+  color: var(--bm-plum);
+}
+
+.bm__big small {
+  display: block;
+  margin-top: 8px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
   line-height: 1.4;
+  color: var(--bm-ink-quiet);
+}
+
+.bm__yr {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--bm-ink-quiet);
+}
+
+.bm__yr b {
+  display: block;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: clamp(22px, 1.9vw, 28px);
+  color: var(--bm-plum);
+}
+
+.bm__tot {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--bm-paper);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(13.5px, 1.1vw, 15.5px);
+  line-height: 1.5;
+  color: var(--bm-midnight);
+}
+
+.bm__gap .bm__tone {
+  font-weight: 800;
+}
+
+.bm__x {
+  flex: none;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: clamp(20px, 1.7vw, 24px);
+  color: #ffffff;
+  background: var(--bm-plum);
+  border-radius: 10px;
+  padding: 7px 11px;
+}
+
+/* Outro */
+.bm__next {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(15px, 1.2vw, 18px);
+  line-height: 1.5;
+  color: var(--t-option-text);
+  max-width: 48ch;
+}
+
+/* Full-width quiz button (.q-btn look), label left, arrow right, as in
+   the card; the width leaves room for the button's offset shadow.
+   .q-btn.bm__cta beats the global .q-btn (inline-block, 700). */
+.q-btn.bm__cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: calc(100% - 7px);
+  text-align: left;
+  font-weight: 800;
+  font-size: clamp(16px, 1.3vw, 19px);
+  line-height: 1.3;
+  letter-spacing: 0;
+  padding: 18px 22px;
+}
+
+.bm__upnext {
+  margin-top: -4px;
   text-align: center;
-  padding: clamp(8px, 1.2vh, 15px) clamp(8px, 0.8vw, 14px);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--t-option-text);
+  opacity: 0.72;
 }
 
-/* thin row rules + short column separators like the reference */
-.benchmark-table tbody tr + tr td {
-  border-top: 1px solid rgba(21, 38, 56, 0.14);
+.bm__src {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--t-option-text);
 }
 
-.benchmark-table td + td,
-.benchmark-table th + th {
-  border-left: 1px solid rgba(21, 38, 56, 0.18);
+.bm__src summary {
+  display: inline;
+  cursor: pointer;
+  list-style: none;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  opacity: 0.8;
 }
 
-.benchmark-table th + th {
-  border-left-color: rgba(255, 255, 255, 0.25);
+.bm__src summary::-webkit-details-marker {
+  display: none;
 }
 
-.benchmark__outro {
-  margin-top: clamp(14px, 2vh, 26px);
+.bm__src p {
+  margin: 8px auto 0;
+  max-width: 52ch;
+}
+
+.bm__src .bm__tone {
+  font-weight: 500;
+}
+
+/* Laptops: same type, tighter rhythm so the card fits one screen
+   (the card's own "laptops" rule) */
+@media (min-width: 900.02px) and (max-height: 860px) {
+  .bm__panel {
+    padding-top: 18px;
+    padding-bottom: 14px;
+  }
+
+  .bm__body {
+    padding-top: 10px;
+    padding-bottom: 4px;
+  }
+
+  .bm__stack {
+    gap: 12px;
+  }
+
+  .bm__table {
+    padding: 12px 16px 14px;
+  }
+
+  .bm__tr > * {
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+
+  .bm__th > * {
+    padding-bottom: 7px;
+  }
+
+  .bm__rev > * {
+    margin-top: 6px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+  }
+
+  .bm__gap {
+    gap: 10px;
+    padding: 14px 18px;
+  }
+
+  .bm__tot {
+    padding: 10px 12px;
+  }
+
+  .q-btn.bm__cta {
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+
+  .bm__upnext {
+    margin-top: -2px;
+  }
 }
 
 /* ============================================================
-   Responsive
+   Responsive — panels stack (same breakpoint as the shell); the
+   stacked order is the card's own single column
    ============================================================ */
 
-/* Panels stack under 900px (shell handles the frame/logo bar);
-   release the reference's forced line breaks so text wraps naturally */
-@media (max-width: 900px) {
-  .benchmark__headline br,
-  .benchmark__subhead br {
-    display: none;
+@media (max-width: 900px), (max-width: 1160px) and (orientation: portrait) {
+  .bm__headline {
+    font-size: clamp(23px, 7.1vw, 40px);
+    line-height: 1.25;
   }
 
-  .benchmark__headline {
-    font-size: clamp(23px, 4.6vw, 34px);
-    line-height: 1.45;
-  }
-
-  .benchmark__subhead {
-    font-size: clamp(16px, 3.6vw, 22px);
-  }
-
-  .benchmark__points span {
-    font-size: clamp(14px, 3.4vw, 18px);
+  .bm__context {
+    font-size: clamp(15px, 3.9vw, 17.5px);
     max-width: none;
   }
 
-  .benchmark__points img {
-    width: clamp(20px, 4.6vw, 28px);
+  .bm__panel {
+    padding-top: clamp(22px, 5vw, 32px);
   }
 
-  .benchmark__continue {
-    margin-top: 26px;
+  .bm__body {
+    padding-top: 0;
   }
 
-  .benchmark__intro,
-  .benchmark__outro {
-    font-size: clamp(14px, 3.4vw, 18px);
+  .bm__stack {
+    gap: 18px;
+    max-width: 640px;
   }
 
-  .benchmark__model,
-  .benchmark__aov {
-    font-size: clamp(15px, 3.6vw, 19px);
+  .bm__table {
+    padding: 10px 12px 12px;
+    border-radius: 14px;
   }
 
-  .benchmark-table th {
-    font-size: clamp(12px, 2.9vw, 16px);
-    padding: 10px 6px;
+  .bm__tr > * {
+    padding: 9px 4px;
   }
 
-  .benchmark-table td {
-    font-size: clamp(11px, 2.7vw, 15px);
-    padding: 10px 6px;
-    overflow-wrap: break-word;
+  .bm__th > * {
+    font-size: 9.5px;
+    letter-spacing: 0.06em;
+  }
+
+  .bm__lab {
+    font-size: 14px;
+  }
+
+  .bm__lab small {
+    font-size: 11.5px;
+  }
+
+  .bm__v {
+    font-size: 16px;
+    padding-left: 10px;
+  }
+
+  .bm__v small {
+    font-size: 10.5px;
+  }
+
+  .bm__rev > *:first-child {
+    padding-left: 10px;
+  }
+
+  .bm__rev > *:last-child {
+    padding-right: 10px;
+  }
+
+  .bm__rev .bm__v {
+    font-size: 17px;
+  }
+
+  .bm__gap {
+    padding: 16px;
+  }
+
+  .bm__tot {
+    gap: 10px;
+    padding: 10px 12px;
+  }
+
+  .bm__x {
+    font-size: 20px;
+    padding: 6px 9px;
+  }
+
+  .q-btn.bm__cta {
+    font-size: 17px;
+    padding: 16px 18px;
+  }
+}
+
+/* small phones: the table is the widest thing on the slide, so give its
+   label column the panel's spare side padding (keylines sit at 10px) */
+@media (max-width: 480px) {
+  .bm__panel {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .bm__table {
+    padding: 10px 10px 12px;
+  }
+
+  .bm__v {
+    padding-left: 8px;
+  }
+}
+
+/* narrowest phones: step the table type down so the longest label word
+   ("conversion", "Subscribers") still fits its column whole */
+@media (max-width: 360px) {
+  .bm__tr > * {
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+
+  .bm__th > * {
+    font-size: 9px;
+    letter-spacing: 0.03em;
+  }
+
+  .bm__col {
+    gap: 4px;
+  }
+
+  .bm__lab {
+    font-size: 13px;
+  }
+
+  .bm__lab small {
+    font-size: 11px;
+  }
+
+  .bm__v {
+    font-size: 15px;
+    padding-left: 6px;
+  }
+
+  .bm__v small {
+    font-size: 10px;
+  }
+
+  .bm__rev .bm__v {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 400px) {
+  .bm__gap-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .bm__yr {
+    text-align: left;
   }
 }
