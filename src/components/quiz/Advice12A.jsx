@@ -1,5 +1,7 @@
-import CardHost from './cards/CardHost.jsx';
-import { mount, css } from './cards/q12a/index.js';
+import CardHost, { prefetchCard } from './cards/CardHost.jsx';
+
+const load = () => import('./cards/q12a/index.js');
+prefetchCard(load);
 
 /**
  * Constraint card after Q12, answer A — Yemi's "Q12A SLG Calls Constraint"
@@ -10,8 +12,7 @@ import { mount, css } from './cards/q12a/index.js';
 export default function Advice12A({ track, onBack, onContinue }) {
   return (
     <CardHost
-      mount={mount}
-      css={css}
+      load={load}
       label="Your number one constraint"
       data={{ track }}
       onBack={onBack}
