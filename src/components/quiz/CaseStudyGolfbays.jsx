@@ -1,5 +1,7 @@
-import CardHost from './cards/CardHost.jsx';
-import { mount, css } from './cards/q5a/index.js';
+import CardHost, { prefetchCard } from './cards/CardHost.jsx';
+
+const load = () => import('./cards/q5a/index.js');
+prefetchCard(load);
 
 /* Dark accent for filled chips/cards + light card fill, per theme, and the
    sweep tone for the dark chip on the light CTA card. Shared with the other
@@ -17,8 +19,7 @@ export const CTA_TONE = { maroon: 'plum', green: 'navy', blue: 'navy' };
 export default function CaseStudyGolfbays({ onBack, onContinue }) {
   return (
     <CardHost
-      mount={mount}
-      css={css}
+      load={load}
       label="Case study: GolfBays"
       onBack={onBack}
       onContinue={onContinue}
