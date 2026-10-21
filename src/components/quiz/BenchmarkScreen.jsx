@@ -49,6 +49,9 @@ export default function BenchmarkScreen({ isSlg, onBack, onContinue }) {
   const s = BENCHMARK_COPY.shared;
   const c = BENCHMARK_COPY[mode];
   const f = benchmarkFigures(mode);
+  // CTA's last word rides with the arrow, so the arrow never wraps alone.
+  const ctaLead = s.cta.slice(0, s.cta.lastIndexOf(' '));
+  const ctaLast = s.cta.slice(s.cta.lastIndexOf(' ') + 1);
   const stageRef = useRef(null);
   const colRef = useRef(null);
 
@@ -174,9 +177,12 @@ export default function BenchmarkScreen({ isSlg, onBack, onContinue }) {
             <div className="bmc__grp">
               <p className="bmc__next">{s.next}</p>
               <button type="button" className="bmc__cta" onClick={onContinue}>
-                <span>{s.cta}</span>
-                <span className="bmc__arrow" aria-hidden="true">
-                  →
+                {ctaLead}{' '}
+                <span className="bmc__nowrap">
+                  {ctaLast}
+                  <span className="bmc__arrow" aria-hidden="true">
+                    →
+                  </span>
                 </span>
               </button>
               <div className="bmc__upnext">{s.up_next}</div>
