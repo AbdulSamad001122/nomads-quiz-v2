@@ -150,10 +150,3 @@ export function toneParts(text) {
   if (last < text.length) parts.push({ t: text.slice(last), tone: null });
   return parts;
 }
-
-/** Source-note lines, minus any line that still carries a copy placeholder. */
-export function sourceLines() {
-  return BENCHMARK_COPY.shared.source_text
-    .split('\n')
-    .filter((line) => !/\[add source\]/i.test(line));
-}

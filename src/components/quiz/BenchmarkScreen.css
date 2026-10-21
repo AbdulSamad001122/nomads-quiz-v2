@@ -1,634 +1,659 @@
-/* ============================================================
-   BenchmarkScreen — Q4 benchmark card (after Q4, before Q5)
-   Yemi's "Q4 Benchmark" HTML card set in the QuizScreen shell
-   (.quiz-screen / .question-panel / .answer-panel + theme vars).
-   Left (dark ground): the claim. Right (light ground): the card's
-   light-ground variant — Midnight table, white gap card.
-   Colours are the Nomads palette only (design-v2 0.2): the card's
-   typical/optimised pairing maps to Stone (typical) and Ice Blue
-   (optimised) — text on dark surfaces, highlight boxes on light ones;
-   Plum is the accent for the one hero figure.
-   ============================================================ */
+/* Q4 benchmark card — the stylesheet of Yemi's "Q4 Benchmark SLG.html" ported
+   one rule at a time, class names prefixed with bmc__ (the card's .stage is
+   .bmc, .slide is .bmc__slide, .panel is .bmc__panel, and so on). Navy ground
+   only (the card's default). Red and green are the card's: numbers only,
+   typical vs optimised. Preview-only rules (.pbar, .qhead, editing) and the
+   paced-mode chrome (.bars, .nav) are left out. */
 
-.benchmark-screen {
-  --bm-midnight: #152638; /* foundation */
-  --bm-stone: #e4c8bc; /* foundation — typical */
-  --bm-ice: #cae1f4; /* accent — optimised */
-  --bm-plum: #5d1b4e; /* accent — hero figures */
-  --bm-cream: #f4ede6; /* text on dark */
-  --bm-paper: #e4fbff; /* the quiz's ice tint */
-  --bm-quiet-dark: rgba(244, 237, 230, 0.7);
-  --bm-ink-quiet: rgba(21, 38, 56, 0.7);
-  --bm-line-dark: rgba(202, 225, 244, 0.16);
-}
-
-/* Square circle-doodle export → mask into the white disc */
-.benchmark-screen .seam-badge {
-  background: #ffffff;
-  overflow: hidden;
-}
-
-/* ---------- Left panel: the claim ---------- */
-
-.benchmark-screen .question-panel__body {
-  padding-top: clamp(20px, 3vh, 44px);
-  padding-bottom: clamp(20px, 3vh, 44px);
-}
-
-.bm__claim {
-  justify-content: center;
-  padding-bottom: 0;
-}
-
-.bm__eyebrow {
-  letter-spacing: 0.05em;
-  max-width: 100%;
-}
-
-.bm__eyebrow s {
-  text-decoration-color: #5d1b4e;
-  text-decoration-thickness: 2px;
-}
-
-.bm__headline {
-  font-family: var(--font-headline);
-  font-weight: 800;
-  color: var(--t-question-text);
-  font-size: clamp(28px, 2.9vw, 54px);
-  line-height: 1.3;
-  letter-spacing: -0.01em;
-  text-wrap: balance;
-  /* wide enough for the boxed payoff line on one line; still breaks
-     "Same 10,000 / visitors a month." like the card */
-  max-width: 17.5ch;
-}
-
-/* the payoff line carries the quiz's highlight box (HighlightSweep) */
-.bm__payoff {
-  display: block;
-  margin-top: 0.12em;
-}
-
-.bm__context {
-  margin-top: clamp(16px, 2.6vh, 30px);
-  font-family: var(--font-body);
+/* The card's fonts: Google Fonts Montserrat 500–900 + Roboto Mono 400/500,
+   served from /fonts under a card-only family name so the 900 weight (not
+   declared for the rest of the quiz) can't change any other screen. Each face
+   carries Google's "latin" unicode-range, so glyphs outside it fall back to
+   the system font exactly as on the card (e.g. the CTA's → and the Back ←). */
+@font-face {
+  font-family: 'Q4 Card Montserrat';
+  src: url('/fonts/Montserrat-Medium.ttf') format('truetype');
   font-weight: 500;
-  color: var(--t-question-text);
-  opacity: 0.92;
-  font-size: clamp(15px, 1.25vw, 22px);
-  line-height: 1.55;
-  max-width: 44ch;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
 }
-
-/* "optimised" / "typical" in the paragraph: small brand highlight boxes
-   in the same Ice / Stone that key the table below */
-.bm__tone {
+@font-face {
+  font-family: 'Q4 Card Montserrat';
+  src: url('/fonts/Montserrat-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Q4 Card Montserrat';
+  src: url('/fonts/Montserrat-Bold.ttf') format('truetype');
   font-weight: 700;
-  color: var(--bm-midnight);
-  padding: 0.02em 0.28em;
-  border-radius: 2px;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
 }
-
-.bm__tone--o {
-  background: var(--bm-ice);
+@font-face {
+  font-family: 'Q4 Card Montserrat';
+  src: url('/fonts/Montserrat-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
 }
-
-.bm__tone--t {
-  background: var(--bm-stone);
+@font-face {
+  font-family: 'Q4 Card Montserrat';
+  src: url('/fonts/Montserrat-Black-latin.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
 }
-
-/* ---------- Right panel: table → gap card → CTA ---------- */
-
-.bm__panel {
-  padding-top: clamp(24px, 3.6vh, 44px);
+@font-face {
+  font-family: 'Q4 Card Roboto Mono';
+  src: url('/fonts/RobotoMono-Regular.ttf') format('truetype');
+  /* Google's Roboto Mono metrics (1048 / 271): the local file's 950 / 250
+     made every mono line ~2px shorter than on the card */
+  ascent-override: 104.8%;
+  descent-override: 27.1%;
+  line-gap-override: 0%;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
 }
-
-/* `safe center` keeps the stack centred when it fits and top-aligned when
-   it doesn't, so the table never clips above the scroll */
-.bm__body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: safe center;
-  padding: clamp(14px, 2.2vh, 28px) 0 clamp(8px, 1.2vh, 16px);
-}
-
-.bm__stack {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(14px, 2vh, 22px);
-  width: 100%;
-  max-width: 680px;
-  margin: 0 auto;
-}
-
-/* Table: one grid so every column lines up */
-.bm__table {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto;
-  background: var(--bm-midnight);
-  color: var(--bm-cream);
-  border-radius: 16px;
-  padding: 14px 18px 16px;
-  box-shadow: 0 22px 44px -22px rgba(21, 38, 56, 0.55);
-  font-variant-numeric: tabular-nums;
-}
-
-.bm__tr {
-  display: contents;
-}
-
-.bm__tr > * {
-  padding: 10px 8px;
-}
-
-.bm__tr > *:first-child {
-  padding-left: 2px;
-}
-
-.bm__tr > *:last-child {
-  padding-right: 2px;
-}
-
-.bm__th > * {
-  font-family: var(--font-mono);
+@font-face {
+  font-family: 'Q4 Card Roboto Mono';
+  src: url('/fonts/RobotoMono-Medium.ttf') format('truetype');
+  /* Google's Roboto Mono metrics (1048 / 271): the local file's 950 / 250
+     made every mono line ~2px shorter than on the card */
+  ascent-override: 104.8%;
+  descent-override: 27.1%;
+  line-gap-override: 0%;
   font-weight: 500;
-  font-size: clamp(10.5px, 0.82vw, 12px);
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+/* ================= THE CARD (.stage) ================= */
+.bmc {
+  --bg: #121726; /* navy under the texture */
+  --purple: #5d1b4e;
+  --midnight: #152638;
+  --maroon: #391129;
+  --lilac: #f2e5f6; /* quiz button fill */
+  --cream: #f4ede6; /* eyebrow chip */
+  --text: #f7efea;
+  --quiet: #b4bdd0;
+  --line: rgba(247, 239, 234, 0.14);
+  --red: #f2867a; /* typical numbers only */
+  --green: #7fd8a6; /* optimised numbers only (on dark) */
+  --stone: #e4c8bc;
+  --ice: #cae1f4;
+  --paper: #e4fbff; /* light reading panel */
+  --card: #ffffff;
+  --ink: #152638; /* Midnight Blue text on light panels */
+  --ink-quiet: #4e5a6e;
+  --ink-line: rgba(21, 38, 56, 0.13);
+  --red-ink: #a6342b; /* typical numbers on light panels */
+  --green-ink: #17703f; /* optimised numbers on light panels */
+  --display: 'Q4 Card Montserrat', system-ui, sans-serif;
+  --mono: 'Q4 Card Roboto Mono', ui-monospace, Menlo, monospace;
+  color-scheme: dark;
+
+  /* fills the space under the quiz's progress strip (the card's "give it
+     the space under the quiz header") and scrolls inside, like the card */
+  height: calc(100vh - var(--qps-height, 0px));
+  height: calc(100dvh - var(--qps-height, 0px));
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  isolation: isolate;
+  outline: none;
+  background-color: var(--bg);
+  background-image: url('/assets/q4-benchmark-navy.jpg');
+  background-size: 994px 424px;
+  background-attachment: local;
+  color: var(--text);
+  font: 14px var(--display);
+  -webkit-font-smoothing: auto;
+  text-rendering: auto;
+  padding-left: max(0px, env(safe-area-inset-left, 0px));
+  padding-right: max(0px, env(safe-area-inset-right, 0px));
+}
+.bmc::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(120% 60% at 50% 0%, rgba(93, 27, 78, 0.22), rgba(18, 23, 38, 0) 60%);
+}
+.bmc *,
+.bmc *::before,
+.bmc *::after {
+  box-sizing: border-box;
+}
+
+.bmc__slide {
+  position: relative;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 28px max(20px, env(safe-area-inset-right, 0px)) 32px
+    max(20px, env(safe-area-inset-left, 0px));
+}
+.bmc__col {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.bmc__grp {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Back: the card's own paced-mode "← Back" (.nav .back), set above the
+   eyebrow because the single layout has no nav bar */
+.bmc__back {
+  align-self: flex-start;
+  margin: -8px 0 -12px -6px;
+  padding: 8px 6px;
+  background: none;
+  border: 0;
+  color: var(--cream);
+  cursor: pointer;
+  font: 500 11px var(--mono);
   letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: var(--bm-quiet-dark);
-  padding-top: 0;
-  padding-bottom: 9px;
-  border-bottom: 2px solid var(--bm-stone);
+  opacity: 0.75;
 }
 
-.bm__col {
+/* claim */
+.bmc__eyebrow {
+  align-self: flex-start;
+  background: var(--cream);
+  color: var(--midnight);
+  font: 500 13px/1.5 var(--mono);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+}
+.bmc__eyebrow s {
+  text-decoration-color: var(--purple);
+  text-decoration-thickness: 2px;
+}
+.bmc__h1 {
+  margin: 0;
+  font: 800 clamp(28px, 8.2vw, 40px) / 1.15 var(--display);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  color: #fff;
+}
+.bmc__pay {
+  display: block;
+  color: var(--green);
+  margin-top: 4px;
+}
+.bmc__context {
+  margin: 0;
+  font: 500 16px/1.55 var(--display);
+  color: rgba(247, 239, 234, 0.9);
+  max-width: 48ch;
+}
+.bmc__context .bmc__o {
+  color: var(--green);
+  font-weight: 700;
+}
+.bmc__context .bmc__t {
+  color: var(--red);
+  font-weight: 700;
+}
+
+/* table: one grid so every column lines up */
+.bmc__panel {
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 16px;
+  padding: 14px 16px 16px;
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.55);
+}
+.bmc__tbl {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  column-gap: 0;
+  font-variant-numeric: tabular-nums;
+}
+.bmc__tr {
+  display: contents;
+}
+.bmc__tr > * {
+  padding: 11px 8px;
+}
+.bmc__tr > *:first-child {
+  padding-left: 2px;
+}
+.bmc__tr > *:last-child {
+  padding-right: 2px;
+}
+.bmc__th > * {
+  font: 500 10.5px var(--mono);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--purple);
+  font-weight: 700;
+  padding-bottom: 9px;
+  padding-top: 0;
+  border-bottom: 2px solid var(--purple);
+}
+.bmc__th .bmc__t,
+.bmc__th .bmc__o {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 6px;
 }
-
-.bm__col--t {
-  color: var(--bm-stone);
+.bmc__th .bmc__t {
+  color: var(--red-ink);
+  font-weight: 700;
 }
-
-.bm__col--o {
-  color: var(--bm-ice);
+.bmc__th .bmc__o {
+  color: var(--green-ink);
+  font-weight: 700;
 }
-
-.bm__dot {
+.bmc__dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
   background: currentColor;
   flex: none;
 }
-
-.bm__row > * {
-  border-bottom: 1px solid var(--bm-line-dark);
+.bmc__row > * {
+  border-bottom: 1px solid var(--ink-line);
 }
-
-.bm__lab {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: clamp(14px, 1.1vw, 16px);
-  line-height: 1.25;
-  color: var(--bm-cream);
+.bmc__lab {
+  font: 700 14.5px/1.25 var(--display);
+  color: var(--ink);
   min-width: 0;
 }
-
-.bm__lab small {
+.bmc__lab small {
   display: block;
+  font: 500 12px/1.35 var(--display);
+  color: var(--ink-quiet);
   margin-top: 3px;
-  font-weight: 500;
-  font-size: clamp(12px, 0.9vw, 13px);
-  line-height: 1.35;
-  color: var(--bm-quiet-dark);
 }
-
-.bm__v {
+.bmc__v {
+  text-align: right;
+  font: 900 18px var(--display);
+  white-space: nowrap;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
-  text-align: right;
-  white-space: nowrap;
-  font-family: var(--font-headline);
-  font-weight: 800;
-  font-size: clamp(16px, 1.35vw, 19px);
-  padding-left: clamp(12px, 1.8vw, 28px);
+  padding-left: 16px;
 }
-
-.bm__v small {
+.bmc__v small {
+  font: 500 11px var(--mono);
+  color: var(--ink-quiet);
   margin-top: 3px;
-  font-family: var(--font-mono);
-  font-weight: 500;
-  font-size: clamp(10.5px, 0.85vw, 12px);
-  color: var(--bm-quiet-dark);
 }
-
-.bm__v--t {
-  color: var(--bm-stone);
+.bmc__v.bmc__t {
+  color: var(--red-ink);
 }
-
-.bm__v--o {
-  color: var(--bm-ice);
+.bmc__v.bmc__o {
+  color: var(--green-ink);
 }
-
-/* revenue row: tinted pill across all three columns */
-.bm__rev > * {
+.bmc__rev > * {
   border-bottom: 0;
-  margin-top: 8px;
-  background: rgba(202, 225, 244, 0.12);
+  background: var(--ice);
+  margin-top: 10px;
 }
-
-.bm__rev > *:first-child {
+.bmc__rev > *:first-child {
   border-radius: 12px 0 0 12px;
   padding-left: 14px;
 }
-
-.bm__rev > *:last-child {
+.bmc__rev > *:last-child {
   border-radius: 0 12px 12px 0;
   padding-right: 14px;
 }
-
-.bm__rev .bm__lab {
-  font-size: clamp(14.5px, 1.15vw, 16px);
+.bmc__rev .bmc__lab {
+  font-size: 15px;
+}
+.bmc__rev .bmc__v {
+  font-size: 21px;
+  font-weight: 900;
 }
 
-.bm__rev .bm__v {
-  font-size: clamp(17px, 1.5vw, 22px);
-}
-
-/* Gap card: the payoff */
-.bm__gap {
+/* payoff */
+.bmc__gap {
+  border: 0;
+  border-radius: 16px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
   gap: 14px;
-  background: #ffffff;
-  color: var(--bm-midnight);
-  border: 1.5px solid rgba(21, 38, 56, 0.08);
-  border-radius: 16px;
-  padding: clamp(16px, 1.6vw, 22px);
-  box-shadow: 0 22px 44px -22px rgba(21, 38, 56, 0.45);
   font-variant-numeric: tabular-nums;
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.6);
 }
-
-.bm__gap-top {
+.bmc__top {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  flex-wrap: wrap;
   gap: 6px 14px;
+  flex-wrap: wrap;
 }
-
-.bm__big {
-  font-family: var(--font-headline);
-  font-weight: 800;
-  font-size: clamp(32px, 3vw, 46px);
-  line-height: 1;
-  color: var(--bm-plum);
+.bmc__big {
+  font: 900 clamp(32px, 9vw, 40px) / 1 var(--display);
+  color: var(--green-ink);
 }
-
-.bm__big small {
+.bmc__big small {
   display: block;
+  font: 600 13px/1.4 var(--display);
+  color: var(--ink-quiet);
   margin-top: 8px;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 13px;
-  line-height: 1.4;
-  color: var(--bm-ink-quiet);
 }
-
-.bm__yr {
+.bmc__yr {
   text-align: right;
-  font-family: var(--font-mono);
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 1.4;
-  color: var(--bm-ink-quiet);
+  font: 500 12px/1.4 var(--mono);
+  color: var(--ink-quiet);
 }
-
-.bm__yr b {
+.bmc__yr b {
   display: block;
-  font-family: var(--font-headline);
-  font-weight: 800;
-  font-size: clamp(22px, 1.9vw, 28px);
-  color: var(--bm-plum);
+  font: 900 24px var(--display);
+  color: var(--green-ink);
 }
-
-.bm__tot {
+.bmc__tot {
   display: flex;
   align-items: center;
   gap: 14px;
-  background: var(--bm-paper);
+  background: var(--paper);
   border-radius: 12px;
   padding: 12px 14px;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: clamp(13.5px, 1.1vw, 15.5px);
-  line-height: 1.5;
-  color: var(--bm-midnight);
+  font: 600 14px/1.5 var(--display);
+  color: var(--ink);
 }
-
-.bm__gap .bm__tone {
+.bmc__tot .bmc__t {
+  color: var(--red-ink);
   font-weight: 800;
 }
-
-.bm__x {
+.bmc__tot .bmc__o {
+  color: var(--green-ink);
+  font-weight: 800;
+}
+.bmc__x {
   flex: none;
-  font-family: var(--font-headline);
-  font-weight: 800;
-  font-size: clamp(20px, 1.7vw, 24px);
-  color: #ffffff;
-  background: var(--bm-plum);
+  font: 900 24px var(--display);
+  color: #fff;
+  background: var(--purple);
   border-radius: 10px;
   padding: 7px 11px;
 }
-
-/* Outro */
-.bm__next {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: clamp(15px, 1.2vw, 18px);
-  line-height: 1.5;
-  color: var(--t-option-text);
-  max-width: 48ch;
-}
-
-/* Full-width quiz button (.q-btn look), label left, arrow right, as in
-   the card; the width leaves room for the button's offset shadow.
-   .q-btn.bm__cta beats the global .q-btn (inline-block, 700). */
-.q-btn.bm__cta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  width: calc(100% - 7px);
-  text-align: left;
-  font-weight: 800;
-  font-size: clamp(16px, 1.3vw, 19px);
-  line-height: 1.3;
-  letter-spacing: 0;
-  padding: 18px 22px;
-}
-
-.bm__upnext {
-  margin-top: -4px;
-  text-align: center;
-  font-family: var(--font-mono);
-  font-weight: 500;
-  font-size: 12.5px;
-  line-height: 1.5;
-  color: var(--t-option-text);
-  opacity: 0.72;
-}
-
-.bm__src {
-  text-align: center;
-  font-family: var(--font-mono);
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 1.55;
-  color: var(--t-option-text);
-}
-
-.bm__src summary {
-  display: inline;
-  cursor: pointer;
-  list-style: none;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  opacity: 0.8;
-}
-
-.bm__src summary::-webkit-details-marker {
-  display: none;
-}
-
-.bm__src p {
-  margin: 8px auto 0;
-  max-width: 52ch;
-}
-
-.bm__src .bm__tone {
-  font-weight: 500;
-}
-
-/* Laptops: same type, tighter rhythm so the card fits one screen
-   (the card's own "laptops" rule) */
-@media (min-width: 900.02px) and (max-height: 860px) {
-  .bm__panel {
-    padding-top: 18px;
-    padding-bottom: 14px;
-  }
-
-  .bm__body {
-    padding-top: 10px;
-    padding-bottom: 4px;
-  }
-
-  .bm__stack {
-    gap: 12px;
-  }
-
-  .bm__table {
-    padding: 12px 16px 14px;
-  }
-
-  .bm__tr > * {
-    padding-top: 7px;
-    padding-bottom: 7px;
-  }
-
-  .bm__th > * {
-    padding-bottom: 7px;
-  }
-
-  .bm__rev > * {
-    margin-top: 6px;
-    padding-top: 9px;
-    padding-bottom: 9px;
-  }
-
-  .bm__gap {
-    gap: 10px;
-    padding: 14px 18px;
-  }
-
-  .bm__tot {
-    padding: 10px 12px;
-  }
-
-  .q-btn.bm__cta {
-    padding-top: 14px;
-    padding-bottom: 14px;
-  }
-
-  .bm__upnext {
-    margin-top: -2px;
-  }
-}
-
-/* ============================================================
-   Responsive — panels stack (same breakpoint as the shell); the
-   stacked order is the card's own single column
-   ============================================================ */
-
-@media (max-width: 900px), (max-width: 1160px) and (orientation: portrait) {
-  .bm__headline {
-    font-size: clamp(23px, 7.1vw, 40px);
-    line-height: 1.25;
-  }
-
-  .bm__context {
-    font-size: clamp(15px, 3.9vw, 17.5px);
-    max-width: none;
-  }
-
-  .bm__panel {
-    padding-top: clamp(22px, 5vw, 32px);
-  }
-
-  .bm__body {
-    padding-top: 0;
-  }
-
-  .bm__stack {
-    gap: 18px;
-    max-width: 640px;
-  }
-
-  .bm__table {
-    padding: 10px 12px 12px;
-    border-radius: 14px;
-  }
-
-  .bm__tr > * {
-    padding: 9px 4px;
-  }
-
-  .bm__th > * {
-    font-size: 9.5px;
-    letter-spacing: 0.06em;
-  }
-
-  .bm__lab {
-    font-size: 14px;
-  }
-
-  .bm__lab small {
-    font-size: 11.5px;
-  }
-
-  .bm__v {
-    font-size: 16px;
-    padding-left: 10px;
-  }
-
-  .bm__v small {
-    font-size: 10.5px;
-  }
-
-  .bm__rev > *:first-child {
-    padding-left: 10px;
-  }
-
-  .bm__rev > *:last-child {
-    padding-right: 10px;
-  }
-
-  .bm__rev .bm__v {
-    font-size: 17px;
-  }
-
-  .bm__gap {
-    padding: 16px;
-  }
-
-  .bm__tot {
-    gap: 10px;
-    padding: 10px 12px;
-  }
-
-  .bm__x {
-    font-size: 20px;
-    padding: 6px 9px;
-  }
-
-  .q-btn.bm__cta {
-    font-size: 17px;
-    padding: 16px 18px;
-  }
-}
-
-/* small phones: the table is the widest thing on the slide, so give its
-   label column the panel's spare side padding (keylines sit at 10px) */
-@media (max-width: 480px) {
-  .bm__panel {
-    padding-left: 18px;
-    padding-right: 18px;
-  }
-
-  .bm__table {
-    padding: 10px 10px 12px;
-  }
-
-  .bm__v {
-    padding-left: 8px;
-  }
-}
-
-/* narrowest phones: step the table type down so the longest label word
-   ("conversion", "Subscribers") still fits its column whole */
-@media (max-width: 360px) {
-  .bm__tr > * {
-    padding-left: 3px;
-    padding-right: 3px;
-  }
-
-  .bm__th > * {
-    font-size: 9px;
-    letter-spacing: 0.03em;
-  }
-
-  .bm__col {
-    gap: 4px;
-  }
-
-  .bm__lab {
-    font-size: 13px;
-  }
-
-  .bm__lab small {
-    font-size: 11px;
-  }
-
-  .bm__v {
-    font-size: 15px;
-    padding-left: 6px;
-  }
-
-  .bm__v small {
-    font-size: 10px;
-  }
-
-  .bm__rev .bm__v {
-    font-size: 15px;
-  }
-}
-
 @media (max-width: 400px) {
-  .bm__gap-top {
+  .bmc__top {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
   }
-
-  .bm__yr {
+  .bmc__yr {
     text-align: left;
   }
+}
+@media (max-width: 599px) {
+  .bmc__col {
+    gap: 18px;
+  }
+  .bmc__panel {
+    padding: 10px 12px 12px;
+    border-radius: 14px;
+  }
+  .bmc__tr > * {
+    padding: 9px 4px;
+  }
+  .bmc__th > * {
+    font-size: 9.5px;
+    letter-spacing: 0.06em;
+  }
+  .bmc__lab {
+    font-size: 14px;
+  }
+  .bmc__lab small {
+    font-size: 11.5px;
+  }
+  .bmc__v {
+    font-size: 16px;
+    padding-left: 10px;
+  }
+  .bmc__v small {
+    font-size: 10.5px;
+  }
+  .bmc__rev > *:first-child {
+    padding-left: 10px;
+  }
+  .bmc__rev > *:last-child {
+    padding-right: 10px;
+  }
+  .bmc__rev .bmc__v {
+    font-size: 17px;
+  }
+  .bmc__gap {
+    padding: 16px;
+  }
+  .bmc__tot {
+    font-size: 13.5px;
+    padding: 10px 12px;
+    gap: 10px;
+  }
+  .bmc__x {
+    font-size: 20px;
+    padding: 6px 9px;
+  }
+  .bmc__cta {
+    font-size: 17px;
+    padding: 16px 18px;
+  }
+}
+.bmc__next {
+  margin: 0;
+  font: 600 16px/1.5 var(--display);
+  color: var(--text);
+  max-width: 48ch;
+}
+.bmc__cta {
+  align-self: stretch;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  font: 800 18px/1.3 var(--display);
+  text-align: left;
+  cursor: pointer;
+  padding: 18px 22px;
+  border: 2px solid var(--maroon);
+  border-radius: 0;
+  background: var(--lilac);
+  color: var(--maroon);
+  box-shadow: 5px 5px 0 var(--purple);
+  margin-right: 6px;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+.bmc__cta:hover {
+  background: var(--purple);
+  color: #fff;
+  border-color: #8a4f70;
+  box-shadow: 5px 5px 0 var(--maroon);
+}
+.bmc__cta:active {
+  transform: translate(3px, 3px);
+  box-shadow: 2px 2px 0 var(--maroon);
+}
+.bmc__upnext {
+  font: 500 12.5px/1.5 var(--mono);
+  color: var(--quiet);
+  text-align: center;
+  margin-top: -4px;
+}
+.bmc__src {
+  font: 400 12px/1.55 var(--mono);
+  color: var(--quiet);
+  text-align: center;
+}
+.bmc__src summary {
+  cursor: pointer;
+  list-style: none;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.bmc__src summary::-webkit-details-marker {
+  display: none;
+}
+.bmc__src p {
+  margin: 8px auto 0;
+  max-width: 52ch;
+}
+.bmc__src .bmc__o {
+  color: var(--green);
+}
+.bmc__src .bmc__t {
+  color: var(--red);
+}
+
+/* larger screens */
+@media (min-width: 600px) {
+  .bmc__col {
+    gap: 24px;
+  }
+  .bmc__eyebrow {
+    font-size: 14.5px;
+  }
+  .bmc__h1 {
+    font-size: clamp(34px, 5.2vw, 44px);
+  }
+  .bmc__context {
+    font-size: 17.5px;
+  }
+  .bmc__lab {
+    font-size: 16px;
+  }
+  .bmc__lab small {
+    font-size: 13px;
+  }
+  .bmc__v {
+    font-size: 19px;
+    padding-left: 28px;
+  }
+  .bmc__v small {
+    font-size: 12px;
+  }
+  .bmc__rev .bmc__v {
+    font-size: 22px;
+  }
+  .bmc__gap {
+    padding: 20px 22px;
+  }
+  .bmc__panel {
+    padding: 16px 20px 18px;
+  }
+  .bmc__big {
+    font-size: 46px;
+  }
+  .bmc__yr b {
+    font-size: 28px;
+  }
+  .bmc__tot {
+    font-size: 15.5px;
+  }
+  .bmc__next {
+    font-size: 17.5px;
+  }
+  .bmc__cta {
+    font-size: 19px;
+  }
+  .bmc__slide {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+/* laptops: same type, tighter rhythm so the first screen fits (the card's
+   slide-padding change here doesn't apply in the single layout) */
+@media (min-width: 900px) and (max-height: 860px) {
+  .bmc__col {
+    gap: 18px;
+    max-width: 680px;
+  }
+  .bmc__grp {
+    gap: 12px;
+  }
+  .bmc__eyebrow {
+    font-size: 13.5px;
+  }
+  .bmc__h1 {
+    font-size: clamp(32px, min(3vw, 6vh), 40px);
+  }
+  .bmc__context {
+    font-size: 16.5px;
+    line-height: 1.5;
+  }
+  .bmc__tr > * {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  .bmc__th > * {
+    padding-bottom: 8px;
+  }
+  .bmc__lab {
+    font-size: 15px;
+  }
+  .bmc__lab small {
+    font-size: 12.5px;
+    margin-top: 2px;
+  }
+  .bmc__v {
+    font-size: 18px;
+  }
+  .bmc__v small {
+    margin-top: 2px;
+  }
+  .bmc__rev > * {
+    margin-top: 6px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .bmc__rev .bmc__v {
+    font-size: 20px;
+  }
+}
+
+.bmc button:focus-visible {
+  outline: 2px solid var(--cream);
+  outline-offset: 3px;
 }

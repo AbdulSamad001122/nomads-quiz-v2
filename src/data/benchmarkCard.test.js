@@ -4,7 +4,7 @@
  */
 import assert from 'node:assert';
 import { readFileSync } from 'node:fs';
-import { BENCHMARK_COPY, benchmarkFigures, toneParts, sourceLines } from './benchmarkCard.js';
+import { BENCHMARK_COPY, benchmarkFigures, toneParts } from './benchmarkCard.js';
 
 let passed = 0;
 const eq = (actual, expected, label) => {
@@ -48,8 +48,10 @@ eq(toneParts(BENCHMARK_COPY.shared.context), [
   { t: 'typical', tone: 't' },
   { t: " one hasn't.", tone: null },
 ], 'context markers');
-eq(sourceLines().length, 1, 'placeholder "Typical: [add source]" line held back');
-eq(toneParts(sourceLines()[0])[0], { t: 'Optimised:', tone: 'o' }, 'source line marker');
+eq(BENCHMARK_COPY.shared.source_text.split('\n').map((line) => toneParts(line)[0]), [
+  { t: 'Optimised:', tone: 'o' },
+  { t: 'Typical:', tone: 't' },
+], 'source note: both lines, as the card shows them');
 
 /* ---------- copy is verbatim from the HTML's #card-copy block ---------- */
 const htmlPath = new URL('../../Quiz Questions and logic/Update Slide Html ( 20 OCT )/Q4 Benchmark SLG.html', import.meta.url);
