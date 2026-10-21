@@ -27,24 +27,26 @@ img{max-width:100%}
 .nc-back:focus-visible{outline:2px solid var(--cream,#F4EDE6);outline-offset:3px}
 .nc-nowrap{white-space:nowrap}
 .nc-arrow{margin-left:12px;font-size:1.6em;line-height:0}
+.nc-arrow-svg{display:inline-block;margin:-.3em 0 -.3em 12px;width:1.6em;height:1.6em;vertical-align:middle;line-height:0}
+.nc-arrow-svg svg{display:block;width:100%;height:100%}
 `;
 
 export function esc(s) {
   return String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 }
 
-/* The CTA's label: the last word rides with the arrow so the arrow never
-   wraps onto a line of its own. */
-export function ctaLabel(text) {
+/* A button's label: the last word rides with the arrow so the arrow never
+   wraps onto a line of its own. The arrow is the card's own: the "→" glyph
+   by default, or the card's SVG arrow when it used one (`svg`). */
+export function ctaLabel(text, svg) {
   const t = String(text);
   const cut = t.lastIndexOf(' ');
   const lead = cut < 0 ? '' : t.slice(0, cut + 1);
   const last = cut < 0 ? t : t.slice(cut + 1);
-  return (
-    esc(lead) +
-    '<span class="nc-nowrap">' + esc(last) +
-    '<span class="nc-arrow" aria-hidden="true">→</span></span>'
-  );
+  const arrow = svg
+    ? '<span class="nc-arrow-svg" aria-hidden="true">' + svg + '</span>'
+    : '<span class="nc-arrow" aria-hidden="true">→</span>';
+  return esc(lead) + '<span class="nc-nowrap">' + esc(last) + arrow + '</span>';
 }
 
 export function backButton(label = 'Back') {
