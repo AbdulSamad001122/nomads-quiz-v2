@@ -9,7 +9,21 @@
    served from /fonts under a card-only family name so the 900 weight (not
    declared for the rest of the quiz) can't change any other screen. Each face
    carries Google's "latin" unicode-range, so glyphs outside it fall back to
-   the system font exactly as on the card (e.g. the CTA's → and the Back ←). */
+   the system font exactly as on the card (e.g. the CTA's → and the Back ←).
+   User rule (Oct 21, all HTML slides): Roboto Mono stays on small labels
+   only; body text set in mono on the card is set in Montserrat here, same
+   size, weight and colour (Q4: the "Next:" line and the sources note). The
+   400 face below is for that sources note. */
+@font-face {
+  font-family: 'Q4 Card Montserrat';
+  src: url('/fonts/Montserrat-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
 @font-face {
   font-family: 'Q4 Card Montserrat';
   src: url('/fonts/Montserrat-Medium.ttf') format('truetype');
@@ -515,14 +529,15 @@
   transform: translate(3px, 3px);
   box-shadow: 2px 2px 0 var(--maroon);
 }
+/* body text: Montserrat (mono on the card; see the user rule at the top) */
 .bmc__upnext {
-  font: 500 12.5px/1.5 var(--mono);
+  font: 500 12.5px/1.5 var(--display);
   color: var(--quiet);
   text-align: center;
   margin-top: -4px;
 }
 .bmc__src {
-  font: 400 12px/1.55 var(--mono);
+  font: 400 12px/1.55 var(--display);
   color: var(--quiet);
   text-align: center;
 }
