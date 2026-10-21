@@ -14,6 +14,7 @@ import CaseStudy97 from './CaseStudy97.jsx';
 import CaseStudyCreative from './CaseStudyCreative.jsx';
 import CaseStudyLara from './CaseStudyLara.jsx';
 import CaseStudyEstelle from './CaseStudyEstelle.jsx';
+import CaseStudyAbandonment from './CaseStudyAbandonment.jsx';
 import Advice12A from './Advice12A.jsx';
 import Advice12B from './Advice12B.jsx';
 import Advice12C from './Advice12C.jsx';
@@ -328,7 +329,8 @@ function screenVisible(screen, answers) {
  * DEV ONLY — `?goto=<screenId>` jumps straight to a screen with realistic
  * prefilled answers, so themes/branches/data render correctly without
  * clicking through the quiz. Variant params: `path=plg`, `gate=1`, `ads=1`,
- * `q5=a..e` (case study), `q12=a..e` (advice). `?goto=dq` shows the
+ * `q5=a..e` (case study; `q5=e&path=plg` = the PLG-only abandoned-carts
+ * case), `q12=a..e` (advice). `?goto=dq` shows the
  * disqualification screen. Part of the dev harness — removed before launch.
  */
 function devInitialState() {
@@ -354,7 +356,7 @@ function devInitialState() {
     ...(gate ? { q2b: 'yes' } : {}),
     q3: 'agency',
     q4: path === 'plg' ? 'self-serve' : 'calls',
-    q5: CS[p.get('q5')] || 'cold-traffic',
+    q5: path === 'plg' && p.get('q5') === 'e' ? 'cart-abandonment' : CS[p.get('q5')] || 'cold-traffic',
     q6: ads ? ['paid-ads', 'seo'] : ['seo'],
     q7a: '10001-50000',
     ...(ads ? { q7b: '10k-25k', q7c: '45-55' } : {}),
@@ -868,6 +870,10 @@ export default function QuizFlow({ restored = null } = {}) {
             onContinue={next}
           />
         );
+      }
+      // 5E for PLG (Q5's PLG-only option E, abandoned carts)
+      if (csKey === 'cart-abandonment') {
+        return <CaseStudyAbandonment onBack={back} onContinue={next} />;
       }
       const cs = CASE_STUDIES[csKey] || CASE_STUDIES['cold-traffic'];
       return (
