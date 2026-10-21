@@ -1,5 +1,7 @@
-import CardHost from './cards/CardHost.jsx';
-import { mount, css } from './cards/q12d/index.js';
+import CardHost, { prefetchCard } from './cards/CardHost.jsx';
+
+const load = () => import('./cards/q12d/index.js');
+prefetchCard(load);
 
 /**
  * Constraint card after Q12 — price (PLG answer D, SLG answer E). Yemi's
@@ -9,8 +11,7 @@ import { mount, css } from './cards/q12d/index.js';
 export default function Advice12D({ onBack, onContinue }) {
   return (
     <CardHost
-      mount={mount}
-      css={css}
+      load={load}
       label="Your number one constraint"
       onBack={onBack}
       onContinue={onContinue}
