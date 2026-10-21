@@ -1,5 +1,7 @@
-import CardHost from './cards/CardHost.jsx';
-import { mount, css } from './cards/q12b/index.js';
+import CardHost, { prefetchCard } from './cards/CardHost.jsx';
+
+const load = () => import('./cards/q12b/index.js');
+prefetchCard(load);
 
 /**
  * Constraint card after Q12, answer B (both paths): revenue has plateaued.
@@ -9,8 +11,7 @@ import { mount, css } from './cards/q12b/index.js';
 export default function Advice12B({ onBack, onContinue }) {
   return (
     <CardHost
-      mount={mount}
-      css={css}
+      load={load}
       label="Your number one constraint"
       onBack={onBack}
       onContinue={onContinue}
