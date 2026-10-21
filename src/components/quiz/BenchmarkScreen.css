@@ -509,8 +509,10 @@
   align-self: stretch;
   display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 14px;
+  /* arrow sits right after the text, bigger (user, Oct 21; the card spread
+     them apart with space-between at the text's own size) */
+  justify-content: flex-start;
+  gap: 12px;
   font: 800 18px/1.3 var(--display);
   text-align: left;
   cursor: pointer;
@@ -537,6 +539,11 @@
 .bmc__cta:active {
   transform: translate(3px, 3px);
   box-shadow: 2px 2px 0 var(--maroon);
+}
+.bmc__arrow {
+  flex: none;
+  font-size: 1.6em;
+  line-height: 0.8; /* the bigger glyph doesn't make the button taller */
 }
 /* body text: Montserrat (mono on the card; see the user rule at the top) */
 .bmc__upnext {

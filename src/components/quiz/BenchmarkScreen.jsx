@@ -175,7 +175,9 @@ export default function BenchmarkScreen({ isSlg, onBack, onContinue }) {
               <p className="bmc__next">{s.next}</p>
               <button type="button" className="bmc__cta" onClick={onContinue}>
                 <span>{s.cta}</span>
-                <span aria-hidden="true">→</span>
+                <span className="bmc__arrow" aria-hidden="true">
+                  →
+                </span>
               </button>
               <div className="bmc__upnext">{s.up_next}</div>
               <details className="bmc__src">
