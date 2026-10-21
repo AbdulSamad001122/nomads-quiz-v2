@@ -1,5 +1,7 @@
-import CardHost from './cards/CardHost.jsx';
-import { mount, css } from './cards/q5es/index.js';
+import CardHost, { prefetchCard } from './cards/CardHost.jsx';
+
+const load = () => import('./cards/q5es/index.js');
+prefetchCard(load);
 
 /**
  * Case study 5E (SLG) — Estelle Winsett ("call-convincing" route off Q5).
@@ -9,8 +11,7 @@ import { mount, css } from './cards/q5es/index.js';
 export default function CaseStudyEstelle({ onBack, onContinue }) {
   return (
     <CardHost
-      mount={mount}
-      css={css}
+      load={load}
       label="Case study: Estelle Winsett"
       onBack={onBack}
       onContinue={onContinue}
