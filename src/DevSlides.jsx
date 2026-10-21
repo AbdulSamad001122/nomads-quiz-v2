@@ -36,7 +36,7 @@ const GROUPS = [
       ['Advice 12B', '/diagnostic-start-now?goto=advice&path=plg&q12=b'],
       ['Advice 12C', '/diagnostic-start-now?goto=advice&path=plg&q12=c'],
       ['Advice 12D', '/diagnostic-start-now?goto=advice&path=plg&q12=d'],
-      ['Five metrics', '/diagnostic-start-now?goto=five-metrics'],
+      ['Q11 One Table (five-metrics slot)', '/diagnostic-start-now?goto=five-metrics'],
     ],
   },
   {
