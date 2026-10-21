@@ -1,5 +1,7 @@
-import CardHost from './cards/CardHost.jsx';
-import { mount, css } from './cards/q5c/index.js';
+import CardHost, { prefetchCard } from './cards/CardHost.jsx';
+
+const load = () => import('./cards/q5c/index.js');
+prefetchCard(load);
 
 /**
  * Case study 5C — Contrarian POV ("differentiation" route off Q5, both
@@ -10,8 +12,7 @@ import { mount, css } from './cards/q5c/index.js';
 export default function CaseStudyCreative({ onBack, onContinue }) {
   return (
     <CardHost
-      mount={mount}
-      css={css}
+      load={load}
       label="Case study: Contrarian POV"
       onBack={onBack}
       onContinue={onContinue}
