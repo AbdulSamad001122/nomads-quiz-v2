@@ -1,5 +1,7 @@
-import CardHost from './cards/CardHost.jsx';
-import { mount, css } from './cards/q11/index.js';
+import CardHost, { prefetchCard } from './cards/CardHost.jsx';
+
+const load = () => import('./cards/q11/index.js');
+prefetchCard(load);
 
 /**
  * The slide after Q11 — Yemi's "Q11 One Table" HTML (Slack, Oct 20): the
@@ -12,8 +14,7 @@ import { mount, css } from './cards/q11/index.js';
 export default function FiveMetricsScreen({ onBack, onContinue }) {
   return (
     <CardHost
-      mount={mount}
-      css={css}
+      load={load}
       label="Separate rooms versus one table"
       onBack={onBack}
       onContinue={onContinue}
