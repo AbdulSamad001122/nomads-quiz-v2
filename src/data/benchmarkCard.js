@@ -1,10 +1,11 @@
 /**
  * Q4 benchmark card (shown after Q4, before Q5).
  *
- * Copy and figures are verbatim from Yemi's "Q4 Benchmark SLG.html"
- * (#card-copy JSON, Slack thread Oct 20), the source of truth for this
- * slide. That file carries both versions: `shared` copy plus an `slg` and a
- * `plg` block. Q4 options 1, 3, 4 get SLG; option 2 gets PLG.
+ * Copy and figures are verbatim from Yemi's "Q4 Benchmark SLG.html" and
+ * "Q4 Benchmark PLG.html" (#card-copy JSON, Slack thread Oct 20), the source
+ * of truth for this slide. Both files carry the same JSON: `shared` copy plus
+ * an `slg` and a `plg` block; they differ only in which block they show.
+ * Q4 options 1, 3, 4 get SLG; option 2 gets PLG.
  *
  * Markers inside copy strings, as in the source file:
  *   {{text}} = optimised (green)   [[text]] = typical (red)

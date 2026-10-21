@@ -53,17 +53,19 @@ eq(BENCHMARK_COPY.shared.source_text.split('\n').map((line) => toneParts(line)[0
   { t: 'Typical:', tone: 't' },
 ], 'source note: both lines, as the card shows them');
 
-/* ---------- copy is verbatim from the HTML's #card-copy block ---------- */
-const htmlPath = new URL('../../Quiz Questions and logic/Update Slide Html ( 20 OCT )/Q4 Benchmark SLG.html', import.meta.url);
-let html = null;
-try {
-  html = readFileSync(htmlPath, 'utf8');
-} catch {
-  console.log('(reference HTML not found — verbatim check skipped)');
-}
-if (html) {
-  const json = html.match(/<script type="application\/json" id="card-copy"[^>]*>([\s\S]*?)<\/script>/)[1];
-  eq(BENCHMARK_COPY, JSON.parse(json), 'copy + figures identical to the reference file');
+/* ---------- copy is verbatim from both HTMLs' #card-copy blocks ---------- */
+for (const file of ['Q4 Benchmark SLG.html', 'Q4 Benchmark PLG.html']) {
+  const htmlPath = new URL(`../../Quiz Questions and logic/Update Slide Html ( 20 OCT )/${file}`, import.meta.url);
+  let html = null;
+  try {
+    html = readFileSync(htmlPath, 'utf8');
+  } catch {
+    console.log(`(${file} not found — verbatim check skipped)`);
+  }
+  if (html) {
+    const json = html.match(/<script type="application\/json" id="card-copy"[^>]*>([\s\S]*?)<\/script>/)[1];
+    eq(BENCHMARK_COPY, JSON.parse(json), `copy + figures identical to ${file}`);
+  }
 }
 
 console.log(`benchmarkCard: all ${passed} checks passed ✓`);

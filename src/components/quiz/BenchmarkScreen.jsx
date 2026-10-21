@@ -32,7 +32,8 @@ function Rich({ text }) {
 
 /**
  * Q4 benchmark card (after Q4, before Q5) — Yemi's "Q4 Benchmark SLG.html"
- * (Slack, Oct 20) ported as-is: same layout (one centred column on the navy
+ * and "Q4 Benchmark PLG.html" (Slack, Oct 20; one card, `isSlg` picks the
+ * version) ported as-is: same layout (one centred column on the navy
  * ground, LAYOUT = "single"), same copy, same colours, red = typical and
  * green = optimised. Only the file's preview chrome (grey bar, stand-in
  * header, copy editing) is dropped: the quiz's progress strip is the header.
