@@ -76,20 +76,20 @@ h1 .t{padding-bottom:.12em;background:url("data:image/svg+xml,%3Csvg xmlns='http
 /* opening statement + the three tiles */
 .intro{margin:0;font:600 16px/1.5 var(--display);color:var(--text);border-left:3px solid var(--clay);padding:2px 0 2px 14px;max-width:56ch}
 .intro em{font-style:normal;font-weight:800;color:var(--clay)}
-.tiles{position:sticky;top:0;z-index:6;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;
-  margin:0 -20px;padding:10px 20px;background:rgba(18,23,38,.92);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-.tiles{grid-template-columns:minmax(0,1fr) 16px minmax(0,1fr) 16px minmax(0,1fr)!important;gap:4px!important;align-items:stretch}
+/* phones: three across can't fit, so the tiles stack vertically (arrows point down)
+   and scroll with the page; 600px and up: the sticky 1→2→3 row with arrows between */
+.tiles{display:flex;flex-direction:column;gap:10px}
 .tile{--tc:var(--purple);--tt:#fff;appearance:none;font:inherit;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:3px;min-width:0;
   padding:8px 10px 9px;border-radius:10px;border:2px solid var(--tc);background:var(--tc);color:var(--tt);opacity:.6;
   transition:opacity .25s, transform .12s, box-shadow .25s}
 .tile[data-n="2"]{--tc:var(--clay);--tt:#152638} .tile[data-n="3"]{--tc:var(--ice);--tt:#152638}
 .tile .n{font:900 18px/1 var(--display);color:inherit;opacity:.85}
 .tile b{font:800 13px/1.25 var(--display);color:inherit}
-.tile .s{display:none;font:600 11.5px/1.35 var(--display);color:inherit;opacity:.82}
+.tile .s{font:600 11.5px/1.35 var(--display);color:inherit;opacity:.82}
 .tile.on{opacity:1;cursor:default;box-shadow:0 0 0 2px var(--ground),0 0 0 4px var(--tc)}
 .tile:not(.on):hover{opacity:.9;transform:translateY(-2px)}
 .tarr{align-self:center;color:var(--clay);display:grid;place-items:center}
-.tarr svg{width:16px;height:22px;overflow:visible}
+.tarr svg{width:16px;height:22px;overflow:visible;transform:rotate(90deg)}
 .tarr path{fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 
 /* the two parts */
@@ -197,10 +197,10 @@ h1 .t{padding-bottom:.12em;background:url("data:image/svg+xml,%3Csvg xmlns='http
   .body{display:flex;flex-direction:column;gap:16px;align-items:stretch}
   .then{position:absolute;left:50%;top:150px;transform:translateX(-50%);width:40px;height:40px}
   .intro{font-size:17px}
-  .tiles{grid-template-columns:minmax(0,1fr) 26px minmax(0,1fr) 26px minmax(0,1fr)!important}
-  .tarr svg{width:24px}
+  .tiles{position:sticky;top:0;z-index:6;display:grid;grid-template-columns:minmax(0,1fr) 26px minmax(0,1fr) 26px minmax(0,1fr);gap:4px;align-items:stretch;
+    margin:0 -20px;padding:10px 20px;background:rgba(18,23,38,.92);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+  .tarr svg{width:24px;transform:none}
   .tile{padding:10px 12px 11px}
-  .tile .s{display:block}
   .grid{justify-self:start;max-width:200px}
   .bars{padding:20px}
   .steps{flex-direction:row;gap:16px}
