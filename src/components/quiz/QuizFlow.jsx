@@ -392,7 +392,8 @@ function showResultsAddress() {
  * `restored` = { answers, manualValues, sig } from SavedResultsRoute: the
  * taker's saved results reopened at /diagnostic-results. It starts on the
  * results screen and never re-fires the completion events (and Kit only ever
- * fires when a live run reaches its results, never on a restored page).
+ * fires from a live run — the email capture and its results — never on a
+ * restored page).
  */
 export default function QuizFlow({ restored = null } = {}) {
   const [index, setIndex] = useState(
@@ -406,9 +407,9 @@ export default function QuizFlow({ restored = null } = {}) {
   );
   const [otherText, setOtherText] = useState('');
   const [vocText, setVocText] = useState('');
-  // { firstName, email } from the email capture after Q2. Kit gets it, with
-  // every answer, only once the taker reaches their results.
+  // { firstName, email } from the email capture after Q2.
   const [lead, setLead] = useState(null);
+  // Last payload sent to Kit, so going Back and forth never re-sends it.
   const kitSentPayload = useRef(null);
   const [dqReason, setDqReason] = useState(restored ? null : DEV_INIT?.dq ?? null);
   // Impossible-answer check currently on screen, and the questions the taker
@@ -566,23 +567,18 @@ export default function QuizFlow({ restored = null } = {}) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index, dqReason]);
 
-  /* ---------- finished: hand the lead to Kit ----------
-     The email is captured after Q2, but Kit (answers + computed results) and
-     GA's lead_submit still fire only for a taker who reaches the results, as
-     they did when the form sat at the end: a disqualified or half-finished
-     taker is never pushed. Fire and forget — a Kit hiccup must never block
-     the results. Coming back to the results re-pushes only if an answer
-     changed in between, and lead_submit counts the lead once. */
-  useEffect(() => {
-    if (restored || dqReason || !lead?.email) return;
-    if (SCREENS[index].id !== 'results') return;
-    const path = salesModel(answers);
-    const inputs = resolveInputs(answers, manualValues, path);
-    const result =
-      inputs.q2 != null && inputs.q7 != null ? calculate(inputs, path) : null;
+  /* ---------- Kit: two pushes per taker ----------
+     Yemi (Oct 22): the email goes to Kit as soon as it's entered, so takers
+     who stop halfway are kept. That first push carries the answers so far
+     (role, revenue tier) and only the entry tag. The "Quiz Taker" tag
+     ("Diagnostic Complete") and the computed results go with the second
+     push, when the taker reaches the results — Kit emails triggered by that
+     tag still wait for a finished quiz. Fire and forget — a Kit hiccup must
+     never block the quiz. An identical payload is never re-sent. */
+  const sendLeadToKit = (who, { result = null, finished = false } = {}) => {
     const payload = {
-      email: lead.email,
-      firstName: lead.firstName,
+      email: who.email,
+      firstName: who.firstName,
       fields: buildKitFields({
         answers,
         manualValues,
@@ -592,17 +588,24 @@ export default function QuizFlow({ restored = null } = {}) {
         overrides,
         clampedBrackets,
       }),
-      // every taker gets the "Quiz Taker" TAG (handover doc Oct 8);
+      // every finisher gets the "Quiz Taker" TAG (handover doc Oct 8);
       // capped takers also get "Quiz Taker Capped State" (Sep 23)
-      tags: buildKitTags({ result }),
+      tags: finished ? buildKitTags({ result }) : [],
     };
     const sig = JSON.stringify(payload);
     if (kitSentPayload.current === sig) return;
-    if (kitSentPayload.current === null) ga.leadSubmit(path);
     kitSentPayload.current = sig;
-    // The Framer site reads this and stops showing quiz popups.
-    markEmailGiven();
     pushToKit(payload);
+  };
+
+  useEffect(() => {
+    if (restored || dqReason || !lead?.email) return;
+    if (SCREENS[index].id !== 'results') return;
+    const path = salesModel(answers);
+    const inputs = resolveInputs(answers, manualValues, path);
+    const result =
+      inputs.q2 != null && inputs.q7 != null ? calculate(inputs, path) : null;
+    sendLeadToKit(lead, { result, finished: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index, dqReason]);
 
@@ -980,7 +983,16 @@ export default function QuizFlow({ restored = null } = {}) {
           onBack={back}
           defaultValues={lead}
           onSubmit={({ firstName, email } = {}) => {
-            setLead({ firstName, email });
+            const who = { firstName, email };
+            if (email) {
+              // Q4 isn't answered yet, so no sales model on the lead event
+              // (salesModel() would default everyone to SLG). Counted once.
+              if (!lead) ga.leadSubmit(answers.q4 ? path : null);
+              // The Framer site reads this and stops showing quiz popups.
+              markEmailGiven();
+              sendLeadToKit(who);
+            }
+            setLead(who);
             next();
           }}
         />
