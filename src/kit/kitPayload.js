@@ -108,12 +108,14 @@ export function buildKitFields({
   // field per calculator question, keys VERBATIM from the doc (note: these
   // have NO quiz_taker_ prefix — {{ subscriber.q7a_answer_type }} etc.).
   // Doc rule is binary: an option that was selected → "Bracket" (that
-  // includes "We don't track this number yet" and Q11's "We don't do email
-  // marketing" — the doc's "one of the options (selected)"), a typed number
+  // includes "We don't track this number yet" and Q8's "We don't capture
+  // emails…" — the doc's "one of the options (selected)"), a typed number
   // → "Exact". Sent only when the question actually produced a value, so
   // Q7B's flag stays absent off the paid-ads path exactly like
-  // quiz_taker_ad_spend does. A range that "Keep my answers" rewrote to a
-  // manual clamp is still "Bracket": the taker never typed that number.
+  // quiz_taker_ad_spend does. Q11 is never shown after that Q8 answer, so it
+  // gets no flag even though its revenue field is sent as 0. A range that
+  // "Keep my answers" rewrote to a manual clamp is still "Bracket": the taker
+  // never typed that number.
   const ANSWER_TYPE_FIELDS = [
     ['q7a', 'q7', 'q7a_answer_type'],
     ['q7b', 'q7b', 'q7b_answer_type'],
@@ -124,6 +126,7 @@ export function buildKitFields({
     ['q11', 'q11', 'q11_answer_type'],
   ];
   for (const [qid, inputKey, fieldKey] of ANSWER_TYPE_FIELDS) {
+    if (qid === 'q11' && answers.q8 === 'no-email') continue;
     if (inputs[inputKey] != null) {
       const typed = answers[qid] === 'manual' && !clampedBrackets.includes(qid);
       fields[fieldKey] = typed ? 'Exact' : 'Bracket';

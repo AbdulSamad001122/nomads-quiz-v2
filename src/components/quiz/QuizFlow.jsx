@@ -737,6 +737,7 @@ export default function QuizFlow({ restored = null } = {}) {
         question={q.question}
         subline={q.subline}
         options={q.options}
+        badges={q.badges}
         selectedId={isMulti ? undefined : value}
         selectedIds={isMulti ? (Array.isArray(value) ? value : []) : undefined}
         onSelect={isMulti ? toggleMulti : selectSingle}

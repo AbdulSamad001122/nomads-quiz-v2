@@ -61,25 +61,21 @@ export default function TransitionCalcScreen({
             </div>
             <div className="question-panel__content transition-calc__content">
               <h1 className="transition-calc__headline">
-                {'Most businesses have a'}
-                <br />
-                {' rough sense of their traffic'}
-                <br />
-                {' and leads, but very few'}
-                <br />
-                {' know how much revenue'}
-                <br />{' '}
+                {'Most businesses know how much traffic they’re getting. But very few know how much revenue '}
                 <HighlightSweep tone={sweepToneFor(theme.name)}>
-                  each eyeball
+                  each visitor
                 </HighlightSweep>
-                {' is bringing in.'}
+                {' brings\u00a0in.'}
               </h1>
               <p className="transition-calc__para">
-                And without that number, you can't tell which traffic channel
-                is worth keeping and which one is draining your budget.
+                The Revenue Per Visitor™ Calculator will show you exactly which
+                acquisition channels are bringing in the most revenue, and which
+                are bleeding money.
               </p>
               <p className="transition-calc__para">
-                That's exactly what the RPV™ calculator is about to show you.
+                So you can see where the opportunity lies to add $1.5M in annual
+                revenue from the visitors you’re already attracting, without
+                increasing your marketing spend.
               </p>
               <button
                 type="button"

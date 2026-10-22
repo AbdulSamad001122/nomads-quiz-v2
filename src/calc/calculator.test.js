@@ -199,9 +199,9 @@ const near = (a, b, tol = 1e-6) => Math.abs(a - b) <= tol;
   ok('resolve · q7b = 17,500', inp.q7b === 17500, inp.q7b);
   ok('resolve · q7c = 0.65', inp.q7c === 0.65, inp.q7c);
 
-  // SLG 15+ caps at 0.22, PLG 15+ = 0.175
+  // 15+ stores at each path's lead cap: SLG 0.22, PLG 0.30
   ok('resolve · q9a SLG 15+ caps 0.22', resolveInputs({ q9a: '15-plus' }, {}, 'slg').q9a === 0.22);
-  ok('resolve · q9a PLG 15+ = 0.175', resolveInputs({ q9a: '15-plus' }, {}, 'plg').q9a === 0.175);
+  ok('resolve · q9a PLG 15+ caps 0.30', resolveInputs({ q9a: '15-plus' }, {}, 'plg').q9a === 0.3);
 
   // don't-track defaults
   ok('resolve · q7 dont-track = 10,000', resolveInputs({ q7a: 'dont-track' }, {}, 'plg').q7 === 10000);

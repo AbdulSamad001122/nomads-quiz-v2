@@ -50,6 +50,7 @@ export const Q8 = {
   '10001-25000': 17500,
   '25001-50000': 37500,
   '50000-plus': 75000,
+  'no-email': 0, // "We don't capture emails…" → opt-in 0%, Q11 skipped, RPS = 0
   // 'dont-track' → 10% of Q7 (resolved below)
 };
 
@@ -59,7 +60,7 @@ export const Q9A = {
     '1-5': 0.03,
     '5-10': 0.075,
     '10-15': 0.125,
-    '15-plus': 0.175,
+    '15-plus': 0.3, // stores at PLG lead cap (latest copy doc, Oct 22)
     'dont-track': 0.02,
   },
   slg: {
@@ -163,8 +164,10 @@ export function resolveInputs(answers, manualValues, path) {
     man('q10', 'currency') ??
     (Q10[path] ? Q10[path][answers.q10] : undefined);
 
-  // Q11 email revenue (annual)
-  const q11 = man('q11', 'currency') ?? Q11[answers.q11];
+  // Q11 email revenue (annual). Q8 "We don't capture emails…" skips Q11, so
+  // any Q11 answer still in state from before that choice is ignored.
+  const q11 =
+    answers.q8 === 'no-email' ? 0 : man('q11', 'currency') ?? Q11[answers.q11];
 
   // Ad module (conditional). Mirror the questions.js showIf chain here, so a
   // taker who answers the ad questions and then goes back and un-ticks "Paid

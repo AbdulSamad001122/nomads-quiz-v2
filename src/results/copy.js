@@ -53,12 +53,13 @@ export const METRICS = {
   rowLabels: {
     rpv: 'Revenue Per Visitor™',
     optIn: 'How many visitors are becoming email or SMS subscribers?',
+    // Same wording as Q9A / Q9B (Yemi, Oct 21: the copy changes carry over).
     lead: {
-      plg: 'Out of every 100 new subscribers joining your list, how many take a buying action within the first 14 days?',
-      slg: 'Out of every 100 new subscribers joining your list, how many book a call or demo within the first 14 days?',
+      plg: 'Out of everyone discovering your business each month, how many take a buying action within the first 14 days?',
+      slg: 'Out of everyone discovering your business each month, how many book a call or demo within the first 14 days?',
     },
     close: {
-      plg: 'And out of every 100 who take that action, how many complete it?',
+      plg: 'And out of every 100 who take that buying action, how many buy?',
       slg: 'And out of every 100 who book, how many become paying clients?',
     },
     rps: 'Revenue Per Subscriber™ (what each subscriber is worth per year)',

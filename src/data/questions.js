@@ -11,16 +11,62 @@
  *                 actually sees (skipped conditionals don't consume a colour)
  *  - variant      'list' | 'binary' | 'media' | 'text'
  *  - question     string (or { plg, slg } when wording differs by path)
- *  - subline      optional smaller line under the question
- *  - options      array (or { plg, slg }) — id + label (+ media/icon)
+ *  - subline      optional smaller line under the question (or { plg, slg })
+ *  - options      array (or { plg, slg }) — id + label (+ desc/media/icon)
+ *  - badges       'letters' swaps the 01/02… option badges for A/B/C… (Q5)
  *  - multi        multi-select (Continue button instead of auto-advance)
  *  - manualEntry  last option reveals an exact-number input when tapped
  *  - manualType   'number' | 'currency' | 'percent' | 'text'
  *  - allowSkip    skippable (Q7C)
  *
- * PLG/SLG wording for Q9A/Q9B/Q10/Q12 is placeholder pending the master
- * copy doc — values and structure follow Quiz Logics.docx.
+ * PLG/SLG wording for Q9A/Q9B/Q12 follows the Oct 20 copy doc ("New
+ * question and option chnages ( 20 OCT ).docx"); values and structure
+ * follow Quiz Logics.docx.
  */
+
+/**
+ * Q5 options A–D, shared by both paths: bold title (`label`, also what Kit and
+ * GA record) over a one-line description (`desc`). Ids drive the case-study
+ * routing in QuizFlow, so they stay as they were.
+ */
+const Q5_SHARED = [
+  {
+    id: 'cold-traffic',
+    label: 'We attract potential buyers, but most leave without buying.',
+    desc: 'We don’t have a way to capture non-buyers on our email list and nurture them until they’re ready to buy.',
+  },
+  {
+    id: 'low-optin',
+    label: 'We need more people on our email list, or we don’t have one yet.',
+    desc: 'We know email can be one of our most profitable channels (it is for our competitors), but our list is growing too slowly, or worse, it doesn’t exist yet, so most of our visitors leave without ever giving us a way to reach them again.',
+  },
+  {
+    id: 'differentiation',
+    label: 'Customers don’t see why we’re different.',
+    desc: 'People visit our website (& follow us on socials) but can’t tell why we’re different from other competitors. So, they choose a cheaper option or a familiar name.',
+  },
+  {
+    id: 'email-close',
+    label: 'Our emails aren’t turning enough subscribers into buyers.',
+    desc: 'People join our list every day, but our emails aren’t closing enough buyers in the first 10 days. Beyond that, we lack a strategy to convert non-buyers over time and grow email revenue month on month.',
+  },
+];
+
+/** Q9A options — identical on both paths apart from the "don't track" wording. */
+function q9aOptions(dontTrackLabel) {
+  return [
+    { id: 'under-1', label: 'Fewer than 1 in 100' },
+    { id: '1-5', label: '1 to 5' },
+    { id: '5-10', label: '5 to 10' },
+    { id: '10-15', label: '10 to 15' },
+    { id: '15-plus', label: '15+' },
+    { id: 'dont-track', label: dontTrackLabel },
+    {
+      id: 'manual',
+      label: 'Enter your exact number for more accurate calculations',
+    },
+  ];
+}
 
 export const QUESTIONS = [
   {
@@ -83,7 +129,7 @@ export const QUESTIONS = [
     variant: 'media',
     question: 'Good. What are you scaling?',
     subline:
-      'Because the path to an extra $1.5M/year looks different for an agency than it does for a course creator.',
+      'Because the path to an extra $1.5M/year looks different for a B2B firm than it does for a D2C company.',
     options: [
       { id: 'saas', label: 'SaaS or Tech Company', media: '/assets/q3-laptop.svg' },
       { id: 'agency', label: 'Agency', media: '/assets/q3-team.svg' },
@@ -118,8 +164,7 @@ export const QUESTIONS = [
     label: 'How you sell',
     theme: 'maroon',
     variant: 'media',
-    question: 'How does your business typically win a customer?',
-    subline: 'Where do roughly 80% of your sales come from today?',
+    question: 'How do most customers buy from you?',
     options: [
       {
         id: 'calls',
@@ -129,19 +174,19 @@ export const QUESTIONS = [
       },
       {
         id: 'self-serve',
-        label: 'Most people buy without ever talking to us',
+        label: 'Most customers buy directly without a call',
         media: '/assets/q3-cart.svg',
         tag: 'PLG',
       },
       {
         id: 'hybrid-call',
-        label: 'Some buy on their own, some still need a call',
+        label: 'Some buy directly; some need a call',
         media: '/assets/icon-12d-signpost.png',
         tag: 'SLG',
       },
       {
         id: 'hybrid-mess',
-        label: "It's a bit all over the place right now",
+        label: 'It’s a bit all over the place right now',
         media: '/assets/icon-12d-puzzle.svg',
         tag: 'SLG',
       },
@@ -153,102 +198,30 @@ export const QUESTIONS = [
     label: 'The pressing problem',
     theme: 'green',
     variant: 'list',
+    badges: 'letters',
     question:
-      'If 5,000 qualified visitors landed on your business tomorrow, what would your team be obsessing over to make 60 sales from it?',
-    subline: '(Select the ONE most pressing problem right now.)',
-    options: [
-      {
-        id: 'cold-traffic',
-        iconSrc: '/assets/q5-funnel.svg',
-        label:
-          "We're driving cold traffic to our website or product pages, but if they're not ready to buy, we lose them. We don't have a way to keep them on our email list or pull them from “not considering” to “I'm open to it.”",
-        rich: [
-          [
-            {
-              t: "We're driving cold traffic to our website or product pages, but if they're not ready to buy, we lose them.",
-            },
-          ],
-          [
-            { t: "We don't have a way to keep them on our email list or pull them " },
-            { t: 'from “not considering” to “I\'m open to it.”', b: true },
-          ],
-        ],
-      },
-      {
-        id: 'low-optin',
-        iconSrc: '/assets/q5-envelope.svg',
-        label:
-          'Our email list is our most profitable channel, but our opt-in rates are low, and we need a better way to get more people in there every day.',
-        rich: [
-          [
-            { t: 'Our email list is our most profitable channel, but our ' },
-            { t: 'opt-in rates are low', b: true },
-            { t: '.' },
-          ],
-          [
-            { t: 'And we need a better way to get ' },
-            { t: 'more people in there every day', b: true },
-            { t: '.' },
-          ],
-        ],
-      },
-      {
-        id: 'differentiation',
-        iconSrc: '/assets/q5-diamond.svg',
-        label:
-          "People land on our website, read everything, and still can't tell why we're different from the five other options they're comparing us to, so they either pick the cheaper one or go with a familiar name.",
-        rich: [
-          [
-            { t: "People land on our website, read everything, and still can't tell " },
-            { t: "why we're different", b: true },
-            { t: " from the five other options they're comparing us to." },
-          ],
-          [
-            { t: 'So they either pick the ' },
-            { t: 'cheaper one', b: true },
-            { t: ' or go with a ' },
-            { t: 'familiar name', b: true },
-            { t: '.' },
-          ],
-        ],
-      },
-      {
-        id: 'email-close',
-        iconSrc: '/assets/q5-loop.svg',
-        label:
-          "People are joining our list every day, but our emails aren't doing enough to close them in the first 14 days, and beyond that, we don’t have a solid strategy to keep converting the non-buyers over time, so our email revenue doesn’t compound month on month.",
-        rich: [
-          [
-            { t: "People are joining our list every day, but our emails aren't doing enough to close them in the " },
-            { t: 'first 14 days', b: true },
-            { t: '.' },
-          ],
-          [
-            { t: "And beyond that, we don’t have a solid strategy to keep converting the non-buyers over time, so our " },
-            { t: 'email revenue doesn’t compound', b: true },
-            { t: ' month on month.' },
-          ],
-        ],
-      },
-      {
-        id: 'call-convincing',
-        iconSrc: '/assets/q5-handshake.svg',
-        label:
-          "We're spending a good chunk of our sales calls convincing doubtful buyers; we need a system that shows our differentiation before the call, so the call is spent closing, not educating.",
-        rich: [
-          [
-            { t: "We're spending a good chunk of our sales calls " },
-            { t: 'convincing doubtful buyers', b: true },
-            { t: '.' },
-          ],
-          [
-            { t: 'We need a system that shows our differentiation before the call, so the call is spent ' },
-            { t: 'closing, not educating', b: true },
-            { t: '.' },
-          ],
-        ],
-      },
-    ],
+      'What’s the #1 constraint you’d need to solve to add $1.5M/year on top of your current annual revenue from 10,000 qualified visitors?',
+    subline: 'Select the ONE most pressing problem right now.',
+    // Option E differs by path (doc: "SLG ONLY" / "PLG ONLY"): SLG = sales
+    // calls, PLG = abandoned carts; each routes to its own 5E case study.
+    options: {
+      plg: [
+        ...Q5_SHARED,
+        {
+          id: 'cart-abandonment',
+          label: 'People browse our products or add items to their cart, but leave without buying.',
+          desc: 'We’re getting too many browse abandonments and abandoned carts, and we’re not bringing enough of those potential customers back to complete their purchase.',
+        },
+      ],
+      slg: [
+        ...Q5_SHARED,
+        {
+          id: 'call-convincing',
+          label: 'We spend too much time convincing buyers on sales calls.',
+          desc: 'We need to show our differentiation before the call, so we can spend the call closing, not educating.',
+        },
+      ],
+    },
   },
   {
     id: 'q6',
@@ -377,7 +350,7 @@ export const QUESTIONS = [
     question:
       'Out of everyone discovering your business each month, how many are becoming new email subscribers?',
     subline:
-      '(Think new opt-ins across all your lead magnets, landing pages, and anywhere else people join your list.)',
+      '(Include all email capture methods relevant to your business, such as lead magnets, free trials, discount pop-ups, and newsletter sign-ups.)',
     options: [
       { id: 'under-1000', label: 'Under 1,000' },
       { id: '1000-5000', label: '1,000 to 5,000' },
@@ -386,6 +359,9 @@ export const QUESTIONS = [
       { id: '25001-50000', label: '25,001 to 50,000' },
       { id: '50000-plus', label: '50,000+' },
       { id: 'dont-track', label: "We don't track this number yet" },
+      // Doc lists it after the exact-number option, but its Logic 1 keeps
+      // that option last (its input opens under the list).
+      { id: 'no-email', label: 'We don’t capture emails or do email marketing' },
       {
         id: 'manual',
         label: 'Enter your exact number for more accurate calculations',
@@ -395,27 +371,25 @@ export const QUESTIONS = [
   {
     id: 'q9a',
     stepNumber: '09',
-    label: 'Subscriber to lead',
+    // No label chip: the copy doc has none for Q9A (user, Oct 22).
     theme: 'green',
     variant: 'list',
     manualEntry: true,
     manualType: 'percent',
     question: {
-      plg: 'Out of every 100 new subscribers joining your list, how many turn into leads within the first 14 days?',
-      slg: 'Out of every 100 new subscribers joining your list, how many book a call (or a demo) within the first 14 days?',
+      plg: 'Out of everyone discovering your business each month, how many take a buying action within the first 14 days?',
+      // Doc reads "book a call or demo (or a demo)": the old "(or a demo)"
+      // tail was left behind when "or demo" was added.
+      slg: 'Out of everyone discovering your business each month, how many book a call or demo within the first 14 days?',
     },
-    options: [
-      { id: 'under-1', label: 'Fewer than 1 in 100' },
-      { id: '1-5', label: '1 to 5' },
-      { id: '5-10', label: '5 to 10' },
-      { id: '10-15', label: '10 to 15' },
-      { id: '15-plus', label: '15+' },
-      { id: 'dont-track', label: "We don't track this number yet" },
-      {
-        id: 'manual',
-        label: 'Enter your exact number for more accurate calculations',
-      },
-    ],
+    subline: {
+      plg: '(adding to cart, starting a trial, landing on your order page - whether or not they buy)',
+      slg: null,
+    },
+    options: {
+      plg: q9aOptions("We don't track this number yet"),
+      slg: q9aOptions("We don't track these numbers yet"),
+    },
   },
   {
     id: 'q9b',
@@ -426,16 +400,16 @@ export const QUESTIONS = [
     manualEntry: true,
     manualType: 'percent',
     question: {
-      plg: 'And of those leads, what percentage end up buying?',
-      slg: 'And of the calls your team takes, what percentage close into clients?',
+      plg: 'And out of every 100 who take that buying action, how many buy?',
+      slg: 'And out of every 100 who book, how many become paying clients?',
     },
     options: [
       { id: 'under-10', label: 'Under 10%' },
       { id: '10-25', label: '10 – 25%' },
       { id: '25-50', label: '25 – 50%' },
       { id: '50-75', label: '50 – 75%' },
-      { id: '75-plus', label: '75%+' },
-      { id: 'dont-track', label: "We don't track this number yet" },
+      { id: '75-plus', label: 'Over 75%' },
+      { id: 'dont-track', label: "We don't track this yet" },
       {
         id: 'manual',
         label: 'Enter your exact number for more accurate calculations',
@@ -490,6 +464,8 @@ export const QUESTIONS = [
     variant: 'list',
     manualEntry: true,
     manualType: 'currency',
+    // Skipped for Q8 "We don't capture emails…" (RPS = $0, see resolveInputs).
+    showIf: (a) => a.q8 !== 'no-email',
     question: 'How much revenue came from your email list in the last 12 months?',
     subline:
       'Pick your best estimate. There’s a calculator on your results page that takes you deeper into your email numbers.',
@@ -501,7 +477,6 @@ export const QUESTIONS = [
       { id: '500k-1m', label: '$500,000 to $1M' },
       { id: '1m-2.5m', label: '$1M to $2.5M' },
       { id: 'over-2.5m', label: 'Over $2.5M' },
-      { id: 'no-email', label: "We don't do email marketing" },
       {
         id: 'manual',
         label: 'Enter your exact number for more accurate calculations',
@@ -514,46 +489,34 @@ export const QUESTIONS = [
     label: 'Your current puzzle',
     theme: 'blue',
     variant: 'list',
-    question:
-      "What's the one thing you and your team are heads down trying to crack right now?",
+    question: 'What’s your (and your team’s) biggest challenge right now?',
     options: {
       plg: [
-        {
-          id: 'a',
-          label: "We're attracting more casual browsers than buyers",
-        },
+        { id: 'a', label: 'We’re getting visitors, but not enough buyers' },
         {
           id: 'b',
           label:
-            "Why has revenue started to plateau, even though traffic hasn't?",
+            'We’re spending heavily on marketing and ads, but revenue has plateaued',
         },
-        {
-          id: 'c',
-          label:
-            'Sales are inconsistent. Some weeks are great, others are quiet.',
-        },
+        { id: 'c', label: 'Sales are unpredictable month to month' },
         {
           id: 'd',
           label:
-            "How do we stop losing sales to cheaper alternatives, especially when we know we're the better choice?",
+            'We’re losing customers to cheaper competitors (even though we’re far better)',
         },
       ],
       slg: [
         {
           id: 'a',
           label:
-            "Honestly, the quality of who's landing on our calls — too many doubtful buyers who need convincing from the ground up",
+            "Honestly, the quality of who's landing on our calls — we’re attracting tire kickers and doubtful buyers who need extreme convincing on calls.",
         },
         {
           id: 'b',
           label:
-            "Why has revenue started to plateau, even though traffic hasn't?",
+            'We’re spending heavily on marketing and ads, but revenue has plateaued',
         },
-        {
-          id: 'c',
-          label:
-            'The pipeline is there, but sales calls are inconsistent, and we want to know what next month looks like before it arrives',
-        },
+        { id: 'c', label: 'We have a pipeline, but sales are inconsistent' },
         {
           id: 'd',
           label:
@@ -644,6 +607,8 @@ export function resolveQuestion(q, answers) {
   return {
     ...q,
     question: typeof q.question === 'object' ? q.question[path] : q.question,
+    subline:
+      q.subline && typeof q.subline === 'object' ? q.subline[path] : q.subline,
     options: Array.isArray(q.options) ? q.options : q.options[path],
   };
 }
