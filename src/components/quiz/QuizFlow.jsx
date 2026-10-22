@@ -888,7 +888,7 @@ export default function QuizFlow({ restored = null } = {}) {
       }
       if (csKey === 'low-optin') {
         return (
-          <CaseStudy97 theme={themeAt(index)} onBack={back} onContinue={next} />
+          <CaseStudy97 q3={answers.q3} onBack={back} onContinue={next} />
         );
       }
       if (csKey === 'differentiation') {
