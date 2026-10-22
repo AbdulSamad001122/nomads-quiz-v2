@@ -371,7 +371,7 @@ export const QUESTIONS = [
   {
     id: 'q9a',
     stepNumber: '09',
-    label: 'Subscriber to lead',
+    // No label chip: the copy doc has none for Q9A (user, Oct 22).
     theme: 'green',
     variant: 'list',
     manualEntry: true,
