@@ -271,3 +271,11 @@ button:focus-visible{outline:2px solid var(--cream);outline-offset:3px}
   .tile .top{flex-wrap:wrap;row-gap:6px}
   .tile .top b{flex-basis:100%;order:1}
 }
+
+/* quiz (user rule, Oct 22): on phones each department's description sat beside its result
+   ("135,000 impressions") and was squeezed to 3-4 lines; under 600px the result sits
+   under the description, left-aligned. */
+@media (max-width:599px){
+  .rm{grid-template-columns:1fr}
+  .rm .v{grid-row:auto;grid-column:1;text-align:left;max-width:none}
+}
