@@ -348,3 +348,12 @@ button:focus-visible{outline:2px solid var(--callout);outline-offset:3px}
    shrinking only as much as the narrowest screens need and growing back with
    the width: the button 13.5px at 320px, back to 17.5px by ~410px wide. */
 @media (max-width:599px){.cta:not(.next){font-size:clamp(13.5px, calc(13.5px + (100vw - 330px) * .05), 17.5px)}}
+
+/* quiz (user rule, Oct 22): on phones the round icon beside the "Now tap to see..."
+   text squeezed it to 4 lines; under 600px the icon (and the small arrow, at
+   the right) sit on top and the text runs the full width below. */
+@media (max-width:599px){
+  .flip{flex-wrap:wrap;row-gap:8px}
+  .flip-t{flex-basis:100%;order:1}
+  .flip-up{margin-left:auto}
+}
