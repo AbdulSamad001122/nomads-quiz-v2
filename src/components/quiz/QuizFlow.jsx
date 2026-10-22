@@ -6,7 +6,7 @@ import BeliefTransitionScreen from './BeliefTransitionScreen.jsx';
 import AlmostReadyScreen from './AlmostReadyScreen.jsx';
 import WelcomeScreen from './WelcomeScreen.jsx';
 import DisqualifiedScreen from './DisqualifiedScreen.jsx';
-import LoadingScreen from './LoadingScreen.jsx';
+import LoadingCard from './LoadingCard.jsx';
 import FeedbackLoopScreen from './FeedbackLoopScreen.jsx';
 import OptinScreen from './OptinScreen.jsx';
 import CaseStudyGolfbays from './CaseStudyGolfbays.jsx';
@@ -438,7 +438,13 @@ export default function QuizFlow({ restored = null } = {}) {
 
   const goTo = (from, dir, ans = answers) => {
     let i = from + dir;
-    while (i >= 0 && i < SCREENS.length && !screenVisible(SCREENS[i], ans)) {
+    // Going back never lands on the loading screen: it moves on by itself,
+    // so Back would bounce straight forward again.
+    while (
+      i >= 0 &&
+      i < SCREENS.length &&
+      (!screenVisible(SCREENS[i], ans) || (dir < 0 && SCREENS[i].id === 'loading'))
+    ) {
       i += dir;
     }
     if (i >= 0 && i < SCREENS.length) {
@@ -943,7 +949,8 @@ export default function QuizFlow({ restored = null } = {}) {
       return <CalculatorIntroCard track={path} onBack={back} onContinue={next} />;
 
     case 'loading':
-      return <LoadingScreen theme={themeAt(index)} onDone={next} durationMs={1500} />;
+      // Yemi's Loading Screen card (Oct 20): moves on by itself at ~3.5s.
+      return <LoadingCard track={path} onDone={next} />;
 
     case 'five-metrics':
       return <FiveMetricsScreen onBack={back} onContinue={next} />;
