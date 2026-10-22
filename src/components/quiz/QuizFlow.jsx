@@ -46,8 +46,9 @@ import { resultFor } from '../../results/restoreResults.js';
 import { currentRoute, RESULTS_PATH } from '../../routes.js';
 
 /**
- * QuizFlow — the sequencer. Wireframe order: welcome → Q1…Q14 with the
- * non-question slides interleaved → opt-in → results placeholder.
+ * QuizFlow — the sequencer. Wireframe order: welcome → Q1 → Q2A/Q2B →
+ * email capture (Oct 21 doc) → Q3…Q14 with the non-question slides
+ * interleaved → results.
  *
  * This phase: screens + navigation + display routing only
  * (conditionals, disqualify gates, PLG/SLG wording). Calculator,
@@ -63,6 +64,7 @@ const SCREENS = [
   { type: 'question', id: 'q1' },
   { type: 'question', id: 'q2a' },
   { type: 'question', id: 'q2b' },
+  { type: 'slide', id: 'optin' },
   { type: 'question', id: 'q3' },
   { type: 'question', id: 'q4' },
   { type: 'slide', id: 'benchmark' },
@@ -86,7 +88,6 @@ const SCREENS = [
   { type: 'slide', id: 'advice' },
   { type: 'question', id: 'q13' },
   { type: 'question', id: 'q14' },
-  { type: 'slide', id: 'optin' },
   { type: 'slide', id: 'results' },
 ];
 
@@ -391,7 +392,7 @@ function showResultsAddress() {
  * `restored` = { answers, manualValues, sig } from SavedResultsRoute: the
  * taker's saved results reopened at /diagnostic-results. It starts on the
  * results screen and never re-fires the completion events (and Kit only ever
- * fires from the opt-in submit, which a restored page never shows).
+ * fires when a live run reaches its results, never on a restored page).
  */
 export default function QuizFlow({ restored = null } = {}) {
   const [index, setIndex] = useState(
@@ -405,6 +406,10 @@ export default function QuizFlow({ restored = null } = {}) {
   );
   const [otherText, setOtherText] = useState('');
   const [vocText, setVocText] = useState('');
+  // { firstName, email } from the email capture after Q2. Kit gets it, with
+  // every answer, only once the taker reaches their results.
+  const [lead, setLead] = useState(null);
+  const kitSentPayload = useRef(null);
   const [dqReason, setDqReason] = useState(restored ? null : DEV_INIT?.dq ?? null);
   // Impossible-answer check currently on screen, and the questions the taker
   // pushed past with "Keep my answers" (Quiz Logics.docx · Manual entry &
@@ -502,7 +507,7 @@ export default function QuizFlow({ restored = null } = {}) {
      for the two or three educational slides that run between questions, so
      it counts EVERY screen the taker actually sees instead — skipped
      conditionals (Q2B / Q7B / Q7C) drop out, so the scale always matches
-     their real route. Welcome is the 0% start, opt-in the 100% end; the
+     their real route. Welcome is the 0% start, Q14 the 100% end; the
      results page sits outside the quiz and has no strip. */
   const journey = SCREENS.filter(
     (s) => s.id !== 'results' && screenVisible(s, answers)
@@ -558,6 +563,46 @@ export default function QuizFlow({ restored = null } = {}) {
       rememberPopupSource(); // a reopened results page keeps the popup source
     }
     showResultsAddress();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [index, dqReason]);
+
+  /* ---------- finished: hand the lead to Kit ----------
+     The email is captured after Q2, but Kit (answers + computed results) and
+     GA's lead_submit still fire only for a taker who reaches the results, as
+     they did when the form sat at the end: a disqualified or half-finished
+     taker is never pushed. Fire and forget — a Kit hiccup must never block
+     the results. Coming back to the results re-pushes only if an answer
+     changed in between, and lead_submit counts the lead once. */
+  useEffect(() => {
+    if (restored || dqReason || !lead?.email) return;
+    if (SCREENS[index].id !== 'results') return;
+    const path = salesModel(answers);
+    const inputs = resolveInputs(answers, manualValues, path);
+    const result =
+      inputs.q2 != null && inputs.q7 != null ? calculate(inputs, path) : null;
+    const payload = {
+      email: lead.email,
+      firstName: lead.firstName,
+      fields: buildKitFields({
+        answers,
+        manualValues,
+        otherText,
+        vocText,
+        result,
+        overrides,
+        clampedBrackets,
+      }),
+      // every taker gets the "Quiz Taker" TAG (handover doc Oct 8);
+      // capped takers also get "Quiz Taker Capped State" (Sep 23)
+      tags: buildKitTags({ result }),
+    };
+    const sig = JSON.stringify(payload);
+    if (kitSentPayload.current === sig) return;
+    if (kitSentPayload.current === null) ga.leadSubmit(path);
+    kitSentPayload.current = sig;
+    // The Framer site reads this and stops showing quiz popups.
+    markEmailGiven();
+    pushToKit(payload);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index, dqReason]);
 
@@ -933,38 +978,9 @@ export default function QuizFlow({ restored = null } = {}) {
         <OptinScreen
           theme={themeAt(index)}
           onBack={back}
+          defaultValues={lead}
           onSubmit={({ firstName, email } = {}) => {
-            ga.leadSubmit(path);
-
-            // Push everything to Kit (answers + computed results). Fire and
-            // forget — a Kit hiccup must never block the results screen.
-            if (email) {
-              // The Framer site reads this and stops showing quiz popups.
-              markEmailGiven();
-
-              let result = null;
-              const inputs = resolveInputs(answers, manualValues, path);
-              if (inputs.q2 != null && inputs.q7 != null) {
-                result = calculate(inputs, path);
-              }
-              pushToKit({
-                email,
-                firstName,
-                fields: buildKitFields({
-                  answers,
-                  manualValues,
-                  otherText,
-                  vocText,
-                  result,
-                  overrides,
-                  clampedBrackets,
-                }),
-                // every taker gets the "Quiz Taker" TAG (handover doc Oct 8);
-                // capped takers also get "Quiz Taker Capped State" (Sep 23)
-                tags: buildKitTags({ result }),
-              });
-            }
-
+            setLead({ firstName, email });
             next();
           }}
         />
