@@ -60,7 +60,7 @@ export const Q9A = {
     '1-5': 0.03,
     '5-10': 0.075,
     '10-15': 0.125,
-    '15-plus': 0.175,
+    '15-plus': 0.3, // stores at PLG lead cap (latest copy doc, Oct 22)
     'dont-track': 0.02,
   },
   slg: {
