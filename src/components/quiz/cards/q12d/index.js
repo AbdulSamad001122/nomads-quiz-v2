@@ -156,7 +156,7 @@ export function mount({ host, root, app, data, back, complete }) {
     '<circle cx="124" cy="118" r="80" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="1.5"/>'+
     '<circle cx="196" cy="118" r="80" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="1.5"/>'+
     '<circle cx="160" cy="182" r="80" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="1.5"/>'+
-    '<g class="z" data-z="gap"><circle cx="160" cy="151" r="36" fill="#FFFFFF" stroke="#17703F" stroke-width="2.4"/></g>'+
+    '<g class="z" data-z="gap"><circle cx="160" cy="151" r="42" fill="#FFFFFF" stroke="#17703F" stroke-width="2.4"/></g>'+
     vlab(80, 108, COPY.b_cust_t)+vlab(240, 108, COPY.b_mkt_t)+vlab(160, 240, COPY.b_proc_t)+
     '</svg><span class="gap-t">'+E("v_gap_t")+'<br>'+E("v_gap_t2")+'</span></div>'; }
   function render(){
