@@ -283,7 +283,7 @@ h1 .o::after,h1 .t::after{content:"";position:absolute;left:-2px;right:-2px;bott
 
 /* ---------- CRPV OS quadrant map ---------- */
 .quad{display:flex;flex-direction:column;gap:12px;padding-top:6px}
-.quad-h{margin:0;font:500 13.5px/1.5 var(--display);color:var(--on);opacity:.9;text-align:center;max-width:48ch;align-self:center}
+.quad-h{margin:0;font:500 13.5px/1.5 var(--display);color:var(--on);opacity:.9;text-align:left; /* quiz: 3+ lines on desktop, so left-aligned (user rule, Oct 22) */ max-width:48ch;align-self:center}
 .qmap{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:4px;width:100%;max-width:440px;align-self:center}
 .qmap li{list-style:none;min-height:78px;display:flex;align-items:flex-start;padding:10px 12px;font:600 12px/1.3 var(--display);color:var(--on-quiet);
   background:color-mix(in srgb, var(--on) 7%, transparent);border:1px solid var(--on-line)}
@@ -356,7 +356,7 @@ button:focus-visible{outline:2px solid var(--callout);outline-offset:3px}
 .mk .legend{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 12px;font:700 10px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
 .mk .legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:0}
 .mk .legend i.lg{background:#7C6A75}
-.mk .call{font:700 13.5px/1.45 var(--display);text-align:center;max-width:30ch}
+.mk .call{font:700 13.5px/1.45 var(--display);text-align:left; /* quiz: 3+ lines on desktop, so left-aligned (user rule, Oct 22) */ max-width:30ch}
 .mk.was .call{color:var(--red-ink)} .mk.now .call{color:var(--green-ink)}
 .mk-row .then{margin:0}
 @media (min-width:600px){
@@ -402,7 +402,7 @@ button:focus-visible{outline:2px solid var(--callout);outline-offset:3px}
 .blurb{font:500 13px/1.45 var(--display);color:var(--ink-quiet);min-width:0}
 .blurb b{display:block;font:900 12px/1.3 var(--display);letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
 .blurb[data-z="cust"] b{color:#245887} .blurb[data-z="mkt"] b{color:#8E4A30} .blurb[data-z="proc"] b{color:#5E3576}
-.blurb[data-z="mkt"]{text-align:right}
+.blurb[data-z="mkt"]{text-align:left} /* quiz: 3+ lines on desktop, so left-aligned like "Your customer" beside it (user rule, Oct 22) */
 .blurb.mid{text-align:center;max-width:300px;align-self:center}
 .vwrap{position:relative;width:100%}
 .venn{display:block;width:100%;height:auto;overflow:visible}
