@@ -975,7 +975,7 @@ export default function QuizFlow({ restored = null } = {}) {
       // 12A has its designed screen; the rest keep the placeholder until
       // their references arrive.
       if (adviceKey === 'a') {
-        return <Advice12A onBack={back} onContinue={next} />;
+        return <Advice12A track={path} onBack={back} onContinue={next} />;
       }
       if (adviceKey === 'b') {
         return <Advice12B onBack={back} onContinue={next} />;
