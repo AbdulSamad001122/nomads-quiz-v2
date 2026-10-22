@@ -261,15 +261,3 @@
     justify-content: safe center;
   }
 }
-
-/* Above 900px the circle badge (top: clamp(14px, 2.4vh, 28px); size: clamp(88px, 7.4vw, 142px),
-   measured from the screen, whose padding puts the frame clamp(16px, 1.7vw, 26px) lower) hangs
-   into the frame. The tall "Two quick questions..." block, centred, could rise into it (it
-   covered "Nearly there" at 1906x912). Keep the block's top at least 16px below the badge's
-   bottom at every size; "safe" centring lets a tall block grow downward instead. */
-@media (min-width: 901px) {
-  .belief__body {
-    padding-top: max(clamp(28px, 4vh, 64px), calc(clamp(14px, 2.4vh, 28px) + clamp(88px, 7.4vw, 142px) - clamp(16px, 1.7vw, 26px) + 16px));
-    justify-content: safe center;
-  }
-}

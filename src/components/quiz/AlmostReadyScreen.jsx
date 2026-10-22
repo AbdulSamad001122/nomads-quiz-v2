@@ -1,4 +1,3 @@
-import SeamBadge from './parts/SeamBadge.jsx';
 import HighlightSweep, { sweepToneFor } from '../primitives/HighlightSweep.jsx';
 import './QuizScreen.css';
 import './BeliefTransitionScreen.css';
@@ -23,8 +22,6 @@ export default function AlmostReadyScreen({ theme, onBack, onContinue }) {
       className={`belief-screen almost-ready-screen quiz-screen--${theme.name}`}
       style={themeVars}
     >
-      <SeamBadge src="/assets/circle-doodle-2.png" />
-
       <div className="belief__top">
         <div className="belief__top-left">
           <div className="question-panel__logo-box">
