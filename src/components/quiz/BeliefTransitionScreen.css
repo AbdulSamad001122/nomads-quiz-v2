@@ -261,3 +261,13 @@
     justify-content: safe center;
   }
 }
+
+/* "Two quick questions..." is a full sentence: up to 900px its headline gets a smaller floor
+   than the belief slide's (21px instead of 26px), so phones fit it in fewer, calmer lines
+   (user request, Oct 22). Only this slide; the belief headline keeps clamp(26px, 6vw, 40px). */
+@media (max-width: 900px) {
+  .almost-ready__headline {
+    font-size: clamp(21px, 6vw, 40px);
+    line-height: 1.55;
+  }
+}
