@@ -357,3 +357,19 @@ button:focus-visible{outline:2px solid var(--callout);outline-offset:3px}
   .flip-t{flex-basis:100%;order:1}
   .flip-up{margin-left:auto}
 }
+
+/* quiz (user rule, Oct 22): on phones the round arrow beside a tile's title squeezed it
+   to 3-4 short lines; under 600px the arrow sits top-right (beside "1 of 2") and the
+   title runs the full width below. */
+@media (max-width:599px){
+  .tile .go-ic{grid-row:1}
+  .tile b{grid-column:1/-1}
+}
+/* quiz (user rule, Oct 22): on phones each chart label (and "Potential buyers your message
+   reaches" beside its "10 of 100") sat beside its big figure and was
+   squeezed to 3-4 lines (and "~5,700 a month" ran past the box at 320px); under 600px
+   the label sits on top and the figure below it. */
+@media (max-width:599px){
+  .tl-top{flex-direction:column;align-items:flex-start;gap:2px}
+  .reach{flex-direction:column;align-items:flex-start;gap:4px}
+}
