@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import QuizScreen from './QuizScreen.jsx';
 import BenchmarkScreen from './BenchmarkScreen.jsx';
 import CalculatorIntroCard from './CalculatorIntroCard.jsx';
@@ -547,6 +547,22 @@ export default function QuizFlow({ restored = null } = {}) {
     ).length;
     return themes[themeCycle[(seenPosition - 1) % 3]];
   };
+
+  /* ---------- every new screen opens at the top ----------
+     Landing Page QC (Yemi): "Make sure they see the question. No auto
+     scrolling on questions." Screens swap in place, so without this the
+     next screen kept the previous one's scroll position — on phones Q4,
+     Q9A, Q13… opened part-way down with the question headline cut off.
+     Jumps instantly (no smooth scroll) before paint, and skips the first
+     render so a reload keeps the browser's own scroll restoration. */
+  const firstScreen = useRef(true);
+  useLayoutEffect(() => {
+    if (firstScreen.current) {
+      firstScreen.current = false;
+      return;
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [index, dqReason]);
 
   /* ---------- reopened results: this browser already gave its email ------
      Results are only saved after a live run passed the opt-in submit, so a
