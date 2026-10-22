@@ -450,3 +450,11 @@ button:focus-visible{outline:2px solid var(--callout);outline-offset:3px}
    shrinking only as much as the narrowest screens need and growing back with
    the width: the button 16px at 320px, back to 17.5px by ~360px wide. */
 @media (max-width:599px){.cta:not(.next){font-size:clamp(16px, calc(16px + (100vw - 330px) * .05), 17.5px)}}
+
+/* quiz (user rule, Oct 22): on phones the round arrow beside a tile's title squeezed it
+   to 3-4 short lines; under 600px the arrow sits top-right (beside "1 of 2") and the
+   title runs the full width below. */
+@media (max-width:599px){
+  .tile .go-ic{grid-row:1}
+  .tile b{grid-column:1/-1}
+}
