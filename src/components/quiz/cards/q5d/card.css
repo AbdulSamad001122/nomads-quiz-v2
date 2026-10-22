@@ -257,3 +257,11 @@ button:focus-visible{outline:2px solid var(--cream);outline-offset:3px}
   .body .grid{order:-1;width:120px;max-width:120px}
   .side .stat{font-size:clamp(20px,11cqi,30px)}
 }
+
+/* quiz (user rule, Oct 22): on phones each launch label sat beside its big figure and was
+   squeezed ("The launch after that" one word a line at 320px); under 600px the label
+   sits on top and the figure below it. */
+@media (max-width:599px){
+  .bar-top{flex-direction:column;align-items:flex-start;gap:2px}
+  .bar-v{text-align:left}
+}
