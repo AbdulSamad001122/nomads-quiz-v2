@@ -367,3 +367,10 @@ button:focus-visible{outline:2px solid var(--cream);outline-offset:3px}
 .load .go{align-items:center;text-align:center}
 .load .cta{align-self:center}
 @media (prefers-reduced-motion:reduce){.compass .needle,.compass .ring-prog,.after,.teaser{transition:none}}
+
+/* quiz (user rule, Oct 22): under 375px the two-column list cut its labels off
+   ("Opt-in rat", "Close rat"), on the card too; there the five metrics run in
+   one column, so every label shows in full. */
+@media (max-width:374px){
+  .f-list{grid-template-columns:1fr}
+}
