@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef } from 'react';
-import { BASE_CSS } from './cardBase.js';
+import { BASE_CSS, arrowNudge } from './cardBase.js';
 import './cardFonts.css';
 
 /**
@@ -43,6 +43,9 @@ export default function CardHost({ load, label, data, onBack, onContinue }) {
         data: live.current.data,
         back: () => live.current.onBack?.(),
         complete: () => live.current.onContinue?.(),
+      });
+      arrowNudge(app).then((dy) => {
+        if (!cancelled) host.style.setProperty('--nc-arrow-dy', dy + 'em');
       });
     });
     return () => {
