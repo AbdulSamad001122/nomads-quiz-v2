@@ -12,7 +12,9 @@
      re-aimed at the shadow root (:host = the page, .nc-body = <body>);
    - the quiz additions shared by every card: the Back control (Q4's "← Back"
      in the card's own type) and the CTA arrow (user, Oct 21: the button hugs
-     its text, the arrow follows the last word, 1.6× the text size). */
+     its text, arrow 1.6× the text size, 12px from it; Oct 22: the arrow sits
+     on the right of the text, vertically centred on the button, also when
+     the text wraps to two lines). */
 export const BASE_CSS = `
 :host{display:block;position:relative;overflow:hidden;color-scheme:light;
   height:calc(100vh - var(--qps-height, 0px));height:calc(100dvh - var(--qps-height, 0px))}
@@ -25,9 +27,10 @@ img{max-width:100%}
   color:var(--cream,#F4EDE6);font:500 11px var(--mono);letter-spacing:.09em;text-transform:uppercase;opacity:.75;
   -webkit-tap-highlight-color:transparent}
 .nc-back:focus-visible{outline:2px solid var(--cream,#F4EDE6);outline-offset:3px}
-.nc-nowrap{white-space:nowrap}
-.nc-arrow{margin-left:12px;font-size:1.6em;line-height:0}
-.nc-arrow-svg{display:inline-block;margin:-.3em 0 -.3em 12px;width:1.6em;height:1.6em;vertical-align:middle;line-height:0}
+.nc-cta{display:flex;align-items:center;gap:12px}
+.nc-cta-t{min-width:0}
+.nc-arrow{flex:none;font-size:1.6em;line-height:0;position:relative;top:var(--nc-arrow-dy,0)}
+.nc-arrow-svg{flex:none;display:block;margin:-.3em 0;width:1.6em;height:1.6em}
 .nc-arrow-svg svg{display:block;width:100%;height:100%}
 `;
 
@@ -35,18 +38,44 @@ export function esc(s) {
   return String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 }
 
-/* A button's label: the last word rides with the arrow so the arrow never
-   wraps onto a line of its own. The arrow is the card's own: the "→" glyph
-   by default, or the card's SVG arrow when it used one (`svg`). */
+/* A button's label: the text, then the arrow to its right, centred on the
+   button's height (a flex row, so a wrapped label never strands the arrow on
+   a line of its own). The arrow is the card's own: the "→" glyph by default,
+   or the card's SVG arrow when it used one (`svg`). */
 export function ctaLabel(text, svg) {
-  const t = String(text);
-  const cut = t.lastIndexOf(' ');
-  const lead = cut < 0 ? '' : t.slice(0, cut + 1);
-  const last = cut < 0 ? t : t.slice(cut + 1);
   const arrow = svg
     ? '<span class="nc-arrow-svg" aria-hidden="true">' + svg + '</span>'
     : '<span class="nc-arrow" aria-hidden="true">→</span>';
-  return esc(lead) + '<span class="nc-nowrap">' + esc(last) + arrow + '</span>';
+  return '<span class="nc-cta"><span class="nc-cta-t">' + esc(text) + '</span>' + arrow + '</span>';
+}
+
+/* The "→" comes from a fallback font (the cards' Montserrat files are the
+   latin subset, without U+2192), so where its ink sits in its line differs by
+   platform (about 2px low on Windows). Measure it once per card, in the
+   card's own button type, and return the nudge (em) that puts the arrow's
+   ink on the button's vertical centre; CardHost sets it as --nc-arrow-dy. */
+export function arrowNudge(app) {
+  const probe = document.createElement('button');
+  probe.className = 'cta';
+  probe.tabIndex = -1;
+  probe.setAttribute('aria-hidden', 'true');
+  probe.style.cssText = 'position:absolute;left:-9999px;top:0;visibility:hidden';
+  probe.innerHTML = '<span class="nc-arrow">→</span>';
+  app.append(probe);
+  const cs = getComputedStyle(probe.firstChild);
+  const font = cs.fontStyle + ' ' + cs.fontWeight + ' 100px ' + cs.fontFamily;
+  probe.remove();
+  const measure = () => {
+    const m = document.createElement('canvas').getContext('2d');
+    m.font = font;
+    const t = m.measureText('→');
+    if (!t.actualBoundingBoxAscent || !t.fontBoundingBoxAscent) return 0;
+    const ink = (t.actualBoundingBoxAscent - t.actualBoundingBoxDescent) / 2;
+    const box = (t.fontBoundingBoxAscent - t.fontBoundingBoxDescent) / 2;
+    return Math.round(ink - box) / 100; /* ink below centre: negative, moves it up */
+  };
+  const fonts = document.fonts && document.fonts.load ? document.fonts.load(font) : null;
+  return Promise.resolve(fonts).catch(() => null).then(measure);
 }
 
 export function backButton(label = 'Back') {
