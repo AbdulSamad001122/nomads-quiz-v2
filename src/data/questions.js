@@ -359,6 +359,9 @@ export const QUESTIONS = [
       { id: '25001-50000', label: '25,001 to 50,000' },
       { id: '50000-plus', label: '50,000+' },
       { id: 'dont-track', label: "We don't track this number yet" },
+      // Doc lists it after the exact-number option, but its Logic 1 keeps
+      // that option last (its input opens under the list).
+      { id: 'no-email', label: 'We don’t capture emails or do email marketing' },
       {
         id: 'manual',
         label: 'Enter your exact number for more accurate calculations',
@@ -374,8 +377,10 @@ export const QUESTIONS = [
     manualEntry: true,
     manualType: 'percent',
     question: {
-      plg: 'Out of every 100 new subscribers joining your list, how many take a buying action within the first 14 days?',
-      slg: 'Out of every 100 new subscribers joining your list, how many book a call (or a demo) within the first 14 days?',
+      plg: 'Out of everyone discovering your business each month, how many take a buying action within the first 14 days?',
+      // Doc reads "book a call or demo (or a demo)": the old "(or a demo)"
+      // tail was left behind when "or demo" was added.
+      slg: 'Out of everyone discovering your business each month, how many book a call or demo within the first 14 days?',
     },
     subline: {
       plg: '(adding to cart, starting a trial, landing on your order page - whether or not they buy)',
@@ -395,7 +400,7 @@ export const QUESTIONS = [
     manualEntry: true,
     manualType: 'percent',
     question: {
-      plg: 'And out of every 100 who take that action, how many buy?',
+      plg: 'And out of every 100 who take that buying action, how many buy?',
       slg: 'And out of every 100 who book, how many become paying clients?',
     },
     options: [
@@ -459,6 +464,8 @@ export const QUESTIONS = [
     variant: 'list',
     manualEntry: true,
     manualType: 'currency',
+    // Skipped for Q8 "We don't capture emails…" (RPS = $0, see resolveInputs).
+    showIf: (a) => a.q8 !== 'no-email',
     question: 'How much revenue came from your email list in the last 12 months?',
     subline:
       'Pick your best estimate. There’s a calculator on your results page that takes you deeper into your email numbers.',
@@ -470,7 +477,6 @@ export const QUESTIONS = [
       { id: '500k-1m', label: '$500,000 to $1M' },
       { id: '1m-2.5m', label: '$1M to $2.5M' },
       { id: 'over-2.5m', label: 'Over $2.5M' },
-      { id: 'no-email', label: "We don't do email marketing" },
       {
         id: 'manual',
         label: 'Enter your exact number for more accurate calculations',
