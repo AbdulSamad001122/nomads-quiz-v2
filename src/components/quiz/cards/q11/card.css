@@ -176,9 +176,25 @@ svg.table{width:100%;max-width:440px;margin:0 auto;display:block;aspect-ratio:30
 .decide .d{font:600 15px/1.5 var(--display);color:var(--text)}
 .decide .d em{font-style:normal;color:var(--green);font-weight:900}
 .proj{display:flex;align-items:center;justify-content:center;gap:14px;border-top:1px solid rgba(23,112,63,.25);padding-top:10px;text-align:center}
+/* quiz (user rule, Oct 22): the arrow sits 8px from BOTH numbers. On the card the
+   wider "Next month, projected" label widened its column, leaving the arrow ~29px
+   from $154,500. Grid: each column is as wide as its number, labels on top (one
+   line from 380px up, centred over the number; narrower screens wrap them, the
+   same widths where the card wraps them), both numbers on one line, the arrow
+   centred between them. Under 340px the numbers drop to 19px so the row fits the
+   card's text width (on the card it ran 14px into the padding each side). */
+.proj{display:grid;grid-template-columns:min-content auto min-content;justify-content:center;column-gap:8px;align-items:end}
+.proj>div{display:contents}
+.proj small{grid-row:1}
+.proj strong{grid-row:2}
+.proj>div:first-child>*{grid-column:1}
+.proj>div:last-child>*{grid-column:3}
+.proj .pa{grid-column:2;grid-row:2;align-self:center}
+@media (min-width:380px){.proj small{white-space:nowrap;margin-left:-40px;margin-right:-40px}}
 .proj small{display:block;font:500 10px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--quiet);margin-bottom:2px}
 .proj strong{font:900 21px var(--display);color:var(--text);font-variant-numeric:tabular-nums}
 .proj strong.up{color:var(--green)}
+@media (max-width:339px){.proj strong{font-size:19px}}
 .proj .pa{font:900 18px var(--display);color:var(--green)}
 .note{margin:0;font:400 11.5px/1.5 var(--display); /* quiz: body text in Montserrat (mono on the card) */color:var(--quiet)}
 
