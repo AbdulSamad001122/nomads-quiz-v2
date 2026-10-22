@@ -537,16 +537,23 @@
   transform: translate(3px, 3px);
   box-shadow: 2px 2px 0 var(--maroon);
 }
-/* The arrow follows the last word inline, 12px on, bigger than the text
+/* The arrow sits 12px to the right of the text, bigger than the text
    (user, Oct 21; the card spread text and arrow apart with space-between
-   at text size). The last word and the arrow never break apart. */
-.bmc__nowrap {
-  white-space: nowrap;
+   at text size), centred on the button's height even when the text wraps
+   (user, Oct 22). */
+.bmc__cta-in {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.bmc__cta-t {
+  min-width: 0;
 }
 .bmc__arrow {
-  margin-left: 12px;
+  flex: none;
+  position: relative; /* top: set by the component to centre the glyph's ink */
   font-size: 1.6em;
-  line-height: 0; /* the bigger glyph doesn't make the line taller */
+  line-height: 0; /* the bigger glyph doesn't make the button taller */
 }
 /* body text: Montserrat (mono on the card; see the user rule at the top) */
 .bmc__upnext {
@@ -690,4 +697,13 @@
 .bmc button:focus-visible {
   outline: 2px solid var(--cream);
   outline-offset: 3px;
+}
+
+/* On phones the button fits in two lines (user rule, Oct 22): 12.5px at 320px,
+   growing with the width back to 18px by ~440px. Last in the file so it wins
+   over the base .bmc__cta rule (which already overrides the 17px above). */
+@media (max-width: 599px) {
+  .bmc__cta {
+    font-size: clamp(12.5px, calc(12.5px + (100vw - 330px) * 0.05), 18px);
+  }
 }

@@ -1,4 +1,4 @@
-import { Fragment, useLayoutEffect, useRef } from 'react';
+import { Fragment, useEffect, useLayoutEffect, useRef } from 'react';
 import {
   BENCHMARK_COPY,
   benchmarkFigures,
@@ -49,11 +49,37 @@ export default function BenchmarkScreen({ isSlg, onBack, onContinue }) {
   const s = BENCHMARK_COPY.shared;
   const c = BENCHMARK_COPY[mode];
   const f = benchmarkFigures(mode);
-  // CTA's last word rides with the arrow, so the arrow never wraps alone.
-  const ctaLead = s.cta.slice(0, s.cta.lastIndexOf(' '));
-  const ctaLast = s.cta.slice(s.cta.lastIndexOf(' ') + 1);
   const stageRef = useRef(null);
+  const arrowRef = useRef(null);
   const colRef = useRef(null);
+
+  // The "→" comes from a fallback font (the card's Montserrat files are the
+  // latin subset, without U+2192), so where its ink sits differs by platform
+  // (about 2px low on Windows). Measure it in the button's own type and nudge
+  // it so the arrow's ink is centred on the button (user, Oct 22).
+  useEffect(() => {
+    const ar = arrowRef.current;
+    if (!ar) return undefined;
+    let live = true;
+    const cs = getComputedStyle(ar);
+    const font = `${cs.fontStyle} ${cs.fontWeight} 100px ${cs.fontFamily}`;
+    const loaded = document.fonts && document.fonts.load ? document.fonts.load(font) : null;
+    Promise.resolve(loaded)
+      .catch(() => null)
+      .then(() => {
+        if (!live) return;
+        const m = document.createElement('canvas').getContext('2d');
+        m.font = font;
+        const t = m.measureText('→');
+        if (!t.actualBoundingBoxAscent || !t.fontBoundingBoxAscent) return;
+        const ink = (t.actualBoundingBoxAscent - t.actualBoundingBoxDescent) / 2;
+        const box = (t.fontBoundingBoxAscent - t.fontBoundingBoxDescent) / 2;
+        ar.style.top = `${Math.round(ink - box) / 100}em`;
+      });
+    return () => {
+      live = false;
+    };
+  }, []);
 
   // The card's layout() for "single": available = stage height − 60 (the
   // slide's 28 + 32 padding); shrink only when 85% or more still fits.
@@ -177,10 +203,9 @@ export default function BenchmarkScreen({ isSlg, onBack, onContinue }) {
             <div className="bmc__grp">
               <p className="bmc__next">{s.next}</p>
               <button type="button" className="bmc__cta" onClick={onContinue}>
-                {ctaLead}{' '}
-                <span className="bmc__nowrap">
-                  {ctaLast}
-                  <span className="bmc__arrow" aria-hidden="true">
+                <span className="bmc__cta-in">
+                  <span className="bmc__cta-t">{s.cta}</span>
+                  <span className="bmc__arrow" aria-hidden="true" ref={arrowRef}>
                     →
                   </span>
                 </span>
