@@ -296,6 +296,10 @@ button:focus-visible{outline:2px solid var(--cream);outline-offset:3px}
 .tile.pulse:not(.on){animation:tpulse 1.6s ease-in-out infinite}
 .pickwrap .callout{margin:0 9% -24px 0}
 .pickwrap .callout .ct{font-size:14px;max-width:none;white-space:nowrap}
+/* once "Revenue per visitor" is tapped the note fades AND gives back its space,
+   so no empty band is left between the headline and the chart */
+.pickwrap .callout{max-height:120px;transition:opacity .3s ease,max-height .45s ease .05s,margin .45s ease .05s}
+.pickwrap .callout.gone{opacity:0;max-height:0;margin-bottom:0}
 .rows{position:relative}
 .row{position:absolute;left:0;right:0;display:grid;grid-template-columns:84px 1fr;align-items:center;gap:10px;transition:transform .6s ease}
 .row .ch{font:700 13px var(--display);color:#152638}
@@ -311,10 +315,12 @@ button:focus-visible{outline:2px solid var(--cream);outline-offset:3px}
 .rpv .row.best .barw,.rpv .row.bleed .barw{animation:land .9s ease .7s 2}
 @keyframes land{50%{box-shadow:0 0 0 4px rgba(93,27,78,.25)}}
 .ex{font:500 11.5px var(--display); /* quiz: body text in Montserrat (mono on the card) */color:#4E5A6E;text-align:center}
-.promise{display:flex;gap:16px;align-items:center}
+/* phones: the $1.5M sits above its sentence; 600px and up: side by side */
+.promise{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
 .promise strong{flex:none;font:900 clamp(30px,8vw,40px)/1 var(--display);color:var(--purple)}
 .promise>span{font:600 15px/1.5 var(--display);color:#152638}
 .promise strong span{font:inherit;color:inherit}
+@media (min-width:600px){.promise{flex-direction:row;align-items:center;gap:16px}}
 .body{margin:0;font:500 15.5px/1.6 var(--display);color:rgba(247,239,234,.88)}
 .body em{font-weight:800;color:#fff}
 @media (min-width:1000px) and (max-width:1179px){

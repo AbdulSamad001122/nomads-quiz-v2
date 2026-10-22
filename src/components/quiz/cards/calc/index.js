@@ -8,7 +8,8 @@
      timer stops when the screen closes;
    - the tap note fades out after the first tap on "Revenue per visitor",
      as the file's notes describe ("shows until it is tapped once"); its
-     script only stopped the pulse. It keeps its space, so nothing jumps;
+     script only stopped the pulse. The note also gives back its space as
+     it fades (user rule, Oct 22: no empty band above the chart);
    - quiz additions: a Back control at the top; the button hugs its text
      with the arrow after the last word (user rule) and moves the quiz on
      (the card's "nomads:card-complete"). */
@@ -164,7 +165,7 @@ export function mount({ host, root, app, data, back, complete }) {
     bind();
     $$(".vtabs .tile").forEach(function(t){ t.addEventListener("click", function(e){
       if (editing) return;
-      if (t.getAttribute("data-v") === "r"){ flipped = true; t.classList.remove("pulse"); var nd = $("#nudge"); if (nd){ nd.style.transition = "opacity .3s ease"; nd.style.opacity = "0"; nd.setAttribute("aria-hidden", "true"); } show("rpv"); }
+      if (t.getAttribute("data-v") === "r"){ flipped = true; t.classList.remove("pulse"); var nd = $("#nudge"); if (nd){ nd.classList.add("gone"); nd.setAttribute("aria-hidden", "true"); } show("rpv"); }
       else show("traffic");
     }); });
     show(mode);
