@@ -249,3 +249,15 @@
     margin-top: 44px;
   }
 }
+
+/* Up to 900px the Back link sits absolutely at the frame's top-left (50px down).
+   The longer "Two quick questions..." headline made the centred block tall enough
+   on short phones (320x640) for its "Nearly there" label to land on top of
+   "Back". Keep the block below the Back row: room at the top, and "safe" centring
+   so a tall block grows downward instead of up under the link. */
+@media (max-width: 900px) {
+  .belief__body {
+    padding-top: max(clamp(28px, 4vh, 64px), 96px);
+    justify-content: safe center;
+  }
+}
