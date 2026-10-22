@@ -206,7 +206,7 @@ em{font-style:normal}
 
 /* ---------- quadrant map ---------- */
 .quad{display:flex;flex-direction:column;gap:12px;padding-top:6px}
-.quad-h{margin:0;font:500 14px/1.55 var(--display);color:#C9D1DF;text-align:center;max-width:52ch;align-self:center}
+.quad-h{margin:0;font:500 14px/1.55 var(--display);color:#C9D1DF;text-align:left; /* quiz: 3+ lines on desktop, so left-aligned (user rule, Oct 22) */ max-width:52ch;align-self:center}
 .quad-h em{font-weight:800;color:#fff}
 .qmap{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:4px;width:100%;max-width:440px;align-self:center}
 .qmap ul{display:contents;margin:0;padding:0}
