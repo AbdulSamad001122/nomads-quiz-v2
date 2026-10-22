@@ -96,6 +96,15 @@
   margin-bottom: clamp(22px, 3.2vh, 48px);
 }
 
+/* Lettered steps (7A–7C, 9A–9B) in Montserrat Bold, sized so both
+   characters sit fully inside the circle with padding all round. */
+.question-panel__step--lettered {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(29px, 1.95vw, 36px);
+  letter-spacing: 0;
+}
+
 /* Roboto Mono label strip — changes per question, 3-4 words max */
 .question-panel__label {
   align-self: flex-start;
@@ -760,7 +769,7 @@
   /* Back link moves onto the dark panel, in the question text color */
   .question-panel__mobile-back {
     display: block;
-    margin-bottom: clamp(26px, 4vw, 24px);
+    margin-bottom: 16px;
   }
 
   .question-panel__mobile-back .back-link {
@@ -768,15 +777,18 @@
     font-size: 16px;
   }
 
-  /* Step badge floats to the top-right of the dark block */
+  /* Step badge sits on the left, under the Back link and above the label */
   .question-panel__step {
-    position: absolute;
-    top: clamp(14px, 4vw, 24px);
-    right: clamp(16px, 4.5vw, 24px);
+    align-self: flex-start;
+    flex-shrink: 0;
     width: 54px;
     height: 54px;
     font-size: 24px;
-    margin-bottom: 0;
+    margin-bottom: 18px;
+  }
+
+  .question-panel__step--lettered {
+    font-size: 21px;
   }
 
   .question-panel__content {
@@ -973,6 +985,10 @@
     width: 44px;
     height: 44px;
     font-size: 18px;
+  }
+
+  .question-panel__step--lettered {
+    font-size: 17px;
   }
 }
 
