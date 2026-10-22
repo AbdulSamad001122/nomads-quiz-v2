@@ -82,8 +82,10 @@ const SCREENS = [
   { type: 'question', id: 'q9b' },
   { type: 'question', id: 'q10' },
   { type: 'question', id: 'q11' },
-  { type: 'slide', id: 'loading' },
+  // Yemi's Oct 20 slides: the One Table card comes right after Q11, then the
+  // loading screen, then the transition slide (almost-ready) and Q12.
   { type: 'slide', id: 'five-metrics' },
+  { type: 'slide', id: 'loading' },
   { type: 'slide', id: 'almost-ready' },
   { type: 'question', id: 'q12' },
   { type: 'slide', id: 'advice' },

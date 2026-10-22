@@ -1,0 +1,281 @@
+/* Q11 One Table.html: the card's own stylesheet (#card-style), ported for
+   the quiz's shadow-root host: :root → :host, body → .nc-body, embedded images
+   saved as files, fonts mapped to the self-hosted copies (cardFonts.css).
+   Preview-only rules (.pbar, .qhead, copy editing) removed. */
+/* Layout: navy textured ground, one centered column that scrolls inside the quiz frame.
+   Headline → sub → callout + two pinned tiles (Separate rooms / One table).
+   Readable blocks (rooms, table, chat) sit on white sections. Red and green appear on numbers only. */
+:host{
+  --ground:#121726;      /* under the navy texture */
+  --ink:#152638;
+  --purple:#5D1B4E;
+  --maroon:#391129;
+  --mauve:#8A4F70;
+  --lilac:#F2E5F6;       /* quiz button fill */
+  --cream:#F4EDE6;
+  --clay:#E0B5A3;
+  --ice:#CAE1F4;
+  --text:#F7EFEA;
+  --quiet:#B4BDD0;
+  --line:rgba(247,239,234,.14);
+  --red:#F2867A;         /* before numbers only */
+  --green:#7FD8A6;       /* after numbers only */
+  --callout:#7FD8A6;
+  --display:"Card Montserrat",system-ui,sans-serif;
+  --mono:"Card Mono 45",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+:host,.nc-body{height:100%}
+.nc-body{background:var(--ground);color:var(--text);font-family:var(--display);overflow:hidden;
+  padding-left:max(0px,env(safe-area-inset-left,0px));padding-right:max(0px,env(safe-area-inset-right,0px));padding-block:0}
+#app{height:100%;display:flex;flex-direction:column}
+
+/* ---------- PREVIEW ONLY: grey bar + stand-in quiz header ---------- */
+
+/* ================= THE CARD ================= */
+.stage{position:relative;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;isolation:isolate;
+  background-color:var(--ground);background-image:var(--texture);background-size:994px 424px;background-attachment:local}
+.stage::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(120% 70% at 50% 0%, rgba(202,225,244,.07), rgba(18,23,38,0) 60%)}
+.col{width:100%;max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:22px;
+  padding:28px max(20px,env(safe-area-inset-right,0px)) 44px max(20px,env(safe-area-inset-left,0px))}
+
+h1{margin:0;font:800 clamp(25px,6.6vw,36px)/1.2 var(--display);letter-spacing:-.01em;text-wrap:balance;color:#fff}
+h1 em{font-style:normal;color:var(--clay)}
+.o{color:var(--green)} .t{color:var(--red)}
+.sub{margin:-8px 0 0;font:500 15.5px/1.55 var(--display);color:rgba(247,239,234,.86);max-width:56ch}
+
+/* ---------- callout: instruction + hand-drawn arrow, pointing at the two tiles ----------
+   Phones/tablets: above the tiles, arrow down into the first one.
+   Wide screens: out in the left margin beside the column, tilted, arrow curving in at the tiles. */
+.callout{display:flex;color:var(--callout);pointer-events:none}
+.callout .ct{font:800 14.5px/1.35 var(--display);max-width:17ch;flex:none;padding:6px 10px;border-radius:10px;
+  background:color-mix(in srgb, var(--callout) 14%, transparent);border:1.5px dashed color-mix(in srgb, var(--callout) 70%, transparent)}
+.callout svg{flex:none;overflow:visible}
+.callout svg path{fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.callout .bob{animation:bob 1.3s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translate(0,0)}50%{transform:translate(var(--bx,0px),var(--by,6px))}}
+.pick{position:relative;margin-bottom:-18px}
+.pick .callout{flex-direction:row;align-items:flex-start;gap:0;--bx:0px;--by:6px;margin-left:2px}
+.pick .callout .ct{transform:rotate(-5deg);transform-origin:left center;margin:4px 0 0 -4px}
+.pick .callout svg.a-dn{width:44px;height:62px;margin-top:2px}
+.pick .callout svg.a-side{display:none}
+@media (min-width:1100px){
+  .pick{height:0;margin-bottom:0}
+  .pick .callout{position:absolute;z-index:3;right:calc(100% + 18px);top:-30px;margin:0;flex-direction:column;align-items:flex-end;--bx:6px;--by:0px}
+  .pick .callout .ct{transform:rotate(-9deg);transform-origin:center;margin:0 34px 0 0}
+  .pick .callout svg.a-dn{display:none}
+  .pick .callout svg.a-side{display:block;width:150px;height:74px;margin:-4px -14px 0 0}
+}
+
+/* ---------- the two tiles, pinned at the top while the card scrolls ---------- */
+.tiles{position:sticky;top:0;z-index:6;display:grid;grid-template-columns:minmax(0,1fr) 18px minmax(0,1fr);gap:4px;align-items:stretch;
+  margin:0 -20px;padding:12px 20px;background:rgba(18,23,38,.92);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.tile{--tc:var(--purple);--tt:#fff;appearance:none;font:inherit;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:4px;min-width:0;
+  padding:11px 12px 12px;border-radius:12px;border:2px solid var(--tc);background:var(--tc);color:var(--tt);opacity:.62;
+  transition:opacity .25s, transform .12s, box-shadow .25s}
+.tile[data-n="2"]{--tc:var(--clay);--tt:#152638}
+.tile .top{display:flex;align-items:center;gap:8px}
+.tile .n{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font:900 13px/1 var(--display);background:var(--tt);color:var(--tc)}
+.tile b{font:800 15px/1.2 var(--display);color:inherit}
+.tile .s{font:600 11.5px/1.35 var(--display);color:inherit;opacity:.85}
+.tile .go-ic{margin-left:auto;flex:none;width:18px;height:18px;opacity:.9}
+.tile.on{opacity:1;cursor:default;box-shadow:0 0 0 2px var(--ground),0 0 0 4px var(--tc)}
+.tile.on .go-ic{display:none}
+.tile:not(.on):hover{opacity:.92;transform:translateY(-2px)}
+.tile.pulse:not(.on){animation:tpulse 1.6s ease-in-out infinite}
+@keyframes tpulse{0%,100%{box-shadow:0 0 0 0 rgba(224,181,163,.0)}50%{box-shadow:0 0 0 6px rgba(224,181,163,.35);opacity:.95}}
+.tarr{align-self:center;color:var(--clay);display:grid;place-items:center}
+.tarr svg{width:18px;height:22px;overflow:visible}
+.tarr path{fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+/* the two parts */
+.part{display:flex;flex-direction:column;gap:22px}
+.part[hidden]{display:none}
+.part.in-fwd{animation:in-fwd .45s cubic-bezier(.2,.7,.2,1) both}
+.part.in-back{animation:in-back .45s cubic-bezier(.2,.7,.2,1) both}
+@keyframes in-fwd{from{opacity:0;transform:translateX(48px)}to{opacity:1;transform:none}}
+@keyframes in-back{from{opacity:0;transform:translateX(-48px)}to{opacity:1;transform:none}}
+
+/* ---------- white sections ---------- */
+.roomsbox,.tablebox,.chatwin{--red:#A6342B;--green:#17703F;--quiet:#4E5A6E;--text:#152638;--line:rgba(21,38,56,.12);color:#152638;
+  background:#fff;border-radius:14px;box-shadow:0 18px 40px -20px rgba(0,0,0,.6)}
+.kick{font:500 10.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--quiet)}
+
+/* part 1: separate rooms */
+.roomsbox{padding:14px;display:flex;flex-direction:column;gap:12px}
+.rooms{display:flex;flex-direction:column;gap:8px}
+.rm{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center;padding:10px 12px 10px 14px;border-radius:10px;background:#F4F6F9;border:1px solid var(--line);border-left:4px solid var(--c)}
+.rm .n{font:800 14.5px/1.25 var(--display);color:var(--text)}
+.rm .r{grid-column:1;font:500 12.5px/1.35 var(--display);color:var(--quiet)}
+.rm .v{grid-row:1/span 2;grid-column:2;font:700 13px/1.3 var(--display); /* quiz: table values in Montserrat (mono on the card) */color:var(--green);text-align:right;max-width:150px;opacity:0;transform:translateX(6px);transition:opacity .35s, transform .35s}
+.rm.done .v{opacity:1;transform:none}
+.others{margin:0;font:500 13px/1.45 var(--display);color:var(--quiet)}
+.revline{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;gap:4px 10px;border-top:1px solid var(--line);padding-top:12px;
+  font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--quiet)}
+.revline .pair{white-space:nowrap;display:inline-flex;align-items:baseline;gap:8px}
+.revline b{font:900 clamp(26px,7vw,32px)/1.1 var(--display);letter-spacing:-.01em;color:var(--red);text-transform:none;font-variant-numeric:tabular-nums}
+.revline .ar{color:var(--red);font:900 24px var(--display)}
+.stuck{margin:0;font:800 16.5px/1.45 var(--display);color:var(--red);text-wrap:balance}
+/* the in-card switch to part 2: dashed and tinted like the callout, never the lilac button style */
+.switch{appearance:none;align-self:flex-start;display:inline-flex;align-items:center;gap:10px;cursor:pointer;
+  font:800 15.5px/1.3 var(--display);color:var(--callout);padding:12px 16px;border-radius:12px;
+  background:color-mix(in srgb, var(--callout) 12%, transparent);border:1.5px dashed color-mix(in srgb, var(--callout) 70%, transparent);transition:background-color .15s, transform .12s}
+.switch:hover{background:color-mix(in srgb, var(--callout) 22%, transparent);transform:translateY(-1px)}
+.switch svg{width:20px;height:20px}
+
+/* part 2: one table */
+.tablebox{background:var(--ice);padding:16px 14px 18px;display:flex;flex-direction:column;gap:6px}
+svg.table{width:100%;max-width:440px;margin:0 auto;display:block;aspect-ratio:300/180;overflow:visible}
+.glow{animation:breathe 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes breathe{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.35);opacity:1}}
+.north{display:flex;gap:12px;align-items:flex-start;border-top:1.5px solid rgba(21,38,56,.18);padding:16px 4px 0}
+.north svg{flex:none;width:26px;height:26px;margin-top:1px}
+.north b{display:block;font:900 17px/1.3 var(--display);color:#152638;margin-bottom:5px}
+.north>div>span{font:500 15px/1.55 var(--display);color:#26354A}
+
+/* chat: a light, Slack-style channel */
+.chatwin{overflow:hidden;display:flex;flex-direction:column}
+.chathead{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid var(--line);background:#F4F6F9}
+.chathead .hash{font:800 17px/1 var(--display);color:var(--quiet)}
+.chathead b{font:800 14.5px var(--display);color:var(--text)}
+.chathead .avs{display:flex;margin-left:auto}
+.chathead .avs i{width:20px;height:20px;border-radius:5px;border:2px solid #F4F6F9;margin-left:-5px;background:var(--c)}
+.chatbody{display:flex;flex-direction:column;gap:2px;padding:10px 0 14px}
+.cmsg{display:grid;grid-template-columns:36px 1fr;gap:10px;padding:8px 14px;align-items:start}
+.cmsg .av{width:36px;height:36px;border-radius:8px;background:var(--c);color:#fff;display:grid;place-items:center;font:800 12px var(--display)}
+.cmsg .who{display:block;font:800 13.5px var(--display);color:var(--c);margin-bottom:2px}
+.cmsg .txt{font:500 15px/1.5 var(--display);color:var(--text)}
+.react{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.mtag{display:inline-flex;align-items:center;gap:6px;font:700 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:5px 10px 5px 8px;border-radius:6px;color:#fff;background:var(--t)}
+.mtag::before{content:"";width:12px;height:9px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;border-radius:0 0 0 4px;margin-top:-6px;opacity:.85}
+
+/* the five metrics, plotted inside the chat */
+.ccard{margin:8px 14px 8px 60px;background:#EEF5FC;border:1px solid rgba(21,38,56,.14);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.f-eq{font:800 14px/1.4 var(--display);color:var(--text)}
+.f-chips{display:flex;flex-wrap:wrap;gap:6px;counter-reset:f}
+.f-chips>span{font:600 12.5px var(--display);color:var(--text);border:1px solid rgba(21,38,56,.2);background:#fff;border-radius:999px;padding:5px 11px;counter-increment:f}
+.f-chips>span::before{content:counter(f) " ";font:700 10px var(--mono);color:var(--quiet)}
+.f-chips>span.hit{border:1.5px solid var(--red);color:var(--red);font-weight:800}
+.f-chips>span.bl{filter:blur(4px);user-select:none}
+.g-row{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center}
+.g-l{font:800 13.5px var(--display);color:var(--red)}
+.g-t{position:relative;height:14px;border-radius:7px;background:#fff;border:1.5px dashed rgba(21,38,56,.45)}
+.g-t i{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:6px;background:var(--red);transition:width .9s ease .2s}
+.g-t b{position:absolute;right:-2px;top:-6px;bottom:-6px;width:3px;border-radius:2px;background:var(--text)}
+.shown .g-t i{width:50%}
+.g-p{font:700 11.5px var(--display); /* quiz: table values in Montserrat (mono on the card) */color:var(--red);white-space:nowrap}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font:500 11.5px var(--display);color:var(--quiet)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:18px;height:10px;border-radius:5px;background:var(--red)}
+.legend i.tg{background:#fff;border:1.5px dashed rgba(21,38,56,.45)}
+
+.decide{margin:8px 14px 4px;border:1.5px solid var(--green);border-radius:12px;padding:14px 16px;background:rgba(23,112,63,.06);display:flex;flex-direction:column;gap:8px}
+.decide b{font:500 10.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+.decide .d{font:600 15px/1.5 var(--display);color:var(--text)}
+.decide .d em{font-style:normal;color:var(--green);font-weight:900}
+.proj{display:flex;align-items:center;justify-content:center;gap:14px;border-top:1px solid rgba(23,112,63,.25);padding-top:10px;text-align:center}
+/* quiz (user rule, Oct 22): the arrow sits 8px from BOTH numbers. On the card the
+   wider "Next month, projected" label widened its column, leaving the arrow ~29px
+   from $154,500. Grid: each column is as wide as its number, labels on top (one
+   line from 380px up, centred over the number; narrower screens wrap them, the
+   same widths where the card wraps them), both numbers on one line, the arrow
+   centred between them. Under 340px the numbers drop to 19px so the row fits the
+   card's text width (on the card it ran 14px into the padding each side). */
+.proj{display:grid;grid-template-columns:min-content auto min-content;justify-content:center;column-gap:8px;align-items:end}
+.proj>div{display:contents}
+.proj small{grid-row:1}
+.proj strong{grid-row:2}
+.proj>div:first-child>*{grid-column:1}
+.proj>div:last-child>*{grid-column:3}
+.proj .pa{grid-column:2;grid-row:2;align-self:center}
+@media (min-width:380px){.proj small{white-space:nowrap;margin-left:-40px;margin-right:-40px}}
+.proj small{display:block;font:500 10px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--quiet);margin-bottom:2px}
+.proj strong{font:900 21px var(--display);color:var(--text);font-variant-numeric:tabular-nums}
+.proj strong.up{color:var(--green)}
+@media (max-width:339px){.proj strong{font-size:19px}}
+.proj .pa{font:900 18px var(--display);color:var(--green)}
+.note{margin:0;font:400 11.5px/1.5 var(--display); /* quiz: body text in Montserrat (mono on the card) */color:var(--quiet)}
+
+/* messages appear as the reader reaches them */
+.rv{transition:opacity .35s ease, transform .35s ease}
+.rv.wait{opacity:0;transform:translateY(8px)}
+.cmsg .dots{display:none;gap:4px;padding:8px 0 2px}
+.cmsg .dots i{width:6px;height:6px;border-radius:50%;background:var(--quiet);animation:blink 1s infinite}
+.cmsg .dots i:nth-child(2){animation-delay:.15s} .cmsg .dots i:nth-child(3){animation-delay:.3s}
+@keyframes blink{0%,100%{opacity:.25}50%{opacity:1}}
+.cmsg.typing{opacity:1;transform:none}
+.cmsg.typing .dots{display:flex}
+.cmsg.typing .txt,.cmsg.typing .react,.cmsg.typing .who{display:none}
+.react.wait .mtag{opacity:0;transform:translateY(-4px)}
+.mtag{transition:opacity .3s ease, transform .3s ease}
+
+/* button */
+/* quiz: the buttons hug their text; the arrow sits to the right of the text, centred on the button (.nc-arrow) — the card had
+   display:inline-flex + justify-content:space-between + gap:14px, and min-width:360px from 600px */
+.cta{align-self:flex-start;width:fit-content;max-width:calc(100% - 6px);display:block;text-align:left;font:800 17.5px/1.3 var(--display);cursor:pointer;
+  padding:17px 22px;border:2px solid var(--maroon);border-radius:0;background:var(--lilac);color:var(--maroon);box-shadow:5px 5px 0 var(--purple);
+  transition:background-color .15s ease, color .15s ease, border-color .15s ease, transform .12s ease, box-shadow .12s ease}
+.cta:hover{background:var(--purple);color:#fff;border-color:var(--mauve);box-shadow:5px 5px 0 var(--maroon)}
+.cta.next{font-size:16.5px;min-width:0}
+.cta:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--maroon)}
+.go{display:flex;flex-direction:column;gap:12px}
+.upnext{font:500 12.5px/1.5 var(--display); /* quiz: body text in Montserrat (mono on the card) */color:var(--quiet)}
+
+@media (min-width:600px){
+  .col{gap:26px;padding-top:38px;padding-bottom:60px}
+  .sub{font-size:16.5px}
+  .tiles{grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr)}
+  .tarr svg{width:26px}
+  .tile{padding:12px 14px 13px}
+  .tile b{font-size:16px}
+  .tile .s{font-size:12.5px}
+  .roomsbox{padding:20px}
+  .tablebox{padding:22px 22px 22px}
+  .cta.next{min-width:0}
+}
+@media (max-width:420px){
+  .ccard{margin-left:14px}
+  .g-row{grid-template-columns:1fr auto;row-gap:6px}
+  .g-l{grid-column:1/-1}
+  .rm .v{max-width:118px}
+}
+@media (prefers-reduced-motion:reduce){
+  .rv,.mtag{transition:none}
+  .part.in-fwd,.part.in-back,.callout .bob,.glow,.tile.pulse{animation:none}
+}
+button:focus-visible{outline:2px solid var(--cream);outline-offset:3px}
+
+/* ---------- PREVIEW ONLY: copy editing (in place, desktop) ---------- */
+
+/* tiles, raised: inactive = white card with a coloured edge and offset shadow; active = solid colour with a ring */
+.tile{--td:#5D1B4E} .tile[data-n="2"]{--td:#A0563C}
+.tile:not(.on){opacity:1;background:#fff;color:#152638;border-color:var(--td);box-shadow:4px 4px 0 var(--td)}
+.tile:not(.on) .n{background:var(--td);color:#fff}
+.tile:not(.on) .s{opacity:1;color:#3F4A5E}
+.tile:not(.on):hover{opacity:1;background:#fff;transform:translate(-1px,-2px);box-shadow:5px 6px 0 var(--td)}
+.tile.pulse:not(.on){animation:tpulse2 1.6s ease-in-out infinite}
+@keyframes tpulse2{0%,100%{box-shadow:4px 4px 0 var(--td),0 0 0 0 rgba(255,255,255,0)}50%{box-shadow:4px 4px 0 var(--td),0 0 0 6px rgba(255,255,255,.28)}}
+@media (prefers-reduced-motion:reduce){.tile.pulse{animation:none}}
+
+/* quiz (user rule, Oct 22): on phones every button fits in two lines, the font
+   shrinking only as much as the narrowest screens need and growing back with
+   the width: the button 12.5px at 320px, back to 17.5px by ~430px wide. */
+@media (max-width:599px){.cta:not(.next){font-size:clamp(12.5px, calc(12.5px + (100vw - 330px) * .05), 17.5px)}}
+
+/* quiz (user rule, Oct 22): on phones the number circle beside each tile's title
+   squeezed it onto two lines; under 600px the circle sits on top (the tap
+   arrow stays top-right) and the title runs the full width below. */
+@media (max-width:599px){
+  .tile .top{flex-wrap:wrap;row-gap:6px}
+  .tile .top b{flex-basis:100%;order:1}
+}
+
+/* quiz (user rule, Oct 22): on phones each department's description sat beside its result
+   ("135,000 impressions") and was squeezed to 3-4 lines; under 600px the result sits
+   under the description, left-aligned. */
+@media (max-width:599px){
+  .rm{grid-template-columns:1fr}
+  .rm .v{grid-row:auto;grid-column:1;text-align:left;max-width:none}
+}
