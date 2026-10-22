@@ -5,15 +5,17 @@ import './QuizScreen.css';
 import './OptinScreen.css';
 
 /**
- * Opt-in slide — fancy design per the reference: split screen on the
- * QuizScreen shell, slotting into the blue → maroon → green rotation.
+ * Email capture — shown right after Q2A / Q2B (Oct 21 copy doc), on the
+ * QuizScreen split-screen shell, slotting into the blue → maroon → green
+ * rotation.
  *
- * Left: arrows doodle, "Your RPV™ is calculated." (sweep highlight), the
- * benchmark line, the two numbered promises, script footer line.
- * Right: "Where should / we send them?" (brush script), email + first
- * name inputs, Continue.
+ * Left: arrows doodle, "You're a few questions away…" (sweep highlight) and
+ * the result + workshop promise. Right: "Where should we send / your result?"
+ * (script kept to the two-word accent), first name + email inputs, Continue.
+ *
+ * `defaultValues` refills the inputs when the taker comes Back to this screen.
  */
-export default function OptinScreen({ theme, onBack, onSubmit }) {
+export default function OptinScreen({ theme, onBack, onSubmit, defaultValues = null }) {
   const themeVars = {
     '--t-left-bg-image': `url(${theme.leftBgImage})`,
     '--t-question-text': theme.questionText,
@@ -49,46 +51,23 @@ export default function OptinScreen({ theme, onBack, onSubmit }) {
                 alt=""
                 aria-hidden="true"
               />
-              <h1 className="optin__headline">
+              <p className="optin__headline">
+                {'You’re '}
                 <HighlightSweep tone={sweepToneFor(theme.name)}>
-                  Your RPV™ is calculated.
+                  a few questions away
                 </HighlightSweep>
-              </h1>
-              <p className="optin__sub">
-                {"We've run your numbers against the funnels pulling the highest revenue per visitor we've seen."}
+                {' from your Revenue Per Visitor™, aka how much money you’re making per visitor.'}
               </p>
               <p className="optin__sub">
-                Two things are waiting on the other side of this:
+                Add your email, and we&rsquo;ll send your result along with an
+                on-demand workshop that lets you and your team map out your next
+                steps to add $1.5M/year based on your new Revenue Per
+                Visitor&trade;.
               </p>
-              <ol className="optin__points">
-                <li>
-                  <span className="optin__num" aria-hidden="true">
-                    01
-                  </span>
-                  <span className="optin__point-text">
-                    Your current and potential revenue per visitor, aka how
-                    much money you&rsquo;re making per visitor.
-                  </span>
-                </li>
-                <li>
-                  <span className="optin__num" aria-hidden="true">
-                    02
-                  </span>
-                  <span className="optin__point-text">
-                    And an on-demand workshop that lets you and your team map
-                    out your next steps to add $1.5M/year based on your new
-                    RPV&trade;&nbsp;.
-                  </span>
-                </li>
-              </ol>
             </div>
           </div>
           <div className="question-panel__footer optin__footer">
-            <div className="question-panel__footer-hint optin__footer-hint">
-              <span className="question-panel__hint-text">
-                Now let&rsquo;s turn that number into your next move.
-              </span>
-            </div>
+            <div className="question-panel__footer-hint optin__footer-hint" />
             <div className="question-panel__footer-cell">
               <img src="/assets/nomads-icon.png" alt="" aria-hidden="true" />
             </div>
@@ -110,9 +89,9 @@ export default function OptinScreen({ theme, onBack, onSubmit }) {
 
         <div className="optin__form-wrap">
           <h1 className="optin__title">
-            {'Where should'}
+            {'Where should we send'}
             <br />
-            <span className="optin__script">we send them?</span>
+            <span className="optin__script">your result?</span>
           </h1>
           <form
             className="optin__form"
@@ -127,16 +106,20 @@ export default function OptinScreen({ theme, onBack, onSubmit }) {
           >
             <input
               className="optin__input"
-              type="email"
-              name="email"
-              placeholder="Your Email"
+              type="text"
+              name="firstName"
+              placeholder="Your First Name"
+              autoComplete="given-name"
+              defaultValue={defaultValues?.firstName || ''}
               required
             />
             <input
               className="optin__input"
-              type="text"
-              name="firstName"
-              placeholder="Your First Name"
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              autoComplete="email"
+              defaultValue={defaultValues?.email || ''}
               required
             />
             <button type="submit" className="q-btn optin__cta">

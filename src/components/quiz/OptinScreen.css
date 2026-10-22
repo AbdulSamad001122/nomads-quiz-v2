@@ -1,7 +1,7 @@
 /* ============================================================
-   OptinScreen — split screen on the QuizScreen shell, per the
-   opt-in reference. Left: arrows, sweep headline, numbered
-   promises, script footer. Right: script title + email/name form.
+   OptinScreen — email capture after Q2, split screen on the
+   QuizScreen shell. Left: arrows, sweep headline, promise line.
+   Right: script title + name/email form.
    ============================================================ */
 
 /* Square circle-doodle export → mask into a disc, keep on top */
@@ -47,53 +47,6 @@
   line-height: 1.5;
 }
 
-.optin__points {
-  list-style: none;
-  margin: clamp(18px, 3vh, 36px) 0 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(16px, 2.8vh, 32px);
-}
-
-.optin__points li {
-  display: flex;
-  align-items: flex-start;
-  gap: clamp(14px, 1.4vw, 26px);
-}
-
-/* 01 / 02 badges — pale circle + Better Brush numeral (step-badge look) */
-.optin__num {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: clamp(42px, 3.4vw, 66px);
-  height: clamp(42px, 3.4vw, 66px);
-  border-radius: 50%;
-  background: var(--t-step-badge-bg);
-  color: var(--t-step-badge-text);
-  font-family: var(--font-number);
-  font-weight: 100;
-  font-size: clamp(17px, 1.4vw, 27px);
-  line-height: 1;
-  flex-shrink: 0;
-}
-
-.optin__point-text {
-  font-family: var(--font-body);
-  font-weight: 500;
-  color: var(--t-question-text);
-  font-size: clamp(14px, 1.2vw, 23px);
-  line-height: 1.5;
-  max-width: 44ch;
-}
-
-/* Footer script — left aligned like the reference */
-.optin__footer-hint {
-  justify-content: flex-start;
-  padding-left: clamp(16px, 1.8vw, 30px);
-}
-
 /* ---------- Right panel ---------- */
 
 .optin__form-wrap {
@@ -111,9 +64,10 @@
   color: #152638;
   font-size: clamp(30px, 3.4vw, 64px);
   line-height: 1.1;
+  text-wrap: balance;
 }
 
-/* "we send them?" — Better Brush script */
+/* "your result?" — Better Brush script */
 .optin__script {
   font-family: var(--font-number);
   font-weight: 400;
@@ -173,16 +127,9 @@
     font-size: clamp(24px, 5.6vw, 32px);
   }
 
-  .optin__sub,
-  .optin__point-text {
+  .optin__sub {
     font-size: clamp(14px, 3.6vw, 18px);
     max-width: none;
-  }
-
-  .optin__num {
-    width: 44px;
-    height: 44px;
-    font-size: 18px;
   }
 
   .optin__footer {
