@@ -1,233 +1,693 @@
-/* ============================================================
-   BenchmarkScreen — split-screen benchmark slide (before Q5)
-   Reuses the QuizScreen shell (.quiz-screen / .question-panel /
-   .answer-panel + theme vars); this file styles only the
-   benchmark-specific content.
-   ============================================================ */
+/* Q4 benchmark card — the stylesheet of Yemi's "Q4 Benchmark SLG.html" ported
+   one rule at a time, class names prefixed with bmc__ (the card's .stage is
+   .bmc, .slide is .bmc__slide, .panel is .bmc__panel, and so on). Navy ground
+   only (the card's default). Red and green are the card's: numbers only,
+   typical vs optimised. Preview-only rules (.pbar, .qhead, editing) and the
+   paced-mode chrome (.bars, .nav) are left out. */
 
-/* The new circle doodle export is a square image on a white ground —
-   mask it into the badge's white disc so the spin reads as a disc. */
-.benchmark-screen .seam-badge {
-  background: #ffffff;
-  overflow: hidden;
+/* The card's fonts: Google Fonts Montserrat 500–900 + Roboto Mono 400/500,
+   served from /fonts under a card-only family name so the 900 weight (not
+   declared for the rest of the quiz) can't change any other screen. Each face
+   carries Google's "latin" unicode-range, so glyphs outside it fall back to
+   the system font exactly as on the card (e.g. the CTA's → and the Back ←).
+   User rule (Oct 21, all HTML slides): Roboto Mono stays on small labels
+   only; body text set in mono on the card is set in Montserrat here, same
+   size, weight and colour (Q4: the "Next:" line and the sources note). The
+   table's mono text (column headers, counts under the rates) is Montserrat
+   too (user, Oct 21). The 400 face below is for the sources note. */
+@font-face {
+  font-family: 'Q4 Card Montserrat';
+  src: url('/fonts/Montserrat-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
 }
-
-/* ---------- Left panel content ---------- */
-
-.benchmark__content {
-  justify-content: center;
-  padding-bottom: 0; /* the question-slide bottom air would push past 100vh */
+@font-face {
+  font-family: 'Q4 Card Montserrat';
+  src: url('/fonts/Montserrat-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
 }
-
-.benchmark-screen .question-panel__body {
-  padding-top: clamp(20px, 3vh, 44px);
-  padding-bottom: clamp(20px, 3vh, 44px);
+@font-face {
+  font-family: 'Q4 Card Montserrat';
+  src: url('/fonts/Montserrat-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
 }
-
-/* Headline — same voice as question slides, sized so the reference's
-   4 forced lines each hold on one line at desktop widths */
-.benchmark__headline {
-  font-family: var(--font-headline);
+@font-face {
+  font-family: 'Q4 Card Montserrat';
+  src: url('/fonts/Montserrat-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Q4 Card Montserrat';
+  src: url('/fonts/Montserrat-ExtraBold.ttf') format('truetype');
   font-weight: 800;
-  color: var(--t-question-text);
-  font-size: clamp(22px, 2.2vw, 42px);
-  line-height: 1.5;
-  letter-spacing: 0.01em;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Q4 Card Montserrat';
+  src: url('/fonts/Montserrat-Black-latin.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Q4 Card Roboto Mono';
+  src: url('/fonts/RobotoMono-Regular.ttf') format('truetype');
+  /* Google's Roboto Mono metrics (1048 / 271): the local file's 950 / 250
+     made every mono line ~2px shorter than on the card */
+  ascent-override: 104.8%;
+  descent-override: 27.1%;
+  line-gap-override: 0%;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Q4 Card Roboto Mono';
+  src: url('/fonts/RobotoMono-Medium.ttf') format('truetype');
+  /* Google's Roboto Mono metrics (1048 / 271): the local file's 950 / 250
+     made every mono line ~2px shorter than on the card */
+  ascent-override: 104.8%;
+  descent-override: 27.1%;
+  line-gap-override: 0%;
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
 }
 
-.benchmark__subhead {
-  margin-top: clamp(18px, 2.6vh, 36px);
-  font-family: var(--font-headline);
-  font-weight: 700;
-  color: var(--t-question-text);
-  font-size: clamp(16px, 1.45vw, 28px);
-  line-height: 1.5;
+/* ================= THE CARD (.stage) ================= */
+.bmc {
+  --bg: #121726; /* navy under the texture */
+  --purple: #5d1b4e;
+  --midnight: #152638;
+  --maroon: #391129;
+  --lilac: #f2e5f6; /* quiz button fill */
+  --cream: #f4ede6; /* eyebrow chip */
+  --text: #f7efea;
+  --quiet: #b4bdd0;
+  --line: rgba(247, 239, 234, 0.14);
+  --red: #f2867a; /* typical numbers only */
+  --green: #7fd8a6; /* optimised numbers only (on dark) */
+  --stone: #e4c8bc;
+  --ice: #cae1f4;
+  --paper: #e4fbff; /* light reading panel */
+  --card: #ffffff;
+  --ink: #152638; /* Midnight Blue text on light panels */
+  --ink-quiet: #4e5a6e;
+  --ink-line: rgba(21, 38, 56, 0.13);
+  --red-ink: #a6342b; /* typical numbers on light panels */
+  --green-ink: #17703f; /* optimised numbers on light panels */
+  --display: 'Q4 Card Montserrat', system-ui, sans-serif;
+  --mono: 'Q4 Card Roboto Mono', ui-monospace, Menlo, monospace;
+  color-scheme: dark;
+
+  /* fills the space under the quiz's progress strip (the card's "give it
+     the space under the quiz header") and scrolls inside, like the card */
+  height: calc(100vh - var(--qps-height, 0px));
+  height: calc(100dvh - var(--qps-height, 0px));
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  isolation: isolate;
+  outline: none;
+  background-color: var(--bg);
+  background-image: url('/assets/q4-benchmark-navy.jpg');
+  background-size: 994px 424px;
+  background-attachment: local;
+  color: var(--text);
+  font: 14px var(--display);
+  -webkit-font-smoothing: auto;
+  text-rendering: auto;
+  padding-left: max(0px, env(safe-area-inset-left, 0px));
+  padding-right: max(0px, env(safe-area-inset-right, 0px));
+}
+.bmc::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(120% 60% at 50% 0%, rgba(93, 27, 78, 0.22), rgba(18, 23, 38, 0) 60%);
+}
+.bmc *,
+.bmc *::before,
+.bmc *::after {
+  box-sizing: border-box;
 }
 
-/* Arrow-doodle bullet points */
-.benchmark__points {
-  list-style: none;
-  margin: clamp(16px, 2.4vh, 32px) 0 0;
-  padding: 0;
+.bmc__slide {
+  position: relative;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
-  gap: clamp(14px, 2vh, 24px);
+  justify-content: center;
+  padding: 28px max(20px, env(safe-area-inset-right, 0px)) 32px
+    max(20px, env(safe-area-inset-left, 0px));
 }
-
-.benchmark__points li {
-  display: flex;
-  align-items: flex-start;
-  gap: clamp(12px, 1.2vw, 22px);
-}
-
-.benchmark__points img {
-  width: clamp(20px, 1.7vw, 32px);
-  height: auto;
-  flex-shrink: 0;
-  margin-top: 0.15em;
-}
-
-.benchmark__points span {
-  font-family: var(--font-body);
-  font-weight: 500;
-  color: var(--t-question-text);
-  font-size: clamp(14px, 1.15vw, 21px);
-  line-height: 1.5;
-  max-width: 34ch;
-}
-
-/* CONTINUE — visual style comes from the shared .q-btn (landing-v3
-   button); this class only positions it inside the panel */
-.benchmark__continue {
-  align-self: flex-start;
-  margin-top: clamp(22px, 3.4vh, 44px);
-}
-
-/* ---------- Right panel content ---------- */
-
-/* Tighter vertical rhythm than question slides so the whole slide
-   (incl. progress bar) fits a 720p viewport like the reference */
-.benchmark__panel {
-  padding-top: clamp(24px, 3.6vh, 44px);
-}
-
-.benchmark__panel-body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: safe center;
-  padding: clamp(12px, 1.8vh, 26px) 0;
-}
-
-.benchmark__intro,
-.benchmark__outro {
-  font-family: var(--font-body);
-  font-weight: 500;
-  color: var(--t-option-text);
-  font-size: clamp(14px, 1.15vw, 20px);
-  line-height: 1.55;
-}
-
-.benchmark__model {
-  margin-top: clamp(14px, 2vh, 26px);
-  font-family: var(--font-body);
-  font-weight: 700;
-  color: var(--t-option-text);
-  font-size: clamp(15px, 1.2vw, 21px);
-}
-
-.benchmark__aov {
-  margin-top: clamp(8px, 1.1vh, 14px);
-  font-family: var(--font-body);
-  font-weight: 700;
-  color: var(--t-option-text);
-  font-size: clamp(15px, 1.2vw, 21px);
-}
-
-/* Funnel benchmark table — dark header bar, white rounded body,
-   thin column separators (reference style) */
-.benchmark-table {
-  margin-top: clamp(14px, 2vh, 24px);
+.bmc__col {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  background: #ffffff;
-  border: 1px solid var(--t-option-selected-bg);
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: var(--card-shadow);
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.bmc__grp {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
-.benchmark-table th {
-  background: var(--t-option-selected-bg);
-  color: var(--t-option-selected-text);
-  font-family: var(--font-body);
+/* Back: the card's own paced-mode "← Back" (.nav .back), set above the
+   eyebrow because the single layout has no nav bar */
+.bmc__back {
+  align-self: flex-start;
+  margin: -8px 0 -12px -6px;
+  padding: 8px 6px;
+  background: none;
+  border: 0;
+  color: var(--cream);
+  cursor: pointer;
+  font: 500 11px var(--mono);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+/* claim */
+.bmc__eyebrow {
+  align-self: flex-start;
+  background: var(--cream);
+  color: var(--midnight);
+  font: 500 13px/1.5 var(--mono);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+}
+.bmc__eyebrow s {
+  text-decoration-color: var(--purple);
+  text-decoration-thickness: 2px;
+}
+.bmc__h1 {
+  margin: 0;
+  font: 800 clamp(28px, 8.2vw, 40px) / 1.15 var(--display);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  color: #fff;
+}
+.bmc__pay {
+  display: block;
+  color: var(--green);
+  margin-top: 4px;
+}
+.bmc__context {
+  margin: 0;
+  font: 500 16px/1.55 var(--display);
+  color: rgba(247, 239, 234, 0.9);
+  max-width: 48ch;
+}
+.bmc__context .bmc__o {
+  color: var(--green);
   font-weight: 700;
-  font-size: clamp(13px, 1.05vw, 19px);
+}
+.bmc__context .bmc__t {
+  color: var(--red);
+  font-weight: 700;
+}
+
+/* table: one grid so every column lines up */
+.bmc__panel {
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 16px;
+  padding: 14px 16px 16px;
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.55);
+}
+.bmc__tbl {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  column-gap: 0;
+  font-variant-numeric: tabular-nums;
+}
+.bmc__tr {
+  display: contents;
+}
+.bmc__tr > * {
+  padding: 11px 8px;
+}
+.bmc__tr > *:first-child {
+  padding-left: 2px;
+}
+.bmc__tr > *:last-child {
+  padding-right: 2px;
+}
+.bmc__th > * {
+  font: 500 10.5px var(--display); /* mono on the card */
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--purple);
+  font-weight: 700;
+  padding-bottom: 9px;
+  padding-top: 0;
+  border-bottom: 2px solid var(--purple);
+}
+.bmc__th .bmc__t,
+.bmc__th .bmc__o {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+.bmc__th .bmc__t {
+  color: var(--red-ink);
+  font-weight: 700;
+}
+.bmc__th .bmc__o {
+  color: var(--green-ink);
+  font-weight: 700;
+}
+.bmc__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+.bmc__row > * {
+  border-bottom: 1px solid var(--ink-line);
+}
+.bmc__lab {
+  font: 700 14.5px/1.25 var(--display);
+  color: var(--ink);
+  min-width: 0;
+}
+.bmc__lab small {
+  display: block;
+  font: 500 12px/1.35 var(--display);
+  color: var(--ink-quiet);
+  margin-top: 3px;
+}
+.bmc__v {
+  text-align: right;
+  font: 900 18px var(--display);
+  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding-left: 16px;
+}
+.bmc__v small {
+  font: 500 11px var(--display); /* mono on the card */
+  color: var(--ink-quiet);
+  margin-top: 3px;
+}
+.bmc__v.bmc__t {
+  color: var(--red-ink);
+}
+.bmc__v.bmc__o {
+  color: var(--green-ink);
+}
+.bmc__rev > * {
+  border-bottom: 0;
+  background: var(--ice);
+  margin-top: 10px;
+}
+.bmc__rev > *:first-child {
+  border-radius: 12px 0 0 12px;
+  padding-left: 14px;
+}
+.bmc__rev > *:last-child {
+  border-radius: 0 12px 12px 0;
+  padding-right: 14px;
+}
+.bmc__rev .bmc__lab {
+  font-size: 15px;
+}
+.bmc__rev .bmc__v {
+  font-size: 21px;
+  font-weight: 900;
+}
+
+/* payoff */
+.bmc__gap {
+  border: 0;
+  border-radius: 16px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-variant-numeric: tabular-nums;
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.6);
+}
+.bmc__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 6px 14px;
+  flex-wrap: wrap;
+}
+.bmc__big {
+  font: 900 clamp(32px, 9vw, 40px) / 1 var(--display);
+  color: var(--green-ink);
+}
+.bmc__big small {
+  display: block;
+  font: 600 13px/1.4 var(--display);
+  color: var(--ink-quiet);
+  margin-top: 8px;
+}
+.bmc__yr {
+  text-align: right;
+  font: 500 12px/1.4 var(--mono);
+  color: var(--ink-quiet);
+}
+.bmc__yr b {
+  display: block;
+  font: 900 24px var(--display);
+  color: var(--green-ink);
+}
+.bmc__tot {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--paper);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font: 600 14px/1.5 var(--display);
+  color: var(--ink);
+}
+.bmc__tot .bmc__t {
+  color: var(--red-ink);
+  font-weight: 800;
+}
+.bmc__tot .bmc__o {
+  color: var(--green-ink);
+  font-weight: 800;
+}
+.bmc__x {
+  flex: none;
+  font: 900 24px var(--display);
+  color: #fff;
+  background: var(--purple);
+  border-radius: 10px;
+  padding: 7px 11px;
+}
+@media (max-width: 400px) {
+  .bmc__top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .bmc__yr {
+    text-align: left;
+  }
+}
+@media (max-width: 599px) {
+  .bmc__col {
+    gap: 18px;
+  }
+  .bmc__panel {
+    padding: 10px 12px 12px;
+    border-radius: 14px;
+  }
+  .bmc__tr > * {
+    padding: 9px 4px;
+  }
+  .bmc__th > * {
+    font-size: 9.5px;
+    letter-spacing: 0.06em;
+  }
+  .bmc__lab {
+    font-size: 14px;
+  }
+  .bmc__lab small {
+    font-size: 11.5px;
+  }
+  .bmc__v {
+    font-size: 16px;
+    padding-left: 10px;
+  }
+  .bmc__v small {
+    font-size: 10.5px;
+  }
+  .bmc__rev > *:first-child {
+    padding-left: 10px;
+  }
+  .bmc__rev > *:last-child {
+    padding-right: 10px;
+  }
+  .bmc__rev .bmc__v {
+    font-size: 17px;
+  }
+  .bmc__gap {
+    padding: 16px;
+  }
+  .bmc__tot {
+    font-size: 13.5px;
+    padding: 10px 12px;
+    gap: 10px;
+  }
+  .bmc__x {
+    font-size: 20px;
+    padding: 6px 9px;
+  }
+  .bmc__cta {
+    font-size: 17px;
+    padding: 16px 18px;
+  }
+}
+/* Small phones (not on the card): at 17px the revenue figures leave the
+   label column so narrow that "Monthly" ran under the next cell's ice box
+   (PLG at 320px). 15px gives the labels ~18px more room. */
+@media (max-width: 360px) {
+  .bmc__rev .bmc__v {
+    font-size: 15px;
+  }
+}
+.bmc__next {
+  margin: 0;
+  font: 600 16px/1.5 var(--display);
+  color: var(--text);
+  max-width: 48ch;
+}
+.bmc__cta {
+  /* hugs its text + arrow (user, Oct 21; full column width on the card);
+     on phones the text wraps, so it still fills the column there */
+  align-self: flex-start;
+  display: block;
+  font: 800 18px/1.3 var(--display);
+  text-align: left;
+  cursor: pointer;
+  padding: 18px 22px;
+  border: 2px solid var(--maroon);
+  border-radius: 0;
+  background: var(--lilac);
+  color: var(--maroon);
+  box-shadow: 5px 5px 0 var(--purple);
+  margin-right: 6px;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+.bmc__cta:hover {
+  background: var(--purple);
+  color: #fff;
+  border-color: #8a4f70;
+  box-shadow: 5px 5px 0 var(--maroon);
+}
+.bmc__cta:active {
+  transform: translate(3px, 3px);
+  box-shadow: 2px 2px 0 var(--maroon);
+}
+/* The arrow follows the last word inline, 12px on, bigger than the text
+   (user, Oct 21; the card spread text and arrow apart with space-between
+   at text size). The last word and the arrow never break apart. */
+.bmc__nowrap {
+  white-space: nowrap;
+}
+.bmc__arrow {
+  margin-left: 12px;
+  font-size: 1.6em;
+  line-height: 0; /* the bigger glyph doesn't make the line taller */
+}
+/* body text: Montserrat (mono on the card; see the user rule at the top) */
+.bmc__upnext {
+  font: 500 12.5px/1.5 var(--display);
+  color: var(--quiet);
   text-align: center;
-  padding: clamp(9px, 1.1vh, 14px) clamp(8px, 0.8vw, 14px);
+  margin-top: -4px;
 }
-
-.benchmark-table td {
-  font-family: var(--font-body);
-  font-weight: 500;
-  color: var(--t-option-text);
-  font-size: clamp(12px, 0.95vw, 17px);
-  line-height: 1.4;
+.bmc__src {
+  font: 400 12px/1.55 var(--display);
+  color: var(--quiet);
   text-align: center;
-  padding: clamp(8px, 1.2vh, 15px) clamp(8px, 0.8vw, 14px);
+}
+.bmc__src summary {
+  cursor: pointer;
+  list-style: none;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.bmc__src summary::-webkit-details-marker {
+  display: none;
+}
+.bmc__src p {
+  margin: 8px auto 0;
+  max-width: 52ch;
+}
+.bmc__src .bmc__o {
+  color: var(--green);
+}
+.bmc__src .bmc__t {
+  color: var(--red);
 }
 
-/* thin row rules + short column separators like the reference */
-.benchmark-table tbody tr + tr td {
-  border-top: 1px solid rgba(21, 38, 56, 0.14);
+/* larger screens */
+@media (min-width: 600px) {
+  .bmc__col {
+    gap: 24px;
+  }
+  .bmc__eyebrow {
+    font-size: 14.5px;
+  }
+  .bmc__h1 {
+    font-size: clamp(34px, 5.2vw, 44px);
+  }
+  .bmc__context {
+    font-size: 17.5px;
+  }
+  .bmc__lab {
+    font-size: 16px;
+  }
+  .bmc__lab small {
+    font-size: 13px;
+  }
+  .bmc__v {
+    font-size: 19px;
+    padding-left: 28px;
+  }
+  .bmc__v small {
+    font-size: 12px;
+  }
+  .bmc__rev .bmc__v {
+    font-size: 22px;
+  }
+  .bmc__gap {
+    padding: 20px 22px;
+  }
+  .bmc__panel {
+    padding: 16px 20px 18px;
+  }
+  .bmc__big {
+    font-size: 46px;
+  }
+  .bmc__yr b {
+    font-size: 28px;
+  }
+  .bmc__tot {
+    font-size: 15.5px;
+  }
+  .bmc__next {
+    font-size: 17.5px;
+  }
+  .bmc__cta {
+    font-size: 19px;
+  }
+  .bmc__slide {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
 }
 
-.benchmark-table td + td,
-.benchmark-table th + th {
-  border-left: 1px solid rgba(21, 38, 56, 0.18);
+/* laptops: same type, tighter rhythm so the first screen fits (the card's
+   slide-padding change here doesn't apply in the single layout) */
+@media (min-width: 900px) and (max-height: 860px) {
+  .bmc__col {
+    gap: 18px;
+    max-width: 680px;
+  }
+  .bmc__grp {
+    gap: 12px;
+  }
+  .bmc__eyebrow {
+    font-size: 13.5px;
+  }
+  .bmc__h1 {
+    font-size: clamp(32px, min(3vw, 6vh), 40px);
+  }
+  .bmc__context {
+    font-size: 16.5px;
+    line-height: 1.5;
+  }
+  .bmc__tr > * {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  .bmc__th > * {
+    padding-bottom: 8px;
+  }
+  .bmc__lab {
+    font-size: 15px;
+  }
+  .bmc__lab small {
+    font-size: 12.5px;
+    margin-top: 2px;
+  }
+  .bmc__v {
+    font-size: 18px;
+  }
+  .bmc__v small {
+    margin-top: 2px;
+  }
+  .bmc__rev > * {
+    margin-top: 6px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .bmc__rev .bmc__v {
+    font-size: 20px;
+  }
 }
 
-.benchmark-table th + th {
-  border-left-color: rgba(255, 255, 255, 0.25);
-}
-
-.benchmark__outro {
-  margin-top: clamp(14px, 2vh, 26px);
-}
-
-/* ============================================================
-   Responsive
-   ============================================================ */
-
-/* Panels stack under 900px (shell handles the frame/logo bar);
-   release the reference's forced line breaks so text wraps naturally */
-@media (max-width: 900px) {
-  .benchmark__headline br,
-  .benchmark__subhead br {
-    display: none;
-  }
-
-  .benchmark__headline {
-    font-size: clamp(23px, 4.6vw, 34px);
-    line-height: 1.45;
-  }
-
-  .benchmark__subhead {
-    font-size: clamp(16px, 3.6vw, 22px);
-  }
-
-  .benchmark__points span {
-    font-size: clamp(14px, 3.4vw, 18px);
-    max-width: none;
-  }
-
-  .benchmark__points img {
-    width: clamp(20px, 4.6vw, 28px);
-  }
-
-  .benchmark__continue {
-    margin-top: 26px;
-  }
-
-  .benchmark__intro,
-  .benchmark__outro {
-    font-size: clamp(14px, 3.4vw, 18px);
-  }
-
-  .benchmark__model,
-  .benchmark__aov {
-    font-size: clamp(15px, 3.6vw, 19px);
-  }
-
-  .benchmark-table th {
-    font-size: clamp(12px, 2.9vw, 16px);
-    padding: 10px 6px;
-  }
-
-  .benchmark-table td {
-    font-size: clamp(11px, 2.7vw, 15px);
-    padding: 10px 6px;
-    overflow-wrap: break-word;
-  }
+.bmc button:focus-visible {
+  outline: 2px solid var(--cream);
+  outline-offset: 3px;
 }
