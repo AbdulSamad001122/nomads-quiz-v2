@@ -293,3 +293,12 @@ button:focus-visible{outline:2px solid var(--cream);outline-offset:3px}
    shrinking only as much as the narrowest screens need and growing back with
    the width: the button 16.5px at 320px, back to 17.5px by ~350px wide; the "next" button 16px at 320px, back to 16.5px by ~340px wide. */
 @media (max-width:599px){.cta:not(.next){font-size:clamp(16.5px, calc(16.5px + (100vw - 330px) * .05), 17.5px)}.cta.next{font-size:clamp(16px, calc(16px + (100vw - 330px) * .05), 16.5px)}}
+
+/* quiz (user rule, Oct 22): on phones a small number beside its text squeezed the
+   text into a narrow column (the two top tiles' titles ran 5-6 lines; the
+   "25% -> 95%" box ~12 lines of one or two words). Under 600px they stack: the
+   number on top, the text below at full width. */
+@media (max-width:599px){
+  .tile{flex-direction:column;align-items:flex-start;gap:6px}
+  .win{flex-direction:column;align-items:flex-start;gap:4px}
+}
