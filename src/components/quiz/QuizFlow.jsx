@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import QuizScreen from './QuizScreen.jsx';
 import BenchmarkScreen from './BenchmarkScreen.jsx';
-import TransitionCalcScreen from './TransitionCalcScreen.jsx';
+import CalculatorIntroCard from './CalculatorIntroCard.jsx';
 import BeliefTransitionScreen from './BeliefTransitionScreen.jsx';
 import AlmostReadyScreen from './AlmostReadyScreen.jsx';
 import WelcomeScreen from './WelcomeScreen.jsx';
@@ -937,14 +937,8 @@ export default function QuizFlow({ restored = null } = {}) {
     }
 
     case 'transition-calculator':
-      return (
-        <TransitionCalcScreen
-          theme={themeAt(index)}
-          onBack={back}
-          onContinue={next}
-          progressPercent={percentFor('q6')}
-        />
-      );
+      // Yemi's Calculator Intro card (Oct 20) replaces TransitionCalcScreen.
+      return <CalculatorIntroCard track={path} onBack={back} onContinue={next} />;
 
     case 'loading':
       return <LoadingScreen theme={themeAt(index)} onDone={next} durationMs={1500} />;
