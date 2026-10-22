@@ -263,3 +263,11 @@ button:focus-visible{outline:2px solid var(--cream);outline-offset:3px}
    shrinking only as much as the narrowest screens need and growing back with
    the width: the button 12.5px at 320px, back to 17.5px by ~430px wide. */
 @media (max-width:599px){.cta:not(.next){font-size:clamp(12.5px, calc(12.5px + (100vw - 330px) * .05), 17.5px)}}
+
+/* quiz (user rule, Oct 22): on phones the number circle beside each tile's title
+   squeezed it onto two lines; under 600px the circle sits on top (the tap
+   arrow stays top-right) and the title runs the full width below. */
+@media (max-width:599px){
+  .tile .top{flex-wrap:wrap;row-gap:6px}
+  .tile .top b{flex-basis:100%;order:1}
+}
