@@ -5,12 +5,14 @@
   background: #f8f1e4; /* paper cream that peeks under the hero's angled cut */
 
   /* The two CTA colours, shared by every button that uses them (QC row 11:
-     all buttons match the nav). Workshop = a washed-out ice blue; booking =
-     a bright, saturated pink in a different colour family, so the eye knows
-     which comes first (Loom). Not a brand-palette colour — chosen Oct 23
-     (option b); swap it here to change every booking button. */
+     all buttons match the nav). Workshop = a washed-out ice blue (QC row 11:
+     "All workshop cta has to be lighter"). Booking = the nav's original pale
+     pink for now: QC row 11 + Loom ask for it "big bold bright" in another
+     colour family, but no colour was named — the user will give the exact
+     colour (Oct 23; a bright pink was tried and reverted). Swap it here to
+     change every booking button. */
   --rbtn-workshop-bg: #e8f3fb;
-  --rbtn-book-bg: #ff4d94;
+  --rbtn-book-bg: #f8dfe8;
 }
 
 /* a few key words / numbers inside body copy, see emphasize.jsx */

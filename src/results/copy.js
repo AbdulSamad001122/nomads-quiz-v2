@@ -23,7 +23,8 @@
  * 10's CTA list. The hero artifact words them slightly differently ("Watch
  * the workshop with your team", "Book your next $125k/mo game-plan call") —
  * flagged; QC doc list used as the Oct 23 default, awaiting confirmation.
- * Workshop = washed-out, booking = big, bold, bright (QC row 11 + Loom).
+ * Workshop = washed-out (QC row 11); booking colour pending from the user —
+ * see --rbtn-book-bg in results.css.
  * TODO: real workshop URL — the separate "Watch the Workshop" page (QC item 8)
  * isn't built yet. Booking URL is live (TidyCal).
  */

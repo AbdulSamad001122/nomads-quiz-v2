@@ -42,14 +42,13 @@
   align-items: center;
 }
 
-/* workshop = the washed-out one; booking = big, bold, bright (QC row 11) */
+/* workshop = the washed-out one; booking colour pending (results.css) */
 .rnav__cta--workshop {
   background: var(--rbtn-workshop-bg);
 }
 
 .rnav__cta--book {
   background: var(--rbtn-book-bg);
-  font-weight: 800;
 }
 
 /* wide desktops: each button on one line, so the sticky bar stays short */
