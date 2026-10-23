@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import QuizScreen from './QuizScreen.jsx';
 import BenchmarkScreen from './BenchmarkScreen.jsx';
-import TransitionCalcScreen from './TransitionCalcScreen.jsx';
+import CalculatorIntroCard from './CalculatorIntroCard.jsx';
 import BeliefTransitionScreen from './BeliefTransitionScreen.jsx';
 import AlmostReadyScreen from './AlmostReadyScreen.jsx';
 import WelcomeScreen from './WelcomeScreen.jsx';
 import DisqualifiedScreen from './DisqualifiedScreen.jsx';
-import LoadingScreen from './LoadingScreen.jsx';
+import LoadingCard from './LoadingCard.jsx';
 import FeedbackLoopScreen from './FeedbackLoopScreen.jsx';
 import OptinScreen from './OptinScreen.jsx';
 import CaseStudyGolfbays from './CaseStudyGolfbays.jsx';
@@ -14,6 +14,7 @@ import CaseStudy97 from './CaseStudy97.jsx';
 import CaseStudyCreative from './CaseStudyCreative.jsx';
 import CaseStudyLara from './CaseStudyLara.jsx';
 import CaseStudyEstelle from './CaseStudyEstelle.jsx';
+import CaseStudyAbandonment from './CaseStudyAbandonment.jsx';
 import Advice12A from './Advice12A.jsx';
 import Advice12B from './Advice12B.jsx';
 import Advice12C from './Advice12C.jsx';
@@ -46,8 +47,9 @@ import { resultFor } from '../../results/restoreResults.js';
 import { currentRoute, RESULTS_PATH } from '../../routes.js';
 
 /**
- * QuizFlow — the sequencer. Wireframe order: welcome → Q1…Q14 with the
- * non-question slides interleaved → opt-in → results placeholder.
+ * QuizFlow — the sequencer. Wireframe order: welcome → Q1 → Q2A/Q2B →
+ * email capture (Oct 21 doc) → Q3…Q14 with the non-question slides
+ * interleaved → results.
  *
  * This phase: screens + navigation + display routing only
  * (conditionals, disqualify gates, PLG/SLG wording). Calculator,
@@ -63,6 +65,7 @@ const SCREENS = [
   { type: 'question', id: 'q1' },
   { type: 'question', id: 'q2a' },
   { type: 'question', id: 'q2b' },
+  { type: 'slide', id: 'optin' },
   { type: 'question', id: 'q3' },
   { type: 'question', id: 'q4' },
   { type: 'slide', id: 'benchmark' },
@@ -79,14 +82,15 @@ const SCREENS = [
   { type: 'question', id: 'q9b' },
   { type: 'question', id: 'q10' },
   { type: 'question', id: 'q11' },
-  { type: 'slide', id: 'loading' },
+  // Yemi's Oct 20 slides: the One Table card comes right after Q11, then the
+  // loading screen, then the transition slide (almost-ready) and Q12.
   { type: 'slide', id: 'five-metrics' },
+  { type: 'slide', id: 'loading' },
   { type: 'slide', id: 'almost-ready' },
   { type: 'question', id: 'q12' },
   { type: 'slide', id: 'advice' },
   { type: 'question', id: 'q13' },
   { type: 'question', id: 'q14' },
-  { type: 'slide', id: 'optin' },
   { type: 'slide', id: 'results' },
 ];
 
@@ -328,7 +332,8 @@ function screenVisible(screen, answers) {
  * DEV ONLY — `?goto=<screenId>` jumps straight to a screen with realistic
  * prefilled answers, so themes/branches/data render correctly without
  * clicking through the quiz. Variant params: `path=plg`, `gate=1`, `ads=1`,
- * `q5=a..e` (case study), `q12=a..e` (advice). `?goto=dq` shows the
+ * `q5=a..e` (case study; `q5=e&path=plg` = the PLG-only abandoned-carts
+ * case), `q12=a..e` (advice). `?goto=dq` shows the
  * disqualification screen. Part of the dev harness — removed before launch.
  */
 function devInitialState() {
@@ -354,7 +359,7 @@ function devInitialState() {
     ...(gate ? { q2b: 'yes' } : {}),
     q3: 'agency',
     q4: path === 'plg' ? 'self-serve' : 'calls',
-    q5: CS[p.get('q5')] || 'cold-traffic',
+    q5: path === 'plg' && p.get('q5') === 'e' ? 'cart-abandonment' : CS[p.get('q5')] || 'cold-traffic',
     q6: ads ? ['paid-ads', 'seo'] : ['seo'],
     q7a: '10001-50000',
     ...(ads ? { q7b: '10k-25k', q7c: '45-55' } : {}),
@@ -391,7 +396,8 @@ function showResultsAddress() {
  * `restored` = { answers, manualValues, sig } from SavedResultsRoute: the
  * taker's saved results reopened at /diagnostic-results. It starts on the
  * results screen and never re-fires the completion events (and Kit only ever
- * fires from the opt-in submit, which a restored page never shows).
+ * fires from a live run — the email capture and its results — never on a
+ * restored page).
  */
 export default function QuizFlow({ restored = null } = {}) {
   const [index, setIndex] = useState(
@@ -405,6 +411,10 @@ export default function QuizFlow({ restored = null } = {}) {
   );
   const [otherText, setOtherText] = useState('');
   const [vocText, setVocText] = useState('');
+  // { firstName, email } from the email capture after Q2.
+  const [lead, setLead] = useState(null);
+  // Last payload sent to Kit, so going Back and forth never re-sends it.
+  const kitSentPayload = useRef(null);
   const [dqReason, setDqReason] = useState(restored ? null : DEV_INIT?.dq ?? null);
   // Impossible-answer check currently on screen, and the questions the taker
   // pushed past with "Keep my answers" (Quiz Logics.docx · Manual entry &
@@ -428,7 +438,13 @@ export default function QuizFlow({ restored = null } = {}) {
 
   const goTo = (from, dir, ans = answers) => {
     let i = from + dir;
-    while (i >= 0 && i < SCREENS.length && !screenVisible(SCREENS[i], ans)) {
+    // Going back never lands on the loading screen: it moves on by itself,
+    // so Back would bounce straight forward again.
+    while (
+      i >= 0 &&
+      i < SCREENS.length &&
+      (!screenVisible(SCREENS[i], ans) || (dir < 0 && SCREENS[i].id === 'loading'))
+    ) {
       i += dir;
     }
     if (i >= 0 && i < SCREENS.length) {
@@ -500,13 +516,14 @@ export default function QuizFlow({ restored = null } = {}) {
      Alefiya review (2026-09-17): progress must be visible on every slide and
      must never sit frozen. Basing it on the question number would freeze it
      for the two or three educational slides that run between questions, so
-     it counts EVERY screen the taker actually sees instead — skipped
-     conditionals (Q2B / Q7B / Q7C) drop out, so the scale always matches
-     their real route. Welcome is the 0% start, opt-in the 100% end; the
-     results page sits outside the quiz and has no strip. */
-  const journey = SCREENS.filter(
-    (s) => s.id !== 'results' && screenVisible(s, answers)
-  );
+     it counts every screen, slides included. Welcome is the 0% start, Q14
+     the 100% end; the results page sits outside the quiz and has no strip.
+     The scale always counts the longest route — conditional questions
+     (Q2B gate, Q7B/Q7C paid ads, Q11 email revenue) included even when this
+     taker will skip them. Dropping them made the bar go BACKWARDS when an
+     answer added screens (ticking "Paid ads" on Q6 took it 42% → 40%,
+     LP QC). Now it only moves forward; a skipped question is a small jump. */
+  const journey = SCREENS.filter((s) => s.id !== 'results');
   const journeyPercent = () => {
     const pos = journey.findIndex((s) => s.id === screen.id);
     if (pos < 0 || journey.length < 2) return 0;
@@ -531,6 +548,22 @@ export default function QuizFlow({ restored = null } = {}) {
     ).length;
     return themes[themeCycle[(seenPosition - 1) % 3]];
   };
+
+  /* ---------- every new screen opens at the top ----------
+     Landing Page QC (Yemi): "Make sure they see the question. No auto
+     scrolling on questions." Screens swap in place, so without this the
+     next screen kept the previous one's scroll position — on phones Q4,
+     Q9A, Q13… opened part-way down with the question headline cut off.
+     Jumps instantly (no smooth scroll) before paint, and skips the first
+     render so a reload keeps the browser's own scroll restoration. */
+  const firstScreen = useRef(true);
+  useLayoutEffect(() => {
+    if (firstScreen.current) {
+      firstScreen.current = false;
+      return;
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [index, dqReason]);
 
   /* ---------- reopened results: this browser already gave its email ------
      Results are only saved after a live run passed the opt-in submit, so a
@@ -558,6 +591,48 @@ export default function QuizFlow({ restored = null } = {}) {
       rememberPopupSource(); // a reopened results page keeps the popup source
     }
     showResultsAddress();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [index, dqReason]);
+
+  /* ---------- Kit: two pushes per taker ----------
+     Yemi (Oct 22): the email goes to Kit as soon as it's entered, so takers
+     who stop halfway are kept. That first push carries the answers so far
+     (role, revenue tier) and only the entry tag. The "Quiz Taker" tag
+     ("Diagnostic Complete") and the computed results go with the second
+     push, when the taker reaches the results — Kit emails triggered by that
+     tag still wait for a finished quiz. Fire and forget — a Kit hiccup must
+     never block the quiz. An identical payload is never re-sent. */
+  const sendLeadToKit = (who, { result = null, finished = false } = {}) => {
+    const payload = {
+      email: who.email,
+      firstName: who.firstName,
+      fields: buildKitFields({
+        answers,
+        manualValues,
+        otherText,
+        vocText,
+        result,
+        overrides,
+        clampedBrackets,
+      }),
+      // every finisher gets the "Quiz Taker" TAG (handover doc Oct 8);
+      // capped takers also get "Quiz Taker Capped State" (Sep 23)
+      tags: finished ? buildKitTags({ result }) : [],
+    };
+    const sig = JSON.stringify(payload);
+    if (kitSentPayload.current === sig) return;
+    kitSentPayload.current = sig;
+    pushToKit(payload);
+  };
+
+  useEffect(() => {
+    if (restored || dqReason || !lead?.email) return;
+    if (SCREENS[index].id !== 'results') return;
+    const path = salesModel(answers);
+    const inputs = resolveInputs(answers, manualValues, path);
+    const result =
+      inputs.q2 != null && inputs.q7 != null ? calculate(inputs, path) : null;
+    sendLeadToKit(lead, { result, finished: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index, dqReason]);
 
@@ -737,6 +812,7 @@ export default function QuizFlow({ restored = null } = {}) {
         question={q.question}
         subline={q.subline}
         options={q.options}
+        badges={q.badges}
         selectedId={isMulti ? undefined : value}
         selectedIds={isMulti ? (Array.isArray(value) ? value : []) : undefined}
         onSelect={isMulti ? toggleMulti : selectSingle}
@@ -839,7 +915,7 @@ export default function QuizFlow({ restored = null } = {}) {
       }
       if (csKey === 'low-optin') {
         return (
-          <CaseStudy97 theme={themeAt(index)} onBack={back} onContinue={next} />
+          <CaseStudy97 q3={answers.q3} onBack={back} onContinue={next} />
         );
       }
       if (csKey === 'differentiation') {
@@ -869,6 +945,10 @@ export default function QuizFlow({ restored = null } = {}) {
           />
         );
       }
+      // 5E for PLG (Q5's PLG-only option E, abandoned carts)
+      if (csKey === 'cart-abandonment') {
+        return <CaseStudyAbandonment onBack={back} onContinue={next} />;
+      }
       const cs = CASE_STUDIES[csKey] || CASE_STUDIES['cold-traffic'];
       return (
         <SlideScreen
@@ -882,17 +962,12 @@ export default function QuizFlow({ restored = null } = {}) {
     }
 
     case 'transition-calculator':
-      return (
-        <TransitionCalcScreen
-          theme={themeAt(index)}
-          onBack={back}
-          onContinue={next}
-          progressPercent={percentFor('q6')}
-        />
-      );
+      // Yemi's Calculator Intro card (Oct 20) replaces TransitionCalcScreen.
+      return <CalculatorIntroCard track={path} onBack={back} onContinue={next} />;
 
     case 'loading':
-      return <LoadingScreen theme={themeAt(index)} onDone={next} durationMs={1500} />;
+      // Yemi's Loading Screen card (Oct 20): moves on by itself at ~3.5s.
+      return <LoadingCard track={path} onDone={next} />;
 
     case 'five-metrics':
       return <FiveMetricsScreen onBack={back} onContinue={next} />;
@@ -917,7 +992,7 @@ export default function QuizFlow({ restored = null } = {}) {
       // 12A has its designed screen; the rest keep the placeholder until
       // their references arrive.
       if (adviceKey === 'a') {
-        return <Advice12A onBack={back} onContinue={next} />;
+        return <Advice12A track={path} onBack={back} onContinue={next} />;
       }
       if (adviceKey === 'b') {
         return <Advice12B onBack={back} onContinue={next} />;
@@ -933,38 +1008,18 @@ export default function QuizFlow({ restored = null } = {}) {
         <OptinScreen
           theme={themeAt(index)}
           onBack={back}
+          defaultValues={lead}
           onSubmit={({ firstName, email } = {}) => {
-            ga.leadSubmit(path);
-
-            // Push everything to Kit (answers + computed results). Fire and
-            // forget — a Kit hiccup must never block the results screen.
+            const who = { firstName, email };
             if (email) {
+              // Q4 isn't answered yet, so no sales model on the lead event
+              // (salesModel() would default everyone to SLG). Counted once.
+              if (!lead) ga.leadSubmit(answers.q4 ? path : null);
               // The Framer site reads this and stops showing quiz popups.
               markEmailGiven();
-
-              let result = null;
-              const inputs = resolveInputs(answers, manualValues, path);
-              if (inputs.q2 != null && inputs.q7 != null) {
-                result = calculate(inputs, path);
-              }
-              pushToKit({
-                email,
-                firstName,
-                fields: buildKitFields({
-                  answers,
-                  manualValues,
-                  otherText,
-                  vocText,
-                  result,
-                  overrides,
-                  clampedBrackets,
-                }),
-                // every taker gets the "Quiz Taker" TAG (handover doc Oct 8);
-                // capped takers also get "Quiz Taker Capped State" (Sep 23)
-                tags: buildKitTags({ result }),
-              });
+              sendLeadToKit(who);
             }
-
+            setLead(who);
             next();
           }}
         />

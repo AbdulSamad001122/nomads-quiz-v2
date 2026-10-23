@@ -32,11 +32,12 @@ const GROUPS = [
       ['Case study 5D — Lara Acosta (green, gate route)', '/diagnostic-start-now?goto=case-study&q5=d&gate=1'],
       ['Case study 5E — Estelle Winsett (maroon)', '/diagnostic-start-now?goto=case-study&q5=e'],
       ['Case study 5E — Estelle Winsett (green, gate route)', '/diagnostic-start-now?goto=case-study&q5=e&gate=1'],
+      ['Case study 5E (PLG) — abandoned carts', '/diagnostic-start-now?goto=case-study&q5=e&path=plg'],
       ['Advice 12A', '/diagnostic-start-now?goto=advice&path=plg&q12=a'],
       ['Advice 12B', '/diagnostic-start-now?goto=advice&path=plg&q12=b'],
       ['Advice 12C', '/diagnostic-start-now?goto=advice&path=plg&q12=c'],
       ['Advice 12D', '/diagnostic-start-now?goto=advice&path=plg&q12=d'],
-      ['Five metrics', '/diagnostic-start-now?goto=five-metrics'],
+      ['Q11 One Table (five-metrics slot)', '/diagnostic-start-now?goto=five-metrics'],
     ],
   },
   {

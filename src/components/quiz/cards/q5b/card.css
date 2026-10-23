@@ -1,0 +1,375 @@
+/* Q5B Email List Card.html: the card's own stylesheet (#card-style), ported for
+   the quiz's shadow-root host: :root → :host, body → .nc-body, embedded images
+   saved as files, fonts mapped to the self-hosted copies (cardFonts.css).
+   Preview-only rules (.pbar, .qhead, copy editing) removed. */
+/* Layout: textured ground (navy by default; maroon, ice, clay or stone via data-ground), one centered column.
+   Rule: only the headline, short lines and buttons sit on the ground. Dense content sits on "sections":
+   white on the dark grounds (navy, maroon), Midnight Blue on the light grounds (ice, clay, stone).
+   Part 1 = two square message cards fanned like trading cards (mouse tilt on desktop, tap the back one or
+   swipe to swap), driving a static pie + color-coded legend. Part 2 = colored business-type triggers + case.
+   Callouts with hand-drawn arrows sit outside the blocks they point at. Red/green on numbers only. */
+:host{
+  --ground:#121726;
+  --purple:#5D1B4E;
+  --maroon:#391129;
+  --mauve:#8A4F70;
+  --lilac:#F2E5F6;
+  --cream:#F4EDE6;
+  --clay:#E0B5A3;
+  --ice:#CAE1F4;
+  --midnight:#152638;
+  --stone:#E4C8BC;
+  /* on the ground */
+  --on:#F7EFEA;
+  --on-quiet:#B4BDD0;
+  --on-line:rgba(247,239,234,.16);
+  --on-red:#F2867A;
+  --on-green:#7FD8A6;
+  --on-em:var(--clay);
+  --callout:#7FD8A6;
+  /* sections (white on dark grounds) */
+  --card:#FFFFFF;
+  --ink:#152638;
+  --ink-quiet:#4E5A6E;
+  --ink-line:rgba(21,38,56,.12);
+  --red-ink:#A6342B;
+  --green-ink:#17703F;
+  --soft:#F5F7FA;
+  --soft-green:#E9F6EE;
+  --soft-red:#FBEDEA;
+  --lit:#E4FBFF;
+  --card-shadow:0 18px 40px -20px rgba(0,0,0,.55);
+  /* the message cards are always paper-white trading cards */
+  --paper:#FFFFFF;
+  --paper-ink:#152638;
+  --paper-quiet:#4E5A6E;
+  --display:"Card Montserrat",system-ui,sans-serif;
+  --mono:"Card Mono 4567",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+:host,.nc-body{height:100%}
+.nc-body{background:var(--ground);color:var(--on);font-family:var(--display);overflow:hidden;
+  padding-left:max(0px,env(safe-area-inset-left,0px));padding-right:max(0px,env(safe-area-inset-right,0px));padding-block:0}
+#app{height:100%;display:flex;flex-direction:column}
+
+/* ---------- PREVIEW ONLY: grey bar + stand-in quiz header ---------- */
+
+/* ================= THE CARD ================= */
+.stage{position:relative;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;isolation:isolate;color:var(--on);
+  background-color:var(--ground);background-image:var(--texture);background-size:994px 424px;background-attachment:local}
+.stage[data-ground="maroon"]{--ground:#1E0A15;--on-quiet:#CDB8C3}
+/* light grounds: dark text on the ground, Midnight sections */
+.stage[data-ground="ice"],.stage[data-ground="clay"],.stage[data-ground="stone"]{
+  --on:#152638;--on-quiet:#3F4A5E;--on-line:rgba(21,38,56,.18);--on-red:#A6342B;--on-green:#17703F;--on-em:var(--purple);--callout:var(--purple);
+  --card:#152638;--ink:#F7EFEA;--ink-quiet:#B9C3D4;--ink-line:rgba(247,239,234,.14);--red-ink:#F2867A;--green-ink:#7FD8A6;
+  --soft:rgba(247,239,234,.07);--soft-green:rgba(127,216,166,.12);--soft-red:rgba(242,134,122,.12);--lit:rgba(202,225,244,.1);
+  --card-shadow:0 18px 40px -22px rgba(21,38,56,.6);color-scheme:light}
+.stage[data-ground="ice"]{--ground:#E2F0FA}
+.stage[data-ground="clay"]{--ground:#E0B5A3;--on-quiet:#4A3A3C}
+.stage[data-ground="stone"]{--ground:#E4C8BC;--on-quiet:#4A3D40}
+.col{width:100%;max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:22px;
+  padding:26px max(20px,env(safe-area-inset-right,0px)) 44px max(20px,env(safe-area-inset-left,0px))}
+
+/* their answer */
+.said{display:flex;flex-direction:column;gap:6px}
+.said .top{display:flex;align-items:center;gap:10px}
+.said .qm{display:block;width:26px;height:21px;color:var(--on-em)}
+.said .lbl{font:500 10.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--on-quiet)}
+.said .txt{display:block;max-width:44ch;font:600 italic clamp(16px,4.3vw,18px)/1.5 var(--display);color:var(--on)}
+
+h1{margin:0;font:800 clamp(25px,6.6vw,36px)/1.2 var(--display);letter-spacing:-.01em;text-wrap:balance;color:var(--on)}
+h1 .o{color:var(--on-green)} h1 .t{color:var(--on-red)}
+h1 em{font-style:normal;color:var(--on-em)}
+/* hand-drawn double underline, in the word's own color */
+h1 .o,h1 .t{position:relative;white-space:nowrap;display:inline-block}
+h1 .o::after,h1 .t::after{content:"";position:absolute;left:-2px;right:-2px;bottom:-.2em;height:.34em;background:currentColor;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 14' preserveAspectRatio='none'%3E%3Cpath d='M3 9.5C60 4 140 2.5 297 6.5M40 12C120 8.5 200 8 270 10' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") center/100% 100% no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 14' preserveAspectRatio='none'%3E%3Cpath d='M3 9.5C60 4 140 2.5 297 6.5M40 12C120 8.5 200 8 270 10' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") center/100% 100% no-repeat}
+.context{margin:-6px 0 0;font:500 15.5px/1.6 var(--display);color:var(--on);opacity:.92;max-width:56ch}
+
+/* part switcher */
+.tiles{position:sticky;top:0;z-index:8;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;
+  margin:0 -20px;padding:10px 20px;background:color-mix(in srgb, var(--ground) 90%, transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.tile{appearance:none;font:inherit;text-align:left;cursor:pointer;display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 8px;min-width:0;
+  padding:9px 12px 10px;border-radius:12px;border:2px solid var(--paper-ink);background:var(--paper);color:var(--paper-ink);box-shadow:3px 3px 0 var(--paper-ink);
+  transition:background-color .2s, color .2s, transform .12s, box-shadow .12s}
+.tile .n{grid-column:1;font:600 10px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--paper-quiet)}
+.tile b{grid-column:1;font:800 13px/1.25 var(--display)}
+.tile .go-ic{grid-column:2;grid-row:1/span 2;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--purple);color:#fff}
+.tile .go-ic svg{width:15px;height:15px}
+.tile.on{background:var(--purple);border-color:var(--purple);color:#fff;box-shadow:none;cursor:default}
+.tile.on .n{color:rgba(255,255,255,.75)}
+.tile.on .go-ic{display:none}
+.tile:not(.on):hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--paper-ink)}
+.tile:not(.on):active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--paper-ink)}
+
+.part{display:flex;flex-direction:column;gap:22px}
+.part[hidden]{display:none}
+.part.in-fwd{animation:in-fwd .45s cubic-bezier(.2,.7,.2,1) both}
+.part.in-back{animation:in-back .45s cubic-bezier(.2,.7,.2,1) both}
+@keyframes in-fwd{from{opacity:0;transform:translateX(48px)}to{opacity:1;transform:none}}
+@keyframes in-back{from{opacity:0;transform:translateX(-48px)}to{opacity:1;transform:none}}
+
+/* ---------- callouts: instruction + hand-drawn arrow, outside the block they point at ---------- */
+.callout{display:flex;align-items:flex-start;gap:4px;color:var(--callout);pointer-events:none}
+.callout .ct{font:800 14.5px/1.35 var(--display);max-width:17ch;min-width:150px;flex:none;padding:6px 10px;border-radius:10px;background:color-mix(in srgb, var(--callout) 14%, transparent);
+  border:1.5px dashed color-mix(in srgb, var(--callout) 70%, transparent)}
+.callout svg{flex:none;overflow:visible}
+.callout svg path{fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.callout .bob{animation:bob 1.3s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translate(0,0)}50%{transform:translate(var(--bx,6px),var(--by,6px))}}
+.callout[hidden]{display:none}
+
+/* ---------- part 1: the fanned message cards ---------- */
+.msg-area{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.msg-area .callout{--bx:4px;--by:6px;align-self:flex-start;margin-left:4%;align-items:flex-end}
+.msg-area .callout .ct{transform:rotate(-4deg)}
+.msg-area .callout svg.a-ph{width:76px;height:58px;margin:0 0 -30px 2px}
+.callout svg.a-dk{display:none}
+.stack{position:relative;display:grid;width:min(372px, 100%);padding:40px 58px 22px 4px;perspective:900px;touch-action:pan-y}
+.fan{display:grid;transform-style:preserve-3d;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out}
+.msg{grid-area:1/1;position:relative;appearance:none;font:inherit;text-align:left;display:flex;flex-direction:column;width:100%;min-height:236px;min-width:0;padding:0;overflow:hidden;
+  background:var(--paper);color:var(--paper-ink);border:2.5px solid var(--paper-ink);border-radius:16px;box-shadow:6px 6px 0 var(--paper-ink);
+  transition:transform .55s cubic-bezier(.2,.75,.2,1), box-shadow .3s, filter .3s}
+.msg .hd{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 14px;font:700 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#fff;
+  border-bottom:2.5px solid var(--paper-ink)}
+.msg.sol .hd{background:var(--red-ink-fixed,#A6342B)} .msg.sym .hd{background:var(--green-ink-fixed,#17703F)}
+.msg .bd{display:flex;flex-direction:column;gap:8px;padding:16px 16px 18px;flex:1}
+.msg .q{font:800 20px/1.3 var(--display);color:var(--paper-ink)}
+.msg .note{font:500 14px/1.5 var(--display);color:var(--paper-quiet)}
+.msg .swap{position:absolute;right:10px;top:46px;width:40px;height:40px;border-radius:50%;display:none;place-items:center;
+  background:var(--purple);color:#fff;border:2px solid var(--paper-ink);box-shadow:2px 2px 0 var(--paper-ink);animation:pulse 1.8s ease-in-out infinite}
+.msg .swap svg{width:20px;height:20px}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.msg.front{z-index:2;transform:translate3d(0,0,30px) rotate(-2deg);cursor:default}
+.msg.back{z-index:1;transform:translate3d(46px,-30px,0) rotate(7deg);cursor:pointer}
+.msg.back .swap{display:grid}
+.msg.back:hover,.stack.peek .msg.back{transform:translate3d(64px,-42px,0) rotate(10deg)}
+.msg.back:focus-visible{outline:3px solid var(--callout);outline-offset:4px}
+.msg.leaving{animation:leave .55s cubic-bezier(.2,.75,.2,1)}
+@keyframes leave{40%{transform:translate3d(-60px,30px,0) rotate(-12deg)}}
+
+/* ---------- the pie section ---------- */
+.piebox{display:flex;flex-direction:column;gap:14px;background:var(--card);color:var(--ink);border-radius:16px;padding:16px;box-shadow:var(--card-shadow)}
+.reach{display:flex;justify-content:space-between;align-items:center;gap:12px;font:700 13.5px/1.35 var(--display);color:var(--ink)}
+.reach b{font:900 clamp(26px,7vw,34px)/1 var(--display);color:var(--red-ink);font-variant-numeric:tabular-nums;white-space:nowrap;transition:color .4s}
+.reach b.up{color:var(--green-ink)}
+.pie-row{display:flex;flex-direction:column;gap:14px}
+.piewrap{display:flex;flex-direction:column;gap:6px;align-items:center}
+.pie{width:100%;max-width:330px;aspect-ratio:1;display:block;overflow:visible}
+.pie path.sl{stroke:var(--card);stroke-width:1.6;transition:fill .6s ease, opacity .4s}
+.pie text{pointer-events:none}
+.pie .pct{font:900 17px var(--display);fill:#fff}
+.pie .nm{font:700 8.5px var(--display);fill:#fff}
+.pie .out{font:900 13px var(--display);fill:var(--ink)}
+.pie .outn{font:700 8px var(--display);fill:var(--ink-quiet)}
+.pie line{stroke:var(--ink-quiet);stroke-width:.7}
+.pie .ring{fill:none;stroke:var(--ink-quiet);opacity:.75;stroke-width:3;stroke-linecap:round;stroke-dasharray:3 6;transition:stroke .5s}
+.pie .ring-end{fill:var(--ink-quiet);transition:fill .5s}
+.pie .ring-txt{font:900 11px var(--display);letter-spacing:.06em;text-transform:uppercase;fill:var(--ink-quiet);transition:fill .5s}
+.pie.won .ring{stroke:var(--green-ink);opacity:1;stroke-width:3.6;stroke-dasharray:none}
+.pie.won .ring-end{fill:var(--green-ink)}
+.pie.won .ring-txt{fill:var(--green-ink)}
+.credit{font:400 10px/1.4 var(--mono);color:var(--ink-quiet);text-align:center}
+.legend{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.legend li{display:grid;grid-template-columns:14px 1fr;gap:3px 10px;align-items:start;padding:8px 10px;border-radius:10px;transition:background-color .4s}
+.legend .sw{width:14px;height:14px;border-radius:4px;margin-top:2px;background:var(--c);transition:background-color .6s}
+.legend b{font:800 13px/1.35 var(--display);color:var(--ink)}
+.legend p{grid-column:2;margin:0;font:500 13px/1.5 var(--display);color:var(--ink-quiet)}
+.legend li:not(.lit) p{display:none}
+.legend li.lit{background:var(--lit)}
+.lead-x{border-radius:12px;padding:12px 14px;font:600 14.5px/1.55 var(--display);color:var(--ink);background:var(--soft-red);border:1.5px solid color-mix(in srgb, var(--red-ink) 30%, transparent)}
+.lead-x.sym{background:var(--soft-green);border-color:color-mix(in srgb, var(--green-ink) 30%, transparent)}
+.lead-x .lb{display:block;font:700 10.5px var(--mono);letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px;color:var(--red-ink)}
+.lead-x.sym .lb{color:var(--green-ink)}
+.lead-x p{margin:0}
+.lead-x p+p{margin-top:6px}
+.lead-x [data-for]{display:none}
+/* the in-section switch: dashed and tinted like the callouts, never the lilac button style */
+.flip{appearance:none;font:inherit;cursor:pointer;display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:12px 14px;border-radius:12px;
+  background:color-mix(in srgb, var(--green-ink) 9%, transparent);border:1.5px dashed color-mix(in srgb, var(--green-ink) 65%, transparent);color:var(--green-ink);
+  transition:background-color .2s, border-color .2s}
+.flip:hover{background:color-mix(in srgb, var(--green-ink) 15%, transparent)}
+.flip.sym{background:color-mix(in srgb, var(--red-ink) 7%, transparent);border-color:color-mix(in srgb, var(--red-ink) 55%, transparent);color:var(--red-ink)}
+.flip.sym:hover{background:color-mix(in srgb, var(--red-ink) 12%, transparent)}
+.flip-ic{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:currentColor}
+.flip-ic svg{width:17px;height:17px;color:var(--card)}
+.flip.sol .flip-ic{animation:pulse 1.8s ease-in-out infinite}
+.flip-t{flex:1;font:800 14.5px/1.35 var(--display)}
+.flip-t[data-for]{display:none}
+.flip.sol .flip-t[data-for="sol"],.flip.sym .flip-t[data-for="sym"]{display:block}
+.flip-up{flex:none;font:800 16px var(--display);opacity:.7}
+.flip:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+.lead-x.sol [data-for="sol"],.lead-x.sym [data-for="sym"]{display:block}
+
+/* ---------- part 2: business-type triggers ---------- */
+/* business-type callout. Phones/tablets: above the first button, arrow down into it.
+   Wide screens: out in the left margin beside the column, tilted, arrow pointing in at the first button. */
+.pick{position:relative;display:flex;flex-direction:column;padding-top:76px}
+.pick .callout{position:absolute;z-index:3;left:2px;top:0;margin:0;flex-direction:row;align-items:flex-start;gap:0;--bx:0px;--by:6px}
+.pick .callout .ct{transform:rotate(-5deg);transform-origin:left center;margin:4px 0 0 -4px}
+.pick .callout svg.a-dn{width:44px;height:66px;margin-top:4px}
+.pick .callout svg.a-side{display:none}
+@media (min-width:1100px){
+  .pick{padding-top:0}
+  .pick .callout{left:auto;right:calc(100% + 26px);top:-64px;flex-direction:column;align-items:flex-end;--bx:6px;--by:0px}
+  .pick .callout .ct{transform:rotate(-9deg);transform-origin:center;margin:0 34px 0 0}
+  .pick .callout svg.a-dn{display:none}
+  .pick .callout svg.a-side{display:block;width:150px;height:74px;margin:-4px -14px 0 0}
+}
+.tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.tabs button{appearance:none;position:relative;font:800 12.5px/1.25 var(--display);border-radius:12px;padding:12px 8px;cursor:pointer;min-width:0;text-align:center;
+  background:var(--tc);color:var(--tt);border:2px solid var(--tb,var(--tc));opacity:.82;transition:opacity .2s, transform .12s, box-shadow .2s}
+.tabs button[data-case="services"]{--tc:var(--purple);--tt:#fff}
+.tabs button[data-case="courses"]{--tc:var(--clay);--tt:#152638}
+.tabs button[data-case="products"]{--tc:var(--ice);--tt:#152638}
+.stage[data-ground="ice"] .tabs button,.stage[data-ground="clay"] .tabs button,.stage[data-ground="stone"] .tabs button{--tb:#152638}
+.tabs button:hover{opacity:1;transform:translateY(-2px)}
+.tabs button[aria-pressed="true"]{opacity:1;box-shadow:0 0 0 3px var(--ground),0 0 0 5px var(--tb,var(--tc))}
+.tabs button[aria-pressed="true"]::after{content:"";position:absolute;left:50%;bottom:-11px;width:14px;height:14px;background:var(--tc);transform:translateX(-50%) rotate(45deg);border-radius:2px}
+
+.case{display:flex;flex-direction:column;gap:14px;background:var(--card);color:var(--ink);border-radius:16px;padding:16px;box-shadow:var(--card-shadow);border-top:6px solid var(--tc)}
+.case[data-case="services"]{--tc:var(--purple)} .case[data-case="courses"]{--tc:var(--clay)} .case[data-case="products"]{--tc:var(--ice)}
+.stage[data-ground="ice"] .case[data-case="products"]{--tc:#8FB8DA}
+.case[hidden]{display:none}
+.case-h{margin:0;font:500 15px/1.6 var(--display);color:var(--ink)}
+.tl{display:flex;flex-direction:column;gap:12px;background:var(--soft);border-radius:12px;padding:14px}
+.tl-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:6px}
+.tl-l{font:600 13px/1.3 var(--display);color:var(--ink-quiet)}
+.tl-v{font:900 20px/1.1 var(--display);white-space:nowrap;font-variant-numeric:tabular-nums}
+.tl-v.lo{color:var(--red-ink)} .tl-v.hi{color:var(--green-ink)}
+.tl-bar{height:14px;border-radius:7px;background:color-mix(in srgb, var(--ink) 9%, transparent);overflow:hidden}
+.tl-bar i{display:block;height:100%;border-radius:7px;min-width:8px;width:0;transition:width 1.2s cubic-bezier(.2,.7,.2,1)}
+.tl-bar i.lo{background:var(--red-ink)} .tl-bar i.hi{background:var(--green-ink)}
+.tl-cap{font:500 11px/1.45 var(--display); /* quiz: body text in Montserrat (mono on the card) */color:var(--ink-quiet)}
+.speed{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:end;background:var(--soft);border-radius:12px;padding:14px}
+.speed .tl-cap{grid-column:1/-1;text-align:center}
+.sp{display:flex;flex-direction:column;gap:4px;text-align:center;min-width:0}
+.sp b{font:900 clamp(22px,6vw,32px)/1.05 var(--display);white-space:nowrap}
+.sp.lo b{color:var(--red-ink)} .sp.hi b{color:var(--green-ink)}
+.sp-arrow{width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--card);display:grid;place-items:center}
+.sp-arrow svg{width:16px;height:16px}
+.compare{position:relative;display:flex;flex-direction:column;gap:8px}
+.side{border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;min-width:0;background:var(--soft)}
+.side.after{background:var(--soft-green)}
+.side .tag{align-self:flex-start;font:700 10.5px var(--mono);letter-spacing:.12em;text-transform:uppercase;padding:3px 7px;border-radius:4px;color:#fff}
+.before .tag{background:#A6342B} .after .tag{background:#17703F}
+.stat{font:900 clamp(20px,5.4vw,26px)/1.15 var(--display)}
+.before .stat{color:var(--red-ink)} .after .stat{color:var(--green-ink)}
+.stat small{display:block;font:500 13px/1.4 var(--display);color:var(--ink-quiet);margin-top:4px}
+.then{position:relative;z-index:2;align-self:center;transform:rotate(90deg);width:32px;height:32px;flex:none;border-radius:50%;background:var(--ink);color:var(--card);display:grid;place-items:center;margin:-14px 0}
+.then svg{width:16px;height:16px}
+.result{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:8px}
+.result>div{background:var(--soft-green);border-radius:12px;padding:16px 8px 14px;text-align:center;
+  font:900 clamp(22px,6vw,32px)/1.05 var(--display);letter-spacing:-.02em;color:var(--green-ink);font-variant-numeric:tabular-nums;min-width:0}
+.result small{display:block;font:600 12px/1.35 var(--display);letter-spacing:0;color:var(--ink);margin-top:8px}
+.shots{display:flex;flex-direction:column;gap:12px;align-items:center}
+.shot{margin:0;width:100%;max-width:420px;background:#fff;border-radius:10px;padding:6px;border:1px solid var(--ink-line);box-shadow:0 8px 20px rgba(21,38,56,.14)}
+.shot.sm{max-width:240px} .shot.tall{max-width:300px}
+.shot img{display:block;width:100%;height:auto}
+
+/* ---------- buttons ---------- */
+.go{display:flex;flex-direction:column;gap:10px}
+/* quiz: the buttons hug their text; the arrow sits to the right of the text, centred on the button (.nc-arrow / .nc-arrow-svg) — the card had
+   align-self:stretch + display:flex + justify-content:space-between + gap:14px, a 22px svg, and min-width:360px from 600px */
+.cta{align-self:flex-start;width:fit-content;display:block;text-align:left;font:800 17.5px/1.3 var(--display);cursor:pointer;
+  padding:17px 22px;margin-right:6px;border:2px solid var(--maroon);border-radius:0;background:var(--lilac);color:var(--maroon);box-shadow:5px 5px 0 var(--purple);
+  transition:background-color .15s ease, color .15s ease, border-color .15s ease, transform .12s ease, box-shadow .12s ease}
+.cta:hover{background:var(--purple);color:#fff;border-color:var(--mauve);box-shadow:5px 5px 0 var(--maroon)}
+.cta:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--maroon)}
+.cta.next{font-size:16px;padding:14px 20px}
+.upnext{font:500 12.5px/1.5 var(--display); /* quiz: body text in Montserrat (mono on the card) */color:var(--on-quiet)}
+
+/* ---------- CRPV OS quadrant map ---------- */
+.quad{display:flex;flex-direction:column;gap:12px;padding-top:6px}
+.quad-h{margin:0;font:500 13.5px/1.5 var(--display);color:var(--on);opacity:.9;text-align:left; /* quiz: 3+ lines on desktop, so left-aligned (user rule, Oct 22) */ max-width:48ch;align-self:center}
+.qmap{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:4px;width:100%;max-width:440px;align-self:center}
+.qmap li{list-style:none;min-height:78px;display:flex;align-items:flex-start;padding:10px 12px;font:600 12px/1.3 var(--display);color:var(--on-quiet);
+  background:color-mix(in srgb, var(--on) 7%, transparent);border:1px solid var(--on-line)}
+.qmap li:nth-child(1){border-radius:14px 4px 4px 4px;padding-right:34px}
+.qmap li:nth-child(2){border-radius:4px 14px 4px 4px;justify-content:flex-end;text-align:right;padding-left:34px}
+.qmap li:nth-child(3){border-radius:4px 4px 4px 14px;padding-right:34px;align-items:flex-end}
+.qmap li:nth-child(4){border-radius:4px 4px 14px 4px;justify-content:flex-end;text-align:right;padding-left:34px;align-items:flex-end}
+.qmap li.one{align-items:center;justify-content:center;text-align:center}
+.qmap li.on{color:#fff;font-weight:800;background:var(--purple);border-color:var(--purple)}
+.qmap .rose{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;background:var(--maroon);border:2px solid var(--clay);
+  display:grid;place-items:center;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+.qmap .rose img{width:30px;height:30px}
+.qmap ul{display:contents;margin:0;padding:0}
+
+@media (min-width:600px){
+  .col{gap:26px;padding-top:34px;padding-bottom:60px}
+  .context{font-size:16.5px}
+  .tile b{font-size:14px}
+  /* desktop: the callout sits to the right of the cards, with a long arrow curving into the back card */
+  .msg-area{flex-direction:row;align-items:center;gap:0;min-height:330px}
+  .msg-area .callout{order:2;align-self:center;margin:0 0 0 14px;flex-direction:row-reverse;align-items:center;--bx:-7px;--by:0px}
+  .msg-area .callout svg.a-ph{display:none}
+  .msg-area .callout svg.a-dk{display:block;width:120px;height:70px;margin:0 2px 30px 0}
+  .stack{width:392px;flex:none}
+  .piebox,.case{padding:22px}
+  .pie-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .then{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);margin:0}
+  .tabs button{font-size:13.5px}
+  .shots{flex-direction:row;align-items:flex-start;justify-content:center}
+  .cta{align-self:flex-start}
+  .qmap li{font-size:13px;min-height:82px}
+}
+/* quiz fix (not on the card): from 600px the callout sits beside the cards and needs ~682px, so
+   between 600 and ~724px it ran past the edge and was cut off by the stage. Keep the card's own
+   phone arrangement (callout above the cards, arrow down) until there is room. */
+@media (min-width:600px) and (max-width:759px){
+  .msg-area{flex-direction:column;align-items:flex-start;gap:4px;min-height:0}
+  .msg-area .callout{order:0;align-self:flex-start;margin:0 0 0 4%;flex-direction:row;align-items:flex-end;--bx:4px;--by:6px}
+  .msg-area .callout svg.a-ph{display:block}
+  .msg-area .callout svg.a-dk{display:none}
+}
+@media (max-width:420px){
+  .tabs button{font-size:11.5px;padding:10px 6px}
+  .result{grid-template-columns:repeat(auto-fit,minmax(92px,1fr));gap:6px}
+  .result>div{font-size:22px;padding:14px 4px 12px}
+  .result small{font-size:11px}
+  .msg .q{font-size:18.5px}
+}
+button:focus-visible{outline:2px solid var(--callout);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){
+  .tl-bar i,.pie path.sl,.msg,.fan{transition:none}
+  .part.in-fwd,.part.in-back,.callout .bob,.msg .swap,.msg.leaving{animation:none}
+}
+
+/* ---------- PREVIEW ONLY: copy editing (in place, desktop) ---------- */
+/* while editing, the two message cards sit one under the other so both are reachable */
+/* case study opener: a bold headline, like the GolfBays one */
+.case .case-h{font:800 clamp(18px,4.9vw,22px)/1.35 var(--display);letter-spacing:-.005em;color:var(--ink);text-wrap:pretty}
+
+/* quiz (user rule, Oct 22): on phones every button fits in two lines, the font
+   shrinking only as much as the narrowest screens need and growing back with
+   the width: the button 13.5px at 320px, back to 17.5px by ~410px wide. */
+@media (max-width:599px){.cta:not(.next){font-size:clamp(13.5px, calc(13.5px + (100vw - 330px) * .05), 17.5px)}}
+
+/* quiz (user rule, Oct 22): on phones the round icon beside the "Now tap to see..."
+   text squeezed it to 4 lines; under 600px the icon (and the small arrow, at
+   the right) sit on top and the text runs the full width below. */
+@media (max-width:599px){
+  .flip{flex-wrap:wrap;row-gap:8px}
+  .flip-t{flex-basis:100%;order:1}
+  .flip-up{margin-left:auto}
+}
+
+/* quiz (user rule, Oct 22): on phones the round arrow beside a tile's title squeezed it
+   to 3-4 short lines; under 600px the arrow sits top-right (beside "1 of 2") and the
+   title runs the full width below. */
+@media (max-width:599px){
+  .tile .go-ic{grid-row:1}
+  .tile b{grid-column:1/-1}
+}
+/* quiz (user rule, Oct 22): on phones each chart label (and "Potential buyers your message
+   reaches" beside its "10 of 100") sat beside its big figure and was
+   squeezed to 3-4 lines (and "~5,700 a month" ran past the box at 320px); under 600px
+   the label sits on top and the figure below it. */
+@media (max-width:599px){
+  .tl-top{flex-direction:column;align-items:flex-start;gap:2px}
+  .reach{flex-direction:column;align-items:flex-start;gap:4px}
+}

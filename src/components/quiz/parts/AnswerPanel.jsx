@@ -25,6 +25,7 @@ const MANUAL_PLACEHOLDER = {
  * Selection: single via `selectedId`, or multi via `selectedIds` (array).
  * `manualOpen` reveals the exact-number input under the options;
  * `onContinue` renders the Continue button (multi/manual/text screens).
+ * `badges="letters"` labels list options A/B/C… instead of 01/02/03… (Q5).
  */
 export default function AnswerPanel({
   options,
@@ -46,6 +47,7 @@ export default function AnswerPanel({
   onContinue,
   continueLabel = 'Continue →',
   continueDisabled = false,
+  badges = 'numbers',
 }) {
   const isSelected = (id) =>
     selectedIds ? selectedIds.includes(id) : selectedId === id;
@@ -92,12 +94,13 @@ export default function AnswerPanel({
           options.map((opt, i) => (
             <OptionCard
               key={opt.id}
-              number={String(i + 1).padStart(2, '0')}
+              number={
+                badges === 'letters' ? LETTERS[i] : String(i + 1).padStart(2, '0')
+              }
               heading={opt.heading}
               label={opt.label}
+              desc={opt.desc}
               sub={opt.sub}
-              iconSrc={opt.iconSrc}
-              rich={opt.rich}
               selected={isSelected(opt.id)}
               onSelect={() => onSelect(opt.id)}
             />

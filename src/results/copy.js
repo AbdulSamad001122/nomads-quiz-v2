@@ -53,12 +53,13 @@ export const METRICS = {
   rowLabels: {
     rpv: 'Revenue Per Visitor™',
     optIn: 'How many visitors are becoming email or SMS subscribers?',
+    // Same wording as Q9A / Q9B (Yemi, Oct 21: the copy changes carry over).
     lead: {
-      plg: 'Out of every 100 new subscribers joining your list, how many take a buying action within the first 14 days?',
-      slg: 'Out of every 100 new subscribers joining your list, how many book a call or demo within the first 14 days?',
+      plg: 'Out of everyone discovering your business each month, how many take a buying action within the first 14 days?',
+      slg: 'Out of everyone discovering your business each month, how many book a call or demo within the first 14 days?',
     },
     close: {
-      plg: 'And out of every 100 who take that action, how many complete it?',
+      plg: 'And out of every 100 who take that buying action, how many buy?',
       slg: 'And out of every 100 who book, how many become paying clients?',
     },
     rps: 'Revenue Per Subscriber™ (what each subscriber is worth per year)',
@@ -926,9 +927,9 @@ export const PILLAR_TWO_PROOF = {
       // "offer" restored (Yemi, Sep 26); the design's "n just" typo was
       // corrected to "in just" earlier.
       headline: 'Estelle went from 3 calls per month to 3 calls per week for a $5K offer in just 19 days',
-      body: 'In just 19 days, Estelle Winsette went from 3 calls per month to 3 calls per week while closing 2 out of every 3 calls for a $5K offer with her new “It’s not your body, it’s your clothes” positioning.',
+      body: 'In just 19 days, Estelle Winsett went from 3 calls per month to 3 calls per week while closing 2 out of every 3 calls for a $5K offer with her new “It’s not your body, it’s your clothes” positioning.',
       avatar: '/assets/results-t-estelle.webp',
-      name: 'Estelle Winsette',
+      name: 'Estelle Winsett',
       role: 'Stylist for lawyers',
     },
     {

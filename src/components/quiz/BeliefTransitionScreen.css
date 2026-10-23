@@ -127,14 +127,10 @@
 /* Highlight on "hit 60 sales" — animated HighlightSweep (see
    primitives/HighlightSweep.css); tone picked per theme in the JSX. */
 
-/* Body line under the headline (almost-ready slide) */
-.belief__line {
-  margin-top: clamp(16px, 2.4vh, 30px);
-  font-family: var(--font-body);
-  font-weight: 500;
-  color: var(--t-question-text);
-  font-size: clamp(15px, 1.25vw, 22px);
-  line-height: 1.55;
+/* Almost-ready headline is a full sentence — the max-width stacks it into
+   short centred lines instead of one long run */
+.almost-ready__headline {
+  max-width: 30ch;
 }
 
 /* Label strip above the almost-ready headline (centered in this layout) */
@@ -251,5 +247,27 @@
 
   .belief__cta-wrap {
     margin-top: 44px;
+  }
+}
+
+/* Up to 900px the Back link sits absolutely at the frame's top-left (50px down).
+   The longer "Two quick questions..." headline made the centred block tall enough
+   on short phones (320x640) for its "Nearly there" label to land on top of
+   "Back". Keep the block below the Back row: room at the top, and "safe" centring
+   so a tall block grows downward instead of up under the link. */
+@media (max-width: 900px) {
+  .belief__body {
+    padding-top: max(clamp(28px, 4vh, 64px), 96px);
+    justify-content: safe center;
+  }
+}
+
+/* "Two quick questions..." is a full sentence: up to 900px its headline gets a smaller floor
+   than the belief slide's (21px instead of 26px), so phones fit it in fewer, calmer lines
+   (user request, Oct 22). Only this slide; the belief headline keeps clamp(26px, 6vw, 40px). */
+@media (max-width: 900px) {
+  .almost-ready__headline {
+    font-size: clamp(21px, 6vw, 40px);
+    line-height: 1.55;
   }
 }

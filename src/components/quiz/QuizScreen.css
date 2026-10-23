@@ -96,6 +96,15 @@
   margin-bottom: clamp(22px, 3.2vh, 48px);
 }
 
+/* Lettered steps (7A–7C, 9A–9B) in Montserrat Bold, sized so both
+   characters sit fully inside the circle with padding all round. */
+.question-panel__step--lettered {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(29px, 1.95vw, 36px);
+  letter-spacing: 0;
+}
+
 /* Roboto Mono label strip — changes per question, 3-4 words max */
 .question-panel__label {
   align-self: flex-start;
@@ -352,56 +361,6 @@
   min-height: clamp(90px, 10vh, 120px);
 }
 
-/* rich option cards (Q5): icon header row + multi-paragraph body */
-.option-card--rich {
-  flex-direction: column;
-  align-items: stretch;
-  width: 100%;
-  padding: clamp(16px, 1.8vw, 28px) clamp(18px, 2vw, 32px);
-}
-
-.option-card__richtop {
-  display: flex;
-  align-items: center;
-  gap: clamp(14px, 1.6vw, 26px);
-}
-
-.option-card__richtop .option-card__radio {
-  margin-left: auto;
-}
-
-.option-card__icon {
-  width: clamp(30px, 2.6vw, 42px);
-  height: clamp(30px, 2.6vw, 42px);
-  object-fit: contain;
-}
-
-/* selected card is dark-filled — flip the icon to white */
-.option-card--rich.is-selected .option-card__icon {
-  filter: brightness(0) invert(1);
-}
-
-.option-card__richbody {
-  display: block;
-  margin-top: clamp(12px, 1.6vh, 20px);
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: clamp(14px, 1.15vw, 21px);
-  line-height: 1.55;
-}
-
-.option-card__para {
-  display: block;
-}
-
-.option-card__para + .option-card__para {
-  margin-top: clamp(10px, 1.5vh, 18px);
-}
-
-.option-card__para strong {
-  font-weight: 800;
-}
-
 /* bracketed tail on a list option — own line, lighter, smaller */
 .option-card__sub {
   display: block;
@@ -419,6 +378,37 @@
   font-size: clamp(18px, 1.6vw, 31px);
   line-height: 1.2;
   margin-bottom: 4px;
+}
+
+/* title + description cards (Q5): full-width rows like Yemi's artifact —
+   bold title over a lighter description line. Explicit sizes, so the
+   long-label and mobile label rules don't restyle them. */
+.option-card--desc {
+  width: 100%;
+  padding-top: clamp(12px, 1.5vh, 18px);
+  padding-bottom: clamp(12px, 1.5vh, 18px);
+}
+
+.option-card--desc .option-card__label {
+  flex: 1;
+}
+
+.option-card__title {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(15px, 1.25vw, 23px);
+  line-height: 1.3;
+}
+
+.option-card__desc {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(13px, 0.95vw, 17px);
+  line-height: 1.45;
+  opacity: 0.85;
 }
 
 .option-card__radio {
@@ -779,7 +769,7 @@
   /* Back link moves onto the dark panel, in the question text color */
   .question-panel__mobile-back {
     display: block;
-    margin-bottom: clamp(26px, 4vw, 24px);
+    margin-bottom: 16px;
   }
 
   .question-panel__mobile-back .back-link {
@@ -787,15 +777,18 @@
     font-size: 16px;
   }
 
-  /* Step badge floats to the top-right of the dark block */
+  /* Step badge sits on the left, under the Back link and above the label */
   .question-panel__step {
-    position: absolute;
-    top: clamp(14px, 4vw, 24px);
-    right: clamp(16px, 4.5vw, 24px);
+    align-self: flex-start;
+    flex-shrink: 0;
     width: 54px;
     height: 54px;
     font-size: 24px;
-    margin-bottom: 0;
+    margin-bottom: 18px;
+  }
+
+  .question-panel__step--lettered {
+    font-size: 21px;
   }
 
   .question-panel__content {
@@ -992,6 +985,10 @@
     width: 44px;
     height: 44px;
     font-size: 18px;
+  }
+
+  .question-panel__step--lettered {
+    font-size: 17px;
   }
 }
 

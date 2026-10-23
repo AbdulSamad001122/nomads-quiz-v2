@@ -157,6 +157,23 @@ eq(plg.quiz_taker_ad_traffic_share, 50, 'Q7C 0.5 → 50%');
 eq(plg.quiz_taker_annual_email_revenue, 0, 'no-email → 0');
 eq('quiz_taker_feedback_loop_what_led_you_here' in plg, false, 'empty VOC dropped');
 
+/* ---------- Oct 20 copy doc: Q5 title + Q12 PLG wording ---------- */
+eq(
+  slg.quiz_taker_biggest_problem,
+  'We attract potential buyers, but most leave without buying.',
+  'Q5 sends the option title, not its description'
+);
+eq(
+  plg.quiz_taker_biggest_problem,
+  'We need more people on our email list, or we don’t have one yet.',
+  'Q5 title on the PLG path'
+);
+eq(
+  plg.quiz_taker_problem_they_are_cracking_right_now,
+  'We’re getting visitors, but not enough buyers',
+  'Q12 PLG option a label verbatim'
+);
+
 /* ---------- hybrid mapping ---------- */
 const hybC = buildKitFields({ answers: { ...slgAnswers, q4: 'hybrid-call' } });
 eq(hybC.quiz_taker_sales_model, 'SLG (Hybrid)', 'Q4 C → SLG (Hybrid)');
@@ -224,6 +241,25 @@ eq(plg.q11_answer_type, 'Bracket', "Q11 no-email is a selected option → Bracke
   eq(clampedTyped.q11_answer_type, 'Exact', 'typed + Keep → Exact (they did type a number)');
 }
 eq('q7a_answer_type' in noCalc, false, 'unanswered question → no answer-type field');
+
+/* ---------- Q8 "We don't capture emails…" (Oct 21 doc) ----------
+   Q11 is skipped and RPS = $0. A Q11 answer left in state from before the
+   taker went back and picked this must not leak into the numbers or Kit. */
+{
+  const noEmailAnswers = { ...slgAnswers, q8: 'no-email', q11: '250k-500k' };
+  const inputs = resolveInputs(noEmailAnswers, {}, 'slg');
+  eq(inputs.q8, 0, 'no-email → 0 new subscribers');
+  eq(inputs.q11, 0, 'no-email → stale Q11 answer ignored, email revenue 0');
+  const result = calculate(inputs, 'slg');
+  eq(result.current.optIn, 0, 'no-email → opt-in 0%');
+  eq(result.current.rps, 0, 'no-email → RPS $0');
+  eq(result.noEmail, true, 'no-email → no-email results block');
+  const fields = buildKitFields({ answers: noEmailAnswers, manualValues: {}, result });
+  eq(fields.quiz_taker_new_monthly_email_subscribers, 0, 'no-email → Kit subscribers 0');
+  eq(fields.quiz_taker_annual_email_revenue, 0, 'no-email → Kit email revenue 0');
+  eq(fields.q8_answer_type, 'Bracket', 'no-email is a picked option → Bracket');
+  eq('q11_answer_type' in fields, false, 'skipped Q11 → no answer-type field');
+}
 
 console.log(`\nkitPayload: all ${passed} checks passed ✓`);
 console.log('\nSample SLG payload that would reach Kit:');

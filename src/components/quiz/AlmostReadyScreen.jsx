@@ -1,12 +1,11 @@
-import SeamBadge from './parts/SeamBadge.jsx';
 import HighlightSweep, { sweepToneFor } from '../primitives/HighlightSweep.jsx';
 import './QuizScreen.css';
 import './BeliefTransitionScreen.css';
 
 /**
- * "Your RPV is almost ready." transition (before Q12) — full-bleed themed
+ * "Two quick questions…" transition (before Q12) — full-bleed themed
  * statement slide in the belief-screen layout family: dark themed
- * background, keyline frame, centered label + headline + line + CTA.
+ * background, keyline frame, centered label + headline + CTA.
  * Slots into the blue → maroon → green rotation.
  */
 export default function AlmostReadyScreen({ theme, onBack, onContinue }) {
@@ -23,8 +22,6 @@ export default function AlmostReadyScreen({ theme, onBack, onContinue }) {
       className={`belief-screen almost-ready-screen quiz-screen--${theme.name}`}
       style={themeVars}
     >
-      <SeamBadge src="/assets/circle-doodle-2.png" />
-
       <div className="belief__top">
         <div className="belief__top-left">
           <div className="question-panel__logo-box">
@@ -45,13 +42,13 @@ export default function AlmostReadyScreen({ theme, onBack, onContinue }) {
           <span className="question-panel__label almost-ready__label">
             Nearly there
           </span>
-          <h1 className="belief__headline">
-            {'Your RPV is '}
+          <h1 className="belief__headline almost-ready__headline">
+            {'Two quick questions so I can recommend '}
             <HighlightSweep tone={sweepToneFor(theme.name)}>
-              almost ready.
+              one immediate fix
             </HighlightSweep>
+            {' for your biggest business constraint.'}
           </h1>
-          <p className="belief__line">Before we show you the numbers…</p>
 
           <div className="belief__cta-wrap">
             <button
