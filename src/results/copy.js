@@ -927,9 +927,9 @@ export const PILLAR_TWO_PROOF = {
       // "offer" restored (Yemi, Sep 26); the design's "n just" typo was
       // corrected to "in just" earlier.
       headline: 'Estelle went from 3 calls per month to 3 calls per week for a $5K offer in just 19 days',
-      body: 'In just 19 days, Estelle Winsette went from 3 calls per month to 3 calls per week while closing 2 out of every 3 calls for a $5K offer with her new “It’s not your body, it’s your clothes” positioning.',
+      body: 'In just 19 days, Estelle Winsett went from 3 calls per month to 3 calls per week while closing 2 out of every 3 calls for a $5K offer with her new “It’s not your body, it’s your clothes” positioning.',
       avatar: '/assets/results-t-estelle.webp',
-      name: 'Estelle Winsette',
+      name: 'Estelle Winsett',
       role: 'Stylist for lawyers',
     },
     {

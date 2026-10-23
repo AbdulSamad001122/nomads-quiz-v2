@@ -72,7 +72,12 @@ export default function QuestionPanel({ stepNumber, label, question, subline, on
             <BackLink onBack={onBack} />
           </div>
           <div className="question-panel__content">
-            <span className="question-panel__step" aria-hidden="true">
+            <span
+              className={`question-panel__step${
+                /[A-Z]/i.test(stepNumber) ? ' question-panel__step--lettered' : ''
+              }`}
+              aria-hidden="true"
+            >
               {stepNumber}
             </span>
             {label ? (

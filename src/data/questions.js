@@ -247,7 +247,7 @@ export const QUESTIONS = [
   },
   {
     id: 'q7a',
-    stepNumber: '07',
+    stepNumber: '7A',
     label: 'Monthly eyeballs count',
     theme: 'maroon',
     variant: 'list',
@@ -274,7 +274,7 @@ export const QUESTIONS = [
   },
   {
     id: 'q7b',
-    stepNumber: '07',
+    stepNumber: '7B',
     label: 'Monthly ad spend',
     theme: 'green',
     variant: 'list',
@@ -298,7 +298,7 @@ export const QUESTIONS = [
   },
   {
     id: 'q7c',
-    stepNumber: '07',
+    stepNumber: '7C',
     label: 'Paid traffic share',
     theme: 'blue',
     variant: 'list',
@@ -370,7 +370,7 @@ export const QUESTIONS = [
   },
   {
     id: 'q9a',
-    stepNumber: '09',
+    stepNumber: '9A',
     // No label chip: the copy doc has none for Q9A (user, Oct 22).
     theme: 'green',
     variant: 'list',
@@ -393,7 +393,7 @@ export const QUESTIONS = [
   },
   {
     id: 'q9b',
-    stepNumber: '09',
+    stepNumber: '9B',
     label: 'Lead to close',
     theme: 'blue',
     variant: 'list',
