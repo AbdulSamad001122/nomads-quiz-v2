@@ -83,14 +83,19 @@ const SCREENS = [
   { type: 'question', id: 'q10' },
   { type: 'question', id: 'q11' },
   // Yemi's Oct 20 slides: the One Table card comes right after Q11, then the
-  // loading screen, then the transition slide (almost-ready) and Q12.
+  // transition slide (almost-ready) and Q12.
   { type: 'slide', id: 'five-metrics' },
-  { type: 'slide', id: 'loading' },
   { type: 'slide', id: 'almost-ready' },
   { type: 'question', id: 'q12' },
   { type: 'slide', id: 'advice' },
   { type: 'question', id: 'q13' },
   { type: 'question', id: 'q14' },
+  // The loading card ("Calculating your current and potential Revenue Per
+  // Visitor™") sits after the LAST question, right before the results — the
+  // spot the opt-in form held before email capture moved up after Q2 (Yemi,
+  // Slack Oct 23: "Loading Screen should be after the last question, not
+  // after Q11").
+  { type: 'slide', id: 'loading' },
   { type: 'slide', id: 'results' },
 ];
 
