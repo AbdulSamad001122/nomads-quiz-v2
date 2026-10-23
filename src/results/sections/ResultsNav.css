@@ -1,4 +1,6 @@
-/* Sticky white nav bar — reference: hero section design image. */
+/* Sticky white nav bar — logo + the two CTAs (QC hero artifact: no section
+   links). Button colours come from the page-level --rbtn-* variables in
+   results.css, so the nav and every other CTA stay matched. */
 
 .rnav {
   position: sticky;
@@ -17,22 +19,6 @@
   flex-shrink: 0;
 }
 
-.rnav__links {
-  display: flex;
-  align-items: center;
-  gap: 36px;
-  margin-left: 24px;
-}
-
-.rnav__link {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 15px;
-  color: #43112e;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
 .rnav__ctas {
   display: flex;
   align-items: stretch;
@@ -48,7 +34,7 @@
   color: #250f1c;
   text-decoration: none;
   text-align: center;
-  max-width: 310px;
+  max-width: 330px;
   padding: 13px 26px;
   border: 2px solid #152638;
   box-shadow: 5px 5px 0 #152638;
@@ -56,12 +42,22 @@
   align-items: center;
 }
 
-.rnav__cta--blue {
-  background: #d4ecf8;
+/* workshop = the washed-out one; booking = big, bold, bright (QC row 11) */
+.rnav__cta--workshop {
+  background: var(--rbtn-workshop-bg);
 }
 
-.rnav__cta--pink {
-  background: #f8dfe8;
+.rnav__cta--book {
+  background: var(--rbtn-book-bg);
+  font-weight: 800;
+}
+
+/* wide desktops: each button on one line, so the sticky bar stays short */
+@media (min-width: 1251px) {
+  .rnav__cta {
+    max-width: none;
+    white-space: nowrap;
+  }
 }
 
 /* ——— responsive ——— */
@@ -71,24 +67,14 @@
     gap: 20px;
     padding: 14px 28px;
   }
-  .rnav__links {
-    gap: 20px;
-    margin-left: 8px;
-  }
-  .rnav__link,
   .rnav__cta {
     font-size: 14px;
-  }
-  .rnav__cta {
     padding: 9px 16px;
-    max-width: 260px;
+    max-width: 280px;
   }
 }
 
 @media (max-width: 940px) {
-  .rnav__links {
-    display: none;
-  }
   .rnav__ctas {
     gap: 18px;
   }

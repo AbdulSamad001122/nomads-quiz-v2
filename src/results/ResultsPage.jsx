@@ -1,6 +1,7 @@
 import ResultsNav from './sections/ResultsNav.jsx';
 import HeroSection from './sections/HeroSection.jsx';
 import MetricsSection from './sections/MetricsSection.jsx';
+import RedMetricsCallout from './sections/RedMetricsCallout.jsx';
 import RedMetricsWorkshop from './sections/RedMetricsWorkshop.jsx';
 import ResultBlocks from './sections/ResultBlocks.jsx';
 import StopOrPush from './sections/StopOrPush.jsx';
@@ -55,6 +56,11 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
           is its own section in the GamePlanCta layout (user, Sep 29). */}
       {anyMetricRed(result) && (
         <>
+          {/* QC round (Oct 2026): the hero artifact's red-metric callout,
+              straight under the table. It repeats the red-metric line that
+              RedMetricsWorkshop also carries — kept on purpose (user,
+              Oct 23). */}
+          <RedMetricsCallout result={result} tokens={tokens} />
           <RedMetricsWorkshop tokens={tokens} />
           <GamePlanCta copy={RED_METRICS_CALL} />
         </>

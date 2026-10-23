@@ -24,6 +24,14 @@ const SCENARIOS = {
     path: 'plg',
     inputs: { q2: 810000, q7: 7500, q7b: null, q7c: undefined, q8: 3000, q9a: 0.125, q9b: 0.375, q10: 175, q11: 600000 },
   },
+  // Exactly ONE red metric (healthy, but the buying-action rate drops to 5%):
+  // proves the red-metric callout's singular headline ("Your red metric
+  // is…") and a single card (QC round, Oct 2026).
+  'one-red': {
+    blocks: 'one red — singular callout',
+    path: 'plg',
+    inputs: { q2: 810000, q7: 7500, q7b: null, q7c: undefined, q8: 3000, q9a: 0.05, q9b: 0.375, q10: 175, q11: 600000 },
+  },
 
   /* ——— Blocks 1–3 · the revenue-split paragraph ——— */
 

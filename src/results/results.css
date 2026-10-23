@@ -3,6 +3,14 @@
 .results-page {
   min-height: 100%;
   background: #f8f1e4; /* paper cream that peeks under the hero's angled cut */
+
+  /* The two CTA colours, shared by every button that uses them (QC row 11:
+     all buttons match the nav). Workshop = a washed-out ice blue; booking =
+     a bright, saturated pink in a different colour family, so the eye knows
+     which comes first (Loom). Not a brand-palette colour — chosen Oct 23
+     (option b); swap it here to change every booking button. */
+  --rbtn-workshop-bg: #e8f3fb;
+  --rbtn-book-bg: #ff4d94;
 }
 
 /* a few key words / numbers inside body copy, see emphasize.jsx */
