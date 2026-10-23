@@ -61,7 +61,7 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
               RedMetricsWorkshop also carries — kept on purpose (user,
               Oct 23). */}
           <RedMetricsCallout result={result} tokens={tokens} />
-          <RedMetricsWorkshop tokens={tokens} />
+          <RedMetricsWorkshop result={result} tokens={tokens} />
           <GamePlanCta copy={RED_METRICS_CALL} />
         </>
       )}
