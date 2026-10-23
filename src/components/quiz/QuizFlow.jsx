@@ -516,13 +516,14 @@ export default function QuizFlow({ restored = null } = {}) {
      Alefiya review (2026-09-17): progress must be visible on every slide and
      must never sit frozen. Basing it on the question number would freeze it
      for the two or three educational slides that run between questions, so
-     it counts EVERY screen the taker actually sees instead — skipped
-     conditionals (Q2B / Q7B / Q7C) drop out, so the scale always matches
-     their real route. Welcome is the 0% start, Q14 the 100% end; the
-     results page sits outside the quiz and has no strip. */
-  const journey = SCREENS.filter(
-    (s) => s.id !== 'results' && screenVisible(s, answers)
-  );
+     it counts every screen, slides included. Welcome is the 0% start, Q14
+     the 100% end; the results page sits outside the quiz and has no strip.
+     The scale always counts the longest route — conditional questions
+     (Q2B gate, Q7B/Q7C paid ads, Q11 email revenue) included even when this
+     taker will skip them. Dropping them made the bar go BACKWARDS when an
+     answer added screens (ticking "Paid ads" on Q6 took it 42% → 40%,
+     LP QC). Now it only moves forward; a skipped question is a small jump. */
+  const journey = SCREENS.filter((s) => s.id !== 'results');
   const journeyPercent = () => {
     const pos = journey.findIndex((s) => s.id === screen.id);
     if (pos < 0 || journey.length < 2) return 0;

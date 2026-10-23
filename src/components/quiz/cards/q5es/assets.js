@@ -14,6 +14,6 @@ export default {
     "src": "/assets/cards/q5es/shot_comments.jpg"
   },
   "shot_results": {
-    "src": "/assets/cards/q5es/shot_results.jpg"
+    "src": "/assets/cards/q5es/shot_results.png"
   }
 };
