@@ -101,13 +101,13 @@
 
 /* The number IS the hero: as big as the card allows. --len (the value's
    character count, set inline) shrinks long values like "$105.40" so they
-   never overflow; short ones like "$0.75" cap at 76px. 0.6em per character
-   is Montserrat 800's average with the narrow "." counted in. */
+   never overflow; short ones like "$0.75" cap at 76px. 0.62em per character
+   covers Montserrat 800's widest (zero-heavy) values like "$6500.00". */
 .rhero__card-value {
   margin-top: 6px;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: min(76px, calc(100cqi / (var(--len, 5) * 0.6)));
+  font-size: min(76px, calc(100cqi / (var(--len, 5) * 0.62)));
   line-height: 1.05;
   letter-spacing: -0.5px;
   white-space: nowrap;
@@ -187,8 +187,10 @@
   justify-content: center;
 }
 
+/* desktop: 92% of its column, no fixed cap (user, Oct 23); tablet/phone
+   keep their own size below */
 .rhero__alefiya {
-  width: min(100%, 556px);
+  width: 92%;
 }
 
 /* ——— responsive ——— */
@@ -250,7 +252,7 @@
     font-size: 26px;
   }
   .rhero__card-value {
-    font-size: min(64px, calc(100cqi / (var(--len, 5) * 0.6)));
+    font-size: min(64px, calc(100cqi / (var(--len, 5) * 0.62)));
   }
   /* side by side on one line, so the arrow + chip row stays short */
   .rhero__jump-chip {

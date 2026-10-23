@@ -12,14 +12,15 @@
  *
  * Result page QC round (Oct 2026, branch result-page-QC): the hero, the
  * metric table and the new red-metric callout follow Alefiya's "RPV Results
- * Hero" artifact (claude.ai/artifact/XGEerFsQP1ApoWawzPATsR — "this is exactly
- * how I want the hero to be"). Its words and casing win over the older doc
+ * Hero" design artifact (linked in the QC doc — "this is exactly how I want
+ * the hero to be"). Its words and casing win over the older doc
  * wording ("$1.5M/year" small y, "an extra", "go from", "So how", "Per").
  */
 
 /**
- * The two CTAs, worded ONCE so every button on the page matches (QC row 11:
- * "Match the navigation button + all buttons of the page"). Wording = QC row
+ * The two CTAs, worded once for the nav and the red-metric callout. QC row 11
+ * ("Match the navigation button + all buttons of the page") will move the
+ * rest of the page's buttons onto these too — a separate QC task. Wording = QC row
  * 10's CTA list. The hero artifact words them slightly differently ("Watch
  * the workshop with your team", "Book your next $125k/mo game-plan call") —
  * flagged; QC doc list used as the Oct 23 default, awaiting confirmation.

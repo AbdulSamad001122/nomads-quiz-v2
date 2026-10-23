@@ -1,4 +1,4 @@
-import { money, rpvMoney, rpv2, dailyVisitors } from '../calc/rounding.js';
+import { money, rpvMoney, dailyVisitors } from '../calc/rounding.js';
 import { metricColour } from '../calc/calculator.js';
 
 /**
@@ -52,12 +52,14 @@ export function resolveTokens(result) {
 const gainM = (x) => `$${(Math.round(x / 100_000) / 10).toFixed(1).replace(/\.0$/, '')}M`;
 
 /* "6.6×" — one decimal, no trailing .0 ("3×"); '' unless the goal is a real
-   step up from a real current RPV */
+   step up from a real current RPV. Worked in whole cents, so an exact half
+   ($23.58 / $3.60 = 6.55) rounds up to "6.6×" instead of float-slipping to
+   "6.5×". */
 export function rpvMultiple(current, goal) {
-  const c = rpv2(current);
-  const g = rpv2(goal);
+  const c = Math.round(current * 100);
+  const g = Math.round(goal * 100);
   if (!(c > 0) || !(g > c)) return '';
-  return `${(Math.round((g / c) * 10) / 10).toFixed(1).replace(/\.0$/, '')}×`;
+  return `${(Math.round((g * 10) / c) / 10).toFixed(1).replace(/\.0$/, '')}×`;
 }
 
 const pct = (x) => `${Math.round(x * 100)}%`;
