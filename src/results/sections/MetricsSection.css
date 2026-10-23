@@ -134,6 +134,8 @@
   border: 1.5px solid;
   border-radius: 6px;
   display: flex;
+  flex-wrap: wrap; /* a very long value ("$6500.00") drops the tick/chip above
+                      or below it on narrow phones instead of overflowing */
   align-items: center;
   justify-content: center;
   gap: 10px;
