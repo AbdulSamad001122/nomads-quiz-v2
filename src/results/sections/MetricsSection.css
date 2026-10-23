@@ -1,323 +1,408 @@
-/* Section 2 — metric table on a tilted cream paper sheet over dark navy.
-   Reference: metric-table design image (angled sheet, inset plum keyline,
-   plum metric cards, lavender current cells, tan goal cells). */
+/* Section 2 — the five-metric table. QC round (Oct 2026): rebuilt to the
+   "RPV Results Hero" artifact — cream ground, plum question cells, today's
+   cells tinted by status with a RED / CLOSE / AT GOAL chip, every goal cell
+   green with a tick, RPV as the closing total under a dashed rule. All
+   metric rows share one height; the table fits one desktop screen. */
 
 .rmx {
-  position: relative;
-  overflow: hidden;
-  background: #1e3547;
-  padding: 110px 96px 95px;
-}
-
-/* the paper sheet — straight top edge under the hero; straight bottom
-   edge: the navy below is a clean horizontal rectangle, and the sheet's clip
-   also cuts the keyline so the border vanishes behind the navy */
-.rmx__sheet {
-  position: absolute;
-  inset: 0;
-  background: #fdfaf1 url('/assets/results-cream-bg.webp') center / cover;
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% var(--rmx-navy-top, calc(100% - 540px)),
-    0 var(--rmx-navy-top, calc(100% - 540px))
-  );
-}
-
-.rmx__keyline {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  --rmx-cols: minmax(0, 2.05fr) minmax(0, 1fr) 40px minmax(0, 1fr);
+  background: #fbf6ec url('/assets/results-cream-bg.webp') center / cover;
+  padding: 44px 48px 40px;
 }
 
 .rmx__inner {
-  position: relative;
-  z-index: 1;
-  max-width: 1120px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
-/* ——— headline + traffic ——— */
+/* ——— headline + subline ——— */
 
 .rmx__headline {
-  max-width: 967px;
+  max-width: 900px;
   margin: 0 auto;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: 38px;
-  line-height: 1.32;
+  font-size: 30px;
+  line-height: 1.3;
   text-align: center;
-  color: #3b1030;
+  color: #4a1640;
+  text-wrap: balance;
 }
 
-/* the answer sentence starts its own line; "pretty" only stops "green:" being
-   left alone on the last line at desktop widths — it doesn't rebalance */
-.rmx__headline-line {
-  display: block;
-  margin-top: 22px;
-  text-wrap: pretty;
-  /* 28px (user, Sep 30), never larger than the question above it — on
-     phones the headline drops to 26px, so this matches it there */
-  font-size: min(28px, 1em);
+.rmx__rpv {
+  white-space: nowrap;
+}
+
+.rmx__rpv--current {
+  color: #d9483b;
+}
+
+.rmx__rpv--goal {
+  color: #2a9a5e;
+}
+
+.rmx__subline {
+  margin-top: 10px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: center;
+  color: #250f1c;
+}
+
+.rmx__green-chip {
+  background: #d4f0dd;
+  color: #23854f;
+  padding: 1px 9px;
+  border-radius: 6px;
 }
 
 /* ——— table ——— */
 
 .rmx__table {
-  margin-top: 48px;
-  display: grid;
-  grid-template-columns: 1.05fr 1fr 1fr;
-  gap: 30px 36px;
+  max-width: 980px;
+  margin: 26px auto 0;
 }
 
+.rmx__heads,
 .rmx__row {
   display: grid;
-  grid-template-columns: subgrid;
+  grid-template-columns: var(--rmx-cols);
+  column-gap: 10px;
+}
+
+/* equal-height rows: every metric row takes the tallest row's height */
+.rmx__rows {
+  display: grid;
+  grid-template-columns: var(--rmx-cols);
+  grid-auto-rows: 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.rmx__rows > .rmx__row {
   grid-column: 1 / -1;
-  gap: inherit;
+  grid-template-columns: subgrid;
 }
 
 .rmx__head {
   background: #1e3547;
-  border-radius: 4px;
+  border-radius: 5px;
   color: #ffffff;
-  font-family: var(--font-headline);
-  font-weight: 800;
-  font-size: 19px;
-  letter-spacing: 0.5px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1.5px;
   text-align: center;
-  padding: 14px 18px;
-  align-self: center;
+  padding: 10px 12px;
+  min-height: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.rmx__head--metric {
-  padding: 20px 18px;
-  margin: 0 60px;
+.rmx__head--goal {
+  background: #2a9a5e;
 }
 
 .rmx__head-sub {
-  display: block;
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 11px;
   letter-spacing: 0.2px;
   margin-top: 2px;
+  opacity: 0.85;
 }
 
 .rmx__metric {
   background: #5d1b4e;
-  border-radius: 22px;
+  border-radius: 6px;
   color: #ffffff;
   font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.5;
-  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.4;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding: 28px 34px;
-  min-height: 110px;
+  padding: 12px 20px;
+  min-height: 72px;
 }
 
 .rmx__value {
-  border-radius: 22px;
+  border: 1.5px solid;
+  border-radius: 6px;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap; /* a very long value ("$6500.00") drops the tick/chip above
+                      or below it on narrow phones instead of overflowing */
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px;
+  min-width: 0;
+}
+
+.rmx__num {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.rmx__status {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 1px;
+  line-height: 1;
+  padding: 4px 7px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* today's cells: the calculator's colour (Logic Doc thresholds) */
+.rmx__value--red {
+  background: #fbe2de;
+  border-color: #eda79c;
+  color: #b8352a;
+}
+.rmx__value--red .rmx__status {
+  background: #e0533f;
+  color: #ffffff;
+}
+
+.rmx__value--yellow {
+  background: #fbf0c8;
+  border-color: #e6c35b;
+  color: #775600;
+}
+.rmx__value--yellow .rmx__status {
+  background: #f2c230;
+  color: #3b2a00;
+}
+
+.rmx__value--green {
+  background: #e0f3e7;
+  border-color: #8fd0a8;
+  color: #1e7a47;
+}
+.rmx__value--green .rmx__status {
+  background: #2a9a5e;
+  color: #ffffff;
+}
+
+/* the total's "today" — red like the hero's TODAY card */
+.rmx__value--today-total {
+  background: #fbe2de;
+  border-color: #eda79c;
+  color: #b8352a;
+}
+
+/* every goal cell: green + tick */
+.rmx__value--goal {
+  background: #e3f5ea;
+  border-color: #8fd0a8;
+  color: #1d6b40;
+}
+
+.rmx__tick {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.rmx__tick circle {
+  fill: #2a9a5e;
+}
+.rmx__tick path {
+  stroke: #ffffff;
+}
+
+.rmx__arrow {
+  display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: 31px;
-  color: #3b1030;
-  padding: 20px;
+  font-size: 18px;
+  color: #9a8a7e;
 }
 
-.rmx__value--current {
-  background: #f2e5f6;
-  border: 1.5px solid #d9bfd7;
+.rmx__divider {
+  margin: 14px 0;
+  border-top: 2px dashed #d8c6ad;
 }
 
-/* Red/yellow/green cell states — reinstated per Yemi's Sep 19 doc comment
-   ("You missed implementing the color logic for the cells"), reversing the
-   Sep 13 flat-tone ruling. The old removed pastels read as pink/cream, not
-   as the key's red/yellow/green (user, Sep 20), so: one notch deeper tints
-   + a solid corner dot in the exact key colour, so cell and 🔴🟡🟢 legend
-   match one-to-one. The rpv row stays --none (no dot, flat lavender). */
-.rmx__value--red,
-.rmx__value--yellow,
-.rmx__value--green {
-  position: relative;
+.rmx__metric--total {
+  background: #250f1c;
+  font-weight: 800;
+  font-size: 16px;
+  min-height: 64px;
 }
 
-.rmx__value--red::after,
-.rmx__value--yellow::after,
-.rmx__value--green::after {
-  content: '';
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
+.rmx__row--total .rmx__num {
+  font-size: 32px;
 }
 
-.rmx__value--red {
-  background: #f6d0cb;
-  border-color: #d3766a;
+.rmx__row--total .rmx__tick {
+  width: 24px;
+  height: 24px;
 }
 
-.rmx__value--red::after {
-  background: #dd3f3d;
-}
+/* ——— the key ——— */
 
-.rmx__value--yellow {
-  background: #f8e8ab;
-  border-color: #ce9f31;
-}
-
-.rmx__value--yellow::after {
-  background: #f3c218;
-}
-
-.rmx__value--green {
-  background: #d3ecce;
-  border-color: #79ac6e;
-}
-
-.rmx__value--green::after {
-  background: #4caf50;
-}
-
-/* tiny phones: the cell is too narrow for the corner dot — it lands on the
-   "YOUR BUSINESS" mini-label — so the fill + the key below carry the colour */
-@media (max-width: 360px) {
-  .rmx__value--red::after,
-  .rmx__value--yellow::after,
-  .rmx__value--green::after {
-    display: none;
-  }
-}
-
-.rmx__value--goal {
-  background: #ecdfc9;
-  border: 1.5px solid #d9c6a6;
-}
-
-/* ——— 🔴🟡🟢 key under the table (Sep 19 doc) ———
-   Sits below the sheet's clip line, i.e. on the NAVY rectangle (the cream
-   sheet ends at the middle of the second-to-last row), so it reads light. */
-
-.rmx__key {
-  margin: 34px auto 0;
-  max-width: 967px;
+.rmx__legend {
+  margin: 18px auto 0;
   list-style: none;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px 34px;
+  gap: 8px 28px;
   font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 1.5;
-  color: #f4ede6;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #5b4652;
 }
 
-/* mobile-only labels inside value cards */
-.rmx__mini {
-  display: none;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 10px;
-  letter-spacing: 1px;
-  margin-bottom: 4px;
-  opacity: 0.75;
+.rmx__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rmx__legend-item::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.rmx__legend-item--red::before {
+  background: #e0533f;
+}
+.rmx__legend-item--yellow::before {
+  background: #f2c230;
+}
+.rmx__legend-item--green::before {
+  background: #2a9a5e;
 }
 
 /* ——— responsive ——— */
 
 @media (max-width: 1100px) {
   .rmx {
-    padding: 72px 48px 85px;
+    padding: 44px 32px 40px;
   }
   .rmx__headline {
-    font-size: 34px;
-  }
-  .rmx__table {
-    gap: 22px 24px;
-  }
-  .rmx__head--metric {
-    margin: 0 24px;
+    font-size: 28px;
   }
   .rmx__metric {
-    font-size: 15px;
-    padding: 22px 24px;
+    padding: 12px 16px;
   }
-  .rmx__value {
-    font-size: 26px;
+  .rmx__num {
+    font-size: 23px;
+  }
+  .rmx__row--total .rmx__num {
+    font-size: 28px;
   }
 }
 
+/* tablet: the arrow column is the first thing to go */
+@media (max-width: 860px) {
+  .rmx {
+    --rmx-cols: minmax(0, 1.3fr) minmax(0, 1fr) 0 minmax(0, 1fr);
+  }
+  .rmx__arrow {
+    visibility: hidden;
+  }
+  .rmx__value {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .rmx__value--goal {
+    flex-direction: row;
+  }
+}
+
+/* phones (artifact's phone layout): two header boxes, then each row = the
+   question as a full-width bar with today + goal side by side below it */
 @media (max-width: 700px) {
   .rmx {
-    padding: 56px 20px 55px;
-  }
-  .rmx__sheet {
-    clip-path: polygon(
-      0 0,
-      100% 0,
-      100% var(--rmx-navy-top, calc(100% - 560px)),
-      0 var(--rmx-navy-top, calc(100% - 560px))
-    );
-  }
-  .rmx__keyline {
-    display: none;
+    padding: 44px 16px 40px;
   }
   .rmx__headline {
-    font-size: 26px;
+    font-size: 24px;
   }
-  .rmx__key {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    margin-top: 26px;
-    font-size: 14px;
+  .rmx__subline {
+    font-size: 16px;
   }
   .rmx__table {
-    margin-top: 32px;
-    display: block;
+    margin-top: 26px;
   }
-  .rmx__head {
+  .rmx__heads,
+  .rmx__row {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .rmx__head--metric,
+  .rmx__gap,
+  .rmx__arrow {
     display: none;
   }
-  .rmx__row {
-    display: grid;
+  .rmx__head {
+    min-height: 46px;
+    font-size: 11px;
+  }
+  .rmx__rows {
+    display: block;
+    margin-top: 14px;
+  }
+  .rmx__rows > .rmx__row {
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 22px;
+    margin-bottom: 14px;
   }
   .rmx__metric {
     grid-column: 1 / -1;
     min-height: 0;
-    padding: 18px 20px;
-    font-size: 15px;
-    border-radius: 16px;
+    padding: 12px 14px;
+    font-size: 14px;
   }
-  .rmx__value {
+  .rmx__value,
+  .rmx__value--goal {
+    flex-direction: row;
+    gap: 8px;
+    padding: 12px 8px;
+  }
+  .rmx__num {
+    font-size: 22px;
+  }
+  .rmx__divider {
+    margin: 4px 0 16px;
+  }
+  .rmx__row--total .rmx__num {
     font-size: 24px;
-    padding: 14px;
-    border-radius: 16px;
   }
-  .rmx__mini {
-    display: block;
+  .rmx__legend {
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
   }
 }
 
-/* mobile: copy that runs past three lines reads left-aligned (site rule) */
-@media (max-width: 700px) {
-  .rmx__headline {
-    text-align: left;
+/* very narrow: the status chip drops under the number so cells don't
+   squeeze */
+@media (max-width: 350px) {
+  .rmx__value--red,
+  .rmx__value--yellow,
+  .rmx__value--green {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .rmx__num {
+    font-size: 20px;
   }
 }

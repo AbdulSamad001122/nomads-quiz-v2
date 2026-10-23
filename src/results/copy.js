@@ -7,48 +7,66 @@
  *
  * Flagged doc↔design mismatches (doc wins per user rule, Sep 11):
  * - Nav labels + formula keep the ™ (design image drops it).
- * - "$1.5M/Year" capital Y per doc (design image shows "/year").
  * - The hero's bottom strip existed only in the design image; removed
  *   (Yemi, Sep 26: not in the copy doc).
+ *
+ * Result page QC round (Oct 2026, branch result-page-QC): the hero, the
+ * metric table and the new red-metric callout follow Alefiya's "RPV Results
+ * Hero" design artifact (linked in the QC doc — "this is exactly how I want
+ * the hero to be"). Its words and casing win over the older doc
+ * wording ("$1.5M/year" small y, "an extra", "go from", "So how", "Per").
  */
 
+/**
+ * The two CTAs, worded once for the nav and the red-metric callout. QC row 11
+ * ("Match the navigation button + all buttons of the page") will move the
+ * rest of the page's buttons onto these too — a separate QC task. Wording = QC row
+ * 10's CTA list. The hero artifact words them slightly differently ("Watch
+ * the workshop with your team", "Book your next $125k/mo game-plan call") —
+ * flagged; QC doc list used as the Oct 23 default, awaiting confirmation.
+ * Workshop = washed-out (QC row 11); booking colour pending from the user —
+ * see --rbtn-book-bg in results.css.
+ * TODO: real workshop URL — the separate "Watch the Workshop" page (QC item 8)
+ * isn't built yet. Booking URL is live (TidyCal).
+ */
+export const CTA = {
+  workshop: { label: 'Watch the hands-on workshop with your team', id: 'watch_workshop', href: '#', keepTogether: 'hands-on' },
+  book: { label: 'Book your Next $125k/mo Game-Plan Call', id: 'book_call', href: 'https://tidycal.com/alefiya/crpv-game-plan-call', keepTogether: 'Game-Plan Call' },
+};
+
 export const NAV = {
-  links: [
-    { label: 'Your RPV™ Score', href: '#rpv-score' },
-    { label: 'How we calculated your RPV™', href: '#how-we-calculated' },
-  ],
+  // The artifact's nav is the logo + the two buttons only — the old "Your
+  // RPV™ Score" / "How we calculated your RPV™" links are gone (Oct 23).
   ctas: [
-    // TODO: real workshop URL when provided. Booking URL is live (Yemi,
-    // Sep 19 doc comments — TidyCal).
-    { label: 'Watch the hands-on workshop with your team', id: 'watch_workshop', variant: 'blue', href: '#' },
-    { label: 'Book your Next $125k/mo game-plan call', id: 'book_call', variant: 'pink', href: 'https://tidycal.com/alefiya/crpv-game-plan-call' },
+    { ...CTA.workshop, variant: 'workshop' },
+    { ...CTA.book, variant: 'book' },
   ],
 };
 
 export const METRICS = {
-  // Sep 19 doc rewrite (Updated Result Page Copy.docx): a question with live
-  // RPV tokens replaces the old three-line headline, and the
-  // "Total traffic:" line is deleted. Lowercase "per" is verbatim from the
-  // doc. Wraps naturally (no line map, per the Sep 12 no-<br> rule).
-  // Two lines, as the doc lays them out: the question, then the answer on its
-  // own line (Yemi, Sep 26).
-  headline: 'So…how do you scale your Revenue per Visitor™ from {{current_rpv}} → {{goal_rpv}}?',
-  headlineLine2: 'By optimising all 5 metrics below until they’re green:',
-  // 🔴🟡🟢 key under the rps row — ALWAYS shown. Yemi's "show only if red"
-  // comment (#6) anchors BELOW this key, on the workshop section that
-  // follows it, so the key itself is not conditional.
-  key: [
-    '🔴 Red: The metric with the most room to improve.',
-    '🟡 Yellow: The metric that’s close to healthy.',
-    '🟢 Green: The metric that’s performing at its goal.',
+  // QC round (Oct 2026): the table follows the hero artifact. The headline's
+  // two RPV values render as coloured spans (current red, goal green), so it
+  // is split around them: before + {{current_rpv}} → {{goal_rpv}} + after.
+  // "So how" / "Per" per the artifact (Sep 19 doc had "So…how" / "per").
+  headlineBefore: 'So how do you scale your Revenue Per Visitor™ from',
+  headlineAfter: '?',
+  // "…until they’re [green]." — "green" is a green chip; full stop, not the
+  // doc's colon (artifact).
+  sublineBefore: 'By optimising all 5 metrics below until they’re',
+  sublineChip: 'green',
+  sublineAfter: '.',
+  // One-line key under the table — always shown (Yemi comment #5).
+  legend: [
+    { colour: 'red', text: 'Red: most room to improve' },
+    { colour: 'yellow', text: 'Yellow: close to healthy' },
+    { colour: 'green', text: 'Green: at goal' },
   ],
   headers: {
     metric: 'METRIC',
     current: 'YOUR BUSINESS',
-    currentSub: '(Currently)', // design casing; doc has "(CURRENTLY)" — flagged
+    currentSub: 'today',
     goal: 'YOUR NEW GOAL',
-    // Design-added header note (not in the copy doc) — flagged, kept.
-    goalSub: '(After optimising 4 pillars that scale average revenue per visitor)',
+    goalSub: 'all five green',
   },
   rowLabels: {
     rpv: 'Revenue Per Visitor™',
@@ -63,6 +81,52 @@ export const METRICS = {
       slg: 'And out of every 100 who book, how many become paying clients?',
     },
     rps: 'Revenue Per Subscriber™ (what each subscriber is worth per year)',
+  },
+
+  // QC round: the lead/close rows above are byte-identical to the
+  // section/oct20-question-changes wording (in ques_changes) so the two
+  // branches merge cleanly. Yemi's QC comment C3 wrote the PLG close row as
+  // "…how many complete it?"; the question doc of Oct 22 (newer) and quiz
+  // Q9B say "…how many buy?" — kept, flagged. The artifact's sample row
+  // wording is placeholder only.
+
+  // RPV is no longer the first row: it closes the table as the total,
+  // because the four metrics above feed it (artifact).
+  totalLabel: '= Your Revenue Per Visitor™',
+  // Status chip on each "today" cell (artifact: RED / CLOSE). The artifact
+  // shows no green current cell; "AT GOAL" is ours, after its legend's
+  // "Green: at goal" (Oct 23 default, flagged).
+  status: { red: 'RED', yellow: 'CLOSE', green: 'AT GOAL' },
+};
+
+/**
+ * Red-metric callout — between the metric table and the "Find the reason
+ * behind your red metrics" section (artifact block 3, QC item 3). Same gate
+ * as that section: renders only when a table cell is red. Both stay even
+ * though they repeat the red-metric line (user, Oct 23).
+ */
+export const RED_CALLOUT = {
+  eyebrow: 'WHAT’S HOLDING YOUR NUMBER DOWN',
+  // "Your 2 red metrics are what’s keeping your Revenue Per Visitor™ at
+  // $0.75 instead of $4.92." — the count is live. The singular form for one
+  // red metric is ours (the artifact only shows the plural), worded like
+  // the old red-metric line.
+  headOne: 'Your red metric is',
+  headMany: 'Your {{red_count}} red metrics are',
+  headMid: 'what’s keeping your Revenue Per Visitor™ at',
+  headInstead: 'instead of',
+  headEnd: '.',
+  body: 'My workshop takes you and your team through 10 questions across 4 quadrants, so you find exactly why each red metric is red, and what to fix first.',
+  bodyBold: '10 questions across 4 quadrants',
+  caption: 'The workshop opens on its own page.',
+  // Short metric names on the cards. The artifact names two ("Buyers who
+  // complete their purchase", "Revenue Per Subscriber™"); the rest are ours
+  // (Oct 23 default, flagged for Alefiya/Yemi).
+  names: {
+    optIn: 'Visitors who become subscribers',
+    lead: { plg: 'Visitors who take a buying action', slg: 'Visitors who book a call or demo' },
+    close: { plg: 'Buyers who complete their purchase', slg: 'Bookings that become paying clients' },
+    rps: 'Revenue Per Subscriber™',
   },
 };
 
@@ -1107,25 +1171,27 @@ export const PILLAR_FOUR_CLOSING = {
   headHighlight: 'what-happens-next problem.',
 };
 
+/**
+ * Hero — QC round (Oct 2026), verbatim from the "RPV Results Hero" artifact.
+ * The before/after RPV pair is the hero: a red "TODAY" card → the jump → a
+ * green "YOUR GOAL" card. The old calc sentence + fraction card become one
+ * formula line. Labels are stored in the case the artifact shows them.
+ */
 export const HERO = {
   introBefore: 'You’re here for the spoils of adding',
-  introChip: '$1.5M/Year',
-  introAfter: 'without increasing your marketing spend.',
-  basedOn: 'Based on your answers…',
-  // Sep 19 doc rewrite: the giant annual-revenue number is replaced by the
-  // RPV-increase framing. The sentence is verbatim from Updated Result Page
-  // Copy.docx; its two inline tokens render as the big number row (current →
-  // goal), keeping the doc's reading order.
-  headline: 'To add an additional $1.5M/year ($125K/mo), your Revenue Per Visitor™ needs to increase from:',
-  rpvFrom: '{{current_rpv}}',
-  rpvArrow: '→',
-  rpvTo: '{{goal_rpv}}',
-  calcLine: 'Revenue Per Visitor™ is calculated by dividing your total revenue by your total visitors.',
-  formula: {
-    lead: 'Revenue Per Visitor™ =',
-    numerator: 'Total Revenue',
-    denominator: 'Total Visitors your business is attracting [online and offline]',
-  },
+  introChip: '$1.5M/year',
+  // "Based on your answers…" now ends the intro sentence (was its own line)
+  introAfter: 'without increasing your marketing spend. Based on your answers…',
+  headline: 'To add an extra $1.5M/year ($125K/mo), your Revenue Per Visitor™ needs to go from:',
+  today: { label: 'TODAY', value: '{{current_rpv}}', sub: 'per visitor, right now' },
+  goal: { label: 'YOUR GOAL', value: '{{goal_rpv}}', sub: 'per visitor, same traffic' },
+  // The chip shows {{rpv_multiple}} = goal ÷ today ("6.6×"). The artifact
+  // chip says just "6.6×"; Alefiya's Loom asks for it to read clearer ("6.6
+  // times the growth"), so it is bigger and gets this word under it (Oct 23
+  // default, flagged).
+  multipleWord: 'growth',
+  formulaLead: 'Revenue Per Visitor™',
+  formulaRest: '= total revenue ÷ total visitors your business attracts, online and offline.',
 };
 
 export const SAME_PROBLEM = {

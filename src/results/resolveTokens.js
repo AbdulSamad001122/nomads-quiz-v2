@@ -14,6 +14,10 @@ export function resolveTokens(result) {
     // q7*12 if a future copy round brings them back.
     current_rpv: rpvMoney(result.currentRPV),
     goal_rpv: rpvMoney(result.goalRPV),
+    // Hero jump chip (QC round): goal ÷ today, worked from the two values
+    // as DISPLAYED so the chip always agrees with them ($4.92 / $0.75 =
+    // "6.6×"). Empty when there is no real jump — the hero hides the chip.
+    rpv_multiple: rpvMultiple(result.currentRPV, result.goalRPV),
     // Blocks 5/6 token — UNCHANGED original behaviour (Yemi Sep-15 Q3):
     // $1.5M+ at or above the promise, exact money below. Blocks 5/6 only
     // fire below $1.5M, so in practice they always show the exact figure.
@@ -47,6 +51,17 @@ export function resolveTokens(result) {
    "$14.8M", "$2M") — the format of the display rule's example */
 const gainM = (x) => `$${(Math.round(x / 100_000) / 10).toFixed(1).replace(/\.0$/, '')}M`;
 
+/* "6.6×" — one decimal, no trailing .0 ("3×"); '' unless the goal is a real
+   step up from a real current RPV. Worked in whole cents, so an exact half
+   ($23.58 / $3.60 = 6.55) rounds up to "6.6×" instead of float-slipping to
+   "6.5×". */
+export function rpvMultiple(current, goal) {
+  const c = Math.round(current * 100);
+  const g = Math.round(goal * 100);
+  if (!(c > 0) || !(g > c)) return '';
+  return `${(Math.round((g * 10) / c) / 10).toFixed(1).replace(/\.0$/, '')}×`;
+}
+
 const pct = (x) => `${Math.round(x * 100)}%`;
 const dollars = (x) => `$${Math.round(x)}`;
 
@@ -74,7 +89,12 @@ export function metricRows(result) {
  * lands; the gate ships tested ahead of it.
  */
 export function anyMetricRed(result) {
-  return metricRows(result).some((row) => row.colour === 'red');
+  return redMetricRows(result).length > 0;
+}
+
+/** The red rows only, in table order — the red-metric callout's cards. */
+export function redMetricRows(result) {
+  return metricRows(result).filter((row) => row.colour === 'red');
 }
 
 /** Replace every {{token}} in a copy string with its resolved value. */

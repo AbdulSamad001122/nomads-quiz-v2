@@ -6,7 +6,7 @@
 import { calculate, runImprovementLoop, metricColour, CEILINGS } from './calculator.js';
 import { resolveInputs } from './backendValues.js';
 import { validateManual, impossibleCheck } from './validation.js';
-import { anyMetricRed } from '../results/resolveTokens.js';
+import { anyMetricRed, redMetricRows, rpvMultiple } from '../results/resolveTokens.js';
 
 let pass = 0,
   fail = 0;
@@ -295,6 +295,26 @@ const near = (a, b, tol = 1e-6) => Math.abs(a - b) <= tol;
   );
   ok('gate · capped5 fixture is cappedState', capped.cappedState === true);
   ok('gate · capped taker with reds → still shown', anyMetricRed(capped) === true);
+}
+
+/* =========================================================
+   10 · Result page QC hero — growth chip + red-metric callout rows
+   ========================================================= */
+{
+  const chip = (c, g, want) => ok(`chip · $${c} → $${g} = "${want}"`, rpvMultiple(c, g) === want, rpvMultiple(c, g));
+  chip(0.75, 4.92, '6.6×'); // the artifact's own example
+  chip(2.25, 6.42, '2.9×');
+  chip(3.6, 23.58, '6.6×'); // exactly 6.55 — must round up, not float-slip to 6.5
+  chip(9.8, 27.93, '2.9×'); // exactly 2.85
+  chip(0.04, 0.29, '7.3×'); // exactly 7.25
+  chip(1, 3, '3×'); // no trailing .0
+  chip(5, 5, ''); // no step up → hero hides the chip
+  chip(0, 3, ''); // no real current RPV → hidden
+
+  const fake = (current, path = 'plg') => ({ currentRPV: 1, goalRPV: 2, path, current, goal: { optIn: 0.6, lead: 0.3, close: 0.75, rps: 50 } });
+  const reds = redMetricRows(fake({ optIn: 0.1, lead: 0.1, close: 0.1, rps: 20 }));
+  ok('callout · only the red rows, in table order', reds.map((r) => r.key).join(',') === 'optIn,close', reds.map((r) => r.key).join(','));
+  ok('callout · RPV total is never a card', redMetricRows(fake({ optIn: 0.1, lead: 0.01, close: 0.1, rps: 1 })).every((r) => r.key !== 'rpv'));
 }
 
 /* =========================================================

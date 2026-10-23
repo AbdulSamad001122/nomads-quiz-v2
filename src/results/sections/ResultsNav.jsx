@@ -1,20 +1,16 @@
 import { NAV } from '../copy.js';
 import { ga } from '../../analytics/ga.js';
+import { keepTogether } from '../keepTogether.jsx';
 import './ResultsNav.css';
 
-/** Sticky white top bar: NOMADS logo, section links, the two CTA buttons. */
+/**
+ * Sticky white top bar: NOMADS logo + the two CTA buttons. The section links
+ * are gone — the QC hero artifact shows the logo and the buttons only.
+ */
 export default function ResultsNav() {
   return (
     <header className="rnav">
       <img className="rnav__logo" src="/assets/results-nomads-logo-plum.png" alt="Nomads" />
-
-      <nav className="rnav__links">
-        {NAV.links.map((l) => (
-          <a key={l.href} className="rnav__link" href={l.href}>
-            {l.label}
-          </a>
-        ))}
-      </nav>
 
       <div className="rnav__ctas">
         {NAV.ctas.map((c) => (
@@ -29,7 +25,7 @@ export default function ResultsNav() {
               : null)}
             onClick={() => ga.ctaClick(c.id)}
           >
-            {c.label}
+            {keepTogether(c.label, c.keepTogether)}
           </a>
         ))}
       </div>

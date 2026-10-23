@@ -1,15 +1,14 @@
-/* Section 1 — score hero. Reference: hero design image (dark gradient bg,
-   cream paper peeking below). The design's stone strip is removed — its
-   copy isn't in the copy doc (Yemi, Sep 26). */
+/* Section 1 — score hero. QC round (Oct 2026): rebuilt to the "RPV Results
+   Hero" artifact — the TODAY → YOUR GOAL pair is the focal point. Same dark
+   gradient ground and Alefiya circle as before (photo kept at its old size,
+   per her Loom); a plum rule closes the hero like the artifact's. */
 
 .rhero {
   position: relative;
   overflow: hidden;
   background: url('/assets/results-hero-bg.webp') center / cover no-repeat;
-  /* bottom = the old padding minus the removed strip (42px desktop, 66px
-     tablet where it wrapped, 49px phone): the same dark space under the
-     content that the design showed above the strip */
-  padding: 70px 96px 108px;
+  border-bottom: 4px solid #5d1b4e;
+  padding: 60px 96px 72px;
 }
 
 .rhero__grid {
@@ -24,12 +23,12 @@
 /* ——— left copy column ——— */
 
 .rhero__intro {
-  max-width: 470px;
+  max-width: 640px;
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 16px;
   line-height: 1.6;
-  color: #f4ede6;
+  color: #e9e1da;
 }
 
 .rhero__intro-chip {
@@ -37,94 +36,148 @@
   color: #250f1c;
   font-weight: 800;
   padding: 1px 8px;
-}
-
-.rhero__based {
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 16px;
-  color: #f4ede6;
-  margin-top: 26px;
-}
-
-.rhero__headline {
-  max-width: 686px;
-  font-family: var(--font-headline);
-  font-weight: 800;
-  font-size: 38px;
-  line-height: 1.28;
-  color: #ffffff;
-  margin-top: 30px;
-}
-
-/* current RPV → goal RPV pair (Sep 19 copy — replaces the giant revenue
-   number). Same headline-number language; goal picks up the cream accent
-   the intro chip uses, so the pair reads today → goal at a glance. */
-.rhero__number-row {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  margin-top: 14px;
-  flex-wrap: wrap;
-  row-gap: 6px;
-}
-
-.rhero__number {
-  font-family: var(--font-headline);
-  font-weight: 800;
-  /* sized so "current → goal" stays ONE line inside the copy column at
-     desktop (96px max wrapped the pair onto two stacked lines at 1280+) */
-  font-size: clamp(46px, 5vw, 72px);
-  line-height: 1.05;
-  color: #ffffff;
   white-space: nowrap;
 }
 
-.rhero__number--goal {
-  color: #f2e3c4;
-}
-
-.rhero__number-arrow {
+.rhero__headline {
+  max-width: 600px;
+  margin-top: 22px;
   font-family: var(--font-headline);
   font-weight: 800;
-  font-size: clamp(30px, 3.2vw, 46px);
+  font-size: 34px;
+  line-height: 1.28;
+  color: #ffffff;
+}
+
+/* ——— TODAY → YOUR GOAL ——— */
+
+.rhero__pair {
+  margin-top: 28px;
+  max-width: 640px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+}
+
+.rhero__card {
+  container-type: inline-size;
+  border: 1.5px solid;
+  border-radius: 10px;
+  padding: 16px 18px 18px;
+}
+
+.rhero__card--today {
+  background: rgba(221, 63, 61, 0.13);
+  border-color: rgba(244, 130, 116, 0.55);
+  color: #f7a090;
+}
+
+.rhero__card--goal {
+  background: rgba(54, 176, 110, 0.14);
+  border-color: #6fd6a0;
+  color: #72e2a7;
+}
+
+.rhero__card-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+}
+
+/* the status dot before the label */
+.rhero__card-label::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+/* The number IS the hero: as big as the card allows. --len (the value's
+   character count, set inline) shrinks long values like "$105.40" so they
+   never overflow; short ones like "$0.75" cap at 76px. 0.62em per character
+   covers Montserrat 800's widest (zero-heavy) values like "$6500.00". */
+.rhero__card-value {
+  margin-top: 6px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: min(76px, calc(100cqi / (var(--len, 5) * 0.62)));
+  line-height: 1.05;
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+}
+
+.rhero__card-sub {
+  margin-top: 8px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #f4ede6;
+}
+
+.rhero__jump {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.rhero__jump-arrow {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 30px;
   line-height: 1;
   color: #f2e3c4;
 }
 
-.rhero__calc-line {
-  max-width: 470px;
+/* the jump, made clearer than the artifact's small mono chip (Loom: "6.6
+   times the growth"): the multiple big, "growth" small under it */
+.rhero__jump-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f2e3c4;
+  color: #250f1c;
+  padding: 6px 10px 7px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.rhero__jump-x {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1.1;
+}
+
+.rhero__jump-word {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.rhero__formula {
+  max-width: 640px;
   margin-top: 26px;
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.6;
-  color: #f4ede6;
+  color: #d9d0c9;
 }
 
-/* ——— formula card ——— */
-
-.rhero__formula {
-  margin-top: 40px;
-  max-width: 310px;
-  background: rgba(228, 222, 226, 0.18);
-  border-radius: 10px;
-  padding: 20px 22px;
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.5;
-  color: #f4ede6;
-}
-
-.rhero__formula-top {
-  margin-top: 18px;
-  padding-bottom: 12px;
-  border-bottom: 1.5px solid rgba(255, 255, 255, 0.6);
-}
-
-.rhero__formula-bottom {
-  padding-top: 12px;
+.rhero__formula strong {
+  font-weight: 800;
+  color: #ffffff;
 }
 
 /* ——— right media column ——— */
@@ -134,24 +187,29 @@
   justify-content: center;
 }
 
+/* desktop: 92% of its column, no fixed cap (user, Oct 23); tablet/phone
+   keep their own size below */
 .rhero__alefiya {
-  width: min(100%, 556px);
+  width: 92%;
 }
 
 /* ——— responsive ——— */
 
 @media (max-width: 1100px) {
   .rhero {
-    padding: 72px 48px 118px;
+    padding: 56px 48px 68px;
+  }
+  .rhero__grid {
+    gap: 36px;
   }
   .rhero__headline {
-    font-size: 36px;
+    font-size: 34px;
   }
 }
 
 @media (max-width: 900px) {
   .rhero {
-    padding: 56px 28px 64px;
+    padding: 48px 28px 56px;
   }
   .rhero__grid {
     grid-template-columns: 1fr;
@@ -163,39 +221,46 @@
   .rhero__alefiya {
     width: min(100%, 400px);
   }
-  .rhero__formula {
-    margin-top: 40px;
+  /* full-width column: no single word ("from:") left alone on a line */
+  .rhero__headline {
+    text-wrap: pretty;
   }
 }
 
+/* phones: the two cards stack, the jump turns to point down between them
+   (artifact's phone layout) */
 @media (max-width: 560px) {
   .rhero {
-    padding: 40px 18px 50px;
-  }
-  .rhero__intro {
-    font-size: 16px;
-  }
-  .rhero__based {
-    font-size: 16px;
-    margin-top: 28px;
+    padding: 36px 18px 48px;
   }
   .rhero__headline {
     font-size: 26px;
+    margin-top: 18px;
   }
-  .rhero__number {
-    font-size: clamp(34px, 11vw, 48px);
+  .rhero__pair {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 22px;
   }
-  .rhero__number-arrow {
-    font-size: clamp(20px, 6.5vw, 30px);
-  }
-  .rhero__number-row {
+  .rhero__jump {
+    flex-direction: row;
+    justify-content: center;
     gap: 12px;
   }
-  .rhero__calc-line {
-    margin-top: 20px;
+  .rhero__jump-arrow {
+    transform: rotate(90deg);
+    font-size: 26px;
+  }
+  .rhero__card-value {
+    font-size: min(64px, calc(100cqi / (var(--len, 5) * 0.62)));
+  }
+  /* side by side on one line, so the arrow + chip row stays short */
+  .rhero__jump-chip {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 6px;
   }
   .rhero__formula {
-    font-size: 16px;
-    padding: 18px;
+    margin-top: 22px;
   }
 }
