@@ -444,7 +444,13 @@ function CalcPreview({ c }) {
           ))}
         </ol>
         {/* TODO: real calculator URL (Burhan, with the other placeholder links) */}
-        <a className="rcs__btn" href="#" onClick={() => ga.ctaClick('crps_calculator')}>
+        <a
+          className="rcs__btn"
+          href={c.buttonHref}
+          target="_blank"
+          rel="noopener"
+          onClick={() => ga.ctaClick('crps_calculator')}
+        >
           {c.button}
         </a>
       </div>
