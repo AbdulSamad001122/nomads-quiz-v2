@@ -153,6 +153,10 @@ export const RED_METRICS = {
   redChip: 'RED',
   whereasPct: 'whereas it should be around',
   whereasRps: 'whereas it needs to be',
+  // Capped takers (Blocks 5–7: $1.5M is out of reach even with every metric
+  // at its max) don't get this tail — "$50 to bring in $1.5M" would
+  // contradict "You're still $X short of $1.5M" a block later. Same rule as
+  // StopOrPush / RPS_CARDS (Yemi 2026-09-15, Q6). Flagged for Alefiya/Yemi.
   rpsTail: 'to bring in $1.5M',
   // Which quadrants move which metric. The V2 designer's own note: "Mapping
   // to confirm: Q1 → opt-in rate; Q2 and Q3 → buying action and completion;
@@ -187,7 +191,7 @@ export const RED_METRICS = {
       chip: 'Quadrant 01',
       title: 'Maximise Revenue per Visitor™',
       q: 'Is it because you don’t know the trigger that helps you sell to a 20X bigger market?',
-      bold: 'the trigger that helps you sell to a 20X bigger market?',
+      bold: 'the trigger that helps you sell to a 20X bigger market',
       icon: '/assets/results-quadrant-icon-1.png',
     },
     {
