@@ -13,6 +13,9 @@ export default function HeroSection({ tokens }) {
   // values feed the cards' fit-to-width font size (see .rhero__card-value)
   const today = fill(HERO.today.value, tokens);
   const goal = fill(HERO.goal.value, tokens);
+  // one shared size for both numbers, so the pair stays balanced when the
+  // values differ in length ("$9.00" vs "$25.67") — QC items 1 and 4
+  const len = Math.max(today.length, goal.length);
 
   return (
     <section className="rhero" id="rpv-score">
@@ -28,7 +31,7 @@ export default function HeroSection({ tokens }) {
           <div className="rhero__pair">
             <div className="rhero__card rhero__card--today">
               <p className="rhero__card-label">{HERO.today.label}</p>
-              <p className="rhero__card-value" style={{ '--len': today.length }}>
+              <p className="rhero__card-value" style={{ '--len': len }}>
                 {today}
               </p>
               <p className="rhero__card-sub">{HERO.today.sub}</p>
@@ -48,7 +51,7 @@ export default function HeroSection({ tokens }) {
 
             <div className="rhero__card rhero__card--goal">
               <p className="rhero__card-label">{HERO.goal.label}</p>
-              <p className="rhero__card-value" style={{ '--len': goal.length }}>
+              <p className="rhero__card-value" style={{ '--len': len }}>
                 {goal}
               </p>
               <p className="rhero__card-sub">{HERO.goal.sub}</p>
