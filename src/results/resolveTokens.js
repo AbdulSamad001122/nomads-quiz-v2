@@ -18,6 +18,15 @@ export function resolveTokens(result) {
     // as DISPLAYED so the chip always agrees with them ($4.92 / $0.75 =
     // "6.6×"). Empty when there is no real jump — the hero hides the chip.
     rpv_multiple: rpvMultiple(result.currentRPV, result.goalRPV),
+    // QC row 5 — "stop at $1.5M or push all 5 metrics to their max". The max
+    // uses the calculator's 12×-capped max RPV (Added Logic.docx); totals are
+    // yearly revenue at today / goal / max RPV on the taker's real traffic.
+    max_rpv: rpvMoney(result.capped.maxRPV),
+    max_gain: moneyShort(result.capped.achievableGain),
+    max_total: moneyShort(result.capped.maxRPV * result.annualVisitors),
+    max_multiple: rpvMultiple(result.currentRPV, result.capped.maxRPV),
+    current_total: moneyShort(result.currentAnnualRevenue),
+    goal_total: moneyShort(result.currentAnnualRevenue + 1_500_000),
     // Blocks 5/6 token — UNCHANGED original behaviour (Yemi Sep-15 Q3):
     // $1.5M+ at or above the promise, exact money below. Blocks 5/6 only
     // fire below $1.5M, so in practice they always show the exact figure.
@@ -25,15 +34,6 @@ export function resolveTokens(result) {
       result.capped.achievableGain >= 1_500_000
         ? '$1.5M+'
         : money(result.capped.achievableGain),
-    // "But… what if you did?" headline — the Logic Doc's "Display Rule for
-    // Achievable Gain" (Yemi, Sep 26; re-confirmed to Samad on Slack Sep 29;
-    // REVERSES the Sep-15 Q3 cap): above $1.5M shows the exact number in the
-    // promise's own M-style (the rule's example: "$2.3M/year"), at or under
-    // shows "$1.5M+". Raw maths and the Kit tag stay untouched.
-    achievable_gain_headline:
-      result.capped.achievableGain > 1_500_000
-        ? gainM(result.capped.achievableGain)
-        : '$1.5M+',
     // Block 1 — share of revenue running through the five metrics, already
     // rounded to the nearest 5 by the calculator.
     email_percentage: String(result.block1.emailPercentage),
@@ -47,9 +47,13 @@ export function resolveTokens(result) {
   };
 }
 
-/* the promise's own "$1.5M" style: one decimal, no trailing .0 ("$2.3M",
-   "$14.8M", "$2M") — the format of the display rule's example */
-const gainM = (x) => `$${(Math.round(x / 100_000) / 10).toFixed(1).replace(/\.0$/, '')}M`;
+/* "$2.97M" / "$270K" — the row-5 design's short money style: millions to 2
+   decimals (no trailing ".00"), thousands to the nearest $1K */
+export function moneyShort(x) {
+  if (!(x >= 0)) return '$0';
+  if (x >= 999_500) return `$${(x / 1_000_000).toFixed(2).replace(/\.?0+$/, '')}M`;
+  return `$${Math.round(x / 1000)}K`;
+}
 
 /* "6.6×" — one decimal, no trailing .0 ("3×"); '' unless the goal is a real
    step up from a real current RPV. Worked in whole cents, so an exact half

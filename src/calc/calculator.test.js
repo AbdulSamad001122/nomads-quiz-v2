@@ -6,6 +6,7 @@
 import { calculate, runImprovementLoop, metricColour, CEILINGS } from './calculator.js';
 import { resolveInputs } from './backendValues.js';
 import { validateManual, impossibleCheck } from './validation.js';
+import { rpv2 } from './rounding.js';
 import { anyMetricRed, redMetricRows, rpvMultiple } from '../results/resolveTokens.js';
 
 let pass = 0,
@@ -131,6 +132,38 @@ const near = (a, b, tol = 1e-6) => Math.abs(a - b) <= tol;
   ok('block · no-email big traffic → remainingGap floored at 0', b5closed.capped.remainingGap === 0);
   ok('block · no-email → gapClosedByMetrics true', b5closed.capped.gapClosedByMetrics === true);
   ok('block · no-email → achievableGain never negative', b5closed.capped.achievableGain >= 0);
+}
+
+/* =========================================================
+   4b · 12× CAP on the "all 5 metrics at max" RPV (QC, Added Logic.docx)
+   ========================================================= */
+{
+  // The doc's own example: $270K/yr over 360K visitors → RPV $0.75, goal
+  // $4.92; 12 × $0.75 = $9.00 → "~$3.24M/year in total and +$2.97M on top of
+  // today, instead of the uncapped $10.6M".
+  const ex = calculate({ q2: 270000, q7: 30000, q7b: null, q7c: undefined, q8: 3000, q9a: 0.03, q9b: 0.375, q10: 175, q11: 62500 }, 'plg');
+  ok('12× · doc example current RPV $0.75', rpv2(ex.currentRPV) === 0.75, rpv2(ex.currentRPV));
+  ok('12× · doc example goal RPV $4.92', rpv2(ex.goalRPV) === 4.92, rpv2(ex.goalRPV));
+  ok('12× · doc example max RPV capped at $9.00', Math.abs(ex.capped.maxRPV - 9) < 1e-9 && ex.capped.maxCappedAt12, ex.capped.maxRPV);
+  ok('12× · doc example total ≈ $3.24M', Math.round(ex.capped.maxRPV * ex.annualVisitors) === 3240000);
+  ok('12× · doc example +$2.97M on top of today', Math.round(ex.capped.achievableGain) === 2970000, ex.capped.achievableGain);
+  ok('12× · doc example uncapped would have been bigger', ex.capped.ceilingRPV > ex.capped.maxRPV);
+  ok('12× · doc example still reaches the goal (Block 4)', ex.cappedBlock === 4 && ex.capped.goalWithinCap);
+
+  // Formula: max added revenue = (max RPV − current RPV) × annual visitors
+  ok('12× · gain = (maxRPV − currentRPV) × visitors', Math.abs(ex.capped.achievableGain - (ex.capped.maxRPV - ex.currentRPV) * ex.annualVisitors) < 1e-6);
+
+  // High-RPV business: 12× today is above the ceiling RPV → the ceiling wins
+  const hi = calculate({ q2: 810000, q7: 7500, q7b: null, q7c: undefined, q8: 3000, q9a: 0.125, q9b: 0.375, q10: 175, q11: 600000 }, 'plg');
+  ok('12× · high RPV → ceiling wins, not capped at 12×', !hi.capped.maxCappedAt12 && hi.capped.maxRPV === hi.capped.ceilingRPV);
+  ok('12× · max never above 12× today', hi.capped.maxRPV <= 12 * hi.currentRPV + 1e-9 && ex.capped.maxRPV <= 12 * ex.currentRPV + 1e-9);
+
+  // Edge case answered in the doc: a $60K/yr business needs ~26× to add
+  // $1.5M → the cap wins → capped Blocks 5–7 replace "push to their max".
+  const small = calculate({ q2: 60000, q7: 7500, q7b: null, q7c: undefined, q8: 500, q9a: 0.005, q9b: 0.05, q10: 25, q11: 12500 }, 'plg');
+  ok('12× · $60K business: goal beyond 12× today', !small.capped.goalWithinCap && small.goalRPV > 12 * small.currentRPV);
+  ok('12× · $60K business → capped Block 5/6, not Block 4', small.cappedState && [5, 6].includes(small.cappedBlock), `block=${small.cappedBlock}`);
+  ok('12× · $60K business gain = 11× today', Math.round(small.capped.achievableGain) === 11 * 60000, small.capped.achievableGain);
 }
 
 /* =========================================================

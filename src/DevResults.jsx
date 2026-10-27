@@ -35,11 +35,13 @@ const SCENARIOS = {
 
   /* ——— Blocks 1–3 · the revenue-split paragraph ——— */
 
-  // Block 1 alone: 20% of revenue runs through the five metrics.
+  // Block 1 alone: 20% of revenue runs through the five metrics. ($270K
+  // tier since the 12× cap, Oct 2026 — at $60K the goal is beyond 12× today
+  // and Block 5 fires; see 'cap-small'.)
   'split-normal': {
     blocks: '1 + 4',
     path: 'plg',
-    inputs: { q2: 60000, q7: 7500, q7b: null, q7c: undefined, q8: 500, q9a: 0.005, q9b: 0.05, q10: 25, q11: 12500 },
+    inputs: { q2: 270000, q7: 7500, q7b: null, q7c: undefined, q8: 500, q9a: 0.005, q9b: 0.05, q10: 25, q11: 54000 },
   },
   // Block 2 fires: share is under 5%, so the "too much of your revenue is
   // unpredictable" warning renders under the split.
@@ -76,7 +78,9 @@ const SCENARIOS = {
   'no-blocks': {
     blocks: 'none — both slots empty, ad module shown',
     path: 'plg',
-    inputs: { q2: 60000, q7: 7500, q7b: 17500, q7c: 0.5, q8: 375, q9a: 0.03, q9b: 0.375, q10: 175, q11: 63000 },
+    // $270K tier since the 12× cap (Oct 2026): at $60K the goal is beyond
+    // 12× today, so Block 5 would fill the capped slot.
+    inputs: { q2: 270000, q7: 7500, q7b: 17500, q7c: 0.5, q8: 375, q9a: 0.03, q9b: 0.375, q10: 175, q11: 282000 },
     adAdjustable: true,
   },
 
@@ -86,6 +90,14 @@ const SCENARIOS = {
   // this slot renders nothing at all.
   capped4: {
     blocks: '1 + 4 (nothing renders)',
+    path: 'plg',
+    inputs: { q2: 270000, q7: 7500, q7b: null, q7c: undefined, q8: 500, q9a: 0.005, q9b: 0.05, q10: 25, q11: 54000 },
+  },
+  // 12× cap (QC Added Logic, Oct 2026): a $60K/yr business needs ~26× to add
+  // $1.5M, beyond the 12× ceiling — so the cap wins and Block 5 replaces the
+  // "stop at $1.5M / push to their max" section.
+  'cap-small': {
+    blocks: '1 + 5 (goal beyond the 12× cap)',
     path: 'plg',
     inputs: { q2: 60000, q7: 7500, q7b: null, q7c: undefined, q8: 500, q9a: 0.005, q9b: 0.05, q10: 25, q11: 12500 },
   },
