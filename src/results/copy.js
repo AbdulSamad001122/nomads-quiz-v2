@@ -1538,6 +1538,8 @@ export const STOP_OR_PUSH = {
   rowMaxSubCapped: 'capped at 12× · RPV {{max_rpv}} · +{{max_gain}}',
   rowMaxSub: 'RPV {{max_rpv}} · +{{max_gain}}',
   rowMaxVal: '~{{max_total}}/year',
+  // Loom 3:41 "maybe 12x can be a little bit bigger" — this chip, the total
+  // chip's multiple and the 12× step are set larger than the design (CSS).
   rowMaxChip: '{{max_multiple}} today',
 
   // Scepticism block (design note 5) — Alefiya admits 12× is a stretch.

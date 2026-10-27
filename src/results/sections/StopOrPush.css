@@ -252,6 +252,14 @@
   padding: 6px 10px;
 }
 
+/* Loom 3:41 "maybe 12x can be a little bit bigger": the multiple in the
+   total chip, the max bar's chip and the ceiling step run larger than the
+   design's 18px / 11px / 16px (flagged, Oct QC) */
+.rso__x-mult {
+  font-size: 1.35em;
+  font-weight: 900;
+}
+
 .rso__yep {
   font-family: var(--font-body);
   font-weight: 800;
@@ -383,6 +391,17 @@
 .rso__lr--max .rso__val i {
   background: var(--rso-ink);
   color: var(--rso-green-hi);
+}
+.rso__lr--max .rso__val i {
+  font-size: 14px;
+  padding: 4px 10px;
+}
+/* smallest phones: the design's size, so the chip still fits on the bar */
+@media (max-width: 360px) {
+  .rso__lr--max .rso__val i {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
 }
 
 /* ——— scepticism block (only when the 12× cap bites) ——— */
@@ -524,6 +543,7 @@
   height: 170px;
   background: var(--rso-green);
   color: #ffffff;
+  font-size: 22px;
 }
 
 .rso__st-lab {
@@ -693,5 +713,8 @@
   .rso__blk,
   .rso__st-lab {
     font-size: 14px;
+  }
+  .rso__st--4 .rso__blk {
+    font-size: 18px;
   }
 }

@@ -1,5 +1,5 @@
 import { money, rpvMoney, dailyVisitors } from '../calc/rounding.js';
-import { metricColour } from '../calc/calculator.js';
+import { metricColour, MAX_RPV_MULTIPLE } from '../calc/calculator.js';
 
 /**
  * Single bridge between the calculator result and the page copy: every
@@ -24,7 +24,11 @@ export function resolveTokens(result) {
     max_rpv: rpvMoney(result.capped.maxRPV),
     max_gain: moneyShort(result.capped.achievableGain),
     max_total: moneyShort(result.capped.maxRPV * result.annualVisitors),
-    max_multiple: rpvMultiple(result.currentRPV, result.capped.maxRPV),
+    // capped at 12× → exactly "12×" (worked from cent-rounded values a tiny
+    // RPV like $0.13 would read "11.5×"); otherwise never shown above 12×
+    max_multiple: result.capped.maxCappedAt12
+      ? `${MAX_RPV_MULTIPLE}×`
+      : atMost12(rpvMultiple(result.currentRPV, result.capped.maxRPV)),
     current_total: moneyShort(result.currentAnnualRevenue),
     goal_total: moneyShort(result.currentAnnualRevenue + 1_500_000),
     // Blocks 5/6 token — UNCHANGED original behaviour (Yemi Sep-15 Q3):
@@ -65,6 +69,8 @@ export function rpvMultiple(current, goal) {
   if (!(c > 0) || !(g > c)) return '';
   return `${(Math.round((g * 10) / c) / 10).toFixed(1).replace(/\.0$/, '')}×`;
 }
+
+const atMost12 = (s) => (s && parseFloat(s) > MAX_RPV_MULTIPLE ? `${MAX_RPV_MULTIPLE}×` : s);
 
 const pct = (x) => `${Math.round(x * 100)}%`;
 const dollars = (x) => `$${Math.round(x)}`;
