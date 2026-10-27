@@ -316,63 +316,133 @@ export const RESULT_BLOCKS = {
   },
 };
 
-export const BEYOND = {
-  // Doc: "Your Revenue per Visitor ™ beyond the first 14-day window" — the
-  // design image drops the ™; doc wins (flagged). Line map from the design.
-  bannerLines: ['Your Revenue per', 'Visitor™ beyond the', 'first 14-day window'],
-  bannerAccent: '14-day window', // stone-coloured span in line 3
-  intro:
-    'You’ve just seen how much more revenue you could generate by increasing the Revenue Per Visitor™ from the traffic you already have, by improving the five metrics behind it.',
-  // Desktop line map for the intro (reference image, 2 lines)
-  introBreakAfter: 'increasing the Revenue',
-  questionLines: ['But what happens to the subscribers', 'who don’t buy in those first 14 days?'],
-  tape: 'They don’t disappear.',
-  // Doc has the comma after "ecosystem" (design image shows a double space) — doc wins, flagged.
-  closingLines: ['They’re still sitting in your ecosystem, and they can', 'continue generating revenue for months to come.'],
-};
+/**
+ * The revenue-per-subscriber part — QC row 7 (Oct 2026): "feels really
+ * fragmented … I would want it to be redesigned like this (all copy is
+ * approved)" → Alefiya's "Compounding RPS Cards" design. One section that
+ * replaces the old BeyondFourteenDays + CompoundingIntro + CrpsCalculatorCta
+ * trio: a headline, five cards left to right ($X is the starting point →
+ * what compounding means → the three windows → the $50 goal → on top of
+ * your $1.5M), then the calculator with a looping preview. Words are the
+ * design's; uppercase labels via CSS as the design does.
+ *
+ * Per-taker values (design note 3): current / goal Revenue Per Subscriber™
+ * ({{rps_now}} / {{rps_goal}}) and current / goal Revenue Per Visitor™.
+ * The "20,000 subscribers" figures and the calculator preview's numbers
+ * are the design's fixed examples.
+ */
+export const RPS_CARDS = {
+  kicker: 'Beyond your $1.5M',
+  // "Reaching your extra [$1.5M] only asks each email subscriber to bring in
+  // [$8] a year. But [$8] is the starting point, not the end game."
+  headBefore: 'Reaching your extra',
+  headPromise: '$1.5M',
+  headMid: 'only asks each email subscriber to bring in',
+  headAfter: 'a year.',
+  headBut: 'But',
+  headEnd: 'is the starting point, not the end game.',
+  // When the taker's goal RPS is already the $50 ceiling, "$50 is the
+  // starting point, not the end game" would contradict card 4 — only the
+  // first sentence shows (flagged). For capped takers (who can't reach
+  // $1.5M) and takers whose RPS doesn't need to rise, the headline is the
+  // old section's approved line instead, and card 1 / card 5 (which assume
+  // reaching $1.5M) are left out (flagged).
+  headFallback: 'This is where Compounding Revenue Per Subscriber™ comes in.',
 
-export const CRPS_INTRO = {
-  // Doc: "This is where Compounding Revenue Per Subscriber™ comes in." —
-  // design drops the ™; doc wins (flagged). Line map from the design.
-  headlineLines: ['This is where Compounding', 'Revenue Per Subscriber™ comes in.'],
-  cards: [
-    {
-      icon: '/assets/results-icon-funnel.png',
-      // Design line map (3 lines)
-      lines: ['Your RPV opportunity shows', 'you how to make more from the', 'visitors you’re already getting.'],
-    },
-    {
-      icon: '/assets/results-icon-calendar.svg',
-      // Design line map (4 lines)
-      lines: [
-        'Your RPS opportunity shows you',
-        'how to make more from the subscribers',
-        'you’re already acquiring over and over',
-        'again throughout the year.',
-      ],
-    },
+  // the carousel controls
+  cardLabel: 'Card', // aria: "Card 1"
+  prev: 'Previous card',
+  next: 'Next card',
+
+  // Card 01 — the starting point
+  c1Top: 'The starting point',
+  c1Before: 'Today, each subscriber brings in around',
+  c1Mid: 'a year. Getting to your $1.5M lifts that to around',
+  c1End: '.',
+  c1Body: 'But someone you’ve already paid to bring onto your list can be worth far more than that. Every extra dollar they bring in comes from marketing you’ve already paid for.',
+  c1Bold: 'Every extra dollar they bring in comes from marketing you’ve already paid for.',
+  c1PinToday: 'today',
+  c1PinGoal: 'your $1.5M',
+  c1PinEnd: 'the goal',
+  c1PinGoalEnd: 'your $1.5M · the goal', // goal RPS already at $50: one pin, both labels
+  c1ScaleLabel: 'Revenue per subscriber scale: {{rps_now}} today, {{rps_goal}} for your $1.5M, $50 goal',
+
+  // Card 02 — what compounding means (the month bars are an illustration)
+  c2Top: 'What does Compounding Revenue Per Subscriber™ mean?',
+  c2Before: 'Compounding means every subscriber keeps pulling in',
+  c2Mark: 'more profit from the marketing you’ve already spent on them',
+  c2After: ', month after month.',
+  c2Paid: 'Paid once',
+  c2PaidSub: 'to bring them in',
+  c2Month1: 'Month 1',
+  c2Month12: 'Month 12',
+  c2Cap: 'Illustration: what one subscriber is worth to you, building month after month.',
+  c2Label: 'One subscriber’s value rising month by month after a one-time marketing cost',
+
+  // Card 03 — the three windows
+  c3Top: 'The three windows',
+  c3Before: 'A subscriber’s value grows across',
+  c3Mark: 'three windows',
+  c3After: ', and hardly any businesses optimise for all three.',
+  w1When: 'Days 0–14',
+  w1Head: 'Convert new subscribers by day 14',
+  w1Body: 'More people buy in their first two weeks, when buying intention is at its peak.',
+  tagYes: 'They bought',
+  tagNo: 'They didn’t buy',
+  w2When: 'Days 15–365',
+  w2Head: 'Turn first-time buyers into repeat buyers',
+  w2Body: 'They buy again within the year.',
+  w3When: 'Days 15–365',
+  w3Head: 'Convert subscribers who did not buy',
+  w3Body: 'They’re nurtured until they’re ready to pull out their wallets, within the year.',
+
+  // Card 04 — the goal
+  c4Top: 'The goal',
+  c4Before: 'Optimise all three windows to their peak, and each subscriber can bring in up to',
+  c4Big: '$50',
+  c4After: 'a year.',
+  c4Body: 'But let’s say you only get halfway there.',
+  tiers: [
+    { at: 'At', n: '$25', per: 'per subscriber', bar: 50, value: '$500,000', valueSub: 'a year', from: 'from every', subs: '20,000 subscribers' },
+    { at: 'At', n: '$50', per: 'per subscriber', bar: 100, value: '$1,000,000', valueSub: 'a year', from: 'from every', subs: '20,000 subscribers', peak: true },
   ],
-  // Doc has the trailing colon (design drops it) — doc wins, flagged.
-  potentialLabel: 'So your potential isn’t just:',
-  potentialBig: '+$1.5M/year',
-  potentialSub: 'from your existing traffic',
-  becomeChip: 'It can become:',
-  // Doc: "+$1.5M+ from RPV optimisation" — design shows "+$1.5M/year" instead
-  // of the trailing "+"; doc wins (flagged for review).
-  becomeBig: '+$1.5M+',
-  becomeSub: 'from RPV optimisation',
-  // Doc's "PLUS" line renders as the plum "+" badge per the design (flagged).
-  iceText: 'Additional revenue from compounding the value of every subscriber you acquire.', // design capitalises "Additional" (doc lowercase) — flagged
-};
 
-export const CRPS_CTA = {
-  headlineLines: ['Want to see what’s sitting', 'inside your subscriber base?'],
-  // Doc includes the ™ (design drops it) — doc wins, flagged.
+  // Card 05 — on top of your $1.5M
+  c5Top: 'On top of your $1.5M',
+  c5Before: 'And that’s on top of the',
+  c5Promise: '$1.5M',
+  c5Mid: 'you could generate by improving your Revenue Per Visitor™ from',
+  c5To: 'to',
+  c5End: '.',
+  c5Row1Value: '+$1.5M',
+  c5Row1Label: 'a year, from raising your Revenue Per Visitor™',
+  c5Row2Value: '+$1M',
+  c5Row2Before: 'a year, from every',
+  c5Row2Subs: '20,000 subscribers',
+  c5Row2After: 'at $50 each',
+
+  // The calculator, with a looping preview of its two real fields
+  calcKicker: 'Your Compounding Revenue Per Visitor™ OS Calculator',
+  calcHead: 'Want to see what each of your subscribers is worth today, and how far you are from $50?',
+  gets: [
+    'Calculate how much you’re making per subscriber, on average.',
+    'See how far you are from averaging $50 per subscriber, and how to get there.',
+    'See how much revenue your email list is bringing in a year.',
+  ],
+  // same words as the old calculator CTA (doc keeps the ™)
   button: 'Calculate Your Compounding Revenue Per Subscriber™ →',
-  subLines: [
-    'Find out how much more revenue you could generate from',
-    'the subscribers you already have beyond the first 14 days.',
-  ],
+  calcTitle: 'Compounding Revenue Per Visitor™ OS Calculator · Revenue per subscriber',
+  calcField1: 'New subscribers added in the last 12 months',
+  calcField2: 'Revenue generated by those subscribers',
+  calcOut1: '1 · Your revenue per subscriber',
+  calcOut2: '2 · How far you are from $50 a subscriber',
+  calcOut2Sub: 'At $50, these subscribers would bring in $1.8M a year',
+  calcOut3: '3 · Your email list brings in',
+  calcNote: 'Preview with example numbers. The real calculator uses yours.',
+  calcLabel: 'Preview of the Compounding Revenue Per Visitor OS calculator, revenue per subscriber section',
+  // the preview's example run: 36,000 subscribers × $360,000 → $10 each,
+  // $40 from $50, $1.8M at $50, $360,000 a year
+  example: { subs: '36,000', revenue: '$360,000', rps: 10, gap: 40, gapPct: 20, yearly: 360000 },
 };
 
 export const AD_SPEND = {

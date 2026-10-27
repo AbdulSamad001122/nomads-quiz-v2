@@ -18,6 +18,10 @@ export function resolveTokens(result) {
     // as DISPLAYED so the chip always agrees with them ($4.92 / $0.75 =
     // "6.6×"). Empty when there is no real jump — the hero hides the chip.
     rpv_multiple: rpvMultiple(result.currentRPV, result.goalRPV),
+    // QC row 7 — the RPS cards: today's / goal revenue per subscriber, the
+    // metric table's whole-dollar style ("$5", "$15")
+    rps_now: dollars(result.current.rps),
+    rps_goal: dollars(result.goal.rps),
     // Blocks 5/6 token — UNCHANGED original behaviour (Yemi Sep-15 Q3):
     // $1.5M+ at or above the promise, exact money below. Blocks 5/6 only
     // fire below $1.5M, so in practice they always show the exact figure.

@@ -6,9 +6,7 @@ import RedMetricsWorkshop from './sections/RedMetricsWorkshop.jsx';
 import ResultBlocks from './sections/ResultBlocks.jsx';
 import StopOrPush from './sections/StopOrPush.jsx';
 import WhatIfYouDid from './sections/WhatIfYouDid.jsx';
-import BeyondFourteenDays from './sections/BeyondFourteenDays.jsx';
-import CompoundingIntro from './sections/CompoundingIntro.jsx';
-import CrpsCalculatorCta from './sections/CrpsCalculatorCta.jsx';
+import CompoundingRps from './sections/CompoundingRps.jsx';
 import AdSpendSection from './sections/AdSpendSection.jsx';
 import DataNerds from './sections/DataNerds.jsx';
 import PromiseBanner from './sections/PromiseBanner.jsx';
@@ -74,13 +72,13 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
           later, so they don't get this one. */}
       {!result.cappedState && <StopOrPush tokens={tokens} />}
       <WhatIfYouDid result={result} tokens={tokens} />
-      <BeyondFourteenDays />
       {/* Copy doc blue box "Block 3 — No email marketing … See Logic Doc
-          Blocks 1–3 for the revenue-split copy that renders here" sits
-          between the 14-day section and the Compounding intro. */}
+          Blocks 1–3 for the revenue-split copy that renders here" sat
+          between the 14-day section and the Compounding intro. QC row 7
+          (Oct 2026) merged those (and the calculator CTA) into one section,
+          so the revenue split now leads into it. */}
       <ResultBlocks result={result} tokens={tokens} slot="split" />
-      <CompoundingIntro />
-      <CrpsCalculatorCta />
+      <CompoundingRps result={result} tokens={tokens} />
       {/* Ad module is conditional — doc: only when the taker answered the
           ad-spend questions (result.ad exists). */}
       {result.ad && <AdSpendSection result={result} adAdjustable={adAdjustable} />}
