@@ -1,13 +1,42 @@
-/* Red-metrics workshop — reference design (Sep 21): dark maroon-crumple top
-   with the playful badge, centred headline with cream sweep + curve arrow,
-   cream panel holding the 2×2 quadrant cards (landing FourAreas card
-   language), triple down-arrows, then a white close with the answer copy,
-   workshop button and the diagnostic video thumbnail. */
+/* Red-metrics workshop. QC row 2 (Oct 2026): the dark top follows Alefiya's
+   "Workshop Quadrants V2" design (values from its source) — Midnight Blue
+   ground, the red-metric line as a white box with a pulsing dot, one card per
+   RED metric with a progress bar, four tinted quadrant tiles (a tile that
+   moves a red metric gets a red outline + that metric's number). Brand
+   colours; red/green only as metric status. The white close (answer line,
+   workshop button, video) is unchanged. */
+
+/* V2 sets the headline and numbers in Montserrat Black (900), which the
+   page's own Montserrat stops short of — scoped family, same pattern as the
+   CRPV embed / quiz cards; latin range so arrows and other glyphs fall back. */
+@font-face {
+  font-family: 'RMW Montserrat';
+  src: url('/fonts/Montserrat-Black-latin.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+.rmw {
+  --rmw-midnight: #152638;
+  --rmw-midnight-2: #0f1c2a;
+  --rmw-deep: #250f1c;
+  --rmw-ice: #cae1f4;
+  --rmw-clay: #e0b5a3;
+  --rmw-mute: #9fb2c4;
+  --rmw-red: #e5533f;
+  --rmw-green: #7fd6a4;
+  --rmw-black: 'RMW Montserrat', var(--font-headline);
+}
 
 .rmw__dark {
   position: relative;
-  background: #150a10 url('/assets/results-maroon-crumple.webp') center / cover;
-  padding: 100px clamp(20px, 5vw, 80px) 90px;
+  background: linear-gradient(180deg, var(--rmw-midnight) 0%, var(--rmw-midnight-2) 100%);
+  color: #ffffff;
+  text-align: center;
+  /* bottom room for the down-arrows doodle, so it sits under the tiles */
+  padding: 64px clamp(20px, 4vw, 60px) 140px;
 }
 
 .rmw__badge {
@@ -28,176 +57,392 @@
 }
 
 .rmw__lead {
-  max-width: 37ch;
+  max-width: 540px;
   margin: 0 auto;
-  text-align: center;
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 16px;
-  line-height: 1.5;
-  color: #f4ede6;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #d3dde7;
+}
+
+.rmw__lead .results-em {
+  font-weight: 800;
+  color: #ffffff;
 }
 
 .rmw__headline {
-  /* em-based + balance: reproduces the reference's even 3-line wrap at
-     every font size without a forced line map */
-  max-width: 20em;
+  max-width: 780px;
+  margin: 14px auto 0;
+  font-family: var(--rmw-black);
+  font-weight: 900;
+  font-size: clamp(26px, 3.6vw, 40px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
   text-wrap: balance;
-  margin: 22px auto 0;
-  text-align: center;
-  font-family: var(--font-headline);
-  font-weight: 800;
-  /* page-wide section-headline size (38 → 34 → 26, same as the table) */
-  font-size: 38px;
-  line-height: 1.25;
   color: #ffffff;
 }
 
 .rmw__hl {
-  display: inline;
-  background: #f2e6d8;
-  color: #5d1b4e;
-  padding: 0.04em 0.22em;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
+  color: var(--rmw-ice);
 }
 
+/* ——— the red-metric line: the loudest thing ——— */
 
-.rmw__keeping {
-  max-width: 35ch;
-  margin: 26px auto 0;
-  text-align: center;
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.75;
-  color: #f4ede6;
-}
-
-/* the two live RPV values, chipped per the design */
-.rmw__val {
-  font-weight: 700;
-  padding: 1px 8px;
+.rmw__redbox {
+  margin: 22px auto 0;
+  width: max-content;
+  max-width: 100%;
+  box-sizing: border-box;
+  background: #ffffff;
+  color: var(--rmw-deep);
+  border: 3px solid var(--rmw-red);
+  border-radius: 16px;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  box-shadow: 0 0 0 6px rgba(229, 83, 63, 0.18);
   white-space: nowrap;
 }
 
-.rmw__val--current {
-  background: #5d1b4e;
-  color: white;
-}
-
-.rmw__val--goal {
-  background: #5d1b4e;
-  color: #ffffff;
-}
-
-/* ——— cream panel with the quadrant cards ——— */
-
-.rmw__panel {
-  max-width: 1060px;
-  margin: 54px auto 0;
-  background: #f2e6d8;
-  border-radius: 24px;
-  padding: clamp(28px, 4vw, 52px) clamp(20px, 3.4vw, 48px);
-}
-
-.rmw__ten {
-  text-wrap: pretty; /* no one-word last line */
-  max-width: 60ch;
-  margin: 0 auto;
-  text-align: center;
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 1.5;
-  color: #250f1c;
-}
-
-.rmw__chip {
-  display: block;
-  width: fit-content;
-  margin: 18px auto 0;
-  background: #5d1b4e;
-  color: #ffffff;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: clamp(12px, 1vw, 15px);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 4px 14px;
-}
-
-.rmw__grid {
-  margin-top: 34px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(24px, 3vw, 42px);
-  align-items: stretch;
-}
-
-/* landing FourAreas card language: white, plum keyline, hard offset shadow */
-.rmw__card {
+.rmw__redbox-vals {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  background: #ffffff;
-  border: 1px solid #5d1b4e;
-  border-radius: 12px;
-  padding: clamp(22px, 2.4vw, 32px) clamp(18px, 2vw, 28px);
-  box-shadow: 8px 8px 0 0 #5d1b4e;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
 }
 
-.rmw__icon {
-  display: block;
-  height: 40px;
-  width: auto;
-  object-fit: contain;
-}
-
-/* the envelope's landscape artwork reads bigger than the others at the same
-   height — smaller image inside the same 40px slot (content-box padding), so
-   the four icons feel equal and the chips stay row-aligned */
-.rmw__card:nth-child(4) .rmw__icon {
-  height: 28px;
-  padding: 6px 0;
-  box-sizing: content-box;
-}
-
-.rmw__card-chip {
-  margin-top: 16px;
-  background: #5d1b4e;
-  color: #ffffff;
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: clamp(13px, 1vw, 15px);
-  padding: 2px 10px;
-}
-
-.rmw__card-title {
-  margin-top: 12px;
+.rmw__redbox-lab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--font-body);
   font-weight: 800;
-  font-size: 20px;
-  line-height: 1.3;
-  color: #250f1c;
+  font-size: 16px;
+  line-height: 1.35;
 }
 
-.rmw__card-q {
-  margin-top: 12px;
+.rmw__dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--rmw-red);
+  flex: none;
+  animation: rmw-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes rmw-pulse {
+  50% {
+    box-shadow: 0 0 0 7px rgba(229, 83, 63, 0.18);
+  }
+}
+
+.rmw__n {
+  font-family: var(--rmw-black);
+  font-weight: 900;
+  font-size: 26px;
+  line-height: 1;
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+.rmw__n--now {
+  background: var(--rmw-red);
+  color: #ffffff;
+}
+
+.rmw__n--goal {
+  background: var(--rmw-midnight);
+  color: var(--rmw-ice);
+}
+
+.rmw__of {
   font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  color: #4a3a44;
+}
+
+/* ——— one card per red metric ——— */
+
+.rmw__reds {
+  list-style: none;
+  max-width: 1080px;
+  margin: 18px auto 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.rmw__rm {
+  width: 380px;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+  background: rgba(229, 83, 63, 0.14);
+  border: 2px solid var(--rmw-red);
+  border-radius: 12px;
+  padding: 10px 12px;
+  text-align: left;
+}
+
+.rmw__rtop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rmw__st {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  border-radius: 999px;
+  padding: 2px 8px;
+  background: var(--rmw-red);
+  color: #ffffff;
+}
+
+.rmw__links {
+  display: flex;
+  gap: 4px;
+}
+
+.rmw__links b {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 11px;
+  background: var(--rmw-ice);
+  color: var(--rmw-midnight);
+  border-radius: 4px;
+  padding: 3px 6px;
+}
+
+.rmw__t {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #ffffff;
+}
+
+.rmw__big {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+}
+
+.rmw__now {
+  font-family: var(--rmw-black);
+  font-weight: 900;
+  font-size: 34px;
+  line-height: 1;
+  color: #ffffff;
+  background: var(--rmw-red);
+  border-radius: 8px;
+  padding: 2px 8px;
+}
+
+.rmw__wt {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 12.5px;
+  color: #d3dde7;
+}
+
+.rmw__goal {
+  font-family: var(--rmw-black);
+  font-weight: 900;
+  font-size: 26px;
+  line-height: 1;
+  color: #0f3a24;
+  background: var(--rmw-green);
+  border-radius: 8px;
+  padding: 2px 8px;
+}
+
+/* today -> goal bar: red fill to today, green marker at the goal */
+.rmw__gt {
+  position: relative;
+  height: 12px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.14);
+  margin-top: 6px;
+}
+
+.rmw__fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 6px;
+  background: var(--rmw-red);
+}
+
+.rmw__mark {
+  position: absolute;
+  top: -5px;
+  width: 4px;
+  height: 22px;
+  margin-left: -2px;
+  border-radius: 2px;
+  background: var(--rmw-green);
+  box-shadow: 0 0 0 3px rgba(127, 214, 164, 0.25);
+}
+
+.rmw__gx {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  height: 14px;
+  font-family: var(--font-mono);
   font-weight: 500;
+  font-size: 10.5px;
+  color: var(--rmw-mute);
+}
+
+.rmw__gl {
+  position: absolute;
+  transform: translateX(-50%);
+  color: var(--rmw-green);
+  font-weight: 700;
+}
+
+/* ——— intro + the four quadrants ——— */
+
+.rmw__ten {
+  max-width: 660px;
+  margin: 30px auto 0;
+  font-family: var(--font-body);
+  font-weight: 600;
   font-size: 16px;
   line-height: 1.55;
-  color: #250f1c;
+  color: #e6edf3;
+  text-wrap: pretty;
 }
 
-/* bold runs in the card questions keep the browser's default <strong>
-   weight (700) — the 800 read too heavy (user, Sep 21) */
+.rmw__ten .results-em {
+  font-family: var(--rmw-black);
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.rmw__tap {
+  margin: 10px auto 0;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--rmw-clay);
+}
+
+.rmw__quads {
+  max-width: 1080px;
+  margin: 14px auto 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  text-align: left;
+}
+
+.rmw__q {
+  box-sizing: border-box;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--rmw-deep);
+  border: 3px solid;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.35);
+}
+
+/* each tile its own pale tint (V2) */
+.rmw__q--1 { background: #e2f0fb; border-color: #e2f0fb; }
+.rmw__q--2 { background: #efe4ec; border-color: #efe4ec; }
+.rmw__q--3 { background: #f7eee8; border-color: #f7eee8; }
+.rmw__q--4 { background: #ffffff; border-color: #ffffff; }
+
+/* a tile that moves one of the taker's red metrics */
+.rmw__q--linked {
+  border-color: var(--rmw-red);
+  box-shadow: 5px 5px 0 var(--rmw-red);
+}
+
+.rmw__qtop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.rmw__qn {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--rmw-midnight);
+  color: #ffffff;
+  border-radius: 4px;
+  padding: 3px 8px;
+}
+
+.rmw__rcs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.rmw__rc {
+  font-family: var(--rmw-black);
+  font-weight: 900;
+  font-size: 12px;
+  background: var(--rmw-red);
+  color: #ffffff;
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+
+.rmw__qt {
+  margin: 0;
+  font-family: var(--rmw-black);
+  font-weight: 900;
+  font-size: 17px;
+  line-height: 1.25;
+  color: var(--rmw-midnight);
+}
+
+.rmw__qq {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #2b2530;
+}
+
+.rmw__qq .results-em {
+  font-weight: 800;
+  color: var(--rmw-midnight);
+}
 
 .rmw__down {
   position: absolute;
   right: clamp(16px, 4.5%, 70px);
-  bottom: 44px;
+  bottom: 28px;
   width: clamp(44px, 5vw, 70px);
   height: auto;
   pointer-events: none;
@@ -251,15 +496,15 @@
 
 /* ——— responsive ——— */
 
-@media (max-width: 1100px) {
-  .rmw__headline {
-    font-size: 34px;
+@media (max-width: 960px) {
+  .rmw__quads {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 900px) {
   .rmw__dark {
-    padding: 120px 20px 80px;
+    padding: 90px 20px 80px;
   }
   .rmw__badge {
     width: 92px;
@@ -269,45 +514,62 @@
   }
 }
 
+/* the one-line red-metric box needs ~760px; below 900 it may wrap */
+@media (max-width: 900px) {
+  .rmw__redbox {
+    flex-wrap: wrap;
+    white-space: normal;
+  }
+}
+
 @media (max-width: 760px) {
   /* badge is out on mobile (user, Sep 21) */
   .rmw__badge {
     display: none;
   }
-  .rmw__grid {
-    grid-template-columns: 1fr;
-    max-width: 480px;
-    margin-left: auto;
-    margin-right: auto;
-  }
 }
 
+/* phones: headline/intro run past 3 lines, so the text reads left-aligned
+   (design-v2 0.9, as this section already did); cards + tiles full width */
 @media (max-width: 560px) {
   .rmw__dark {
-    padding: 50px 16px 64px;
+    padding: 50px 16px 56px;
   }
-  .rmw__lead {
+  .rmw__lead,
+  .rmw__headline,
+  .rmw__ten,
+  .rmw__tap {
     text-align: left;
-  }
-  .rmw__headline {
-    font-size: 26px;
-    text-align: left;
-    text-wrap: balance;
-  }
-  .rmw__keeping {
-    text-align: left;
-    line-height: 2;
-  }
-  .rmw__panel {
-    padding: 24px 16px;
-    border-radius: 18px;
-  }
-  .rmw__ten {
-    text-align: left;
+    margin-left: 0;
   }
   .rmw__thumb {
     width: 100%;
     margin-top: 36px;
     border-radius: 4px;
+  }
+}
+
+@media (max-width: 520px) {
+  .rmw__quads {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* narrow phones: long values ("$250.00 instead of $6500.00") must still fit —
+   slightly smaller figures, and the trio may break only if it has to */
+@media (max-width: 420px) {
+  .rmw__n {
+    font-size: 22px;
+  }
+  .rmw__redbox-vals {
+    flex-wrap: wrap;
+    justify-content: center;
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rmw__dot {
+    animation: none;
   }
 }

@@ -145,6 +145,23 @@ export const RED_CALLOUT = {
  */
 export const RED_METRICS = {
   lead: 'It’s one thing to know WHICH metrics are red, but another to know WHAT is keeping them red.',
+  // QC row 2 (Oct 2026) — "Workshop Quadrants V2" design: WHICH / WHAT bold.
+  leadBold: ['WHICH', 'WHAT'],
+  // One card per RED metric under the red-metric line (V2). Phrases verbatim
+  // from the design; the card's question is the metric table's own label
+  // for the taker's path ("The red metric labels follow the results table").
+  redChip: 'RED',
+  whereasPct: 'whereas it should be around',
+  whereasRps: 'whereas it needs to be',
+  rpsTail: 'to bring in $1.5M',
+  // Which quadrants move which metric. The V2 designer's own note: "Mapping
+  // to confirm: Q1 → opt-in rate; Q2 and Q3 → buying action and completion;
+  // Q4 → Revenue Per Subscriber™. This is my reading of the framework, so
+  // please check it before build." No doc states it otherwise — built as
+  // designed, FLAGGED for Alefiya. Change it here only.
+  metricQuadrants: { optIn: [1], lead: [2, 3], close: [2, 3], rps: [4] },
+  // "10 questions" / "4 quadrants" bold in the intro line (V2).
+  tenBold: ['10 questions', '4 quadrants'],
   // Headline split for the cream sweep on "Reason Behind". Title Case per
   // the reference (casing rule); the ™ stays per the doc even though the
   // design drops it (same standing flag as NAV/formula).
@@ -159,7 +176,7 @@ export const RED_METRICS = {
   // Alefiya confirmed). Yemi's first option.
   tenQuestions:
     'I’ve created a workshop that takes you and your team through 10 questions across 4 quadrants to find out exactly why each red metric is red.',
-  // Renders as the mono chip "FOR EXAMPLE" (uppercase via CSS).
+  // V2 shows it as a small mono label in sentence case ("For example").
   forExample: 'For example',
   // Chip + title split per the design ("Quadrant 01" chip above the name);
   // doc writes them inline ("Quadrant 1 – …"). Card 1 shows "per" lowercase
