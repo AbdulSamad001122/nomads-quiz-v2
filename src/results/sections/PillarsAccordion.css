@@ -130,6 +130,45 @@
   padding: 0;
 }
 
+/* ——— both CTAs at the end of each open pillar (QC row 10): centred,
+   the nav / red-callout button style; colours from results.css --rbtn-*
+   (booking colour pending, QC row 11) ——— */
+
+.rpl__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 16px 22px;
+  padding: 44px 32px 50px;
+}
+
+.rpl__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.3;
+  color: #250f1c;
+  text-decoration: none;
+  text-align: center;
+  padding: 15px 26px;
+  border: 2px solid #0f0a10;
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.55);
+}
+
+.rpl__btn--workshop {
+  background: var(--rbtn-workshop-bg);
+}
+
+.rpl__btn--book {
+  background: var(--rbtn-book-bg);
+  font-size: 17px;
+  padding: 17px 30px;
+}
+
 /* ——— variants ——— */
 
 .rpl__item--pink {
@@ -242,6 +281,16 @@
   }
   .rpl__panel {
     padding: 0;
+  }
+  /* phones: the two buttons stack full width */
+  .rpl__ctas {
+    flex-direction: column;
+    padding: 30px 16px 34px;
+  }
+  .rpl__btn,
+  .rpl__btn--book {
+    font-size: 15px;
+    padding: 14px 18px;
   }
 }
 
