@@ -684,6 +684,8 @@
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 13px;
+  /* room for the "20,000 subscribers" chip when it wraps to a new line */
+  line-height: 1.7;
   color: var(--rcs-mute);
 }
 
@@ -693,7 +695,7 @@
   font-family: var(--rcs-black);
   font-weight: 900;
   font-size: 14px;
-  padding: 2px 7px;
+  padding: 1px 6px;
   border-radius: 5px;
   white-space: nowrap;
 }
@@ -741,7 +743,7 @@
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 13px;
-  line-height: 1.4;
+  line-height: 1.7;
 }
 
 .rcs__plus {
@@ -1033,6 +1035,25 @@
     width: 100%;
     justify-content: center;
     text-align: center;
+  }
+}
+
+/* smallest phones: tier value under its label (the "$50" chip ran into
+   "$1,000,000" at 320) and the calculator's "$40 away" kept on one line */
+@media (max-width: 359px) {
+  .rcs__tier {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .rcs__tv {
+    grid-row: auto;
+    grid-column: 1;
+  }
+  .rcs__tv small {
+    display: inline;
+    margin-left: 6px;
+  }
+  .rcs__ov--gap {
+    font-size: 32px;
   }
 }
 
