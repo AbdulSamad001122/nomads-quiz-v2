@@ -42,8 +42,14 @@ export default function DataNerds() {
 
           <p className="rdn__chip">{c.chip}</p>
 
-          {/* TODO: real RPV-by-channel URL when provided */}
-          <a className="q-btn rdn__btn" href="#" onClick={() => ga.ctaClick('rpv_by_channel')}>
+          {/* the Compounding RPV™ OS calculator, in a new tab */}
+          <a
+            className="q-btn rdn__btn"
+            href={c.buttonHref}
+            target="_blank"
+            rel="noopener"
+            onClick={() => ga.ctaClick('rpv_by_channel')}
+          >
             {c.button}
           </a>
         </div>
