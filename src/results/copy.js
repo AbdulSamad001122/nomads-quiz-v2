@@ -537,6 +537,10 @@ export const DATA_NERDS = {
   channels: ['Paid', 'Organic', 'Referral', 'Email', 'Social'],
   chip: 'Whatever you’ve got.',
   button: 'Calculate My RPV By Channel →',
+  // Alefiya's Loom (7:12–7:24, Oct QC): "the spreadsheets need to be properly
+  // hyperlinked" — she opens the Compounding Revenue Per Visitor™ OS
+  // calculator, whose first tab is revenue per visitor by channel.
+  buttonHref: 'https://nomads-spreadsheet-calculator.lovable.app/',
 };
 
 export const PROMISE_BANNER = {
