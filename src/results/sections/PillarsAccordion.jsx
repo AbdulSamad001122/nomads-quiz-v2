@@ -1,5 +1,7 @@
 import { useLayoutEffect, useRef, useState } from 'react';
-import { PILLARS } from '../copy.js';
+import { CTA, PILLARS } from '../copy.js';
+import { keepTogether } from '../keepTogether.jsx';
+import { ga } from '../../analytics/ga.js';
 import PillarOneIntro from './PillarOneIntro.jsx';
 import PillarOneUlcers from './PillarOneUlcers.jsx';
 import PillarOneCurious from './PillarOneCurious.jsx';
@@ -30,6 +32,11 @@ import './PillarsAccordion.css';
  * Section — the four-pillar accordion. Each bar toggles open; the pillar
  * content sections (doc rows 6–9) mount inside the panels once designed —
  * pass them via the PANELS map below.
+ *
+ * QC row 10 (Oct 2026): pillar 1 starts open, only one pillar is open at a
+ * time (opening another closes the open one), and every pillar ends with
+ * both CTAs — "Watch the hands-on workshop with your team" / "Book your
+ * Next $125k/mo Game-Plan Call" — centred, styled like the nav buttons.
  */
 const PANELS = {
   '01': (
@@ -75,8 +82,33 @@ const PANELS = {
   ),
 };
 
+/* both CTAs under each pillar (QC row 10), the doc's exact words */
+function PillarCtas() {
+  return (
+    <div className="rpl__ctas">
+      <a
+        className="rpl__btn rpl__btn--workshop"
+        href={CTA.workshop.href}
+        onClick={() => ga.ctaClick(CTA.workshop.id)}
+      >
+        {keepTogether(CTA.workshop.label, CTA.workshop.keepTogether)}
+      </a>
+      <a
+        className="rpl__btn rpl__btn--book"
+        href={CTA.book.href}
+        target="_blank"
+        rel="noopener"
+        onClick={() => ga.ctaClick(CTA.book.id)}
+      >
+        {keepTogether(CTA.book.label, CTA.book.keepTogether)}
+      </a>
+    </div>
+  );
+}
+
 export default function PillarsAccordion() {
-  const [open, setOpen] = useState(null);
+  // pillar 1 open by default (QC row 10); one open at a time
+  const [open, setOpen] = useState('01');
 
   // The open panel runs to ~11,000px. Switching pillars collapses all of that
   // from *above* the bar you tapped, and the browser holds scrollY where it
@@ -130,7 +162,12 @@ export default function PillarsAccordion() {
                   <path d="M2 2 L10 12 L18 2 Z" fill="currentColor" />
                 </svg>
               </button>
-              {isOpen && PANELS[p.num] && <div className="rpl__panel">{PANELS[p.num]}</div>}
+              {isOpen && PANELS[p.num] && (
+                <div className="rpl__panel">
+                  {PANELS[p.num]}
+                  <PillarCtas />
+                </div>
+              )}
             </div>
           );
         })}
