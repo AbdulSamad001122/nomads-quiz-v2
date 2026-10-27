@@ -10,15 +10,17 @@
   padding: 44px 48px 40px;
 }
 
+/* wide enough for the headline's one desktop line, as in the reference;
+   the table keeps its own 980px */
 .rmx__inner {
-  max-width: 1000px;
+  max-width: 1184px;
   margin: 0 auto;
 }
 
 /* ——— headline + subline ——— */
 
 .rmx__headline {
-  max-width: 900px;
+  max-width: none;
   margin: 0 auto;
   font-family: var(--font-headline);
   font-weight: 800;
