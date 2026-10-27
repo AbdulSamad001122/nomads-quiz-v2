@@ -94,7 +94,7 @@ export default function RedMetricsWorkshop({ result, tokens }) {
                   <span className="rmw__now">{row.current}</span>
                   <span className="rmw__wt">{isRps ? c.whereasRps : c.whereasPct}</span>
                   <span className="rmw__goal">{row.goal}</span>
-                  {isRps && <span className="rmw__wt">{c.rpsTail}</span>}
+                  {isRps && !result.cappedState && <span className="rmw__wt">{c.rpsTail}</span>}
                 </div>
                 <div className="rmw__gt" role="img" aria-label={`${row.current} today, ${row.goal} goal`}>
                   <i className="rmw__fill" style={{ width: `${s.fill}%` }} />
