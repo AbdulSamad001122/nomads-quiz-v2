@@ -7,7 +7,7 @@ import { calculate, runImprovementLoop, metricColour, CEILINGS } from './calcula
 import { resolveInputs } from './backendValues.js';
 import { validateManual, impossibleCheck } from './validation.js';
 import { rpv2 } from './rounding.js';
-import { anyMetricRed, redMetricRows, rpvMultiple } from '../results/resolveTokens.js';
+import { anyMetricRed, redMetricRows, rpvMultiple, resolveTokens } from '../results/resolveTokens.js';
 
 let pass = 0,
   fail = 0;
@@ -156,6 +156,11 @@ const near = (a, b, tol = 1e-6) => Math.abs(a - b) <= tol;
   // High-RPV business: 12× today is above the ceiling RPV → the ceiling wins
   const hi = calculate({ q2: 810000, q7: 7500, q7b: null, q7c: undefined, q8: 3000, q9a: 0.125, q9b: 0.375, q10: 175, q11: 600000 }, 'plg');
   ok('12× · high RPV → ceiling wins, not capped at 12×', !hi.capped.maxCappedAt12 && hi.capped.maxRPV === hi.capped.ceilingRPV);
+  // High traffic, tiny RPV ($0.125 → shown $0.13): the capped chip still
+  // reads exactly "12×", not "11.5×" from cent-rounded values
+  const tiny = calculate({ q2: 270000, q7: 180000, q7b: null, q7c: undefined, q8: 3000, q9a: 0.03, q9b: 0.375, q10: 175, q11: 62500 }, 'plg');
+  ok('12× · tiny RPV still capped at 12×', tiny.capped.maxCappedAt12, tiny.currentRPV);
+  ok('12× · tiny RPV chip reads "12×"', resolveTokens(tiny).max_multiple === '12×', resolveTokens(tiny).max_multiple);
   ok('12× · max never above 12× today', hi.capped.maxRPV <= 12 * hi.currentRPV + 1e-9 && ex.capped.maxRPV <= 12 * ex.currentRPV + 1e-9);
 
   // Edge case answered in the doc: a $60K/yr business needs ~26× to add

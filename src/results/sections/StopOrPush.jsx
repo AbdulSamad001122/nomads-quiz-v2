@@ -34,6 +34,9 @@ function placeLabels(ladder) {
     val.classList.toggle('rso__val--inside', inside);
     val.classList.toggle('rso__val--nochip', nochip);
     val.style.left = inside ? '' : `${fillW + 10}px`;
+    // inside: right-aligned to the end of ITS fill (the CSS right: 12px
+    // alone would pin it to the end of the track, off a short fill)
+    val.style.right = inside ? `${trackW - fillW + 12}px` : '';
   });
 }
 
@@ -135,7 +138,11 @@ export default function StopOrPush({ result, tokens }) {
               <small>{c.maxMegaSub}</small>
             </p>
             <div className="rso__row">
-              <span className="rso__x">{t(c.maxTotal)}</span>
+              <span className="rso__x">
+                {t(c.maxTotal.split('{{max_multiple}}')[0])}
+                <b className="rso__x-mult">{tokens.max_multiple}</b>
+                {t(c.maxTotal.split('{{max_multiple}}')[1] || '')}
+              </span>
               <span className="rso__yep">{c.maxYep}</span>
             </div>
           </div>
