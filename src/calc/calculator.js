@@ -19,6 +19,9 @@ export const CEILINGS = {
 
 const TARGET_EXTRA = 1_500_000;
 
+/** The "all 5 metrics at max" RPV can never exceed this × today (QC, Oct 2026). */
+export const MAX_RPV_MULTIPLE = 12;
+
 /**
  * @param inputs { q2, q7, q7b, q7c, q8, q9a, q9b, q10, q11 } numeric backend values
  * @param path   'plg' | 'slg'
@@ -71,9 +74,16 @@ export function calculate(inputs, path) {
   const splitSuppressed = otherRevenue < 0;
   const emailPercentage = round5((emailPathRevenue / currentAnnualRevenue) * 100);
 
-  // Capped-state maths (Blocks 5–7) — always computed; used only when !goalReached
-  const maxRPV =
+  // Capped-state maths (Blocks 5–7) — always computed; used only when capped.
+  // 12× cap (Result page QC, "Added Logic.docx", Oct 2026): "The max revenue
+  // per visitor is the lower of two numbers: the revenue per visitor with all
+  // five metrics at their ceilings, or 12 × current revenue per visitor. Max
+  // added revenue = (max RPV − current RPV) × annual visitors." So the "all
+  // 5 metrics at max" figure can never be more than 12× today.
+  const ceilingRPV =
     (annualVisitors * CEILINGS.optIn * CEILINGS.rps + nonListRevenue) / annualVisitors;
+  const maxRPV = Math.min(ceilingRPV, MAX_RPV_MULTIPLE * currentRPV);
+  const maxCappedAt12 = ceilingRPV > MAX_RPV_MULTIPLE * currentRPV;
   const achievableGainRaw = annualVisitors * maxRPV - currentAnnualRevenue;
   const achievableGain = Math.max(0, achievableGainRaw);
   // Guard: the achievable gain can already exceed $1.5M (e.g. a business with
@@ -85,9 +95,13 @@ export function calculate(inputs, path) {
   const additionalDailyVisitors = additionalAnnualVisitors / 365;
   const trafficWithinReach = additionalAnnualVisitors <= 20 * annualVisitors;
 
-  // Which block fires for the 4/5/6/7 slot
+  // Which block fires for the 4/5/6/7 slot. The goal must also fit under
+  // the 12× cap: "for very small businesses the $1.5M goal itself can be more
+  // than 12× today … blocks 5, 6, and 7 in the logic doc has the copy to
+  // replace the 'push metrics to their max' section" (Added Logic.docx).
+  const goalWithinCap = goalRPV <= maxRPV + 1e-9;
   let cappedBlock;
-  if (goalReached) cappedBlock = 4;
+  if (goalReached && goalWithinCap) cappedBlock = 4;
   else if (achievableGainRaw <= 0) cappedBlock = 7;
   else if (trafficWithinReach) cappedBlock = 5;
   else cappedBlock = 6;
@@ -133,6 +147,9 @@ export function calculate(inputs, path) {
     cappedBlock,
     capped: {
       maxRPV,
+      ceilingRPV,
+      maxCappedAt12,
+      goalWithinCap,
       achievableGain,
       remainingGap,
       additionalDailyVisitors,

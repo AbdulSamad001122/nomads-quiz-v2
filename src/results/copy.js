@@ -1456,20 +1456,11 @@ export const WORKSHOP_INVITE = {
 };
 
 export const WHAT_IF = {
-  // Doc (row 1): "But... what if you did?" — design sets a true ellipsis;
-  // rendered as shown in the reference (flagged).
-  kicker: 'But… what if you did?',
-  // Doc: "If you hit the maximum benchmark across all five conversion
-  // points, your existing traffic could add {{achievable_gain}}/year (yep,
-  // with the same traffic!)" — 3-line map from the design; design
-  // capitalises "Your" at the line start and lifts the parenthetical into
-  // the plum banner in title case without the parens (flagged).
-  headLine1: 'If you hit the maximum benchmark',
-  headLine2: 'across all five conversion points,',
-  headLine3Before: 'Your existing traffic could add',
-  headLine3After: '/year',
-  banner: 'Yep, With The Same Traffic!',
-  note: 'More on how to max these metrics in the upcoming workshop.',
+  // QC row 5 (Oct 2026): the "But… what if you did?" kicker, the max-gain
+  // headline, the "Yep, with the same traffic!" banner and the workshop note
+  // now live inside the merged STOP_OR_PUSH section (design: "one message,
+  // one section"). What stays here is the GolfBays proof card, which QC row
+  // 6 restyles separately.
   // GolfBays proof card. The bold recap line is design-added (flagged);
   // the accent spans follow the design. Body is the doc's box copy
   // verbatim — the doc's em-dash before "without" is kept (design drops
@@ -1488,23 +1479,98 @@ export const WHAT_IF = {
   golfType: 'E-commerce company',
 };
 
+/**
+ * "You can stop at $1.5M. Or push all 5 metrics to their max." — QC row 5
+ * (Oct 2026), rebuilt to Alefiya's "RPV Max Upside Section" design
+ * (claude.ai artifact linked in the QC doc, comment C7: "the new way I want
+ * this to be presented — so it shows the whole idea in one go"). Words are
+ * the design's; casing as it shows them (uppercase eyebrows via CSS, like
+ * the design). {{tokens}} resolve per taker (resolveTokens.js). Comment C5
+ * ("make this bold headline") → the two sentences are the section headline.
+ */
 export const STOP_OR_PUSH = {
-  // Doc (row 1): "You can stop at $1.5M. Or push all 5 metrics to their
-  // max." — design renders "or" lowercase mid-sentence; design casing kept
-  // (flagged). Lead line above the headline.
-  lead: 'You can stop at $1.5M. or push all 5 metrics to their max.',
-  // Doc: "By increasing your Revenue Per Visitor™ from {{current_rpv}} →
-  // {{goal_rpv}}, you could add $1.5M/year ($125K/mo) without adding a
-  // penny to your current marketing and ad spend." The design splits this
-  // into a 3-line headline ending at "($125K/mo)" and moves "without
-  // adding…" to a body line with a capital W; the doc's comma after the
-  // goal token and lowercase "you could" are dropped/capitalised per the
-  // design (flagged). Tokens resolve to the taker's live RPVs.
-  headLine1: 'By increasing your Revenue Per',
-  headLine2Before: 'Visitor™ from',
-  headLine3: 'You could add $1.5M/year ($125K/mo)',
-  bodyLine1: 'Without adding a penny to your current marketing and ad spend.',
-  bodyLine2: 'And nope, you don’t need to max out all 5 metrics to get there.',
-  // The "PLAYFUL, YET HIGHLY PROFITABLE" compass stamp (Group 225) on the
-  // top-left seam is design-only wayfinding — flagged.
+  // Headline: each sentence on its own line (two block spans, not <br>).
+  head1Before: 'You can',
+  head1Hl: 'stop at $1.5M',
+  head1After: '.',
+  head2Before: 'Or push all 5 metrics',
+  head2Hl: 'to their max',
+  head2After: '.',
+
+  // Card A — the goal (deliberately the smaller card, design note 3)
+  stopEyebrow: 'Stop here · your goal',
+  stopRpvBefore: 'By increasing your Revenue Per Visitor™ from',
+  stopBig: '+$1.5M/year',
+  stopBigSub: '($125K/mo)',
+  stopBody: 'Without adding a penny to your current marketing and ad spend.',
+  stopBodyBold: 'marketing and ad spend',
+  stopNope: 'And nope, you don’t need to max out all 5 metrics to get there.',
+
+  // the joint between the two cards
+  but: 'But… what if you did?',
+
+  // Card B — the max (12× cap, calculator.js / Added Logic.docx)
+  maxEyebrow: 'Or go all the way · max benchmark',
+  maxIf: 'If you hit the maximum benchmark across all five conversion points,',
+  maxIfBold: 'maximum benchmark across all five conversion points',
+  maxLead: 'your existing traffic could add',
+  maxMega: '{{max_gain}}',
+  maxMegaSub: '/year',
+  maxTotal: '~{{max_total}} total: {{max_multiple}} today',
+  maxYep: 'Yep, with the same traffic!',
+
+  // "Where you are, and where you could go" — revenue drawn to scale.
+  // The design's "Today's revenue is worked back from your numbers…" line
+  // explained its mock-up estimate; design note 8: "'today' must use each
+  // person's real current revenue" — so the build uses the taker's own
+  // yearly revenue and the explainer line is dropped (flagged).
+  ladderHead: 'Where you are, and where you could go',
+  ladderSub: 'Your yearly revenue, drawn to scale. Same visitors in every row.',
+  rowToday: 'Today',
+  rowTodaySub: 'RPV {{current_rpv}}',
+  rowTodayVal: '~{{current_total}}/year',
+  rowGoal: 'Stop at your goal',
+  rowGoalSub: 'RPV {{goal_rpv}} · +$1.5M',
+  rowGoalVal: '~{{goal_total}}/year',
+  rowGoalChip: '{{rpv_multiple}} today',
+  rowMax: 'All 5 metrics at max',
+  // "capped at 12× ·" only shows when the 12× cap actually bites
+  rowMaxSubCapped: 'capped at 12× · RPV {{max_rpv}} · +{{max_gain}}',
+  rowMaxSub: 'RPV {{max_rpv}} · +{{max_gain}}',
+  rowMaxVal: '~{{max_total}}/year',
+  rowMaxChip: '{{max_multiple}} today',
+
+  // Scepticism block (design note 5) — Alefiya admits 12× is a stretch.
+  // Shown only when the taker's max is capped at 12× (the case it is written
+  // for: "Yes, 12× sounds like a stretch" / "Your ceiling" = 12×); a taker
+  // whose ceiling is lower never sees "12×" claims (flagged).
+  whoName: 'Alefiya Khorakiwala',
+  whoRole: 'Co-founder, Nomads Marketing',
+  realEyebrow: 'Yes, 12× sounds like a stretch',
+  realHead: 'It is a stretch, which is why nobody gets there in one jump.',
+  realP1: 'You don’t fix all five metrics at once. You fix the first red one and get a 2–3× jump. Then you fix the next, and you’re closer to 5×. Then the next, and the next.',
+  realP2: 'It might take two or three years. But you’ll know exactly how to grow month on month and year on year, because Revenue Per Visitor™ gives you a north star to diagnose every growth problem, and the workshop shows you how to clear each metric.',
+  realP2Bold: 'Revenue Per Visitor™ gives you a north star to diagnose every growth problem',
+  // "The middle steps are illustrative, not promised" (design note 5)
+  stairs: [
+    { x: '1×', cap: 'Today' },
+    { x: '3×', cap: 'Fix metric 1' },
+    { x: '5×', cap: 'Fix metric 2' },
+    { x: '8×', cap: 'Fix metric 3' },
+    { x: '12×', cap: 'Your ceiling, where our clients have reached' },
+  ],
+  stairsLabel: 'Growth steps: today 1×, first metric fixed 3×, second 5×, third 8×, ceiling 12×',
+  proofHead: 'We’ve done 12× and more for clients',
+  // Design note 5: "pull 2–3 client results of 12× or more from the
+  // homepage into the proof cards". Card 1 is the design's; cards 2–3 are
+  // pulled from nomadsmarketing.co (Oct 27) in the homepage's own words —
+  // FLAGGED for Alefiya / Jimmy to confirm.
+  proof: [
+    { name: 'Video Mastermind', big: '13.5×', small: '$8,000/month → $108,000/month' },
+    { name: 'Golfbays', big: '0.044% → 14%', small: 'demo booking rate, £96,000+ in 12 days' },
+    { name: 'Executive coach', big: '7,706%', small: 'list growth in 72 hours' },
+  ],
+
+  // closing line + the shared workshop CTA (CTA.workshop in this file)
+  next: 'More on how to max these metrics in the upcoming workshop.',
 };
