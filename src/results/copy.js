@@ -345,8 +345,11 @@ export const RPS_CARDS = {
   // starting point, not the end game" would contradict card 4 — only the
   // first sentence shows (flagged). For capped takers (who can't reach
   // $1.5M) and takers whose RPS doesn't need to rise, the headline is the
-  // old section's approved line instead, and card 1 / card 5 (which assume
-  // reaching $1.5M) are left out (flagged).
+  // old section's approved line instead and card 1 (today → goal RPS) is
+  // left out. Capped takers also lose card 5 ("on top of your $1.5M") and
+  // the "Beyond your $1.5M" kicker; non-capped takers keep card 5, which
+  // is still true for them (flagged). Card 4's "up to $50" is the design's
+  // fixed benchmark even for takers already above $50 (flagged).
   headFallback: 'This is where Compounding Revenue Per Subscriber™ comes in.',
 
   // the carousel controls

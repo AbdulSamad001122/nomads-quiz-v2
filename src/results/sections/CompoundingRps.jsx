@@ -307,7 +307,8 @@ export default function CompoundingRps({ result, tokens }) {
     <section className="rcs">
       <div className="rcs__inner">
         <div className="rcs__head">
-          <span className="rcs__k">{c.kicker}</span>
+          {/* capped takers can't reach $1.5M, so no "Beyond your $1.5M" */}
+          {!result.cappedState && <span className="rcs__k">{c.kicker}</span>}
           {lifts ? (
             <h2 className="rcs__h2">
               {c.headBefore} <span className="rcs__hn">{c.headPromise}</span> {c.headMid}{' '}
