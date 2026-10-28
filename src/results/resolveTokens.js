@@ -72,14 +72,36 @@ const dollars = (x) => `$${Math.round(x)}`;
  */
 export function metricRows(result) {
   const r = result;
+  const row = (key, whole, fine) => {
+    const [current, goal] = liftPair(r.current[key], r.goal[key], whole, fine);
+    return { key, current, goal, colour: metricColour(key, r.current[key], r.path) };
+  };
   return [
     { key: 'rpv', current: rpvMoney(r.currentRPV), goal: rpvMoney(r.goalRPV), colour: 'none' },
-    { key: 'optIn', current: pct(r.current.optIn), goal: pct(r.goal.optIn), colour: metricColour('optIn', r.current.optIn, r.path) },
-    { key: 'lead', current: pct(r.current.lead), goal: pct(r.goal.lead), colour: metricColour('lead', r.current.lead, r.path) },
-    { key: 'close', current: pct(r.current.close), goal: pct(r.goal.close), colour: metricColour('close', r.current.close, r.path) },
-    { key: 'rps', current: dollars(r.current.rps), goal: dollars(r.goal.rps), colour: metricColour('rps', r.current.rps, r.path) },
+    row('optIn', pct, PCT_FINE),
+    row('lead', pct, PCT_FINE),
+    row('close', pct, PCT_FINE),
+    row('rps', dollars, USD_FINE),
   ];
 }
+
+/* today → goal for one metric: whole numbers as usual, but when rounding
+   would show the same number for a real lift ("3% → 3%"), both get more
+   precision (QC answer Y1, Oct 28): percentages one decimal ("3.0% → 3.3%"),
+   two if one isn't enough; money in cents ("$2.20 → $2.42"). */
+function liftPair(cur, goal, whole, fine) {
+  const a = whole(cur);
+  const b = whole(goal);
+  if (!(goal > cur) || a !== b) return [a, b];
+  for (const d of fine.steps) {
+    const x = fine.fmt(cur, d);
+    const y = fine.fmt(goal, d);
+    if (x !== y) return [x, y];
+  }
+  return [a, b];
+}
+const PCT_FINE = { steps: [1, 2], fmt: (x, d) => `${(x * 100).toFixed(d)}%` };
+const USD_FINE = { steps: [2], fmt: (x, d) => `$${x.toFixed(d)}` };
 
 /**
  * Gate for the red-metrics workshop section (Updated Result Page Copy.docx,

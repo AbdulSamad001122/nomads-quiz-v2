@@ -318,6 +318,27 @@ const near = (a, b, tol = 1e-6) => Math.abs(a - b) <= tol;
 }
 
 /* =========================================================
+   METRIC TABLE ROUNDING (QC answer Y1, Oct 28)
+   ========================================================= */
+{
+  const { metricRows } = await import('../results/resolveTokens.js');
+  // no-email PLG taker: buying action 3% → goal 3.3% rounds to "3% → 3%"
+  const ne = calculate({ q2: 810000, q7: 30000, q7b: null, q7c: undefined, q8: 3000, q9a: 0.03, q9b: 0.375, q10: 175, q11: 0 }, 'plg');
+  const lead = metricRows(ne).find((r) => r.key === 'lead');
+  ok('Y1 · hidden lift shows one decimal', lead.current === '3.0%' && lead.goal === '3.3%', `${lead.current} → ${lead.goal}`);
+  // a visible lift keeps whole numbers
+  const opt = metricRows(ne).find((r) => r.key === 'optIn');
+  ok('Y1 · visible lift stays whole', /^\d+%$/.test(opt.current) && /^\d+%$/.test(opt.goal) && opt.current !== opt.goal, `${opt.current} → ${opt.goal}`);
+  // no lift (goal = today) stays whole
+  const same = metricRows({ currentRPV: 1, goalRPV: 1, path: 'plg', current: { optIn: 0.5, lead: 0.2, close: 0.75, rps: 50 }, goal: { optIn: 0.5, lead: 0.2, close: 0.75, rps: 50 } });
+  ok('Y1 · no lift keeps whole numbers', same.find((r) => r.key === 'lead').current === '20%' && same.find((r) => r.key === 'rps').goal === '$50');
+  // money: $2.20 → $2.42 instead of "$2 → $2"
+  const money = metricRows({ currentRPV: 1, goalRPV: 2, path: 'plg', current: { optIn: 0.1, lead: 0.1, close: 0.1, rps: 2.2 }, goal: { optIn: 0.6, lead: 0.3, close: 0.75, rps: 2.42 } });
+  const rps = money.find((r) => r.key === 'rps');
+  ok('Y1 · hidden money lift shows cents', rps.current === '$2.20' && rps.goal === '$2.42', `${rps.current} → ${rps.goal}`);
+}
+
+/* =========================================================
    REPORT
    ========================================================= */
 console.log('\n' + results.join('\n'));
