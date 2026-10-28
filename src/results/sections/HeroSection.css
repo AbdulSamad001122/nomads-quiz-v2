@@ -47,6 +47,8 @@
   font-size: 34px;
   line-height: 1.28;
   color: #ffffff;
+  /* no single word ("from:") left alone on the last line, at any width */
+  text-wrap: pretty;
 }
 
 /* ——— TODAY → YOUR GOAL ——— */
@@ -167,11 +169,12 @@
   text-transform: uppercase;
 }
 
-/* The artifact sets the formula on one line; at 15px it needs ~714px, wider
-   than the copy column below ~1570px, so it wraps to two lines at 1280 —
-   kept readable rather than shrunk to ~11.5px (flagged, Oct QC). */
+/* The artifact sets the formula on one line; at 15px it needs ~714px, so it
+   runs the full copy column and is one line wherever the column fits it
+   (~1570px and up); below that it wraps to two lines rather than shrinking
+   to ~11.5px (flagged, Oct QC). */
 .rhero__formula {
-  max-width: 640px;
+  max-width: none;
   margin-top: 26px;
   font-family: var(--font-body);
   font-weight: 500;
@@ -225,10 +228,6 @@
   }
   .rhero__alefiya {
     width: min(100%, 400px);
-  }
-  /* full-width column: no single word ("from:") left alone on a line */
-  .rhero__headline {
-    text-wrap: pretty;
   }
 }
 

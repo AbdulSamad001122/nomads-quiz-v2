@@ -13,8 +13,9 @@ export const roas1 = (x) => Math.round(x * 10) / 10; // ROAS → 1 dp
 /** "$1,234,500" style money for display. */
 export const money = (x) => '$' + round100(x).toLocaleString('en-US');
 
-/** "$2.25" RPV display (always 2 dp). */
-export const rpvMoney = (x) => '$' + rpv2(x).toFixed(2);
+/** "$2.25" RPV display (always 2 dp; thousands comma, e.g. "$6,500.00"). */
+export const rpvMoney = (x) =>
+  '$' + rpv2(x).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
 /**
  * Daily-visitor display. The doc says "visitors → nearest 100", but a daily
