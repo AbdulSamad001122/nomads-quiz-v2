@@ -89,6 +89,7 @@ function PillarCtas() {
       <a
         className="rpl__btn rpl__btn--workshop"
         href={CTA.workshop.href}
+        {...(CTA.workshop.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : null)}
         onClick={() => ga.ctaClick(CTA.workshop.id)}
       >
         {keepTogether(CTA.workshop.label, CTA.workshop.keepTogether)}
