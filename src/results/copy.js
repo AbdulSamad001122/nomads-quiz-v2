@@ -164,8 +164,8 @@ export const RED_METRICS = {
   // Which quadrants move which metric. The V2 designer's own note: "Mapping
   // to confirm: Q1 → opt-in rate; Q2 and Q3 → buying action and completion;
   // Q4 → Revenue Per Subscriber™. This is my reading of the framework, so
-  // please check it before build." No doc states it otherwise — built as
-  // designed, FLAGGED for Alefiya. Change it here only.
+  // please check it before build." CONFIRMED by Yemi (QC questions C4,
+  // Oct 2026): "the quadrant mapping is right". Change it here only.
   metricQuadrants: { optIn: [1], lead: [2, 3], close: [2, 3], rps: [4] },
   // "10 questions" / "4 quadrants" bold in the intro line (V2).
   tenBold: ['10 questions', '4 quadrants'],
@@ -219,6 +219,8 @@ export const RED_METRICS = {
       icon: '/assets/results-quadrant-icon-4.png',
     },
   ],
+  // QC item 6 ("All 10 Questions section", Yemi C7: this sentence): set as
+  // a bold, large headline; words unchanged.
   // Split around the {{goal_rpv}} chip per the design. The doc's em dash
   // after "red" reads as a comma here (user rule: no em dashes in the new
   // sections, same as Spot A/B).
