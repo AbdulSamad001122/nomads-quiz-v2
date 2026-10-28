@@ -312,16 +312,13 @@ export default function CompoundingRps({ result, tokens }) {
           {lifts ? (
             <h2 className="rcs__h2">
               {c.headBefore} <span className="rcs__hn">{c.headPromise}</span> {c.headMid}{' '}
-              <span className="rcs__hn rcs__hn--big">{tokens.rps_goal}</span> {c.headAfter}
-              {!goalAtCeiling && (
-                <>
-                  {' '}
-                  <em>
-                    {c.headBut} <span className="rcs__hn rcs__hn--big rcs__hn--alt">{tokens.rps_goal}</span>{' '}
-                    {c.headEnd}
-                  </em>
-                </>
-              )}
+              <span className="rcs__hn rcs__hn--big">{tokens.rps_goal}</span> {c.headAfter}{' '}
+              {/* both sentences always — the design's approved copy, even when
+                  the goal is already the $50 ceiling */}
+              <em>
+                {c.headBut} <span className="rcs__hn rcs__hn--big rcs__hn--alt">{tokens.rps_goal}</span>{' '}
+                {c.headEnd}
+              </em>
             </h2>
           ) : (
             <h2 className="rcs__h2">{c.headFallback}</h2>
