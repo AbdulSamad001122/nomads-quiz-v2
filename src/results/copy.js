@@ -149,7 +149,10 @@ export const RED_METRICS = {
   leadBold: ['WHICH', 'WHAT'],
   // One card per RED metric under the red-metric line (V2). Phrases verbatim
   // from the design; the card's question is the metric table's own label
-  // for the taker's path ("The red metric labels follow the results table").
+  // for the taker's path ("The red metric labels follow the results table"),
+  // except the completion card, which the design rewords (its note: "the
+  // completion one is reworded to …") — word for word below, both paths.
+  closeLabel: 'Out of every 100 who book a call or add to cart, how many end up buying?',
   redChip: 'RED',
   whereasPct: 'whereas it should be around',
   whereasRps: 'whereas it needs to be',
