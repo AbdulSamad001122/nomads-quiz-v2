@@ -1,4 +1,4 @@
-import { TWO_PATHS } from '../copy.js';
+import { TWO_PATHS, CTA } from '../copy.js';
 import { emphasize } from '../emphasize.jsx';
 import { ga } from '../../analytics/ga.js';
 import './TwoPaths.css';
@@ -66,7 +66,7 @@ export default function TwoPaths() {
           <div className="rtp__btns">
             {/* TODO: real workshop URL when provided (same as NAV). Booking
                 URL live (Yemi, Sep 19); new tab keeps the result page. */}
-            <a className="rtp__btn" href="#" onClick={() => ga.ctaClick('watch_workshop')}>
+            <a className="rtp__btn" href={CTA.workshop.href} target="_blank" rel="noopener" onClick={() => ga.ctaClick('watch_workshop')}>
               {c.btnWorkshop}
             </a>
             <a

@@ -2,6 +2,7 @@ import { RED_METRICS } from '../copy.js';
 import { emphasize } from '../emphasize.jsx';
 import { ga } from '../../analytics/ga.js';
 import WorkshopVideo from './WorkshopVideo.jsx';
+import { CTA } from '../copy.js';
 import './RedMetricsWorkshop.css';
 
 /**
@@ -75,7 +76,9 @@ export default function RedMetricsWorkshop({ tokens }) {
           {/* TODO: real workshop URL when provided (same as NAV). */}
           <a
             className="q-btn rmw__btn"
-            href="#"
+            href={CTA.workshop.href}
+            target="_blank"
+            rel="noopener"
             onClick={() => ga.ctaClick('watch_workshop')}
           >
             {c.ctaWorkshop}

@@ -60,6 +60,8 @@ export default function RedMetricsCallout({ result, tokens }) {
           <a
             className="rrc__btn rrc__btn--workshop"
             href={CTA.workshop.href}
+            target="_blank"
+            rel="noopener"
             onClick={() => ga.ctaClick(CTA.workshop.id)}
           >
             {/* the arrow hugs the last word, so it never strands at the
