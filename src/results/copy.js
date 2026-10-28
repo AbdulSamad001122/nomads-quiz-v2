@@ -1673,17 +1673,11 @@ export const STOP_OR_PUSH = {
   ],
   stairsLabel: 'Growth steps: today 1×, first metric fixed 3×, second 5×, third 8×, ceiling 12×',
   proofHead: 'We’ve done 12× and more for clients',
-  // Design note 5: "pull 2–3 client results of 12× or more from the
-  // homepage into the proof cards". Card 1 is the design's; cards 2–3 are
-  // pulled from nomadsmarketing.co (Oct 27) in the homepage's own words —
-  // FLAGGED for Alefiya / Jimmy to confirm. The 7,706% list growth in 72
-  // hours is Samar Owais's result (homepage story; same as PILLAR_ONE_SAMAR
-  // and the landing page's "Course creator" card) — not the Executive
-  // Communications coach, whose result is 2,100 subscribers in 35 days.
+  // Only the design's own client card. Its other two slots are team notes
+  // ("Client result 2 / 3 — Jimmy: pull from the homepage"), not copy, so
+  // nothing is shown for them until Jimmy / Alefiya send the results.
   proof: [
     { name: 'Video Mastermind', big: '13.5×', small: '$8,000/month → $108,000/month' },
-    { name: 'Golfbays', big: '0.044% → 14%', small: 'demo booking rate, £96,000+ in 12 days' },
-    { name: 'Samar Owais', big: '7,706%', small: 'list growth in 72 hours' },
   ],
 
   // closing line + the workshop button, both exactly as the design (the →
