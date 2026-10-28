@@ -207,7 +207,7 @@ export default function StopOrPush({ result, tokens }) {
         <div className="rso__next">
           <p>{c.next}</p>
           {/* TODO: real workshop URL — the "Watch the Workshop" page (QC item 8) */}
-          <a className="rso__btn" href={CTA.workshop.href} onClick={() => ga.ctaClick(CTA.workshop.id)}>
+          <a className="rso__btn" href={CTA.workshop.href} {...(CTA.workshop.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : null)} onClick={() => ga.ctaClick(CTA.workshop.id)}>
             {/* the arrow hugs the last word, so it never strands alone */}
             <span>
               {btnHead}{' '}
