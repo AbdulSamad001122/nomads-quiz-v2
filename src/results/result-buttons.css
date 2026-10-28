@@ -27,7 +27,8 @@
 .results-page .rgp__btn,
 .results-page .rtp__btn,
 .results-page .rwk__btn,
-.results-page .ryc__btn {
+.results-page .ryc__btn,
+.results-page .rpl__btn {
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
@@ -38,7 +39,8 @@
 .results-page .rgp__btn:hover,
 .results-page .rtp__btn:hover,
 .results-page .rwk__btn:hover,
-.results-page .ryc__btn:hover {
+.results-page .ryc__btn:hover,
+.results-page .rpl__btn:hover {
   transform: translate(-2px, -2px) scale(1.04);
 }
 
@@ -49,7 +51,8 @@
 .results-page .rgp__btn:active,
 .results-page .rtp__btn:active,
 .results-page .rwk__btn:active,
-.results-page .ryc__btn:active {
+.results-page .ryc__btn:active,
+.results-page .rpl__btn:active {
   transform: translate(0, 0) scale(1);
 }
 
@@ -109,6 +112,15 @@
   box-shadow: 3px 3px 0 #431232;
 }
 
+/* the CTA pair under each pillar (QC row 10) — same shadow as the red-metric
+   callout buttons it copies */
+.results-page .rpl__btn:hover {
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.55);
+}
+.results-page .rpl__btn:active {
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.55);
+}
+
 /* Respect the OS setting — the buttons still get their hover shadow,
    they just don't move. */
 @media (prefers-reduced-motion: reduce) {
@@ -119,7 +131,8 @@
   .results-page .rgp__btn,
   .results-page .rtp__btn,
   .results-page .rwk__btn,
-  .results-page .ryc__btn {
+  .results-page .ryc__btn,
+  .results-page .rpl__btn {
     transition: box-shadow 0.15s ease;
   }
   .results-page .rnav__cta:hover,
@@ -129,7 +142,8 @@
   .results-page .rgp__btn:hover,
   .results-page .rtp__btn:hover,
   .results-page .rwk__btn:hover,
-  .results-page .ryc__btn:hover {
+  .results-page .ryc__btn:hover,
+  .results-page .rpl__btn:hover {
     transform: none;
   }
 }
