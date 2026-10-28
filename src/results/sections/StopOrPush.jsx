@@ -2,7 +2,6 @@ import { useLayoutEffect, useRef } from 'react';
 import { STOP_OR_PUSH, CTA } from '../copy.js';
 import { fill } from '../resolveTokens.js';
 import { emphasize } from '../emphasize.jsx';
-import { keepTogether } from '../keepTogether.jsx';
 import { ga } from '../../analytics/ga.js';
 import './StopOrPush.css';
 
@@ -59,7 +58,7 @@ function placeLabels(ladder) {
 export default function StopOrPush({ result, tokens }) {
   const c = STOP_OR_PUSH;
   const t = (s) => fill(s, tokens);
-  const btnWords = CTA.workshop.label.split(' ');
+  const btnWords = c.button.split(' ');
   const btnLast = btnWords.pop();
   const btnHead = btnWords.join(' ');
 
@@ -211,7 +210,7 @@ export default function StopOrPush({ result, tokens }) {
           <a className="rso__btn" href={CTA.workshop.href} onClick={() => ga.ctaClick(CTA.workshop.id)}>
             {/* the arrow hugs the last word, so it never strands alone */}
             <span>
-              {keepTogether(btnHead, CTA.workshop.keepTogether)}{' '}
+              {btnHead}{' '}
               <span className="rso__nowrap">
                 {btnLast}
                 <span aria-hidden="true">{' '}→</span>
