@@ -2,38 +2,86 @@ import { TEAM_APPROACH } from '../copy.js';
 import './TeamApproach.css';
 
 /**
- * Section — team approach: left half is the supplied compass image (full
- * bleed), right half is paper-texture cream with the four-heads lead,
- * three coloured bars and closing paragraphs.
+ * Team approach — QC row 9 (Oct 2026), Alefiya's "Team Approach Section"
+ * design. Left: the compass panel, unchanged, pinned while the right side
+ * scrolls. Right: the team approach and the old "Your Next $125k/Mo Game
+ * Plan" section merged into five cards that stick and pile up as you scroll.
+ * Phones: the compass sits on top and the cards stack below, unpinned.
  */
 export default function TeamApproach() {
+  const c = TEAM_APPROACH;
   return (
     <section className="rta">
       <div className="rta__left">
-        <img
-          src="/assets/results-team-compass.webp"
-          alt="Team approach — and here's why I recommend doing it with your team. One team. One view. One shared goal."
-        />
+        <img src="/assets/results-team-compass.webp" alt={c.compassAlt} />
       </div>
 
       <div className="rta__right">
-        <div className="rta__right-inner">
-        <p className="rta__lead">{TEAM_APPROACH.lead}</p>
-
-        <div className="rta__bars">
-          {TEAM_APPROACH.bars.map((bar) => (
-            <div key={bar.variant} className={`rta__bar rta__bar--${bar.variant}`}>
-              <span className="rta__bar-icon" aria-hidden="true" />
-              {bar.text}
+        <div className="rta__stack">
+          <article className="rta__card rta__card--problem" style={{ '--i': 0 }}>
+            <span className="rta__kick">{c.problem.kick}</span>
+            <h3 className="rta__h3">{c.problem.title}</h3>
+            <div className="rta__heads">
+              {c.problem.heads.map((h) => (
+                <div key={h.variant} className={`rta__head rta__head--${h.variant}`}>
+                  <svg className="rta__icon" viewBox="0 0 26 26" aria-hidden="true">
+                    <path d="M3 13 C8 6 14 5 22 7 M14 3 L23 7 L17 14" />
+                  </svg>
+                  <span>
+                    <b>{h.bold}</b>
+                    {h.rest && ` ${h.rest}`}
+                  </span>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </article>
 
-        <p className="rta__para">{TEAM_APPROACH.para1}</p>
+          <article className="rta__card rta__card--so" style={{ '--i': 1 }}>
+            <span className="rta__kick">{c.so.kick}</span>
+            <p className="rta__mystery">
+              {c.so.lead} <span>{c.so.accent}</span>
+            </p>
+          </article>
 
-        <p className="rta__para">{TEAM_APPROACH.para2Lines.join(' ')}</p>
+          <article className="rta__card rta__card--workshop" style={{ '--i': 2 }}>
+            <span className="rta__kick">{c.workshop.kick}</span>
+            <h3 className="rta__h3">{c.workshop.title}</h3>
+            <div className="rta__vs">
+              {c.workshop.says.map((s) => (
+                <div key={s.who} className="rta__say">
+                  <small>{s.who}</small>
+                  {s.quote}
+                </div>
+              ))}
+            </div>
+            <p className="rta__same">{c.workshop.same}</p>
+          </article>
 
-        <p className="rta__para">{TEAM_APPROACH.para3Lines.join(' ')}</p>
+          <article className="rta__card rta__card--plan" style={{ '--i': 3 }}>
+            <span className="rta__bg" aria-hidden="true">
+              {c.gamePlan.bg}
+            </span>
+            <span className="rta__kick">{c.gamePlan.kick}</span>
+            <h2 className="rta__h3 rta__h3--plan">{c.gamePlan.title}</h2>
+            <p className="rta__p">{c.gamePlan.sub}</p>
+            <div className="rta__blind">
+              {c.gamePlan.cards.map((b) => (
+                <div key={b.variant} className={`rta__bl rta__bl--${b.variant}`}>
+                  <b>{b.label}</b>
+                  <span>{b.text}</span>
+                </div>
+              ))}
+            </div>
+          </article>
+
+          <article className="rta__card rta__card--help" style={{ '--i': 4 }}>
+            <span className="rta__kick">{c.help.kick}</span>
+            <p className="rta__help">
+              {c.help.before}
+              <mark>{c.help.mark}</mark>
+              {c.help.after}
+            </p>
+          </article>
         </div>
       </div>
     </section>

@@ -648,56 +648,66 @@ export const THE_CATCH = {
   // that tail opens the next (team) section per the design split.
 };
 
+// QC row 9 (Oct 2026), Alefiya's "Team Approach Section" design: the team
+// approach and the "Your Next $125k/Mo Game Plan" block merged into one
+// stack of five cards beside the unchanged compass panel. Copy word for word
+// from the design (the QC row asks for its copy changes too).
 export const TEAM_APPROACH = {
-  lead: 'The four scores live in four different heads.',
-  // Doc runs these as one block; design splits them into three bars.
-  bars: [
-    { text: 'Your content lead knows the traffic.', variant: 'cream' },
-    { text: 'Sales knows what happens on the calls.', variant: 'navy' },
-    { text: 'Nobody in the building is holding all four at once.', variant: 'plum' },
-  ],
-  para1: 'Which is exactly why a slow month feels like a mystery.',
-  para2Lines: ['The workshop is the first time your team', 'looks at one shared goal.'],
-  para3Lines: [
-    'Instead of marketing saying “traffic is up” while sales says',
-    '“the leads are a poor fit,”  everyone is finally on the same',
-    'page (literally, and figuratively!)',
-  ],
-};
-
-export const GAMEPLAN_INTRO = {
-  // Doc: "Your Next $125k/mo Game Plan" — design renders "/Mo"; design casing
-  // kept per the reference-casing rule, flagged.
-  headline: 'Your Next $125k/Mo Game Plan',
-  subLines: ['The scorecard shows you your scores.', 'The highest. The lowest.'],
-  // Card labels are design-added (not in the doc) — flagged. Card bodies are
-  // the doc paragraph split across the two cards, verbatim.
-  cards: [
-    {
-      label: 'Too Close to See It',
-      variant: 'pink',
-      lines: [
-        'But when you’re workshopping this',
-        'with your team: your team is too close',
-        'to the product, to sales, to the',
-        'customers.',
-      ],
-    },
-    {
-      label: 'Closeness Creates Blind Spots',
-      variant: 'ice',
-      lines: [
-        'That closeness is a strength on most',
-        'days. But when you’re that near to it,',
-        'it\'s also the reason the obvious thing',
-        'hides in plain sight.',
-      ],
-    },
-  ],
-  closingLines: [
-    'I help you and your team read the story your numbers',
-    'are telling, the one that\'s hard to hear from the inside.',
-  ],
+  compassAlt:
+    'Team approach — and here\'s why I recommend doing it with your team. One team. One view. One shared goal.',
+  problem: {
+    kick: 'The problem',
+    title: 'The four scores live in four different heads.',
+    // [bold lead, rest]; the last one is all bold
+    heads: [
+      { variant: 'stone', bold: 'Your content lead knows the traffic:', rest: 'which posts pulled 40,000 impressions last month.' },
+      { variant: 'navy', bold: 'Sales knows what happens on the calls:', rest: 'the same three questions every prospect asks.' },
+      { variant: 'ice', bold: 'Your email person knows the list:', rest: 'who opens, who clicks, who’s gone quiet.' },
+      {
+        variant: 'plum',
+        bold: 'Each team knows its own numbers. But without seeing how they pull on each other, you can’t tell which one is holding revenue back and which one is amplifying it.',
+        rest: '',
+      },
+    ],
+  },
+  so: {
+    kick: 'So…',
+    lead: 'Which is exactly why a slow month',
+    accent: 'feels like a mystery.',
+  },
+  workshop: {
+    kick: 'The workshop',
+    title: 'The workshop is the first time your team looks at one shared goal.',
+    says: [
+      { who: 'Marketing says', quote: '“Reach is up 40% this quarter, and we booked 30% more calls.”' },
+      { who: 'Sales says', quote: '“Half those calls weren’t a fit. I spent most of them explaining what we do.”' },
+    ],
+    same: 'Both are telling the truth. In the workshop, both numbers go on the same scorecard, and everyone is finally on the same page (literally, and figuratively!), looking at one number: what each visitor is worth.',
+  },
+  gamePlan: {
+    bg: '125k',
+    kick: 'Your next $125k/mo game plan',
+    title: 'Your Next $125k/Mo Game Plan',
+    sub: 'The scorecard shows you your scores. The highest. The lowest.',
+    cards: [
+      {
+        variant: 'pink',
+        label: 'Too Close to See It',
+        text: 'But when you’re workshopping this with your team: your team is too close to the product, to sales, to the customers.',
+      },
+      {
+        variant: 'ice',
+        label: 'Closeness Creates Blind Spots',
+        text: 'That closeness is a strength on most days. But when you’re that near to it, it’s also the reason the obvious thing hides in plain sight.',
+      },
+    ],
+  },
+  help: {
+    kick: 'Where I come in',
+    before: 'I help you and your team ',
+    mark: 'read the story your numbers are telling',
+    after: ', the one that’s hard to hear from the inside.',
+  },
 };
 
 export const CLIENT_DAVID = {

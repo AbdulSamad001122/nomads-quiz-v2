@@ -1,133 +1,395 @@
-/* Team approach — compass image left, paper-texture right with the
-   four-heads bars. Reference: team-approach design image. */
+/* ============================================================
+   Team approach — QC row 9 (Oct 2026), Alefiya's "Team Approach Section"
+   design: the compass panel (unchanged image) pinned on the left, five
+   stacking cards on paper on the right. Brand colours; hard shadows
+   instead of the design's blur shadows.
+   ============================================================ */
+
+@font-face {
+  font-family: 'RTA Montserrat';
+  src: url('/fonts/Montserrat-Black-latin.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 .rta {
+  --rta-navy: #152639;
+  --rta-ice: #cae1f4;
+  --rta-ice-lt: #e3f2fb;
+  --rta-stone: #e4c8bc;
+  --rta-stone-lt: #f7eee8;
+  --rta-plum: #5d1b4e;
+  --rta-deep: #250f1c;
+  --rta-mute: #5e5a66;
+  --rta-black: 'RTA Montserrat', var(--font-headline);
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.06fr);
+}
+
+/* ——— left: the compass panel, unchanged ——— */
+
+.rta__left {
+  background: var(--rta-navy); /* matches the image's own navy */
 }
 
 .rta__left img {
+  display: block;
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
+
+/* ——— right: the card stack ——— */
 
 .rta__right {
-  background: #f7f4ea url('/assets/results-paper-texture.webp') center / cover;
-  padding: 116px 78px;
-  display: flex;
-  align-items: center; /* content block centred in the panel */
+  background: #fbf7ee url('/assets/results-paper-texture.webp') center / cover;
+  /* bottom room for the next section's round badge on the seam */
+  padding: 40px 34px 110px;
 }
 
-/* keeps the laptop width on wide screens: at 1440 the column is 565px,
-   so the block caps there and sits centred instead of stretching */
-.rta__right-inner {
-  width: 100%;
-  max-width: 565px;
+.rta__stack {
+  max-width: 620px;
   margin: 0 auto;
-}
-
-.rta__lead {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 16px;
-  color: #16273b;
-}
-
-.rta__bars {
-  margin-top: 44px;
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 30px;
 }
 
-.rta__bar {
+.rta__card {
+  position: relative;
+  border-radius: 20px;
+  padding: 24px 26px 26px;
+  border: 1.5px solid rgba(21, 38, 57, 0.1);
+  box-shadow: 6px 6px 0 rgba(21, 38, 57, 0.14);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.rta__kick {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.rta__h3 {
+  margin: 0;
+  font-family: var(--rta-black);
+  font-weight: 900;
+  font-size: clamp(22px, 2.4vw, 28px);
+  line-height: 1.22;
+  text-wrap: balance;
+  color: var(--rta-navy);
+}
+
+.rta__p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+/* 1 · the problem */
+.rta__card--problem {
+  background: #ffffff;
+}
+
+.rta__card--problem .rta__kick,
+.rta__card--workshop .rta__kick {
+  background: var(--rta-navy);
+  color: #ffffff;
+}
+
+.rta__heads {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rta__head {
   display: flex;
   align-items: center;
-  gap: 18px;
-  border-radius: 10px;
-  padding: 14px 22px;
+  gap: 14px;
+  border-radius: 12px;
+  padding: 12px 16px;
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 16px;
+  font-size: 15.5px;
+  line-height: 1.45;
 }
 
-/* Nomads swoosh drawn through a mask so each bar sets its own colour */
-.rta__bar-icon {
-  width: 26px;
-  height: 24px;
+.rta__head b {
+  font-weight: 800;
+}
+
+/* the design's curved arrow; each row sets its own colour */
+.rta__icon {
   flex-shrink: 0;
-  background-color: var(--icon, #ffffff);
-  -webkit-mask: url('/assets/results-swoosh-white.png') center / contain no-repeat;
-  mask: url('/assets/results-swoosh-white.png') center / contain no-repeat;
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: var(--icon, #ffffff);
+  stroke-width: 3;
+  stroke-linecap: round;
 }
 
-.rta__bar--cream {
-  --icon: #641d4f; /* maroon on the stone bar */
-  background: #f2e6d7;
-  border: 1px solid rgba(93, 27, 78, 0.45);
-  color: #16273b;
+.rta__head--stone {
+  background: var(--rta-stone-lt);
+  border: 1.5px solid var(--rta-stone);
+  color: var(--rta-navy);
+  --icon: var(--rta-plum);
 }
 
-.rta__bar--navy {
-  --icon: #ffffff;
-  background: #16273b;
+.rta__head--navy {
+  background: var(--rta-navy);
   color: #ffffff;
 }
 
-.rta__bar--plum {
-  --icon: #ffffff;
-  background: #641d4f;
+.rta__head--ice {
+  background: var(--rta-ice-lt);
+  border: 1.5px solid var(--rta-ice);
+  color: var(--rta-navy);
+  --icon: var(--rta-navy);
+}
+
+.rta__head--plum {
+  background: var(--rta-plum);
   color: #ffffff;
 }
 
-.rta__para {
-  margin-top: 40px;
+/* 2 · so… */
+.rta__card--so {
+  background: var(--rta-navy);
+  color: #ffffff;
+}
+
+.rta__card--so .rta__kick {
+  background: var(--rta-ice);
+  color: var(--rta-navy);
+}
+
+.rta__mystery {
+  margin: 0;
+  font-family: var(--rta-black);
+  font-weight: 900;
+  font-size: clamp(24px, 2.8vw, 32px);
+  line-height: 1.25;
+}
+
+.rta__mystery span {
+  color: var(--rta-ice);
+}
+
+/* 3 · the workshop */
+.rta__card--workshop {
+  background: var(--rta-ice-lt);
+}
+
+.rta__vs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.rta__say {
+  background: #ffffff;
+  border: 1.5px solid #c9dbe8;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--rta-navy);
+}
+
+.rta__say small {
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--rta-mute);
+}
+
+.rta__same {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--rta-navy);
+}
+
+/* 4 · the $125k/mo game plan */
+.rta__card--plan {
+  background: var(--rta-deep);
+  color: #ffffff;
+  overflow: hidden;
+}
+
+.rta__card--plan .rta__kick {
+  position: relative;
+  background: var(--rta-stone);
+  color: var(--rta-deep);
+}
+
+.rta__bg {
+  position: absolute;
+  right: -10px;
+  top: -24px;
+  font-family: var(--rta-black);
+  font-weight: 900;
+  font-size: 120px;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+}
+
+.rta__h3--plan {
+  position: relative;
+  color: #ffffff;
+  font-size: clamp(26px, 3vw, 34px);
+}
+
+.rta__card--plan .rta__p {
+  position: relative;
+  color: #e9dfe6;
+}
+
+.rta__blind {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.rta__bl {
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--rta-navy);
+}
+
+.rta__bl b {
+  align-self: flex-start;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 14px;
+  padding: 4px 9px;
+  color: #ffffff;
+}
+
+.rta__bl span {
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14.5px;
   line-height: 1.55;
-  color: #1e3547;
+}
+
+.rta__bl--pink {
+  background: #f6e4ef;
+}
+
+.rta__bl--pink b {
+  background: var(--rta-plum);
+}
+
+.rta__bl--ice {
+  background: var(--rta-ice-lt);
+}
+
+.rta__bl--ice b {
+  background: var(--rta-navy);
+}
+
+/* 5 · where I come in */
+.rta__card--help {
+  background: #ffffff;
+}
+
+.rta__card--help .rta__kick {
+  background: var(--rta-plum);
+  color: #ffffff;
+}
+
+.rta__help {
+  margin: 0;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: clamp(20px, 2.3vw, 26px);
+  line-height: 1.4;
+  color: var(--rta-navy);
+}
+
+.rta__help mark {
+  background: var(--rta-ice);
+  color: var(--rta-navy);
+  padding: 0 4px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* ——— pinning: side by side, and only when the window is tall enough for
+   every card to be read in full before the next one slides over it
+   (124px clears the 100px sticky nav) ——— */
+
+@media (min-width: 1200px) and (min-height: 680px) and (prefers-reduced-motion: no-preference),
+  (min-width: 861px) and (min-height: 800px) and (prefers-reduced-motion: no-preference) {
+  .rta__left img {
+    position: sticky;
+    top: 100px;
+    max-height: calc(100vh - 100px);
+  }
+  .rta__card {
+    position: sticky;
+    top: calc(124px + var(--i) * 14px);
+  }
 }
 
 /* ——— responsive ——— */
 
-@media (max-width: 1100px) {
-  .rta__right {
-    padding: 80px 40px 72px;
-  }
-  .rta__bar {
-    font-size: 15.5px;
-    padding: 12px 16px;
-  }
-  .rta__lead {
-    font-size: 16px;
-  }
-  .rta__para {
-    font-size: 16px;
-    margin-top: 30px;
-  }
-}
-
-@media (max-width: 900px) {
+@media (max-width: 860px) {
   .rta {
     grid-template-columns: 1fr;
   }
+  .rta__left img {
+    max-width: 600px;
+    margin: 0 auto;
+  }
   .rta__right {
-    padding: 60px 22px 64px;
+    padding: 28px 18px 96px;
+  }
+  .rta__vs,
+  .rta__blind {
+    grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 560px) {
-  .rta__bars {
-    margin-top: 30px;
-    gap: 14px;
+@media (max-width: 400px) {
+  .rta__right {
+    padding: 24px 12px 96px;
   }
-  .rta__bar {
-    font-size: 14px;
-    gap: 12px;
+  .rta__card {
+    padding: 20px 16px 20px;
   }
-  .rta__bar-icon {
+  .rta__head {
+    gap: 10px;
+    padding: 11px 12px;
+    font-size: 15px;
+  }
+  .rta__icon {
     width: 22px;
-    height: 20px;
+    height: 22px;
   }
 }
