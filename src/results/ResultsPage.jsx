@@ -17,7 +17,6 @@ import WorkshopInvite from './sections/WorkshopInvite.jsx';
 import GamePlanCta from './sections/GamePlanCta.jsx';
 import TheCatch from './sections/TheCatch.jsx';
 import TeamApproach from './sections/TeamApproach.jsx';
-import GamePlanIntro from './sections/GamePlanIntro.jsx';
 import ClientDavid from './sections/ClientDavid.jsx';
 import WalkAwayWith from './sections/WalkAwayWith.jsx';
 import WeakestPillar from './sections/WeakestPillar.jsx';
@@ -94,7 +93,6 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
       <GamePlanCta />
       <TheCatch />
       <TeamApproach />
-      <GamePlanIntro />
       <ClientDavid />
       <WalkAwayWith />
       <WeakestPillar />
