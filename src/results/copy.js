@@ -341,9 +341,8 @@ export const RPS_CARDS = {
   headAfter: 'a year.',
   headBut: 'But',
   headEnd: 'is the starting point, not the end game.',
-  // When the taker's goal RPS is already the $50 ceiling, "$50 is the
-  // starting point, not the end game" would contradict card 4 — only the
-  // first sentence shows (flagged). For capped takers (who can't reach
+  // Both headline sentences always show (approved copy), even when the
+  // taker's goal is already the $50 ceiling. For capped takers (who can't reach
   // $1.5M) and takers whose RPS doesn't need to rise, the headline is the
   // old section's approved line instead and card 1 (today → goal RPS) is
   // left out. Capped takers also lose card 5 ("on top of your $1.5M") and
