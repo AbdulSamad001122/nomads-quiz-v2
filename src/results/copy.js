@@ -376,49 +376,37 @@ export const CRPS_CTA = {
 };
 
 export const AD_SPEND = {
-  // Design-only transition band (not in doc) — flagged.
-  bandLines: ['Now, Let’s Look At', 'Your Ad Spend ↓'],
-  // Doc: "About your ad budget." — design renders as uppercase mono chip.
-  chip: 'ABOUT YOUR AD BUDGET',
-  // Doc ends with "?" (design drops it) — doc wins, flagged.
-  headlineTop: 'What happens when every',
-  headlineHighlight: 'visitor becomes more profitable?',
-  subLines: [
-    'From what you told us, here’s what your same ad spend',
-    'could produce today vs. when you reach your RPV™ goal',
-  ],
-  // Unused while the slider is a share control (see shareLabel below). Casing
-  // matches the copy doc's slider mockup (word/media/image4.png).
-  sliderLabel: 'Your monthly spend',
-  // Logic Doc · 7 makes the slider an AD-TRAFFIC SHARE control (10–100%,
-  // "Not sure" takers only), so it needs its own label. The copy doc has no
-  // wording for it — this is dev-added, FLAGGED for Alefiya.
+  // QC item 5 (Oct 2026): Alefiya's "RPV Ad Budget Section" design (QC
+  // comment C4), every word as the design. The chip, "stays the same" and the
+  // chart heading are uppercase via CSS, as in the design.
+  chip: 'About your ad budget',
+  headline: 'What happens when every visitor becomes more profitable?',
+  lede: 'Same ad spend. Same visitors. Here’s what that spend brings back today, and what it brings back at your RPV™ goal.',
+  spendChip: 'Monthly ad spend',
+  visitorsChip: 'Visitors it buys you',
+  stays: 'stays the same',
+  chartHead: 'Revenue from that spend, each month',
+  spendKey: 'Dashed line = your {{spend}} ad spend',
+  todayLabel: 'Today',
+  goalLabel: 'At your RPV™ goal',
+  roas: '{{x}}× ROAS',
+  perVisitor: '{{rpv}} per visitor',
+  // the design's two verdicts; each bar gets the one that fits its ROAS
+  short: 'You get back less than you spend: about {{amount}} short every month.',
+  back: 'Every $1 of ads brings back about {{amount}}.',
+  foot: 'The only thing that changed is what each visitor is worth on the way through.',
+  payIntro: 'Sitting inside spend you’ve already committed to:',
+  payGainSub: 'more a month',
+  payYear: 'Call it {{year}} a year',
+  // the design's working line; the yearly figure is 12 × the monthly gain
+  payMath: '{{goal}} − {{today}} = {{gain}}',
+  button: 'Watch the workshop',
+  // Logic Doc · 7: "Not sure" takers (Q7c) get an ad-traffic SHARE slider
+  // (10–100%). The design has no slider; kept for the logic. The label is
+  // dev-added and the note is the copy doc's (it says "ad spend" while the
+  // control is a share) — both FLAGGED earlier, unchanged.
   shareLabel: 'What % of your traffic comes from ads?',
-  // DOC CONFLICT — FLAGGED: Result Page Copy.docx says "You can adjust your ad
-  // spend…", but Quiz Logics.docx · 7 says the slider adjusts ad-traffic share.
-  // Logic Doc wins on behaviour (user ruling), so this line now sits above a
-  // share control and reads wrong. Kept verbatim pending Alefiya's decision.
   adjustNote: 'You can adjust your ad spend for it to accurately match your current ad spend',
-  // Column heads + row labels come from the copy doc's own ad-module mockup
-  // (Result Page Copy.docx · word/media/image9.png, anchored under "From what
-  // you told us…"). Quiz Logics.docx 666–668 gives the same five rows.
-  tableHeads: {
-    today: 'Today',
-    goal: 'At goal RPV',
-  },
-  tableLabels: {
-    spend: 'Monthly ad spend',
-    visitors: 'Visitors it buys you',
-    rpv: 'Return per visitor',
-    revenue: 'Revenue from that spend',
-    roas: 'Return on ad spend',
-  },
-  // Design-only caption (not in doc) — flagged.
-  caption: 'Same budget. Same visitors. The only thing that changed is what each one is worth on the way through.',
-  // Design-only panel copy (not in doc) — flagged.
-  panelIntroLines: ['Sitting inside spend you’ve', 'already committed to:'],
-  panelGainSub: 'more a month',
-  panelYearChip: (year) => `Call it ${year} a year`,
 };
 
 /**
