@@ -23,7 +23,7 @@ export default function RedMetricsCallout({ result, tokens }) {
   };
   const subject =
     reds.length === 1 ? c.headOne : fill(c.headMany, { red_count: String(reds.length) });
-  const words = CTA.workshop.label.split(' ');
+  const words = c.workshopLabel.split(' ');
   const workshopLast = words.pop();
   const workshopHead = words.join(' ');
 
@@ -65,7 +65,7 @@ export default function RedMetricsCallout({ result, tokens }) {
             {/* the arrow hugs the last word, so it never strands at the
                 button's edge when the label wraps */}
             <span>
-              {keepTogether(workshopHead, CTA.workshop.keepTogether)}{' '}
+              {workshopHead}{' '}
               <span className="rrc__nowrap">
                 {workshopLast}
                 <span className="rrc__btn-arrow" aria-hidden="true">
@@ -81,7 +81,7 @@ export default function RedMetricsCallout({ result, tokens }) {
             rel="noopener"
             onClick={() => ga.ctaClick(CTA.book.id)}
           >
-            {keepTogether(CTA.book.label, CTA.book.keepTogether)}
+            {keepTogether(c.bookLabel, 'game-plan call')}
           </a>
         </div>
 
