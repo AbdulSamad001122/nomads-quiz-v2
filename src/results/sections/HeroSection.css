@@ -173,6 +173,19 @@
    runs the full copy column and is one line wherever the column fits it
    (~1570px and up); below that it wraps to two lines rather than shrinking
    to ~11.5px (flagged, Oct QC). */
+/* capped takers: the full $1.5M also needs more traffic (Yemi C1) */
+.rhero__capped {
+  margin-top: 18px;
+  padding-left: 12px;
+  text-wrap: pretty;
+  border-left: 3px solid #f0dcbf;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #f0dcbf;
+}
+
 .rhero__formula {
   max-width: none;
   margin-top: 26px;

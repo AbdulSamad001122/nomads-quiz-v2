@@ -9,7 +9,7 @@ import './HeroSection.css';
  * card — then the one-line formula. Alefiya's circle photo stays right, at
  * its old size (her Loom: "keep my photo as big as this one").
  */
-export default function HeroSection({ tokens }) {
+export default function HeroSection({ tokens, capped = false }) {
   // values feed the cards' fit-to-width font size (see .rhero__card-value)
   const today = fill(HERO.today.value, tokens);
   const goal = fill(HERO.goal.value, tokens);
@@ -57,6 +57,8 @@ export default function HeroSection({ tokens }) {
               <p className="rhero__card-sub">{HERO.goal.sub}</p>
             </div>
           </div>
+
+          {capped && <p className="rhero__capped">{HERO.cappedNote}</p>}
 
           <p className="rhero__formula">
             <strong>{HERO.formulaLead}</strong> {HERO.formulaRest}

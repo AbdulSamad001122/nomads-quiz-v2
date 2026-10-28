@@ -48,7 +48,7 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
   return (
     <div className="results-page">
       <ResultsNav />
-      <HeroSection tokens={tokens} />
+      <HeroSection tokens={tokens} capped={result.cappedState} />
       <MetricsSection result={result} tokens={tokens} />
       {/* Red-metrics workshop (Sep 19 doc insert). Yemi ruling 2026-09-21:
           shows for ANY taker with a red table cell — capped included; hides

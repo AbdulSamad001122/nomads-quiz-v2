@@ -1195,6 +1195,11 @@ export const HERO = {
   multipleWord: 'growth',
   formulaLead: 'Revenue Per Visitor™',
   formulaRest: '= total revenue ÷ total visitors your business attracts, online and offline.',
+  // Capped takers only (Yemi, QC questions C1: "go with the suggestion":
+  // keep the goal, add one short line that the full $1.5M needs more
+  // traffic). True for Blocks 5, 6 and 7 alike; the capped block further
+  // down says how much.
+  cappedNote: 'Reaching the full $1.5M will also need more traffic. More on that below.',
 };
 
 export const SAME_PROBLEM = {
