@@ -1685,6 +1685,8 @@ export const STOP_OR_PUSH = {
     { name: 'Samar Owais', big: '7,706%', small: 'list growth in 72 hours' },
   ],
 
-  // closing line + the shared workshop CTA (CTA.workshop in this file)
+  // closing line + the workshop button, both exactly as the design (the →
+  // is drawn in JSX); link + tracking id from CTA.workshop
   next: 'More on how to max these metrics in the upcoming workshop.',
+  button: 'Watch the workshop',
 };
