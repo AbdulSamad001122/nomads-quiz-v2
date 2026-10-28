@@ -531,16 +531,38 @@ export const AD_SPEND = {
  *   trailing. Design wins on presentation; flagged.
  */
 export const DATA_NERDS = {
+  // QC row 3 (Oct 2026): Alefiya's "Data Nerds Calculator Peek" design. Its
+  // note: "Same copy, with a sneak peek. The section keeps its copy." — so the
+  // words below are unchanged; the design shows the title as the chip, p1 as
+  // the headline and bolds two phrases in p2.
   title: 'For the data nerds',
   p1: 'This diagnostic can’t peek inside your Google Analytics, CRM, ad dashboards, or other data sources.',
   p2: 'So if you want to go deeper and nerd out, grab your numbers to see your Revenue Per Visitor™ by channel and find which channels are most profitable.',
+  p2Bold: ['Revenue Per Visitor™ by channel', 'which channels are most profitable.'],
   channels: ['Paid', 'Organic', 'Referral', 'Email', 'Social'],
   chip: 'Whatever you’ve got.',
   button: 'Calculate My RPV By Channel →',
-  // Alefiya's Loom (7:12–7:24, Oct QC): "the spreadsheets need to be properly
-  // hyperlinked" — she opens the Compounding Revenue Per Visitor™ OS
-  // calculator, whose first tab is revenue per visitor by channel.
+  // Alefiya's Loom (7:12–7:24): "the spreadsheets need to be properly
+  // hyperlinked" — the Compounding RPV™ OS calculator (the design's link too).
   buttonHref: 'https://nomads-spreadsheet-calculator.lovable.app/',
+
+  // The sneak-peek window, words exactly as the design (field and column
+  // names follow the live calculator; channels and numbers are examples).
+  winTitle: 'Compounding Revenue Per Visitor™ OS Calculator',
+  winQuestion: 'What would it take to add $1.5M (above last year’s revenue) from your existing marketing and ad spend?',
+  fields: ['Channel group', 'Specific channel', 'Visitors', 'Revenue from this channel'],
+  addButton: 'Add this channel',
+  ledgerHead: 'Your channel ledger · last 30 days',
+  cols: ['Channel', 'Measured', 'Revenue', 'Current RPV', 'RPV for +$125K/month'],
+  example: [
+    ['Paid', 'Meta ads', '15,000', '$11,300', '$0.75', '$4.92'],
+    ['Organic', 'LinkedIn', '40,000', '$24,000', '$0.60', '$3.70'],
+    ['Email', 'Newsletter', '6,000', '$18,000', '$3.00', '$8.40'],
+  ],
+  best: { label: '▲ Most profitable', channel: 'Email · Newsletter', rpv: '$3.00 per visitor' },
+  worst: { label: '▼ Least profitable', channel: 'Organic · LinkedIn', rpv: '$0.60 per visitor' },
+  caption: 'Sneak peek with example numbers.',
+  winLabel: 'Sneak peek of the Compounding Revenue Per Visitor OS calculator',
 };
 
 export const PROMISE_BANNER = {
