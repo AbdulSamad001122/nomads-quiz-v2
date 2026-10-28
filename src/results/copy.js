@@ -30,7 +30,9 @@
  * isn't built yet. Booking URL is live (TidyCal).
  */
 export const CTA = {
-  workshop: { label: 'Watch the hands-on workshop with your team', id: 'watch_workshop', href: '#', keepTogether: 'hands-on' },
+  // Workshop link: the workshop video on YouTube for now (user, Oct 28);
+  // swap in the "Watch the Workshop" page URL when that page exists (QC item 8).
+  workshop: { label: 'Watch the hands-on workshop with your team', id: 'watch_workshop', href: 'https://www.youtube.com/watch?v=Zzu1a3robjE', keepTogether: 'hands-on' },
   book: { label: 'Book your Next $125k/mo Game-Plan Call', id: 'book_call', href: 'https://tidycal.com/alefiya/crpv-game-plan-call', keepTogether: 'Game-Plan Call' },
 };
 

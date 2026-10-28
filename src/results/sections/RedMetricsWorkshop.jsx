@@ -3,6 +3,7 @@ import { redMetricRows } from '../resolveTokens.js';
 import { emphasize } from '../emphasize.jsx';
 import { ga } from '../../analytics/ga.js';
 import WorkshopVideo from './WorkshopVideo.jsx';
+import { CTA } from '../copy.js';
 import './RedMetricsWorkshop.css';
 
 const pad2 = (n) => String(n).padStart(2, '0');
@@ -161,7 +162,9 @@ export default function RedMetricsWorkshop({ result, tokens }) {
           {/* TODO: real workshop URL when provided (same as NAV). */}
           <a
             className="q-btn rmw__btn"
-            href="#"
+            href={CTA.workshop.href}
+            target="_blank"
+            rel="noopener"
             onClick={() => ga.ctaClick('watch_workshop')}
           >
             {c.ctaWorkshop}

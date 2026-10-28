@@ -1,4 +1,4 @@
-import { WORKSHOP_INVITE } from '../copy.js';
+import { WORKSHOP_INVITE, CTA } from '../copy.js';
 import { ga } from '../../analytics/ga.js';
 import WorkshopVideo from './WorkshopVideo.jsx';
 import './WorkshopInvite.css';
@@ -56,7 +56,7 @@ export default function WorkshopInvite({ tokens }) {
             {tokens.goal_rpv} {c.grabAfter}
           </p>
           {/* TODO: real workshop URL when provided (same as NAV). */}
-          <a className="rwk__btn" href="#" onClick={() => ga.ctaClick('watch_workshop')}>
+          <a className="rwk__btn" href={CTA.workshop.href} target="_blank" rel="noopener" onClick={() => ga.ctaClick('watch_workshop')}>
             {c.button}
           </a>
         </div>
