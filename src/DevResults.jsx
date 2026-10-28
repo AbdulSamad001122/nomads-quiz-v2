@@ -143,6 +143,15 @@ const SCENARIOS = {
     inputs: { q2: 810000, q7: 30000, q7b: 17500, q7c: 0.5, q8: 3000, q9a: 0.03, q9b: 0.375, q10: 175, q11: 175000 },
     adAdjustable: true,
   },
+  // The ad-budget design's own sample (QC item 5): $270K/yr over 30K visitors
+  // a month (RPV $0.75 → $4.92), $17,500 spend, half the traffic from ads →
+  // 15,000 visitors, $11,300 → $73,800, 0.6× / 4.2× ROAS, +$62,500 a month.
+  // The only case where today's ads lose money ("…short every month").
+  'ad-design': {
+    blocks: 'capped-free · ad module, ROAS under 1×',
+    path: 'plg',
+    inputs: { q2: 270000, q7: 30000, q7b: 17500, q7c: 0.5, q8: 3000, q9a: 0.03, q9b: 0.375, q10: 175, q11: 62500 },
+  },
   // Manual ad spend of $0 → ROAS has no ratio to show; both cells render an em
   // dash rather than "Infinity×".
   'ad-zero': {
