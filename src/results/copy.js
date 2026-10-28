@@ -1194,201 +1194,141 @@ export const HERO = {
   formulaRest: '= total revenue ÷ total visitors your business attracts, online and offline.',
 };
 
-export const SAME_PROBLEM = {
-  // Design-only plum ribbon straddling the section's top seam (not in the
-  // doc) — flagged. Casing + arrow per the reference.
-  ribbon: 'See How It Shows Up ↓',
-  // Doc (row 10): "Here are variations of the same problem a dozen marketing
-  // teams scaling 7-figure businesses to 8 figures have shared with me" —
-  // verbatim; line map (7/6/8 words) + the ice "same problem" highlight from
-  // the design. The "v" of "variations" renders as a script glyph per the
-  // design (same device as METRICS / BEHIND_NUMBER).
-  l1Before: 'Here are',
-  l1ScriptGlyph: 'v',
-  l1ScriptRest: 'ariations',
-  l1After: 'of the',
-  l1Highlight: 'same problem',
-  line2: 'a dozen marketing teams scaling 7-figure',
-  line3: 'businesses to 8 figures have shared with me',
-  // The "8 figures" brush watermark is baked into the section's bg art
-  // (Frame 807 → results-relate-bg-art.webp); mobile uses the plain texture.
-  // Doc continues "Perhaps you can relate?" + the four quote cards — the
-  // next slice of this row, built when its reference arrives.
-};
-
-export const RELATE_QUOTES = {
-  // Doc (row 10): "Perhaps you can relate?" — verbatim.
-  heading: 'Perhaps you can relate?',
-  // Quote copy verbatim from the doc's two nested tables. Flags:
-  // - Doc prefixes attributions with "~" / "-"; the design drops the dash
-  //   and renders the attribution as a plain caption line — design kept.
-  // - Doc: "CMO @ Sports Ecommerce store in the UK" — design shows "CMO@ "
-  //   (no space before the @); design spacing kept per the casing rule.
-  // - The doc's opening/closing “ ” marks render as the plum comma graphic
-  //   (comma 20.png → results-relate-quote.png), not as text.
-  cards: [
-    {
-      tone: 'wine',
-      paras: [
-        'We’re growing, but growth is fuzzy.',
-        'Things are working, but I don’t fully know why, and I don’t trust that they’ll keep working if I push harder.',
-      ],
-      who: '7-figure Concierge Medical Clinic Owner',
-    },
-    {
-      tone: 'cream',
-      paras: ['We don’t know who’s serious until the call.'],
-      who: 'B2B Content Agency owner',
-    },
-    {
-      tone: 'navy',
-      paras: [
-        'The majority of leads aren’t relevant.',
-        'People show interest but don’t convert.',
-      ],
-      who: 'CMO@ Sports Ecommerce store in the UK',
-    },
-    {
-      tone: 'ice',
-      paras: [
-        'Lowest quality but highest volume is from paid ads.',
-        'We don’t trust what’s converting. The calls we book, sales is explaining basics.',
-      ],
-      who: 'Founder of a Cold Email SaaS',
-    },
+// QC row 4 (Oct 2026), Alefiya's "See How It Shows Up V2" design: the
+// "dozen marketing teams" run (intro, quotes, what they have in common,
+// where most teams stop, it's not just the site, so what if…, two paths) as
+// ONE section — four tappable steps, then the "so what if" block and the
+// fork. Copy word for word from the design (the context lines, step labels,
+// stat chips and site captions are the design's new copy). The closing
+// panel with the two buttons stays in TwoPaths.
+export const SEE_HOW = {
+  tag: 'See How It Shows Up ↓',
+  // headline split around the ice "same problem" highlight
+  headBefore: 'Here are variations of the',
+  headMark: 'same problem',
+  headAfter: 'a dozen marketing teams scaling 7-figure businesses to 8 figures have shared with me',
+  // [text, bold] runs
+  ctxTop: [
+    ['Growth feels fuzzy when you keep doing ', false],
+    ['more', true],
+    [', without getting smarter about ', false],
+    ['each visitor', true],
+    ['.', false],
   ],
-};
-
-export const IN_COMMON = {
-  // Doc (row 10): "Here's what they have in common. AI made content easy, so
-  // everyone is producing more visibility than ever, and feeling less sure
-  // where revenue is actually coming from." — verbatim. Line map from the
-  // design. Doc ends "coming from." — the design image drops the period;
-  // doc wins, flagged.
-  heading: 'Here’s what they have in common.',
-  subLine1: 'AI made content easy, so everyone is producing more visibility than',
-  subLine2: 'ever, and feeling less sure where revenue is actually coming from.',
-  // Doc: "More LinkedIn posts. More YouTube. More influencer collabs. More
-  // ad spend." — rendered as icon labels without the periods per the design
-  // (flagged). Label line breaks per the design.
-  channels: [
-    { icon: '/assets/results-common-linkedin.png', lines: ['More LinkedIn', 'posts'] },
-    { icon: '/assets/results-common-youtube.png', lines: ['More YouTube'] },
-    { icon: '/assets/results-common-collabs.png', lines: ['More influencer', 'collabs'] },
-    { icon: '/assets/results-common-adspend.png', lines: ['More ad spend'] },
-  ],
-  beliefLines: ['All on the belief that more', 'distribution means more revenue.'],
-  beliefChip: 'And you do see the correlation too.',
-  // The circular "NOMADS MARKETING · CONVERSION QUIZZES" stamp (Group 122)
-  // is design-only wayfinding straddling the section's top seam — flagged.
-};
-
-export const NOT_JUST_SITE = {
-  // Left panel headline is baked into the eagle art (Group 840 1.png).
-  // Doc: "And it's not just the site." — the art renders it ALL CAPS;
-  // design casing kept per the casing rule (flagged).
-  eagleAlt: 'And it’s not just the site.',
-  // Doc (row 10) verbatim; line map from the design.
-  subLines: [
-    '9 in 10 teams run their top-of-funnel ads and influencer',
-    'campaigns straight to a product page or a web page, to',
-    'people who were never going to buy on the first visit.',
-  ],
-  headingLines: [
-    'So what if you could earn more from',
-    'each visitor by meeting them where',
-    'they are in their buying journey?',
-  ],
-  hookLines: [
-    'Hook the non-buyers onto your email list, and',
-    'compound revenue from traffic you’re already paying for.',
-  ],
-  becauseBold: 'Because here’s what usually happens instead.',
-  throwLines: ['Revenue gets inconsistent, and', 'the response is to throw'],
-  // Doc runs these in one lowercase sentence ("…throw more money at
-  // acquisition, more pressure…"); the design splits them into chevron
-  // bullets with capital "More" — design presentation kept (flagged).
-  bullets: [
-    'More money at acquisition,',
-    'More pressure on the sales team,',
-    'More content into the void,',
-    'More random experiments at the wall,',
-  ],
-  bulletsTail: 'hoping something finally moves the needle.',
-  compoundingLines: ['But compounding businesses don’t do', 'more random marketing.'],
-  scaleLines: [
-    'They scale because they know which specific actions move',
-    'revenue, where buyers lose certainty, and how to build a',
-    'system where each new visitor becomes more valuable',
-    'over time instead of disappearing after one interaction.',
-  ],
-  goalLines: [
-    'That’s the real goal of the Compounding Revenue per Visitor™ OS.',
-    'Not another funnel duct-taped onto an already',
-    'chaotic customer journey.',
-  ],
-};
-
-export const BOUNCE_RATES = {
-  // Doc (row 10) verbatim, straight after "And you do see the correlation
-  // too."; line maps from the design.
-  p1Lines: [
-    'You hired a content agency, your Influencer UGC spend has tripled this quarter,',
-    'you’ve doubled your ad spend and you see how your revenue doubled too.',
-  ],
-  chip: 'That’s where most teams stop.',
-  p2Lines: [
-    'But when I audit the assets underneath all that traffic, I keep seeing',
-    'the same thing: sites with 50, 60, 70% bounce rates. Thousands of',
-    'visitors, on a page built only for the person ready to buy today.',
-  ],
-  // Phrases set a touch bolder (see emphasize.jsx); "Thousands of" +
-  // "visitors" are listed separately because the line map splits them.
-  bold: ['tripled', 'revenue doubled', '50, 60, 70% bounce rates', 'Thousands of', 'visitors'],
-  // The three bounce-rate cards are fully baked design art (Groups 841–843:
-  // ice card, AVG-duration chip, laptop + Similarweb popup, name, bounce
-  // badge). The doc holds only an empty visual row here — design-only,
-  // flagged. Alts carry the baked text for accessibility.
-  cards: [
-    {
-      src: '/assets/results-bounce-card-1.webp',
-      alt: 'David Graham, professional services — 64% bounce rate, 12-second average visit',
-    },
-    {
-      src: '/assets/results-bounce-card-2.webp',
-      alt: 'Bridgeline, coaching — 70% bounce rate, 29-second average visit',
-    },
-    {
-      src: '/assets/results-bounce-card-3.webp',
-      alt: 'Health wellbeing clinic — 60% bounce rate, 22-second average visit',
-    },
-  ],
+  steps: ['Perhaps you can relate?', 'What they have in common', 'Where most teams stop', 'It’s not just the site'],
+  back: '← Back',
+  next: 'Next →',
+  relate: {
+    top: 'Perhaps you can relate?',
+    ctx: 'Four different businesses. The same fuzzy feeling.',
+    chat: [
+      {
+        side: 'l',
+        tone: 'plum',
+        av: 'Clinic',
+        who: '7-figure Concierge Medical Clinic Owner',
+        lead: 'We’re growing, but growth is fuzzy.',
+        rest: 'Things are working, but I don’t fully know why, and I don’t trust that they’ll keep working if I push harder.',
+      },
+      { side: 'r', tone: 'stone', av: 'Agency', who: 'B2B Content Agency owner', lead: 'We don’t know who’s serious until the call.' },
+      {
+        side: 'l',
+        tone: 'navy',
+        av: 'Ecom',
+        who: 'CMO@ Sports Ecommerce store in the UK',
+        lead: 'The majority of leads aren’t relevant.',
+        rest: 'People show interest but don’t convert.',
+      },
+      {
+        side: 'r',
+        tone: 'white',
+        av: 'SaaS',
+        who: 'Founder of a Cold Email SaaS',
+        lead: 'Lowest quality but highest volume is from paid ads.',
+        rest: 'We don’t trust what’s converting. The calls we book, sales is explaining basics.',
+      },
+    ],
+  },
+  common: {
+    top: 'Here’s what they have in common',
+    ctx: 'Every one of them is doing more, and none of them can see what each visitor is worth.',
+    title: 'Here’s what they have in common.',
+    p: 'AI made content easy, so everyone is producing more visibility than ever, and feeling less sure where revenue is actually coming from.',
+    // icons are the live page's channel icons
+    mores: [
+      { icon: '/assets/results-common-linkedin.png', label: 'More LinkedIn posts' },
+      { icon: '/assets/results-common-youtube.png', label: 'More YouTube' },
+      { icon: '/assets/results-common-collabs.png', label: 'More influencer collabs' },
+      { icon: '/assets/results-common-adspend.png', label: 'More ad spend' },
+    ],
+    belief: 'All on the belief that more distribution means more revenue.',
+    beliefChip: 'And you do see the correlation too.',
+  },
+  stop: {
+    top: 'Where most teams stop',
+    ctx: 'More reach looks like growth, until you look at what each visitor actually does.',
+    corr: [
+      { big: 'Hired', small: 'a content agency' },
+      { big: '3×', small: 'Influencer UGC spend this quarter' },
+      { big: '2×', small: 'ad spend, and revenue doubled too' },
+    ],
+    p1: 'You hired a content agency, your Influencer UGC spend has tripled this quarter, you’ve doubled your ad spend and you see how your revenue doubled too.',
+    line: 'That’s where most teams stop.',
+    p2Before: 'But when I audit the assets underneath all that traffic, I keep seeing the same thing: ',
+    p2Bold: 'sites with 50, 60, 70% bounce rates. Thousands of visitors, on a page built only for the person ready to buy today.',
+    bounceLabel: 'Bounce',
+    // laptop crops of the live page's three bounce-rate cards
+    sites: [
+      { src: '/assets/results-shows-site-1.webp', alt: 'David Graham website analytics', bounce: '64%', name: 'David Graham', meta: 'Professional Services · 12-sec avg visit' },
+      { src: '/assets/results-shows-site-2.webp', alt: 'Bridgeline website analytics', bounce: '70%', name: 'Bridgeline', meta: 'Coaching · 29-sec avg visit' },
+      { src: '/assets/results-shows-site-3.webp', alt: 'Health wellbeing clinic website analytics', bounce: '60%', name: 'Health wellbeing clinic', meta: 'Wellbeing Clinic · 22-sec avg visit' },
+    ],
+  },
+  site: {
+    top: 'And it’s not just the site',
+    ctx: 'They pay for more visitors, then send them somewhere built only for the few who are ready.',
+    big: '9 in 10',
+    bigSmall: 'teams',
+    pBefore: '9 in 10 teams run their top-of-funnel ads and influencer campaigns straight to a product page or a web page, to ',
+    pBold: 'people who were never going to buy on the first visit.',
+  },
+  aha: 'So what if you could earn more from each visitor by meeting them where they are in their buying journey?',
+  ahaSub: 'Hook the non-buyers onto your email list, and compound revenue from traffic you’re already paying for.',
+  chaos: {
+    label: 'Because here’s what usually happens instead.',
+    head: 'Revenue gets inconsistent, and the response is to throw',
+    throws: ['More money at acquisition,', 'More pressure on the sales team,', 'More content into the void,', 'More random experiments at the wall,'],
+    foot: 'hoping something finally moves the needle.',
+  },
+  calm: {
+    label: 'But compounding businesses don’t do more random marketing.',
+    head: 'They scale because they know',
+    know: [
+      'which specific actions move revenue,',
+      'where buyers lose certainty, and',
+      'how to build a system where each new visitor becomes more valuable over time instead of disappearing after one interaction.',
+    ],
+  },
+  goalBefore: 'That’s the real goal of the ',
+  goalBold: 'Compounding Revenue per Visitor™ OS',
+  goalAfter: '.',
+  goalSub: 'Not another funnel duct-taped onto an already chaotic customer journey.',
+  paths: {
+    tag: 'Two paths',
+    intro: 'It’s the difference between guessing and a team that can look at the numbers and say:',
+    quote: '“Let’s double down on testing top-of-funnel hooks for our opt-in page because if we increase email opt-in rate by 20%, ',
+    quoteMark: 'it adds $357,000 this quarter.',
+    quoteEnd: '”',
+    fork: 'So there’s a fork here.',
+    a: 'Keep spending more to reach more people.',
+    or: 'Or',
+    b: 'Earn more from the people already finding you, using the four pillars you just walked through.',
+  },
 };
 
 export const TWO_PATHS = {
-  // Design-only wayfinding: rotated "Here's the fork in the road" text
-  // (Group 807) on a white circle straddling the seam, and the mono
-  // "TWO PATHS" chip — both flagged (not in the doc).
-  intro:
-    'It’s the difference between guessing and a team that can look at the numbers and say:',
-  // Doc (row 10 tail) verbatim; 4-line map from the design. Doc says
-  // "email opt-in rate" — the design hyphenates "email-opt-in rate";
-  // doc wins, flagged. Highlight span per the design.
-  headlineLines: [
-    '“Let’s double down on testing',
-    'top-of-funnel hooks for our opt-in page',
-    'because if we increase email opt-in rate',
-  ],
-  headlineTail: 'by 20%,',
-  headlineHl: 'it adds $357,000 this quarter.”',
-  forkChip: 'So there’s a fork here.',
-  // Doc: "Keep spending more to reach more people. Or earn more from the
-  // people already finding you, using the four pillars you just walked
-  // through." — split across the two path cards + the "Or" badge per the
-  // design; card B capitalises "Earn" (design casing kept, flagged).
-  pathA: 'Keep spending more to reach more people.',
-  pathB:
-    'Earn more from the people already finding you, using the four pillars you just walked through.',
+  // QC row 4: the quote, fork and path cards moved into SEE_HOW; this
+  // section is now only the closing panel.
   // Panel copy verbatim; line maps from the design.
   panelP1Lines: [
     'If you’ve made it this far, part of you probably already knows your',

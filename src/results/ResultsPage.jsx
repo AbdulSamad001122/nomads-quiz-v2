@@ -24,11 +24,7 @@ import WeakestPillar from './sections/WeakestPillar.jsx';
 import LaraStory from './sections/LaraStory.jsx';
 import YourCall from './sections/YourCall.jsx';
 import PillarsAccordion from './sections/PillarsAccordion.jsx';
-import SameProblemIntro from './sections/SameProblemIntro.jsx';
-import RelateQuotes from './sections/RelateQuotes.jsx';
-import InCommon from './sections/InCommon.jsx';
-import BounceRates from './sections/BounceRates.jsx';
-import NotJustSite from './sections/NotJustSite.jsx';
+import SeeHowItShowsUp from './sections/SeeHowItShowsUp.jsx';
 import TwoPaths from './sections/TwoPaths.jsx';
 import BookCallCalendar from './sections/BookCallCalendar.jsx';
 import { resolveTokens, anyMetricRed } from './resolveTokens.js';
@@ -103,11 +99,9 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
       {/* Pillar content sections (doc rows 6–9) mount inside the accordion
           panels as they're designed. */}
       <PillarsAccordion />
-      <SameProblemIntro />
-      <RelateQuotes />
-      <InCommon />
-      <BounceRates />
-      <NotJustSite />
+      {/* QC row 4: the "dozen marketing teams" run as one section with four
+          tappable steps; TwoPaths is now only its closing panel. */}
+      <SeeHowItShowsUp />
       <TwoPaths />
       {/* standalone booking calendar on the maroon band (user, Sep 21) */}
       <BookCallCalendar />
