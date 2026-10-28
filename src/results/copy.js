@@ -37,9 +37,11 @@ export const CTA = {
 export const NAV = {
   // The artifact's nav is the logo + the two buttons only — the old "Your
   // RPV™ Score" / "How we calculated your RPV™" links are gone (Oct 23).
+  // Button words exactly as the hero artifact's nav (casing included); links
+  // and tracking ids stay shared with CTA.
   ctas: [
-    { ...CTA.workshop, variant: 'workshop' },
-    { ...CTA.book, variant: 'book' },
+    { ...CTA.workshop, label: 'Watch the workshop with your team', keepTogether: 'your team', variant: 'workshop' },
+    { ...CTA.book, label: 'Book your next $125k/mo game-plan call', keepTogether: 'game-plan call', variant: 'book' },
   ],
 };
 
@@ -70,33 +72,31 @@ export const METRICS = {
   },
   rowLabels: {
     rpv: 'Revenue Per Visitor™',
-    optIn: 'How many visitors are becoming email or SMS subscribers?',
+    // optIn / rps rows: the hero artifact's exact words (Oct QC)
+    optIn: 'How many visitors become email or SMS subscribers?',
     // Same wording as Q9A / Q9B (Yemi, Oct 21: the copy changes carry over).
     lead: {
       plg: 'Out of everyone discovering your business each month, how many take a buying action within the first 14 days?',
       slg: 'Out of everyone discovering your business each month, how many book a call or demo within the first 14 days?',
     },
     close: {
-      plg: 'And out of every 100 who take that buying action, how many buy?',
+      // Yemi's QC comment C3, exact: "…how many complete it?"
+      plg: 'And out of every 100 who take that buying action, how many complete it?',
       slg: 'And out of every 100 who book, how many become paying clients?',
     },
-    rps: 'Revenue Per Subscriber™ (what each subscriber is worth per year)',
+    rps: 'Revenue Per Subscriber™ (what each subscriber is worth a year)',
   },
 
-  // QC round: the lead/close rows above are byte-identical to the
-  // section/oct20-question-changes wording (in ques_changes) so the two
-  // branches merge cleanly. Yemi's QC comment C3 wrote the PLG close row as
-  // "…how many complete it?"; the question doc of Oct 22 (newer) and quiz
-  // Q9B say "…how many buy?" — kept, flagged. The artifact's sample row
-  // wording is placeholder only.
+  // QC round: lead/close rows = Yemi's QC comment C3 word for word (her
+  // "??" typo dropped); optIn/rps rows = the hero artifact's words. The quiz's
+  // own Q9B keeps its wording ("…how many buy?") — this table follows C3.
 
   // RPV is no longer the first row: it closes the table as the total,
   // because the four metrics above feed it (artifact).
   totalLabel: '= Your Revenue Per Visitor™',
-  // Status chip on each "today" cell (artifact: RED / CLOSE). The artifact
-  // shows no green current cell; "AT GOAL" is ours, after its legend's
-  // "Green: at goal" (Oct 23 default, flagged).
-  status: { red: 'RED', yellow: 'CLOSE', green: 'AT GOAL' },
+  // Status chip on each "today" cell — the artifact's RED / CLOSE only; a
+  // green cell carries no chip (the design has no label for it).
+  status: { red: 'RED', yellow: 'CLOSE', green: '' },
 };
 
 /**
@@ -119,9 +119,12 @@ export const RED_CALLOUT = {
   body: 'My workshop takes you and your team through 10 questions across 4 quadrants, so you find exactly why each red metric is red, and what to fix first.',
   bodyBold: '10 questions across 4 quadrants',
   caption: 'The workshop opens on its own page.',
-  // Short metric names on the cards. The artifact names two ("Buyers who
-  // complete their purchase", "Revenue Per Subscriber™"); the rest are ours
-  // (Oct 23 default, flagged for Alefiya/Yemi).
+  // the callout's two buttons, exactly as the artifact (the → is drawn in JSX)
+  workshopLabel: 'Watch the workshop with your team',
+  bookLabel: 'Book your $125k/mo game-plan call',
+  // Short metric names on the cards: the artifact's two ("Buyers who
+  // complete their purchase", "Revenue Per Subscriber™"); the design gives no
+  // name for the others, so they follow the same pattern.
   names: {
     optIn: 'Visitors who become subscribers',
     lead: { plg: 'Visitors who take a buying action', slg: 'Visitors who book a call or demo' },

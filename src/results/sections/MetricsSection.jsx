@@ -66,7 +66,7 @@ export default function MetricsSection({ result, tokens }) {
                 <div className="rmx__metric">{labelFor(row.key)}</div>
                 <div className={`rmx__value rmx__value--${row.colour}`}>
                   <span className="rmx__num">{row.current}</span>
-                  <span className="rmx__status">{METRICS.status[row.colour]}</span>
+                  {METRICS.status[row.colour] && <span className="rmx__status">{METRICS.status[row.colour]}</span>}
                 </div>
                 <div className="rmx__arrow" aria-hidden="true">
                   →
