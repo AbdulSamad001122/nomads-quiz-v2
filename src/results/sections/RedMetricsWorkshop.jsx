@@ -42,6 +42,7 @@ export default function RedMetricsWorkshop({ result, tokens }) {
   const c = RED_METRICS;
   const reds = redMetricRows(result);
   const labelFor = (key) => {
+    if (key === 'close') return c.closeLabel;
     const l = METRICS.rowLabels[key];
     return typeof l === 'string' ? l : l[result.path];
   };
