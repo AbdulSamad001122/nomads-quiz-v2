@@ -179,7 +179,7 @@ export const RED_METRICS = {
   // design drops it (same standing flag as NAV/formula).
   headBefore: 'Find The',
   headHighlight: 'Reason Behind',
-  headAfter: 'Your Red Metrics With The Compounding Revenue Per Visitor™ OS Workshop.',
+  headAfter: 'Your Red Metrics With The Compounding Revenue Per Visitor™ OS Workshop.',
   // "…at {{current_rpv}} instead of {{goal_rpv}}" — the two values render as
   // chips (cream current, plum goal) between these parts, per the design.
   keepingBefore: 'Your red metric is what’s keeping your RPV™ at',
@@ -926,7 +926,7 @@ export const PILLAR_ONE = {
   // doc's "10 %" spacing normalised to "10%" per the design — flagged.
   headBefore: 'Which is why your (and your competitors’) marketing completely ignores this huge group and only speaks to the',
   headHighlight: 'TINY 10%',
-  headAfter: 'who are interested.',
+  headAfter: 'who are interested.',
 };
 
 /**
@@ -1103,7 +1103,7 @@ export const PILLAR_ONE_LARA_QUOTE = {
 export const PILLAR_ONE_PREDICTABLE = {
   // Doc: "…metrics that move revenue — together, not in isolation." The
   // design drops the em-dash and the comma; doc punctuation kept, flagged.
-  headline: 'Get predictable, consistent revenue by letting your entire team track, obsess, and optimise metrics that move revenue together, not in isolation.',
+  headline: 'Get predictable, consistent revenue by letting your entire team track, obsess, and optimise metrics that move revenue together, not in isolation.',
   sub: 'And of the four they track together, here’s the one that I want you to pay the MOST attention to.',
 };
 
