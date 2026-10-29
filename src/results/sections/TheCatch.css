@@ -128,13 +128,266 @@
   width: auto;
 }
 
-/* re-exported image carries its own card design — no bg/padding here */
-.rtc__map-card {
-  max-width: 620px;
+/* ——— QC row 8: the unfilled workshop scorecard (replaces the OS map) ——— */
+
+.rtc__card-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
 }
 
-.rtc__map-card img {
+.rtc__board {
+  --rtc-deep: #250f1c;
+  --rtc-plum: #5d1b4e;
+  --rtc-mauve: #8a4f70;
+  --rtc-mute: #6b6170;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px 16px 14px;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.3);
+}
+
+.rtc__bt {
+  text-align: center;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: clamp(15px, 1.7vw, 20px);
+  line-height: 1.35;
+  color: var(--rtc-deep);
+}
+
+.rtc__bt span {
+  background: var(--rtc-plum);
+  color: #ffffff;
+  padding: 0 6px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.rtc__bs {
+  margin-top: 3px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 10px;
+  color: var(--rtc-mute);
+}
+
+.rtc__bgrid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+}
+
+.rtc__col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rtc__qc {
+  background: #f7eee8;
+  border: 1.5px solid #e2d4cc;
+  border-radius: 6px;
+  padding: 7px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  box-shadow: 2px 2px 0 rgba(37, 15, 28, 0.12);
+}
+
+.rtc__qc--ice {
+  background: #e3f2fb;
+  border-color: #c3d8e8;
+}
+
+.rtc__hd {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 9px;
+  color: var(--rtc-deep);
+}
+
+.rtc__hd b {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--rtc-deep);
+  color: #ffffff;
+  font-size: 8px;
+  line-height: 18px;
+  text-align: center;
+}
+
+.rtc__qrow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 24px;
+  gap: 6px;
+  align-items: center;
+}
+
+/* greyed placeholder lines — the question text isn't meant to be read */
+.rtc__sk {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.rtc__sk i {
+  display: block;
+  height: 4px;
+  border-radius: 2px;
+  background: #d8cdd3;
+}
+
+.rtc__sk i:nth-child(2) {
+  width: 80%;
+}
+
+.rtc__sk i:nth-child(3) {
+  width: 55%;
+}
+
+/* score boxes; pencilled marks in the brand's handwriting font */
+.rtc__box {
+  box-sizing: border-box;
+  width: 24px;
+  height: 22px;
+  border: 1.5px dashed var(--rtc-mauve);
+  border-radius: 4px;
+  background: #ffffff;
+  font-family: var(--font-script);
+  font-size: 40px;
+  line-height: 20px;
+  -webkit-text-stroke: 0.6px currentColor;
+  color: var(--rtc-plum);
+  text-align: center;
+  overflow: hidden;
+}
+
+.rtc__box--f {
+  border-style: solid;
+  border-color: var(--rtc-deep);
+}
+
+.rtc__wheel {
+  position: relative;
+  container-type: inline-size;
   width: 100%;
+  max-width: 260px;
+  aspect-ratio: 1;
+  justify-self: center;
+}
+
+.rtc__wheel svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.rtc__wheel-centre {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 6.5px;
+  fill: var(--rtc-deep);
+}
+
+.rtc__wheel-label {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 6.6px;
+  fill: #ffffff;
+}
+
+.rtc__qscore {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  border: 2px dashed var(--rtc-mauve);
+  border-radius: 8px;
+  /* sized to the wheel, which shrinks on narrow desktops */
+  padding: 0 2.6cqw;
+  height: 9.5cqw;
+  font-family: var(--font-script);
+  font-size: 15cqw;
+  line-height: 9cqw;
+  word-spacing: -0.22em;
+  -webkit-text-stroke: 0.6px currentColor;
+  color: rgba(93, 27, 78, 0.6);
+  white-space: nowrap;
+}
+
+.rtc__qscore--f {
+  height: 11cqw;
+  border: 2px solid var(--rtc-deep);
+  color: var(--rtc-plum);
+  font-size: 18cqw;
+  line-height: 10.5cqw;
+}
+
+/* still-empty marks ("_", "?") in plain type, so they never read as a
+   pencilled score (the script "?" looks like a 1) */
+.rtc__blank {
+  font-family: var(--font-headline);
+  font-style: normal;
+  font-weight: 800;
+  font-size: 0.42em;
+  -webkit-text-stroke: 0;
+  vertical-align: 0.1em;
+}
+
+.rtc__tot {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.rtc__tot div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 9px;
+  color: var(--rtc-mute);
+}
+
+.rtc__tot b {
+  box-sizing: border-box;
+  width: 42px;
+  height: 30px;
+  border: 2px dashed var(--rtc-mauve);
+  border-radius: 6px;
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: 46px;
+  line-height: 27px;
+  -webkit-text-stroke: 0.6px currentColor;
+  color: rgba(93, 27, 78, 0.55);
+  text-align: center;
+}
+
+.rtc__tot .rtc__tot--f b {
+  border: 2px solid var(--rtc-deep);
+  color: var(--rtc-plum);
+}
+
+.rtc__pencil {
+  position: absolute;
+  width: 150px;
+  right: -4%;
+  bottom: -64px;
+  transform: rotate(-28deg);
+  filter: drop-shadow(3px 5px 0 rgba(0, 0, 0, 0.25));
+  pointer-events: none;
 }
 
 /* holds line 2 together so the heading breaks after "genuinely" — only
@@ -166,6 +419,52 @@
   .rtc__band {
     font-size: 18px;
     padding: 12px 30px;
+  }
+}
+
+/* the right column is narrow here (side by side) or the board is phone
+   sized: wheel on top at full width, the question cards two by two */
+@media (max-width: 1279px) and (min-width: 901px), (max-width: 560px) {
+  .rtc__bgrid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .rtc__wheel {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+}
+
+@media (max-width: 1279px) and (min-width: 901px) {
+  .rtc__pencil {
+    width: 110px;
+    bottom: -50px;
+  }
+}
+
+/* stacked: the panel's bottom padding is 70px, keep the pencil inside it */
+@media (max-width: 900px) {
+  .rtc__pencil {
+    width: 120px;
+    right: 0;
+    bottom: -34px;
+  }
+}
+
+@media (max-width: 560px) {
+  .rtc__pencil {
+    display: none;
+  }
+}
+
+@media (max-width: 360px) {
+  .rtc__board {
+    padding: 14px 10px 12px;
+  }
+  .rtc__tot {
+    gap: 5px;
+  }
+  .rtc__tot b {
+    width: 38px;
   }
 }
 

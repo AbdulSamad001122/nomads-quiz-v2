@@ -526,6 +526,39 @@ export const THE_CATCH = {
   boldLines: ['That’s your first move. Not a list of twelve', 'competing priorities.'],
   // Doc continues "And here's why I recommend doing it with your team:" —
   // that tail opens the next (team) section per the design split.
+  // QC row 8 (Oct 2026): the OS board image is swapped for an unfilled
+  // workshop scorecard (Alefiya's comment: "an incomplete diagnostic, which
+  // they have to fill and they have to score"; her "Here's The Catch V2"
+  // design). Labels word for word from the design; mid-workshop, only
+  // Pillar 01 is pencilled in (3, 2, 3 → 2.7).
+  scorecard: {
+    label:
+      'Blank workshop scorecard: the four pillars of the Compounding Revenue Per Visitor™ OS, each with questions and an empty score out of five',
+    titleBefore: 'Compounding',
+    titleMark: 'Revenue Per Visitor',
+    titleAfter: '™ OS',
+    sub: 'WORKSHOP SCORECARD · SCORE EACH PILLAR OUT OF 5',
+    pillar: 'PILLAR',
+    // wheel quadrants, clockwise from top left = pillars 01, 02, 03, 04
+    wheel: [
+      ['MAXIMISE', 'RPV™'],
+      ['CONTRARIAN', 'POV™'],
+      ['SPEED TO', 'DECISION™'],
+      ['COMPOUNDING', 'RPS™'],
+    ],
+    centre: ['Your lowest', 'score = ?'],
+    // questions per pillar (3 + 3 + 2 + 2 = the workshop's 10) and the
+    // pencilled scores; null = still blank
+    pillars: [
+      { n: '01', scores: ['3', '2', '3'], total: '2.7', tone: 'stone' },
+      { n: '02', scores: [null, null, null], total: null, tone: 'stone' },
+      { n: '03', scores: [null, null], total: null, tone: 'ice' },
+      { n: '04', scores: [null, null], total: null, tone: 'ice' },
+    ],
+    outOf: ' / 5',
+    blank: '_',
+    unknown: '?',
+  },
 };
 
 export const TEAM_APPROACH = {
