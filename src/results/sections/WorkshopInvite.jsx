@@ -1,6 +1,7 @@
 import { WORKSHOP_INVITE } from '../copy.js';
 import { ga } from '../../analytics/ga.js';
 import WorkshopVideo from './WorkshopVideo.jsx';
+import { keepLastTwo } from '../emphasize.jsx';
 import './WorkshopInvite.css';
 
 const brJoin = (lines) =>
@@ -33,7 +34,7 @@ export default function WorkshopInvite({ tokens }) {
           <h2 className="rwk__headline">
             {brJoin(c.headLines)}{' '}
             <br />
-            <span className="rwk__hl">{c.headHl}</span> {c.headTail}
+            <span className="rwk__hl">{c.headHl}</span> {keepLastTwo(c.headTail)}
           </h2>
           <p className="rwk__p">{brJoin(c.beforeLines)}</p>
         </div>

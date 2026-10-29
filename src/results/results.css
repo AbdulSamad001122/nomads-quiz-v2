@@ -16,6 +16,19 @@
   --rbtn-book-bg: #f8dfe8;
 }
 
+/* Responsive pass (Oct 2026): headings don't leave one word alone on their
+   last line (20 did, at one width or another). :where() keeps this at zero
+   specificity, so a section's own text-wrap (balance, nowrap) still wins. */
+:where(.results-page) :where(h1, h2, h3) {
+  text-wrap: balance;
+}
+
+/* keeps a heading's last two words together where a forced line break
+   would otherwise strand the last one (see keepLastTwo in emphasize.jsx) */
+.results-nowrap {
+  white-space: nowrap;
+}
+
 /* a few key words / numbers inside body copy, see emphasize.jsx */
 .results-em {
   font-weight: 700;

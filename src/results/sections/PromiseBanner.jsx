@@ -1,4 +1,5 @@
 import { PROMISE_BANNER } from '../copy.js';
+import { keepLastTwo } from '../emphasize.jsx';
 import './PromiseBanner.css';
 
 /**
@@ -17,7 +18,7 @@ export default function PromiseBanner() {
         </span>{' '}
         <br />
         {PROMISE_BANNER.line2Before} <span className="rpb__hl">{PROMISE_BANNER.line2Highlight}</span>{' '}
-        {PROMISE_BANNER.line3}
+        {keepLastTwo(PROMISE_BANNER.line3)}
       </h2>
       <p className="rpb__sub">{PROMISE_BANNER.sub}</p>
       <p className="rpb__chip">{PROMISE_BANNER.chip}</p>
