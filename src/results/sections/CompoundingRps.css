@@ -1064,6 +1064,12 @@
   .rcs__ov--gap {
     font-size: 32px;
   }
+  /* "Calculate Your Compounding Revenue Per Subscriber™ →" ran to 3 lines
+     at 320 (responsive pass); every CTA stays within 2 */
+  .rcs__btn {
+    font-size: 13px;
+    padding: 12px 12px;
+  }
 }
 
 @media (max-width: 430px) {
