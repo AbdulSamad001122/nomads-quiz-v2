@@ -1474,16 +1474,19 @@ export const WHAT_IF = {
   // the accent spans follow the design. Body is the doc's box copy
   // verbatim — the doc's em-dash before "without" is kept (design drops
   // it; doc wins, flagged).
+  // Figure per Yemi (QC questions C5, Oct 2026): "£96,000+ in 12 days", the
+  // same as the quiz landing page. The old "($131K USD)" was £97K converted,
+  // so it is dropped rather than re-converted.
   golfHead: [
     { t: 'GolfBays generated ' },
-    { t: '£97,000+', hl: true },
-    { t: ' ($131K USD) in just ' },
-    { t: '20 days', hl: true },
+    { t: '£96,000+', hl: true },
+    { t: ' in just ' },
+    { t: '12 days', hl: true },
     { t: ' after launching their Conversion Quiz Ecosystem' },
   ],
-  golfHeadBreakAfter: '20 days',
+  golfHeadBreakAfter: '12 days',
   golfBody:
-    'GolfBays generated £97,000+ ($131K USD) in just 20 days after launching their Conversion Quiz Ecosystem™ — without increasing traffic. They also increased demo conversions by 15.25X using the same traffic they already had.',
+    'GolfBays generated £96,000+ in just 12 days after launching their Conversion Quiz Ecosystem™ — without increasing traffic. They also increased demo conversions by 15.25X using the same traffic they already had.',
   golfName: 'Golfbays',
   golfType: 'E-commerce company',
 };
