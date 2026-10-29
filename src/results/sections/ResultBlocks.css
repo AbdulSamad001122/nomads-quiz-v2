@@ -187,10 +187,17 @@
 .rcb__btn {
   /* renders caps like the red-metrics workshop button (user, Sep 21) */
   text-transform: uppercase;
-  display: inline-block;
-  margin-top: 30px;
+  /* QC item 7: workshop buttons centred in the copy column (Loom 2:51) */
+  display: block;
+  width: fit-content;
+  margin: 30px auto 0;
   font-size: 16px;
   padding: 16px 30px;
+}
+
+/* scoped (0,2,0) so it beats the sitewide .q-btn's inline-block */
+.rcb__copy .rcb__btn {
+  display: block;
 }
 
 .rcb__media img {
