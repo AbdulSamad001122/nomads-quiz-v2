@@ -159,6 +159,8 @@
      bar isn't */
   text-transform: none;
   letter-spacing: normal;
+  /* a label that wraps on a phone stays centred, like the top bar's */
+  text-align: center;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
