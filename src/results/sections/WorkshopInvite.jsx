@@ -1,8 +1,8 @@
 import { WORKSHOP_INVITE } from '../copy.js';
 import { ga } from '../../analytics/ga.js';
 import WorkshopVideo from './WorkshopVideo.jsx';
-import { keepLastTwo } from '../emphasize.jsx';
 import './WorkshopInvite.css';
+import { keepLastTwo } from '../emphasize.jsx';
 
 const brJoin = (lines) =>
   lines.map((line, i) => (
