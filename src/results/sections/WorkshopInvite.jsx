@@ -1,6 +1,5 @@
 import { WORKSHOP_INVITE, CTA } from '../copy.js';
 import { ga } from '../../analytics/ga.js';
-import WorkshopVideo from './WorkshopVideo.jsx';
 import './WorkshopInvite.css';
 import { keepLastTwo } from '../emphasize.jsx';
 
@@ -19,8 +18,9 @@ const brJoin = (lines) =>
  * One keyline-framed block: a navy→maroon crumple band with the isolated-
  * channels copy and the "revenue growth" highlight headline, the plum
  * "See What's Working" stamp on the seam, then the white half with the
- * pen-and-paper invite (live RPV tokens), the Watch the Workshop button
- * and the workshop video (WorkshopVideo).
+ * pen-and-paper invite (live RPV tokens) and the Watch the Workshop button,
+ * which opens the separate workshop page (QC item 8: the video is no longer
+ * on the results page).
  */
 export default function WorkshopInvite({ tokens }) {
   const c = WORKSHOP_INVITE;
@@ -56,17 +56,10 @@ export default function WorkshopInvite({ tokens }) {
             <br />
             {tokens.goal_rpv} {c.grabAfter}
           </p>
-          {/* TODO: real workshop URL when provided (same as NAV). */}
           <a className="rwk__btn" href={CTA.workshop.href} target="_blank" rel="noopener" onClick={() => ga.ctaClick('watch_workshop')}>
             {c.button}
           </a>
         </div>
-        {/* the workshop video (same one as the red-metrics section),
-            autoplaying (muted) once it's in view */}
-        <WorkshopVideo
-          className="rwk__thumb"
-          posterAlt="Diagnostic video — Alefiya scoring the four pillars on the board"
-        />
       </div>
     </section>
   );

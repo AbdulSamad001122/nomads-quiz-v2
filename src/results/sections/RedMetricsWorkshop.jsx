@@ -2,7 +2,6 @@ import { RED_METRICS, METRICS } from '../copy.js';
 import { redMetricRows } from '../resolveTokens.js';
 import { emphasize } from '../emphasize.jsx';
 import { ga } from '../../analytics/ga.js';
-import WorkshopVideo from './WorkshopVideo.jsx';
 import { CTA } from '../copy.js';
 import './RedMetricsWorkshop.css';
 
@@ -159,7 +158,6 @@ export default function RedMetricsWorkshop({ result, tokens }) {
             {c.answerAfter}
           </h3>
 
-          {/* TODO: real workshop URL when provided (same as NAV). */}
           <a
             className="q-btn rmw__btn"
             href={CTA.workshop.href}
@@ -171,11 +169,8 @@ export default function RedMetricsWorkshop({ result, tokens }) {
           </a>
         </div>
 
-        {/* the workshop video, autoplaying (muted) once it's in view */}
-        <WorkshopVideo
-          className="rmw__thumb"
-          posterAlt="Diagnostic video — Alefiya scoring the four pillars on the board"
-        />
+        {/* QC item 8: the workshop video is no longer on the results page; it
+            lives on its own "Watch the Workshop" page, which the button opens */}
       </div>
     </section>
   );

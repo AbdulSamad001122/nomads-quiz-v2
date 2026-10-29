@@ -26,13 +26,13 @@
  * flagged; QC doc list used as the Oct 23 default, awaiting confirmation.
  * Workshop = washed-out (QC row 11); booking colour pending from the user —
  * see --rbtn-book-bg in results.css.
- * TODO: real workshop URL — the separate "Watch the Workshop" page (QC item 8)
- * isn't built yet. Booking URL is live (TidyCal).
+ * Workshop URL = the separate "Watch the Workshop" page (QC item 8).
+ * Booking URL is live (TidyCal).
  */
 export const CTA = {
-  // Workshop link: the workshop video on YouTube for now (user, Oct 28);
-  // swap in the "Watch the Workshop" page URL when that page exists (QC item 8).
-  workshop: { label: 'Watch the hands-on workshop with your team', id: 'watch_workshop', href: 'https://www.youtube.com/watch?v=Zzu1a3robjE', keepTogether: 'hands-on' },
+  // Workshop link: the separate "Watch the Workshop" page (QC item 8; link
+  // from the user, Oct 29). Every workshop button on the page uses it.
+  workshop: { label: 'Watch the hands-on workshop with your team', id: 'watch_workshop', href: 'https://nomadsmarketing.co/workshop', keepTogether: 'hands-on' },
   book: { label: 'Book your Next $125k/mo Game-Plan Call', id: 'book_call', href: 'https://tidycal.com/alefiya/crpv-game-plan-call', keepTogether: 'Game-Plan Call' },
 };
 
