@@ -144,3 +144,11 @@
   }
 }
 
+/* smallest phones: "Book your Next +$125k/mo Game Plan Call →" ran to 3
+   lines below ~350px (responsive pass); every CTA stays within 2 */
+@media (max-width: 400px) {
+  .rtp__btn {
+    font-size: 14.5px;
+    padding: 14px 12px;
+  }
+}
