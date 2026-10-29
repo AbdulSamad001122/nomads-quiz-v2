@@ -21,3 +21,20 @@ export function emphasize(text, phrases = []) {
     ),
   );
 }
+
+/**
+ * Keeps the last two words of a heading segment together, so a forced line
+ * break before it can't strand the final word alone on a phone ("…promise").
+ * Words unchanged; only the wrap point moves.
+ */
+export function keepLastTwo(text) {
+  if (!text) return text;
+  const i = text.lastIndexOf(' ', text.lastIndexOf(' ') - 1);
+  if (i < 0) return text;
+  return (
+    <>
+      {text.slice(0, i + 1)}
+      <span className="results-nowrap">{text.slice(i + 1)}</span>
+    </>
+  );
+}
