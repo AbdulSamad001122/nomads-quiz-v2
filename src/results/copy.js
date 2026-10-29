@@ -371,7 +371,7 @@ export const RPS_CARDS = {
   headMid: 'only asks each email subscriber to bring in',
   headAfter: 'a year.',
   headBut: 'But',
-  headEnd: 'is the starting point, not the end game.',
+  headEnd: 'is the starting point, not the end game.',
   // Both headline sentences always show (approved copy), even when the
   // taker's goal is already the $50 ceiling. For capped takers (who can't reach
   // $1.5M) and takers whose RPS doesn't need to rise, the headline is the
@@ -404,7 +404,7 @@ export const RPS_CARDS = {
   c2Top: 'What does Compounding Revenue Per Subscriber™ mean?',
   c2Before: 'Compounding means every subscriber keeps pulling in',
   c2Mark: 'more profit from the marketing you’ve already spent on them',
-  c2After: ', month after month.',
+  c2After: ', month after month.',
   c2Paid: 'Paid once',
   c2PaidSub: 'to bring them in',
   c2Month1: 'Month 1',
@@ -416,7 +416,7 @@ export const RPS_CARDS = {
   c3Top: 'The three windows',
   c3Before: 'A subscriber’s value grows across',
   c3Mark: 'three windows',
-  c3After: ', and hardly any businesses optimise for all three.',
+  c3After: ', and hardly any businesses optimise for all three.',
   w1When: 'Days 0–14',
   w1Head: 'Convert new subscribers by day 14',
   w1Body: 'More people buy in their first two weeks, when buying intention is at its peak.',
