@@ -153,11 +153,11 @@ export default function RedMetricsWorkshop({ result, tokens }) {
 
       <div className="rmw__light">
         <div className="rmw__light-inner">
-          <p className="rmw__answer">
+          <h3 className="rmw__answer">
             {c.answerBefore}{' '}
             <span className="rmw__val rmw__val--goal">{tokens.goal_rpv}</span>{' '}
             {c.answerAfter}
-          </p>
+          </h3>
 
           {/* TODO: real workshop URL when provided (same as NAV). */}
           <a

@@ -460,16 +460,23 @@
   margin: 0 auto;
 }
 
+/* QC item 6: the "Answer all 10 questions…" sentence as a bold headline */
 .rmw__answer {
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.65;
+  margin: 0;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: clamp(21px, 2.4vw, 28px);
+  line-height: 1.38;
+  letter-spacing: -0.005em;
   color: #250f1c;
+  text-wrap: pretty;
 }
 
 .rmw__answer .rmw__val--goal {
-  padding: 0 6px;
+  padding: 0 7px;
+  background: #e4c8bc;
+  color: #5d1b4e;
+  white-space: nowrap;
 }
 
 .rmw__btn {
