@@ -225,7 +225,9 @@
   display: flex;
   flex-direction: column;
   gap: 22px;
-  align-items: flex-start;
+  /* QC item 7: the workshop + call pair centred, like the page's other
+     button pairs (Loom 2:51) */
+  align-items: center;
 }
 
 .rtp__btn {

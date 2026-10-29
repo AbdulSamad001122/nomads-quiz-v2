@@ -232,11 +232,17 @@
   text-transform: uppercase;
   display: block;
   width: fit-content;
-  margin-top: 34px;
+  margin: 34px auto 0; /* QC item 7: workshop buttons centred (Loom 2:51) */
   text-align: center;
   max-width: 340px;
   font-size: 16px;
   text-decoration: none;
+}
+
+/* scoped (0,2,0) so it beats the sitewide .q-btn's inline-block, which
+   loads later and kept this button left-aligned */
+.rmw__light .rmw__btn {
+  display: block;
 }
 
 .rmw__thumb {
