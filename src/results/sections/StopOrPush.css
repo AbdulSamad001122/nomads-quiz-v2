@@ -68,7 +68,7 @@
 .rso__steps {
   margin-top: 36px;
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) 112px minmax(0, 1.5fr);
+  grid-template-columns: minmax(0, 0.85fr) 140px minmax(0, 1.5fr);
   align-items: center;
 }
 
@@ -169,6 +169,9 @@
   align-items: center;
   justify-content: center;
   gap: 4px;
+  /* clear of both cards: the stop card's shadow on the left and the max
+     card's 10px green ring on the right, which "what if" used to touch */
+  padding: 0 22px 0 16px;
   text-align: center;
   color: var(--rso-gold);
 }
