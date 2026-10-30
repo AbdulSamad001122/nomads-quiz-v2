@@ -59,8 +59,9 @@
   color: var(--rso-gold);
 }
 
+/* "to their max" in white (user, Oct 30) */
 .rso__hl-max {
-  color: var(--rso-green-hi);
+  color: #ffffff;
 }
 
 /* ——— the two cards, joined by "But… what if you did?" ——— */
