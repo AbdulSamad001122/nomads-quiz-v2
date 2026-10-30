@@ -160,7 +160,11 @@
    size, padding, width and position (and its phone sizes). The
    booking colour is one setting (--rbtn-book-bg in results.css), so
    the designer's brighter colour will reach every booking button.
-   The two "Calculate…" buttons keep their own design colours.
+   The two "Calculate…" buttons (data nerds, revenue per subscriber)
+   join them in the workshop's light blue (user, Oct 30: every button
+   in the top-bar style; pink stays for booking so it remains the
+   priority). The data nerds design's "Stone button" was its own
+   palette, not an instruction to keep it.
    ============================================================ */
 
 .results-page .rmw__btn,
@@ -169,7 +173,9 @@
 .results-page .rtp__btns > .rtp__btn:first-child,
 .results-page .rgp__btn,
 .results-page .ryc__btn,
-.results-page .rtp__btns > .rtp__btn:last-child {
+.results-page .rtp__btns > .rtp__btn:last-child,
+.results-page .rdn__btn,
+.results-page .rcs__btn {
   color: #250f1c;
   border: 2px solid #0f0a10;
   border-radius: 0;
@@ -188,7 +194,9 @@
 .results-page .rmw__btn,
 .results-page .rcb__btn,
 .results-page .rwk__btn,
-.results-page .rtp__btns > .rtp__btn:first-child {
+.results-page .rtp__btns > .rtp__btn:first-child,
+.results-page .rdn__btn,
+.results-page .rcs__btn {
   background: var(--rbtn-workshop-bg);
 }
 
@@ -204,7 +212,10 @@
   .results-page .rmw__btn,
   .results-page .rcb__btn,
   .results-page .rwk__btn,
-  .results-page .rtp__btns > .rtp__btn:first-child {
+  .results-page .rtp__btns > .rtp__btn:first-child,
+  .results-page .rdn__btn,
+  .results-page .rcs__btn,
+  .results-page .rad__btn {
     font-size: 16px;
   }
   .results-page .rgp__btn,
@@ -227,7 +238,9 @@
 /* hover / press: the shared lift, the matched buttons' shadow; the
    sitewide .q-btn plum swap is cancelled so the colour stays */
 .results-page .rmw__btn:hover,
-.results-page .rcb__btn:hover {
+.results-page .rcb__btn:hover,
+.results-page .rdn__btn:hover,
+.results-page .rcs__btn:hover {
   transform: translate(-2px, -2px) scale(1.04);
   background: var(--rbtn-workshop-bg);
   color: #250f1c;
@@ -238,7 +251,9 @@
 .results-page .rwk__btn:hover,
 .results-page .rtp__btns > .rtp__btn:hover,
 .results-page .rgp__btn:hover,
-.results-page .ryc__btn:hover {
+.results-page .ryc__btn:hover,
+.results-page .rdn__btn:hover,
+.results-page .rcs__btn:hover {
   box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.55);
 }
 
@@ -247,14 +262,18 @@
 .results-page .rwk__btn:active,
 .results-page .rtp__btns > .rtp__btn:active,
 .results-page .rgp__btn:active,
-.results-page .ryc__btn:active {
+.results-page .ryc__btn:active,
+.results-page .rdn__btn:active,
+.results-page .rcs__btn:active {
   transform: translate(0, 0) scale(1);
   box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.55);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .results-page .rmw__btn:hover,
-  .results-page .rcb__btn:hover {
+  .results-page .rcb__btn:hover,
+  .results-page .rdn__btn:hover,
+  .results-page .rcs__btn:hover {
     transform: none;
   }
 }
