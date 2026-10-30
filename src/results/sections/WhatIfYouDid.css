@@ -28,11 +28,9 @@
 }
 
 /* the GolfBays composition carries its own frame + name art, sized like
-   the Lara portrait */
-.rwi__photo {
-  display: block;
+   the Lara portrait (TitledPortrait sets the title under it) */
+.rwi__golf {
   width: min(100%, 500px);
-  height: auto;
 }
 
 .rwi__logo-disc {
@@ -139,7 +137,7 @@
   .rwi__frame {
     width: min(100%, 340px);
   }
-  .rwi__photo {
+  .rwi__golf {
     width: min(100%, 420px);
   }
   .rwi__copy {
