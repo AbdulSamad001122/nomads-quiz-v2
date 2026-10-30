@@ -493,3 +493,143 @@
     max-width: 80vw;
   }
 }
+
+/* ============================================================
+   Scorecard motion + interaction (Oct 30). See the timeline notes in
+   TheCatch.jsx. Nothing here changes the layout.
+   ============================================================ */
+
+/* 1 · pieces settle in one after another, so the board never lands all
+   at once ("not … overwhelming when they appear") */
+.rtc__board .rtc__qc,
+.rtc__board .rtc__wheel,
+.rtc__board .rtc__tot > div {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.45s ease, transform 0.45s ease, box-shadow 0.2s ease;
+}
+
+.rtc__board--in .rtc__qc,
+.rtc__board--in .rtc__wheel,
+.rtc__board--in .rtc__tot > div {
+  opacity: 1;
+  transform: none;
+}
+
+.rtc__board--in .rtc__col:first-child .rtc__qc:nth-child(1) { transition-delay: 0s; }
+.rtc__board--in .rtc__wheel { transition-delay: 0.08s; }
+.rtc__board--in .rtc__col:nth-child(3) .rtc__qc:nth-child(1) { transition-delay: 0.16s; }
+.rtc__board--in .rtc__col:nth-child(3) .rtc__qc:nth-child(2) { transition-delay: 0.24s; }
+.rtc__board--in .rtc__col:first-child .rtc__qc:nth-child(2) { transition-delay: 0.32s; }
+.rtc__board--in .rtc__tot > div { transition-delay: 0.4s; }
+
+/* 2 · pencilled marks write in left to right */
+.rtc__ink {
+  display: inline-block;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.5s cubic-bezier(0.55, 0.1, 0.35, 1);
+}
+
+.rtc__ink--on {
+  clip-path: inset(0 0 0 0);
+}
+
+.rtc__box,
+.rtc__qscore,
+.rtc__tot b {
+  transition: border-color 0.25s ease, border-style 0s, transform 0.2s ease;
+}
+
+/* the pencil jiggles while it "writes" */
+.rtc__pencil--writing {
+  animation: rtc-write 0.32s ease-in-out infinite alternate;
+}
+
+@keyframes rtc-write {
+  from { transform: rotate(-28deg) translate(0, 0); }
+  to { transform: rotate(-24deg) translate(-6px, -3px); }
+}
+
+/* 3 · the empty "?"s and the centre ask for the reader's scores — twice,
+   then they rest */
+.rtc__board--ask .rtc__ask {
+  animation: rtc-ask 0.8s ease calc(var(--ask, 0) * 0.22s) 2;
+}
+
+.rtc__board--ask .rtc__tot .rtc__ask b {
+  animation: rtc-ask-box 0.8s ease calc(var(--ask, 0) * 0.22s) 2;
+}
+
+@keyframes rtc-ask {
+  50% { transform: translate(-50%, -50%) scale(1.12); }
+}
+
+@keyframes rtc-ask-box {
+  50% { transform: scale(1.14); border-color: var(--rtc-plum); }
+}
+
+/* the totals row isn't absolutely placed, so its pulse lives on the box */
+.rtc__board--ask .rtc__tot .rtc__ask {
+  animation: none;
+}
+
+.rtc__board--ask .rtc__hub {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: rtc-hub 1s ease 0.7s 2;
+}
+
+@keyframes rtc-hub {
+  50% { transform: scale(1.12); }
+}
+
+/* 4 · point at / tap a pillar: its card, quadrant, wheel score and total
+   light up together; the rest step back */
+.rtc__qc,
+.rtc__quad,
+.rtc__qscore,
+.rtc__tot > div {
+  cursor: pointer;
+}
+
+.rtc__quad {
+  transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+.rtc__board .rtc__dim {
+  opacity: 0.35;
+}
+
+.rtc__board .rtc__qc.rtc__hl {
+  box-shadow: 0 0 0 3px var(--rtc-plum), 2px 2px 0 rgba(37, 15, 28, 0.12);
+}
+
+.rtc__quad.rtc__hl {
+  filter: brightness(1.35);
+}
+
+.rtc__qscore.rtc__hl {
+  border-color: var(--rtc-deep);
+  border-style: solid;
+}
+
+.rtc__tot .rtc__hl b {
+  border-color: var(--rtc-deep);
+  border-style: solid;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rtc__board .rtc__qc,
+  .rtc__board .rtc__wheel,
+  .rtc__board .rtc__tot > div,
+  .rtc__ink,
+  .rtc__quad {
+    transition: none;
+  }
+  .rtc__pencil--writing,
+  .rtc__board--ask .rtc__ask,
+  .rtc__board--ask .rtc__tot .rtc__ask b,
+  .rtc__board--ask .rtc__hub {
+    animation: none;
+  }
+}
