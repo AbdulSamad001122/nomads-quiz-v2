@@ -583,6 +583,13 @@
   color: var(--rso-mute);
 }
 
+/* phones: the long ceiling caption reads left-aligned (user, Oct 30) */
+@media (max-width: 760px) {
+  .rso__cap--4 {
+    text-align: left;
+  }
+}
+
 .rso__st--0 .rso__blk {
   height: 16px;
   padding-top: 0;
