@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { SEE_HOW } from '../copy.js';
 import './SeeHowItShowsUp.css';
 
@@ -18,6 +18,28 @@ export default function SeeHowItShowsUp() {
   const [cur, setCur] = useState(0);
   const trackRef = useRef(null);
   const last = c.steps.length - 1;
+
+  // the chat bubbles pop in when the card first comes into view, not on
+  // page load (row 4 sits far down the page, so the pop was long over)
+  const [seen, setSeen] = useState(false);
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') {
+      setSeen(true);
+      return undefined;
+    }
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setSeen(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   const show = (i, fromNav) => {
     const n = Math.max(0, Math.min(last, i));
@@ -85,7 +107,7 @@ export default function SeeHowItShowsUp() {
         ))}
       </div>
 
-      <div className="rsh__track" ref={trackRef}>
+      <div className={`rsh__track${seen ? ' rsh__track--seen' : ''}`} ref={trackRef}>
         {card(
           0,
           'relate',
