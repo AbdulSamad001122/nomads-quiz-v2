@@ -141,6 +141,10 @@
   align-items: stretch;
   gap: 16px 22px;
   padding: 44px 32px 50px;
+  /* dark band (user, Oct 30): continues pillar 1's dark closing banner
+     and sits as a dark footer under the other pillars (was the open
+     pillar's own light colour) */
+  background: #150a10 url('/assets/results-maroon-crumple.webp') center / cover;
 }
 
 .rpl__btn {
