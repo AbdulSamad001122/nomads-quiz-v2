@@ -317,6 +317,15 @@
   }
 }
 
+/* held until the card comes into view (.rsh__track--seen, set in JS) */
+.rsh__msg {
+  animation-play-state: paused;
+}
+
+.rsh__track--seen .rsh__msg {
+  animation-play-state: running;
+}
+
 .rsh__av {
   flex: none;
   width: 44px;
