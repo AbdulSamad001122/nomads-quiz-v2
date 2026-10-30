@@ -138,6 +138,26 @@ body .results-page .rtc__headline {
   text-wrap: balance;
 }
 
+/* Workshop section's "Grab a pen and paper…" line: a bold headline in the
+   middle of the page, like row 2's "Answer all 10 questions…" (user, Oct 30) */
+body .results-page .rwk__invite {
+  max-width: 760px;
+}
+
+body .results-page .rwk__p--dark {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 1.38;
+  letter-spacing: -0.005em;
+  color: #250f1c;
+  text-wrap: pretty;
+}
+
+body .results-page .rwk__p--dark br {
+  display: none;
+}
+
 /* ——— tablet ——— */
 @media (max-width: 1100px) {
   body .results-page :is(
@@ -181,7 +201,8 @@ body .results-page .rtc__headline {
     .rcs__h3,
     .rtc__scorebox,
     .rta__mystery,
-    .rta__help
+    .rta__help,
+    .rwk__p--dark
   ) {
     font-size: 20px;
   }
