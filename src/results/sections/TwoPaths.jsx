@@ -7,7 +7,8 @@ import './TwoPaths.css';
    rule — they stranded "numbers" on its own line at ~860–1200px). The
    design's desktop lines come from the column widths in TwoPaths.css. */
 const flow = (lines, bold) => {
-  const text = lines.join(' ');
+  // the last two words stay together, so no line ends on a lone word
+  const text = lines.join(' ').replace(/ (\S+)$/, '\u00a0$1');
   return bold ? emphasize(text, bold) : text;
 };
 
