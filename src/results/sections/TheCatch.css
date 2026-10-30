@@ -642,3 +642,237 @@
     animation: none;
   }
 }
+
+/* ============================================================
+   "It's unfinished — we fill the rest in together" (branch
+   section/qc-catch-fill-together, Oct 30). A sticky note just under the
+   board, a pencilled arrow up to the "?" totals, a hover bubble on
+   unscored pillars, and the pencil waiting its turn. Layout unchanged.
+   The totals row is always centred and sits 6px above the board's bottom
+   edge, so the note and arrow are placed from the board's centre and kept
+   fully below it: they never cover a score, and the white arrow is always
+   on the dark panel.
+   ============================================================ */
+
+.rtc__note {
+  position: absolute;
+  left: calc(50% - 160px);
+  top: calc(100% + 18px);
+  z-index: 3;
+  width: 178px;
+  padding: 18px 14px 12px;
+  background: #f0dcbf; /* the page's warm cream (brand), as a sticky note */
+  color: #3a2a12;
+  box-shadow: 4px 5px 0 rgba(0, 0, 0, 0.22);
+  font-family: 'RTC Caveat', var(--font-script);
+  font-weight: 700;
+  text-align: center;
+  transform: rotate(-4deg);
+  opacity: 0;
+  translate: 0 -14px;
+  /* drops in as the board's last pieces settle (they finish 0.85s after
+     the board comes into view; user, Oct 30: "as the whole board comes
+     in view") */
+  transition: opacity 0.35s ease 0.55s, translate 0.45s cubic-bezier(0.3, 1.4, 0.5, 1) 0.55s;
+}
+
+.rtc__note--on {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* a strip of tape holding it on */
+.rtc__note-tape {
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  width: 62px;
+  height: 18px;
+  margin-left: -31px;
+  background: rgba(228, 200, 188, 0.85);
+  transform: rotate(3deg);
+}
+
+.rtc__note-scored {
+  display: block;
+  font-size: 22px;
+  line-height: 1.05;
+}
+
+/* 4 parts, one per pillar; only Pillar 01 is filled */
+.rtc__note-bar {
+  display: flex;
+  gap: 4px;
+  margin: 8px 6px;
+}
+
+.rtc__note-bar i {
+  flex: 1;
+  height: 8px;
+  border: 1.5px dashed #8a4f70;
+  border-radius: 3px;
+  /* Pillar 01's part fills when its 2.7 lands in the totals */
+  transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.rtc__note-bar i.rtc__note-seg--f {
+  border-style: solid;
+  border-color: #5d1b4e;
+  background: #5d1b4e;
+}
+
+.rtc__note-rest {
+  display: block;
+  font-size: 17px;
+  line-height: 1.1;
+  color: #5d1b4e;
+}
+
+/* the pencilled arrow: out of the note's right edge, hooking up under
+   Pillar 03's "?" — drawing itself */
+.rtc__arrow {
+  position: absolute;
+  z-index: 3;
+  left: calc(50% + 13px);
+  top: calc(100% - 5px);
+  width: 70px;
+  height: 63px;
+  overflow: visible;
+  pointer-events: none;
+  filter: drop-shadow(1px 2px 0 rgba(0, 0, 0, 0.3));
+}
+
+.rtc__arrow path {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.rtc__arrow-line {
+  stroke-dasharray: 90;
+  stroke-dashoffset: 90;
+  transition: stroke-dashoffset 0.7s ease 1.05s;
+}
+
+.rtc__arrow-head {
+  stroke-dasharray: 30;
+  stroke-dashoffset: 30;
+  transition: stroke-dashoffset 0.25s ease 1.75s;
+}
+
+.rtc__arrow--on .rtc__arrow-line,
+.rtc__arrow--on .rtc__arrow-head {
+  stroke-dashoffset: 0;
+}
+
+/* hover / tap an unscored pillar: a small handwritten bubble over its "?" */
+.rtc__tot > div {
+  position: relative;
+}
+
+.rtc__tip {
+  position: absolute;
+  z-index: 4;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  width: max-content;
+  max-width: 150px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: #152638;
+  color: #ffffff;
+  font-family: 'RTC Caveat', var(--font-script);
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.1;
+  text-align: center;
+  white-space: normal;
+  transform: translateX(-50%);
+  animation: rtc-tip 0.22s ease-out;
+}
+
+.rtc__tip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -6px;
+  border: 6px solid transparent;
+  border-top-color: #152638;
+}
+
+/* the last total sits at the board's right edge: keep its bubble inside */
+.rtc__tot > div:last-child .rtc__tip {
+  left: auto;
+  right: -6px;
+  transform: none;
+}
+
+.rtc__tot > div:last-child .rtc__tip::after {
+  left: auto;
+  right: 18px;
+}
+
+@keyframes rtc-tip {
+  from {
+    opacity: 0;
+    translate: 0 4px;
+  }
+}
+
+/* that pillar's empty boxes wiggle, waiting for a score */
+.rtc__qc.rtc__hl .rtc__box:not(.rtc__box--f) {
+  animation: rtc-wiggle 0.45s ease 2;
+}
+
+@keyframes rtc-wiggle {
+  25% { transform: rotate(-6deg); }
+  75% { transform: rotate(6deg); }
+}
+
+/* after writing, the pencil bobs a few times, waiting its turn */
+.rtc__pencil--wait {
+  animation: rtc-wait 1.4s ease-in-out 0.4s 4 alternate;
+}
+
+@keyframes rtc-wait {
+  to { transform: rotate(-32deg) translate(-8px, -10px); }
+}
+
+/* side by side but narrow: the board is the column's tallest thing, so
+   make room under it for the note */
+@media (max-width: 1279px) and (min-width: 901px) {
+  .rtc__card-wrap {
+    margin-bottom: 64px;
+  }
+}
+
+/* stacked layouts: the note sits centred under the board, no arrow */
+@media (max-width: 900px) {
+  .rtc__note {
+    position: relative;
+    left: auto;
+    top: auto;
+    margin: 30px auto 0;
+    transform: rotate(-2deg);
+  }
+  .rtc__arrow {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rtc__note,
+  .rtc__note-bar i,
+  .rtc__arrow-line,
+  .rtc__arrow-head {
+    transition: none;
+  }
+  .rtc__tip,
+  .rtc__qc.rtc__hl .rtc__box:not(.rtc__box--f),
+  .rtc__pencil--wait {
+    animation: none;
+  }
+}

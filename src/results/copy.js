@@ -680,6 +680,14 @@ export const THE_CATCH = {
     outOf: ' / 5',
     blank: '_',
     unknown: '?',
+    // "It's unfinished — we fill it in together" layer (branch
+    // section/qc-catch-fill-together, user's idea, Oct 30). DRAFT COPY: these
+    // words are ours, not from Yemi / Alefiya — needs their OK before launch.
+    together: {
+      scored: '1 of 4 pillars scored',
+      rest: 'We’ll fill in the rest together.',
+      tip: 'We score this one together, live.',
+    },
   },
 };
 
