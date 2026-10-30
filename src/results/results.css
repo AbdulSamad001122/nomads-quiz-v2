@@ -141,6 +141,16 @@ body .results-page :is(
   font-size: 16px;
 }
 
+/* "Here's the catch": at 38px its kept-together line 2 pushed "back."
+   onto a line of its own — let the headline balance instead */
+body .results-page .rtc__keep {
+  white-space: normal;
+}
+
+body .results-page .rtc__headline {
+  text-wrap: balance;
+}
+
 /* ——— tablet ——— */
 @media (max-width: 1100px) {
   body .results-page :is(
