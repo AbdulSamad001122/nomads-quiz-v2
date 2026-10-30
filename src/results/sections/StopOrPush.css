@@ -408,6 +408,51 @@
   }
 }
 
+/* grow-in (user, Oct 30): once the ladder is seen, each bar fills left to
+   right, one after another (--rso-delay per row); its label fades in and
+   counts up with it (CountUp), and the "× today" chip pops in as the bar
+   lands. --anim is only set when motion is allowed. */
+.rso__ladder--anim .rso__fill {
+  clip-path: inset(0 100% 0 0 round 8px);
+  transition: clip-path var(--rso-grow) cubic-bezier(0.33, 1, 0.68, 1) var(--rso-delay);
+}
+.rso__ladder--anim .rso__val {
+  opacity: 0;
+  transition: opacity 300ms ease var(--rso-delay);
+}
+.rso__ladder--anim .rso__val i {
+  opacity: 0;
+  transform: scale(0.6);
+  transition:
+    opacity 200ms ease calc(var(--rso-delay) + var(--rso-grow) - 150ms),
+    transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1) calc(var(--rso-delay) + var(--rso-grow) - 150ms);
+}
+.rso__ladder--in .rso__fill {
+  clip-path: inset(0 0 0 0 round 8px);
+}
+.rso__ladder--in .rso__val {
+  opacity: 1;
+}
+.rso__ladder--in .rso__val i {
+  opacity: 1;
+  transform: none;
+}
+
+/* the counting copy sits over the finished figure, which holds the width */
+.rso__count {
+  position: relative;
+  display: inline-block;
+}
+.rso__count-end {
+  opacity: 0;
+}
+.rso__count-run {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+}
+
 /* ——— scepticism block (only when the 12× cap bites) ——— */
 
 .rso__real {
