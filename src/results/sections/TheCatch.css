@@ -657,7 +657,7 @@
   z-index: 3;
   width: 178px;
   padding: 18px 14px 12px;
-  background: #f7e7a6;
+  background: #f0dcbf; /* the page's warm cream (brand), as a sticky note */
   color: #3a2a12;
   box-shadow: 4px 5px 0 rgba(0, 0, 0, 0.22);
   font-family: 'RTC Caveat', var(--font-script);
