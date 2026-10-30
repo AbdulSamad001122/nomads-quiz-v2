@@ -1,6 +1,7 @@
 import { RED_METRICS, METRICS } from '../copy.js';
 import { redMetricRows } from '../resolveTokens.js';
 import { emphasize } from '../emphasize.jsx';
+import HighlightSweep from '../../components/primitives/HighlightSweep.jsx';
 import { ga } from '../../analytics/ga.js';
 import WorkshopVideo from './WorkshopVideo.jsx';
 import './RedMetricsWorkshop.css';
@@ -59,7 +60,11 @@ export default function RedMetricsWorkshop({ result, tokens }) {
         <p className="rmw__lead">{emphasize(c.lead, c.leadBold)}</p>
 
         <h2 className="rmw__headline">
-          {c.headBefore} <span className="rmw__hl">{c.headHighlight}</span> {c.headAfter}
+          {c.headBefore}{' '}
+          <HighlightSweep tone="iceblue" className="rmw__hl">
+            {c.headHighlight}
+          </HighlightSweep>{' '}
+          {c.headAfter}
         </h2>
 
         {/* the red-metric line: white box, red border, pulsing red dot */}

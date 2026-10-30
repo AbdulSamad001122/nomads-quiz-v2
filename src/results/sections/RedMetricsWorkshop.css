@@ -83,8 +83,13 @@
   color: #ffffff;
 }
 
-.rmw__hl {
-  color: var(--rmw-ice);
+/* "Reason Behind": the shared highlight sweep (HighlightSweep, as in the
+   quiz) — a light-blue box wipes in from the left as the headline comes
+   into view and the words turn dark blue under its edge (user, Oct 30).
+   The results page's own ice + midnight, not the quiz's paler ice. */
+.rmw__hl.hl-sweep {
+  --sweep-bg: var(--rmw-ice);
+  --sweep-color: var(--rmw-midnight);
 }
 
 /* ——— the red-metric line: the loudest thing ——— */
