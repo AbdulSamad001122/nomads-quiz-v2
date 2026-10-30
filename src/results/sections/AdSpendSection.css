@@ -72,6 +72,15 @@
   color: #4d4350;
 }
 
+/* Phones (design-v2 §0.9; user, Oct 30): headline and lede run 3 lines at
+   375px, so they read left-aligned. */
+@media (max-width: 760px) {
+  .rad__headline,
+  .rad__lede {
+    text-align: left;
+  }
+}
+
 /* spend + visitors, "stays the same" */
 .rad__same {
   margin: 22px auto 0;
