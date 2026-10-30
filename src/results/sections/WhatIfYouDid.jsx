@@ -2,10 +2,10 @@ import { WHAT_IF } from '../copy.js';
 import { emphasize } from '../emphasize.jsx';
 import './WhatIfYouDid.css';
 
-/* The GolfBays photo for the left panel — the user sends it later. Until
-   then the frame shows the GolfBays logo on a white disc. Set the path here
-   (e.g. '/assets/results-golfbays-photo.webp') and it replaces the logo. */
-const GOLF_IMAGE = null;
+/* The GolfBays composition for the left panel (frame, founders and name art
+   baked in, like the Lara / David portraits — user, Oct 30). If it's ever
+   set to null, the frame falls back to the GolfBays logo on a white disc. */
+const GOLF_IMAGE = '/assets/results-golfbays-photo.webp';
 
 /**
  * The GolfBays case study, right after the "stop at $1.5M / push to their
@@ -25,15 +25,15 @@ export default function WhatIfYouDid({ result }) {
   return (
     <section className="rwi">
       <div className="rwi__media">
-        <div className="rwi__frame">
-          {GOLF_IMAGE ? (
-            <img className="rwi__photo" src={GOLF_IMAGE} alt={c.golfName} />
-          ) : (
+        {GOLF_IMAGE ? (
+          <img className="rwi__photo" src={GOLF_IMAGE} alt={`${c.golfName} founders`} width="1000" height="890" />
+        ) : (
+          <div className="rwi__frame">
             <span className="rwi__logo-disc">
               <img src="/assets/results-golfbays-icon.png" alt={c.golfName} width="720" height="720" />
             </span>
-          )}
-        </div>
+          </div>
+        )}
       </div>
 
       <div className="rwi__copy">

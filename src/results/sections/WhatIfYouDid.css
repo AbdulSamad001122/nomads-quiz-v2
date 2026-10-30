@@ -27,11 +27,12 @@
   overflow: hidden;
 }
 
+/* the GolfBays composition carries its own frame + name art, sized like
+   the Lara portrait */
 .rwi__photo {
   display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: min(100%, 500px);
+  height: auto;
 }
 
 .rwi__logo-disc {
@@ -137,6 +138,9 @@
   }
   .rwi__frame {
     width: min(100%, 340px);
+  }
+  .rwi__photo {
+    width: min(100%, 420px);
   }
   .rwi__copy {
     padding: 48px 24px 56px;
