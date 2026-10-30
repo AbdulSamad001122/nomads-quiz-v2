@@ -340,17 +340,25 @@
   box-decoration-break: clone;
 }
 
-/* ——— pinning: side by side, and only when the window is tall enough for
-   every card to be read in full before the next one slides over it
-   (124px clears the 100px sticky nav) ——— */
+/* ——— pinning ———
+   The compass image stays put while the cards scroll at every side-by-side
+   width (design note 1): it covers nothing, so it needs no height or motion
+   gate (final QC audit, Oct 30 — short laptops used to get no pin at all). */
 
-@media (min-width: 1200px) and (min-height: 680px) and (prefers-reduced-motion: no-preference),
-  (min-width: 861px) and (min-height: 800px) and (prefers-reduced-motion: no-preference) {
+@media (min-width: 861px) {
   .rta__left img {
     position: sticky;
     top: 100px;
     max-height: calc(100vh - 100px);
   }
+}
+
+/* The cards stack only when the window is tall enough for every card to be
+   read in full before the next one slides over it (124px clears the 100px
+   sticky nav), and not for reduced motion. */
+
+@media (min-width: 1200px) and (min-height: 680px) and (prefers-reduced-motion: no-preference),
+  (min-width: 861px) and (min-height: 800px) and (prefers-reduced-motion: no-preference) {
   .rta__card {
     position: sticky;
     top: calc(124px + var(--i) * 14px);
