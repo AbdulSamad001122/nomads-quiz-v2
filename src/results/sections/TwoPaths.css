@@ -36,8 +36,10 @@
   padding: 52px 40px 52px 52px;
 }
 
+/* column widths that give the design's desktop lines (3 / 3 / 2) without
+   forced breaks; narrower screens simply wrap */
 .rtp__p {
-  max-width: 600px;
+  max-width: 540px;
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 16px;
@@ -46,6 +48,7 @@
 }
 
 .rtp__panel-heading {
+  max-width: 560px;
   margin-top: 40px;
   font-family: var(--font-headline);
   font-weight: 800;
@@ -55,6 +58,7 @@
 }
 
 .rtp__panel-sub {
+  max-width: 440px;
   margin-top: 22px;
 }
 
@@ -101,14 +105,6 @@
 
 /* ——— responsive ——— */
 
-/* below the panel's 1200 max-width the copy column is too narrow for the
-   closing paragraph's manual line map — let it flow naturally there */
-@media (max-width: 1200px) {
-  .rtp__p br {
-    display: none;
-  }
-}
-
 @media (max-width: 1100px) {
   .rtp__panel-copy {
     padding: 40px 32px;
@@ -132,11 +128,6 @@
   .rtp__panel-photo img {
     position: static;
     height: 100%;
-  }
-  .rtp__p br,
-  .rtp__panel-heading br,
-  .rtp__panel-sub br {
-    display: none;
   }
   .rtp__btn {
     width: 100%;
