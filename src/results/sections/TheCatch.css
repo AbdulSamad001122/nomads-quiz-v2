@@ -605,7 +605,11 @@
   transition: opacity 0.2s ease, filter 0.2s ease;
 }
 
-.rtc__board .rtc__dim {
+/* specific enough to beat the settle-in "opacity: 1" rule on the
+   totals (.rtc__board--in .rtc__tot > div), which kept them from dimming */
+.rtc__board .rtc__dim,
+.rtc__board .rtc__qc.rtc__dim,
+.rtc__board .rtc__tot > div.rtc__dim {
   opacity: 0.35;
 }
 
