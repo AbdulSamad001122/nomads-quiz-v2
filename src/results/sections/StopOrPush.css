@@ -420,6 +420,11 @@
   opacity: 0;
   transition: opacity 300ms ease var(--rso-delay);
 }
+/* a label inside its bar is dark-on-fill, unreadable on the empty track:
+   it waits until the bar is nearly under it */
+.rso__ladder--anim .rso__val--inside {
+  transition-delay: calc(var(--rso-delay) + var(--rso-grow) * 0.45);
+}
 .rso__ladder--anim .rso__val i {
   opacity: 0;
   transform: scale(0.6);
