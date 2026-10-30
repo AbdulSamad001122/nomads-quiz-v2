@@ -1,8 +1,8 @@
-import { useMemo, useState } from 'react';
+import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { AD_SPEND, CTA } from '../copy.js';
 import { fill } from '../resolveTokens.js';
 import { computeAdModule } from '../../calc/calculator.js';
-import { money, rpvMoney } from '../../calc/rounding.js';
+import { money, round100, rpvMoney } from '../../calc/rounding.js';
 import { ga } from '../../analytics/ga.js';
 import './AdSpendSection.css';
 
@@ -20,6 +20,15 @@ function short(v) {
   if (v >= 1e6) return `$${(v / 1e6).toFixed(v % 1e6 ? 1 : 0)}M`;
   if (v >= 1e3) return `$${+(v / 1e3).toFixed(1)}K`;
   return `$${v}`;
+}
+
+/* ROAS as shown: one decimal, but rounding may never move it across 1×
+   (a true 0.96 reads "0.96", not "1") or turn a real return into "0". */
+function roasText(raw, shown) {
+  const two = Math.floor(raw * 100) / 100;
+  if (raw < 1 && shown >= 1) return two.toFixed(2);
+  if (raw > 0 && shown === 0) return two > 0 ? two.toFixed(2) : '<0.01';
+  return String(shown);
 }
 
 /**
@@ -55,25 +64,72 @@ export default function AdSpendSection({ result, adAdjustable = false }) {
   const spend = ad.monthlySpend;
   const hasSpend = Number.isFinite(spend) && spend > 0;
 
-  // the gain is worked from the two figures as shown, so the card's working
-  // line always adds up; the year is 12 × that month
+  // the month is worked from the two figures as shown, so the card's working
+  // line always adds up; the year comes from the unrounded figures (Logic
+  // Doc · 7 fixture: +$81,200 a month, +$975,000 a year — not 12 × $81,200)
   const gain = d.goalAdRev - d.currentAdRev;
+  const year = round100((ad.goalAdRev - ad.currentAdRev) * 12);
   const top = niceMax(Math.max(d.goalAdRev, d.currentAdRev, hasSpend ? spend : 0));
   const pct = (v) => Math.max(0, Math.min(100, (v / top) * 100));
   const spendPct = hasSpend ? pct(spend) : null;
 
   const bars = [
-    { key: 'today', label: c.todayLabel, rpv: r.currentRPV, rev: d.currentAdRev, roas: d.currentROAS },
-    { key: 'goal', label: c.goalLabel, rpv: r.goalRPV, rev: d.goalAdRev, roas: d.goalROAS },
+    { key: 'today', label: c.todayLabel, rpv: r.currentRPV, rev: d.currentAdRev, raw: ad.currentAdRev, roas: d.currentROAS },
+    { key: 'goal', label: c.goalLabel, rpv: r.goalRPV, rev: d.goalAdRev, raw: ad.goalAdRev, roas: d.goalROAS },
   ].map((b) => {
     const w = pct(b.rev);
-    const good = b.roas != null && b.roas >= 1;
+    // judged on the true ratio, so a 0.96 return is never painted green
+    const ratio = b.roas != null ? b.raw / spend : null;
+    const good = ratio != null && ratio >= 1;
     // label inside a long bar; otherwise just past the bar (or past the
     // dashed line when the bar stops short of it), as in the design
     const after = Math.max(w, spendPct ?? 0);
     const inside = w >= 30 || after > 78;
-    return { ...b, w, good, inside, outLeft: after };
+    return { ...b, w, good, ratio, inside, outLeft: after };
   });
+
+  // The guess above holds for most answers, but a short bar with the spend
+  // line far right (or any bar at phone width) can be narrower than its own
+  // figure. So measure: inside when the bar fits the figure; else just past
+  // the dashed line; else between the bar and the line; never clipped or
+  // past the track's end.
+  const rowsRef = useRef(null);
+  const [place, setPlace] = useState(null);
+  useLayoutEffect(() => {
+    const rows = rowsRef.current;
+    if (!rows) return undefined;
+    const measure = () => {
+      const next = {};
+      rows.querySelectorAll('.rad__track').forEach((track) => {
+        const b = bars.find((x) => x.key === track.dataset.key);
+        const label = track.querySelector('.rad__measure');
+        if (!b || !label) return;
+        const tw = track.clientWidth;
+        const lw = label.offsetWidth;
+        const barPx = (Math.max(b.w, b.rev > 0 ? 1.5 : 0) / 100) * tw;
+        const linePx = spendPct != null ? (spendPct / 100) * tw : null;
+        if (barPx >= lw + 20) {
+          next[b.key] = { inside: true };
+          return;
+        }
+        const pastLine = Math.max(barPx, linePx ?? 0) + 10;
+        let left;
+        if (pastLine + lw <= tw) left = pastLine;
+        else if (linePx != null && linePx - barPx >= lw + 20) left = barPx + 10;
+        else left = Math.max(0, tw - lw);
+        next[b.key] = { inside: false, left };
+      });
+      setPlace((prev) => (JSON.stringify(prev) === JSON.stringify(next) ? prev : next));
+    };
+    measure();
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(measure) : null;
+    ro?.observe(rows);
+    document.fonts?.ready?.then(measure);
+    return () => ro?.disconnect();
+    // bars/spendPct are rebuilt every render from these inputs
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [d.currentAdRev, d.goalAdRev, spendPct]);
+  const at = (b) => place?.[b.key] ?? { inside: b.inside, left: null };
   const verdict = (b) =>
     b.roas == null
       ? null
@@ -135,7 +191,7 @@ export default function AdSpendSection({ result, adAdjustable = false }) {
                 {fill(c.spendKey, { spend: money(spend) })}
               </div>
             )}
-            <div className="rad__rows">
+            <div className="rad__rows" ref={rowsRef}>
               {bars.map((b) => (
                 <div key={b.key} className={`rad__row rad__row--${b.key}`}>
                   <div className="rad__who">
@@ -143,22 +199,28 @@ export default function AdSpendSection({ result, adAdjustable = false }) {
                       {b.label}
                       {b.roas != null && (
                         <span className={`rad__roas${b.good ? ' rad__roas--good' : ''}`}>
-                          {fill(c.roas, { x: String(b.roas) })}
+                          {fill(c.roas, { x: roasText(b.ratio, b.roas) })}
                         </span>
                       )}
                     </span>
                     <small>{fill(c.perVisitor, { rpv: rpvMoney(b.rpv) })}</small>
                   </div>
-                  <div className="rad__track">
+                  <div className="rad__track" data-key={b.key}>
                     <div className="rad__bar" style={{ width: `${Math.max(b.w, b.rev > 0 ? 1.5 : 0)}%` }}>
-                      {b.inside && money(b.rev)}
+                      {at(b).inside && money(b.rev)}
                     </div>
                     {spendPct != null && <i className="rad__line" style={{ left: `${spendPct}%` }} aria-hidden="true" />}
-                    {!b.inside && (
-                      <span className="rad__out" style={{ left: `calc(${b.outLeft}% + 10px)` }}>
+                    {!at(b).inside && (
+                      <span
+                        className="rad__out"
+                        style={{ left: at(b).left != null ? `${at(b).left}px` : `calc(${b.outLeft}% + 10px)` }}
+                      >
                         {money(b.rev)}
                       </span>
                     )}
+                    <span className="rad__out rad__measure" aria-hidden="true">
+                      {money(b.rev)}
+                    </span>
                   </div>
                   {verdict(b) && <p className={`rad__verdict${b.good ? ' rad__verdict--good' : ''}`}>{verdict(b)}</p>}
                 </div>
@@ -178,7 +240,7 @@ export default function AdSpendSection({ result, adAdjustable = false }) {
               +{money(gain)}
               <small>{c.payGainSub}</small>
             </span>
-            <span className="rad__pay-year">{fill(c.payYear, { year: money(gain * 12) })}</span>
+            <span className="rad__pay-year">{fill(c.payYear, { year: money(year) })}</span>
             <span className="rad__pay-math">
               {fill(c.payMath, { goal: money(d.goalAdRev), today: money(d.currentAdRev), gain: money(gain) })}
             </span>
