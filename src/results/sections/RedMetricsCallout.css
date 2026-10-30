@@ -92,7 +92,7 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 1.6;
-  color: #e3dad3;
+  color: #ffffff; /* white (user, Oct 30) */
   text-wrap: pretty;
 }
 
