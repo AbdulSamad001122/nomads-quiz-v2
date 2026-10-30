@@ -107,11 +107,24 @@ function Scorecard() {
   }, []);
 
   // pointer / tap focus on one pillar (purely visual; the board stays an image
-  // for screen readers)
+  // for screen readers). Hover is mouse-only: a phone tap also fires a
+  // compatibility hover, which used to switch the pillar on and the click
+  // straight back off. A tap toggles; a mouse click keeps the highlight.
+  const pointer = useRef('mouse');
   const focusProps = (i) => ({
-    onMouseEnter: () => setFocus(i),
-    onMouseLeave: () => setFocus(null),
-    onClick: () => setFocus((f) => (f === i ? null : i)),
+    onPointerEnter: (e) => {
+      if (e.pointerType === 'mouse') setFocus(i);
+    },
+    onPointerLeave: (e) => {
+      if (e.pointerType === 'mouse') setFocus(null);
+    },
+    onPointerDown: (e) => {
+      pointer.current = e.pointerType;
+    },
+    onClick: () => {
+      if (pointer.current === 'mouse') setFocus(i);
+      else setFocus((f) => (f === i ? null : i));
+    },
   });
   const hl = (i) => (focus === null ? '' : focus === i ? ' rtc__hl' : ' rtc__dim');
 
