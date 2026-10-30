@@ -315,18 +315,22 @@
 
      Deliberately NOT listed: .rpu__lead, which stays centred by request.
      The Pillar 3 CRPV demos (.crpv-scope) keep their own design, so their
-     headings are excluded — :where() adds no specificity. */
+     headings are excluded — :where() adds no specificity. Two lines that run
+     3+ lines at 375px are added (user, Oct 30): Pillar 1's chip and the
+     demo's "Want to see a live example?" caption. */
   .rpl__panel h2:not(:where(.crpv-scope *)),
   .rpl__panel h3:not(:where(.crpv-scope *)),
   .rpl__panel .rps__caption,
   .rpl__panel .rpp__caption,
+  .rpl__panel .rp4__chip,
   .rpl__panel .rp4__lines,
   .rpl__panel .rp4__para,
   .rpl__panel .rpi__sub,
   .rpl__panel .rpd__sub,
   .rpl__panel .rqp__caption,
   .rpl__panel .rqw__sub,
-  .rpl__panel .r3n__lead {
+  .rpl__panel .r3n__lead,
+  .rpl__panel .crpv-scope .thumb-cta p {
     text-align: left;
   }
 }
