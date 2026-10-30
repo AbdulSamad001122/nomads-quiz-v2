@@ -62,6 +62,9 @@
 .rso__hl-stop.hl-sweep {
   --sweep-bg: #cae1f4;
   --sweep-color: #152638;
+  /* one box: on the smallest phones the whole phrase drops to its own line
+     instead of splitting the highlight in two */
+  white-space: nowrap;
 }
 
 /* "to their max" in white (user, Oct 30) */
