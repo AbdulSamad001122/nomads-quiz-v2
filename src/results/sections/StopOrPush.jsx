@@ -159,10 +159,11 @@ export default function StopOrPush({ result, tokens }) {
         <h2 className="rso__headline">
           <span className="rso__line">
             {c.head1Before}{' '}
+            {/* the full stop sits inside the highlight too (user, Oct 30) */}
             <HighlightSweep tone="iceblue" className="rso__hl-stop">
               {c.head1Hl}
+              {c.head1After}
             </HighlightSweep>
-            {c.head1After}
           </span>
           <span className="rso__line">
             {c.head2Before} <span className="rso__hl-max">{c.head2Hl}</span>
