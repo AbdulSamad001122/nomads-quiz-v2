@@ -292,7 +292,7 @@
 .rsh__chat {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 18px; /* a little more air between the bubbles (user, Oct 30) */
 }
 
 .rsh__msg {
@@ -339,7 +339,7 @@
   display: flex;
   flex-direction: column;
   gap: 3px;
-  box-shadow: 0 4px 0 rgba(21, 38, 56, 0.12);
+  /* no shadow under the bubbles (user, Oct 30) */
 }
 
 .rsh__msg--l .rsh__bub {
