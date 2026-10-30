@@ -277,3 +277,38 @@
     transform: none;
   }
 }
+
+/* The Pillar 3 demos' two pills ("Watch the Nomads Diagnostic Workshop",
+   "Take the Nomads quiz for a live demo") were the last CTAs on the page
+   in their own purple: the same workshop look (final QC audit, Oct 30).
+   They keep the demo's own size — they sit inside a mock phone screen. */
+.results-page .crpv-scope .ph-cta {
+  background: var(--rbtn-workshop-bg);
+  color: #250f1c;
+  border: 2px solid #0f0a10;
+  border-radius: 0;
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.55);
+  font-family: var(--font-body);
+  font-weight: 700;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.results-page .crpv-scope .ph-cta:hover {
+  transform: translate(-2px, -2px) scale(1.04);
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.55);
+  background: var(--rbtn-workshop-bg);
+  color: #250f1c;
+}
+
+.results-page .crpv-scope .ph-cta:active {
+  transform: translate(0, 0) scale(1);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .results-page .crpv-scope .ph-cta,
+  .results-page .crpv-scope .ph-cta:hover {
+    transition: none;
+    transform: none;
+  }
+}
