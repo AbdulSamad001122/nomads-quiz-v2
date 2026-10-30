@@ -74,6 +74,15 @@
   margin-top: 38px;
 }
 
+/* Phones (design-v2 §0.9; user, Oct 30): the split line and the footer run
+   3+ lines at 375px, so they read left-aligned. */
+@media (max-width: 760px) {
+  .rsb__head,
+  .rsb__foot {
+    text-align: left;
+  }
+}
+
 /* Blocks 2/3 — dev-styled outline note (no design reference yet). */
 .rsb__note {
   max-width: 680px;
