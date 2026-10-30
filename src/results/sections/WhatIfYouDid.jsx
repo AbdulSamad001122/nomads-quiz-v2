@@ -1,11 +1,14 @@
 import { WHAT_IF } from '../copy.js';
 import { emphasize } from '../emphasize.jsx';
+import TitledPortrait from './TitledPortrait.jsx';
 import './WhatIfYouDid.css';
 
 /* The GolfBays composition for the left panel (frame, founders and name art
    baked in, like the Lara / David portraits — user, Oct 30). If it's ever
    set to null, the frame falls back to the GolfBays logo on a white disc. */
 const GOLF_IMAGE = '/assets/results-golfbays-photo.webp';
+// "GOLFBAYS" starts at the art's left edge (x 1 of 1000)
+const GOLF_INSET = '0%';
 
 /**
  * The GolfBays case study, right after the "stop at $1.5M / push to their
@@ -25,8 +28,18 @@ export default function WhatIfYouDid({ result }) {
   return (
     <section className="rwi">
       <div className="rwi__media">
+        {/* name + type under the image as plain white lines, like Lara's
+            and David's titles (user, Oct 30) */}
         {GOLF_IMAGE ? (
-          <img className="rwi__photo" src={GOLF_IMAGE} alt={`${c.golfName} founders`} width="1000" height="890" />
+          <TitledPortrait
+            src={GOLF_IMAGE}
+            alt={`${c.golfName} founders`}
+            width="1000"
+            height="890"
+            title={[c.golfName, c.golfType]}
+            inset={GOLF_INSET}
+            className="rwi__golf"
+          />
         ) : (
           <div className="rwi__frame">
             <span className="rwi__logo-disc">
@@ -46,10 +59,13 @@ export default function WhatIfYouDid({ result }) {
             ))}
           </h2>
           <p className="rwi__body">{emphasize(c.golfBody, [boldLine])}</p>
-          <p className="rwi__chip">
-            <strong>{c.golfName}</strong>
-            <span>{c.golfType}</span>
-          </p>
+          {/* the bar only shows with the logo fallback, which has no title */}
+          {!GOLF_IMAGE && (
+            <p className="rwi__chip">
+              <strong>{c.golfName}</strong>
+              <span>{c.golfType}</span>
+            </p>
+          )}
         </div>
       </div>
     </section>
