@@ -1066,3 +1066,19 @@
     transform: none;
   }
 }
+
+/* Phones (design-v2 §0.9; user, Oct 30): copy that runs to 3+ lines at
+   375px reads left-aligned. Tags, avatars, buttons and short lines stay
+   centred. */
+@media (max-width: 760px) {
+  .rsh__h2,
+  .rsh__ctx-top,
+  .rsh__aha-h,
+  .rsh__aha-sub,
+  .rsh__goal,
+  .rsh__tp-l,
+  .rsh__quote,
+  .rsh__belief {
+    text-align: left;
+  }
+}
