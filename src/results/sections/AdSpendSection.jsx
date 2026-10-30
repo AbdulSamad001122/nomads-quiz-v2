@@ -88,11 +88,12 @@ export default function AdSpendSection({ result, adAdjustable = false }) {
     return { ...b, w, good, ratio, inside, outLeft: after };
   });
 
-  // The guess above holds for most answers, but a short bar with the spend
-  // line far right (or any bar at phone width) can be narrower than its own
-  // figure. So measure: inside when the bar fits the figure; else just past
-  // the dashed line; else between the bar and the line; never clipped or
-  // past the track's end.
+  // The guess above is the design's placement and holds for most answers,
+  // but a short bar with the spend line far right (or any bar at phone
+  // width) can be narrower than its own figure. So measure: keep the
+  // design's spot when the figure fits there; else just past the dashed
+  // line; else inside; else between the bar and the line — never clipped,
+  // never past the track's end.
   const rowsRef = useRef(null);
   const [place, setPlace] = useState(null);
   useLayoutEffect(() => {
@@ -108,16 +109,15 @@ export default function AdSpendSection({ result, adAdjustable = false }) {
         const lw = label.offsetWidth;
         const barPx = (Math.max(b.w, b.rev > 0 ? 1.5 : 0) / 100) * tw;
         const linePx = spendPct != null ? (spendPct / 100) * tw : null;
-        if (barPx >= lw + 20) {
-          next[b.key] = { inside: true };
-          return;
-        }
+        const fitsInside = barPx >= lw + 20;
         const pastLine = Math.max(barPx, linePx ?? 0) + 10;
-        let left;
-        if (pastLine + lw <= tw) left = pastLine;
-        else if (linePx != null && linePx - barPx >= lw + 20) left = barPx + 10;
-        else left = Math.max(0, tw - lw);
-        next[b.key] = { inside: false, left };
+        const fitsPast = pastLine + lw <= tw;
+        // the design's own placement first, then whatever still fits
+        if (b.inside && fitsInside) next[b.key] = { inside: true };
+        else if (fitsPast) next[b.key] = { inside: false, left: pastLine };
+        else if (fitsInside) next[b.key] = { inside: true };
+        else if (linePx != null && linePx - barPx >= lw + 20) next[b.key] = { inside: false, left: barPx + 10 };
+        else next[b.key] = { inside: false, left: Math.max(0, tw - lw) };
       });
       setPlace((prev) => (JSON.stringify(prev) === JSON.stringify(next) ? prev : next));
     };
