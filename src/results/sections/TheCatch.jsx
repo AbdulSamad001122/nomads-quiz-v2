@@ -236,17 +236,17 @@ function Scorecard() {
           the board's corner (1 of 4 scored + a 4-part bar), and a pencilled
           arrow drawing itself towards the empty pillars. Real text, outside
           the board image, so screen readers get it too. */}
-      <div className={`rtc__note${asking ? ' rtc__note--on' : ''}`}>
+      <div className={`rtc__note${step >= 1 ? ' rtc__note--on' : ''}`}>
         <span className="rtc__note-tape" aria-hidden="true" />
         <span className="rtc__note-scored">{c.together.scored}</span>
         <span className="rtc__note-bar" aria-hidden="true">
           {c.pillars.map((p) => (
-            <i key={p.n} className={p.total ? 'rtc__note-seg--f' : undefined} />
+            <i key={p.n} className={p.total && totalOn ? 'rtc__note-seg--f' : undefined} />
           ))}
         </span>
         <span className="rtc__note-rest">{c.together.rest}</span>
       </div>
-      <svg className={`rtc__arrow${asking ? ' rtc__arrow--on' : ''}`} viewBox="0 0 60 54" aria-hidden="true">
+      <svg className={`rtc__arrow${step >= 1 ? ' rtc__arrow--on' : ''}`} viewBox="0 0 60 54" aria-hidden="true">
         <path className="rtc__arrow-line" d="M4 44 C 30 52, 56 34, 26 6" />
         <path className="rtc__arrow-head" d="M28.5 17.7 L26 6 L37.9 7.7" />
       </svg>

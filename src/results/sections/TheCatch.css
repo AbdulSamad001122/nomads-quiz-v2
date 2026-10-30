@@ -670,7 +670,10 @@
   transform: rotate(-4deg);
   opacity: 0;
   translate: 0 -14px;
-  transition: opacity 0.35s ease 0.15s, translate 0.45s cubic-bezier(0.3, 1.4, 0.5, 1) 0.15s;
+  /* drops in as the board's last pieces settle (they finish 0.85s after
+     the board comes into view; user, Oct 30: "as the whole board comes
+     in view") */
+  transition: opacity 0.35s ease 0.55s, translate 0.45s cubic-bezier(0.3, 1.4, 0.5, 1) 0.55s;
 }
 
 .rtc__note--on {
@@ -708,6 +711,8 @@
   height: 8px;
   border: 1.5px dashed #8a4f70;
   border-radius: 3px;
+  /* Pillar 01's part fills when its 2.7 lands in the totals */
+  transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 
 .rtc__note-bar i.rtc__note-seg--f {
@@ -748,13 +753,13 @@
 .rtc__arrow-line {
   stroke-dasharray: 90;
   stroke-dashoffset: 90;
-  transition: stroke-dashoffset 0.8s ease 0.55s;
+  transition: stroke-dashoffset 0.7s ease 1.05s;
 }
 
 .rtc__arrow-head {
   stroke-dasharray: 30;
   stroke-dashoffset: 30;
-  transition: stroke-dashoffset 0.3s ease 1.3s;
+  transition: stroke-dashoffset 0.25s ease 1.75s;
 }
 
 .rtc__arrow--on .rtc__arrow-line,
@@ -860,6 +865,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .rtc__note,
+  .rtc__note-bar i,
   .rtc__arrow-line,
   .rtc__arrow-head {
     transition: none;
