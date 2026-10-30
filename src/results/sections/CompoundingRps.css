@@ -173,6 +173,17 @@
   scrollbar-width: none;
   /* each card is as tall as its own content, no empty foot (user, Oct 30) */
   align-items: flex-start;
+  /* the row's height follows the card(s) on screen (set in JS), so the gap
+     under every card is the same; taller cards off to the side are clipped
+     until they slide in, and the row never scrolls up and down */
+  overflow-y: hidden;
+  transition: height 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rcs__track {
+    transition: none;
+  }
 }
 
 .rcs__track::-webkit-scrollbar {
