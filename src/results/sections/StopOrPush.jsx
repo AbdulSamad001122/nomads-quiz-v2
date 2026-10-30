@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import { STOP_OR_PUSH, CTA } from '../copy.js';
 import { fill } from '../resolveTokens.js';
+import HighlightSweep from '../../components/primitives/HighlightSweep.jsx';
 import { emphasize } from '../emphasize.jsx';
 import { ga } from '../../analytics/ga.js';
 import './StopOrPush.css';
@@ -96,7 +97,10 @@ export default function StopOrPush({ result, tokens }) {
       <div className="rso__inner">
         <h2 className="rso__headline">
           <span className="rso__line">
-            {c.head1Before} <span className="rso__hl-stop">{c.head1Hl}</span>
+            {c.head1Before}{' '}
+            <HighlightSweep tone="iceblue" className="rso__hl-stop">
+              {c.head1Hl}
+            </HighlightSweep>
             {c.head1After}
           </span>
           <span className="rso__line">

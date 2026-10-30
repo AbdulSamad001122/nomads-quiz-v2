@@ -55,8 +55,13 @@
   display: block;
 }
 
-.rso__hl-stop {
-  color: var(--rso-gold);
+/* "stop at $1.5M": the shared highlight sweep (HighlightSweep, as in the
+   quiz) — a light-blue box wipes in from the left as the headline comes
+   into view and the words turn dark blue under its edge; same light/dark
+   blue as row 2's "Reason Behind" (user, Oct 30) */
+.rso__hl-stop.hl-sweep {
+  --sweep-bg: #cae1f4;
+  --sweep-color: #152638;
 }
 
 /* "to their max" in white (user, Oct 30) */
