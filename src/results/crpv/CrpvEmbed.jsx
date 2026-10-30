@@ -1,4 +1,6 @@
 import { useEffect, useRef } from 'react';
+import { CTA } from '../copy.js';
+import { ga } from '../../analytics/ga.js';
 import runCrpvScripts from './runCrpvScripts.js';
 import * as demoQuiz from './demoQuiz.js';
 import * as demoWorkSkep from './demoWorkSkep.js';
@@ -26,8 +28,22 @@ export default function CrpvEmbed({ demo }) {
     const host = hostRef.current;
     const { HTML, SCRIPTS } = DEMOS[demo];
     host.innerHTML = HTML;
+    // QC item 8: the workshop demo's thumbnail and pill were built with
+    // href="#" (jumped to the page top); they open the workshop page,
+    // like every other workshop button
+    const links = [...host.querySelectorAll('[data-workshop-link]')];
+    const onClick = () => ga.ctaClick(CTA.workshop.id);
+    links.forEach((a) => {
+      a.href = CTA.workshop.href;
+      if (CTA.workshop.href.startsWith('http')) {
+        a.target = '_blank';
+        a.rel = 'noopener';
+      }
+      a.addEventListener('click', onClick);
+    });
     const cleanup = runCrpvScripts(host, SCRIPTS);
     return () => {
+      links.forEach((a) => a.removeEventListener('click', onClick));
       cleanup();
       host.innerHTML = '';
     };
