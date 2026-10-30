@@ -225,9 +225,10 @@
   display: flex;
   flex-direction: column;
   gap: 22px;
-  /* QC item 7: the workshop + call pair centred, like the page's other
-     button pairs (Loom 2:51) */
-  align-items: center;
+  /* left, under the heading and sub (user, Oct 30): this panel is the one
+     exception to the centred workshop buttons of QC item 7 — Alefiya's
+     Loom 2:51 "always middle indented" was said on row 2, never here */
+  align-items: flex-start;
 }
 
 .rtp__btn {
