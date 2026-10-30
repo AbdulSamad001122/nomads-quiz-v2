@@ -3,14 +3,13 @@ import { emphasize } from '../emphasize.jsx';
 import { ga } from '../../analytics/ga.js';
 import './TwoPaths.css';
 
-const brJoin = (lines, bold) =>
-  lines.map((line, i) => (
-    <span key={line.slice(0, 14)}>
-      {bold ? emphasize(line, bold) : line}
-      {i < lines.length - 1 ? ' ' : ''}
-      {i < lines.length - 1 ? <br /> : null}
-    </span>
-  ));
+/* Each copy block flows as one run of text: no forced line breaks (standing
+   rule — they stranded "numbers" on its own line at ~860–1200px). The
+   design's desktop lines come from the column widths in TwoPaths.css. */
+const flow = (lines, bold) => {
+  const text = lines.join(' ');
+  return bold ? emphasize(text, bold) : text;
+};
 
 /**
  * Section — the two-paths closing panel (copy doc row 10 tail). Since QC
@@ -25,9 +24,9 @@ export default function TwoPaths() {
     <section className="rtp">
       <div className="rtp__panel">
         <div className="rtp__panel-copy">
-          <p className="rtp__p">{brJoin(c.panelP1Lines, c.panelBold)}</p>
-          <h3 className="rtp__panel-heading">{brJoin(c.panelHeadingLines)}</h3>
-          <p className="rtp__p rtp__panel-sub">{brJoin(c.panelSubLines)}</p>
+          <p className="rtp__p">{flow(c.panelP1Lines, c.panelBold)}</p>
+          <h3 className="rtp__panel-heading">{flow(c.panelHeadingLines)}</h3>
+          <p className="rtp__p rtp__panel-sub">{flow(c.panelSubLines)}</p>
           <div className="rtp__btns">
             {/* TODO: real workshop URL when provided (same as NAV). Booking
                 URL live (Yemi, Sep 19); new tab keeps the result page. */}
