@@ -24,9 +24,7 @@ export default function TeamApproach() {
             <div className="rta__heads">
               {c.problem.heads.map((h) => (
                 <div key={h.variant} className={`rta__head rta__head--${h.variant}`}>
-                  <svg className="rta__icon" viewBox="0 0 26 26" aria-hidden="true">
-                    <path d="M3 13 C8 6 14 5 22 7 M14 3 L23 7 L17 14" />
-                  </svg>
+                  <span className="rta__icon" aria-hidden="true" />
                   <span>
                     <b>{h.bold}</b>
                     {h.rest && ` ${h.rest}`}

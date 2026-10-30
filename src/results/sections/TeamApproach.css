@@ -129,15 +129,16 @@
   font-weight: 800;
 }
 
-/* the design's curved arrow; each row sets its own colour */
+/* the page's brushed chevron-in-a-circle image (as on David's bullets)
+   instead of the design's curved arrow (user, Oct 30): white on the dark
+   rows; the light rows keep their ink colour so it stays visible */
 .rta__icon {
   flex-shrink: 0;
   width: 26px;
-  height: 26px;
-  fill: none;
-  stroke: var(--icon, #ffffff);
-  stroke-width: 3;
-  stroke-linecap: round;
+  height: 25px;
+  background-color: var(--icon, #ffffff);
+  -webkit-mask: url('/assets/results-swoosh-white.png') center / contain no-repeat;
+  mask: url('/assets/results-swoosh-white.png') center / contain no-repeat;
 }
 
 .rta__head--stone {
@@ -343,9 +344,10 @@
 /* ——— pinning ———
    The compass image stays put while the cards scroll at every side-by-side
    width (design note 1): it covers nothing, so it needs no height or motion
-   gate (final QC audit, Oct 30 — short laptops used to get no pin at all). */
+   gate (final QC audit, Oct 30 — short laptops used to get no pin at all).
+   Side by side, and so pinned, down to 761px: tablets too (user, Oct 30). */
 
-@media (min-width: 861px) {
+@media (min-width: 761px) {
   .rta__left img {
     position: sticky;
     top: 100px;
@@ -367,7 +369,20 @@
 
 /* ——— responsive ——— */
 
+/* tablet portrait: still side by side (the compass stays pinned); the right
+   column is narrow, so its padding tightens and the two-up grids stack */
 @media (max-width: 860px) {
+  .rta__right {
+    padding: 32px 18px 110px;
+  }
+  .rta__vs,
+  .rta__blind {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* phones: compass on top, cards below */
+@media (max-width: 760px) {
   .rta {
     grid-template-columns: 1fr;
   }
@@ -377,10 +392,6 @@
   }
   .rta__right {
     padding: 28px 18px 96px;
-  }
-  .rta__vs,
-  .rta__blind {
-    grid-template-columns: 1fr;
   }
 }
 
@@ -398,6 +409,6 @@
   }
   .rta__icon {
     width: 22px;
-    height: 22px;
+    height: 21px;
   }
 }
