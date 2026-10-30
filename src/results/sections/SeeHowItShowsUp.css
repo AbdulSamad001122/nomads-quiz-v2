@@ -958,6 +958,29 @@
   .rsh {
     padding: 44px 14px 88px;
   }
+  /* phones: Back / Next sit between the step buttons and the card, so
+     they stay in reach above a tall card (user, Oct 30) */
+  .rsh {
+    display: flex;
+    flex-direction: column;
+  }
+  .rsh > * {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .rsh__head { order: 1; }
+  .rsh__route { order: 2; }
+  .rsh__stepnav {
+    order: 3;
+    margin-top: 16px;
+  }
+  .rsh__track {
+    order: 4;
+    margin-top: 14px;
+  }
+  .rsh__joint { order: 5; }
+  .rsh__aha { order: 6; }
   .rsh__route {
     gap: 10px;
   }
