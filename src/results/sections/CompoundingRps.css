@@ -1107,10 +1107,15 @@
   .rcs__branch .rcs__node {
     padding: 12px;
   }
+  /* a size down, so it sits level with the DAYS chip, clear of the title */
   .rcs__wnum {
     left: auto;
     right: 10px;
     top: 10px;
+    width: 22px;
+    height: 22px;
+    font-size: 12px;
+    line-height: 22px;
   }
 }
 
