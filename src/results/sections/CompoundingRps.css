@@ -171,7 +171,8 @@
   scroll-snap-type: x mandatory;
   padding: 14px 4px 28px;
   scrollbar-width: none;
-  align-items: stretch;
+  /* each card is as tall as its own content, no empty foot (user, Oct 30) */
+  align-items: flex-start;
 }
 
 .rcs__track::-webkit-scrollbar {
