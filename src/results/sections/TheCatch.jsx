@@ -246,9 +246,9 @@ function Scorecard() {
         </span>
         <span className="rtc__note-rest">{c.together.rest}</span>
       </div>
-      <svg className={`rtc__arrow${asking ? ' rtc__arrow--on' : ''}`} viewBox="0 0 120 90" aria-hidden="true">
-        <path className="rtc__arrow-line" d="M8 82 C 28 62, 58 40, 104 20" />
-        <path className="rtc__arrow-head" d="M90 13 L106 19 L97 33" />
+      <svg className={`rtc__arrow${asking ? ' rtc__arrow--on' : ''}`} viewBox="0 0 60 54" aria-hidden="true">
+        <path className="rtc__arrow-line" d="M4 44 C 30 52, 56 34, 26 6" />
+        <path className="rtc__arrow-head" d="M28.5 17.7 L26 6 L37.9 7.7" />
       </svg>
       <svg
         className={`rtc__pencil${writing ? ' rtc__pencil--writing' : ''}${asking ? ' rtc__pencil--wait' : ''}`}

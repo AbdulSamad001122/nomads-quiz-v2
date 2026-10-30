@@ -645,15 +645,19 @@
 
 /* ============================================================
    "It's unfinished — we fill the rest in together" (branch
-   section/qc-catch-fill-together, Oct 30). A sticky note on the board's
-   bottom-left corner, a pencilled arrow to the "?" totals, a hover bubble
-   on unscored pillars, and the pencil waiting its turn. Layout unchanged.
+   section/qc-catch-fill-together, Oct 30). A sticky note just under the
+   board, a pencilled arrow up to the "?" totals, a hover bubble on
+   unscored pillars, and the pencil waiting its turn. Layout unchanged.
+   The totals row is always centred and sits 6px above the board's bottom
+   edge, so the note and arrow are placed from the board's centre and kept
+   fully below it: they never cover a score, and the white arrow is always
+   on the dark panel.
    ============================================================ */
 
 .rtc__note {
   position: absolute;
-  left: -26px;
-  bottom: -74px;
+  left: calc(50% - 160px);
+  top: calc(100% + 18px);
   z-index: 3;
   width: 178px;
   padding: 18px 14px 12px;
@@ -719,16 +723,18 @@
   color: #5d1b4e;
 }
 
-/* the pencilled arrow from the note up to the "?" totals, drawing itself */
+/* the pencilled arrow: out of the note's right edge, hooking up under
+   Pillar 03's "?" — drawing itself */
 .rtc__arrow {
   position: absolute;
   z-index: 3;
-  left: 146px;
-  bottom: -26px;
-  width: 96px;
-  height: 72px;
+  left: calc(50% + 13px);
+  top: calc(100% - 5px);
+  width: 70px;
+  height: 63px;
   overflow: visible;
   pointer-events: none;
+  filter: drop-shadow(1px 2px 0 rgba(0, 0, 0, 0.3));
 }
 
 .rtc__arrow path {
@@ -740,14 +746,14 @@
 }
 
 .rtc__arrow-line {
-  stroke-dasharray: 140;
-  stroke-dashoffset: 140;
+  stroke-dasharray: 90;
+  stroke-dashoffset: 90;
   transition: stroke-dashoffset 0.8s ease 0.55s;
 }
 
 .rtc__arrow-head {
-  stroke-dasharray: 40;
-  stroke-dashoffset: 40;
+  stroke-dasharray: 30;
+  stroke-dashoffset: 30;
   transition: stroke-dashoffset 0.3s ease 1.3s;
 }
 
@@ -830,12 +836,20 @@
   to { transform: rotate(-32deg) translate(-8px, -10px); }
 }
 
-/* stacked layouts: the note sits under the board, no arrow */
+/* side by side but narrow: the board is the column's tallest thing, so
+   make room under it for the note */
+@media (max-width: 1279px) and (min-width: 901px) {
+  .rtc__card-wrap {
+    margin-bottom: 64px;
+  }
+}
+
+/* stacked layouts: the note sits centred under the board, no arrow */
 @media (max-width: 900px) {
   .rtc__note {
     position: relative;
     left: auto;
-    bottom: auto;
+    top: auto;
     margin: 30px auto 0;
     transform: rotate(-2deg);
   }
