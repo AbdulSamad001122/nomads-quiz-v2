@@ -247,14 +247,24 @@ export default function StopOrPush({ result, tokens }) {
               <p className="rso__real-p">{c.realP1}</p>
               <p className="rso__real-p">{emphasize(c.realP2, [c.realP2Bold])}</p>
             </div>
+            {/* bars and captions in two rows, so every bar stands on the same
+                baseline however long its caption wraps (user, Oct 30) */}
             <div className="rso__stairs" role="img" aria-label={c.stairsLabel}>
-              {c.stairs.map((s, i) => (
-                <div key={s.x} className={`rso__st rso__st--${i}`}>
-                  {i === 0 && <span className="rso__st-lab">{s.x}</span>}
-                  <div className="rso__blk">{i === 0 ? null : s.x}</div>
-                  <span className="rso__cap">{s.cap}</span>
-                </div>
-              ))}
+              <div className="rso__stairs-row rso__stairs-row--bars">
+                {c.stairs.map((s, i) => (
+                  <div key={s.x} className={`rso__st rso__st--${i}`}>
+                    {i === 0 && <span className="rso__st-lab">{s.x}</span>}
+                    <div className="rso__blk">{i === 0 ? null : s.x}</div>
+                  </div>
+                ))}
+              </div>
+              <div className="rso__stairs-row">
+                {c.stairs.map((s, i) => (
+                  <span key={s.x} className={`rso__cap rso__cap--${i}`}>
+                    {s.cap}
+                  </span>
+                ))}
+              </div>
             </div>
             <p className="rso__proof-head">{c.proofHead}</p>
             <div className="rso__proof">

@@ -531,20 +531,31 @@
   color: var(--rso-ink);
 }
 
-/* min-height (not a fixed height): on narrow screens the long "Your
-   ceiling…" caption wraps to several lines, and a fixed box pushed the
-   tallest bar up over the paragraph above */
+/* two rows — bars on one baseline, captions under them — so the long
+   "Your ceiling…" caption can wrap without lifting its bar (user, Oct 30) */
 .rso__stairs {
   display: flex;
-  align-items: flex-end;
-  gap: 8px;
-  min-height: 210px;
+  flex-direction: column;
+  gap: 6px;
   padding-top: 10px;
 }
 
-.rso__st {
+.rso__stairs-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.rso__stairs-row--bars {
+  align-items: flex-end;
+}
+
+.rso__stairs-row > * {
   flex: 1;
   min-width: 0;
+}
+
+.rso__st {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -564,7 +575,6 @@
 }
 
 .rso__cap {
-  min-height: 28px;
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 11px;
@@ -758,11 +768,15 @@
     margin-top: 4px;
     font-size: 15px;
   }
-  .rso__stairs {
+  .rso__stairs-row {
     gap: 4px;
   }
   .rso__cap {
     font-size: 10px;
+  }
+  /* the long ceiling caption a size down (user, Oct 30) */
+  .rso__cap--4 {
+    font-size: 9px;
   }
   .rso__blk,
   .rso__st-lab {
