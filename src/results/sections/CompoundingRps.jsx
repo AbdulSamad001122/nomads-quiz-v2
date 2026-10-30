@@ -65,12 +65,30 @@ export default function CompoundingRps({ result, tokens }) {
     const k = Math.max(0, Math.min(els.length - 1, i));
     track.scrollTo({ left: els[k].offsetLeft - track.offsetLeft - 4, behavior: 'smooth' });
   };
+  // The row is as tall as the tallest card on screen, not the tallest card
+  // overall, so every card keeps the same gap above what follows (on phones
+  // a short card used to leave up to ~280px of empty navy; user, Oct 30).
+  const fitHeight = () => {
+    const track = trackRef.current;
+    if (!track) return;
+    const box = track.getBoundingClientRect();
+    let h = 0;
+    cardEls().forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.right > box.left + 1 && r.left < box.right - 1) h = Math.max(h, el.offsetHeight);
+    });
+    if (!h) return;
+    const cs = getComputedStyle(track);
+    const pad = cs.boxSizing === 'border-box' ? parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom) : 0;
+    track.style.height = `${Math.ceil(h + pad)}px`;
+  };
   const sync = useCallback(() => {
     const track = trackRef.current;
     if (!track) return;
     const end = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
     setAtEnd(end);
     setActive(end ? cardEls().length - 1 : indexNow());
+    fitHeight();
   }, []);
   useEffect(() => {
     const track = trackRef.current;
@@ -78,10 +96,15 @@ export default function CompoundingRps({ result, tokens }) {
     const onScroll = () => window.requestAnimationFrame(sync);
     track.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
+    // a card's height also changes as fonts load or its text rewraps
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(onScroll) : null;
+    cardEls().forEach((el) => ro?.observe(el));
+    document.fonts?.ready?.then(onScroll);
     sync();
     return () => {
       track.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
+      ro?.disconnect();
     };
   }, [sync]);
   const onKey = (e) => {
