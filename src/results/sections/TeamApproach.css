@@ -61,7 +61,7 @@
   border-radius: 20px;
   padding: 24px 26px 26px;
   border: 1.5px solid rgba(21, 38, 57, 0.1);
-  box-shadow: 6px 6px 0 rgba(21, 38, 57, 0.14);
+  box-shadow: none; /* no grey shadow (user, Oct 30) */
   display: flex;
   flex-direction: column;
   gap: 14px;
