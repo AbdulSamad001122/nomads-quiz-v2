@@ -53,6 +53,14 @@
   color: #250f1c;
 }
 
+/* Phones (design-v2 §0.9; user, Oct 30): the headline runs 3 lines at
+   375px, so it reads left-aligned; the shorter subline stays centred. */
+@media (max-width: 760px) {
+  .rmx__headline {
+    text-align: left;
+  }
+}
+
 .rmx__green-chip {
   background: #d4f0dd;
   color: #23854f;
