@@ -1,10 +1,63 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { STOP_OR_PUSH, CTA } from '../copy.js';
 import { fill } from '../resolveTokens.js';
 import HighlightSweep from '../../components/primitives/HighlightSweep.jsx';
 import { emphasize } from '../emphasize.jsx';
 import { ga } from '../../analytics/ga.js';
+import useInView from '../../hooks/useInView.js';
 import './StopOrPush.css';
+
+/* Grow-in timing (ms): each bar fills over GROW, the next starts STAGGER
+   later; the big max figure counts over MEGA. */
+const GROW = 1100;
+const STAGGER = 250;
+const MEGA = 1300;
+// ease-out cubic, the same curve as the bars' CSS cubic-bezier(0.33, 1, 0.68, 1)
+const easeOut = (k) => 1 - (1 - k) ** 3;
+const NUM = /\d[\d,]*(?:\.\d+)?/;
+
+function countText(text, m, k) {
+  const raw = m[0];
+  const dec = (raw.split('.')[1] || '').length;
+  const v = parseFloat(raw.replace(/,/g, '')) * easeOut(k);
+  const s = raw.includes(',')
+    ? v.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec })
+    : v.toFixed(dec);
+  return text.slice(0, m.index) + s + text.slice(m.index + raw.length);
+}
+
+/* Counts the first number in `text` up from 0 once `run` turns true, with
+   the same prefix, suffix and decimals all the way ("~$0.00M/year" →
+   "~$1.77M/year"). The finished text stays in the flow (transparent, still
+   read by screen readers) so the width never moves and placeLabels always
+   measures the final label; the counting copy sits on top of it. */
+function CountUp({ text, animate, run, delay = 0, duration }) {
+  const m = NUM.exec(text);
+  const [k, setK] = useState(0);
+  useEffect(() => {
+    if (!animate || !run || !m) return undefined;
+    let raf;
+    let start;
+    const tick = (now) => {
+      start ??= now;
+      const next = Math.min(1, Math.max(0, (now - start - delay) / duration));
+      setK(next);
+      if (next < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [animate, run, text, delay, duration]);
+  if (!animate || !m || k >= 1) return text;
+  return (
+    <span className="rso__count">
+      <span className="rso__count-end">{text}</span>
+      <span className="rso__count-run" aria-hidden="true">
+        {countText(text, m, k)}
+      </span>
+    </span>
+  );
+}
 
 /* Ladder value labels: measured, not guessed. Each label sits just past
    its bar when there is room, else inside the bar (dark, right-aligned);
@@ -49,7 +102,9 @@ function placeLabels(ladder) {
  * max drawn to scale as bars; the scepticism block (only when the 12× cap
  * bites); the workshop note + button. The old "But… what if you did?"
  * section's headline moved in here; its GolfBays card stays in
- * WhatIfYouDid (QC row 6).
+ * WhatIfYouDid (QC row 6). Motion (user, Oct 30; not in the design): the
+ * bars grow in and their figures count up once seen, and so does the big
+ * max figure.
  *
  * ResultsPage renders this only for non-capped takers: capped takers
  * (Blocks 5–7, which now include a goal beyond 12× today) read their capped
@@ -63,7 +118,13 @@ export default function StopOrPush({ result, tokens }) {
   const btnLast = btnWords.pop();
   const btnHead = btnWords.join(' ');
 
-  const ladderRef = useRef(null);
+  // Bars grow in and figures count up once seen, unless the device asks
+  // for reduced motion (then everything is simply there, as before).
+  const [motion] = useState(
+    () => typeof window !== 'undefined' && !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches,
+  );
+  const [ladderRef, ladderIn] = useInView({ threshold: 0.35 });
+  const [maxRef, maxIn] = useInView({ threshold: 0.5 });
   useLayoutEffect(() => {
     const el = ladderRef.current;
     if (!el) return undefined;
@@ -132,12 +193,12 @@ export default function StopOrPush({ result, tokens }) {
             <b aria-hidden="true">→</b>
           </p>
 
-          <div className="rso__card rso__card--max">
+          <div className="rso__card rso__card--max" ref={maxRef}>
             <span className="rso__eyebrow">{c.maxEyebrow}</span>
             <p className="rso__if">{emphasize(c.maxIf, [c.maxIfBold])}</p>
             <span className="rso__lead">{c.maxLead}</span>
             <p className="rso__mega">
-              {t(c.maxMega)}
+              <CountUp text={t(c.maxMega)} animate={motion} run={maxIn} duration={MEGA} />
               <small>{c.maxMegaSub}</small>
             </p>
             <div className="rso__row">
@@ -151,11 +212,15 @@ export default function StopOrPush({ result, tokens }) {
           </div>
         </div>
 
-        <div className="rso__ladder" ref={ladderRef}>
+        <div
+          className={`rso__ladder${motion ? ' rso__ladder--anim' : ''}${ladderIn ? ' rso__ladder--in' : ''}`}
+          style={{ '--rso-grow': `${GROW}ms` }}
+          ref={ladderRef}
+        >
           <h3 className="rso__ladder-head">{c.ladderHead}</h3>
           <p className="rso__ladder-sub">{c.ladderSub}</p>
-          {rows.map((r) => (
-            <div key={r.key} className={`rso__lr rso__lr--${r.key}`}>
+          {rows.map((r, i) => (
+            <div key={r.key} className={`rso__lr rso__lr--${r.key}`} style={{ '--rso-delay': `${i * STAGGER}ms` }}>
               <div className="rso__l">
                 {r.label}
                 <small>{r.sub}</small>
@@ -163,7 +228,7 @@ export default function StopOrPush({ result, tokens }) {
               <div className="rso__tr">
                 <div className="rso__fill" style={{ width: `${r.w}%` }} />
                 <span className="rso__val">
-                  {r.val}
+                  <CountUp text={r.val} animate={motion} run={ladderIn} delay={i * STAGGER} duration={GROW} />
                   {r.chip && <i>{r.chip}</i>}
                 </span>
               </div>
