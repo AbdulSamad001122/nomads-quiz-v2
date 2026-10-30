@@ -268,8 +268,10 @@
   color: var(--rcs-ink);
 }
 
+/* the visual follows its copy instead of being pushed to the card's foot,
+   so the shorter cards don't open a big gap mid-card (user, Oct 30) */
 .rcs__vis {
-  margin-top: auto;
+  margin-top: 12px;
   padding-top: 6px;
 }
 
@@ -1074,18 +1076,50 @@
   }
 }
 
+/* tablet + phones (user, Oct 30): the three-windows card's lower two boxes
+   stack, so each grey line gets the card's full width and stays within 3
+   lines; those lines drop to 14px here (an exception to results.css's 16px
+   body size). */
+@media (max-width: 1100px) {
+  .rcs__pair {
+    grid-template-columns: 1fr;
+  }
+  .rcs__fork {
+    display: none;
+  }
+  .results-page .rcs__tree .rcs__node small {
+    font-size: 14px;
+  }
+}
+
+/* phones: one card at a time (user, Oct 30); 8px short of the full width
+   so the card's offset shadow still shows */
+@media (max-width: 760px) {
+  .rcs__card {
+    flex-basis: calc(100% - 8px);
+  }
+}
+
+/* smallest phones: each window's number moves to the box's top-right
+   corner, so its copy gets the full width (3 lines max at 320) */
+@media (max-width: 359px) {
+  .rcs__node,
+  .rcs__branch .rcs__node {
+    padding: 12px;
+  }
+  .rcs__wnum {
+    left: auto;
+    right: 10px;
+    top: 10px;
+  }
+}
+
 @media (max-width: 430px) {
   /* card 5 rows: figure above its line, so the line keeps the full width */
   .rcs__row {
     flex-direction: column;
     align-items: flex-start;
     gap: 2px;
-  }
-  .rcs__pair {
-    grid-template-columns: 1fr;
-  }
-  .rcs__fork {
-    display: none;
   }
 }
 
