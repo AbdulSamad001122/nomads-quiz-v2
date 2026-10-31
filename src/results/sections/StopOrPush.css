@@ -106,6 +106,7 @@
 .rso__card--stop {
   background: var(--rso-cream);
   padding: 20px 20px 22px;
+  container-type: inline-size; /* the big figure sizes to the card */
   box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.35);
 }
 
@@ -136,8 +137,9 @@
 .rso__big {
   font-family: var(--rso-black);
   font-weight: 900;
-  /* bigger (user, Oct 31) */
-  font-size: clamp(38px, 4.4vw, 50px);
+  /* bigger (user, Oct 31): as big as the card allows ("+$1.5M/year" is
+     about 6.4em wide), up to 52px */
+  font-size: min(52px, 15cqi);
   line-height: 1;
   color: var(--rso-plum);
 }
