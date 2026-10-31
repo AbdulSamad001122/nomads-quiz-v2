@@ -1633,7 +1633,8 @@ export const STOP_OR_PUSH = {
 
   // Card B — the max (12× cap, calculator.js / Added Logic.docx)
   maxEyebrow: 'Or go all the way · max benchmark',
-  maxIf: 'If you hit the maximum benchmark across all five conversion points,',
+  // "Buuuuuuut..." opener (Alefiya, Slack Oct 31)
+  maxIf: 'Buuuuuuut...if you hit the maximum benchmark across all five conversion points,',
   maxIfBold: 'maximum benchmark across all five conversion points',
   maxLead: 'your existing traffic could add',
   maxMega: '{{max_gain}}',
