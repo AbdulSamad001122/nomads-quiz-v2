@@ -19,30 +19,37 @@ export default function SeeHowItShowsUp() {
   const trackRef = useRef(null);
   const last = c.steps.length - 1;
 
-  /* Scrolling moves through the steps (Alefiya, Slack Oct 31: "once I
-     scroll I go to the next … even if I don't click").
-     'pin'   — the step buttons + card stay on screen while the page scrolls
-               through 01 → 04, then the page carries on. Only when the
-               tallest card fits on screen (desktop windows ~770px+ tall).
-     'stack' — phones and short screens: the four cards follow one another
-               and the step buttons (stuck at the top) light up as each
-               card is reached. Nothing is ever hidden off screen. */
-  const [mode, setMode] = useState('stack');
-  const [dims, setDims] = useState({ step: 500, top: 90 });
+  /* Scrolling moves through the steps SIDEWAYS, like a carousel
+     (Alefiya, Slack Oct 31: "once I scroll I go to the next … even if I
+     don't click"; user: horizontal, the cards must not go bottom to top).
+     'pin'   — desktop / tablet: the step buttons + the card strip stay on
+               screen while the page scrolls, and the scrolling slides the
+               strip to the left, one card at a time (01 → 04), each card
+               held for a moment; then the page carries on. On short screens
+               the whole stage is scaled down a little so the tallest card
+               always fits.
+     'swipe' — phones (a card is taller than the screen there, so it can't
+               be held in place): the cards sit side by side and swipe left
+               / right; the step buttons follow. */
+  const [mode, setMode] = useState('swipe');
+  const [dims, setDims] = useState({ step: 500, top: 90, scale: 1 });
   const scrollyRef = useRef(null);
   const routeRef = useRef(null);
+  const railRef = useRef(null);
+  const cardsOf = () => [...(trackRef.current?.querySelectorAll('.rsh__card') || [])];
 
   useEffect(() => {
     const decide = () => {
-      const track = trackRef.current;
       const route = routeRef.current;
-      if (!track || !route) return;
+      const cards = cardsOf();
+      if (!route || !cards.length) return;
       const top = (document.querySelector('.rnav')?.offsetHeight || 0) + 12;
-      const tallest = Math.max(...[...track.querySelectorAll('.rsh__card')].map((el) => el.offsetHeight));
+      const tallest = Math.max(...cards.map((el) => el.offsetHeight));
       const stageH = route.offsetHeight + 16 + tallest;
-      const fits = window.innerWidth >= 861 && top + stageH + 16 <= window.innerHeight;
-      setMode(fits ? 'pin' : 'stack');
-      setDims({ step: Math.round(window.innerHeight * 0.55), top });
+      const scale = Math.min(1, (window.innerHeight - top - 16) / stageH);
+      const pin = window.innerWidth >= 861 && scale >= 0.72;
+      setMode(pin ? 'pin' : 'swipe');
+      setDims({ step: Math.round(window.innerHeight * 0.6), top, scale: pin ? scale : 1 });
     };
     let raf = 0;
     const onResize = () => {
@@ -58,25 +65,24 @@ export default function SeeHowItShowsUp() {
     };
   }, []);
 
-  // which step the scroll position stands on
+  // 'pin': the page's scroll position slides the strip
   useEffect(() => {
+    const rail = railRef.current;
+    const track = trackRef.current;
+    if (mode !== 'pin' || !rail || !track) return undefined;
+    track.style.height = '';
+    const hold = 0.35; // share of each step's scroll spent holding the card still
+    const ease = (t) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2);
     let raf = 0;
     const sync = () => {
       raf = 0;
-      if (mode === 'pin') {
-        const box = scrollyRef.current?.getBoundingClientRect();
-        if (!box) return;
-        const past = dims.top - box.top;
-        setCur(Math.max(0, Math.min(last, Math.floor(past / dims.step))));
-      } else {
-        const cards = [...(trackRef.current?.querySelectorAll('.rsh__card') || [])];
-        const line = window.innerHeight * 0.45;
-        let at = 0;
-        cards.forEach((el, i) => {
-          if (el.getBoundingClientRect().top < line) at = i;
-        });
-        setCur(at);
-      }
+      const box = scrollyRef.current?.getBoundingClientRect();
+      if (!box) return;
+      const raw = Math.max(0, (dims.top - box.top) / dims.step);
+      const i = Math.min(last, Math.floor(raw));
+      const p = i >= last ? last : i + ease(Math.max(0, Math.min(1, (raw - i - hold) / (1 - hold))));
+      rail.style.setProperty('--rsh-p', p.toFixed(4));
+      setCur(Math.round(p));
     };
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(sync);
@@ -86,10 +92,51 @@ export default function SeeHowItShowsUp() {
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener('scroll', onScroll);
+      rail.style.removeProperty('--rsh-p');
     };
   }, [mode, dims, last]);
 
-  // a step button takes the page to that step
+  // 'swipe': the strip scrolls sideways under the finger; the step buttons
+  // follow, and the strip is as tall as the card on screen
+  useEffect(() => {
+    const track = trackRef.current;
+    if (mode !== 'swipe' || !track) return undefined;
+    let raf = 0;
+    let prev = -1;
+    const sync = () => {
+      raf = 0;
+      const cards = cardsOf();
+      if (!cards.length) return;
+      const stride = cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : 1;
+      const at = Math.max(0, Math.min(last, Math.round(track.scrollLeft / stride)));
+      setCur(at);
+      track.style.height = `${cards[at].offsetHeight + 14}px`;
+      // swiped while reading low down a tall card: bring the new card's top
+      // back into view instead of leaving the reader below it
+      if (prev !== -1 && at !== prev && track.getBoundingClientRect().top < dims.top) {
+        const y = track.getBoundingClientRect().top + window.scrollY - dims.top - (routeRef.current?.offsetHeight || 0) - 8;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+      prev = at;
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(sync);
+    };
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(onScroll) : null;
+    cardsOf().forEach((el) => ro?.observe(el));
+    sync();
+    track.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      cancelAnimationFrame(raf);
+      ro?.disconnect();
+      track.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      track.style.height = '';
+    };
+  }, [mode, dims, last]);
+
+  // a step button goes to that step
   const goTo = (i) => {
     const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     const behavior = reduce ? 'auto' : 'smooth';
@@ -97,9 +144,8 @@ export default function SeeHowItShowsUp() {
       const startY = scrollyRef.current.getBoundingClientRect().top + window.scrollY - dims.top;
       window.scrollTo({ top: startY + i * dims.step + 2, behavior });
     } else {
-      const el = trackRef.current?.querySelectorAll('.rsh__card')[i];
-      const offset = dims.top + (routeRef.current?.offsetHeight || 0) + 8;
-      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - offset, behavior });
+      const cards = cardsOf();
+      if (cards[i]) trackRef.current.scrollTo({ left: cards[i].offsetLeft - cards[0].offsetLeft, behavior });
     }
   };
 
@@ -125,16 +171,12 @@ export default function SeeHowItShowsUp() {
     return () => io.disconnect();
   }, []);
 
-  // pinned: only the current card shows (the others wait in the same spot);
-  // stacked: every card shows, one after another
-  const off = (i) => mode === 'pin' && cur !== i;
   const card = (i, cls, top, children) => (
     <article
-      className={`rsh__card rsh__card--${cls}${off(i) ? ' rsh__card--off' : ''}`}
+      className={`rsh__card rsh__card--${cls}`}
       id={`rsh-card-${i}`}
       role="tabpanel"
       aria-labelledby={`rsh-stop-${i}`}
-      aria-hidden={off(i) || undefined}
     >
       <div className="rsh__top">
         <span>{top}</span>
@@ -145,7 +187,10 @@ export default function SeeHowItShowsUp() {
   );
 
   return (
-    <section className={`rsh rsh--${mode}`} style={{ '--rsh-pin-top': `${dims.top}px` }}>
+    <section
+      className={`rsh rsh--${mode}`}
+      style={{ '--rsh-pin-top': `${dims.top}px`, '--rsh-scale': dims.scale }}
+    >
       <div className="rsh__head">
         <span className="rsh__tag">{c.tag}</span>
         <img className="rsh__avs" src="/assets/results-relate-avatars.png" alt="" width="408" height="110" />
@@ -183,6 +228,7 @@ export default function SeeHowItShowsUp() {
       </div>
 
       <div className={`rsh__track${seen ? ' rsh__track--seen' : ''}`} ref={trackRef}>
+      <div className="rsh__rail" ref={railRef}>
         {card(
           0,
           'relate',
@@ -288,8 +334,9 @@ export default function SeeHowItShowsUp() {
         )}
       </div>
 
-      {/* Back / Next retired: scrolling (and the step buttons) move through
-          the steps now */}
+      </div>
+      {/* Back / Next retired: scrolling / swiping (and the step buttons)
+          move through the steps now */}
       </div>
       </div>
 

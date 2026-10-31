@@ -1096,7 +1096,8 @@
 }
 
 /* ============================================================
-   Scrolling moves through the steps (Alefiya, Slack Oct 31)
+   Scrolling moves through the steps sideways, like a carousel
+   (Alefiya, Slack Oct 31; user: horizontal, not bottom to top)
    ============================================================ */
 
 /* the old Back / Next row is gone from the markup */
@@ -1104,9 +1105,22 @@
   display: none;
 }
 
-/* 'pin': the step buttons + card stick under the top bar while the page
-   scrolls through 01 → 04 (the wrapper is taller by one scroll step per
-   card), then the page carries on */
+/* the four cards sit side by side in one strip; each keeps its own height */
+.rsh__rail {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.rsh__rail > .rsh__card {
+  flex: 0 0 100%;
+  min-width: 0;
+  animation: none;
+}
+
+/* 'pin' (desktop / tablet): the step buttons + strip stick under the top
+   bar; the page's scroll slides the strip left one card at a time (set in
+   JS as --rsh-p, 0 → 3); scaled down a little on short screens */
 .rsh--pin .rsh__scrolly::after {
   content: '';
   display: block;
@@ -1116,48 +1130,52 @@
 .rsh--pin .rsh__stage {
   position: sticky;
   top: var(--rsh-pin-top, 90px);
+  transform: scale(var(--rsh-scale, 1));
+  transform-origin: 50% 0;
 }
 
-/* every card waits in the same spot; only the current one shows */
+/* only the card in view shows; the right / bottom padding keeps its hard
+   shadow, and the neighbours (24px away) stay clipped */
 .rsh--pin .rsh__track {
-  display: grid;
+  overflow: hidden;
+  padding: 0 14px 14px 0;
 }
 
-.rsh--pin .rsh__card {
-  grid-area: 1 / 1;
-  align-self: start; /* each card keeps its own height, no empty foot */
-  animation: none;
-  transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s;
+.rsh--pin .rsh__rail {
+  transform: translateX(calc(var(--rsh-p, 0) * (-100% - 24px)));
+  will-change: transform;
 }
 
-.rsh--pin .rsh__card--off {
-  visibility: hidden;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s 0.2s;
+/* 'swipe' (phones): the strip scrolls sideways under the finger, snapping
+   card by card, with the next card peeking in; the strip's height follows
+   the card on screen (set in JS) */
+.rsh--swipe .rsh__track {
+  box-sizing: border-box;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  padding-bottom: 14px;
+  transition: height 0.3s ease;
 }
 
-/* 'stack' (phones, short screens): the cards follow one another and the
-   step buttons stay stuck at the top, lighting up as each card is reached */
-.rsh--stack .rsh__route {
-  position: sticky;
-  top: var(--rsh-pin-top, 90px);
-  z-index: 5;
-  padding: 10px 0;
-  background: var(--rsh-midnight);
-  box-shadow: 0 10px 14px -12px rgba(0, 0, 0, 0.6);
+.rsh--swipe .rsh__track::-webkit-scrollbar {
+  display: none;
 }
 
-.rsh--stack .rsh__track {
-  display: flex;
-  flex-direction: column;
-  gap: 26px;
+.rsh--swipe .rsh__rail {
+  gap: 14px;
+}
+
+.rsh--swipe .rsh__rail > .rsh__card {
+  flex-basis: 88%;
+  scroll-snap-align: start;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .rsh--pin .rsh__card,
-  .rsh--pin .rsh__card--off {
+  .rsh--swipe .rsh__track {
     transition: none;
-    transform: none;
+    scroll-behavior: auto;
   }
 }
