@@ -1152,9 +1152,16 @@
   padding: 0 14px 14px 0;
 }
 
+/* the strip shows card --rsh-i (0-3, set from the scroll position); the
+   slide between cards is a plain CSS transition, run by the browser's
+   compositor, so scroll speed or a busy page can't make it stutter */
 .rsh--pin .rsh__rail {
-  transform: translateX(calc(var(--rsh-p, 0) * (-100% - 24px)));
+  transform: translateX(calc(var(--rsh-i, 0) * (-100% - 24px)));
   will-change: transform;
+}
+
+.rsh--pin .rsh__rail--ready {
+  transition: transform 0.6s cubic-bezier(0.22, 0.8, 0.3, 1);
 }
 
 /* 'swipe' (phones): the strip scrolls sideways under the finger, snapping
@@ -1198,6 +1205,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .rsh--pin .rsh__rail--ready {
+    transition: none;
+  }
   .rsh--swipe .rsh__track {
     transition: none;
     scroll-behavior: auto;

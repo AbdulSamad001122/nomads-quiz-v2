@@ -95,26 +95,34 @@ export default function SeeHowItShowsUp() {
     };
   }, []);
 
-  // 'pin': the page's scroll position slides the strip
+  // 'pin': the page's scroll position decides WHICH card shows; the slide
+  // to it is a CSS transition the browser runs on its own (compositor).
+  // Root cause of the jitter (user's videos, Oct 31): the strip used to be
+  // moved frame by frame from JavaScript while the browser scrolled on its
+  // own thread, so any slow frame (dev-mode React, a busy page) left the
+  // strip a frame behind and it caught up in little jumps. Now scrolling
+  // only flips an index — with a dead band so it can't flicker on a
+  // boundary — and nothing about the motion depends on scroll timing.
   useEffect(() => {
     const rail = railRef.current;
     const track = trackRef.current;
     const stage = stageRef.current;
     if (mode !== 'pin' || !rail || !track || !stage) return undefined;
     track.scrollLeft = 0; // no leftover sideways offset from the swipe strip
-    const hold = 0.35; // share of each step's scroll spent holding the card still
-    const ease = (t) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2);
     let raf = 0;
     const sync = () => {
       raf = 0;
       const box = scrollyRef.current?.getBoundingClientRect();
       if (!box) return;
       const raw = Math.max(0, (dims.top - box.top) / dims.step);
-      const i = Math.min(last, Math.floor(raw));
-      const f = i >= last ? 0 : ease(Math.max(0, Math.min(1, (raw - i - hold) / (1 - hold))));
-      const p = i + f;
-      rail.style.setProperty('--rsh-p', p.toFixed(4));
-      setCur(Math.round(p));
+      // card k owns raw ∈ [k - 0.4, k + 0.6); +-0.06 dead band either side
+      let k = curRef.current;
+      while (k < last && raw >= k + 0.66) k += 1;
+      while (k > 0 && raw < k - 0.46) k -= 1;
+      if (k !== curRef.current) {
+        curRef.current = k;
+        setCur(k);
+      }
     };
     // Nothing in the pinned stage changes height while the page scrolls —
     // a height change there made the browser's scroll anchoring shift the
@@ -137,14 +145,19 @@ export default function SeeHowItShowsUp() {
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(sync);
     };
+    // first placement without a slide (e.g. a reload mid-section), then
+    // transitions on
+    rail.classList.remove('rsh__rail--ready');
     sync();
     tuck();
+    const ready = requestAnimationFrame(() => requestAnimationFrame(() => rail.classList.add('rsh__rail--ready')));
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => {
       cancelAnimationFrame(raf);
+      cancelAnimationFrame(ready);
       ro?.disconnect();
       window.removeEventListener('scroll', onScroll);
-      rail.style.removeProperty('--rsh-p');
+      rail.classList.remove('rsh__rail--ready');
       if (scrolly) scrolly.style.marginBottom = '';
     };
   }, [mode, dims, last]);
@@ -229,7 +242,8 @@ export default function SeeHowItShowsUp() {
     const behavior = reduce ? 'auto' : 'smooth';
     if (mode === 'pin') {
       const startY = scrollyRef.current.getBoundingClientRect().top + window.scrollY - dims.top;
-      window.scrollTo({ top: startY + n * dims.step + 2, behavior });
+      // the middle of card n's own stretch of scroll
+      window.scrollTo({ top: startY + (n === 0 ? 0.05 : n + 0.1) * dims.step, behavior });
     } else {
       const cards = cardsOf();
       if (cards[n]) trackRef.current.scrollTo({ left: cards[n].offsetLeft - cards[0].offsetLeft, behavior });
@@ -331,7 +345,7 @@ export default function SeeHowItShowsUp() {
       )}
 
       <div className={`rsh__track${seen ? ' rsh__track--seen' : ''}`} ref={trackRef}>
-      <div className="rsh__rail" ref={railRef}>
+      <div className="rsh__rail" ref={railRef} style={mode === 'pin' ? { '--rsh-i': cur } : undefined}>
         {card(
           0,
           'relate',
