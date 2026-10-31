@@ -1123,8 +1123,9 @@
 }
 
 /* 'pin' (desktop / tablet): the step buttons + strip stick under the top
-   bar; the page's scroll slides the strip left one card at a time (set in
-   JS as --rsh-p, 0 → 3); scaled down a little on short screens */
+   bar; scrolling picks the card (--rsh-i, 0-3, set in JS) and the strip
+   slides to it with a CSS transition; scaled down a little on short
+   screens */
 /* scroll anchoring off here: the page must only ever move with the reader */
 .rsh--pin {
   overflow-anchor: none;
