@@ -51,12 +51,18 @@ export default function WhatIfYouDid({ result }) {
 
       <div className="rwi__copy">
         <div className="rwi__copy-inner">
+          {/* one h2 of plain text; only the two coloured figures get a span
+              (user, Oct 31) */}
           <h2 className="rwi__head">
-            {c.golfHead.map((seg) => (
-              <span key={seg.t} className={seg.hl ? 'rwi__hl' : undefined}>
-                {seg.t}
-              </span>
-            ))}
+            {c.golfHead.map((seg) =>
+              seg.hl ? (
+                <span key={seg.t} className="rwi__hl">
+                  {seg.t}
+                </span>
+              ) : (
+                seg.t
+              ),
+            )}
           </h2>
           <p className="rwi__body">{emphasize(c.golfBody, [boldLine])}</p>
           {/* the bar only shows with the logo fallback, which has no title */}
