@@ -160,7 +160,8 @@ export default function SeeHowItShowsUp() {
       <div
         className="rsh__scrolly"
         ref={scrollyRef}
-        style={mode === 'pin' ? { '--rsh-scroll': `${last * dims.step}px` } : undefined}
+        // step 04 is held on screen for a while too, like the others
+        style={mode === 'pin' ? { '--rsh-scroll': `${Math.round((last + 0.7) * dims.step)}px` } : undefined}
       >
       <div className="rsh__stage">
       <div className="rsh__route" role="tablist" ref={routeRef}>
