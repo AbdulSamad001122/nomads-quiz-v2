@@ -19,6 +19,90 @@ export default function SeeHowItShowsUp() {
   const trackRef = useRef(null);
   const last = c.steps.length - 1;
 
+  /* Scrolling moves through the steps (Alefiya, Slack Oct 31: "once I
+     scroll I go to the next … even if I don't click").
+     'pin'   — the step buttons + card stay on screen while the page scrolls
+               through 01 → 04, then the page carries on. Only when the
+               tallest card fits on screen (desktop windows ~770px+ tall).
+     'stack' — phones and short screens: the four cards follow one another
+               and the step buttons (stuck at the top) light up as each
+               card is reached. Nothing is ever hidden off screen. */
+  const [mode, setMode] = useState('stack');
+  const [dims, setDims] = useState({ step: 500, top: 90 });
+  const scrollyRef = useRef(null);
+  const routeRef = useRef(null);
+
+  useEffect(() => {
+    const decide = () => {
+      const track = trackRef.current;
+      const route = routeRef.current;
+      if (!track || !route) return;
+      const top = (document.querySelector('.rnav')?.offsetHeight || 0) + 12;
+      const tallest = Math.max(...[...track.querySelectorAll('.rsh__card')].map((el) => el.offsetHeight));
+      const stageH = route.offsetHeight + 16 + tallest;
+      const fits = window.innerWidth >= 861 && top + stageH + 16 <= window.innerHeight;
+      setMode(fits ? 'pin' : 'stack');
+      setDims({ step: Math.round(window.innerHeight * 0.55), top });
+    };
+    let raf = 0;
+    const onResize = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(decide);
+    };
+    decide();
+    document.fonts?.ready?.then(decide);
+    window.addEventListener('resize', onResize);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('resize', onResize);
+    };
+  }, []);
+
+  // which step the scroll position stands on
+  useEffect(() => {
+    let raf = 0;
+    const sync = () => {
+      raf = 0;
+      if (mode === 'pin') {
+        const box = scrollyRef.current?.getBoundingClientRect();
+        if (!box) return;
+        const past = dims.top - box.top;
+        setCur(Math.max(0, Math.min(last, Math.floor(past / dims.step))));
+      } else {
+        const cards = [...(trackRef.current?.querySelectorAll('.rsh__card') || [])];
+        const line = window.innerHeight * 0.45;
+        let at = 0;
+        cards.forEach((el, i) => {
+          if (el.getBoundingClientRect().top < line) at = i;
+        });
+        setCur(at);
+      }
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(sync);
+    };
+    sync();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, [mode, dims, last]);
+
+  // a step button takes the page to that step
+  const goTo = (i) => {
+    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    const behavior = reduce ? 'auto' : 'smooth';
+    if (mode === 'pin') {
+      const startY = scrollyRef.current.getBoundingClientRect().top + window.scrollY - dims.top;
+      window.scrollTo({ top: startY + i * dims.step + 2, behavior });
+    } else {
+      const el = trackRef.current?.querySelectorAll('.rsh__card')[i];
+      const offset = dims.top + (routeRef.current?.offsetHeight || 0) + 8;
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - offset, behavior });
+    }
+  };
+
   // the chat bubbles pop in when the card first comes into view, not on
   // page load (row 4 sits far down the page, so the pop was long over)
   const [seen, setSeen] = useState(false);
@@ -41,32 +125,16 @@ export default function SeeHowItShowsUp() {
     return () => io.disconnect();
   }, []);
 
-  const show = (i, fromNav) => {
-    const n = Math.max(0, Math.min(last, i));
-    setCur(n);
-    // Back / Next sit under the card: when the new card is shorter and its
-    // top is now above the screen, bring it back into view
-    if (fromNav) {
-      requestAnimationFrame(() => {
-        const el = trackRef.current;
-        // clear the sticky top bar (taller on phones)
-        const offset = (document.querySelector('.rnav')?.offsetHeight || 0) + 16;
-        const top = el?.getBoundingClientRect().top;
-        if (el && top < offset) {
-          const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-          window.scrollTo({ top: top + window.scrollY - offset, behavior: reduce ? 'auto' : 'smooth' });
-        }
-      });
-    }
-  };
-
+  // pinned: only the current card shows (the others wait in the same spot);
+  // stacked: every card shows, one after another
+  const off = (i) => mode === 'pin' && cur !== i;
   const card = (i, cls, top, children) => (
     <article
-      className={`rsh__card rsh__card--${cls}`}
+      className={`rsh__card rsh__card--${cls}${off(i) ? ' rsh__card--off' : ''}`}
       id={`rsh-card-${i}`}
       role="tabpanel"
       aria-labelledby={`rsh-stop-${i}`}
-      hidden={cur !== i}
+      aria-hidden={off(i) || undefined}
     >
       <div className="rsh__top">
         <span>{top}</span>
@@ -77,7 +145,7 @@ export default function SeeHowItShowsUp() {
   );
 
   return (
-    <section className="rsh">
+    <section className={`rsh rsh--${mode}`} style={{ '--rsh-pin-top': `${dims.top}px` }}>
       <div className="rsh__head">
         <span className="rsh__tag">{c.tag}</span>
         <img className="rsh__avs" src="/assets/results-relate-avatars.png" alt="" width="408" height="110" />
@@ -89,7 +157,13 @@ export default function SeeHowItShowsUp() {
         </p>
       </div>
 
-      <div className="rsh__route" role="tablist">
+      <div
+        className="rsh__scrolly"
+        ref={scrollyRef}
+        style={mode === 'pin' ? { '--rsh-scroll': `${last * dims.step}px` } : undefined}
+      >
+      <div className="rsh__stage">
+      <div className="rsh__route" role="tablist" ref={routeRef}>
         {c.steps.map((s, i) => (
           <button
             key={s}
@@ -99,7 +173,7 @@ export default function SeeHowItShowsUp() {
             aria-selected={cur === i}
             aria-controls={`rsh-card-${i}`}
             className={`rsh__stop${cur === i ? ' rsh__stop--on' : ''}`}
-            onClick={() => show(i, false)}
+            onClick={() => goTo(i)}
           >
             <b>{pad(i + 1)}</b>
             <span>{s}</span>
@@ -213,14 +287,9 @@ export default function SeeHowItShowsUp() {
         )}
       </div>
 
-      <div className="rsh__stepnav">
-        <button type="button" onClick={() => show(cur - 1, true)} disabled={cur === 0}>
-          {c.back}
-        </button>
-        <span aria-live="polite">{`${cur + 1} / ${c.steps.length}`}</span>
-        <button type="button" onClick={() => show(cur + 1, true)} disabled={cur === last}>
-          {c.next}
-        </button>
+      {/* Back / Next retired: scrolling (and the step buttons) move through
+          the steps now */}
+      </div>
       </div>
 
       <div className="rsh__joint" aria-hidden="true">

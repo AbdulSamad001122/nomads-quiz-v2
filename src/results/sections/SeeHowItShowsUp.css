@@ -33,6 +33,8 @@
   /* bottom room for TwoPaths' closing panel, which rides up over the seam */
   padding: 56px 20px 96px;
   overflow: hidden;
+  /* clip (not hidden) so the step buttons + card can stick while scrolling */
+  overflow: clip;
 }
 
 /* ——— head ——— */
@@ -979,6 +981,7 @@
     margin-right: 0;
   }
   .rsh__head { order: 1; }
+  .rsh__scrolly { order: 2; }
   .rsh__route { order: 2; }
   .rsh__stepnav {
     order: 3;
@@ -1089,5 +1092,71 @@
   .rsh__quote,
   .rsh__belief {
     text-align: left;
+  }
+}
+
+/* ============================================================
+   Scrolling moves through the steps (Alefiya, Slack Oct 31)
+   ============================================================ */
+
+/* the old Back / Next row is gone from the markup */
+.rsh__stepnav {
+  display: none;
+}
+
+/* 'pin': the step buttons + card stick under the top bar while the page
+   scrolls through 01 → 04 (the wrapper is taller by one scroll step per
+   card), then the page carries on */
+.rsh--pin .rsh__scrolly::after {
+  content: '';
+  display: block;
+  height: var(--rsh-scroll, 0px);
+}
+
+.rsh--pin .rsh__stage {
+  position: sticky;
+  top: var(--rsh-pin-top, 90px);
+}
+
+/* every card waits in the same spot; only the current one shows */
+.rsh--pin .rsh__track {
+  display: grid;
+}
+
+.rsh--pin .rsh__card {
+  grid-area: 1 / 1;
+  animation: none;
+  transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s;
+}
+
+.rsh--pin .rsh__card--off {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s 0.2s;
+}
+
+/* 'stack' (phones, short screens): the cards follow one another and the
+   step buttons stay stuck at the top, lighting up as each card is reached */
+.rsh--stack .rsh__route {
+  position: sticky;
+  top: var(--rsh-pin-top, 90px);
+  z-index: 5;
+  padding: 10px 0;
+  background: var(--rsh-midnight);
+  box-shadow: 0 10px 14px -12px rgba(0, 0, 0, 0.6);
+}
+
+.rsh--stack .rsh__track {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rsh--pin .rsh__card,
+  .rsh--pin .rsh__card--off {
+    transition: none;
+    transform: none;
   }
 }
