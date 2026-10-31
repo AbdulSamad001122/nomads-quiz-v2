@@ -145,17 +145,37 @@ export default function SeeHowItShowsUp() {
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(sync);
     };
-    // first placement without a slide (e.g. a reload mid-section), then
-    // transitions on
-    rail.classList.remove('rsh__rail--ready');
+    // place the strip on the right card WITHOUT a slide, then transitions on
+    let ready = 0;
+    const jump = () => {
+      cancelAnimationFrame(ready);
+      rail.classList.remove('rsh__rail--ready');
+      rail.style.setProperty('--rsh-i', curRef.current);
+      ready = requestAnimationFrame(() => {
+        ready = requestAnimationFrame(() => rail.classList.add('rsh__rail--ready'));
+      });
+    };
+    // the page above can change height with no scroll at all (late images
+    // and fonts after a reload mid-section, a pillar opening), which moves
+    // this section: check the card again then, and jump straight to it
+    // (edge-case test, Oct 31). Watched on the page wrapper, which grows
+    // with its content; body is pinned to the window height (global.css).
+    const onLayout = () => {
+      const was = curRef.current;
+      sync();
+      if (curRef.current !== was) jump();
+    };
+    const pageRo = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(onLayout) : null;
+    pageRo?.observe(sectionRef.current?.parentElement || document.body);
     sync();
     tuck();
-    const ready = requestAnimationFrame(() => requestAnimationFrame(() => rail.classList.add('rsh__rail--ready')));
+    jump();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => {
       cancelAnimationFrame(raf);
       cancelAnimationFrame(ready);
       ro?.disconnect();
+      pageRo?.disconnect();
       window.removeEventListener('scroll', onScroll);
       rail.classList.remove('rsh__rail--ready');
       if (scrolly) scrolly.style.marginBottom = '';
