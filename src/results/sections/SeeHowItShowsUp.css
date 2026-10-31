@@ -1125,6 +1125,7 @@
 
 .rsh--pin .rsh__card {
   grid-area: 1 / 1;
+  align-self: start; /* each card keeps its own height, no empty foot */
   animation: none;
   transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s;
 }
