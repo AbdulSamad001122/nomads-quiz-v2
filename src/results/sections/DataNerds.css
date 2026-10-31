@@ -479,3 +479,22 @@
     transform: none;
   }
 }
+
+/* the calculator button, bright so it pops on the navy (Alefiya, Slack
+   Oct 31): white with plum text and a pink shadow, apart from the
+   light-blue workshop / pink booking buttons */
+.results-page .rdn .rdn__btn,
+.results-page .rdn .rdn__btn:hover {
+  background: #ffffff;
+  color: #5d1b4e;
+  border-color: #0f0a10;
+  box-shadow: 6px 6px 0 #f0a8c8;
+}
+
+.results-page .rdn .rdn__btn:hover {
+  box-shadow: 8px 8px 0 #f0a8c8;
+}
+
+.results-page .rdn .rdn__btn:active {
+  box-shadow: 3px 3px 0 #f0a8c8;
+}
