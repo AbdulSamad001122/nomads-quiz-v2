@@ -866,7 +866,8 @@ export const WEAKEST_PILLAR = {
   para2Before:
     'You leave with a clear next step like "All sales calls start at this message, so we’ll use this message top of funnel to lift opt-ins ',
   para2Bold: 'from 11% to 25% and that shall add $40,000/mo',
-  para2After: ' to our revenue", an action with a number attached to it.',
+  // punctuation fixed by Alefiya (Slack Oct 31)
+  para2After: ' to our revenue". An action with a number attached to it.',
   // First sentence of the doc's next paragraph — the Lara story that follows
   // it belongs to the next section.
   band: 'I don\'t guess at these.',
