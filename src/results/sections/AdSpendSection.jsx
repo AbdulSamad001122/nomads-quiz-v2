@@ -130,12 +130,24 @@ export default function AdSpendSection({ result, adAdjustable = false }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [d.currentAdRev, d.goalAdRev, spendPct]);
   const at = (b) => place?.[b.key] ?? { inside: b.inside, left: null };
+  // a copy line with its figure picked out (Slack Oct 31: only the "$7.20"
+  // stands out in "Every $1 of ads brings back about $7.20.")
+  const withFigure = (tpl, key, figure) => {
+    const [before, after] = tpl.split(`{{${key}}}`);
+    return (
+      <>
+        {before}
+        <b className="rad__amt">{figure}</b>
+        {after}
+      </>
+    );
+  };
   const verdict = (b) =>
     b.roas == null
       ? null
       : b.good
-        ? fill(c.back, { amount: `$${b.roas.toFixed(2)}` })
-        : fill(c.short, { amount: money(spend - b.rev) });
+        ? withFigure(c.back, 'amount', `$${b.roas.toFixed(2)}`)
+        : withFigure(c.short, 'amount', money(spend - b.rev));
 
   const fillPct = ((sharePct - 10) / 90) * 100;
   const ext = CTA.workshop.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : null;
@@ -240,7 +252,7 @@ export default function AdSpendSection({ result, adAdjustable = false }) {
               +{money(gain)}
               <small>{c.payGainSub}</small>
             </span>
-            <span className="rad__pay-year">{fill(c.payYear, { year: money(year) })}</span>
+            <span className="rad__pay-year">{withFigure(c.payYear, 'year', money(year))}</span>
             <span className="rad__pay-math">
               {fill(c.payMath, { goal: money(d.goalAdRev), today: money(d.currentAdRev), gain: money(gain) })}
             </span>
