@@ -590,6 +590,7 @@
 .rad__pay-intro {
   font-size: 16px;
   color: #f6e9f1;
+  text-wrap: balance; /* no lone "to:" on its own line */
 }
 
 .rad__pay-n {
