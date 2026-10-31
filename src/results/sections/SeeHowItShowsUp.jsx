@@ -115,28 +115,37 @@ export default function SeeHowItShowsUp() {
       const p = i + f;
       rail.style.setProperty('--rsh-p', p.toFixed(4));
       setCur(Math.round(p));
-      // the strip is as tall as the card in view (the taller of the two
-      // while they slide), so a short card — 04 above all — leaves no empty
-      // band below it (user, Oct 31)
-      const cards = cardsOf();
-      const h = f > 0 && f < 1 ? Math.max(cards[i].offsetHeight, cards[i + 1].offsetHeight) : cards[Math.round(p)].offsetHeight;
-      track.style.height = `${h + 14}px`;
-      // a scaled-down stage still takes its full height in the layout: pull
-      // what follows up by the difference
-      const natural = (routeRef.current?.offsetHeight || 0) + 16 + h + 14;
-      stage.style.marginBottom = dims.scale < 1 ? `${-((1 - dims.scale) * natural).toFixed(1)}px` : '';
     };
+    // Nothing in the pinned stage changes height while the page scrolls —
+    // a height change there made the browser's scroll anchoring shift the
+    // page, which moved the strip, which changed the height again: the
+    // cards shook (user's video, Oct 31). Instead, what follows the section
+    // is pulled up once by a fixed amount, so it lands just under card 04
+    // (and under the scaled-down stage) when the pin lets go.
+    const scrolly = scrollyRef.current;
+    const tuck = () => {
+      const cards = cardsOf();
+      const lastCard = cards[cards.length - 1];
+      if (!scrolly || !lastCard) return;
+      const stageBox = stage.getBoundingClientRect();
+      const lastBottom = lastCard.getBoundingClientRect().bottom + 14 * dims.scale;
+      const unused = stageBox.top + stage.offsetHeight - lastBottom;
+      scrolly.style.marginBottom = unused > 0 ? `${-unused.toFixed(1)}px` : '';
+    };
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(tuck) : null;
+    cardsOf().forEach((el) => ro?.observe(el));
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(sync);
     };
     sync();
+    tuck();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => {
       cancelAnimationFrame(raf);
+      ro?.disconnect();
       window.removeEventListener('scroll', onScroll);
       rail.style.removeProperty('--rsh-p');
-      track.style.height = '';
-      stage.style.marginBottom = '';
+      if (scrolly) scrolly.style.marginBottom = '';
     };
   }, [mode, dims, last]);
 

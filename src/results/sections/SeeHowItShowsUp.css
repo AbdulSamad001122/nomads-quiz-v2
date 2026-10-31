@@ -1125,6 +1125,11 @@
 /* 'pin' (desktop / tablet): the step buttons + strip stick under the top
    bar; the page's scroll slides the strip left one card at a time (set in
    JS as --rsh-p, 0 → 3); scaled down a little on short screens */
+/* scroll anchoring off here: the page must only ever move with the reader */
+.rsh--pin {
+  overflow-anchor: none;
+}
+
 .rsh--pin .rsh__scrolly::after {
   content: '';
   display: block;
@@ -1145,8 +1150,6 @@
   overflow: hidden;
   overflow: clip; /* not a scroll container: nothing can shift it sideways */
   padding: 0 14px 14px 0;
-  /* height follows the card in view (set in JS) */
-  transition: height 0.35s ease;
 }
 
 .rsh--pin .rsh__rail {
@@ -1195,7 +1198,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .rsh--pin .rsh__track,
   .rsh--swipe .rsh__track {
     transition: none;
     scroll-behavior: auto;
