@@ -248,7 +248,7 @@ export default function StopOrPush({ result, tokens }) {
                   <small>{c.whoRole}</small>
                 </div>
               </div>
-              <span className="rso__eyebrow rso__eyebrow--rose">{c.realEyebrow}</span>
+              <span className="rso__eyebrow rso__eyebrow--chip">{c.realEyebrow}</span>
               <h3 className="rso__real-head">{c.realHead}</h3>
               <p className="rso__real-p">{c.realP1}</p>
               <p className="rso__real-p">{emphasize(c.realP2, [c.realP2Bold])}</p>

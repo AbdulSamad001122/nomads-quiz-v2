@@ -515,12 +515,20 @@
   color: var(--rso-mute);
 }
 
-.rso__eyebrow--rose {
-  color: var(--rso-rose);
+/* "Yes, 12× sounds like a stretch" as a maroon chip with white text
+   (user, Oct 31) */
+.rso__eyebrow--chip {
+  display: inline-block;
+  max-width: 100%;
+  background: #641d4f;
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 1.4;
+  padding: 6px 12px;
 }
 
 .rso__real-head {
-  margin: 6px 0 0;
+  margin: 14px 0 0;
   font-family: var(--rso-black);
   font-weight: 900;
   font-size: clamp(22px, 2.6vw, 28px);
@@ -743,7 +751,7 @@
     transform: rotate(90deg);
   }
   .rso__real {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr); /* never wider than the card */
     padding: 22px 20px;
   }
 }
