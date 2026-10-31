@@ -476,7 +476,8 @@ function CalcPreview({ c }) {
           rel="noopener"
           onClick={() => ga.ctaClick('crps_calculator')}
         >
-          {c.button}
+          {/* the arrow stays with the last word */}
+          {c.button.replace(/ (\S+)$/, '\u00a0$1')}
         </a>
         </div>
       </div>

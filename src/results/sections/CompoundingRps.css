@@ -1085,7 +1085,8 @@
   }
   .rcs__cw-inner,
   .rcs__cw-media > * {
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
