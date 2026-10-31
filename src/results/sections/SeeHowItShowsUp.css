@@ -1100,9 +1100,13 @@
    (Alefiya, Slack Oct 31; user: horizontal, not bottom to top)
    ============================================================ */
 
-/* the old Back / Next row is gone from the markup */
-.rsh__stepnav {
-  display: none;
+/* measuring (JS, one frame): lay the cards out as when pinned */
+.rsh.rsh--measure .rsh__rail > .rsh__card {
+  flex-basis: 100%;
+}
+
+.rsh.rsh--measure .rsh__track {
+  padding: 0 14px 14px 0;
 }
 
 /* the four cards sit side by side in one strip; each keeps its own height */
@@ -1139,6 +1143,7 @@
 .rsh--pin .rsh__track {
   box-sizing: border-box;
   overflow: hidden;
+  overflow: clip; /* not a scroll container: nothing can shift it sideways */
   padding: 0 14px 14px 0;
   /* height follows the card in view (set in JS) */
   transition: height 0.35s ease;
@@ -1158,17 +1163,30 @@
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
   overscroll-behavior-x: contain;
-  scrollbar-width: none;
+  scrollbar-width: thin; /* a mouse needs to see it can scroll sideways */
   padding-bottom: 14px;
   transition: height 0.3s ease;
 }
 
-.rsh--swipe .rsh__track::-webkit-scrollbar {
-  display: none;
+/* touch screens: no scrollbar, the swipe and the peeking card say it all */
+@media (hover: none), (pointer: coarse) {
+  .rsh--swipe .rsh__track {
+    scrollbar-width: none;
+  }
+  .rsh--swipe .rsh__track::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .rsh--swipe .rsh__rail {
   gap: 14px;
+}
+
+/* room after card 04, so its hard shadow isn't cut off at the scroll end */
+.rsh--swipe .rsh__rail::after {
+  content: '';
+  flex: 0 0 1px;
+  height: 1px;
 }
 
 .rsh--swipe .rsh__rail > .rsh__card {

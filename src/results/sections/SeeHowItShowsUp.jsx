@@ -32,7 +32,10 @@ export default function SeeHowItShowsUp() {
                be held in place): the cards sit side by side and swipe left
                / right; the step buttons follow. */
   const [mode, setMode] = useState('swipe');
+  const modeRef = useRef('swipe');
+  const curRef = useRef(0);
   const [dims, setDims] = useState({ step: 500, top: 90, scale: 1 });
+  const sectionRef = useRef(null);
   const scrollyRef = useRef(null);
   const routeRef = useRef(null);
   const railRef = useRef(null);
@@ -40,25 +43,51 @@ export default function SeeHowItShowsUp() {
   const cardsOf = () => [...(trackRef.current?.querySelectorAll('.rsh__card') || [])];
 
   useEffect(() => {
-    const decide = () => {
+    curRef.current = cur;
+  }, [cur]);
+
+  useEffect(() => {
+    // sticking needs overflow: clip on the section (Safari 16+); older
+    // browsers simply get the swipe strip
+    const canPin = typeof CSS !== 'undefined' && CSS.supports?.('overflow', 'clip');
+    let lastW = 0;
+    let lastH = 0;
+    const decide = (force) => {
+      const sec = sectionRef.current;
       const route = routeRef.current;
-      const cards = cardsOf();
-      if (!route || !cards.length) return;
+      if (!sec || !route) return;
+      const w = window.innerWidth;
+      const h = document.documentElement.clientHeight;
+      // a phone's toolbar sliding in / out only nudges the height: don't
+      // rebuild the carousel mid-scroll for that
+      if (!force && w === lastW && Math.abs(h - lastH) < 120) return;
+      lastW = w;
+      lastH = h;
+      // always measure the cards as they sit when pinned (full width), so
+      // the answer doesn't depend on the mode we happen to be in
+      sec.classList.add('rsh--measure');
+      const tallest = Math.max(...cardsOf().map((el) => el.offsetHeight));
+      const stageH = route.offsetHeight + 16 + tallest + 14;
+      sec.classList.remove('rsh--measure');
       const top = (document.querySelector('.rnav')?.offsetHeight || 0) + 12;
-      const tallest = Math.max(...cards.map((el) => el.offsetHeight));
-      const stageH = route.offsetHeight + 16 + tallest;
-      const scale = Math.min(1, (window.innerHeight - top - 16) / stageH);
-      const pin = window.innerWidth >= 861 && scale >= 0.72;
-      setMode(pin ? 'pin' : 'swipe');
-      setDims({ step: Math.round(window.innerHeight * 0.6), top, scale: pin ? scale : 1 });
+      const scale = Math.min(1, (h - top - 16) / stageH);
+      // pin only while the text stays readable; a little hysteresis so a
+      // window right at the edge doesn't flip back and forth
+      const floor = modeRef.current === 'pin' ? 0.72 : 0.76;
+      const next = canPin && w >= 861 && scale >= floor ? 'pin' : 'swipe';
+      modeRef.current = next;
+      setMode(next);
+      const step = Math.round(h * 0.6);
+      const sc = next === 'pin' ? Math.round(scale * 1000) / 1000 : 1;
+      setDims((d) => (d.step === step && d.top === top && d.scale === sc ? d : { step, top, scale: sc }));
     };
     let raf = 0;
     const onResize = () => {
       cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(decide);
+      raf = requestAnimationFrame(() => decide(false));
     };
-    decide();
-    document.fonts?.ready?.then(decide);
+    decide(true);
+    document.fonts?.ready?.then(() => decide(true));
     window.addEventListener('resize', onResize);
     return () => {
       cancelAnimationFrame(raf);
@@ -72,6 +101,7 @@ export default function SeeHowItShowsUp() {
     const track = trackRef.current;
     const stage = stageRef.current;
     if (mode !== 'pin' || !rail || !track || !stage) return undefined;
+    track.scrollLeft = 0; // no leftover sideways offset from the swipe strip
     const hold = 0.35; // share of each step's scroll spent holding the card still
     const ease = (t) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2);
     let raf = 0;
@@ -110,56 +140,90 @@ export default function SeeHowItShowsUp() {
     };
   }, [mode, dims, last]);
 
-  // 'swipe': the strip scrolls sideways under the finger; the step buttons
-  // follow, and the strip is as tall as the card on screen
+  // 'swipe': the strip scrolls sideways under the finger (or via Back /
+  // Next); the step buttons follow live, and once the strip comes to rest
+  // its height fits the card on screen
   useEffect(() => {
     const track = trackRef.current;
     if (mode !== 'swipe' || !track) return undefined;
+    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     let raf = 0;
-    let prev = -1;
-    const sync = () => {
-      raf = 0;
+    let settleT = 0;
+    let gestureFrom = -1;
+    const indexNow = () => {
       const cards = cardsOf();
-      if (!cards.length) return;
       const stride = cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : 1;
-      const at = Math.max(0, Math.min(last, Math.round(track.scrollLeft / stride)));
+      return Math.max(0, Math.min(last, Math.round(track.scrollLeft / stride)));
+    };
+    const fit = (at) => {
+      const card = cardsOf()[at];
+      if (!card) return;
+      const bar = track.offsetHeight - track.clientHeight; // a visible scrollbar, if any
+      track.style.height = `${card.offsetHeight + 14 + bar}px`;
+    };
+    const settle = () => {
+      clearTimeout(settleT);
+      const at = indexNow();
       setCur(at);
-      track.style.height = `${cards[at].offsetHeight + 14}px`;
-      // swiped while reading low down a tall card: bring the new card's top
-      // back into view instead of leaving the reader below it
-      if (prev !== -1 && at !== prev && track.getBoundingClientRect().top < dims.top) {
+      fit(at);
+      // swiped while reading low down a tall card: bring the new card's
+      // top back into view — only after a real swipe, never on resize
+      if (gestureFrom !== -1 && at !== gestureFrom && track.getBoundingClientRect().top < dims.top) {
         const y = track.getBoundingClientRect().top + window.scrollY - dims.top - (routeRef.current?.offsetHeight || 0) - 8;
-        window.scrollTo({ top: y, behavior: 'smooth' });
+        window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
       }
-      prev = at;
+      gestureFrom = -1;
     };
     const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(sync);
+      if (!raf) {
+        raf = requestAnimationFrame(() => {
+          raf = 0;
+          setCur(indexNow());
+        });
+      }
+      clearTimeout(settleT);
+      settleT = setTimeout(settle, 160);
     };
-    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(onScroll) : null;
-    cardsOf().forEach((el) => ro?.observe(el));
-    sync();
+    const onStart = () => {
+      gestureFrom = indexNow();
+    };
+    const onRefit = () => fit(indexNow());
+    // coming from 'pin' (e.g. a tablet turned round): stay on the same card
+    const cards = cardsOf();
+    if (cards[curRef.current]) track.scrollLeft = cards[curRef.current].offsetLeft - cards[0].offsetLeft;
+    setCur(indexNow());
+    fit(indexNow());
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(onRefit) : null;
+    cards.forEach((el) => ro?.observe(el));
     track.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
+    track.addEventListener('scrollend', settle);
+    track.addEventListener('touchstart', onStart, { passive: true });
+    track.addEventListener('pointerdown', onStart);
+    window.addEventListener('resize', onRefit);
     return () => {
       cancelAnimationFrame(raf);
+      clearTimeout(settleT);
       ro?.disconnect();
       track.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
+      track.removeEventListener('scrollend', settle);
+      track.removeEventListener('touchstart', onStart);
+      track.removeEventListener('pointerdown', onStart);
+      window.removeEventListener('resize', onRefit);
       track.style.height = '';
     };
   }, [mode, dims, last]);
 
-  // a step button goes to that step
+  // a step button (or Back / Next) goes to that step
   const goTo = (i) => {
+    const n = Math.max(0, Math.min(last, i));
     const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     const behavior = reduce ? 'auto' : 'smooth';
     if (mode === 'pin') {
       const startY = scrollyRef.current.getBoundingClientRect().top + window.scrollY - dims.top;
-      window.scrollTo({ top: startY + i * dims.step + 2, behavior });
+      window.scrollTo({ top: startY + n * dims.step + 2, behavior });
     } else {
       const cards = cardsOf();
-      if (cards[i]) trackRef.current.scrollTo({ left: cards[i].offsetLeft - cards[0].offsetLeft, behavior });
+      if (cards[n]) trackRef.current.scrollTo({ left: cards[n].offsetLeft - cards[0].offsetLeft, behavior });
     }
   };
 
@@ -202,6 +266,7 @@ export default function SeeHowItShowsUp() {
 
   return (
     <section
+      ref={sectionRef}
       className={`rsh rsh--${mode}`}
       style={{ '--rsh-pin-top': `${dims.top}px`, '--rsh-scale': dims.scale }}
     >
@@ -240,6 +305,21 @@ export default function SeeHowItShowsUp() {
           </button>
         ))}
       </div>
+
+      {/* the swipe strip also gets Back / Next — a mouse can't swipe, and
+          on phones they sit between the step buttons and the card (user,
+          Oct 30) */}
+      {mode === 'swipe' && (
+        <div className="rsh__stepnav">
+          <button type="button" onClick={() => goTo(cur - 1)} disabled={cur === 0}>
+            {c.back}
+          </button>
+          <span aria-live="polite">{`${cur + 1} / ${c.steps.length}`}</span>
+          <button type="button" onClick={() => goTo(cur + 1)} disabled={cur === last}>
+            {c.next}
+          </button>
+        </div>
+      )}
 
       <div className={`rsh__track${seen ? ' rsh__track--seen' : ''}`} ref={trackRef}>
       <div className="rsh__rail" ref={railRef}>
@@ -349,8 +429,6 @@ export default function SeeHowItShowsUp() {
       </div>
 
       </div>
-      {/* Back / Next retired: scrolling / swiping (and the step buttons)
-          move through the steps now */}
       </div>
       </div>
 
