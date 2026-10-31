@@ -4,7 +4,7 @@ import './WelcomeScreen.css';
 /**
  * First slide of the quiz — built to the "first quiz page" design
  * reference: cream logo bar, dark textured map background, big headline
- * with the plum sweep on "expensive" and a Better Brush "G", subline,
+ * with the plum sweep on "expensive" and a Better Brush "g", subline,
  * landing-style CTA, "takes 5 minutes" chip, and Alefiya's photo
  * anchored bottom-right.
  */
@@ -17,16 +17,15 @@ export default function WelcomeScreen({ onStart }) {
 
       <div className="welcome__stage">
         <div className="welcome__content">
-          {/* copy per the hero inspo (Sep 28); capital brush "G" by the
-              user's call, over the inspo's lowercase */}
+          {/* Quiz QC Oct 31 (Alefiya): "that" removed, lowercase brush "g" */}
           <h1
             className="welcome__headline"
-            aria-label="This is where that expensive Guessing stops."
+            aria-label="This is where expensive guessing stops."
           >
-            {'This is where that '}
+            {'This is where '}
             <HighlightSweep tone="plum">expensive</HighlightSweep>{' '}
             <span className="welcome__g" aria-hidden="true">
-              G
+              g
             </span>
             <span className="welcome__g-rest">uessing stops.</span>
           </h1>
