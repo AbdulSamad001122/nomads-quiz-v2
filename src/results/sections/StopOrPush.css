@@ -136,7 +136,8 @@
 .rso__big {
   font-family: var(--rso-black);
   font-weight: 900;
-  font-size: clamp(30px, 3.4vw, 38px);
+  /* bigger (user, Oct 31) */
+  font-size: clamp(38px, 4.4vw, 50px);
   line-height: 1;
   color: var(--rso-plum);
 }

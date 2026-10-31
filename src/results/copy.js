@@ -1624,11 +1624,19 @@ export const STOP_OR_PUSH = {
 
   // Card A — the goal (deliberately the smaller card, design note 3)
   stopEyebrow: 'Stop here · your goal',
+  // Alefiya (Slack, Oct 31): the card reads as one clear sentence — "by
+  // increasing your revenue per visitor from 2.25 to 6.25, you'll add 1.5
+  // million a year without adding a penny to your current marketing or ad
+  // spend" — around the big figure (kept, made bigger), with the taker's
+  // own numbers; the "And nope…" line stays (Alefiya: keep it; she and Yemi
+  // revise this section's logic on Monday).
   stopRpvBefore: 'By increasing your Revenue Per Visitor™ from',
+  stopRpvTo: 'to',
+  stopRpvAfter: ', you’ll add',
   stopBig: '+$1.5M/year',
   stopBigSub: '($125K/mo)',
-  stopBody: 'Without adding a penny to your current marketing and ad spend.',
-  stopBodyBold: 'marketing and ad spend',
+  stopBody: 'without adding a penny to your current marketing or ad spend.',
+  stopBodyBold: 'marketing or ad spend',
   stopNope: 'And nope, you don’t need to max out all 5 metrics to get there.',
 
   // the joint between the two cards

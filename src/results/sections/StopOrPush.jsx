@@ -177,9 +177,10 @@ export default function StopOrPush({ result, tokens }) {
             <p className="rso__rpv">
               {c.stopRpvBefore}{' '}
               <b>
-                <span className="rso__from">{tokens.current_rpv}</span> →{' '}
+                <span className="rso__from">{tokens.current_rpv}</span> {c.stopRpvTo}{' '}
                 <span className="rso__to">{tokens.goal_rpv}</span>
               </b>
+              {c.stopRpvAfter}
             </p>
             <p className="rso__big">
               {c.stopBig}
