@@ -65,6 +65,14 @@ body .results-page :is(
   line-height: 1.2;
 }
 
+/* the GolfBays headline runs smaller on desktop (user, Oct 31); tablet and
+   phone keep the shared 32 / 26 */
+@media (min-width: 1101px) {
+  body .results-page .rwi__head {
+    font-size: 31px;
+  }
+}
+
 /* ——— subheadings ——— */
 body .results-page :is(
   .rmw__answer,
