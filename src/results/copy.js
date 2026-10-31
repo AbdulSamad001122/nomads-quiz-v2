@@ -789,6 +789,8 @@ export const CLIENT_DAVID = {
       ],
     },
   ],
+  // *who* and *what* in italics in the first box line (Alefiya, Slack Oct 31)
+  boxEmFirst: ['who', 'what'],
   boxParas: [
     ['We changed who it spoke to and what it', 'opened with. Same course. That\'s when it moved.'],
     [

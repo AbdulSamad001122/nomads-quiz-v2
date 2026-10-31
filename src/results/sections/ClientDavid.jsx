@@ -7,6 +7,12 @@ function Lines({ lines }) {
   return lines.join(' ');
 }
 
+/** The given whole words in italics, the rest as plain text. */
+function Italics({ text, words }) {
+  const re = new RegExp(`\\b(${words.join('|')})\\b`, 'g');
+  return text.split(re).map((part, k) => (k % 2 ? <em key={k}>{part}</em> : part));
+}
+
 /**
  * Section — "Take my Client David.": dark left panel with the David
  * composition image (pinned while the copy scrolls), ice right panel with
@@ -45,7 +51,7 @@ export default function ClientDavid() {
         <div className="rcd__box">
           {CLIENT_DAVID.boxParas.map((para, i) => (
             <p key={i} className="rcd__box-para">
-              <Lines lines={para} />
+              {i === 0 ? <Italics text={para.join(' ')} words={CLIENT_DAVID.boxEmFirst} /> : <Lines lines={para} />}
             </p>
           ))}
           <p className="rcd__box-bold">{CLIENT_DAVID.boxBold}</p>
