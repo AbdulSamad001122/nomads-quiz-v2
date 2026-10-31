@@ -36,6 +36,7 @@ export default function SeeHowItShowsUp() {
   const scrollyRef = useRef(null);
   const routeRef = useRef(null);
   const railRef = useRef(null);
+  const stageRef = useRef(null);
   const cardsOf = () => [...(trackRef.current?.querySelectorAll('.rsh__card') || [])];
 
   useEffect(() => {
@@ -69,8 +70,8 @@ export default function SeeHowItShowsUp() {
   useEffect(() => {
     const rail = railRef.current;
     const track = trackRef.current;
-    if (mode !== 'pin' || !rail || !track) return undefined;
-    track.style.height = '';
+    const stage = stageRef.current;
+    if (mode !== 'pin' || !rail || !track || !stage) return undefined;
     const hold = 0.35; // share of each step's scroll spent holding the card still
     const ease = (t) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2);
     let raf = 0;
@@ -80,9 +81,20 @@ export default function SeeHowItShowsUp() {
       if (!box) return;
       const raw = Math.max(0, (dims.top - box.top) / dims.step);
       const i = Math.min(last, Math.floor(raw));
-      const p = i >= last ? last : i + ease(Math.max(0, Math.min(1, (raw - i - hold) / (1 - hold))));
+      const f = i >= last ? 0 : ease(Math.max(0, Math.min(1, (raw - i - hold) / (1 - hold))));
+      const p = i + f;
       rail.style.setProperty('--rsh-p', p.toFixed(4));
       setCur(Math.round(p));
+      // the strip is as tall as the card in view (the taller of the two
+      // while they slide), so a short card — 04 above all — leaves no empty
+      // band below it (user, Oct 31)
+      const cards = cardsOf();
+      const h = f > 0 && f < 1 ? Math.max(cards[i].offsetHeight, cards[i + 1].offsetHeight) : cards[Math.round(p)].offsetHeight;
+      track.style.height = `${h + 14}px`;
+      // a scaled-down stage still takes its full height in the layout: pull
+      // what follows up by the difference
+      const natural = (routeRef.current?.offsetHeight || 0) + 16 + h + 14;
+      stage.style.marginBottom = dims.scale < 1 ? `${-((1 - dims.scale) * natural).toFixed(1)}px` : '';
     };
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(sync);
@@ -93,6 +105,8 @@ export default function SeeHowItShowsUp() {
       cancelAnimationFrame(raf);
       window.removeEventListener('scroll', onScroll);
       rail.style.removeProperty('--rsh-p');
+      track.style.height = '';
+      stage.style.marginBottom = '';
     };
   }, [mode, dims, last]);
 
@@ -208,7 +222,7 @@ export default function SeeHowItShowsUp() {
         // step 04 is held on screen for a while too, like the others
         style={mode === 'pin' ? { '--rsh-scroll': `${Math.round((last + 0.7) * dims.step)}px` } : undefined}
       >
-      <div className="rsh__stage">
+      <div className="rsh__stage" ref={stageRef}>
       <div className="rsh__route" role="tablist" ref={routeRef}>
         {c.steps.map((s, i) => (
           <button

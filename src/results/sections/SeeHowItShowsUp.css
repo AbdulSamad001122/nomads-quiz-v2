@@ -1137,8 +1137,11 @@
 /* only the card in view shows; the right / bottom padding keeps its hard
    shadow, and the neighbours (24px away) stay clipped */
 .rsh--pin .rsh__track {
+  box-sizing: border-box;
   overflow: hidden;
   padding: 0 14px 14px 0;
+  /* height follows the card in view (set in JS) */
+  transition: height 0.35s ease;
 }
 
 .rsh--pin .rsh__rail {
@@ -1174,6 +1177,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .rsh--pin .rsh__track,
   .rsh--swipe .rsh__track {
     transition: none;
     scroll-behavior: auto;
