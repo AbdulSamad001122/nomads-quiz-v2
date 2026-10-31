@@ -8,8 +8,10 @@
   text-align: center;
 }
 
+/* a big bold headline like the other sections (Alefiya, Slack Oct 31);
+   size from the shared scale in results.css */
 .rsb__head {
-  max-width: 715px;
+  max-width: 900px;
 }
 
 .rsb__foot {
@@ -25,6 +27,13 @@
   font-size: 16px;
   line-height: 1.65;
   color: #ffffff;
+}
+
+.rsb__head {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  line-height: 1.2;
+  text-wrap: balance;
 }
 
 .rsb__intro {

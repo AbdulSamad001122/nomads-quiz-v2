@@ -327,6 +327,7 @@ export default function CompoundingRps({ result, tokens }) {
   };
 
   return (
+    <>
     <section className="rcs">
       <div className="rcs__inner">
         <div className="rcs__head">
@@ -377,9 +378,12 @@ export default function CompoundingRps({ result, tokens }) {
           {cards.map(render)}
         </div>
 
-        <CalcPreview c={c} />
       </div>
     </section>
+    {/* the calculator, its own split section under the cards (Alefiya,
+        Slack Oct 31: it blended into the navy) */}
+    <CalcPreview c={c} />
+    </>
   );
 }
 
@@ -451,8 +455,9 @@ function CalcPreview({ c }) {
   }, [reduced, ex]);
 
   return (
-    <div className="rcs__calcwrap">
+    <section className="rcs-calc">
       <div className="rcs__cw-text">
+        <div className="rcs__cw-inner">
         <span className="rcs__k2">{c.calcKicker}</span>
         <h3 className="rcs__calc-h">{c.calcHead}</h3>
         <ol className="rcs__gets">
@@ -473,7 +478,9 @@ function CalcPreview({ c }) {
         >
           {c.button}
         </a>
+        </div>
       </div>
+      <div className="rcs__cw-media">
       <div className="rcs__calc" role="img" aria-label={c.calcLabel}>
         <div className="rcs__in-side" aria-hidden="true">
           <div className="rcs__ttl">
@@ -517,6 +524,7 @@ function CalcPreview({ c }) {
         </div>
       </div>
       <p className="rcs__calc-note">{c.calcNote}</p>
-    </div>
+      </div>
+    </section>
   );
 }

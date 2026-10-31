@@ -782,16 +782,48 @@
 
 /* ——— the calculator ——— */
 
-.rcs__calcwrap {
-  margin-top: 8px;
+/* its own full-width split section under the cards (Alefiya, Slack Oct 31):
+   copy on plain cream on the left, the preview on the dark maroon texture on
+   the right, like the GolfBays section */
+.rcs-calc {
+  --rcs-black: 'RCS Montserrat', var(--font-headline);
+  --rcs-plum: #5d1b4e;
+  --rcs-pink: #f6dbe6;
+  --rcs-ink: #1b1220;
+  --rcs-mute: #6b6170;
+  --rcs-line: #e3dbe6;
+  --rcs-lav: #f2e5f6;
+  --rcs-ice: #d9ecf8;
+  --rcs-icebright: #cae1f4;
+  --rcs-navy: #152638;
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: 22px 28px;
+}
+
+.rcs__cw-text {
+  background: #f7f1e6;
+  padding: 80px clamp(24px, 4vw, 64px);
+  display: flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 22px;
-  padding: 24px;
+}
+
+.rcs__cw-inner {
+  width: 100%;
+  max-width: 520px;
+  margin-left: auto;
+}
+
+.rcs__cw-media {
+  background: #2a0f1c url('/assets/results-maroon-crumple.webp') center / cover;
+  padding: 80px clamp(20px, 4vw, 64px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.rcs__cw-media > * {
+  width: 100%;
+  max-width: 640px;
 }
 
 .rcs__k2 {
@@ -801,7 +833,7 @@
   font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--rcs-pink);
+  color: var(--rcs-plum);
 }
 
 .rcs__calc-h {
@@ -810,7 +842,7 @@
   font-weight: 900;
   font-size: clamp(22px, 2.6vw, 28px);
   line-height: 1.2;
-  color: #ffffff;
+  color: #250f1c;
   text-wrap: balance;
 }
 
@@ -832,15 +864,15 @@
   font-weight: 600;
   font-size: 15px;
   line-height: 1.45;
-  color: #e3e9ef;
+  color: #3c1a30;
 }
 
 .rcs__gets b {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: var(--rcs-pink);
-  color: var(--rcs-plum);
+  background: var(--rcs-plum);
+  color: #ffffff;
   font-family: var(--rcs-black);
   font-weight: 900;
   font-size: 14px;
@@ -1023,20 +1055,35 @@
 }
 
 .rcs__calc-note {
-  grid-column: 1 / -1;
-  margin: -10px 0 0;
+  margin: 14px 0 0;
   font-family: var(--font-mono);
   font-weight: 500;
   font-size: 11.5px;
-  color: #93a3b3;
+  color: #e3c8d6;
+}
+
+/* the button in the theme's own colour: plum on the cream side, so it pops
+   and stays apart from the light-blue workshop / pink booking buttons */
+.results-page .rcs-calc .rcs__btn,
+.results-page .rcs-calc .rcs__btn:hover {
+  background: var(--rcs-plum);
+  color: #ffffff;
+  border-color: #0f0a10;
 }
 
 /* ——— responsive ——— */
 
 @media (max-width: 860px) {
-  .rcs__calcwrap {
+  .rcs-calc {
     grid-template-columns: 1fr;
-    padding: 18px;
+  }
+  .rcs__cw-text,
+  .rcs__cw-media {
+    padding: 56px 22px;
+  }
+  .rcs__cw-inner,
+  .rcs__cw-media > * {
+    margin: 0 auto;
   }
 }
 
