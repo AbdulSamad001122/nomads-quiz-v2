@@ -82,10 +82,41 @@
   padding: 76px 40px 92px;
 }
 
+/* workshop page mockup on the left, the invite + button on the right
+   (user, Oct 31); stacked on phones */
 .rwk__invite {
-  max-width: 990px;
+  max-width: 1080px;
   margin: 0 auto;
   text-align: left;
+  display: grid;
+  grid-template-columns: clamp(220px, 32%, 350px) minmax(0, 1fr);
+  gap: clamp(36px, 5.5vw, 80px);
+  align-items: center;
+}
+
+.rwk__mock,
+.rwk__mock img {
+  display: block;
+}
+
+.rwk__mock img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+/* the mockup opens the workshop page in a new tab; it grows a little on
+   hover (user, Oct 31) */
+@media (hover: hover) {
+  .rwk__mock:hover img {
+    transform: scale(1.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rwk__mock img {
+    transition: none;
+  }
 }
 
 .rwk__p--dark {
@@ -94,10 +125,10 @@
 }
 
 .rwk__btn {
-  /* QC item 7: workshop buttons centred (Loom 2:51) */
+  /* lined up with the text above it (user, Oct 31) */
   display: block;
   width: fit-content;
-  margin: 34px auto 0;
+  margin: 34px 0 0;
   background: #f3e6f6;
   color: #4b1240;
   border: 2px solid #5d1b4e;
@@ -147,8 +178,10 @@
     width: 150px;
     height: 150px;
   }
+  /* room under the stamp: on tablets the text column runs taller than
+     the mockup and starts at the top, right below the stamp */
   .rwk__light {
-    padding: 64px 36px 72px;
+    padding: 104px 36px 72px;
   }
 }
 
@@ -180,6 +213,14 @@
   }
   .rwk__light {
     padding: 68px 22px 48px;
+  }
+  .rwk__invite {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+  .rwk__mock {
+    width: min(250px, 72%);
+    margin: 0 auto;
   }
   .rwk__btn {
     margin-top: 26px;

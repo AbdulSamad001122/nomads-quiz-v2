@@ -48,17 +48,32 @@ export default function WorkshopInvite({ tokens }) {
         />
       </div>
       <div className="rwk__light">
+        {/* workshop page mockup on the left, the invite and its button on
+            the right, the button lined up with the text (user, Oct 31) */}
         <div className="rwk__invite">
-          <p className="rwk__p rwk__p--dark">
-            {c.grabBefore}{' '}
-            <br />
-            {c.grabMid1} {tokens.current_rpv} {c.grabMid2}{' '}
-            <br />
-            {tokens.goal_rpv} {c.grabAfter}
-          </p>
-          <a className="rwk__btn" href={CTA.workshop.href} target="_blank" rel="noopener" onClick={() => ga.ctaClick('watch_workshop')}>
-            {c.button}
+          <a
+            className="rwk__mock"
+            href={CTA.workshop.href}
+            target="_blank"
+            rel="noopener"
+            tabIndex={-1}
+            aria-hidden="true"
+            onClick={() => ga.ctaClick('watch_workshop')}
+          >
+            <img src="/assets/results-workshop-tablet.webp" alt="" width="860" height="1319" loading="lazy" />
           </a>
+          <div className="rwk__invite-text">
+            <p className="rwk__p rwk__p--dark">
+              {c.grabBefore}{' '}
+              <br />
+              {c.grabMid1} {tokens.current_rpv} {c.grabMid2}{' '}
+              <br />
+              {tokens.goal_rpv} {c.grabAfter}
+            </p>
+            <a className="rwk__btn" href={CTA.workshop.href} target="_blank" rel="noopener" onClick={() => ga.ctaClick('watch_workshop')}>
+              {c.button}
+            </a>
+          </div>
         </div>
       </div>
     </section>
