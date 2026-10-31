@@ -250,9 +250,10 @@ export const RED_METRICS = {
 export const RED_METRICS_CALL = {
   headlinePlain: 'Already know you want a second set of',
   headlineAccent: 'expert eyes on your business?',
-  body: 'Pick a day and time, and bring your Revenue Per Visitor (RPV) number to the C-RPV Game Plan Call with me.',
-  // keeps "C-RPV" from breaking at its hyphen
-  noBreak: 'C-RPV',
+  // abbreviations written out + bigger text (Alefiya, Slack Oct 31)
+  body: 'Pick a day and time, and bring your Revenue Per Visitor number to the Compounding Revenue Per Visitor™ Game Plan Call with me.',
+  noBreak: 'Game Plan Call',
+  bigBody: true,
 };
 
 /**

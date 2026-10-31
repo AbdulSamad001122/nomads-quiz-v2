@@ -477,10 +477,17 @@
   text-wrap: pretty;
 }
 
+/* the goal RPV, big and green like the hero's goal card (Alefiya, Slack
+   Oct 31); a deeper green than the hero's, which is set on dark navy and
+   would wash out on this white card */
 .rmw__answer .rmw__val--goal {
-  padding: 0 7px;
-  background: #e4c8bc;
-  color: #5d1b4e;
+  padding: 0 10px;
+  border: 2px solid #6fd6a0;
+  border-radius: 8px;
+  background: rgba(54, 176, 110, 0.14);
+  color: #1f7a48;
+  font-size: 1.4em;
+  line-height: 1.2;
   white-space: nowrap;
 }
 
