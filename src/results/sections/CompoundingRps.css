@@ -801,7 +801,8 @@
 }
 
 .rcs__cw-text {
-  background: #f7f1e6;
+  /* the GolfBays section's lined paper (user, Oct 31) */
+  background: #f7f3e8 url('/assets/results-paper-texture.webp') center / cover;
   padding: 80px clamp(24px, 4vw, 64px);
   display: flex;
   align-items: center;
