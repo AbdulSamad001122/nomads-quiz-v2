@@ -77,21 +77,30 @@
 
 /* ——— white half ——— */
 
+/* top padding clears the "See What's Working" stamp, which hangs 94px
+   into this half, so the navy card starts below it; 48px sides keep the
+   card clear of the keyline frame (inset 36px) at 1101-1180px widths */
 .rwk__light {
   position: relative;
-  padding: 76px 40px 92px;
+  padding: 128px 48px 92px;
 }
 
 /* workshop page mockup on the left, the invite + button on the right
    (user, Oct 31); stacked on phones */
 .rwk__invite {
-  max-width: 1080px;
+  max-width: 1100px;
   margin: 0 auto;
   text-align: left;
   display: grid;
   grid-template-columns: clamp(220px, 32%, 350px) minmax(0, 1fr);
   gap: clamp(36px, 5.5vw, 80px);
   align-items: center;
+  /* the mockup, text and button sit on one navy card on the white
+     section, rounded like row 4's "Two paths" card, no shadow, up to
+     1100px wide (user, Oct 31) */
+  background: #0f1c2a;
+  border-radius: 20px;
+  padding: clamp(24px, 4vw, 52px);
 }
 
 .rwk__mock,
@@ -121,7 +130,7 @@
 
 .rwk__p--dark {
   margin-top: 0;
-  color: #2f2a2a;
+  color: #ffffff;
 }
 
 .rwk__btn {
@@ -212,7 +221,7 @@
     height: 112px;
   }
   .rwk__light {
-    padding: 68px 22px 48px;
+    padding: 88px 22px 48px;
   }
   .rwk__invite {
     grid-template-columns: minmax(0, 1fr);

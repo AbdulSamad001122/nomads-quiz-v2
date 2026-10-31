@@ -12,6 +12,20 @@ const brJoin = (lines) =>
     </span>
   ));
 
+// on the narrower navy card "hands-on" broke after its hyphen and "RPV ™"
+// left its ™ at the start of a line: each stays on one line, words unchanged
+const HOLD = ['hands-on', 'RPV ™'];
+const holdTogether = (text) =>
+  text.split(/(hands-on|RPV ™)/).map((part, i) =>
+    HOLD.includes(part) ? (
+      <span key={i} className="results-nowrap">
+        {part}
+      </span>
+    ) : (
+      part
+    ),
+  );
+
 /**
  * Section — "Because… revenue rarely scales…" → workshop invite (copy doc
  * rows 2–3, between "Here's what it took us…" and the game-plan CTA).
@@ -66,7 +80,7 @@ export default function WorkshopInvite({ tokens }) {
             <p className="rwk__p rwk__p--dark">
               {c.grabBefore}{' '}
               <br />
-              {c.grabMid1} {tokens.current_rpv} {c.grabMid2}{' '}
+              {holdTogether(c.grabMid1)} {tokens.current_rpv} {c.grabMid2}{' '}
               <br />
               {tokens.goal_rpv} {c.grabAfter}
             </p>

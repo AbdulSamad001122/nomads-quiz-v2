@@ -154,9 +154,9 @@ body .results-page .rtc__headline {
 
 /* Workshop section's "Grab a pen and paper…" line: a bold headline like
    row 2's "Answer all 10 questions…" (user, Oct 30), right of the workshop
-   mockup (user, Oct 31) */
+   mockup, white on the navy card (user, Oct 31) */
 body .results-page .rwk__invite {
-  max-width: 1080px;
+  max-width: 1100px;
 }
 
 body .results-page .rwk__p--dark {
@@ -165,7 +165,7 @@ body .results-page .rwk__p--dark {
   font-size: 24px;
   line-height: 1.38;
   letter-spacing: -0.005em;
-  color: #250f1c;
+  color: #ffffff;
   text-wrap: pretty;
 }
 

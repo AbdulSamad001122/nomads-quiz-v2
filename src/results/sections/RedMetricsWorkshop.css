@@ -463,12 +463,18 @@
 /* workshop page mockup on the left, the sentence + button on the right
    (user, Oct 31); stacked on phones */
 .rmw__light-inner {
-  max-width: 1080px;
+  max-width: 1100px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: clamp(220px, 32%, 350px) minmax(0, 1fr);
   gap: clamp(36px, 5.5vw, 80px);
   align-items: center;
+  /* the mockup, text and button sit on one navy card on the white
+     section, rounded like row 4's "Two paths" card, no shadow, up to
+     1100px wide (user, Oct 31) */
+  background: #0f1c2a;
+  border-radius: 20px;
+  padding: clamp(24px, 4vw, 52px);
 }
 
 .rmw__mock,
@@ -504,19 +510,18 @@
   font-size: clamp(21px, 2.4vw, 28px);
   line-height: 1.38;
   letter-spacing: -0.005em;
-  color: #250f1c;
+  color: #ffffff;
   text-wrap: pretty;
 }
 
 /* the goal RPV, big and green like the hero's goal card (Alefiya, Slack
-   Oct 31); a deeper green than the hero's, which is set on dark navy and
-   would wash out on this white card */
+   Oct 31) — the hero's own green, now that it sits on navy too */
 .rmw__answer .rmw__val--goal {
   padding: 0 10px;
   border: 2px solid #6fd6a0;
   border-radius: 8px;
   background: rgba(54, 176, 110, 0.14);
-  color: #1f7a48;
+  color: #72e2a7;
   font-size: 1.4em;
   line-height: 1.2;
   white-space: nowrap;
@@ -538,6 +543,12 @@
    loads later and kept this button left-aligned */
 .rmw__light .rmw__btn {
   display: block;
+}
+
+/* the sitewide plum focus ring (button.css) all but vanishes on the navy
+   card: white there instead (review, Oct 31) */
+.rmw__light .rmw__btn:focus-visible {
+  outline-color: #ffffff;
 }
 
 .rmw__thumb {
