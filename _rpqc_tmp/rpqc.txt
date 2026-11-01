@@ -1,0 +1,88 @@
+⟨LINK→https://rpv-landing-page-v3.vercel.app/diagnostic-results#⟩[https://rpv-landing-page-v3.vercel.app/diagnostic-results#] 
+⟨LINK→https://diagnostic.nomadsmarketing.co/diagnostic-start-now?results⟩[https://diagnostic.nomadsmarketing.co/diagnostic-start-now?results] 
+Feedback 
+Status 
+### 1.⟦C0▶⟦C1▶ ⟦C2▶⟦C3▶Reimagine the Hero Section◀C0⟧◀C1⟧◀C2⟧◀C3⟧
+Rework the hero using our existing brand colours and visual style.
+Make the Before vs. After Revenue per Visitor comparison the focal point of the hero.
+Clearly show the starting RPV and the improved RPV so the revenue outcome is immediately obvious.
+Make the five metrics and their before-and-after states easy to understand at a glance.
+Visually reinforce that the goal is to optimise all five metrics until they turn green.
+Ensure the entire hero fits comfortably on screen, with balanced spacing, sizing, and alignment.
+### 2. Make the Revenue Outcome More Prominent
+Make the RPV numbers larger and more visually striking.
+Clearly communicate the transformation from the current Revenue per Visitor to the improved Revenue per Visitor.
+Use colour contrast, typography, and visual hierarchy to make the difference between the two numbers immediately noticeable.
+Make it obvious that fixing the red metric is what improves the overall RPV.
+### 3. Clarify the Red Metric Explanation
+Make the statement “Your Red Metric Is What's Keeping Your Revenue Per Visitor at 0.5 to 4.92” easier to understand and more prominent.
+Clearly connect the underperforming red metric to the current RPV and the potential improvement.
+Use a simple visual hierarchy so users can immediately identify:
+Which metric is underperforming.
+How it is affecting their Revenue per Visitor.
+What the improved outcome could look like.
+### 4. Improve the Five-Metric Colour System
+Make the red and green states visually distinct and consistent.
+Ensure the “Your New Goal: All of These Are Green” section clearly shows all five metrics in green.
+Keep the before-and-after sections visually balanced, with consistent sizing, spacing, and alignment.
+Make sure the green states communicate the desired outcome without creating confusion between the current performance and the goal.
+### 5.⟦C4▶ Make the “About Your Ad Budget” Section Clearer◀C4⟧
+Rework this section so the data is much easier to scan and understand.
+Make the key numbers, comparisons, and takeaways stand out visually.
+Improve the hierarchy between the data, supporting explanations, and the main takeaway.
+Avoid making users work to understand what the numbers mean or why they matter.
+### 6. Ensure All 10 Questions Section is Bold headline
+Keep all 10 questions section sufficiently large and legible.
+Ensure the question text is easy to read without feeling cramped or requiring unnecessary effort.
+Maintain consistent typography, spacing, and layout throughout the questions.
+### 7. Add the “Watch the Workshop” Button (Middle indent it)
+Position the “Watch the Workshop” button between the relevant sections so users can easily find it.
+Make the button prominent enough to stand out without disrupting the overall page design.
+Ensure the placement feels intentional within the user's journey through the page.
+### 8. Create a Separate Workshop Page
+The workshop should not be embedded in or displayed directly on the results page.
+Create a dedicated “Watch the Workshop” page.
+Link the button to this separate page.
+Please clarify why the dedicated workshop page has not been added yet and ensure it is included in the implementation.
+### Find the reason behind your red metrics - redesigned: ⟨LINK→https://claude.ai/artifact/GZDzJ11EusdVN92Xbt1tdW⟩[https://claude.ai/artifact/GZDzJ11EusdVN92Xbt1tdW] 
+### For data nerds section - reimagined - ⟨LINK→https://claude.ai/artifact/PTu8wWDkTry98AD7HnTqhN⟩[https://claude.ai/artifact/PTu8wWDkTry98AD7HnTqhN] 
+### Here’s a dozen marketing teams section redesigned: ⟨LINK→https://claude.ai/artifact/BSa72jhgaGTVAVM2vBsE15⟩[https://claude.ai/artifact/BSa72jhgaGTVAVM2vBsE15] The individual designs can still be more on brand, but I'm really happy with how this is all coming, especially the UX and the interconnectivity. We've not broken down one idea into seven different sections where I can't see how it's all part of one narrative. Now this is all very clearly part of one narrative.
+### ⟦C5▶You can stop at $1.5M. or push all 5 metrics to their max.◀C5⟧
+### By increasing your Revenue Per
+### Visitor™ from $0.75→$4.92
+### ⟦C6▶⟦C7▶You could add $1.5M/year ($125K/mo)◀C6⟧◀C7⟧
+### Without adding a penny to your current marketing and ad spend.
+### And nope, you don’t need to max out all 5 metrics to get there.
+### GolfBays generated £97,000+ ($131K USD) in just 20 days
+### after launching their Conversion Quiz Ecosystem
+### GolfBays generated £97,000+ ($131K USD) in just 20 days after launching their Conversion Quiz Ecosystem™ — without increasing traffic. They also increased demo conversions by 15.25X using the same traffic they already had.
+### Golfbays &lt;pls design this the way we design case study cards - it is currently blurring with the rest of the beige background 
+### The revenue per subscriber part feels really fragmented, and I cannot see how it all connects to each other. I would want it to be redesigned like this (all copy is approved): ⟨LINK→https://claude.ai/artifact/WxUGxjkB3AQUmTuaQhN267⟩[https://claude.ai/artifact/WxUGxjkB3AQUmTuaQhN267] 
+### ⟦C8▶⟦C9▶[IMAGE: image1.png]◀C8⟧◀C9⟧
+### Here’s why I recommend section reimagined (even reflect the copy changes pls) : ⟨LINK→https://claude.ai/artifact/RqrqKgUnjpnnbGetg6cJyk⟩[https://claude.ai/artifact/RqrqKgUnjpnnbGetg6cJyk] 
+### Keep pillar 1 toggle open + when the second pillar is opened, pillar 1 closes, and so on. Let’s make sure to add both CTAs under each pillar 
+CTAs 
+Watch the hands-on workshop with your team 
+Book your Next $125k/mo Game-Plan Call 
+### Match the navigation button + all buttons of the pageAll workshop cta has to be lighter / book a call shall be big bold briggggghhhtttt!!
+
+===== COMMENTS =====
+[C8] Alefiya Khorakiwala: Please swap this image with an incomplete diagnostic, which they have to fill and they have to score. They can see that it's incomplete, and they want to score themselves across this. This is so overwhelming that it literally gives them no idea about what this is. / Yes, show the diagnostic. Make it like an incomplete, unfillable worksheet type of look, like they are scoring themselves and they are workshopping through that. Please do that.
+[C9] Alefiya Khorakiwala: Obviously, you can do way better, but this is one of the directions, or just break some brainstorming  I did: https://claude.ai/artifact/XXafadGggJ6eQYQFcUQiJk
+[C0] Alefiya Khorakiwala: https://www.loom.com/share/88a31e875ef04242b32e799a3633b178 &lt; @yemi@nomadsmarketing.co pls watch this loom / _Assigned to yemi@nomadsmarketing.co_
+[C1] Yemi Pelumi: Watch the loom as well, @iamabdulsamad2.0@gmail.com / _Reassigned to iamabdulsamad2.0@gmail.com_
+[C2] Alefiya Khorakiwala: https://claude.ai/artifact/XGEerFsQP1ApoWawzPATsR &lt;this is exactly how I want the hero to be / @yemi@nomadsmarketing.co you can add your thoughts / _Assigned to yemi@nomadsmarketing.co_
+[C3] Yemi Pelumi: Designer:  / Remember to update the metrics table copy:  / Out of everyone discovering your business each month, how many take a buying action within the first 14 days?? / And out of every 100 who take that buying action, how many complete it? / Out of everyone discovering your business each month, how many book a call or demo within the first 14 days?  / And out of every 100 who book, how many become paying clients? / @iamabdulsamad2.0@gmail.com / _Reassigned to alefiya@nomadsmarketing.co_
+[C6] Alefiya Khorakiwala: @yemi@nomadsmarketing.co The quiz logic rule is written into the team notes on that page: / The max revenue per visitor is the lower of two numbers: the revenue per visitor with all five metrics at their ceilings, or 12 × current revenue per visitor. / Max added revenue = (max revenue per visitor − current revenue per visitor) × annual visitors. / _Assigned to yemi@nomadsmarketing.co_
+[C7] Alefiya Khorakiwala: https://claude.ai/artifact/2b4txidvwciQEAcdgMHhBG &lt;the new way I want this to be presented- so it shows the whole idea in one go / @yemi@nomadsmarketing.co I've added a new logic rule and skepticsm block, pls check it
+[C5] Alefiya Khorakiwala: make this  bold headline
+[C4] Alefiya Khorakiwala: https://claude.ai/artifact/Bp9L12zoZ8u2kZADhkVyzT &lt;I want the ads section designed like this for more clarityyyy
+
+===== ALL EXTERNAL LINKS =====
+https://claude.ai/artifact/BSa72jhgaGTVAVM2vBsE15
+https://claude.ai/artifact/GZDzJ11EusdVN92Xbt1tdW
+https://claude.ai/artifact/PTu8wWDkTry98AD7HnTqhN
+https://claude.ai/artifact/RqrqKgUnjpnnbGetg6cJyk
+https://claude.ai/artifact/WxUGxjkB3AQUmTuaQhN267
+https://diagnostic.nomadsmarketing.co/diagnostic-start-now?results
+https://rpv-landing-page-v3.vercel.app/diagnostic-results#

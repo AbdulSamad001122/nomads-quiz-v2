@@ -1,0 +1,47 @@
+TITLE: RPV Ad Budget Section
+URL: https://claude.ai/artifact/Bp9L12zoZ8u2kZADhkVyzT
+CONTENT HEIGHT: 1095px
+
+Reviewer tools · click “Edit copy”, then click any text to change it. Saves in this browser.
+Edit copy
+Copy all copy
+Reset
+Concept for the RPV™ results page · “About your ad budget” section · sample numbers from the current page
+ABOUT YOUR AD BUDGET
+What happens when every visitor becomes more profitable?
+
+Same ad spend. Same visitors. Here’s what that spend brings back today, and what it brings back at your RPV™ goal.
+
+Monthly ad spend
+$17,500
+STAYS THE SAME
+Visitors it buys you
+15,000
+STAYS THE SAME
+REVENUE FROM THAT SPEND, EACH MONTH
+Dashed line = your $17,500 ad spend
+Today 0.6× ROAS
+$0.75 per visitor
+$11,300
+You get back less than you spend: about $6,200 short every month.
+At your RPV™ goal 4.2× ROAS
+$4.92 per visitor
+$73,800
+Every $1 of ads brings back about $4.20.
+$0
+$20K
+$40K
+$60K
+$80K
+The only thing that changed is what each visitor is worth on the way through.
+Sitting inside spend you’ve already committed to:
++$62,500
+more a month
+Call it $750,000 a year
+$73,800 − $11,300 = $62,500
+Watch the workshop →
+Design notes for the team
+Spend and visitors stay the same, so they sit up top as two chips instead of repeating in both table columns.
+Revenue is drawn as two bars on one scale, with a dashed line marking the $17,500 ad spend. Today’s $11,300 stops short of the line; the goal’s $73,800 clears it four times over.
+ROAS (0.6× and 4.2×) sits as a small label next to each bar instead of its own row.
+The +$62,500 card shows its working ($73,800 − $11,300) and ends with a “Watch the workshop” button that links to the separate workshop page.

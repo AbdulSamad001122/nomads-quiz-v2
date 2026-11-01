@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Result page QC — open questions (29 Oct 2026)</title>
+<style>
+  :root {
+    --navy: #152638; --plum: #5d1b4e; --cream: #f7f3e8; --ink: #1d1d1f; --mute: #5f6670;
+    --crit: #b3261e; --crit-bg: #fdecea; --quick: #1e6b3f; --quick-bg: #e3f4ea; --line: #e2ddd2;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: var(--ink); background: var(--cream); }
+  header { background: var(--navy); color: #fff; padding: 28px 20px 22px; }
+  .wrap { max-width: 1000px; margin: 0 auto; }
+  h1 { margin: 0 0 6px; font-size: 26px; }
+  header p { margin: 4px 0; color: #d7dee6; font-size: 14.5px; line-height: 1.5; }
+  .counts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+  .pill { border-radius: 999px; padding: 6px 12px; font-weight: 700; font-size: 13px; }
+  .pill--crit { background: var(--crit-bg); color: var(--crit); }
+  .pill--quick { background: var(--quick-bg); color: var(--quick); }
+  .bar { position: sticky; top: 0; z-index: 5; background: #fff; border-bottom: 1px solid var(--line); }
+  .bar .wrap { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 10px 20px; }
+  .bar button { font: inherit; font-size: 13.5px; font-weight: 700; border: 2px solid var(--navy); background: #fff; color: var(--navy); padding: 7px 12px; cursor: pointer; }
+  .bar button.on { background: var(--navy); color: #fff; }
+  .bar .sp { flex: 1; }
+  .bar .copy { border-color: var(--plum); background: var(--plum); color: #fff; }
+  .toast { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); background: var(--navy); color: #fff; padding: 10px 16px; font-size: 14px; display: none; z-index: 9; }
+  main { padding: 18px 20px 60px; }
+  h2 { margin: 26px 0 4px; font-size: 21px; }
+  h2 small { font-size: 14px; font-weight: 400; color: var(--mute); }
+  .help { margin: 0 0 12px; color: var(--mute); font-size: 14px; line-height: 1.5; }
+  .card { background: #fff; border: 1px solid var(--line); border-left: 6px solid var(--quick); padding: 16px 18px; margin: 14px 0; }
+  .card--crit { border-left-color: var(--crit); }
+  .top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 6px; }
+  .id { font-weight: 700; font-size: 13px; color: var(--mute); }
+  .tag { font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 4px; background: #eef1f5; color: var(--navy); }
+  .q { margin: 2px 0 8px; font-size: 17px; font-weight: 700; line-height: 1.4; }
+  .row { margin: 5px 0; font-size: 14.5px; line-height: 1.55; }
+  .row b { color: var(--navy); }
+  .pics { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin: 12px 0 4px; }
+  .pics figure { margin: 0; border: 1px solid var(--line); background: #fafafa; }
+  .pics a { display: block; }
+  .pics img { display: block; width: 100%; height: auto; max-height: 420px; object-fit: contain; background: #fff; }
+  .pics figcaption { font-size: 12.5px; color: var(--mute); padding: 6px 8px; line-height: 1.4; }
+  details { margin-top: 30px; background: #fff; border: 1px solid var(--line); padding: 12px 16px; }
+  summary { cursor: pointer; font-weight: 700; color: var(--navy); }
+  details li { font-size: 14px; line-height: 1.5; margin: 4px 0; }
+  .hide { display: none !important; }
+  @media (max-width: 600px) { h1 { font-size: 21px; } .q { font-size: 15.5px; } .card { padding: 12px; } .bar { position: static; } }
+  @media print { .bar, .toast { display: none !important; } .card { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>Result page QC — open questions</h1>
+  <p>Only the questions we really need answered. Wherever exact words were already given (a QC comment, this doc or a design), the page now uses those words.</p>
+  <p>Each question has pictures of the actual section. Click a picture to open it full size. Press <b>Copy questions</b> to paste them into Slack.</p>
+  <div class="counts">
+    <span class="pill pill--crit" id="cntCrit"></span>
+    <span class="pill pill--quick" id="cntQuick"></span>
+  </div>
+</div></header>
+
+<div class="bar"><div class="wrap">
+  <button data-f="all" class="on">All</button>
+  <button data-f="crit">Critical</button>
+  <button data-f="quick">Quick yes / no</button>
+  <span class="sp"></span>
+  <button class="copy" id="copyQ">Copy questions</button>
+</div></div>
+
+<main><div class="wrap">
+  <h2>Critical <small>a real decision, missing info or new words are needed</small></h2>
+  <p class="help">These stop us finishing a section, or affect numbers or claims on the page.</p>
+  <div id="crit"></div>
+
+  <h2 id="quickHead">Quick yes / no <small>we already built a sensible default — just confirm</small></h2>
+  <p class="help" id="quickHelp">Our suggestion is shown under each one.</p>
+  <div id="quick"></div>
+
+  <details>
+    <summary>Already settled (no question needed any more)</summary>
+    <ul>
+      <li>Top-bar buttons, red-metric box buttons, table rows (comment C3 and the design’s words), row 2’s completion card, row 5’s button and row 7’s headline now use the exact words given.</li>
+      <li>The “AT GOAL” label we had added is gone — the design only has RED and CLOSE.</li>
+      <li>Row 5 now shows only the design’s own client card (Video Mastermind); the design’s other two slots were notes, not copy.</li>
+      <li>When rounding made the goal look the same as today, the table now shows one decimal (“3.0% → 3.3%”).</li>
+      <li>All workshop buttons open the workshop video on YouTube for now; they’ll point to the workshop page once it exists.</li>
+      <li>The book-a-call colour is the designer’s call.</li>
+      <li>Phones keep both buttons in the top bar (nobody asked to remove them).</li>
+      <li>Both “Calculate…” buttons open the Compounding RPV™ OS calculator (Loom: “the spreadsheets need to be properly hyperlinked”).</li>
+    <li>People who can’t reach $1.5M keep the $1.5M goal at the top, with one short line under it: “Reaching the full $1.5M will also need more traffic. More on that below.”</li>
+    <li>Row 2’s closing sentence stays as it is for everyone.</li>
+    <li>The quadrant mapping (Quadrant 1 opt-in; Quadrants 2 and 3 buying action and completion; Quadrant 4 revenue per subscriber) is confirmed.</li>
+    <li>GolfBays now says “£96,000+ in just 12 days” on the results page too, the same as the quiz landing page.</li>
+    <li>Item 6 is the “Answer all 10 questions…” sentence: it is now a bold, large headline (same words).</li>
+    <li>Workshop buttons open the workshop page (nomadsmarketing.co/workshop); the videos are off the results page.</li>
+    <li>C2 (metrics past the benchmark ceiling): answered by Yemi; no change to the page.</li>
+    <li>People who can’t reach $1.5M keep the older approved headline and the 3 general revenue-per-subscriber cards.</li>
+    </ul>
+  </details>
+</div></main>
+<div class="toast" id="toast">Copied</div>
+
+<script>
+const IMG = 'question-images/';
+const Q = [
+  // ——— CRITICAL ———
+];
+
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+function card(x) {
+  const pics = x.pics ? `<div class="pics">${x.pics.map(([f, cap]) => `<figure><a href="${IMG}${f}" target="_blank" rel="noopener"><img src="${IMG}${f}" alt="${esc(cap)}" loading="lazy"></a><figcaption>${esc(cap)}</figcaption></figure>`).join('')}</div>` : '';
+  return `<div class="card card--${x.cat}" data-cat="${x.cat}" data-id="${x.id}">
+    <div class="top"><span class="id">${x.id}</span><span class="tag">${esc(x.sec)}</span></div>
+    <p class="q">${esc(x.q)}</p>
+    ${x.today ? `<p class="row"><b>Today:</b> ${esc(x.today)}</p>` : ''}
+    ${x.why ? `<p class="row"><b>Why it matters:</b> ${esc(x.why)}</p>` : ''}
+    ${x.suggest ? `<p class="row"><b>Our suggestion:</b> ${esc(x.suggest)}</p>` : ''}${pics}</div>`;
+}
+document.getElementById('crit').innerHTML = Q.filter((x) => x.cat === 'crit').map(card).join('');
+document.getElementById('quick').innerHTML = Q.filter((x) => x.cat === 'quick').map(card).join('');
+document.getElementById('cntCrit').textContent = `${Q.filter((x) => x.cat === 'crit').length} critical`;
+const nQuick = Q.filter((x) => x.cat === 'quick').length;
+document.getElementById('cntQuick').textContent = `${nQuick} quick yes / no`;
+if (!nQuick) ['cntQuick', 'quickHead', 'quickHelp', 'quick'].forEach((id) => (document.getElementById(id).style.display = 'none'));
+if (!nQuick) document.querySelector('.bar [data-f="quick"]').style.display = 'none';
+document.querySelectorAll('.bar [data-f]').forEach((b) => b.addEventListener('click', () => {
+  const f = b.dataset.f;
+  document.querySelectorAll('.bar [data-f]').forEach((x) => x.classList.toggle('on', x === b));
+  document.querySelectorAll('.card').forEach((el) => el.classList.toggle('hide', f !== 'all' && el.dataset.cat !== f));
+}));
+function toast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.style.display = 'block'; setTimeout(() => (t.style.display = 'none'), 1800); }
+document.getElementById('copyQ').addEventListener('click', async () => {
+  const lines = ['Result page QC — questions we need answered before we finish these sections:', ''];
+  Q.filter((x) => x.cat === 'crit').forEach((x) => { lines.push(`${x.id} (${x.sec}) — ${x.q}`); if (x.today) lines.push(`   Today: ${x.today}`); if (x.suggest) lines.push(`   Our suggestion: ${x.suggest}`); lines.push(''); });
+  if (Q.some((x) => x.cat === 'quick')) lines.push('Quick yes/no (our suggestion in brackets):');
+  Q.filter((x) => x.cat === 'quick').forEach((x) => lines.push(`${x.id} ${x.q} [${x.suggest}]`));
+  const text = lines.join('\n');
+  try { await navigator.clipboard.writeText(text); } catch (e) { const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); }
+  toast('Questions copied');
+});
+</script>
+</body>
+</html>

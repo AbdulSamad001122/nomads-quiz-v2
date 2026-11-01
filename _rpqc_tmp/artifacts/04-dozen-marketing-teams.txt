@@ -1,0 +1,90 @@
+TITLE: See How It Shows Up V2
+URL: https://claude.ai/artifact/BSa72jhgaGTVAVM2vBsE15
+CONTENT HEIGHT: 2540px
+
+Reviewer tools · click “Edit copy”, then click any text to change it. Saves in this browser.
+Edit copy
+Copy all copy
+Reset
+Concept for the RPV™ results page · Version 2 · “See How It Shows Up” with tappable steps and context lines · visuals from the live page
+See How It Shows Up ↓
+Here are variations of the same problem a dozen marketing teams scaling 7-figure businesses to 8 figures have shared with me
+
+Growth feels fuzzy when you keep doing more, without getting smarter about each visitor.
+
+01
+Perhaps you can relate?
+02
+What they have in common
+03
+Where most teams stop
+04
+It’s not just the site
+PERHAPS YOU CAN RELATE?
+01
+
+Four different businesses. The same fuzzy feeling.
+
+CLINIC
+7-figure Concierge Medical Clinic Owner
+We’re growing, but growth is fuzzy.
+Things are working, but I don’t fully know why, and I don’t trust that they’ll keep working if I push harder.
+AGENCY
+B2B Content Agency owner
+We don’t know who’s serious until the call.
+ECOM
+CMO@ Sports Ecommerce store in the UK
+The majority of leads aren’t relevant.
+People show interest but don’t convert.
+SAAS
+Founder of a Cold Email SaaS
+Lowest quality but highest volume is from paid ads.
+We don’t trust what’s converting. The calls we book, sales is explaining basics.
+← Back
+1 / 4
+Next →
+↓
+So what if you could earn more from each visitor by meeting them where they are in their buying journey?
+
+Hook the non-buyers onto your email list, and compound revenue from traffic you’re already paying for.
+
+BECAUSE HERE’S WHAT USUALLY HAPPENS INSTEAD.
+
+Revenue gets inconsistent, and the response is to throw
+
+More money at acquisition,
+More pressure on the sales team,
+More content into the void,
+More random experiments at the wall,
+
+hoping something finally moves the needle.
+
+BUT COMPOUNDING BUSINESSES DON’T DO MORE RANDOM MARKETING.
+
+They scale because they know
+
+which specific actions move revenue,
+where buyers lose certainty, and
+how to build a system where each new visitor becomes more valuable over time instead of disappearing after one interaction.
+
+That’s the real goal of the Compounding Revenue per Visitor™ OS.
+Not another funnel duct-taped onto an already chaotic customer journey.
+
+TWO PATHS
+
+It’s the difference between guessing and a team that can look at the numbers and say:
+
+“Let’s double down on testing top-of-funnel hooks for our opt-in page because if we increase email opt-in rate by 20%, it adds $357,000 this quarter.”
+
+So there’s a fork here.
+
+A
+Keep spending more to reach more people.
+Or
+B
+Earn more from the people already finding you, using the four pillars you just walked through.
+Design notes for the team (version 2)
+Tap to switch: the four steps at the top are buttons. Tapping one swaps the card underneath; Back and Next do the same. Only one card shows at a time.
+Four steps instead of five: “Where most teams stop” and “What the audit shows” are now one card: the correlation → “That’s where most teams stop.” → the audit and the three sites.
+Context between the slides: one line under the headline and one purple line at the top of each card carry the thread: growth feels fuzzy because teams keep doing more without getting smarter about each visitor. These lines are new copy, so edit freely.
+Everything else (copy, colours, visuals, the aha section and the two paths) is the same as version 1.

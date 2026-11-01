@@ -1,0 +1,50 @@
+TITLE: Data Nerds Calculator Peek
+URL: https://claude.ai/artifact/PTu8wWDkTry98AD7HnTqhN
+CONTENT HEIGHT: 1241px
+
+Reviewer tools · click “Edit copy”, then click any text to change it. Saves in this browser.
+Edit copy
+Copy all copy
+Reset
+Concept for the RPV™ results page · “For the data nerds” with a sneak peek of the calculator · example numbers
+FOR THE DATA NERDS
+This diagnostic can’t peek inside your Google Analytics, CRM, ad dashboards, or other data sources.
+
+So if you want to go deeper and nerd out, grab your numbers to see your Revenue Per Visitor™ by channel and find which channels are most profitable.
+
+Paid
+Organic
+Referral
+Email
+Social
+Whatever you’ve got.
+Compounding Revenue Per Visitor™ OS Calculator
+What would it take to add $1.5M (above last year’s revenue) from your existing marketing and ad spend?
+Channel group
+Email
+Specific channel
+Newsletter
+Visitors
+6,000
+Revenue from this channel
+$18,000
+Add this channel
+YOUR CHANNEL LEDGER · LAST 30 DAYS
+CHANNEL	MEASURED	REVENUE	CURRENT RPV	RPV FOR +$125K/MONTH
+Paid · Meta ads	15,000	$11,300	$0.75	$4.92
+Organic · LinkedIn	40,000	$24,000	$0.60	$3.70
+Email · Newsletter	6,000	$18,000	$3.00	$8.40
+▲ MOST PROFITABLE
+Email · Newsletter
+$3.00 per visitor
+▼ LEAST PROFITABLE
+Organic · LinkedIn
+$0.60 per visitor
+Sneak peek with example numbers.
+See how much I make per visitor from each channel →
+Design notes for the team
+Same copy, with a sneak peek. The section keeps its copy. Next to it, a looping preview of the real calculator types in a channel, clicks “Add this channel”, and drops it into the channel ledger with its Revenue Per Visitor™.
+Tied to the $1.5M promise: the preview opens on the calculator’s own question, “What would it take to add $1.5M…”, and the last column, “RPV for +$125K/month”, stays blurred and locked, so the answer is the reason to click.
+The payoff: a “Most profitable” and “Least profitable” pair sits under the ledger from the very first second (it never hides while the preview loops), and those rows tint green and red. The button sits centred below, in Stone.
+Field and column names follow the live calculator (“Visitors” is shortened from its visitor field). The channels and numbers are examples; the blurred values are placeholders, not the calculator’s maths.
+Brand colours: Midnight Blue section, Ice Blue accents, Stone button, lightest Stone window bar. Green and red only on the most/least profitable callouts.
