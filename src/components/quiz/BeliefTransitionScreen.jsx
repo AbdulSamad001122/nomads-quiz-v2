@@ -46,14 +46,16 @@ export default function BeliefTransitionScreen({ theme, onBack, onContinue }) {
           <button type="button" className="belief__back" onClick={onBack}>
             <span aria-hidden="true">&#8249;</span> Back
           </button>
-          <h1 className="belief__headline">
+          {/* Quiz QC Oct 31 (doc row 3, Loom 6:34): updated copy; highlight on
+              "bag $1.5M", middle part normal size (user, Nov 2). Wraps naturally;
+              a no-break space keeps each em dash on the line before it. */}
+          <h1 className="belief__headline belief__headline--long">
             <span className="belief__script">Okay,</span>
-            {" let's get real about what"}
-            <br />
-            {' it actually takes to '}
+            {" let's get real about what it actually takes to "}
             <HighlightSweep tone={sweepToneFor(theme.name)}>
-              hit 60 sales
+              bag $1.5M
             </HighlightSweep>
+            {' — on top of your existing yearly revenue — with your current monthly marketing and ad spend.'}
           </h1>
 
           <div className="belief__cta-wrap">
