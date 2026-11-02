@@ -419,6 +419,51 @@
   flex-shrink: 0;
 }
 
+/* Q6 (Quiz QC Oct 31, Loom 13:12): a small picture between the number and
+   the text, in a white circle like the Q13 icons, drawn in the screen's dark
+   colour (like the Q3 / Q13 icons, which use their screen's colour). It sits
+   a little closer to the number than the text does. */
+.option-card__lead {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(32px, 2.4vw, 46px);
+  height: clamp(32px, 2.4vw, 46px);
+  margin-left: calc(8px - clamp(12px, 1.1vw, 20px));
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid var(--t-option-selected-bg);
+}
+
+.option-card__lead-img {
+  width: 80%;
+  height: 80%;
+  background: var(--t-option-selected-bg);
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+/* smallest phones (under 360px): Q6 cards carry a number AND an icon, so
+   the spacing tightens to give the text room (one line for most answers) */
+@media (max-width: 359px) {
+  .quiz-q-q6 .option-card {
+    gap: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .quiz-q-q6 .option-card__lead {
+    width: 28px;
+    height: 28px;
+    margin-left: -2px;
+  }
+}
+
 /* Selected state — dark fill, white text; number badge blends into
    the fill (matches reference), radio becomes solid */
 .option-card.is-selected {
