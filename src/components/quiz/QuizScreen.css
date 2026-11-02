@@ -999,6 +999,55 @@
   }
 }
 
+/* Q4 on phones: all 4 tiles fit one screen without scrolling (Quiz QC Oct 31,
+   Alefiya's Loom 2:56) — two per row like desktop, with a smaller circle,
+   badge, label and padding. Labels still wrap naturally. */
+@media (max-width: 569.98px) {
+  .quiz-q-q4 .answer-panel {
+    padding-top: 16px;
+  }
+
+  .quiz-q-q4 .answer-panel__options--media {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .quiz-q-q4 .media-option__number {
+    top: 7px;
+    right: 7px;
+    width: 26px;
+    height: 26px;
+    font-size: 12px;
+  }
+
+  .quiz-q-q4 .media-option__body {
+    gap: 7px;
+    padding: 12px 10px 10px;
+  }
+
+  .quiz-q-q4 .media-option__circle {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* .media-option in the selector so it also beats the later mobile
+     ".media-option--long .media-option__label" rule */
+  .quiz-q-q4 .media-option .media-option__label {
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  .quiz-q-q4 .media-option__footer {
+    padding: 5px 9px;
+  }
+
+  .quiz-q-q4 .media-option__radio {
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
+  }
+}
+
 /* ============================================================
    Flow additions — subline, manual entry, continue/skip, textarea
    ============================================================ */
