@@ -4,17 +4,19 @@ const load = () => import('./cards/calc/index.js');
 prefetchCard(load);
 
 /**
- * Calculator intro — after the Q5 case studies, before Q6. Yemi's
+ * Calculator intro — after Q7A (moved from after the Q5 case studies, Quiz QC
+ * Oct 31). Yemi's
  * "Calculator Intro (after Q5 case studies)" HTML (Slack, Oct 20), run as
  * designed inside the card host; see cards/calc/index.js for what changed
- * for the quiz. `track` is the taker's path ('slg' | 'plg').
+ * for the quiz. `track` is the taker's path ('slg' | 'plg'); `upNext` is the
+ * wording of the question that comes next for this taker (Q7B or Q8).
  */
-export default function CalculatorIntroCard({ track, onBack, onContinue }) {
+export default function CalculatorIntroCard({ track, upNext, onBack, onContinue }) {
   return (
     <CardHost
       load={load}
       label="Revenue Per Visitor Calculator"
-      data={{ track }}
+      data={{ track, upNext }}
       onBack={onBack}
       onContinue={onContinue}
     />

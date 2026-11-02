@@ -19,6 +19,10 @@ if (!html) {
 } else {
   const ref = JSON.parse(html.match(/<script type="application\/json" id="card-copy"[^>]*>([\s\S]*?)<\/script>/)[1]);
   const copy = JSON.parse(readFileSync(new URL('./copy.json', import.meta.url), 'utf8'));
+  // Quiz QC Oct 31 (Yemi, Nov 2): the card moved after Q7A, so its
+  // "Next question:" line follows. The quiz fills in the real next question
+  // (Q7B or Q8); copy.json keeps Q8's, the one most takers see.
+  ref.up_next = 'Next question: Out of everyone discovering your business each month, how many are becoming new email subscribers?';
   assert.deepStrictEqual(copy, ref, 'copy.json differs from the HTML card');
   console.log('calc: copy identical to the HTML card ✓');
 }
