@@ -1,4 +1,5 @@
-/* Calculator intro card (after the Q5 case studies, before Q6).
+/* Calculator intro card (after Q7A; it sat after the Q5 case studies until
+   the Quiz QC of Oct 31).
    The card's own script from "Calculator Intro (after Q5 case studies).html",
    ported for the quiz:
    - preview chrome (grey bar, stand-in header) and copy editing removed;
@@ -12,7 +13,9 @@
      it fades (user rule, Oct 22: no empty band above the chart);
    - quiz additions: a Back control at the top; the button hugs its text
      with the arrow after the last word (user rule) and moves the quiz on
-     (the card's "nomads:card-complete"). */
+     (the card's "nomads:card-complete");
+   - the "Next question:" line names the question the quiz shows next for
+     this taker (data.upNext: Q7B or Q8), since the card moved after Q7A. */
 import COPY_JSON from './copy.json';
 import ASSETS from './assets.js';
 import css from './card.css?inline';
@@ -25,6 +28,9 @@ export function mount({ host, root, app, data, back, complete }) {
 
   var CARD = "q6-calculator-intro";
   var COPY = COPY_JSON;
+  if (data && data.upNext) {
+    COPY = Object.assign({}, COPY_JSON, { up_next: COPY_JSON.up_next.split(": ")[0] + ": " + data.upNext });
+  }
   var A = ASSETS;
     var RM = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var editing = false;
@@ -159,7 +165,9 @@ export function mount({ host, root, app, data, back, complete }) {
           '<div class="ex">'+E("ex")+'</div>'+
         '</div></div>'+
         '<p class="body">'+E("body",1)+'</p>'+
-        '<div class="cbox"><div class="promise"><strong>'+E("pr_v")+'</strong><span>'+E("pr")+'</span></div></div>'+
+        /* Quiz QC Oct 31 (doc row 4, Loom 11:20-13:10; user, Nov 2): three lines, the middle one
+           big, bold and plum like the old "$1.5M" */
+        '<div class="cbox"><div class="promise promise--3"><span>'+E("pr_1")+'</span><strong>'+E("pr_v")+'</strong><span>'+E("pr_2")+'</span></div></div>'+
         go_()+
       '</div></main>';
     bind();

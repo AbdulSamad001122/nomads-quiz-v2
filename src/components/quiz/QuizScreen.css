@@ -419,6 +419,51 @@
   flex-shrink: 0;
 }
 
+/* Q6 (Quiz QC Oct 31, Loom 13:12): a small picture between the number and
+   the text, in a white circle like the Q13 icons, drawn in the screen's dark
+   colour (like the Q3 / Q13 icons, which use their screen's colour). It sits
+   a little closer to the number than the text does. */
+.option-card__lead {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(32px, 2.4vw, 46px);
+  height: clamp(32px, 2.4vw, 46px);
+  margin-left: calc(8px - clamp(12px, 1.1vw, 20px));
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid var(--t-option-selected-bg);
+}
+
+.option-card__lead-img {
+  width: 80%;
+  height: 80%;
+  background: var(--t-option-selected-bg);
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+/* smallest phones (under 360px): Q6 cards carry a number AND an icon, so
+   the spacing tightens to give the text room (one line for most answers) */
+@media (max-width: 359px) {
+  .quiz-q-q6 .option-card {
+    gap: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .quiz-q-q6 .option-card__lead {
+    width: 28px;
+    height: 28px;
+    margin-left: -2px;
+  }
+}
+
 /* Selected state — dark fill, white text; number badge blends into
    the fill (matches reference), radio becomes solid */
 .option-card.is-selected {
@@ -805,9 +850,14 @@
     display: none;
   }
 
+  /* Quiz QC Oct 31 (user, Nov 2): every question headline uses ONE phone
+     size — the same as the email screen headline and the slide cards
+     (25px at 375px wide, growing to 36px) — with tighter lines. Before,
+     questions shrank to 23–24px on 420–600px screens while every other
+     screen grew, so they looked smaller than the rest. */
   .question-panel__question {
-    font-size: clamp(24px, 4.6vw, 34px);
-    line-height: 1.45;
+    font-size: clamp(25px, 6.6vw, 36px);
+    line-height: 1.3;
   }
 
   /* Badge sits on the horizontal seam between stacked panels,
@@ -957,20 +1007,6 @@
   }
 }
 
-/* Between 420–460px the question headline steps down to 23px */
-@media (max-width: 460px) and (min-width: 420px) {
-  .question-panel__question {
-    font-size: 23px;
-  }
-}
-
-/* Below 420px the question headline steps down to 25px */
-@media (max-width: 419.98px) {
-  .question-panel__question {
-    font-size: 25px;
-  }
-}
-
 /* Below 650px the yes/no options block hugs its content */
 @media (max-width: 649.98px) {
   .answer-panel__options--binary {
@@ -992,10 +1028,163 @@
   }
 }
 
+/* Q3 on phones: all 8 tiles on one screen (Quiz QC Oct 31, Alefiya's Loom
+   2:26–2:56 "I don't want this to be scrolling … all in one screen"; user,
+   Nov 2: normal phones fit, very small phones may scroll a little). Two per
+   row, the icon beside the text, the number in the slim dark strip, less
+   padding. Desktop and tablet keep the big tiles. */
+@media (max-width: 569.98px) {
+  .quiz-q-q3 .answer-panel {
+    padding-top: 8px;
+    padding-bottom: 4px;
+    min-height: 0; /* hug the cards; the grid row still fills taller screens */
+  }
+
+  .quiz-q-q3 .question-panel__body {
+    padding-bottom: 8px;
+  }
+
+  .quiz-q-q3 .answer-panel .answer-panel__options--media {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    padding: 6px 0 0;
+  }
+
+  .quiz-q-q3 .answer-panel .media-option {
+    border-radius: 10px;
+  }
+
+  .quiz-q-q3 .answer-panel .media-option__body,
+  .quiz-q-q3 .answer-panel .media-option--nomedia .media-option__body {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 7px;
+    min-height: 0;
+    padding: 6px 8px;
+    text-align: left;
+  }
+
+  .quiz-q-q3 .answer-panel .media-option__circle {
+    width: 30px;
+    height: 30px;
+  }
+
+  .quiz-q-q3 .answer-panel .media-option .media-option__label {
+    font-weight: 500;
+    font-size: 13.5px;
+    line-height: 1.25;
+  }
+
+  .quiz-q-q3 .answer-panel .media-option .media-option__sub {
+    font-size: 11px;
+    line-height: 1.3;
+    margin-top: 2px;
+  }
+
+  /* number moves from the top-right corner into the dark strip, bottom-left */
+  .quiz-q-q3 .answer-panel .media-option__number {
+    top: auto;
+    right: auto;
+    bottom: 3px;
+    left: 9px;
+    width: auto;
+    height: auto;
+    background: none;
+    color: #ffffff;
+    font-size: 12px;
+  }
+
+  .quiz-q-q3 .answer-panel .media-option__footer {
+    padding: 3px 8px;
+  }
+
+  .quiz-q-q3 .answer-panel .media-option__radio {
+    width: 14px;
+    height: 14px;
+    border-width: 2px;
+  }
+}
+
+/* Q3 on narrow phones (under 375px wide, e.g. 360x740 Android): slightly
+   smaller text and icon so the labels wrap less and all 8 cards stay on screen */
+@media (max-width: 374.98px) {
+  .quiz-q-q3 .answer-panel .media-option .media-option__label {
+    font-size: 12.5px;
+  }
+
+  .quiz-q-q3 .answer-panel .media-option .media-option__sub {
+    font-size: 10.5px;
+  }
+
+  .quiz-q-q3 .answer-panel .media-option__circle {
+    width: 26px;
+    height: 26px;
+  }
+
+  .quiz-q-q3 .answer-panel .media-option__body,
+  .quiz-q-q3 .answer-panel .media-option--nomedia .media-option__body {
+    gap: 5px;
+    padding: 5px 6px;
+  }
+}
+
 /* Below 570px the icon/gif tiles stack vertically (one per row) */
 @media (max-width: 569.98px) {
   .answer-panel__options--media {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Q4 on phones: all 4 tiles fit one screen without scrolling (Quiz QC Oct 31,
+   Alefiya's Loom 2:56) — two per row like desktop, with a smaller circle,
+   badge, label and padding. Labels still wrap naturally. */
+@media (max-width: 569.98px) {
+  .quiz-q-q4 .answer-panel {
+    padding-top: 10px;
+    min-height: 0; /* hug the 4 cards; the grid row still fills taller screens */
+  }
+
+  .quiz-q-q4 .answer-panel__options--media {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    /* less empty space above/below the cards, so 360x740 phones fit too */
+    padding: 8px 0 6px;
+  }
+
+  .quiz-q-q4 .media-option__number {
+    top: 7px;
+    right: 7px;
+    width: 26px;
+    height: 26px;
+    font-size: 12px;
+  }
+
+  .quiz-q-q4 .media-option__body {
+    gap: 7px;
+    padding: 10px 10px 8px;
+  }
+
+  .quiz-q-q4 .media-option__circle {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* .media-option in the selector so it also beats the later mobile
+     ".media-option--long .media-option__label" rule */
+  .quiz-q-q4 .media-option .media-option__label {
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  .quiz-q-q4 .media-option__footer {
+    padding: 5px 9px;
+  }
+
+  .quiz-q-q4 .media-option__radio {
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
   }
 }
 
@@ -1013,6 +1202,14 @@
   color: var(--t-question-text);
   opacity: 0.82;
   max-width: 52ch;
+}
+
+/* Phones/tablets: the small line under a question is the same size as the
+   email screen's (Quiz QC, Nov 2) */
+@media (max-width: 900px), (max-width: 1160px) and (orientation: portrait) {
+  .question-panel__subline {
+    font-size: clamp(14px, 3.6vw, 18px);
+  }
 }
 
 /* Long option lists (Q3, Q6…): no inner scrollbox — the screen grows with
@@ -1179,6 +1376,11 @@
   font-size: clamp(14px, 1.1vw, 20px);
 }
 
+/* Q12 key words in bold (Quiz QC Oct 31; user, Nov 2: "highlight" = bold) */
+.option-card__strong {
+  font-weight: 800;
+}
+
 /* ============================================================
    Mobile: uniform option labels — everything weight 500 at one
    size, so there's no bold/light mix regardless of line count
@@ -1207,4 +1409,64 @@
    twice on the question screens. Alefiya review 2026-09-17. */
 .progress {
   display: none;
+}
+
+/* Quiz QC Oct 31 (Alefiya's Loom 13:54–14:08: she highlighted Q7A's
+   "(Website visits, social media reach…)" — "this is not visible"; user,
+   Nov 2: make it bigger): the small line under every question is bigger
+   and clearer — 16–20px on computers, 15–18px on phones, nearly full white. */
+.question-panel__subline {
+  font-size: clamp(16px, 1.25vw, 20px);
+  opacity: 0.95;
+}
+
+@media (max-width: 900px), (max-width: 1160px) and (orientation: portrait) {
+  .question-panel__subline {
+    font-size: clamp(15px, 4vw, 18px);
+  }
+}
+
+/* ============================================================
+   Q13 (Quiz QC Oct 31 — Alefiya's Loom 19:40–20:19; user, Nov 2):
+   compact full-width rows like Q12 instead of picture tiles, bigger
+   text, a small icon on the right of the text, and the key words
+   marked in yellow so they stand out on the pink.
+   ============================================================ */
+.quiz-q-q13 .option-card {
+  width: 100%;
+}
+
+.quiz-q-q13 .option-card__label,
+.quiz-q-q13 .option-card--long .option-card__label {
+  flex: 1;
+  font-weight: 500;
+  font-size: clamp(16.5px, 1.3vw, 22px);
+  line-height: 1.4;
+}
+
+.option-card__mark {
+  background: #ffe15a;
+  color: #1d1d1f;
+  font-weight: 700;
+  padding: 0.05em 0.2em;
+  border-radius: 3px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.option-card__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(32px, 2.4vw, 42px);
+  height: clamp(32px, 2.4vw, 42px);
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid var(--t-option-selected-bg);
+}
+
+.option-card__icon img {
+  width: 58%;
+  height: auto;
 }

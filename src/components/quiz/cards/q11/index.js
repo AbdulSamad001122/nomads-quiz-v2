@@ -198,14 +198,30 @@ export function mount({ host, root, app, data, back, complete }) {
 
   /* ---------- view 1: each department's number ticks in ---------- */
   var RM = window.matchMedia("(prefers-reduced-motion: reduce)").matches, roomsT = [], roomsIO = null;
+  /* Quiz QC Oct 31 (Alefiya's Loom 16:02 "make this interactive where it's layering on
+     top of each other"; user, Nov 2): the department cards start piled on the first one
+     like a deck, then deal down into their places one by one as their numbers tick in. */
+  function stackRooms(){
+    var rs = $$(".rm"); if (!rs.length) return;
+    var t0 = rs[0].offsetTop, n = rs.length;
+    rs.forEach(function(r,i){
+      if (r.classList.contains("done")) return;
+      r.style.zIndex = String(n - i);   /* the first card stays on top of the pile */
+      if (i === 0) return;
+      r.style.transform = "translateY(" + (t0 - r.offsetTop + i*7) + "px) scale(" + (1 - i*0.035).toFixed(3) + ")";
+      r.classList.add("stacked");
+    });
+  }
+  function dealRoom(r){ r.classList.remove("stacked"); r.style.transform = ""; r.classList.add("done"); }
   function playRooms(){
     var rs = $$(".rm"); roomsT.forEach(clearTimeout); roomsT = [];
-    if (RM || editing){ rs.forEach(function(r){ r.classList.add("done"); }); return; }
-    rs.forEach(function(r,i){ roomsT.push(S.timeout(function(){ r.classList.add("done"); }, 300 + i*420)); });
+    if (RM || editing){ rs.forEach(dealRoom); return; }
+    rs.forEach(function(r,i){ roomsT.push(S.timeout(function(){ dealRoom(r); }, 300 + i*420)); });
   }
   function watchRooms(){
     var rb = $("#roomsbox"); if (!rb) return;
     if (roomsIO) roomsIO.disconnect();
+    if (!(RM || editing)) stackRooms();
     if (RM || editing || !("IntersectionObserver" in window)){ playRooms(); return; }
     roomsIO = S.track(new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting && e.intersectionRatio > .4){ roomsIO.disconnect(); playRooms(); } }); }, {root: stage(), threshold:[0,.4,1]}));
     roomsIO.observe(rb);

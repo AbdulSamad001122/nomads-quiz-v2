@@ -6,6 +6,29 @@ import ProgressBar from './ProgressBar.jsx';
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
 
+/* Quiz QC Oct 31 (Alefiya's Loom 16:51–17:45; user, Nov 2: "highlight" = bold):
+   an option's `bold` words render bold inside its label. Cached, so the label
+   element keeps its identity between renders (OptionCard re-measures on change). */
+const BOLD_LABELS = new Map();
+function boldLabel(label, bold) {
+  if (!bold) return label;
+  const key = `${label}|${bold}`;
+  if (!BOLD_LABELS.has(key)) {
+    const at = label.indexOf(bold);
+    BOLD_LABELS.set(
+      key,
+      at < 0 ? label : (
+        <>
+          {label.slice(0, at)}
+          <strong className="option-card__strong">{bold}</strong>
+          {label.slice(at + bold.length)}
+        </>
+      ),
+    );
+  }
+  return BOLD_LABELS.get(key);
+}
+
 const MANUAL_PLACEHOLDER = {
   number: 'Type the exact number — e.g. 12500',
   currency: 'Type the exact amount — e.g. 7500',
@@ -97,10 +120,13 @@ export default function AnswerPanel({
               number={
                 badges === 'letters' ? LETTERS[i] : String(i + 1).padStart(2, '0')
               }
+              icon={opt.icon}
               heading={opt.heading}
-              label={opt.label}
+              label={boldLabel(opt.label, opt.bold)}
               desc={opt.desc}
               sub={opt.sub}
+              mark={opt.mark}
+              media={opt.media}
               selected={isSelected(opt.id)}
               onSelect={() => onSelect(opt.id)}
             />

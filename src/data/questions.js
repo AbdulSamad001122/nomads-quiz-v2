@@ -232,17 +232,19 @@ export const QUESTIONS = [
     multi: true,
     question: 'Where does most of your traffic or audience come from today?',
     subline: '(Select all that apply)',
+    // Quiz QC Oct 31 (Loom 13:12–13:46): each answer gets its icon, between
+    // the number and the text (hand-drawn set from the user's Canva board).
     options: [
-      { id: 'linkedin', label: 'LinkedIn content' },
-      { id: 'social', label: 'Instagram / TikTok / social media' },
-      { id: 'seo', label: 'SEO / Google search' },
-      { id: 'paid-ads', label: 'Paid ads' },
-      { id: 'youtube', label: 'YouTube' },
-      { id: 'referrals', label: 'Referrals / word of mouth' },
-      { id: 'email', label: 'Email marketing' },
-      { id: 'influencers', label: 'Influencer partnerships' },
-      { id: 'communities', label: 'Communities / forums' },
-      { id: 'affiliates', label: 'Partnerships or affiliates' },
+      { id: 'linkedin', label: 'LinkedIn content', icon: '/assets/q6-linkedin.webp' },
+      { id: 'social', label: 'Instagram / TikTok / social media', icon: '/assets/q6-social.webp' },
+      { id: 'seo', label: 'SEO / Google search', icon: '/assets/q6-seo.webp' },
+      { id: 'paid-ads', label: 'Paid ads', icon: '/assets/q6-paid-ads.webp' },
+      { id: 'youtube', label: 'YouTube', icon: '/assets/q6-youtube.webp' },
+      { id: 'referrals', label: 'Referrals / word of mouth', icon: '/assets/q6-referrals.webp' },
+      { id: 'email', label: 'Email marketing', icon: '/assets/q6-email.webp' },
+      { id: 'influencers', label: 'Influencer partnerships', icon: '/assets/q6-influencers.webp' },
+      { id: 'communities', label: 'Communities / forums', icon: '/assets/q6-communities.webp' },
+      { id: 'affiliates', label: 'Partnerships or affiliates', icon: '/assets/q6-affiliates.webp' },
     ],
   },
   {
@@ -401,7 +403,7 @@ export const QUESTIONS = [
     manualType: 'percent',
     question: {
       plg: 'And out of every 100 who take that buying action, how many buy?',
-      slg: 'And out of every 100 who book, how many become paying clients?',
+      slg: 'And out of every 10 who book, how many become paying clients?',
     },
     options: [
       { id: 'under-10', label: 'Under 10%' },
@@ -488,21 +490,24 @@ export const QUESTIONS = [
     stepNumber: '12',
     label: 'Your current puzzle',
     theme: 'blue',
+    // Quiz QC Oct 31 (Loom 16:51–17:45; user, Nov 2): key words in bold
     variant: 'list',
     question: 'What’s your (and your team’s) biggest challenge right now?',
     options: {
       plg: [
-        { id: 'a', label: 'We’re getting visitors, but not enough buyers' },
+        { id: 'a', label: 'We’re getting visitors, but not enough buyers', bold: 'not enough buyers' },
         {
           id: 'b',
           label:
             'We’re spending heavily on marketing and ads, but revenue has plateaued',
+          bold: 'revenue has plateaued',
         },
-        { id: 'c', label: 'Sales are unpredictable month to month' },
+        { id: 'c', label: 'Sales are unpredictable month to month', bold: 'Sales are unpredictable' },
         {
           id: 'd',
           label:
             'We’re losing customers to cheaper competitors (even though we’re far better)',
+          bold: 'losing customers to cheaper competitors',
         },
       ],
       slg: [
@@ -510,22 +515,26 @@ export const QUESTIONS = [
           id: 'a',
           label:
             "Honestly, the quality of who's landing on our calls — we’re attracting tire kickers and doubtful buyers who need extreme convincing on calls.",
+          bold: 'attracting tire kickers and doubtful buyers',
         },
         {
           id: 'b',
           label:
             'We’re spending heavily on marketing and ads, but revenue has plateaued',
+          bold: 'revenue has plateaued',
         },
-        { id: 'c', label: 'We have a pipeline, but sales are inconsistent' },
+        { id: 'c', label: 'We have a pipeline, but sales are inconsistent', bold: 'sales are inconsistent' },
         {
           id: 'd',
           label:
             "We're getting visibility, but we can't tell which channels are actually driving revenue.",
+          bold: "can't tell which channels are actually driving revenue",
         },
         {
           id: 'e',
           label:
             'We’re losing to price wars! We’re seeing more deals go to competitors.',
+          bold: 'We’re seeing more deals go to competitors',
         },
       ],
     },
@@ -535,7 +544,9 @@ export const QUESTIONS = [
     stepNumber: '13',
     label: 'What you tried',
     theme: 'maroon',
-    variant: 'media',
+    // Quiz QC Oct 31 (Alefiya's Loom 19:40–20:19; user, Nov 2): full-width rows
+    // like Q12, bigger text, a small icon on the right, key words marked.
+    variant: 'list',
     multi: true,
     otherEntry: true,
     question: 'What have you already tried to improve your revenue?',
@@ -545,35 +556,41 @@ export const QUESTIONS = [
         id: 'paid-ads',
         label:
           "We've increased our paid ad spend and experimented with new acquisition channels",
+        mark: 'increased our paid ad spend',
         media: '/assets/q13-megaphone.svg',
       },
       {
         id: 'organic',
         label:
           "We've been investing in organic channels like SEO, content, and social",
+        mark: 'investing in organic channels like SEO, content, and social',
         media: '/assets/q13-hashtag.svg',
       },
       {
         id: 'lead-magnets',
         label:
           "We've created lead magnets (webinars, ebooks, whitepapers) to capture and nurture traffic",
+        mark: 'created lead magnets',
         media: '/assets/q13-magnet.svg',
       },
       {
         id: 'email-marketing',
         label:
           "We've been building out email marketing to engage leads and turn them into customers",
+        mark: 'building out email marketing',
         media: '/assets/q13-envelope.svg',
       },
       {
         id: 'funnel',
         label:
           "We've been optimising our funnel (website, landing pages, conversion flows)",
+        mark: 'optimising our funnel',
         media: '/assets/q13-funnel.svg',
       },
       {
         id: 'messaging',
         label: "We've worked on refining our messaging and positioning",
+        mark: 'refining our messaging and positioning',
         media: '/assets/q13-diamond.svg',
       },
       {

@@ -3,15 +3,20 @@
    ported for the quiz:
    - preview chrome (grey bar, stand-in header) and copy editing removed;
    - the track (slg / plg) comes from the quiz (data.track) instead of the
-     window.NOMADS_TRACK global; the page switcher and the Venn's tap-to-
-     highlight wiring stay inside the card instead of window.goPart /
-     window.onBind globals;
+     window.NOMADS_TRACK global; the Venn's tap-to-highlight wiring stays
+     inside the card instead of a window.onBind global (the card's page
+     switcher, window.goPart, went with its two pages — see below);
    - lookups run inside the card's shadow root; every window listener and
      timer stops when the screen closes;
-   - quiz additions: a Back control at the top; both buttons hug their text
+   - quiz additions: a Back control at the top; the button hugs its text
      with the arrow after the last word (user rule); the CTA moves the quiz
      on (the card's "nomads:card-complete"). The "nomads:card-part" event
-     had no listener and is dropped. */
+     had no listener and is dropped;
+   - Quiz QC Oct 31 (Alefiya's "Constraint Slide Price" artifact; Yemi,
+     Nov 2: both paths): one page instead of two tabbed pages — Step 1 and
+     Step 2 follow each other under big green step headings; the
+     "25% -> 95%" box and the "So how do I find what makes me different?"
+     button are gone; "Maximise" spelling. */
 import COPY_JSON from './copy.json';
 import ASSETS from './assets.js';
 import css from './card.css?inline';
@@ -137,9 +142,6 @@ export function mount({ host, root, app, data, back, complete }) {
     });
   }
 
-  var part = 0, seen2 = false;
-  function tile(p, n, k){ return '<button class="tile'+(p===part?' on':'')+'" type="button" data-go="'+p+'" data-n="'+n+'"><span class="n">'+n+'</span><b>'+esc(COPY[k])+'</b></button>'; }
-  var TARR = '<span class="tarr" aria-hidden="true"><svg viewBox="0 0 24 22"><path d="M2 12c6-3 12-3 18-.5"/><path d="M15 6.5l5.5 5-6 4"/></svg></span>';
   /* Venn: three dark circles, each labelled inside (as on 5C) */
   function vlab(x, y, t){
     var w = String(t).split(" "), lines = w.length > 1 ? [w.slice(0, Math.ceil(w.length/2)).join(" "), w.slice(Math.ceil(w.length/2)).join(" ")] : [t];
@@ -166,10 +168,9 @@ export function mount({ host, root, app, data, back, complete }) {
         lead()+
         '<h1><span class="soft">'+E("h1_soft")+'</span> '+E("h1",1)+'</h1>'+
         '<div class="cbox"><div class="fix"><span class="fix-k">'+E("fix_k")+'</span><p class="fix-h">'+E("fix_p",1)+'</p></div></div>'+
-        '<nav class="tiles'+(seen2?' seen':'')+'" aria-label="Two pages">'+tile(0,1,"s1_kick")+TARR+tile(1,2,"s2_kick")+'</nav>'+
-        /* PAGE 1 */
-        '<section class="part" data-part="0" aria-label="Page 1 of 2"'+(part===0?'':' hidden')+'>'+
-          '<div class="stephead"><span class="num">1</span>'+E("s1_kick")+'</div>'+
+        /* STEP 1 */
+        '<section class="step" aria-label="Step 1">'+
+          '<h2 class="stephead"><span class="num">1</span>'+E("s1_kick")+'</h2>'+
           '<p class="sub2">'+E("s1_h1",1)+'</p>'+
           '<p class="para">'+E("s1_body")+'</p>'+
           '<div class="paper"><div class="mk-row">'+
@@ -181,13 +182,11 @@ export function mount({ host, root, app, data, back, complete }) {
               '<span class="lbl" style="left:86%;top:4%;color:var(--p-brown)">'+E("lbl_email1")+'<br>'+E("lbl_email2")+'</span>'+
               '<span class="lbl" style="left:22%;top:88%;color:var(--p-green)">'+E("lbl_pos")+'</span>'+
               '<span class="lbl" style="left:50%;top:37%;color:#152638">'+E("lbl_us")+'</span></div><small class="now">'+E("m_now_call")+'</small></div>'+
-          '</div>'+
-          '<div class="win"><b>'+E("win_v")+'</b><span>'+E("win_s")+'</span></div></div>'+
-          '<div class="go"><button class="cta next" type="button" data-act="next">'+ctaLabel(COPY.next1)+'</button></div>'+
+          '</div></div>'+
         '</section>'+
-        /* PAGE 2 */
-        '<section class="part" data-part="1" aria-label="Page 2 of 2"'+(part===1?'':' hidden')+'>'+
-          '<div class="stephead"><span class="num">2</span>'+E("s2_kick")+'</div>'+
+        /* STEP 2 */
+        '<section class="step" aria-label="Step 2">'+
+          '<h2 class="stephead"><span class="num">2</span>'+E("s2_kick")+'</h2>'+
           '<p class="sub2">'+E("s2_h1",1)+'</p>'+
           '<p class="para">'+E("s2_body")+'</p>'+
           '<div class="paper"><div class="vwrap" id="vw">'+
@@ -196,24 +195,13 @@ export function mount({ host, root, app, data, back, complete }) {
             VENN()+
             '<div class="blurb mid" data-z="proc" style="--c:var(--purple)"><b>'+E("b_proc_t")+'</b><span>'+E("b_proc")+'</span></div>'+
           '</div></div>'+
-          '<p class="ice-note">'+E("iceberg")+'</p>'+
-          lensMap("quad", [2])+
-          go_()+
         '</section>'+
+        '<p class="ice-note">'+E("iceberg")+'</p>'+
+        lensMap("quad", [2])+
+        go_()+
       '</div></main>';
     bind();
     draw();
-    $$(".tile").forEach(function(t){ t.addEventListener("click", function(){ goPart(+t.getAttribute("data-go")); }); });
-    var nx = $('[data-act="next"]'); if (nx) nx.addEventListener("click", function(){ if (!editing) goPart(1); });
-  }
-  function goPart(p){
-    if (p === part) return;
-    part = p; if (p === 1) seen2 = true;
-    $$(".part").forEach(function(s){ var on = +s.getAttribute("data-part") === p; s.hidden = !on; s.classList.remove("in"); if (on && !RM){ void s.offsetWidth; s.classList.add("in"); } });
-    $$(".tile").forEach(function(t){ t.classList.toggle("on", +t.getAttribute("data-go") === p); });
-    var tl = $(".tiles"); if (tl) tl.classList.toggle("seen", seen2);
-    var st = stage(), tl2 = $(".tiles"); if (st && tl2) st.scrollTop = Math.max(0, tl2.offsetTop - 8);
-    markOneLine();
   }
   var onBind = function(){
     var vw = $("#vw"), cur = null; if (!vw) return;

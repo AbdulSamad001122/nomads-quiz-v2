@@ -38,6 +38,14 @@
   align-self: flex-start;
 }
 
+/* "Revenue Per Visitor™—" stays on one line (Quiz QC Oct 31). Under 360px
+   it is wider than the column, so there it may wrap rather than overflow. */
+@media (min-width: 360px) {
+  .optin__keep {
+    white-space: nowrap;
+  }
+}
+
 .optin__sub {
   margin-top: clamp(14px, 2.4vh, 28px);
   font-family: var(--font-body);
@@ -123,8 +131,9 @@
     display: none;
   }
 
+  /* same phone size as every question headline (Quiz QC, Nov 2) */
   .optin__headline {
-    font-size: clamp(24px, 5.6vw, 32px);
+    font-size: clamp(25px, 6.6vw, 36px);
   }
 
   .optin__sub {

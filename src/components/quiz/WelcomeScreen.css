@@ -1,7 +1,7 @@
 /* ============================================================
    WelcomeScreen — first slide, per the "first quiz page" design
    reference: cream logo bar + dark textured stage, headline with
-   plum sweep + Better Brush "G", CTA, time chip, photo bottom-right.
+   plum sweep + Better Brush "g", CTA, time chip, photo bottom-right.
    ============================================================ */
 
 .welcome-screen {
@@ -44,11 +44,13 @@
   max-width: 60%;
 }
 
-/* Headline — Montserrat EB white. Wraps naturally; the width cap lands it
-   on the reference's three lines (This is where / that expensive /
-   Guessing stops.) without forced breaks. */
+/* Headline — Montserrat EB white. Wraps naturally (no forced breaks);
+   the width cap keeps it to three short lines. */
 .welcome__headline {
   max-width: 10em;
+  /* room for the brush "g" descender — without it the tail reaches the
+     subline on short laptop screens */
+  padding-bottom: 0.3em;
   text-wrap: balance;
   font-family: var(--font-headline);
   font-weight: 800;
@@ -58,7 +60,7 @@
   letter-spacing: 0.005em;
 }
 
-/* Better Brush "G" of "Guessing" — cream, oversized */
+/* Better Brush "g" of "guessing" — cream, oversized */
 .welcome__g {
   font-family: var(--font-number);
   font-weight: 400;
