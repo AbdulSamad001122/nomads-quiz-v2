@@ -1696,16 +1696,36 @@ export const STOP_OR_PUSH = {
     { x: '12×', cap: 'Your ceiling, where our clients have reached' },
   ],
   stairsLabel: 'Growth steps: today 1×, first metric fixed 3×, second 5×, third 8×, ceiling 12×',
-  proofHead: 'We’ve done 12× and more for clients',
-  // Only the design's own client card. Its other two slots are team notes
-  // ("Client result 2 / 3 — Jimmy: pull from the homepage"), not copy, so
-  // nothing is shown for them until Jimmy / Alefiya send the results.
-  proof: [
-    { name: 'Video Mastermind', big: '13.5×', small: '$8,000/month → $108,000/month' },
-  ],
+  // (the "We've done 12× and more for clients" Video Mastermind card is now
+  // its own section: CREATIVE_DELIVERY below, user Nov 2)
 
   // closing line + the workshop button, both exactly as the design (the →
   // is drawn in JSX); link + tracking id from CTA.workshop
   next: 'More on how to max these metrics in the upcoming workshop.',
   button: 'Watch the workshop',
+};
+
+/**
+ * Case study — L · Creative Delivery (user, Nov 2): its own split section
+ * right after the "It is a stretch…" card, replacing the Video Mastermind
+ * proof card there. Copy is the user's reference screenshot, word for word
+ * (curly quotes, "wanna", CREATIVE DELIVERY in caps); `bold` lists the
+ * phrases the reference sets in bold. The big 13.5× closes the right side.
+ */
+export const CREATIVE_DELIVERY = {
+  chip: 'CASE STUDY',
+  head: 'L • Creative Delivery',
+  paras: [
+    'One of our clients positioned their funnel based on their understanding of their audience. They were getting 30,000+ impressions on each post and 300+ comments; they also booked 29 sales calls in 2 weeks, but tanked 27 of them.',
+    'His POV was that videos should be “ungeneric,” which was great, but it didn’t really mean anything to his audience. During the research phase, clients and prospects kept saying, “I wanna be creative.”',
+    'So we crafted the big idea, “CREATIVE DELIVERY,” and positioned him as the professional who turned simple messages into fun and creative videos.',
+    'He closed 29 of the next 31 calls, going from making $8,000 to $108,000/mo.',
+  ],
+  bold: ['“I wanna be creative.”', '29 of the next 31 calls,', '$8,000 to $108,000/mo.'],
+  // reference: "READ FULL CASE STUDY→" (caps as shown; the arrow is drawn
+  // in JSX). The reference gives no URL: Nomads' case studies page for now.
+  button: 'READ FULL CASE STUDY',
+  href: 'https://nomadsmarketing.co/casestudies',
+  big: '13.5×',
+  imageAlt: 'The Lean Video System landing page on a tablet',
 };

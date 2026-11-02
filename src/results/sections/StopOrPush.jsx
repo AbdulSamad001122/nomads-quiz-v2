@@ -272,16 +272,9 @@ export default function StopOrPush({ result, tokens }) {
                 ))}
               </div>
             </div>
-            <p className="rso__proof-head">{c.proofHead}</p>
-            <div className="rso__proof">
-              {c.proof.map((p) => (
-                <div key={p.name} className="rso__pc">
-                  <b>{p.name}</b>
-                  <span>{p.big}</span>
-                  <small>{p.small}</small>
-                </div>
-              ))}
-            </div>
+            {/* the "We've done 12× and more" Video Mastermind card moved
+                out into its own case-study section, CreativeDelivery.jsx
+                (user, Nov 2) */}
           </div>
         )}
 

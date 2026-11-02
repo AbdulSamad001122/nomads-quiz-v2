@@ -644,59 +644,6 @@
   color: var(--rso-rose);
 }
 
-.rso__proof-head {
-  grid-column: 1 / -1;
-  margin: 0;
-  border-top: 1px dashed var(--rso-line);
-  padding-top: 16px;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--rso-mute);
-}
-
-.rso__proof {
-  grid-column: 1 / -1;
-  margin-top: -16px;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.rso__pc {
-  background: #ffffff;
-  border: 1.5px solid var(--rso-line);
-  border-radius: 12px;
-  padding: 12px 14px;
-}
-
-.rso__pc b {
-  display: block;
-  font-family: var(--font-body);
-  font-weight: 800;
-  font-size: 13px;
-}
-
-.rso__pc span {
-  display: block;
-  margin-top: 4px;
-  font-family: var(--rso-black);
-  font-weight: 900;
-  font-size: 20px;
-  color: var(--rso-green);
-}
-
-.rso__pc small {
-  display: block;
-  margin-top: 2px;
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 12px;
-  color: var(--rso-mute);
-}
-
 /* ——— closing note + the shared workshop CTA (washed-out, results.css) ——— */
 
 .rso__next {
@@ -753,12 +700,6 @@
   .rso__real {
     grid-template-columns: minmax(0, 1fr); /* never wider than the card */
     padding: 22px 20px;
-  }
-}
-
-@media (max-width: 700px) {
-  .rso__proof {
-    grid-template-columns: 1fr;
   }
 }
 

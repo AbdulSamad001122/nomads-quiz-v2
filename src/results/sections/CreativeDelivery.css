@@ -1,0 +1,173 @@
+/* Case study — L · Creative Delivery (user, Nov 2): the reference's split
+   layout and colours — navy #152639 left with the tablet, light paper right
+   (the GolfBays paper), navy chip, plum headline, navy body, lilac button
+   with a plum keyline + shadow, big green 13.5× to close. Stacks under
+   860px like the GolfBays / Lara sections. */
+
+.rcd {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+/* ——— left: navy + tablet ——— */
+
+.rcd__media {
+  background: #152639;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 48px;
+}
+
+.rcd__img {
+  display: block;
+  width: min(100%, 680px);
+  height: auto;
+}
+
+/* ——— right: light paper + story ——— */
+
+.rcd__copy {
+  background: #f7f3e8 url('/assets/results-paper-texture.webp') center / cover;
+  display: flex;
+  align-items: center;
+  padding: 80px 72px;
+}
+
+.rcd__copy-inner {
+  max-width: 600px;
+}
+
+.rcd__chip {
+  display: inline-block;
+  background: #152639;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  padding: 6px 12px;
+}
+
+/* size from the shared headline scale (results.css: 38 / 32 / 26) */
+.rcd__head {
+  margin: 14px 0 0;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 38px;
+  line-height: 1.2;
+  color: #5d1b4e;
+}
+
+.rcd__p {
+  margin: 20px 0 0;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #263548;
+}
+
+.rcd__p .results-em {
+  font-weight: 800;
+  color: #122132;
+}
+
+.rcd__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin-top: 30px;
+  background: #f2e6f5;
+  color: #331228;
+  border: 2px solid #5d1b4e;
+  box-shadow: 5px 5px 0 #5d1b4e;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+  padding: 12px 24px;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.rcd__btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 #5d1b4e;
+}
+
+.rcd__btn:active {
+  transform: translate(0, 0);
+  box-shadow: 3px 3px 0 #5d1b4e;
+}
+
+/* the big figure that closes the story, in the page's big-number style
+   (the hero / proof green) */
+.rcd__big {
+  margin: 34px 0 0;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: #2a9a5e;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rcd__btn {
+    transition: none;
+  }
+  .rcd__btn:hover {
+    transform: none;
+  }
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rcd__media {
+    padding: 56px 32px;
+  }
+  .rcd__copy {
+    padding: 64px 44px;
+  }
+}
+
+/* stacked: tablet on top, story below */
+@media (max-width: 860px) {
+  .rcd {
+    grid-template-columns: 1fr;
+  }
+  .rcd__media {
+    padding: 48px 24px;
+  }
+  .rcd__img {
+    width: min(100%, 560px);
+  }
+  .rcd__copy {
+    padding: 48px 24px 56px;
+  }
+  .rcd__copy-inner {
+    max-width: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .rcd__btn {
+    font-size: 16px;
+    padding: 12px 18px;
+  }
+  .rcd__big {
+    font-size: 52px;
+  }
+}
+
+@media (max-width: 400px) {
+  .rcd__copy {
+    padding: 40px 18px 48px;
+  }
+  .rcd__p {
+    font-size: 16px;
+  }
+}
