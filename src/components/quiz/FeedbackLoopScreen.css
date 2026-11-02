@@ -223,8 +223,10 @@
     padding: 35px 0 20px;
   }
 
+  /* same phone size as every other question headline (Quiz QC, Nov 2) */
   .fl__question {
-    font-size: clamp(22px, 5.6vw, 30px);
+    font-size: clamp(25px, 6.6vw, 36px);
+    line-height: 1.3;
     max-width: none;
   }
 
