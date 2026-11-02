@@ -105,11 +105,13 @@ h1 em{font-style:normal;color:var(--clay)}
 
 /* part 1: separate rooms */
 .roomsbox{padding:14px;display:flex;flex-direction:column;gap:12px}
-.rooms{display:flex;flex-direction:column;gap:8px}
-.rm{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center;padding:10px 12px 10px 14px;border-radius:10px;background:#F4F6F9;border:1px solid var(--line);border-left:4px solid var(--c)}
-.rm .n{font:800 14.5px/1.25 var(--display);color:var(--text)}
-.rm .r{grid-column:1;font:500 12.5px/1.35 var(--display);color:var(--quiet)}
-.rm .v{grid-row:1/span 2;grid-column:2;font:700 13px/1.3 var(--display); /* quiz: table values in Montserrat (mono on the card) */color:var(--green);text-align:right;max-width:150px;opacity:0;transform:translateX(6px);transition:opacity .35s, transform .35s}
+/* Quiz QC Oct 31 (Alefiya's Loom 15:44): department rows bigger, bolder and clearer;
+   the result + ✓ never wrap ("135,000 impressions ✓" stays on one line). */
+.rooms{display:flex;flex-direction:column;gap:10px}
+.rm{display:grid;grid-template-columns:1fr auto;gap:3px 14px;align-items:center;padding:12px 14px 12px 16px;border-radius:10px;background:#F4F6F9;border:1px solid var(--line);border-left:5px solid var(--c)}
+.rm .n{font:800 17px/1.25 var(--display);color:var(--text)}
+.rm .r{grid-column:1;font:600 14px/1.4 var(--display);color:var(--quiet)}
+.rm .v{grid-row:1/span 2;grid-column:2;font:800 15px/1.3 var(--display); /* quiz: table values in Montserrat (mono on the card) */color:var(--green);text-align:right;white-space:nowrap;opacity:0;transform:translateX(6px);transition:opacity .35s, transform .35s}
 .rm.done .v{opacity:1;transform:none}
 .others{margin:0;font:500 13px/1.45 var(--display);color:var(--quiet)}
 .revline{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;gap:4px 10px;border-top:1px solid var(--line);padding-top:12px;
@@ -117,7 +119,8 @@ h1 em{font-style:normal;color:var(--clay)}
 .revline .pair{white-space:nowrap;display:inline-flex;align-items:baseline;gap:8px}
 .revline b{font:900 clamp(26px,7vw,32px)/1.1 var(--display);letter-spacing:-.01em;color:var(--red);text-transform:none;font-variant-numeric:tabular-nums}
 .revline .ar{color:var(--red);font:900 24px var(--display)}
-.stuck{margin:0;font:800 16.5px/1.45 var(--display);color:var(--red);text-wrap:balance}
+/* runs the full width of the column — no balanced (early) line breaks (Loom 16:14) */
+.stuck{margin:0;font:800 16.5px/1.45 var(--display);color:var(--red)}
 /* the in-card switch to part 2: dashed and tinted like the callout, never the lilac button style */
 .switch{appearance:none;align-self:flex-start;display:inline-flex;align-items:center;gap:10px;cursor:pointer;
   font:800 15.5px/1.3 var(--display);color:var(--callout);padding:12px 16px;border-radius:12px;
@@ -239,7 +242,6 @@ svg.table{width:100%;max-width:440px;margin:0 auto;display:block;aspect-ratio:30
   .ccard{margin-left:14px}
   .g-row{grid-template-columns:1fr auto;row-gap:6px}
   .g-l{grid-column:1/-1}
-  .rm .v{max-width:118px}
 }
 @media (prefers-reduced-motion:reduce){
   .rv,.mtag{transition:none}
