@@ -1,3 +1,4 @@
+import { cloneElement } from 'react';
 import { CREATIVE_DELIVERY as c } from '../copy.js';
 import { emphasize } from '../emphasize.jsx';
 import './CreativeDelivery.css';
@@ -29,7 +30,9 @@ export default function CreativeDelivery() {
           <h2 className="rcd__head">{c.head}</h2>
           {c.paras.map((p) => (
             <p key={p.slice(0, 24)} className="rcd__p">
-              {emphasize(p, c.bold)}
+              {[].concat(emphasize(p, c.bold)).map((n) =>
+                n?.props?.children === c.figure ? cloneElement(n, { className: 'results-em rcd__fig' }) : n,
+              )}
             </p>
           ))}
           <p className="rcd__big">{c.big}</p>

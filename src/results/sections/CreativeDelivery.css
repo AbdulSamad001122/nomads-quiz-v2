@@ -74,6 +74,12 @@
   color: #122132;
 }
 
+/* "$8,000 to $108,000/mo." bigger (user, Nov 2) */
+.rcd__p .rcd__fig {
+  font-size: 1.35em;
+  line-height: 1.3;
+}
+
 /* the big figure that closes the story, in the page's big-number style
    (the hero / proof green) */
 .rcd__big {
