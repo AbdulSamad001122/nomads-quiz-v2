@@ -535,7 +535,9 @@ export const QUESTIONS = [
     stepNumber: '13',
     label: 'What you tried',
     theme: 'maroon',
-    variant: 'media',
+    // Quiz QC Oct 31 (Alefiya's Loom 19:40–20:19; user, Nov 2): full-width rows
+    // like Q12, bigger text, a small icon on the right, key words marked.
+    variant: 'list',
     multi: true,
     otherEntry: true,
     question: 'What have you already tried to improve your revenue?',
@@ -545,35 +547,41 @@ export const QUESTIONS = [
         id: 'paid-ads',
         label:
           "We've increased our paid ad spend and experimented with new acquisition channels",
+        mark: 'increased our paid ad spend',
         media: '/assets/q13-megaphone.svg',
       },
       {
         id: 'organic',
         label:
           "We've been investing in organic channels like SEO, content, and social",
+        mark: 'investing in organic channels like SEO, content, and social',
         media: '/assets/q13-hashtag.svg',
       },
       {
         id: 'lead-magnets',
         label:
           "We've created lead magnets (webinars, ebooks, whitepapers) to capture and nurture traffic",
+        mark: 'created lead magnets',
         media: '/assets/q13-magnet.svg',
       },
       {
         id: 'email-marketing',
         label:
           "We've been building out email marketing to engage leads and turn them into customers",
+        mark: 'building out email marketing',
         media: '/assets/q13-envelope.svg',
       },
       {
         id: 'funnel',
         label:
           "We've been optimising our funnel (website, landing pages, conversion flows)",
+        mark: 'optimising our funnel',
         media: '/assets/q13-funnel.svg',
       },
       {
         id: 'messaging',
         label: "We've worked on refining our messaging and positioning",
+        mark: 'refining our messaging and positioning',
         media: '/assets/q13-diamond.svg',
       },
       {
