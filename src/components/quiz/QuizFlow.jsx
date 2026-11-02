@@ -72,9 +72,12 @@ const SCREENS = [
   { type: 'question', id: 'q5' },
   { type: 'slide', id: 'transition-belief' },
   { type: 'slide', id: 'case-study' },
-  { type: 'slide', id: 'transition-calculator' },
   { type: 'question', id: 'q6' },
   { type: 'question', id: 'q7a' },
+  // Calculator intro moved here from straight after the case study, so two
+  // teaching slides no longer come back to back (Quiz QC Oct 31, Alefiya's
+  // Loom 9:18; Yemi, Nov 2: "after question 7a").
+  { type: 'slide', id: 'transition-calculator' },
   { type: 'question', id: 'q7b' },
   { type: 'question', id: 'q7c' },
   { type: 'question', id: 'q8' },
@@ -966,9 +969,25 @@ export default function QuizFlow({ restored = null } = {}) {
       );
     }
 
-    case 'transition-calculator':
+    case 'transition-calculator': {
       // Yemi's Calculator Intro card (Oct 20) replaces TransitionCalcScreen.
-      return <CalculatorIntroCard track={path} onBack={back} onContinue={next} />;
+      // Its "Next question:" line names the question this taker really sees
+      // next: Q7B when they picked paid ads at Q6, otherwise Q8.
+      const nextQ = SCREENS.slice(index + 1).find(
+        (s) => s.type === 'question' && screenVisible(s, answers)
+      );
+      const upNext = nextQ
+        ? resolveQuestion(byId[nextQ.id], answers).question
+        : null;
+      return (
+        <CalculatorIntroCard
+          track={path}
+          upNext={upNext}
+          onBack={back}
+          onContinue={next}
+        />
+      );
+    }
 
     case 'loading':
       // Yemi's Loading Screen card (Oct 20): moves on by itself at ~3.5s.
