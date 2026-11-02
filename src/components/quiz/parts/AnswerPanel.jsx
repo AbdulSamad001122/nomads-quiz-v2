@@ -97,6 +97,7 @@ export default function AnswerPanel({
               number={
                 badges === 'letters' ? LETTERS[i] : String(i + 1).padStart(2, '0')
               }
+              icon={opt.icon}
               heading={opt.heading}
               label={opt.label}
               desc={opt.desc}
