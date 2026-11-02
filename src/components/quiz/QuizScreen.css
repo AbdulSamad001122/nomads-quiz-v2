@@ -992,6 +992,7 @@
   .quiz-q-q3 .answer-panel {
     padding-top: 8px;
     padding-bottom: 4px;
+    min-height: 0; /* hug the cards; the grid row still fills taller screens */
   }
 
   .quiz-q-q3 .question-panel__body {
@@ -1057,6 +1058,29 @@
     width: 14px;
     height: 14px;
     border-width: 2px;
+  }
+}
+
+/* Q3 on narrow phones (under 375px wide, e.g. 360x740 Android): slightly
+   smaller text and icon so the labels wrap less and all 8 cards stay on screen */
+@media (max-width: 374.98px) {
+  .quiz-q-q3 .answer-panel .media-option .media-option__label {
+    font-size: 12.5px;
+  }
+
+  .quiz-q-q3 .answer-panel .media-option .media-option__sub {
+    font-size: 10.5px;
+  }
+
+  .quiz-q-q3 .answer-panel .media-option__circle {
+    width: 26px;
+    height: 26px;
+  }
+
+  .quiz-q-q3 .answer-panel .media-option__body,
+  .quiz-q-q3 .answer-panel .media-option--nomedia .media-option__body {
+    gap: 5px;
+    padding: 5px 6px;
   }
 }
 
