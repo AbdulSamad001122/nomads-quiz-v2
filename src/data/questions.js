@@ -401,7 +401,7 @@ export const QUESTIONS = [
     manualType: 'percent',
     question: {
       plg: 'And out of every 100 who take that buying action, how many buy?',
-      slg: 'And out of every 100 who book, how many become paying clients?',
+      slg: 'And out of every 10 who book, how many become paying clients?',
     },
     options: [
       { id: 'under-10', label: 'Under 10%' },
