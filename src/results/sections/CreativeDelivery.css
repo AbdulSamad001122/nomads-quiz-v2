@@ -4,14 +4,14 @@
    13.5× to close (no button, user Nov 2). Stacks under 860px like the
    GolfBays / Lara sections. */
 
-.rcd {
+.rlc {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 }
 
 /* ——— left: navy + tablet ——— */
 
-.rcd__media {
+.rlc__media {
   background: #152639;
   display: flex;
   align-items: center;
@@ -19,7 +19,7 @@
   padding: 80px 48px;
 }
 
-.rcd__img {
+.rlc__img {
   display: block;
   width: min(90%, 680px); /* user, Nov 2 (desktop; stacked layout below 860 keeps its own) */
   height: auto;
@@ -27,18 +27,18 @@
 
 /* ——— right: light paper + story ——— */
 
-.rcd__copy {
+.rlc__copy {
   background: #f7f3e8 url('/assets/results-paper-texture.webp') center / cover;
   display: flex;
   align-items: center;
   padding: 80px 72px;
 }
 
-.rcd__copy-inner {
+.rlc__copy-inner {
   max-width: 600px;
 }
 
-.rcd__chip {
+.rlc__chip {
   display: inline-block;
   background: #152639;
   color: #ffffff;
@@ -51,7 +51,7 @@
 }
 
 /* size from the shared headline scale (results.css: 38 / 32 / 26) */
-.rcd__head {
+.rlc__head {
   margin: 14px 0 0;
   font-family: var(--font-headline);
   font-weight: 800;
@@ -60,7 +60,7 @@
   color: #5d1b4e;
 }
 
-.rcd__p {
+.rlc__p {
   margin: 20px 0 0;
   font-family: var(--font-body);
   font-weight: 500;
@@ -69,20 +69,20 @@
   color: #263548;
 }
 
-.rcd__p .results-em {
+.rlc__p .results-em {
   font-weight: 800;
   color: #122132;
 }
 
 /* "$8,000 to $108,000/mo." bigger (user, Nov 2) */
-.rcd__p .rcd__fig {
+.rlc__p .rlc__fig {
   font-size: 1.35em;
   line-height: 1.3;
 }
 
 /* the big figure that closes the story, in the page's big-number style
    (the hero / proof green) */
-.rcd__big {
+.rlc__big {
   margin: 34px 0 0;
   font-family: var(--font-headline);
   font-weight: 800;
@@ -95,44 +95,44 @@
 /* ——— responsive ——— */
 
 @media (max-width: 1100px) {
-  .rcd__media {
+  .rlc__media {
     padding: 56px 32px;
   }
-  .rcd__copy {
+  .rlc__copy {
     padding: 64px 44px;
   }
 }
 
 /* stacked: tablet on top, story below */
 @media (max-width: 860px) {
-  .rcd {
+  .rlc {
     grid-template-columns: 1fr;
   }
-  .rcd__media {
+  .rlc__media {
     padding: 48px 24px;
   }
-  .rcd__img {
+  .rlc__img {
     width: min(100%, 560px);
   }
-  .rcd__copy {
+  .rlc__copy {
     padding: 48px 24px 56px;
   }
-  .rcd__copy-inner {
+  .rlc__copy-inner {
     max-width: none;
   }
 }
 
 @media (max-width: 560px) {
-  .rcd__big {
+  .rlc__big {
     font-size: 52px;
   }
 }
 
 @media (max-width: 400px) {
-  .rcd__copy {
+  .rlc__copy {
     padding: 40px 18px 48px;
   }
-  .rcd__p {
+  .rlc__p {
     font-size: 16px;
   }
 }

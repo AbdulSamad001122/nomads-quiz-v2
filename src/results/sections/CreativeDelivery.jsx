@@ -12,10 +12,10 @@ import './CreativeDelivery.css';
  */
 export default function CreativeDelivery() {
   return (
-    <section className="rcd">
-      <div className="rcd__media">
+    <section className="rlc">
+      <div className="rlc__media">
         <img
-          className="rcd__img"
+          className="rlc__img"
           src="/assets/results-creative-delivery.avif"
           alt={c.imageAlt}
           width="1167"
@@ -24,18 +24,18 @@ export default function CreativeDelivery() {
         />
       </div>
 
-      <div className="rcd__copy">
-        <div className="rcd__copy-inner">
-          <span className="rcd__chip">{c.chip}</span>
-          <h2 className="rcd__head">{c.head}</h2>
+      <div className="rlc__copy">
+        <div className="rlc__copy-inner">
+          <span className="rlc__chip">{c.chip}</span>
+          <h2 className="rlc__head">{c.head}</h2>
           {c.paras.map((p) => (
-            <p key={p.slice(0, 24)} className="rcd__p">
+            <p key={p.slice(0, 24)} className="rlc__p">
               {[].concat(emphasize(p, c.bold)).map((n) =>
-                n?.props?.children === c.figure ? cloneElement(n, { className: 'results-em rcd__fig' }) : n,
+                n?.props?.children === c.figure ? cloneElement(n, { className: 'results-em rlc__fig' }) : n,
               )}
             </p>
           ))}
-          <p className="rcd__big">{c.big}</p>
+          <p className="rlc__big">{c.big}</p>
         </div>
       </div>
     </section>
