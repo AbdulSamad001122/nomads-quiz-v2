@@ -1256,3 +1256,18 @@
 .progress {
   display: none;
 }
+
+/* Quiz QC Oct 31 (Alefiya's Loom 13:54–14:08: she highlighted Q7A's
+   "(Website visits, social media reach…)" — "this is not visible"; user,
+   Nov 2: make it bigger): the small line under every question is bigger
+   and clearer — 16–20px on computers, 15–18px on phones, nearly full white. */
+.question-panel__subline {
+  font-size: clamp(16px, 1.25vw, 20px);
+  opacity: 0.95;
+}
+
+@media (max-width: 900px), (max-width: 1160px) and (orientation: portrait) {
+  .question-panel__subline {
+    font-size: clamp(15px, 4vw, 18px);
+  }
+}
