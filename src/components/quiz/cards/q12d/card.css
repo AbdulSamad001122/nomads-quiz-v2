@@ -178,8 +178,11 @@ em{font-style:normal}
 .loop .mid{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}
 
 /* ---------- Price ---------- */
-.stephead{display:flex;align-items:center;gap:12px;margin-top:6px;font:800 21px/1.25 var(--display);color:#fff;text-wrap:balance}
-.stephead .num{flex:none;width:40px;height:40px;border-radius:50%;background:var(--clay);color:var(--ink);font:900 20px/40px var(--display);text-align:center}
+/* quiz (Quiz QC Oct 31, Alefiya's artifact): one page — each step opens under a
+   thin rule with a big green heading and a big green number circle */
+.step{display:flex;flex-direction:column;gap:22px;padding-top:28px;border-top:1px solid var(--line)}
+.stephead{display:flex;align-items:center;gap:14px;margin:0;font:800 clamp(22px,5.8vw,26px)/1.22 var(--display);color:var(--green);text-wrap:balance}
+.stephead .num{flex:none;width:46px;height:46px;border-radius:50%;background:var(--green);color:var(--ink);font:900 22px/46px var(--display);text-align:center}
 .sub2{margin:0;font:800 18px/1.4 var(--display);color:#fff;text-wrap:pretty}
 .sub2 em{color:var(--clay)}
 .mk-row{display:grid;grid-template-columns:1fr 22px 1fr;align-items:start;gap:4px}
@@ -201,7 +204,7 @@ em{font-style:normal}
 .venn{width:100%;max-width:300px;margin:0 auto;display:block;aspect-ratio:320/300}
 .venn .z{cursor:pointer;transition:opacity .3s}
 .vwrap.dim .z:not(.hi),.vwrap.dim .blurb:not(.hi){opacity:.3}
-.ice-note{margin:0;font:600 15px/1.5 var(--display);color:#fff;text-align:center}
+.ice-note{margin:0;padding:14px 16px;border:1px dashed rgba(247,239,234,.3);border-radius:12px;font:600 15px/1.5 var(--display);color:#fff;text-align:center}
 
 /* ---------- quadrant map ---------- */
 .quad{display:flex;flex-direction:column;gap:12px;padding-top:6px}
@@ -251,34 +254,9 @@ button:focus-visible{outline:2px solid var(--cream);outline-offset:3px}
 
 /* ---------- PREVIEW ONLY: copy editing (in place, desktop) ---------- */
 
-/* ---------- Price: two pages with raised tiles ---------- */
-.tiles{position:sticky;top:0;z-index:6;display:grid;grid-template-columns:minmax(0,1fr) 22px minmax(0,1fr);gap:4px;align-items:stretch;
-  margin:0 -20px;padding:12px 20px;background:rgba(18,23,38,.92);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-.tile{--td:#5D1B4E;appearance:none;font:inherit;text-align:left;cursor:pointer;display:flex;align-items:center;gap:10px;min-width:0;
-  padding:10px 12px;border-radius:12px;border:2px solid var(--td);background:#fff;color:#152638;box-shadow:4px 4px 0 var(--td);transition:transform .12s, box-shadow .25s}
-.tile[data-n="2"]{--td:#A0563C}
-.tile .n{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font:900 13px/1 var(--display);background:var(--td);color:#fff}
-.tile b{font:800 12.5px/1.25 var(--display)}
-.tile.on{background:var(--td);color:#fff;cursor:default;box-shadow:0 0 0 2px var(--ground),0 0 0 4px var(--td)}
-.tile.on .n{background:#fff;color:var(--td)}
-.tile:not(.on):hover{transform:translate(-1px,-2px);box-shadow:5px 6px 0 var(--td)}
-.tiles:not(.seen) .tile[data-go="1"]:not(.on){animation:tpulse 1.6s ease-in-out infinite}
-@keyframes tpulse{0%,100%{box-shadow:4px 4px 0 var(--td),0 0 0 0 rgba(255,255,255,0)}50%{box-shadow:4px 4px 0 var(--td),0 0 0 6px rgba(255,255,255,.28)}}
-.tarr{align-self:center;color:var(--clay);display:grid;place-items:center}
-.tarr svg{width:20px;height:22px;overflow:visible}
-.tarr path{fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.part{display:flex;flex-direction:column;gap:22px}
-.part[hidden]{display:none}
-.part.in{animation:pin .4s ease-out}
-@keyframes pin{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
-.cta.next{font-size:16.5px}
-.win{display:flex;align-items:center;gap:14px;border:2px solid var(--p-green);border-radius:12px;padding:12px 14px;background:#E9F6EE}
-.win b{font:900 24px var(--display);color:var(--p-green);white-space:nowrap;font-variant-numeric:tabular-nums}
-.win>span{font:600 14px/1.45 var(--display);color:#152638}
-.win b span{font:inherit;color:inherit}
+/* ---------- Price ---------- */
 .venn .vt{font:900 12.5px var(--display);fill:#fff;letter-spacing:.01em}
-@media (min-width:600px){.part{gap:26px}.tile b{font-size:15px}}
-@media (prefers-reduced-motion:reduce){.tiles .tile,.part.in{animation:none!important}}
+@media (min-width:600px){.step{gap:26px;padding-top:34px}}
 
 @media (min-width:1000px){
   .cs-area{margin-top:16px}
@@ -291,14 +269,5 @@ button:focus-visible{outline:2px solid var(--cream);outline-offset:3px}
 
 /* quiz (user rule, Oct 22): on phones every button fits in two lines, the font
    shrinking only as much as the narrowest screens need and growing back with
-   the width: the button 16.5px at 320px, back to 17.5px by ~350px wide; the "next" button 16px at 320px, back to 16.5px by ~340px wide. */
-@media (max-width:599px){.cta:not(.next){font-size:clamp(16.5px, calc(16.5px + (100vw - 330px) * .05), 17.5px)}.cta.next{font-size:clamp(16px, calc(16px + (100vw - 330px) * .05), 16.5px)}}
-
-/* quiz (user rule, Oct 22): on phones a small number beside its text squeezed the
-   text into a narrow column (the two top tiles' titles ran 5-6 lines; the
-   "25% -> 95%" box ~12 lines of one or two words). Under 600px they stack: the
-   number on top, the text below at full width. */
-@media (max-width:599px){
-  .tile{flex-direction:column;align-items:flex-start;gap:6px}
-  .win{flex-direction:column;align-items:flex-start;gap:4px}
-}
+   the width: the button 16.5px at 320px, back to 17.5px by ~350px wide. */
+@media (max-width:599px){.cta{font-size:clamp(16.5px, calc(16.5px + (100vw - 330px) * .05), 17.5px)}}
