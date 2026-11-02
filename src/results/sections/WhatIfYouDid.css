@@ -8,6 +8,14 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 }
 
+/* side by side: the story on the left, the dark image panel on the right
+   (user, Nov 2); stacked phones keep the image on top */
+@media (min-width: 861px) {
+  .rwi__copy {
+    order: -1;
+  }
+}
+
 /* ——— left: dark paper + frame ——— */
 
 .rwi__media {
