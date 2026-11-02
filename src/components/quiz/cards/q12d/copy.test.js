@@ -19,6 +19,14 @@ if (!html) {
 } else {
   const ref = JSON.parse(html.match(/<script type="application\/json" id="card-copy"[^>]*>([\s\S]*?)<\/script>/)[1]);
   const copy = JSON.parse(readFileSync(new URL('./copy.json', import.meta.url), 'utf8'));
+  // Quiz QC Oct 31 (Alefiya's "Constraint Slide Price" artifact; Yemi, Nov 2):
+  // the "25% → 95%" box and the "So how do I find what makes me different?"
+  // button are gone, and "Maximise" is spelt as in the artifact — the
+  // intended differences from the HTML card.
+  delete ref.win_v;
+  delete ref.win_s;
+  delete ref.next1;
+  ref.q1 = ref.q1.replace('Maximize', 'Maximise');
   assert.deepStrictEqual(copy, ref, 'copy.json differs from the HTML card');
   console.log('q12d: copy identical to the HTML card ✓');
 }
