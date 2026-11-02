@@ -123,8 +123,9 @@
     display: none;
   }
 
+  /* same phone size as every question headline (Quiz QC, Nov 2) */
   .optin__headline {
-    font-size: clamp(24px, 5.6vw, 32px);
+    font-size: clamp(25px, 6.6vw, 36px);
   }
 
   .optin__sub {

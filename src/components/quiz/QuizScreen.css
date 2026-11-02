@@ -805,9 +805,14 @@
     display: none;
   }
 
+  /* Quiz QC Oct 31 (user, Nov 2): every question headline uses ONE phone
+     size — the same as the email screen headline and the slide cards
+     (25px at 375px wide, growing to 36px) — with tighter lines. Before,
+     questions shrank to 23–24px on 420–600px screens while every other
+     screen grew, so they looked smaller than the rest. */
   .question-panel__question {
-    font-size: clamp(24px, 4.6vw, 34px);
-    line-height: 1.45;
+    font-size: clamp(25px, 6.6vw, 36px);
+    line-height: 1.3;
   }
 
   /* Badge sits on the horizontal seam between stacked panels,
@@ -957,20 +962,6 @@
   }
 }
 
-/* Between 420–460px the question headline steps down to 23px */
-@media (max-width: 460px) and (min-width: 420px) {
-  .question-panel__question {
-    font-size: 23px;
-  }
-}
-
-/* Below 420px the question headline steps down to 25px */
-@media (max-width: 419.98px) {
-  .question-panel__question {
-    font-size: 25px;
-  }
-}
-
 /* Below 650px the yes/no options block hugs its content */
 @media (max-width: 649.98px) {
   .answer-panel__options--binary {
@@ -1062,6 +1053,14 @@
   color: var(--t-question-text);
   opacity: 0.82;
   max-width: 52ch;
+}
+
+/* Phones/tablets: the small line under a question is the same size as the
+   email screen's (Quiz QC, Nov 2) */
+@media (max-width: 900px), (max-width: 1160px) and (orientation: portrait) {
+  .question-panel__subline {
+    font-size: clamp(14px, 3.6vw, 18px);
+  }
 }
 
 /* Long option lists (Q3, Q6…): no inner scrollbox — the screen grows with
