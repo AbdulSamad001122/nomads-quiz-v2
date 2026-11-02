@@ -78,3 +78,4 @@ Status: waiting for the next messages (1c/1d may continue there).
 - 2 Nov: Creative Delivery '$8,000 to $108,000/mo.' 1.35x bigger (23px desktop / 21.6px phone); 06bda18, both remotes.
 - 2 Nov: Creative Delivery chip = 'WE’VE DONE 12× AND MORE FOR CLIENTS' (mono 500, was 700); bold 30,000+ / 300+ comments; / booked 29 sales calls / tanked 27; 1e966cd, both remotes.
 - 2 Nov: Creative Delivery image width min(90%, 680px) on desktop; 4e29bf7, both remotes.
+- 2 Nov: Creative Delivery classes renamed rcd -> rlc (rcd = David's prefix; shared .rcd rules leaked) 3478a55. FINAL CHECK on the deployed branch preview https://nomads-quiz-git-slack-changes-31-oct-nomads-marketing.vercel.app/?results=fixture : slackall.cjs 57/57 pass at 1440/1024/375 (every Slack change), no page errors.
