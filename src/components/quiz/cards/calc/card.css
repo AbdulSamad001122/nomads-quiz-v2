@@ -387,3 +387,8 @@ button:focus-visible{outline:2px solid var(--cream);outline-offset:3px}
   .row .barw{overflow:visible}
   .row .tag{top:-7px;right:4px;transform:none;font-size:8.5px;line-height:1.3;padding:1px 5px}
 }
+
+/* Quiz QC Oct 31: the promise is three stacked lines at every width — lead-in, the big plum
+   "ADD $1.5M + In annual revenue" (same style as the old "$1.5M"), then the rest */
+.promise.promise--3{flex-direction:column;align-items:flex-start;gap:6px}
+.promise--3 strong{line-height:1.1;text-wrap:balance}
