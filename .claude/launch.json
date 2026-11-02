@@ -38,6 +38,35 @@
       "port": 8765
     },
     {
+      "name": "quiz-qc-preview",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "C:/Users/Abdul Samad/AppData/Local/Temp/wt-qc-preview",
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "5207",
+        "--strictPort"
+      ],
+      "port": 5207
+    },
+    {
+      "name": "quiz-qc-guide",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8766",
+        "--bind",
+        "127.0.0.1",
+        "--directory",
+        "D:/Abdul Samad/Alefiya/Quiz/Quiz Questions and logic"
+      ],
+      "port": 8766
+    },
+    {
       "name": "quiz-fill-together",
       "runtimeExecutable": "npm",
       "runtimeArgs": [
