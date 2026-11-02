@@ -119,11 +119,10 @@ export default function BenchmarkScreen({ isSlg, onBack, onContinue }) {
               {s.myth_lead} <s>{s.myth_struck}</s>
             </div>
             <h1 className="bmc__h1">
-              {s.headline}
-              <span className="bmc__pay">{s.headline_payoff}</span>
+              <Rich text={s.headline} />
             </h1>
             <p className="bmc__context">
-              <Rich text={s.context} />
+              <Rich text={s.context.replace('{x}', f.multipleX)} />
             </p>
           </div>
 
@@ -192,7 +191,9 @@ export default function BenchmarkScreen({ isSlg, onBack, onContinue }) {
                 </span>
               </div>
               <div className="bmc__tot">
-                <span className="bmc__x">{f.multiple}</span>
+                <span className="bmc__x">
+                  {f.multiple} {s.multiple_suffix}
+                </span>
                 <span>
                   {s.year_sentence_a} <span className="bmc__t">{f.totalTypical}</span>{' '}
                   {s.year_sentence_b} <span className="bmc__o">{f.gapYearPlain}</span>{' '}
