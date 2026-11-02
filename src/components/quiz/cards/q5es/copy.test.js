@@ -20,8 +20,12 @@ if (!html) {
   const ref = JSON.parse(html.match(/<script type="application\/json" id="card-copy"[^>]*>([\s\S]*?)<\/script>/)[1]);
   const copy = JSON.parse(readFileSync(new URL('./copy.json', import.meta.url), 'utf8'));
   // Quiz QC Oct 31 (Alefiya's Loom 9:05; user, Nov 2: on all slides): capital
-  // "The" after "Why it worked:" — the one intended difference from the HTML.
+  // "The" after "Why it worked:" — one intended difference from the HTML.
   ref.why = ref.why.charAt(0).toUpperCase() + ref.why.slice(1);
+  // Quiz QC Oct 31 (Alefiya's Loom 8:51; Yemi, Nov 2: on Estelle's slide
+  // only): "quiz takers" -> "Conversion Quiz™ takers".
+  ref.built_1 = ref.built_1.replace('so quiz takers', 'so Conversion Quiz™ takers');
+  ref.r0s = ref.r0s.replace(/^quiz takers/, 'Conversion Quiz™ takers');
   assert.deepStrictEqual(copy, ref, 'copy.json differs from the HTML card');
   console.log('q5es: copy identical to the HTML card ✓');
 }
