@@ -56,7 +56,11 @@ export default function OptinScreen({ theme, onBack, onSubmit, defaultValues = n
                 <HighlightSweep tone={sweepToneFor(theme.name)}>
                   a few questions away
                 </HighlightSweep>
-                {' from your Revenue Per Visitor™, aka how much money you’re making per visitor.'}
+                {/* Quiz QC Oct 31 (Loom 1:29–2:10): em dash, no spaces (user, Nov 2);
+                    "Revenue Per Visitor™—" never splits across two lines */}
+                {' from your '}
+                <span className="optin__keep">Revenue Per Visitor™—</span>
+                {'aka how much money you’re making per visitor.'}
               </p>
               <p className="optin__sub">
                 Add your email, and we&rsquo;ll send your result along with an
