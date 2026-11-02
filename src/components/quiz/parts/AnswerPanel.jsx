@@ -101,6 +101,8 @@ export default function AnswerPanel({
               label={opt.label}
               desc={opt.desc}
               sub={opt.sub}
+              mark={opt.mark}
+              media={opt.media}
               selected={isSelected(opt.id)}
               onSelect={() => onSelect(opt.id)}
             />
