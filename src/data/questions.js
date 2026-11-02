@@ -488,21 +488,24 @@ export const QUESTIONS = [
     stepNumber: '12',
     label: 'Your current puzzle',
     theme: 'blue',
+    // Quiz QC Oct 31 (Loom 16:51–17:45; user, Nov 2): key words in bold
     variant: 'list',
     question: 'What’s your (and your team’s) biggest challenge right now?',
     options: {
       plg: [
-        { id: 'a', label: 'We’re getting visitors, but not enough buyers' },
+        { id: 'a', label: 'We’re getting visitors, but not enough buyers', bold: 'not enough buyers' },
         {
           id: 'b',
           label:
             'We’re spending heavily on marketing and ads, but revenue has plateaued',
+          bold: 'revenue has plateaued',
         },
-        { id: 'c', label: 'Sales are unpredictable month to month' },
+        { id: 'c', label: 'Sales are unpredictable month to month', bold: 'Sales are unpredictable' },
         {
           id: 'd',
           label:
             'We’re losing customers to cheaper competitors (even though we’re far better)',
+          bold: 'losing customers to cheaper competitors',
         },
       ],
       slg: [
@@ -510,22 +513,26 @@ export const QUESTIONS = [
           id: 'a',
           label:
             "Honestly, the quality of who's landing on our calls — we’re attracting tire kickers and doubtful buyers who need extreme convincing on calls.",
+          bold: 'attracting tire kickers and doubtful buyers',
         },
         {
           id: 'b',
           label:
             'We’re spending heavily on marketing and ads, but revenue has plateaued',
+          bold: 'revenue has plateaued',
         },
-        { id: 'c', label: 'We have a pipeline, but sales are inconsistent' },
+        { id: 'c', label: 'We have a pipeline, but sales are inconsistent', bold: 'sales are inconsistent' },
         {
           id: 'd',
           label:
             "We're getting visibility, but we can't tell which channels are actually driving revenue.",
+          bold: "can't tell which channels are actually driving revenue",
         },
         {
           id: 'e',
           label:
             'We’re losing to price wars! We’re seeing more deals go to competitors.',
+          bold: 'We’re seeing more deals go to competitors',
         },
       ],
     },
