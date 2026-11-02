@@ -21,7 +21,7 @@
 
 .rcd__img {
   display: block;
-  width: min(100%, 680px);
+  width: min(90%, 680px); /* user, Nov 2 (desktop; stacked layout below 860 keeps its own) */
   height: auto;
 }
 
