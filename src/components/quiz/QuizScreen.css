@@ -1331,6 +1331,11 @@
   font-size: clamp(14px, 1.1vw, 20px);
 }
 
+/* Q12 key words in bold (Quiz QC Oct 31; user, Nov 2: "highlight" = bold) */
+.option-card__strong {
+  font-weight: 800;
+}
+
 /* ============================================================
    Mobile: uniform option labels — everything weight 500 at one
    size, so there's no bold/light mix regardless of line count
