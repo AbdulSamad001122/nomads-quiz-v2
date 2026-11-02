@@ -19,10 +19,13 @@ export const BENCHMARK_COPY = {
   shared: {
     myth_lead: 'Most growth advice says:',
     myth_struck: 'get more visitors.',
-    headline: 'Same 10,000 visitors a month.',
-    headline_payoff: '$1.5M+ more a year.',
+    /* Quiz QC Oct 31 (doc row 2 + Loom 3:12–5:40): new headline and context;
+       "{x}" = this version's own multiple (8.9X sales-call, 4.1X buy-without-
+       call — user, Nov 2), and the badge reads "8.9× monthly revenue". */
+    headline: 'What if you could add {{$1.5M+ more a year}} from the same 10,000 visitors a month?',
     context:
-      "Two businesses get the same traffic and spend the same on ads. The {{optimised}} one has improved every step of the customer journey. The [[typical]] one hasn't.",
+      "Two businesses get the same traffic and spend the same on ads. Yet one brings in {x} revenue. The {{optimised}} one has improved every step of the customer journey. The [[typical]] one hasn't.",
+    multiple_suffix: 'monthly revenue',
     table_heading: 'Each month',
     label_typical: 'Typical',
     label_optimised: 'Optimised',
@@ -129,6 +132,8 @@ export function benchmarkFigures(mode) {
     gapYear: '+' + halfFloor(gap * 12),
     gapYearPlain: halfFloor(gap * 12),
     multiple: (tRev ? (oRev / tRev).toFixed(1).replace(/\.0$/, '') : '0') + '×',
+    /* the same multiple as the doc writes it inside the context sentence */
+    multipleX: (tRev ? (oRev / tRev).toFixed(1).replace(/\.0$/, '') : '0') + 'X',
     totalTypical: money(tRev * 12),
     totalOptimised: yearly(oRev * 12),
   };
