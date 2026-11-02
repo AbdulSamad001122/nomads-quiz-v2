@@ -159,7 +159,9 @@ export function mount({ host, root, app, data, back, complete }) {
           '<div class="ex">'+E("ex")+'</div>'+
         '</div></div>'+
         '<p class="body">'+E("body",1)+'</p>'+
-        '<div class="cbox"><div class="promise"><strong>'+E("pr_v")+'</strong><span>'+E("pr")+'</span></div></div>'+
+        /* Quiz QC Oct 31 (doc row 4, Loom 11:20-13:10; user, Nov 2): three lines, the middle one
+           big, bold and plum like the old "$1.5M" */
+        '<div class="cbox"><div class="promise promise--3"><span>'+E("pr_1")+'</span><strong>'+E("pr_v")+'</strong><span>'+E("pr_2")+'</span></div></div>'+
         go_()+
       '</div></main>';
     bind();
