@@ -43,7 +43,7 @@
   background: #152639;
   color: #ffffff;
   font-family: var(--font-mono);
-  font-weight: 700;
+  font-weight: 500; /* a touch lighter (user, Nov 2) */
   font-size: 15px;
   letter-spacing: 0.08em;
   line-height: 1.2;

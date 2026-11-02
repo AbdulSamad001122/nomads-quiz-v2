@@ -1713,7 +1713,8 @@ export const STOP_OR_PUSH = {
  * phrases the reference sets in bold. The big 13.5× closes the right side.
  */
 export const CREATIVE_DELIVERY = {
-  chip: 'CASE STUDY',
+  // the old proof card's label, now the chip (user, Nov 2)
+  chip: 'WE’VE DONE 12× AND MORE FOR CLIENTS',
   head: 'L • Creative Delivery',
   paras: [
     'One of our clients positioned their funnel based on their understanding of their audience. They were getting 30,000+ impressions on each post and 300+ comments; they also booked 29 sales calls in 2 weeks, but tanked 27 of them.',
@@ -1721,7 +1722,7 @@ export const CREATIVE_DELIVERY = {
     'So we crafted the big idea, “CREATIVE DELIVERY,” and positioned him as the professional who turned simple messages into fun and creative videos.',
     'He closed 29 of the next 31 calls, going from making $8,000 to $108,000/mo.',
   ],
-  bold: ['“I wanna be creative.”', '29 of the next 31 calls,', '$8,000 to $108,000/mo.'],
+  bold: ['30,000+', '300+ comments;', 'booked 29 sales calls', 'tanked 27', '“I wanna be creative.”', '29 of the next 31 calls,', '$8,000 to $108,000/mo.'],
   // the revenue jump, set bigger than the other bold bits (user, Nov 2)
   figure: '$8,000 to $108,000/mo.',
   // the reference's "READ FULL CASE STUDY→" button is left out (user, Nov 2)
