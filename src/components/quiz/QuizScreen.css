@@ -1004,12 +1004,15 @@
    badge, label and padding. Labels still wrap naturally. */
 @media (max-width: 569.98px) {
   .quiz-q-q4 .answer-panel {
-    padding-top: 16px;
+    padding-top: 10px;
+    min-height: 0; /* hug the 4 cards; the grid row still fills taller screens */
   }
 
   .quiz-q-q4 .answer-panel__options--media {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
+    /* less empty space above/below the cards, so 360x740 phones fit too */
+    padding: 8px 0 6px;
   }
 
   .quiz-q-q4 .media-option__number {
