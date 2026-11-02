@@ -1722,10 +1722,7 @@ export const CREATIVE_DELIVERY = {
     'He closed 29 of the next 31 calls, going from making $8,000 to $108,000/mo.',
   ],
   bold: ['“I wanna be creative.”', '29 of the next 31 calls,', '$8,000 to $108,000/mo.'],
-  // reference: "READ FULL CASE STUDY→" (caps as shown; the arrow is drawn
-  // in JSX). The reference gives no URL: Nomads' case studies page for now.
-  button: 'READ FULL CASE STUDY',
-  href: 'https://nomadsmarketing.co/casestudies',
+  // the reference's "READ FULL CASE STUDY→" button is left out (user, Nov 2)
   big: '13.5×',
   imageAlt: 'The Lean Video System landing page on a tablet',
 };

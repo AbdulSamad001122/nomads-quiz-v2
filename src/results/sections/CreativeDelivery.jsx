@@ -1,12 +1,11 @@
 import { CREATIVE_DELIVERY as c } from '../copy.js';
 import { emphasize } from '../emphasize.jsx';
-import { ga } from '../../analytics/ga.js';
 import './CreativeDelivery.css';
 
 /**
  * Case study — L · Creative Delivery (user, Nov 2). Split like the user's
  * reference: navy panel with the Lean Video System tablet on the left, light
- * paper with the "CASE STUDY" chip, the story, the button and a big 13.5×
+ * paper with the "CASE STUDY" chip, the story and a big 13.5×
  * on the right. Replaces the Video Mastermind proof card that sat under
  * the "It is a stretch…" ladder, so it follows that section.
  */
@@ -33,16 +32,6 @@ export default function CreativeDelivery() {
               {emphasize(p, c.bold)}
             </p>
           ))}
-          <a
-            className="rcd__btn"
-            href={c.href}
-            target="_blank"
-            rel="noopener"
-            onClick={() => ga.ctaClick('read_case_study')}
-          >
-            {c.button}
-            <span aria-hidden="true">→</span>
-          </a>
           <p className="rcd__big">{c.big}</p>
         </div>
       </div>

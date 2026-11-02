@@ -1,8 +1,8 @@
 /* Case study — L · Creative Delivery (user, Nov 2): the reference's split
    layout and colours — navy #152639 left with the tablet, light paper right
-   (the GolfBays paper), navy chip, plum headline, navy body, lilac button
-   with a plum keyline + shadow, big green 13.5× to close. Stacks under
-   860px like the GolfBays / Lara sections. */
+   (the GolfBays paper), navy chip, plum headline, navy body, big green
+   13.5× to close (no button, user Nov 2). Stacks under 860px like the
+   GolfBays / Lara sections. */
 
 .rcd {
   display: grid;
@@ -74,34 +74,6 @@
   color: #122132;
 }
 
-.rcd__btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-  margin-top: 30px;
-  background: #f2e6f5;
-  color: #331228;
-  border: 2px solid #5d1b4e;
-  box-shadow: 5px 5px 0 #5d1b4e;
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 18px;
-  letter-spacing: 0.02em;
-  padding: 12px 24px;
-  text-decoration: none;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.rcd__btn:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 7px 7px 0 #5d1b4e;
-}
-
-.rcd__btn:active {
-  transform: translate(0, 0);
-  box-shadow: 3px 3px 0 #5d1b4e;
-}
-
 /* the big figure that closes the story, in the page's big-number style
    (the hero / proof green) */
 .rcd__big {
@@ -112,15 +84,6 @@
   line-height: 1;
   letter-spacing: -0.01em;
   color: #2a9a5e;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .rcd__btn {
-    transition: none;
-  }
-  .rcd__btn:hover {
-    transform: none;
-  }
 }
 
 /* ——— responsive ——— */
@@ -154,10 +117,6 @@
 }
 
 @media (max-width: 560px) {
-  .rcd__btn {
-    font-size: 16px;
-    padding: 12px 18px;
-  }
   .rcd__big {
     font-size: 52px;
   }
