@@ -23,6 +23,7 @@ function withMark(label, mark) {
 
 export default function OptionCard({
   number,
+  icon,
   heading,
   label,
   desc,
@@ -45,6 +46,16 @@ export default function OptionCard({
       <span className="option-card__number" aria-hidden="true">
         {number}
       </span>
+      {/* `icon` = a small picture between the number and the text (Q6),
+          drawn in the screen's colour (the file is used as a mask) */}
+      {icon ? (
+        <span className="option-card__lead" aria-hidden="true">
+          <span
+            className="option-card__lead-img"
+            style={{ WebkitMaskImage: `url(${icon})`, maskImage: `url(${icon})` }}
+          />
+        </span>
+      ) : null}
       <span className="option-card__label" ref={labelRef}>
         {heading ? (
           <span className="option-card__heading">{heading}</span>
