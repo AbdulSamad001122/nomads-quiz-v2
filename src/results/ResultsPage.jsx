@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import ResultsNav from './sections/ResultsNav.jsx';
 import HeroSection from './sections/HeroSection.jsx';
 import MetricsSection from './sections/MetricsSection.jsx';
@@ -27,6 +28,7 @@ import TwoPaths from './sections/TwoPaths.jsx';
 import BookCallCalendar from './sections/BookCallCalendar.jsx';
 import { resolveTokens, anyMetricRed } from './resolveTokens.js';
 import { RED_METRICS_CALL } from './copy.js';
+import { installWorkshopLinkTagging } from '../kit/viewerId.js';
 import './results.css';
 // last, so the shared button hover wins over the per-section rules
 import './result-buttons.css';
@@ -38,6 +40,9 @@ import './result-buttons.css';
  */
 export default function ResultsPage({ result, onBack, adAdjustable = false }) {
   const tokens = resolveTokens(result);
+  // workshop links carry the taker's Kit id, so the workshop video can tag
+  // how much of it they watch (src/kit/viewerId.js)
+  useEffect(() => installWorkshopLinkTagging(), []);
 
   return (
     <div className="results-page">
