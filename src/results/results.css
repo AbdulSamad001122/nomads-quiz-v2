@@ -239,3 +239,11 @@ body .results-page .rwk__p--dark br {
     font-size: 20px;
   }
 }
+
+/* small phones: both workshop CTA sentences at 16px (user, Nov 3); last in the file so it
+   beats the 20px phone rule above */
+@media (max-width: 500px) {
+  body .results-page :is(.rmw__answer, .rwk__p--dark) {
+    font-size: 16px;
+  }
+}
