@@ -22,6 +22,9 @@ if (!html) {
   // Quiz QC Oct 31 (Alefiya's Loom 9:05; user, Nov 2: on all slides): capital
   // "The" after "Why it worked:" — the one intended difference from the HTML.
   ref.why = ref.why.charAt(0).toUpperCase() + ref.why.slice(1);
+  // Quiz QC Oct 31 (Yemi, Nov 3: change every "quiz takers" in the quiz):
+  // "Conversion Quiz™ takers".
+  ref.after_sub = ref.after_sub.replace(/^quiz-takers/, 'Conversion Quiz™ takers');
   assert.deepStrictEqual(copy, ref, 'copy.json differs from the HTML card');
   console.log('q5a: copy identical to the HTML card ✓');
 }
