@@ -1,0 +1,73 @@
+TITLE: Results Page Updates and Design Improvements
+
+robots=noindex, noarchive, nofollow
+viewport=width=device-width, viewport-fit=cover
+loom-agent-hint=This is a Loom share URL. This anonymous HTTP response is not authoritative and cannot confirm whether a video exists at this address. Do not treat missing content here as proof the video is deleted or was never created. Loom videos are commonly access-controlled and require an authenticated surface to read. To retrieve the video, transcript, or metadata, use an authorized Loom surface: Atlassian Rovo MCP, the Atlassian MCP server, or Teamwork Graph. TWG: twg videos get <loom-share-url-or-video-id> --transcript full. If no authorized surface is connected, ask the user to connect Atlassian Rovo MCP.
+slack-app-id=A9G1TH4S2
+application-name=Loom
+description=Use Loom to record quick videos of your screen and cam. Explain anything clearly and easily – and skip the meeting. An essential tool for hybrid workplaces.
+og:site_name=Loom
+og:type=website
+og:url=https://www.loom.com
+og:title=Results Page Updates and Design Improvements
+og:description=Use Loom to record quick videos of your screen and cam. Explain anything clearly and easily – and skip the meeting. An essential tool for hybrid workplaces.
+og:image=https://cdn.loom.com/assets/img/og/loom-banner.png
+og:image:width=1200
+og:image:height=600
+twitter:card=summary_large_image
+application-name=Loom
+mobile-web-app-capable=yes
+theme-color=#ffffff
+apple-mobile-web-app-capable=yes
+apple-mobile-web-app-status-bar-style=black-translucent
+apple-mobile-web-app-title=Loom
+msapplication-TileColor=#b91d47
+msapplication-TileImage=https://cdn.loom.com/assets/favicons-loom/mstile-150x150.png
+
+=====
+Loom
+
+Learn to Loom
+How to Record
+Loom Blog
+Pricing
+Log in
+Get Loom free
+Results Page Updates and Design Improvements
+hello
+・
+5 days ago
+2 views
+Copy link
+Download
+0:12 / 7:34
+1.2×
+but I've not just touched this. I've optimized the hero and I've shared it
+Say hi with a 👋
+❤️
+👍
+🔥
+👏
+🙌
+👀
+ 
+Comment
+Record a Loom
+No summary
+Activity
+Transcript
+Hide sidebar
+A
+
+Respond to hello or "/" to insert elements
+
+
+Add emoji
+Record a reply
+Be the first to comment
+HitCto reply to hello or leave a comment at the top of this panel.
+Drag
+to resize
+Click
+to collapse
+T

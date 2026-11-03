@@ -1,0 +1,51 @@
+TITLE: Team Approach Section
+URL: https://claude.ai/artifact/RqrqKgUnjpnnbGetg6cJyk
+CONTENT HEIGHT: 2444px
+
+Reviewer tools · click “Edit copy”, then click any text to change it. Saves in this browser.
+Edit copy
+Copy all copy
+Reset
+Concept for the RPV™ results page · compass panel unchanged on the left · team approach + game plan merged into stacking cards on the right
+TEAM APPROACH
+And Here's Why I Recommend Doing It With Your Team
+ONE TEAM. ONE VIEW. ONE SHARED GOAL.
+THE PROBLEM
+The four scores live in four different heads.
+Your content lead knows the traffic: which posts pulled 40,000 impressions last month.
+Sales knows what happens on the calls: the same three questions every prospect asks.
+Your email person knows the list: who opens, who clicks, who’s gone quiet.
+Each team knows its own numbers. But without seeing how they pull on each other, you can’t tell which one is holding revenue back and which one is amplifying it.
+SO…
+
+Which is exactly why a slow month feels like a mystery.
+
+THE WORKSHOP
+The workshop is the first time your team looks at one shared goal.
+MARKETING SAYS
+“Reach is up 40% this quarter, and we booked 30% more calls.”
+SALES SAYS
+“Half those calls weren’t a fit. I spent most of them explaining what we do.”
+
+Both are telling the truth. In the workshop, both numbers go on the same scorecard, and everyone is finally on the same page (literally, and figuratively!), looking at one number: what each visitor is worth.
+
+125k
+YOUR NEXT $125K/MO GAME PLAN
+Your Next $125k/Mo Game Plan
+
+The scorecard shows you your scores. The highest. The lowest.
+
+Too Close to See It
+But when you’re workshopping this with your team: your team is too close to the product, to sales, to the customers.
+Closeness Creates Blind Spots
+That closeness is a strength on most days. But when you’re that near to it, it’s also the reason the obvious thing hides in plain sight.
+WHERE I COME IN
+
+I help you and your team read the story your numbers are telling, the one that’s hard to hear from the inside.
+
+Design notes for the team
+Left side unchanged: the compass panel from the live page (same compass, arrows, “TEAM APPROACH” tag, headline, and the “ONE TEAM. ONE VIEW. ONE SHARED GOAL.” bar). It stays pinned while the right side scrolls.
+Right side merges two sections: the team-approach copy and the “Your Next $125k/Mo Game Plan” block now live in one stack of five cards. Each card sticks and the next slides over it, so it reads as one thought.
+Readability: bigger type (17px body), solid card backgrounds instead of text on texture, and the “traffic is up” vs “the leads are a poor fit” lines pulled out as two quotes.
+Copy (updated): the “four heads” list now names all four pillars’ owners with something specific each one knows, and the marketing vs sales quotes are things those teams actually say. Numbers in the quotes are illustrative. The small labels on each card (The problem, So…, The workshop, Where I come in) are new and editable.
+On phones the compass panel sits on top and the cards stack below it.

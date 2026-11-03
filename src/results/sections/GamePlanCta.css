@@ -120,3 +120,15 @@
     box-shadow: 5px 5px 0 #431232;
   }
 }
+
+/* the red-metrics call line, bigger (Alefiya, Slack Oct 31): 20px desktop,
+   18px phones */
+.rgp__body.rgp__body--big {
+  font-size: 20px;
+}
+
+@media (max-width: 560px) {
+  .rgp__body.rgp__body--big {
+    font-size: 18px;
+  }
+}

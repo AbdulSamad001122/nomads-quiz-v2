@@ -12,6 +12,20 @@ const brJoin = (lines) =>
     </span>
   ));
 
+// on the narrower navy card "hands-on" broke after its hyphen and "RPV ™"
+// left its ™ at the start of a line: each stays on one line, words unchanged
+const HOLD = ['hands-on', 'RPV ™'];
+const holdTogether = (text) =>
+  text.split(/(hands-on|RPV ™)/).map((part, i) =>
+    HOLD.includes(part) ? (
+      <span key={i} className="results-nowrap">
+        {part}
+      </span>
+    ) : (
+      part
+    ),
+  );
+
 /**
  * Section — "Because… revenue rarely scales…" → workshop invite (copy doc
  * rows 2–3, between "Here's what it took us…" and the game-plan CTA).
@@ -48,17 +62,32 @@ export default function WorkshopInvite({ tokens }) {
         />
       </div>
       <div className="rwk__light">
+        {/* workshop page mockup on the left, the invite and its button on
+            the right, the button lined up with the text (user, Oct 31) */}
         <div className="rwk__invite">
-          <p className="rwk__p rwk__p--dark">
-            {c.grabBefore}{' '}
-            <br />
-            {c.grabMid1} {tokens.current_rpv} {c.grabMid2}{' '}
-            <br />
-            {tokens.goal_rpv} {c.grabAfter}
-          </p>
-          <a className="rwk__btn" href={CTA.workshop.href} target="_blank" rel="noopener" onClick={() => ga.ctaClick('watch_workshop')}>
-            {c.button}
+          <a
+            className="rwk__mock"
+            href={CTA.workshop.href}
+            target="_blank"
+            rel="noopener"
+            tabIndex={-1}
+            aria-hidden="true"
+            onClick={() => ga.ctaClick('watch_workshop')}
+          >
+            <img src="/assets/results-workshop-tablet.webp" alt="" width="860" height="1319" loading="lazy" />
           </a>
+          <div className="rwk__invite-text">
+            <p className="rwk__p rwk__p--dark">
+              {c.grabBefore}{' '}
+              <br />
+              {holdTogether(c.grabMid1)} {tokens.current_rpv} {c.grabMid2}{' '}
+              <br />
+              {tokens.goal_rpv} {c.grabAfter}
+            </p>
+            <a className="rwk__btn" href={CTA.workshop.href} target="_blank" rel="noopener" onClick={() => ga.ctaClick('watch_workshop')}>
+              {c.button}
+            </a>
+          </div>
         </div>
       </div>
     </section>

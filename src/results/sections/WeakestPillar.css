@@ -160,7 +160,7 @@
 
 .rwp__p-bold {
   font-weight: 700;
-  color: #6d1d4c;
+  color: inherit; /* same colour as the rest of the line (user, Oct 31) */
 }
 
 .rwp__band {

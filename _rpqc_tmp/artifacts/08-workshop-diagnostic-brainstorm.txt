@@ -1,0 +1,62 @@
+TITLE: Here's The Catch V2
+URL: https://claude.ai/artifact/XXafadGggJ6eQYQFcUQiJk
+CONTENT HEIGHT: 1099px
+
+Reviewer tools · click “Edit copy”, then click any text to change it. Saves in this browser.
+Edit copy
+Copy all copy
+Reset
+Version 2 · same layout as the live page · the OS board redrawn as a blank scorecard to fill in
+HERE’S THE CATCH
+From the inside, it’s genuinely hard to tell which of the four pillars is the one holding you back.
+
+They can all look like they’re working, or you feel like all of them need work.
+
+So you don’t guess. You score.
+
+In the workshop, you and your team rate your business across the four pillars, one at a time. For each, you answer a short set of questions (the same ones a paid audit would start with) and score yourself out of five.
+
+By the end, you’re holding four numbers. Optimising the lowest one will have the largest impact on your revenue.
+
+That’s your first move. Not a list of twelve competing priorities.
+
+Compounding Revenue Per Visitor™ OS
+WORKSHOP SCORECARD · SCORE EACH PILLAR OUT OF 5
+01
+PILLAR 01
+3
+2
+3
+04
+PILLAR 04
+Your lowest
+score = ?
+MAXIMISE
+RPV™
+CONTRARIAN
+POV™
+SPEED TO
+DECISION™
+COMPOUNDING
+RPS™
+2.7 / 5
+_ / 5
+_ / 5
+_ / 5
+02
+PILLAR 02
+03
+PILLAR 03
+PILLAR 01
+2.7
+PILLAR 02
+?
+PILLAR 03
+?
+PILLAR 04
+?
+Design notes for the team
+Same layout as the live page: copy on the left exactly as it is now, gradient panel with the hand-drawn arrows on the right. Only the image changes.
+The image: the OS board is redrawn as a blank scorecard. Same four-quadrant wheel and question cards around it, but the question text is greyed placeholder lines (it isn’t meant to be read), each question has an empty score box, and each quadrant has an empty “_ / 5”.
+Mid-workshop: only Pillar 01 is pencilled in (3, 2, 3 → 2.7). The other three are dashed and show “?”, and the centre asks for “your lowest score”, so it reads as theirs to fill.
+For the designer: this can be rebuilt as a static image in Canva from the original board. The handwritten marks use Caveat as a stand-in for the brand’s Pencil Script.

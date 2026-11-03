@@ -19,6 +19,9 @@ if (!html) {
 } else {
   const ref = JSON.parse(html.match(/<script type="application\/json" id="card-copy"[^>]*>([\s\S]*?)<\/script>/)[1]);
   const copy = JSON.parse(readFileSync(new URL('./copy.json', import.meta.url), 'utf8'));
+  // Quiz QC Oct 31 (Yemi, Nov 3: change every "quiz takers" in the quiz):
+  // "Conversion Quiz™ takers".
+  ref.services_mcap = ref.services_mcap.replace('of quiz-takers', 'of Conversion Quiz™ takers');
   assert.deepStrictEqual(copy, ref, 'copy.json differs from the HTML card');
   console.log('q5b: copy identical to the HTML card ✓');
 }

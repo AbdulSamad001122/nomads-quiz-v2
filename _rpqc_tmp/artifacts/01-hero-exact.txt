@@ -1,0 +1,83 @@
+TITLE: RPV Results Hero
+URL: https://claude.ai/artifact/XGEerFsQP1ApoWawzPATsR
+CONTENT HEIGHT: 2402px
+
+Reviewer tools · click “Edit copy”, then click any text to change it. Saves in this browser.
+Edit copy
+Copy all copy
+Reset
+Concept for the RPV™ results page · hero, five metrics and red-metric callout · sample numbers from the current page
+NOMADS
+Watch the workshop with your team
+Book your next $125k/mo game-plan call
+
+You’re here for the spoils of adding $1.5M/year without increasing your marketing spend. Based on your answers…
+
+To add an extra $1.5M/year ($125K/mo), your Revenue Per Visitor™ needs to go from:
+TODAY
+$0.75
+per visitor, right now
+→
+6.6×
+YOUR GOAL
+$4.92
+per visitor, same traffic
+
+Revenue Per Visitor™ = total revenue ÷ total visitors your business attracts, online and offline.
+
+So how do you scale your Revenue Per Visitor™ from $0.75 → $4.92?
+
+By optimising all 5 metrics below until they’re green.
+
+METRIC
+YOUR BUSINESS
+today
+YOUR NEW GOAL
+all five green
+How many visitors become email or SMS subscribers?
+58%
+CLOSE
+→
+60%
+Of every 100 new subscribers, how many take a buying action in 14 days?
+13%
+CLOSE
+→
+30%
+Of every 100 who take that action, how many complete it?
+18%
+RED
+→
+75%
+Revenue Per Subscriber™ (what each subscriber is worth a year)
+$1
+RED
+→
+$8
+= Your Revenue Per Visitor™
+$0.75
+→
+$4.92
+Red: most room to improve
+Yellow: close to healthy
+Green: at goal
+WHAT’S HOLDING YOUR NUMBER DOWN
+Your 2 red metrics are what’s keeping your Revenue Per Visitor™ at $0.75 instead of $4.92.
+Buyers who complete their purchase
+18% → 75%
+Revenue Per Subscriber™
+$1 → $8
+
+My workshop takes you and your team through 10 questions across 4 quadrants, so you find exactly why each red metric is red, and what to fix first.
+
+Watch the workshop with your team →
+Book your $125k/mo game-plan call
+The workshop opens on its own page.
+Design notes for the team
+Hero: the before and after numbers are the hero. $0.75 sits in red as “Today”, $4.92 in green as “Your goal”, with the 6.6× jump between them. They should be the first thing anyone sees.
+Five-metric table: every cell in “Your new goal” is green with a tick, so “until they’re green” is literally true. Today’s cells carry a Red / Close label as well as the colour. All rows are the same height, and the table fits one screen on desktop.
+RPV row: moved to the bottom as the total, because the metrics above feed it. One thing to check: the headline says “all 5 metrics”, but the table shows four (visitors is the fifth). Either add a visitors row or change the line to match.
+Red-metric line: “Your red metric is what’s keeping your RPV at $0.75 instead of $4.92” now names the red metrics and shows each one’s number and goal.
+Workshop button: sits right after the red metrics, where the reader wants the answer, and again in the nav.
+Workshop page: the video comes off the results page and lives on its own “Watch the Workshop” page. Every workshop button links there. Why hasn’t that page been built yet?
+Next: the “About your ad budget” section gets the same treatment so the data reads clearly.

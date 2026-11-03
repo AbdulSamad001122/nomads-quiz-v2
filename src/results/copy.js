@@ -250,9 +250,10 @@ export const RED_METRICS = {
 export const RED_METRICS_CALL = {
   headlinePlain: 'Already know you want a second set of',
   headlineAccent: 'expert eyes on your business?',
-  body: 'Pick a day and time, and bring your Revenue Per Visitor (RPV) number to the C-RPV Game Plan Call with me.',
-  // keeps "C-RPV" from breaking at its hyphen
-  noBreak: 'C-RPV',
+  // abbreviations written out + bigger text (Alefiya, Slack Oct 31)
+  body: 'Pick a day and time, and bring your Revenue Per Visitor number to the Compounding Revenue Per Visitor™ Game Plan Call with me.',
+  noBreak: 'Game Plan Call',
+  bigBody: true,
 };
 
 /**
@@ -788,6 +789,8 @@ export const CLIENT_DAVID = {
       ],
     },
   ],
+  // *who* and *what* in italics in the first box line (Alefiya, Slack Oct 31)
+  boxEmFirst: ['who', 'what'],
   boxParas: [
     ['We changed who it spoke to and what it', 'opened with. Same course. That\'s when it moved.'],
     [
@@ -865,7 +868,8 @@ export const WEAKEST_PILLAR = {
   para2Before:
     'You leave with a clear next step like "All sales calls start at this message, so we’ll use this message top of funnel to lift opt-ins ',
   para2Bold: 'from 11% to 25% and that shall add $40,000/mo',
-  para2After: ' to our revenue", an action with a number attached to it.',
+  // punctuation fixed by Alefiya (Slack Oct 31)
+  para2After: ' to our revenue". An action with a number attached to it.',
   // First sentence of the doc's next paragraph — the Lara story that follows
   // it belongs to the next section.
   band: 'I don\'t guess at these.',
@@ -1620,11 +1624,19 @@ export const STOP_OR_PUSH = {
 
   // Card A — the goal (deliberately the smaller card, design note 3)
   stopEyebrow: 'Stop here · your goal',
+  // Alefiya (Slack, Oct 31): the card reads as one clear sentence — "by
+  // increasing your revenue per visitor from 2.25 to 6.25, you'll add 1.5
+  // million a year without adding a penny to your current marketing or ad
+  // spend" — around the big figure (kept, made bigger), with the taker's
+  // own numbers; the "And nope…" line stays (Alefiya: keep it; she and Yemi
+  // revise this section's logic on Monday).
   stopRpvBefore: 'By increasing your Revenue Per Visitor™ from',
+  stopRpvTo: 'to',
+  stopRpvAfter: ', you’ll add',
   stopBig: '+$1.5M/year',
   stopBigSub: '($125K/mo)',
-  stopBody: 'Without adding a penny to your current marketing and ad spend.',
-  stopBodyBold: 'marketing and ad spend',
+  stopBody: 'without adding a penny to your current marketing or ad spend.',
+  stopBodyBold: 'marketing or ad spend',
   stopNope: 'And nope, you don’t need to max out all 5 metrics to get there.',
 
   // the joint between the two cards
@@ -1632,7 +1644,8 @@ export const STOP_OR_PUSH = {
 
   // Card B — the max (12× cap, calculator.js / Added Logic.docx)
   maxEyebrow: 'Or go all the way · max benchmark',
-  maxIf: 'If you hit the maximum benchmark across all five conversion points,',
+  // "Buuuuuuut..." opener (Alefiya, Slack Oct 31)
+  maxIf: 'Buuuuuuut...if you hit the maximum benchmark across all five conversion points,',
   maxIfBold: 'maximum benchmark across all five conversion points',
   maxLead: 'your existing traffic could add',
   maxMega: '{{max_gain}}',
@@ -1683,16 +1696,36 @@ export const STOP_OR_PUSH = {
     { x: '12×', cap: 'Your ceiling, where our clients have reached' },
   ],
   stairsLabel: 'Growth steps: today 1×, first metric fixed 3×, second 5×, third 8×, ceiling 12×',
-  proofHead: 'We’ve done 12× and more for clients',
-  // Only the design's own client card. Its other two slots are team notes
-  // ("Client result 2 / 3 — Jimmy: pull from the homepage"), not copy, so
-  // nothing is shown for them until Jimmy / Alefiya send the results.
-  proof: [
-    { name: 'Video Mastermind', big: '13.5×', small: '$8,000/month → $108,000/month' },
-  ],
+  // (the "We've done 12× and more for clients" Video Mastermind card is now
+  // its own section: CREATIVE_DELIVERY below, user Nov 2)
 
   // closing line + the workshop button, both exactly as the design (the →
   // is drawn in JSX); link + tracking id from CTA.workshop
   next: 'More on how to max these metrics in the upcoming workshop.',
   button: 'Watch the workshop',
+};
+
+/**
+ * Case study — L · Creative Delivery (user, Nov 2): its own split section
+ * right after the "It is a stretch…" card, replacing the Video Mastermind
+ * proof card there. Copy is the user's reference screenshot, word for word
+ * (curly quotes, "wanna", CREATIVE DELIVERY in caps); `bold` lists the
+ * phrases the reference sets in bold. The big 13.5× closes the right side.
+ */
+export const CREATIVE_DELIVERY = {
+  // the old proof card's label, now the chip (user, Nov 2)
+  chip: 'WE’VE DONE 12× AND MORE FOR CLIENTS',
+  head: 'L • Creative Delivery',
+  paras: [
+    'One of our clients positioned their funnel based on their understanding of their audience. They were getting 30,000+ impressions on each post and 300+ comments; they also booked 29 sales calls in 2 weeks, but tanked 27 of them.',
+    'His POV was that videos should be “ungeneric,” which was great, but it didn’t really mean anything to his audience. During the research phase, clients and prospects kept saying, “I wanna be creative.”',
+    'So we crafted the big idea, “CREATIVE DELIVERY,” and positioned him as the professional who turned simple messages into fun and creative videos.',
+    'He closed 29 of the next 31 calls, going from making $8,000 to $108,000/mo.',
+  ],
+  bold: ['30,000+', '300+ comments;', 'booked 29 sales calls', 'tanked 27', '“I wanna be creative.”', '29 of the next 31 calls,', '$8,000 to $108,000/mo.'],
+  // the revenue jump, set bigger than the other bold bits (user, Nov 2)
+  figure: '$8,000 to $108,000/mo.',
+  // the reference's "READ FULL CASE STUDY→" button is left out (user, Nov 2)
+  big: '13.5×',
+  imageAlt: 'The Lean Video System landing page on a tablet',
 };

@@ -156,22 +156,38 @@ export default function RedMetricsWorkshop({ result, tokens }) {
       </div>
 
       <div className="rmw__light">
+        {/* workshop page mockup on the left, the sentence and its button on
+            the right, the button lined up with the text (user, Oct 31) */}
         <div className="rmw__light-inner">
-          <h3 className="rmw__answer">
-            {c.answerBefore}{' '}
-            <span className="rmw__val rmw__val--goal">{tokens.goal_rpv}</span>{' '}
-            {c.answerAfter}
-          </h3>
-
           <a
-            className="q-btn rmw__btn"
+            className="rmw__mock"
             href={CTA.workshop.href}
             target="_blank"
             rel="noopener"
+            tabIndex={-1}
+            aria-hidden="true"
             onClick={() => ga.ctaClick('watch_workshop')}
           >
-            {c.ctaWorkshop}
+            <img src="/assets/results-workshop-tablet.webp" alt="" width="860" height="1319" loading="lazy" />
           </a>
+
+          <div className="rmw__light-text">
+            <h3 className="rmw__answer">
+              {c.answerBefore}{' '}
+              <span className="rmw__val rmw__val--goal">{tokens.goal_rpv}</span>{' '}
+              {c.answerAfter}
+            </h3>
+
+            <a
+              className="q-btn rmw__btn"
+              href={CTA.workshop.href}
+              target="_blank"
+              rel="noopener"
+              onClick={() => ga.ctaClick('watch_workshop')}
+            >
+              {c.ctaWorkshop}
+            </a>
+          </div>
         </div>
 
         {/* QC item 8: the workshop video is no longer on the results page; it

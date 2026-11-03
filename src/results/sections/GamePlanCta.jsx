@@ -21,7 +21,7 @@ export default function GamePlanCta({ copy = GAMEPLAN_CTA }) {
           <h2 className="rgp__headline">
             {copy.headlinePlain} <span className="rgp__accent">{copy.headlineAccent}</span>
           </h2>
-          <p className="rgp__body">{copy.noBreak ? keepTogether(body, copy.noBreak) : body}</p>
+          <p className={`rgp__body${copy.bigBody ? ' rgp__body--big' : ''}`}>{copy.noBreak ? keepTogether(body, copy.noBreak) : body}</p>
           {/* Booking URL live (Yemi, Sep 19 doc comments). New tab so the
               taker keeps their result page — it can't be regenerated. */}
           {copy.button && (

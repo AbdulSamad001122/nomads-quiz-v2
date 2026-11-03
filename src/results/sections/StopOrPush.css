@@ -106,6 +106,7 @@
 .rso__card--stop {
   background: var(--rso-cream);
   padding: 20px 20px 22px;
+  container-type: inline-size; /* the big figure sizes to the card */
   box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.35);
 }
 
@@ -136,7 +137,9 @@
 .rso__big {
   font-family: var(--rso-black);
   font-weight: 900;
-  font-size: clamp(30px, 3.4vw, 38px);
+  /* bigger (user, Oct 31): as big as the card allows ("+$1.5M/year" is
+     about 6.4em wide), up to 52px */
+  font-size: min(52px, 15cqi);
   line-height: 1;
   color: var(--rso-plum);
 }
@@ -512,12 +515,20 @@
   color: var(--rso-mute);
 }
 
-.rso__eyebrow--rose {
-  color: var(--rso-rose);
+/* "Yes, 12× sounds like a stretch" as a maroon chip with white text
+   (user, Oct 31) */
+.rso__eyebrow--chip {
+  display: inline-block;
+  max-width: 100%;
+  background: #641d4f;
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 1.4;
+  padding: 6px 12px;
 }
 
 .rso__real-head {
-  margin: 6px 0 0;
+  margin: 14px 0 0;
   font-family: var(--rso-black);
   font-weight: 900;
   font-size: clamp(22px, 2.6vw, 28px);
@@ -633,59 +644,6 @@
   color: var(--rso-rose);
 }
 
-.rso__proof-head {
-  grid-column: 1 / -1;
-  margin: 0;
-  border-top: 1px dashed var(--rso-line);
-  padding-top: 16px;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--rso-mute);
-}
-
-.rso__proof {
-  grid-column: 1 / -1;
-  margin-top: -16px;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.rso__pc {
-  background: #ffffff;
-  border: 1.5px solid var(--rso-line);
-  border-radius: 12px;
-  padding: 12px 14px;
-}
-
-.rso__pc b {
-  display: block;
-  font-family: var(--font-body);
-  font-weight: 800;
-  font-size: 13px;
-}
-
-.rso__pc span {
-  display: block;
-  margin-top: 4px;
-  font-family: var(--rso-black);
-  font-weight: 900;
-  font-size: 20px;
-  color: var(--rso-green);
-}
-
-.rso__pc small {
-  display: block;
-  margin-top: 2px;
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 12px;
-  color: var(--rso-mute);
-}
-
 /* ——— closing note + the shared workshop CTA (washed-out, results.css) ——— */
 
 .rso__next {
@@ -740,14 +698,8 @@
     transform: rotate(90deg);
   }
   .rso__real {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr); /* never wider than the card */
     padding: 22px 20px;
-  }
-}
-
-@media (max-width: 700px) {
-  .rso__proof {
-    grid-template-columns: 1fr;
   }
 }
 

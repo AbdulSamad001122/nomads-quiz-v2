@@ -1,0 +1,62 @@
+TITLE: Workshop Quadrants V2
+URL: https://claude.ai/artifact/GZDzJ11EusdVN92Xbt1tdW
+CONTENT HEIGHT: 1478px
+
+Reviewer tools · click “Edit copy”, then click any text to change it. Saves in this browser.
+Edit copy
+Copy all copy
+Reset
+Version 2 · workshop section with your red metrics plotted to the quadrants · brand colours only · sample numbers
+
+It’s one thing to know WHICH metrics are red, but another to know WHAT is keeping them red.
+
+Find The Reason Behind Your Red Metrics With The Compounding Revenue Per Visitor™ OS Workshop.
+Your red metric is what’s keeping your RPV™ at
+$0.75
+instead of
+$4.92
+RED
+02
+03
+Out of every 100 who book a call or add to cart, how many end up buying?
+18%
+whereas it should be around
+75%
+0%
+75%
+100%
+RED
+04
+Revenue Per Subscriber™ (what each subscriber is worth per year)
+$1
+whereas it needs to be
+$8
+to bring in $1.5M
+$0
+$8
+$10
+
+I’ve created a workshop that takes you and your team through 10 questions across 4 quadrants to find out exactly why each red metric is red.
+
+For example
+QUADRANT 01
+Maximise Revenue per Visitor™
+Is it because you don’t know the trigger that helps you sell to a 20X bigger market?
+QUADRANT 02
+18%
+Contrarian POV™
+Is it because buyers can’t see your category-dominating differentiation and keep comparing you to cheaper alternatives?
+QUADRANT 03
+18%
+Speed to Decision™
+Is it because buyers with different objections are being dumped into the same buying journey, instead of getting a personalised path that answers their questions without ever needing to speak with you?
+QUADRANT 04
+$1
+Compounding Revenue Per Subscriber™
+Is it because you aren’t nurturing non-buyers until they’re ready to buy?
+Design notes for the team
+Version 2, alongside version 1. Same copy as the live page. The red metric labels follow the results table; the completion one is reworded to “book a call or add to cart … end up buying”.
+The red-metric line is the loudest thing: a white box with a red border and a pulsing red dot, $0.75 in red, $4.92 in Midnight Blue.
+Red metrics plotted to quadrants, no tapping: only the red metrics show, under the red-metric line. Each one carries the numbers of the quadrants that move it, and those quadrant tiles carry the red number back and get a red outline.
+Mapping to confirm: Q1 → opt-in rate; Q2 and Q3 → buying action and completion; Q4 → Revenue Per Subscriber™. This is my reading of the framework, so please check it before build.
+Brand colours only: Midnight Blue background, Ice Blue quadrant tiles, white and Deep Purple text. Red and yellow appear only as metric status colours.

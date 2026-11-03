@@ -1,0 +1,6 @@
+SECTION: You can stop at $1.5M. Or push all 5 metrics to their max.
+The max revenue per visitor is the lower of two numbers: the revenue per visitor with all five metrics at their ceilings, or 12 × current revenue per visitor.
+Max added revenue = (max revenue per visitor − current revenue per visitor) × annual visitors.
+The “all 5 metrics at max” number can never be more than 12× today. Max RPV = the lower of (RPV with all five metrics at their ceilings) and (12 × current RPV). Max added revenue = (max RPV − current RPV) × annual visitors. In this example: 12 × $0.75 = 3.24M/year in total and +$2.97M on top of today, instead of the uncapped $10.6M.
+Edge case to decide: for very small businesses, the $1.5M goal itself can be more than 12× today (e.g., $60K/year today needs 26× to add $1.5M). Should the cap win there, or the goal? 
+Answer to edge case question: Small businesses will likely already be screened out in Q2. If not, blocks 5, 6, and 7 in the logic doc has the copy to replace the “push metrics to their max” section. 

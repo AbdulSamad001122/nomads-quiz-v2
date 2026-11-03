@@ -1,0 +1,88 @@
+TITLE: RPV Max Upside Section
+URL: https://claude.ai/artifact/2b4txidvwciQEAcdgMHhBG
+CONTENT HEIGHT: 2297px
+
+Reviewer tools · click “Edit copy”, then click any text to change it. Saves in this browser.
+Edit copy
+Copy all copy
+Reset
+Concept for the RPV™ results page · “stop at $1.5M or max all five” as one section · sample numbers from the current page
+You can stop at $1.5M.
+Or push all 5 metrics to their max.
+STOP HERE · YOUR GOAL
+By increasing your Revenue Per Visitor™ from $0.75 → $4.92
++$1.5M/year
+($125K/mo)
+
+Without adding a penny to your current marketing and ad spend.
+
+And nope, you don’t need to max out all 5 metrics to get there.
+
+But… what if you did?
+→
+OR GO ALL THE WAY · MAX BENCHMARK
+
+If you hit the maximum benchmark across all five conversion points,
+
+your existing traffic could add
+$2.97M/year
+~$3.24M total: 12× today
+Yep, with the same traffic!
+WHERE YOU ARE, AND WHERE YOU COULD GO
+
+Your yearly revenue, drawn to scale. Same visitors in every row.
+
+Today
+RPV $0.75
+~$270K/year
+Stop at your goal
+RPV $4.92 · +$1.5M
+~$1.77M/year
+6.6× today
+All 5 metrics at max
+capped at 12× · RPV $9.00 · +$2.97M
+~$3.24M/year
+12× today
+Today’s revenue is worked back from your numbers: $1.5M ÷ ($4.92 − $0.75) ≈ 360K visitors a year × $0.75 ≈ $270K.
+Alefiya Khorakiwala
+Co-founder, Nomads Marketing
+YES, 12× SOUNDS LIKE A STRETCH
+It is a stretch, which is why nobody gets there in one jump.
+
+You don’t fix all five metrics at once. You fix the first red one and get a 2–3× jump. Then you fix the next, and you’re closer to 5×. Then the next, and the next.
+
+It might take two or three years. But you’ll know exactly how to grow month on month and year on year, because Revenue Per Visitor™ gives you a north star to diagnose every growth problem, and the workshop shows you how to clear each metric.
+
+1×
+Today
+3×
+Fix metric 1
+5×
+Fix metric 2
+8×
+Fix metric 3
+12×
+Your ceiling, where our clients have reached
+
+WE’VE DONE 12× AND MORE FOR CLIENTS
+
+Video Mastermind
+13.5×
+$8,000/month → $108,000/month
+Client result 2
+Jimmy: pull from the homepage
+Client result 3
+Jimmy: pull from the homepage
+
+More on how to max these metrics in the upcoming workshop.
+
+Watch the workshop →
+Design notes for the team
+One message, one section. “Stop at $1.5M” and “what if you maxed out” live in one navy section, joined by “But… what if you did?”.
+Bigger headline, and “Stop here · your goal” / “Or go all the way” are now small eyebrows, not badges.
+Card sizes tell the story: the $1.5M card is deliberately smaller; the max card is the biggest thing on screen, white with a green outline, so both cards stand right off the dark background.
+Where they are → where they could go: today, goal and max are drawn as bars on one scale, with the growth multiple on each (6.6× and 12×).
+Scepticism block: straight after the bars, we admit 12× is a stretch and show the path as steps: fix one metric at a time, 3× → 5× → 8× → 12×. The middle steps are illustrative, not promised. Jimmy: pull 2–3 client results of 12× or more from the homepage into the proof cards.
+New quiz logic, 12× cap: the “all 5 metrics at max” number can never be more than 12× today. Max RPV = the lower of (RPV with all five metrics at their ceilings) and (12 × current RPV). Max added revenue = (max RPV − current RPV) × annual visitors. In this example: 12 × $0.75 = $9.00 RPV, so ~$3.24M/year in total and +$2.97M on top of today, instead of the uncapped $10.6M.
+Edge case to decide: for very small businesses the $1.5M goal itself can be more than 12× today (e.g. $60K/year today needs 26× to add $1.5M). Should the cap win there, or the goal?
+For the build: “today” must use each person’s real current revenue, not the worked-back estimate in this mock-up. The ~$270K figure happens to match the $10k–35k/month revenue tier ($270,000), but please confirm the formula with whoever owns the calculator.

@@ -1,0 +1,138 @@
+/* Case study — L · Creative Delivery (user, Nov 2): the reference's split
+   layout and colours — navy #152639 left with the tablet, light paper right
+   (the GolfBays paper), navy chip, plum headline, navy body, big green
+   13.5× to close (no button, user Nov 2). Stacks under 860px like the
+   GolfBays / Lara sections. */
+
+.rlc {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+/* ——— left: navy + tablet ——— */
+
+.rlc__media {
+  background: #152639;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 48px;
+}
+
+.rlc__img {
+  display: block;
+  width: min(90%, 680px); /* user, Nov 2 (desktop; stacked layout below 860 keeps its own) */
+  height: auto;
+}
+
+/* ——— right: light paper + story ——— */
+
+.rlc__copy {
+  background: #f7f3e8 url('/assets/results-paper-texture.webp') center / cover;
+  display: flex;
+  align-items: center;
+  padding: 80px 72px;
+}
+
+.rlc__copy-inner {
+  max-width: 600px;
+}
+
+.rlc__chip {
+  display: inline-block;
+  background: #152639;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-weight: 500; /* a touch lighter (user, Nov 2) */
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  padding: 6px 12px;
+}
+
+/* size from the shared headline scale (results.css: 38 / 32 / 26) */
+.rlc__head {
+  margin: 14px 0 0;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 38px;
+  line-height: 1.2;
+  color: #5d1b4e;
+}
+
+.rlc__p {
+  margin: 20px 0 0;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #263548;
+}
+
+.rlc__p .results-em {
+  font-weight: 800;
+  color: #122132;
+}
+
+/* "$8,000 to $108,000/mo." bigger (user, Nov 2) */
+.rlc__p .rlc__fig {
+  font-size: 1.35em;
+  line-height: 1.3;
+}
+
+/* the big figure that closes the story, in the page's big-number style
+   (the hero / proof green) */
+.rlc__big {
+  margin: 34px 0 0;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: #2a9a5e;
+}
+
+/* ——— responsive ——— */
+
+@media (max-width: 1100px) {
+  .rlc__media {
+    padding: 56px 32px;
+  }
+  .rlc__copy {
+    padding: 64px 44px;
+  }
+}
+
+/* stacked: tablet on top, story below */
+@media (max-width: 860px) {
+  .rlc {
+    grid-template-columns: 1fr;
+  }
+  .rlc__media {
+    padding: 48px 24px;
+  }
+  .rlc__img {
+    width: min(100%, 560px);
+  }
+  .rlc__copy {
+    padding: 48px 24px 56px;
+  }
+  .rlc__copy-inner {
+    max-width: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .rlc__big {
+    font-size: 52px;
+  }
+}
+
+@media (max-width: 400px) {
+  .rlc__copy {
+    padding: 40px 18px 48px;
+  }
+  .rlc__p {
+    font-size: 16px;
+  }
+}

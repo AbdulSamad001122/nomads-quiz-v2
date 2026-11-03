@@ -177,9 +177,10 @@ export default function StopOrPush({ result, tokens }) {
             <p className="rso__rpv">
               {c.stopRpvBefore}{' '}
               <b>
-                <span className="rso__from">{tokens.current_rpv}</span> →{' '}
+                <span className="rso__from">{tokens.current_rpv}</span> {c.stopRpvTo}{' '}
                 <span className="rso__to">{tokens.goal_rpv}</span>
               </b>
+              {c.stopRpvAfter}
             </p>
             <p className="rso__big">
               {c.stopBig}
@@ -247,7 +248,7 @@ export default function StopOrPush({ result, tokens }) {
                   <small>{c.whoRole}</small>
                 </div>
               </div>
-              <span className="rso__eyebrow rso__eyebrow--rose">{c.realEyebrow}</span>
+              <span className="rso__eyebrow rso__eyebrow--chip">{c.realEyebrow}</span>
               <h3 className="rso__real-head">{c.realHead}</h3>
               <p className="rso__real-p">{c.realP1}</p>
               <p className="rso__real-p">{emphasize(c.realP2, [c.realP2Bold])}</p>
@@ -271,16 +272,9 @@ export default function StopOrPush({ result, tokens }) {
                 ))}
               </div>
             </div>
-            <p className="rso__proof-head">{c.proofHead}</p>
-            <div className="rso__proof">
-              {c.proof.map((p) => (
-                <div key={p.name} className="rso__pc">
-                  <b>{p.name}</b>
-                  <span>{p.big}</span>
-                  <small>{p.small}</small>
-                </div>
-              ))}
-            </div>
+            {/* the "We've done 12× and more" Video Mastermind card moved
+                out into its own case-study section, CreativeDelivery.jsx
+                (user, Nov 2) */}
           </div>
         )}
 

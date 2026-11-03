@@ -77,27 +77,67 @@
 
 /* ——— white half ——— */
 
+/* top padding clears the "See What's Working" stamp, which hangs 94px
+   into this half, so the navy card starts below it; 48px sides keep the
+   card clear of the keyline frame (inset 36px) at 1101-1180px widths */
 .rwk__light {
   position: relative;
-  padding: 76px 40px 92px;
+  padding: 128px 48px 92px;
 }
 
+/* workshop page mockup on the left, the invite + button on the right
+   (user, Oct 31); stacked on phones */
 .rwk__invite {
-  max-width: 990px;
+  max-width: 1100px;
   margin: 0 auto;
   text-align: left;
+  display: grid;
+  grid-template-columns: clamp(220px, 32%, 350px) minmax(0, 1fr);
+  gap: clamp(36px, 5.5vw, 80px);
+  align-items: center;
+  /* the mockup, text and button sit on one navy card on the white
+     section, rounded like row 4's "Two paths" card, no shadow, up to
+     1100px wide (user, Oct 31) */
+  background: #0f1c2a;
+  border-radius: 20px;
+  padding: clamp(24px, 4vw, 52px);
+}
+
+.rwk__mock,
+.rwk__mock img {
+  display: block;
+}
+
+.rwk__mock img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+/* the mockup opens the workshop page in a new tab; it grows a little on
+   hover (user, Oct 31) */
+@media (hover: hover) {
+  .rwk__mock:hover img {
+    transform: scale(1.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rwk__mock img {
+    transition: none;
+  }
 }
 
 .rwk__p--dark {
   margin-top: 0;
-  color: #2f2a2a;
+  color: #ffffff;
 }
 
 .rwk__btn {
-  /* QC item 7: workshop buttons centred (Loom 2:51) */
+  /* lined up with the text above it (user, Oct 31) */
   display: block;
   width: fit-content;
-  margin: 34px auto 0;
+  margin: 34px 0 0;
   background: #f3e6f6;
   color: #4b1240;
   border: 2px solid #5d1b4e;
@@ -147,8 +187,10 @@
     width: 150px;
     height: 150px;
   }
+  /* room under the stamp: on tablets the text column runs taller than
+     the mockup and starts at the top, right below the stamp */
   .rwk__light {
-    padding: 64px 36px 72px;
+    padding: 104px 36px 72px;
   }
 }
 
@@ -179,7 +221,15 @@
     height: 112px;
   }
   .rwk__light {
-    padding: 68px 22px 48px;
+    padding: 88px 22px 48px;
+  }
+  .rwk__invite {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+  .rwk__mock {
+    width: min(250px, 72%);
+    margin: 0 auto;
   }
   .rwk__btn {
     margin-top: 26px;
