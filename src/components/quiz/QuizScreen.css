@@ -1457,6 +1457,13 @@
   -webkit-box-decoration-break: clone;
 }
 
+/* on the maroon (pink) screen: a stone highlight with the words in the
+   quiz's maroon (user, Nov 3) */
+.quiz-screen--maroon .option-card__mark {
+  background: #e4c8bc;
+  color: #5d1b4e;
+}
+
 /* Q13 on phones (user, Nov 3: text squeezed at 320px): tighter spacing, a
    smaller number, icon and radio, and slightly smaller text, so each answer
    has room to breathe */
