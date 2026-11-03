@@ -27,6 +27,9 @@ if (!html) {
   delete ref.win_s;
   delete ref.next1;
   ref.q1 = ref.q1.replace('Maximize', 'Maximise');
+  // Alefiya (doc comment, Nov 3): drop "Find a category you can win." and
+  // start with "Find a less crowded category, …".
+  ref.fix_p = 'Find a **less crowded category**, then own it and dominate it with your clear differentiator.';
   assert.deepStrictEqual(copy, ref, 'copy.json differs from the HTML card');
   console.log('q12d: copy identical to the HTML card ✓');
 }
