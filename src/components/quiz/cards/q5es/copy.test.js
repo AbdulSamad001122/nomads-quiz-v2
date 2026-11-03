@@ -24,7 +24,7 @@ if (!html) {
   ref.why = ref.why.charAt(0).toUpperCase() + ref.why.slice(1);
   // Quiz QC Oct 31 (Alefiya's Loom 8:51; Yemi, Nov 2: on Estelle's slide
   // only): "quiz takers" -> "Conversion Quiz™ takers".
-  ref.built_1 = ref.built_1.replace('so quiz takers', 'so Conversion Quiz™ takers');
+  // Yemi (Nov 3): point 1 keeps "quiz takers" (Conversion Quiz™ is earlier in that sentence).
   ref.r0s = ref.r0s.replace(/^quiz takers/, 'Conversion Quiz™ takers');
   assert.deepStrictEqual(copy, ref, 'copy.json differs from the HTML card');
   console.log('q5es: copy identical to the HTML card ✓');
