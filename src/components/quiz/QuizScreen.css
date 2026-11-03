@@ -1457,6 +1457,43 @@
   -webkit-box-decoration-break: clone;
 }
 
+/* Q13 on phones (user, Nov 3: text squeezed at 320px): tighter spacing, a
+   smaller number, icon and radio, and slightly smaller text, so each answer
+   has room to breathe */
+@media (max-width: 479px) {
+  .quiz-q-q13 .option-card {
+    gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .quiz-q-q13 .option-card__number {
+    width: 26px;
+    height: 26px;
+    font-size: 13px;
+  }
+
+  .quiz-q-q13 .option-card__icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .quiz-q-q13 .option-card__radio {
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
+  }
+
+  .quiz-q-q13 .option-card__label,
+  .quiz-q-q13 .option-card--long .option-card__label {
+    font-size: 15px;
+    line-height: 1.38;
+  }
+
+  .quiz-q-q13 .option-card__mark {
+    font-size: 1.04em;
+  }
+}
+
 .option-card__icon {
   flex-shrink: 0;
   display: flex;
