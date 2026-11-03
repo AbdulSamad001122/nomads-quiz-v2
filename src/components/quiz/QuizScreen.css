@@ -1494,6 +1494,14 @@
   }
 }
 
+/* smallest phones: the panel's side margins shrink too, so the cards are wider */
+@media (max-width: 379px) {
+  .quiz-q-q13 .answer-panel {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
 .option-card__icon {
   flex-shrink: 0;
   display: flex;
