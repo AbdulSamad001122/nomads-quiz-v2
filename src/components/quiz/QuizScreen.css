@@ -1444,10 +1444,13 @@
   line-height: 1.4;
 }
 
+/* key words: light blue marker (user, Nov 3 — Yemi found the yellow off),
+   a touch bigger than the rest of the answer so they catch the eye */
 .option-card__mark {
-  background: #ffe15a;
+  background: #cae1f4;
   color: #1d1d1f;
   font-weight: 700;
+  font-size: 1.08em;
   padding: 0.05em 0.2em;
   border-radius: 3px;
   box-decoration-break: clone;
