@@ -165,7 +165,7 @@ body .results-page .rtc__headline {
    row 2's "Answer all 10 questions…" (user, Oct 30), right of the workshop
    mockup, white on the navy card (user, Oct 31) */
 body .results-page .rwk__invite {
-  max-width: 1100px;
+  max-width: 1280px;
 }
 
 body .results-page .rwk__p--dark {
@@ -237,5 +237,13 @@ body .results-page .rwk__p--dark br {
   }
   body .results-page :is(.rta__card:not(.rta__card--plan) .rta__h3, .rsh__h3) {
     font-size: 20px;
+  }
+}
+
+/* small phones: both workshop CTA sentences at 16px (user, Nov 3); last in the file so it
+   beats the 20px phone rule above */
+@media (max-width: 500px) {
+  body .results-page :is(.rmw__answer, .rwk__p--dark) {
+    font-size: 16px;
   }
 }

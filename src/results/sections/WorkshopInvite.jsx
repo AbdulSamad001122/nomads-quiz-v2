@@ -62,7 +62,7 @@ export default function WorkshopInvite({ tokens }) {
         />
       </div>
       <div className="rwk__light">
-        {/* workshop page mockup on the left, the invite and its button on
+        {/* workshop thumbnail on the left (user, Nov 3), the invite and its button on
             the right, the button lined up with the text (user, Oct 31) */}
         <div className="rwk__invite">
           <a
@@ -74,7 +74,7 @@ export default function WorkshopInvite({ tokens }) {
             aria-hidden="true"
             onClick={() => ga.ctaClick('watch_workshop')}
           >
-            <img src="/assets/results-workshop-tablet.webp" alt="" width="860" height="1319" loading="lazy" />
+            <img src="/assets/results-workshop-thumb.webp" alt="" width="1280" height="720" loading="lazy" />
           </a>
           <div className="rwk__invite-text">
             <p className="rwk__p rwk__p--dark">
