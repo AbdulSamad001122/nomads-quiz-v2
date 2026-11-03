@@ -22,6 +22,8 @@ if (!html) {
   // Quiz QC Oct 31 (Yemi, Nov 3: change every "quiz takers" in the quiz):
   // "Conversion Quiz™ takers".
   ref.after_sub = ref.after_sub.replace(/^quiz takers/, 'Conversion Quiz™ takers');
+  // Alefiya (doc comment, Nov 3): "with *a* reason to buy".
+  ref.t2 = ref.t2.replace('with the reason', 'with a reason');
   assert.deepStrictEqual(copy, ref, 'copy.json differs from the HTML card');
   console.log('q5ep: copy identical to the HTML card ✓');
 }
