@@ -602,13 +602,6 @@
   color: var(--rso-mute);
 }
 
-/* phones: the long ceiling caption reads left-aligned (user, Oct 30) */
-@media (max-width: 760px) {
-  .rso__cap--4 {
-    text-align: left;
-  }
-}
-
 .rso__st--0 .rso__blk {
   height: 16px;
   padding-top: 0;
@@ -740,10 +733,6 @@
   }
   .rso__cap {
     font-size: 10px;
-  }
-  /* the long ceiling caption a size down (user, Oct 30) */
-  .rso__cap--4 {
-    font-size: 9px;
   }
   .rso__blk,
   .rso__st-lab {

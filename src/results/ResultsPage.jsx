@@ -6,7 +6,6 @@ import RedMetricsWorkshop from './sections/RedMetricsWorkshop.jsx';
 import ResultBlocks from './sections/ResultBlocks.jsx';
 import StopOrPush from './sections/StopOrPush.jsx';
 import WhatIfYouDid from './sections/WhatIfYouDid.jsx';
-import CreativeDelivery from './sections/CreativeDelivery.jsx';
 import CompoundingRps from './sections/CompoundingRps.jsx';
 import AdSpendSection from './sections/AdSpendSection.jsx';
 import DataNerds from './sections/DataNerds.jsx';
@@ -71,11 +70,10 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
           "hide this section and show blocks 5, 6, and 7 instead").
           WhatIfYouDid keeps only the GolfBays card. */}
       {!result.cappedState && <StopOrPush result={result} tokens={tokens} />}
-      {/* L · Creative Delivery case study — the Video Mastermind card that
-          sat under the 12× ladder, as its own section (user, Nov 2). Rule
-          unchanged: shown when the cap is what limits the max (was "the 12×
-          cap bites", now "the band cap bites", Cap Logic Nov 4). */}
-      {!result.cappedState && result.capped.bandCapBites && <CreativeDelivery />}
+      {/* The "We've done 12× and more for clients" proof card (L · Creative
+          Delivery) is removed — Cap Logic "Proof card" (Yemi, Nov 4 evening):
+          "The case study section further down the page already provides
+          client proof." */}
       <WhatIfYouDid result={result} />
       {/* Copy doc blue box "Block 3 — No email marketing … See Logic Doc
           Blocks 1–3 for the revenue-split copy that renders here" sat
