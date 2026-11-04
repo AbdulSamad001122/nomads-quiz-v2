@@ -80,9 +80,10 @@ export default function WorkshopInvite({ tokens }) {
             <p className="rwk__p rwk__p--dark">
               {c.grabBefore}{' '}
               <br />
-              {holdTogether(c.grabMid1)} {tokens.current_rpv} {c.grabMid2}{' '}
+              {/* today's RPV red, the goal green (Alefiya, 2.0 FINAL RP QC) */}
+              {holdTogether(c.grabMid1)} <span className="rwk__rpv rwk__rpv--now">{tokens.current_rpv}</span> {c.grabMid2}{' '}
               <br />
-              {tokens.goal_rpv} {c.grabAfter}
+              <span className="rwk__rpv rwk__rpv--goal">{tokens.goal_rpv}</span> {c.grabAfter}
             </p>
             <a className="rwk__btn" href={CTA.workshop.href} target="_blank" rel="noopener" onClick={() => ga.ctaClick('watch_workshop')}>
               {c.button}
