@@ -143,10 +143,7 @@ body .results-page :is(
   .rta__head > span,
   .rta__say,
   .rta__bl span,
-  .rad__lede,
-  .rad__foot,
-  .rad__verdict,
-  .rad__pay-intro
+  .rad__ws-p
 ) {
   font-size: 16px;
 }
