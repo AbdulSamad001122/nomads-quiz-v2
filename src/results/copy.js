@@ -1676,30 +1676,27 @@ export const STOP_OR_PUSH = {
   rowMaxChip: '{{max_multiple}} today',
 
   // Scepticism block (design note 5). Cap Logic (Nov 4): shown for every max
-  // beyond 3× today (Alefiya, QC doc comment). Yemi: "Rewrite the 'Yes, 12×
-  // sounds like a stretch' block, since most visitors will see a smaller
-  // multiple" — no new copy given, so only the 12× became each taker's own
-  // multiple; every other word is unchanged.
+  // beyond 3× today (Alefiya, QC doc comment). Yemi's doc asks for this
+  // block to be rewritten but gives no new copy — UNCHANGED until it does
+  // (user, Nov 4: skip, leave as it is).
   whoName: 'Alefiya Khorakiwala',
   whoRole: 'Co-founder, Nomads Marketing',
-  realEyebrow: 'Yes, {{max_multiple}} sounds like a stretch',
+  realEyebrow: 'Yes, 12× sounds like a stretch',
   realHead: 'It is a stretch, which is why nobody gets there in one jump.',
   realP1: 'You don’t fix all five metrics at once. You fix the first red one and get a 2–3× jump. Then you fix the next, and you’re closer to 5×. Then the next, and the next.',
   realP2: 'It might take two or three years. But you’ll know exactly how to grow month on month and year on year, because Revenue Per Visitor™ gives you a north star to diagnose every growth problem, and the workshop shows you how to clear each metric.',
   realP2Bold: 'Revenue Per Visitor™ gives you a north star to diagnose every growth problem',
   // "The middle steps are illustrative, not promised" (design note 5).
-  // Cap Logic (Nov 4): "Update the stairs graphic (1×, 3×, 5×, 8×, 12× 'your
-  // ceiling') so it ends at each visitor's own max instead of 12×." The
-  // ceiling step is the taker's max; middle steps at or above it drop out
-  // (StopOrPush.jsx stairsSteps). Captions unchanged.
-  stairsToday: { x: '1×', cap: 'Today' },
-  stairsMiddle: [
-    { m: 3, cap: 'Fix metric 1' },
-    { m: 5, cap: 'Fix metric 2' },
-    { m: 8, cap: 'Fix metric 3' },
+  // Cap Logic (Nov 4) wants the stairs to end at each visitor's own max, but
+  // gives no middle steps — UNCHANGED until it does (user, Nov 4: skip).
+  stairs: [
+    { x: '1×', cap: 'Today' },
+    { x: '3×', cap: 'Fix metric 1' },
+    { x: '5×', cap: 'Fix metric 2' },
+    { x: '8×', cap: 'Fix metric 3' },
+    { x: '12×', cap: 'Your ceiling, where our clients have reached' },
   ],
-  stairsCeilingCap: 'Your ceiling, where our clients have reached',
-  stairsLabel: 'Growth steps: {{steps}}',
+  stairsLabel: 'Growth steps: today 1×, first metric fixed 3×, second 5×, third 8×, ceiling 12×',
   // (the "We've done 12× and more for clients" Video Mastermind card is now
   // its own section: CREATIVE_DELIVERY below, user Nov 2)
 

@@ -113,19 +113,6 @@ function placeLabels(ladder) {
  * blocks 5, 6, and 7 instead".
  */
 
-/* Cap Logic (Nov 4): the stairs end at the taker's own max. Today, then the
-   illustrative middle steps that sit below that max, then the max as the
-   ceiling. Each step keeps its original look (rso__st--0…3); the ceiling is
-   always --4. */
-export function stairsSteps(c, maxMultipleText, maxMultiple) {
-  const steps = [{ ...c.stairsToday, look: 0 }];
-  c.stairsMiddle.forEach((s, i) => {
-    if (s.m < maxMultiple - 0.05) steps.push({ x: `${s.m}×`, cap: s.cap, look: i + 1 });
-  });
-  steps.push({ x: maxMultipleText, cap: c.stairsCeilingCap, look: 4 });
-  return steps;
-}
-
 export default function StopOrPush({ result, tokens }) {
   const c = STOP_OR_PUSH;
   const t = (s) => fill(s, tokens);
@@ -154,7 +141,6 @@ export default function StopOrPush({ result, tokens }) {
   const today = result.currentAnnualRevenue;
   const goal = today + 1_500_000;
   const max = Math.max(result.capped.maxRevenue, goal);
-  const stairs = stairsSteps(c, tokens.max_multiple, result.capped.maxMultiple);
   const pct = (v) => Math.max(1.5, Math.min(100, (v / max) * 100));
   const rows = [
     { key: 'today', label: c.rowToday, sub: t(c.rowTodaySub), val: t(c.rowTodayVal), chip: null, w: pct(today) },
@@ -264,29 +250,25 @@ export default function StopOrPush({ result, tokens }) {
                   <small>{c.whoRole}</small>
                 </div>
               </div>
-              <span className="rso__eyebrow rso__eyebrow--chip">{t(c.realEyebrow)}</span>
+              <span className="rso__eyebrow rso__eyebrow--chip">{c.realEyebrow}</span>
               <h3 className="rso__real-head">{c.realHead}</h3>
               <p className="rso__real-p">{c.realP1}</p>
               <p className="rso__real-p">{emphasize(c.realP2, [c.realP2Bold])}</p>
             </div>
             {/* bars and captions in two rows, so every bar stands on the same
                 baseline however long its caption wraps (user, Oct 30) */}
-            <div
-              className="rso__stairs"
-              role="img"
-              aria-label={fill(c.stairsLabel, { steps: stairs.map((s) => `${s.cap} ${s.x}`).join(', ') })}
-            >
+            <div className="rso__stairs" role="img" aria-label={c.stairsLabel}>
               <div className="rso__stairs-row rso__stairs-row--bars">
-                {stairs.map((s, i) => (
-                  <div key={s.look} className={`rso__st rso__st--${s.look}`}>
+                {c.stairs.map((s, i) => (
+                  <div key={s.x} className={`rso__st rso__st--${i}`}>
                     {i === 0 && <span className="rso__st-lab">{s.x}</span>}
                     <div className="rso__blk">{i === 0 ? null : s.x}</div>
                   </div>
                 ))}
               </div>
               <div className="rso__stairs-row">
-                {stairs.map((s) => (
-                  <span key={s.look} className={`rso__cap rso__cap--${s.look}`}>
+                {c.stairs.map((s, i) => (
+                  <span key={s.x} className={`rso__cap rso__cap--${i}`}>
                     {s.cap}
                   </span>
                 ))}

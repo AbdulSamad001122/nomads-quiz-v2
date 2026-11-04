@@ -72,9 +72,10 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
           WhatIfYouDid keeps only the GolfBays card. */}
       {!result.cappedState && <StopOrPush result={result} tokens={tokens} />}
       {/* L · Creative Delivery case study — the Video Mastermind card that
-          sat under the stretch block, as its own section (user, Nov 2); it
-          follows that block, so it shows when the max is beyond 3× today */}
-      {!result.cappedState && result.capped.showStretch && <CreativeDelivery />}
+          sat under the 12× ladder, as its own section (user, Nov 2). Rule
+          unchanged: shown when the cap is what limits the max (was "the 12×
+          cap bites", now "the band cap bites", Cap Logic Nov 4). */}
+      {!result.cappedState && result.capped.bandCapBites && <CreativeDelivery />}
       <WhatIfYouDid result={result} />
       {/* Copy doc blue box "Block 3 — No email marketing … See Logic Doc
           Blocks 1–3 for the revenue-split copy that renders here" sat

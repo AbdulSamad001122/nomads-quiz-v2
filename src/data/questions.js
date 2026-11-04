@@ -100,8 +100,8 @@ export const QUESTIONS = [
     // and "$500K+/month (new)" shows a field asking for their annual revenue.
     manualEntry: true,
     manualType: 'currency',
+    // doc: "show a field asking for their annual revenue"
     manualLabel: 'Your annual revenue',
-    manualPlaceholder: 'Type your annual revenue — e.g. 8000000',
     question:
       'To make our recommendations realistic, where is your business today?',
     options: [

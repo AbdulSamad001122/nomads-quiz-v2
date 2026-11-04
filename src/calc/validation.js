@@ -78,8 +78,8 @@ export function impossibleCheck(qid, resolved, answers = {}) {
   ) {
     return {
       id: 'top-revenue-under-6m',
-      message:
-        "$500K+/month is at least $6M a year, but you entered less than that. Mind checking the number?",
+      // the doc's own words ("check the number before continuing")
+      message: 'Please check the number before continuing.',
     };
   }
   if (qid === 'q8' && resolved.q8 != null && resolved.q7 != null && resolved.q8 >= resolved.q7) {
