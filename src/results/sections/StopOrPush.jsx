@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { STOP_OR_PUSH, CTA } from '../copy.js';
 import { fill } from '../resolveTokens.js';
+import { stairsSteps } from '../stairs.js';
 import HighlightSweep from '../../components/primitives/HighlightSweep.jsx';
 import { emphasize } from '../emphasize.jsx';
 import { ga } from '../../analytics/ga.js';
@@ -141,6 +142,8 @@ export default function StopOrPush({ result, tokens }) {
   const today = result.currentAnnualRevenue;
   const goal = today + 1_500_000;
   const max = Math.max(result.capped.maxRevenue, goal);
+  const stairs = stairsSteps(c.stairs, result.capped.maxMultiple);
+  const stairsLabel = fill(c.stairsLabel, Object.fromEntries(stairs.map((s, i) => [`s${i}`, s.x])));
   const pct = (v) => Math.max(1.5, Math.min(100, (v / max) * 100));
   const rows = [
     { key: 'today', label: c.rowToday, sub: t(c.rowTodaySub), val: t(c.rowTodayVal), chip: null, w: pct(today) },
@@ -250,33 +253,32 @@ export default function StopOrPush({ result, tokens }) {
                   <small>{c.whoRole}</small>
                 </div>
               </div>
-              <span className="rso__eyebrow rso__eyebrow--chip">{c.realEyebrow}</span>
+              <span className="rso__eyebrow rso__eyebrow--chip">{t(c.realEyebrow)}</span>
               <h3 className="rso__real-head">{c.realHead}</h3>
               <p className="rso__real-p">{c.realP1}</p>
               <p className="rso__real-p">{emphasize(c.realP2, [c.realP2Bold])}</p>
             </div>
             {/* bars and captions in two rows, so every bar stands on the same
                 baseline however long its caption wraps (user, Oct 30) */}
-            <div className="rso__stairs" role="img" aria-label={c.stairsLabel}>
+            <div className="rso__stairs" role="img" aria-label={stairsLabel}>
               <div className="rso__stairs-row rso__stairs-row--bars">
-                {c.stairs.map((s, i) => (
-                  <div key={s.x} className={`rso__st rso__st--${i}`}>
+                {stairs.map((s, i) => (
+                  <div key={s.cap} className={`rso__st rso__st--${i}`}>
                     {i === 0 && <span className="rso__st-lab">{s.x}</span>}
-                    <div className="rso__blk">{i === 0 ? null : s.x}</div>
+                    <div className="rso__blk" style={{ height: `${s.height}px` }}>
+                      {i === 0 ? null : s.x}
+                    </div>
                   </div>
                 ))}
               </div>
               <div className="rso__stairs-row">
-                {c.stairs.map((s, i) => (
-                  <span key={s.x} className={`rso__cap rso__cap--${i}`}>
+                {stairs.map((s, i) => (
+                  <span key={s.cap} className={`rso__cap rso__cap--${i}`}>
                     {s.cap}
                   </span>
                 ))}
               </div>
             </div>
-            {/* the "We've done 12× and more" Video Mastermind card moved
-                out into its own case-study section, CreativeDelivery.jsx
-                (user, Nov 2) */}
           </div>
         )}
 

@@ -7,7 +7,9 @@ import { calculate, runImprovementLoop, metricColour, CEILINGS, bandMax } from '
 import { resolveInputs } from './backendValues.js';
 import { validateManual, impossibleCheck } from './validation.js';
 import { rpv2 } from './rounding.js';
-import { anyMetricRed, redMetricRows, rpvMultiple, resolveTokens } from '../results/resolveTokens.js';
+import { anyMetricRed, redMetricRows, rpvMultiple, resolveTokens, fill } from '../results/resolveTokens.js';
+import { stairsSteps, STAIRS_FULL_PX } from '../results/stairs.js';
+import { STOP_OR_PUSH } from '../results/copy.js';
 
 let pass = 0,
   fail = 0;
@@ -201,6 +203,33 @@ const near = (a, b, tol = 1e-6) => Math.abs(a - b) <= tol;
   ok('stretch · 3× ($8M) hides it', !big(8000000, 800000).capped.showStretch);
   ok('stretch · 2.5× ($12M) hides it', !big(12000000, 1200000).capped.showStretch);
   ok('stretch · 2.4× (Example B) hides it', !exB.capped.showStretch);
+
+  // Yemi's updated Cap Logic tab (Nov 4 evening) — stretch block copy
+  const c = STOP_OR_PUSH;
+  ok('stretch · eyebrow 12× for the $270K band', fill(c.realEyebrow, resolveTokens(big(270000, 27000))).toUpperCase() === 'YES, 12× SOUNDS LIKE A STRETCH');
+  ok('stretch · eyebrow 4× for the $4.5M band', fill(c.realEyebrow, resolveTokens(big(4500000, 450000))).toUpperCase() === 'YES, 4× SOUNDS LIKE A STRETCH');
+  ok('stretch · headline unchanged', c.realHead === 'It is a stretch, which is why nobody gets there in one jump.');
+  ok('stretch · first paragraph = Yemi’s rewrite', c.realP1 === 'You don’t fix all five metrics at once. You fix the first red one and see your first jump. Then you fix the next, and the next, and each fix adds to the one before it.');
+  ok('stretch · second paragraph unchanged', c.realP2.startsWith('It might take two or three years. But you’ll know exactly how to grow month on month and year on year'));
+
+  // Stairs graphic — Yemi's example table, row by row
+  const stairRows = [
+    [12, ['1×', '3×', '5×', '8×', '12×']],
+    [6, ['1×', '1.9×', '2.8×', '4.2×', '6×']],
+    [4, ['1×', '1.5×', '2.1×', '2.9×', '4×']],
+    [2.5, ['1×', '1.3×', '1.5×', '2×', '2.5×']],
+  ];
+  for (const [m, want] of stairRows) {
+    const got = stairsSteps(c.stairs, m).map((s) => s.x);
+    ok(`stairs · ${m}× → ${want.join(' ')}`, got.join(' ') === want.join(' '), got.join(' '));
+  }
+  const s6 = stairsSteps(c.stairs, 6);
+  ok('stairs · last bar always full height', [12, 6, 4, 2.5, 3.7].every((m) => stairsSteps(c.stairs, m)[4].height === STAIRS_FULL_PX));
+  ok('stairs · heights scale to the max (6×: 1.9× bar = 1.9/6 of full)', s6[1].height === Math.round((STAIRS_FULL_PX * 1.9) / 6));
+  ok('stairs · bars only grow', [12, 6, 4, 2.5].every((m) => stairsSteps(c.stairs, m).every((s, i, a) => i === 0 || s.height > a[i - 1].height)));
+  ok('stairs · captions Today / Fix metric 1–3 / Your max', s6.map((s) => s.cap).join('|') === 'Today|Fix metric 1|Fix metric 2|Fix metric 3|Your max');
+  ok('stairs · last step = the badge figure', stairsSteps(c.stairs, exA.capped.maxMultiple)[4].x === resolveTokens(exA).max_multiple);
+  ok('proof card · "We’ve done 12× and more" copy removed', !JSON.stringify(c).includes('12× AND MORE') && !JSON.stringify(c).includes('ceiling, where our clients'));
 
   // Q2 "$500K+/month" typed revenue (Cap Logic "Change to Q2")
   const typed = resolveInputs({ q2a: 'manual' }, { q2a: '$8,000,000' }, 'plg');

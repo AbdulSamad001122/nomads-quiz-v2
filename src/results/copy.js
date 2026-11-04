@@ -1676,29 +1676,34 @@ export const STOP_OR_PUSH = {
   rowMaxChip: '{{max_multiple}} today',
 
   // Scepticism block (design note 5). Cap Logic (Nov 4): shown for every max
-  // beyond 3× today (Alefiya, QC doc comment). Yemi's doc asks for this
-  // block to be rewritten but gives no new copy — UNCHANGED until it does
-  // (user, Nov 4: skip, leave as it is).
+  // beyond 3× today (Alefiya, QC doc comment). Copy = Yemi's updated Cap
+  // Logic tab (Nov 4 evening): eyebrow "YES, {max}× SOUNDS LIKE A STRETCH"
+  // with the visitor's own max ÷ today (Step 8; uppercase comes from the
+  // eyebrow CSS), headline + second paragraph unchanged, first paragraph
+  // rewritten.
   whoName: 'Alefiya Khorakiwala',
   whoRole: 'Co-founder, Nomads Marketing',
-  realEyebrow: 'Yes, 12× sounds like a stretch',
+  realEyebrow: 'Yes, {{max_multiple}} sounds like a stretch',
   realHead: 'It is a stretch, which is why nobody gets there in one jump.',
-  realP1: 'You don’t fix all five metrics at once. You fix the first red one and get a 2–3× jump. Then you fix the next, and you’re closer to 5×. Then the next, and the next.',
+  realP1: 'You don’t fix all five metrics at once. You fix the first red one and see your first jump. Then you fix the next, and the next, and each fix adds to the one before it.',
   realP2: 'It might take two or three years. But you’ll know exactly how to grow month on month and year on year, because Revenue Per Visitor™ gives you a north star to diagnose every growth problem, and the workshop shows you how to clear each metric.',
   realP2Bold: 'Revenue Per Visitor™ gives you a north star to diagnose every growth problem',
-  // "The middle steps are illustrative, not promised" (design note 5).
-  // Cap Logic (Nov 4) wants the stairs to end at each visitor's own max, but
-  // gives no middle steps — UNCHANGED until it does (user, Nov 4: skip).
+  // Stairs graphic — Yemi's updated Cap Logic tab (Nov 4 evening): "The last
+  // step is the visitor's max. Each earlier step sits at a fixed fraction of
+  // the distance between 1× and the max": step = 1 + f × (max − 1). Values
+  // rounded to one decimal, ".0" dropped; bar heights scale to the visitor's
+  // max (stairsSteps in StopOrPush.jsx). Last label "Your ceiling, where our
+  // clients have reached" → "Your max".
   stairs: [
-    { x: '1×', cap: 'Today' },
-    { x: '3×', cap: 'Fix metric 1' },
-    { x: '5×', cap: 'Fix metric 2' },
-    { x: '8×', cap: 'Fix metric 3' },
-    { x: '12×', cap: 'Your ceiling, where our clients have reached' },
+    { f: 0, cap: 'Today' },
+    { f: 0.18, cap: 'Fix metric 1' },
+    { f: 0.36, cap: 'Fix metric 2' },
+    { f: 0.64, cap: 'Fix metric 3' },
+    { f: 1, cap: 'Your max' },
   ],
-  stairsLabel: 'Growth steps: today 1×, first metric fixed 3×, second 5×, third 8×, ceiling 12×',
-  // (the "We've done 12× and more for clients" Video Mastermind card is now
-  // its own section: CREATIVE_DELIVERY below, user Nov 2)
+  stairsLabel: 'Growth steps: today {{s0}}, first metric fixed {{s1}}, second {{s2}}, third {{s3}}, your max {{s4}}',
+  // (the "We've done 12× and more for clients" proof card: removed — Cap
+  // Logic "Proof card", Nov 4 evening)
 
   // closing line + the workshop button, both exactly as the design (the →
   // is drawn in JSX); link + tracking id from CTA.workshop
@@ -1706,27 +1711,3 @@ export const STOP_OR_PUSH = {
   button: 'Watch the workshop',
 };
 
-/**
- * Case study — L · Creative Delivery (user, Nov 2): its own split section
- * right after the "It is a stretch…" card, replacing the Video Mastermind
- * proof card there. Copy is the user's reference screenshot, word for word
- * (curly quotes, "wanna", CREATIVE DELIVERY in caps); `bold` lists the
- * phrases the reference sets in bold. The big 13.5× closes the right side.
- */
-export const CREATIVE_DELIVERY = {
-  // the old proof card's label, now the chip (user, Nov 2)
-  chip: 'WE’VE DONE 12× AND MORE FOR CLIENTS',
-  head: 'L • Creative Delivery',
-  paras: [
-    'One of our clients positioned their funnel based on their understanding of their audience. They were getting 30,000+ impressions on each post and 300+ comments; they also booked 29 sales calls in 2 weeks, but tanked 27 of them.',
-    'His POV was that videos should be “ungeneric,” which was great, but it didn’t really mean anything to his audience. During the research phase, clients and prospects kept saying, “I wanna be creative.”',
-    'So we crafted the big idea, “CREATIVE DELIVERY,” and positioned him as the professional who turned simple messages into fun and creative videos.',
-    'He closed 29 of the next 31 calls, going from making $8,000 to $108,000/mo.',
-  ],
-  bold: ['30,000+', '300+ comments;', 'booked 29 sales calls', 'tanked 27', '“I wanna be creative.”', '29 of the next 31 calls,', '$8,000 to $108,000/mo.'],
-  // the revenue jump, set bigger than the other bold bits (user, Nov 2)
-  figure: '$8,000 to $108,000/mo.',
-  // the reference's "READ FULL CASE STUDY→" button is left out (user, Nov 2)
-  big: '13.5×',
-  imageAlt: 'The Lean Video System landing page on a tablet',
-};
