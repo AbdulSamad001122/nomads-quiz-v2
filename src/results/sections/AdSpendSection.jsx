@@ -61,7 +61,10 @@ export default function AdSpendSection({ result, adAdjustable = false }) {
 
   const fillPct = ((sharePct - 10) / 90) * 100;
   const ext = CTA.workshop.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : null;
-  const perMonth = (v) => fill(c.spendChip, { spend: money(v) });
+  // the spend is the taker's own answer: shown as entered, to the dollar
+  // ($30 stays $30, $7,550 stays $7,550; money() rounds to $100 — review)
+  const spendMoney = (v) => `$${Math.round(v).toLocaleString('en-US')}`;
+  const perMonth = (v, fmt = money) => fill(c.spendChip, { spend: fmt(v) });
 
   return (
     <section className="rad">
@@ -70,7 +73,7 @@ export default function AdSpendSection({ result, adAdjustable = false }) {
         <h2 className="rad__headline">{c.headline}</h2>
         {hasSpend ? (
           <p className="rad__spend">
-            {c.spendBefore} <b>{perMonth(spend)}</b>
+            {c.spendBefore} <b>{perMonth(spend, spendMoney)}</b>
             {c.spendAfter}
           </p>
         ) : (
@@ -148,7 +151,7 @@ export default function AdSpendSection({ result, adAdjustable = false }) {
               <b className="rad__g">{rpvMoney(r.goalRPV)}</b>
               {hasSpend && (
                 <>
-                  {c.wsSame} <b>{perMonth(spend)}</b> {c.wsInAds} <b>{perMonth(gain)}</b>
+                  {c.wsSame} <b>{perMonth(spend, spendMoney)}</b> {c.wsInAds} <b>{perMonth(gain)}</b>
                 </>
               )}
               {c.wsAfter}
