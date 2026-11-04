@@ -189,6 +189,10 @@ const near = (a, b, tol = 1e-6) => Math.abs(a - b) <= tol;
   // Step 7 — $60K × 12 = $720K is below the $1.56M goal → Blocks 5–7
   const small = calculate({ q2: 60000, q7: 7500, q7b: null, q7c: undefined, q8: 500, q9a: 0.005, q9b: 0.05, q10: 25, q11: 12500 }, 'plg');
   ok('cap · $60K: max $720K below goal → capped block', !small.capped.goalWithinCap && small.cappedState && [5, 6].includes(small.cappedBlock), `block=${small.cappedBlock}`);
+  // "If the max isn't higher than the goal" — exactly equal also hides it.
+  // $136,363.64 × 12 = $1,636,363.64 = its goal → not higher → capped.
+  const eq = calculate({ q2: 1_500_000 / 11, q7: 150000, q7b: null, q7c: undefined, q8: 3000, q9a: 0.03, q9b: 0.375, q10: 175, q11: 10000 }, 'plg');
+  ok('cap · max equal to goal → section hidden (step 7 "isn\'t higher")', !eq.capped.goalWithinCap && eq.cappedState, `max=${eq.capped.maxRevenue} goal=${eq.targetRevenue}`);
   ok('cap · $60K gain = 11× today', Math.round(small.capped.achievableGain) === 660000, small.capped.achievableGain);
 
   // Alefiya (QC doc, Nov 4): the "nobody gets there in one jump" block shows

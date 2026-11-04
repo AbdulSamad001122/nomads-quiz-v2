@@ -129,8 +129,9 @@ export function calculate(inputs, path) {
 
   // Which block fires for the 4/5/6/7 slot. Cap Logic step 7: "If the max
   // isn't higher than the goal, hide this section and show blocks 5, 6, and 7
-  // instead" (e.g. $60K × 12 = $720K, below the $1.56M goal).
-  const goalWithinCap = goalRPV <= maxRPV + 1e-9;
+  // instead" (e.g. $60K × 12 = $720K, below the $1.56M goal). "Isn't higher"
+  // → a max exactly equal to the goal also hides it (strictly higher shows).
+  const goalWithinCap = maxRevenue - targetRevenue > 1e-6;
   let cappedBlock;
   if (goalReached && goalWithinCap) cappedBlock = 4;
   else if (achievableGainRaw <= 0) cappedBlock = 7;
