@@ -30,6 +30,8 @@
   color: #ffffff;
   padding: 52px 20px 56px;
   overflow: hidden;
+  /* clip, not hidden, so the pinned stage below can stick (Safari 16+) */
+  overflow: clip;
 }
 
 .rcs__inner {
@@ -92,6 +94,41 @@
 .rcs__hn--alt {
   background: var(--rcs-icebright);
   color: var(--rcs-navy);
+}
+
+/* "$1.5M" in green (Alefiya, 2.0 FINAL RP QC: "make it green") — the
+   page's goal green */
+.rcs__hn--green {
+  background: #72e2a7;
+  color: var(--rcs-navy);
+}
+
+/* ——— pinned (desktop, when the stage fits under the top bar): the
+   controls + the cards stick while the page scrolls past them, and the
+   scroll position picks the card. The extra scroll room is the scrolly's
+   bottom padding; nothing inside changes height while pinned. ——— */
+.rcs--pin {
+  overflow-anchor: none;
+}
+
+/* the extra scroll room is a spacer after the stage (not padding: a sticky
+   element can't travel into its parent's padding) */
+.rcs--pin .rcs__scrolly::after {
+  content: '';
+  display: block;
+  height: var(--rcs-scroll);
+}
+
+.rcs--pin .rcs__stage {
+  position: sticky;
+  top: var(--rcs-pin-top);
+}
+
+/* the row is moved by the page scroll, not dragged sideways */
+.rcs--pin .rcs__track {
+  overflow-x: hidden;
+  scroll-snap-type: none;
+  transition: none;
 }
 
 /* ——— carousel controls ——— */
