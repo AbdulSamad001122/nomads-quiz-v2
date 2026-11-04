@@ -239,7 +239,8 @@ export default function StopOrPush({ result, tokens }) {
               <small>{c.maxMegaSub}</small>
             </p>
             <hr className="rso__rule" />
-            <p className="rso__times">{t(c.maxTimes)}</p>
+            {/* no multiple to show (max under 1.05× today): no empty "That's  more…" */}
+            {tokens.max_multiple && <p className="rso__times">{t(c.maxTimes)}</p>}
             <span className="rso__yep">{c.maxYep}</span>
           </div>
         </div>
