@@ -361,9 +361,12 @@ function devInitialState() {
     e: 'call-convincing',
   };
 
+  // `rev=<annual revenue>`: Q2 answered "$500K+/month" with that typed
+  // figure (Cap Logic, Nov 4), so the real results path can be checked.
+  const rev = p.get('rev');
   const answers = {
     q1: 'founder',
-    q2a: gate ? 'under-10k' : '35k-100k',
+    q2a: rev ? 'manual' : gate ? 'under-10k' : '35k-100k',
     ...(gate ? { q2b: 'yes' } : {}),
     q3: 'agency',
     q4: path === 'plg' ? 'self-serve' : 'calls',
@@ -380,9 +383,10 @@ function devInitialState() {
     q13: ['paid-ads'],
   };
 
-  if (g === 'dq') return { index: 0, answers, dq: 'traffic_gate' };
+  const manual = rev ? { q2a: rev } : {};
+  if (g === 'dq') return { index: 0, answers, manual, dq: 'traffic_gate' };
   const idx = SCREENS.findIndex((s) => s.id === g);
-  return idx >= 0 ? { index: idx, answers, dq: null } : null;
+  return idx >= 0 ? { index: idx, answers, manual, dq: null } : null;
 }
 
 const DEV_INIT = devInitialState();
@@ -415,7 +419,7 @@ export default function QuizFlow({ restored = null } = {}) {
     restored ? restored.answers : DEV_INIT ? DEV_INIT.answers : {}
   );
   const [manualValues, setManualValues] = useState(
-    restored ? restored.manualValues : {}
+    restored ? restored.manualValues : DEV_INIT?.manual ?? {}
   );
   const [otherText, setOtherText] = useState('');
   const [vocText, setVocText] = useState('');
