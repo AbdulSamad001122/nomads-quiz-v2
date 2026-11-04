@@ -111,7 +111,10 @@ export default function CompoundingRps({ result, tokens }) {
       // page scroll then moves the row
       const k = stopOf(i);
       const startY = scrolly.getBoundingClientRect().top + window.scrollY - p.top;
-      window.scrollTo({ top: startY + (k === 0 ? 0.05 : k + 0.1) * p.step, behavior: reducedMotion() ? 'auto' : 'smooth' });
+      // the middle of that stop's stretch, but never past the end of the
+      // pin (the last stop's stretch ends where the stage lets go)
+      const at = k === 0 ? 0.05 : Math.min(k + 0.1, p.stops - 1);
+      window.scrollTo({ top: startY + at * p.step, behavior: reducedMotion() ? 'auto' : 'smooth' });
       return;
     }
     slideTo(i);
@@ -171,12 +174,17 @@ export default function CompoundingRps({ result, tokens }) {
       const stage = stageRef.current;
       const track = trackRef.current;
       if (!stage || !track) return;
-      const prevZoom = stage.style.zoom;
-      stage.style.zoom = '1';
       const w = window.innerWidth;
       const h = document.documentElement.clientHeight;
-      // a phone toolbar sliding in/out only nudges the height: ignore it
-      if (!force && w === lastW && Math.abs(h - lastH) < 120) return;
+      // a phone/tablet toolbar sliding in/out only nudges the height: ignore
+      // that on touch screens; on a desktop every height change re-measures
+      // (a download bar can make the pinned stage taller than the window)
+      const touch = window.matchMedia?.('(pointer: coarse)').matches;
+      if (!force && w === lastW && (h === lastH || (touch && Math.abs(h - lastH) < 120))) return;
+      // measure at full size (checked above first, so an ignored resize
+      // never leaves the zoom off — review, Nov 4)
+      const prevZoom = stage.style.zoom;
+      stage.style.zoom = '1';
       lastW = w;
       lastH = h;
       const tallest = Math.max(0, ...cardEls().map((el) => el.offsetHeight));
@@ -217,7 +225,11 @@ export default function CompoundingRps({ result, tokens }) {
 
   useEffect(() => {
     const scrolly = scrollyRef.current;
-    if (!pin || !scrolly) return undefined;
+    if (!pin || !scrolly) {
+      // unpinned (or never pinned): the row fits the card on screen again
+      fitHeight();
+      return undefined;
+    }
     const last = pin.stops - 1;
     let raf = 0;
     const pick = (glide) => {
