@@ -9,11 +9,12 @@ import './AdSpendSection.css';
 /* "$X back for every $1" — the ROAS as money, one decimal like the old
    ROAS label, but rounding may never lift a return below 1× to "$1.00"
    (a true 0.96 reads "$0.96") or turn a real return into "$0.00". */
+const cents = (v) => `$${v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 function perDollar(raw, shown) {
   const two = Math.floor(raw * 100) / 100;
-  if (raw < 1 && shown >= 1) return `$${two.toFixed(2)}`;
-  if (raw > 0 && shown === 0) return two > 0 ? `$${two.toFixed(2)}` : '<$0.01';
-  return `$${shown.toFixed(2)}`;
+  if (raw < 1 && shown >= 1) return cents(two);
+  if (raw > 0 && shown === 0) return two > 0 ? cents(two) : '<$0.01';
+  return cents(shown);
 }
 
 /**
