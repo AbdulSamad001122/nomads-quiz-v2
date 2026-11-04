@@ -1668,34 +1668,38 @@ export const STOP_OR_PUSH = {
   rowGoalVal: '~{{goal_total}}/year',
   rowGoalChip: '{{rpv_multiple}} today',
   rowMax: 'All 5 metrics at max',
-  // "capped at 12× ·" only shows when the 12× cap actually bites
-  rowMaxSubCapped: 'capped at 12× · RPV {{max_rpv}} · +{{max_gain}}',
+  // Cap Logic (Nov 4): the "capped at 12× ·" label is removed
   rowMaxSub: 'RPV {{max_rpv}} · +{{max_gain}}',
   rowMaxVal: '~{{max_total}}/year',
   // Loom 3:41 "maybe 12x can be a little bit bigger" — this chip, the total
   // chip's multiple and the 12× step are set larger than the design (CSS).
   rowMaxChip: '{{max_multiple}} today',
 
-  // Scepticism block (design note 5) — Alefiya admits 12× is a stretch.
-  // Shown only when the taker's max is capped at 12× (the case it is written
-  // for: "Yes, 12× sounds like a stretch" / "Your ceiling" = 12×); a taker
-  // whose ceiling is lower never sees "12×" claims (flagged).
+  // Scepticism block (design note 5). Cap Logic (Nov 4): shown for every max
+  // beyond 3× today (Alefiya, QC doc comment). Yemi: "Rewrite the 'Yes, 12×
+  // sounds like a stretch' block, since most visitors will see a smaller
+  // multiple" — no new copy given, so only the 12× became each taker's own
+  // multiple; every other word is unchanged.
   whoName: 'Alefiya Khorakiwala',
   whoRole: 'Co-founder, Nomads Marketing',
-  realEyebrow: 'Yes, 12× sounds like a stretch',
+  realEyebrow: 'Yes, {{max_multiple}} sounds like a stretch',
   realHead: 'It is a stretch, which is why nobody gets there in one jump.',
   realP1: 'You don’t fix all five metrics at once. You fix the first red one and get a 2–3× jump. Then you fix the next, and you’re closer to 5×. Then the next, and the next.',
   realP2: 'It might take two or three years. But you’ll know exactly how to grow month on month and year on year, because Revenue Per Visitor™ gives you a north star to diagnose every growth problem, and the workshop shows you how to clear each metric.',
   realP2Bold: 'Revenue Per Visitor™ gives you a north star to diagnose every growth problem',
-  // "The middle steps are illustrative, not promised" (design note 5)
-  stairs: [
-    { x: '1×', cap: 'Today' },
-    { x: '3×', cap: 'Fix metric 1' },
-    { x: '5×', cap: 'Fix metric 2' },
-    { x: '8×', cap: 'Fix metric 3' },
-    { x: '12×', cap: 'Your ceiling, where our clients have reached' },
+  // "The middle steps are illustrative, not promised" (design note 5).
+  // Cap Logic (Nov 4): "Update the stairs graphic (1×, 3×, 5×, 8×, 12× 'your
+  // ceiling') so it ends at each visitor's own max instead of 12×." The
+  // ceiling step is the taker's max; middle steps at or above it drop out
+  // (StopOrPush.jsx stairsSteps). Captions unchanged.
+  stairsToday: { x: '1×', cap: 'Today' },
+  stairsMiddle: [
+    { m: 3, cap: 'Fix metric 1' },
+    { m: 5, cap: 'Fix metric 2' },
+    { m: 8, cap: 'Fix metric 3' },
   ],
-  stairsLabel: 'Growth steps: today 1×, first metric fixed 3×, second 5×, third 8×, ceiling 12×',
+  stairsCeilingCap: 'Your ceiling, where our clients have reached',
+  stairsLabel: 'Growth steps: {{steps}}',
   // (the "We've done 12× and more for clients" Video Mastermind card is now
   // its own section: CREATIVE_DELIVERY below, user Nov 2)
 

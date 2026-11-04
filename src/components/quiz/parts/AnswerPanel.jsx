@@ -60,6 +60,10 @@ export default function AnswerPanel({
   variant = 'list',
   manualOpen = false,
   manualType = 'number',
+  // optional per-question wording for the box (Q2 "$500K+/month" asks for
+  // annual revenue, Cap Logic Nov 4); default is the shared exact-number text
+  manualLabel = null,
+  manualPlaceholder = null,
   manualValue = '',
   manualError = null,
   onManualChange,
@@ -144,7 +148,7 @@ export default function AnswerPanel({
         {manualOpen ? (
           <div className="qa-manual">
             <span className="qa-manual__label">
-              {manualType === 'text' ? 'Tell us more' : 'Your exact number'}
+              {manualLabel || (manualType === 'text' ? 'Tell us more' : 'Your exact number')}
             </span>
             <input
               className={`qa-manual__input${manualError ? ' qa-manual__input--error' : ''}`}
@@ -152,7 +156,7 @@ export default function AnswerPanel({
               inputMode="decimal"
               value={manualValue}
               onChange={(e) => onManualChange?.(e.target.value)}
-              placeholder={MANUAL_PLACEHOLDER[manualType] || MANUAL_PLACEHOLDER.number}
+              placeholder={manualPlaceholder || MANUAL_PLACEHOLDER[manualType] || MANUAL_PLACEHOLDER.number}
               aria-invalid={manualError ? true : undefined}
               aria-describedby={manualError ? 'qa-manual-error' : undefined}
               autoFocus

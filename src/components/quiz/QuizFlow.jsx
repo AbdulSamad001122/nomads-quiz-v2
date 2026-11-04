@@ -470,7 +470,7 @@ export default function QuizFlow({ restored = null } = {}) {
    * modal's routes preserve what the taker typed.
    */
   const advanceChecked = (qid, ans = answers, man = manualValues) => {
-    const trip = impossibleCheck(qid, resolveInputs(ans, man, salesModel(ans)));
+    const trip = impossibleCheck(qid, resolveInputs(ans, man, salesModel(ans)), ans);
     if (trip) {
       setAnswerCheck({ ...trip, qid, ans, man });
       return;
@@ -495,7 +495,17 @@ export default function QuizFlow({ restored = null } = {}) {
 
   const keepAnswers = () => {
     const { qid, ans, man } = answerCheck;
-    const cap = CLAMP_TO[qid]?.(resolveInputs(ans, man, salesModel(ans)));
+    const clamp = CLAMP_TO[qid];
+    // Q2 "$500K+/month" under $6M (Cap Logic, Nov 4) is only "check the
+    // number": there is no ceiling to clamp to, so their typed revenue is
+    // kept as entered — the override still tags the record unverified.
+    if (!clamp) {
+      setOverrides((o) => (o.includes(qid) ? o : [...o, qid]));
+      setAnswerCheck(null);
+      goTo(index, 1, ans);
+      return;
+    }
+    const cap = clamp(resolveInputs(ans, man, salesModel(ans)));
     const nextAns = { ...ans, [qid]: 'manual' };
     const nextMan = { ...man, [qid]: String(cap) };
     setAnswers(nextAns);
@@ -828,6 +838,8 @@ export default function QuizFlow({ restored = null } = {}) {
         progressPercent={percentFor(q.id)}
         manualOpen={manualOpen}
         manualType={q.otherEntry ? 'text' : q.manualType}
+        manualLabel={q.otherEntry ? null : q.manualLabel}
+        manualPlaceholder={q.otherEntry ? null : q.manualPlaceholder}
         manualValue={
           q.otherEntry ? otherText : manualValues[q.id] || ''
         }

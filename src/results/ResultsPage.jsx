@@ -67,13 +67,14 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
           all 5 metrics and add $1.5M/year" would contradict it one section
           later, so they don't get this one. QC row 5 (Oct 2026): this is now
           the merged "stop at $1.5M / push to their max" section, and capped
-          now also covers a $1.5M goal beyond 12× today (Added Logic.docx:
-          "blocks 5, 6, and 7 … replace the 'push metrics to their max'
-          section"). WhatIfYouDid keeps only the GolfBays card. */}
+          now also covers a max that isn't above the goal (Cap Logic step 7:
+          "hide this section and show blocks 5, 6, and 7 instead").
+          WhatIfYouDid keeps only the GolfBays card. */}
       {!result.cappedState && <StopOrPush result={result} tokens={tokens} />}
       {/* L · Creative Delivery case study — the Video Mastermind card that
-          sat under the 12× ladder, as its own section (user, Nov 2) */}
-      {!result.cappedState && result.capped.maxCappedAt12 && <CreativeDelivery />}
+          sat under the stretch block, as its own section (user, Nov 2); it
+          follows that block, so it shows when the max is beyond 3× today */}
+      {!result.cappedState && result.capped.showStretch && <CreativeDelivery />}
       <WhatIfYouDid result={result} />
       {/* Copy doc blue box "Block 3 — No email marketing … See Logic Doc
           Blocks 1–3 for the revenue-split copy that renders here" sat

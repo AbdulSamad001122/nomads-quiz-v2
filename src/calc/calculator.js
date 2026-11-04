@@ -19,8 +19,35 @@ export const CEILINGS = {
 
 const TARGET_EXTRA = 1_500_000;
 
-/** The "all 5 metrics at max" RPV can never exceed this × today (QC, Oct 2026). */
-export const MAX_RPV_MULTIPLE = 12;
+/**
+ * "Push all 5 metrics to their max" cap (Yemi, "Cap Logic" tab, Nov 4 2026 —
+ * replaces the old flat 12× rule). Each yearly-revenue band has its own
+ * multiple, so the max gets more conservative as a business grows. `floor`
+ * is the band's minimum max: the highest max anyone in the band below can
+ * reach, so a business just over a boundary never sees a lower max than one
+ * just under it ($9.9M × 3 = $29.7M, but $10M × 2 = $20M → floored to $30M).
+ */
+export const CAP_BANDS = [
+  { below: 300_000, multiple: 12, floor: 0 },
+  { below: 1_000_000, multiple: 6, floor: 3_600_000 }, // 300K × 12
+  { below: 3_000_000, multiple: 5, floor: 6_000_000 }, // 1M × 6
+  { below: 5_000_000, multiple: 4, floor: 15_000_000 }, // 3M × 5
+  { below: 10_000_000, multiple: 3, floor: 20_000_000 }, // 5M × 4
+  { below: Infinity, multiple: 2, floor: 30_000_000 }, // 10M × 3
+];
+
+/** Steps 2–4: the band's multiple and its max (revenue × multiple, floored). */
+export function bandMax(annualRevenue) {
+  const band = CAP_BANDS.find((b) => annualRevenue < b.below);
+  return {
+    multiple: band.multiple,
+    max: Math.max(annualRevenue * band.multiple, band.floor),
+  };
+}
+
+/** Alefiya (QC doc, Nov 4): the "nobody gets there in one jump" block shows
+ *  for every max beyond 3× today's revenue. */
+export const STRETCH_MIN_MULTIPLE = 3;
 
 /**
  * @param inputs { q2, q7, q7b, q7c, q8, q9a, q9b, q10, q11 } numeric backend values
@@ -75,15 +102,20 @@ export function calculate(inputs, path) {
   const emailPercentage = round5((emailPathRevenue / currentAnnualRevenue) * 100);
 
   // Capped-state maths (Blocks 5–7) — always computed; used only when capped.
-  // 12× cap (Result page QC, "Added Logic.docx", Oct 2026): "The max revenue
-  // per visitor is the lower of two numbers: the revenue per visitor with all
-  // five metrics at their ceilings, or 12 × current revenue per visitor. Max
-  // added revenue = (max RPV − current RPV) × annual visitors." So the "all
-  // 5 metrics at max" figure can never be more than 12× today.
-  const ceilingRPV =
-    (annualVisitors * CEILINGS.optIn * CEILINGS.rps + nonListRevenue) / annualVisitors;
-  const maxRPV = Math.min(ceilingRPV, MAX_RPV_MULTIPLE * currentRPV);
-  const maxCappedAt12 = ceilingRPV > MAX_RPV_MULTIPLE * currentRPV;
+  // Cap Logic (Yemi, Nov 4 2026): max = the lower of the band max (revenue ×
+  // its band's multiple, floored — bandMax) and the metric max (yearly
+  // visitors × $30 [60% opt-in × $50/subscriber] + revenue from outside
+  // email). Added revenue = max − today. Replaces the old flat 12× rule.
+  const metricMax = annualVisitors * CEILINGS.optIn * CEILINGS.rps + nonListRevenue;
+  const ceilingRPV = metricMax / annualVisitors;
+  const band = bandMax(currentAnnualRevenue);
+  const maxRevenue = Math.min(metricMax, band.max);
+  const maxRPV = maxRevenue / annualVisitors;
+  const bandCapBites = band.max < metricMax;
+  // Step 8: the badge shows max ÷ today's revenue (not the band multiple),
+  // so it always matches the dollar amount ($30M floor at $12M → 2.5×).
+  const maxMultiple = currentAnnualRevenue > 0 ? maxRevenue / currentAnnualRevenue : 0;
+  const showStretch = Math.round(maxMultiple * 10) / 10 > STRETCH_MIN_MULTIPLE;
   const achievableGainRaw = annualVisitors * maxRPV - currentAnnualRevenue;
   const achievableGain = Math.max(0, achievableGainRaw);
   // Guard: the achievable gain can already exceed $1.5M (e.g. a business with
@@ -95,10 +127,9 @@ export function calculate(inputs, path) {
   const additionalDailyVisitors = additionalAnnualVisitors / 365;
   const trafficWithinReach = additionalAnnualVisitors <= 20 * annualVisitors;
 
-  // Which block fires for the 4/5/6/7 slot. The goal must also fit under
-  // the 12× cap: "for very small businesses the $1.5M goal itself can be more
-  // than 12× today … blocks 5, 6, and 7 in the logic doc has the copy to
-  // replace the 'push metrics to their max' section" (Added Logic.docx).
+  // Which block fires for the 4/5/6/7 slot. Cap Logic step 7: "If the max
+  // isn't higher than the goal, hide this section and show blocks 5, 6, and 7
+  // instead" (e.g. $60K × 12 = $720K, below the $1.56M goal).
   const goalWithinCap = goalRPV <= maxRPV + 1e-9;
   let cappedBlock;
   if (goalReached && goalWithinCap) cappedBlock = 4;
@@ -147,8 +178,13 @@ export function calculate(inputs, path) {
     cappedBlock,
     capped: {
       maxRPV,
+      maxRevenue,
       ceilingRPV,
-      maxCappedAt12,
+      bandMultiple: band.multiple,
+      bandMax: band.max,
+      bandCapBites,
+      maxMultiple,
+      showStretch,
       goalWithinCap,
       achievableGain,
       remainingGap,
