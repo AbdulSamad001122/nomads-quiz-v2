@@ -485,33 +485,36 @@ export const RPS_CARDS = {
 };
 
 export const AD_SPEND = {
-  // QC item 5 (Oct 2026): Alefiya's "RPV Ad Budget Section" design (QC
-  // comment C4), every word as the design. The chip, "stays the same" and the
-  // chart heading are uppercase via CSS, as in the design.
+  // 2.0 FINAL RP QC (Alefiya, 4 Nov): rebuilt to her artifact "Ad Budget at
+  // Your RPV Goal" (claude.ai/artifact/YcESJdTa2TmxrYRyFopket), every word
+  // as the artifact; {{tokens}} are the taker's own figures. The chip is
+  // uppercase via CSS, as in the artifact.
   chip: 'About your ad budget',
   headline: 'What happens when every visitor becomes more profitable?',
-  lede: 'Same ad spend. Same visitors. Here’s what that spend brings back today, and what it brings back at your RPV™ goal.',
-  spendChip: 'Monthly ad spend',
-  visitorsChip: 'Visitors it buys you',
-  stays: 'stays the same',
-  chartHead: 'Revenue from that spend, each month',
-  spendKey: 'Dashed line = your {{spend}} ad spend',
+  spendBefore: 'Your ad spend stays at',
+  spendChip: '{{spend}} a month',
+  spendAfter: '. Here’s what it brings back.',
   todayLabel: 'Today',
   goalLabel: 'At your RPV™ goal',
-  roas: '{{x}}× ROAS',
-  perVisitor: '{{rpv}} per visitor',
-  // the design's two verdicts; each bar gets the one that fits its ROAS
-  short: 'You get back less than you spend: about {{amount}} short every month.',
-  back: 'Every $1 of ads brings back about {{amount}}.',
-  foot: 'The only thing that changed is what each visitor is worth on the way through.',
-  payIntro: 'Sitting inside spend you’ve already committed to:',
-  payGainSub: 'more a month',
-  payYear: 'Call it {{year}} a year',
-  // the design's working line; the yearly figure is 12 × the monthly gain
-  payMath: '{{goal}} − {{today}} = {{gain}}',
+  backEach: 'back each month',
+  perDollar: '{{amount}} back for every $1',
+  gainSub: 'more a month, from the same spend',
+  year: 'That’s {{year}} a year',
+  wsHead: 'Here’s how to get your ads to bring back {{goal}} a month',
+  // "The workshop walks you and your team through lifting your Revenue Per
+  // Visitor™ from $3.00 to $19.67, so the same $7,500 a month in ads adds
+  // $62,500 a month, predictably, without buying more traffic."
+  wsBefore: 'The workshop walks you and your team through lifting your Revenue Per Visitor™ from',
+  wsTo: 'to',
+  wsSame: ', so the same',
+  wsInAds: 'in ads adds',
+  wsAfter: ', predictably, without buying more traffic.',
   button: 'Watch the workshop',
+  // kept from the old design for a taker with no ad spend figure (the
+  // artifact's spend line needs one)
+  ledeNoSpend: 'Same ad spend. Same visitors. Here’s what that spend brings back today, and what it brings back at your RPV™ goal.',
   // Logic Doc · 7: "Not sure" takers (Q7c) get an ad-traffic SHARE slider
-  // (10–100%). The design has no slider; kept for the logic. The label is
+  // (10–100%). The artifact has no slider; kept for the logic. The label is
   // dev-added and the note is the copy doc's (it says "ad spend" while the
   // control is a share) — both FLAGGED earlier, unchanged.
   shareLabel: 'What % of your traffic comes from ads?',
