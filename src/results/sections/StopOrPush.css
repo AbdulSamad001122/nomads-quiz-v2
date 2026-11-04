@@ -67,296 +67,335 @@
   white-space: nowrap;
 }
 
-/* "to their max" in white (user, Oct 30) */
+/* "to their max": plain white, as her new picture (no second highlight) */
 .rso__hl-max {
   color: #ffffff;
 }
 
-/* ——— the two cards, joined by "But… what if you did?" ——— */
+/* ——— 2.0 FINAL RP QC (Alefiya, 4 Nov): her new, simpler two cards ——— */
 
 .rso__steps {
-  margin-top: 36px;
+  margin-top: 40px;
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) 140px minmax(0, 1.5fr);
+  grid-template-columns: minmax(0, 1fr) minmax(170px, 0.62fr) minmax(0, 1fr);
   align-items: center;
+  gap: 16px;
 }
 
 .rso__card {
-  border-radius: 18px;
+  border-radius: 22px;
+  padding: 34px 26px 32px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  color: var(--rso-ink);
-}
-
-.rso__eyebrow {
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 10.5px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--rso-mute);
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  min-width: 0;
 }
 
 .rso__card p {
   margin: 0;
 }
 
-/* card A — the goal, deliberately the smaller card */
 .rso__card--stop {
-  background: var(--rso-cream);
-  padding: 20px 20px 22px;
-  container-type: inline-size; /* the big figure sizes to the card */
-  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.35);
+  background: #f5ebe4;
+  color: #152638;
 }
 
-.rso__rpv {
+.rso__card--max {
+  background: linear-gradient(160deg, #2c0f20 0%, #3a1430 100%);
+  border: 2px solid #8a4f70;
+  color: #e4c8bc;
+}
+
+.rso__say {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: clamp(19px, 2vw, 24px);
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+.rso__card--stop .rso__say {
+  color: #152638;
+}
+
+.rso__pair {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 14px;
+}
+
+.rso__to-word {
+  margin-top: 14px;
   font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 13px;
-  line-height: 1.45;
-  color: var(--rso-mute);
+  font-weight: 700;
+  font-size: 18px;
+  color: #6b6170;
 }
 
-.rso__rpv b {
+/* "$3.00 / PER VISITOR" and "✓ $19.67 / PER VISITOR" boxes */
+.rso__rpvbox {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.rso__rpvbox b {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-family: var(--rso-black);
   font-weight: 900;
-  font-size: 16px;
-  color: var(--rso-ink);
+  font-size: clamp(30px, 3.4vw, 42px);
+  line-height: 1;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 2px solid;
   white-space: nowrap;
 }
 
-.rso__from {
-  color: var(--rso-rose);
+.rso__rpvbox small {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  color: #6b6170;
 }
 
-.rso__to {
-  color: var(--rso-green);
+.rso__card--max .rso__rpvbox small {
+  color: #b39aa5;
+}
+
+.rso__rpvbox--now b {
+  background: #fbe1de;
+  border-color: #eca59c;
+  color: #c7392f;
+}
+
+.rso__rpvbox--goal b {
+  background: #e3f5ea;
+  border-color: #86d8a8;
+  color: #127a44;
+}
+
+.rso__tick {
+  width: 0.8em;
+  height: 0.8em;
+  flex: none;
+}
+
+.rso__tick circle {
+  fill: #127a44;
+}
+
+.rso__tick path {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* the big "+$1.5M/year" (plum) and "+$2.52M/year" (green) */
+.rso__big,
+.rso__mega {
+  font-family: var(--rso-black);
+  font-weight: 900;
+  font-size: min(80px, 18cqi);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.rso__card {
+  container-type: inline-size;
 }
 
 .rso__big {
-  font-family: var(--rso-black);
-  font-weight: 900;
-  /* bigger (user, Oct 31): as big as the card allows ("+$1.5M/year" is
-     about 6.4em wide), up to 52px */
-  font-size: min(52px, 15cqi);
-  line-height: 1;
-  color: var(--rso-plum);
+  color: #5d1b4e;
 }
 
-.rso__big small {
-  display: block;
-  margin-top: 5px;
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 14px;
-  color: var(--rso-mute);
+.rso__mega {
+  color: #5be39a;
+}
+
+.rso__big small,
+.rso__mega small {
+  font-size: 0.42em;
+  letter-spacing: 0;
+}
+
+.rso__rule {
+  align-self: stretch;
+  margin: 8px 0 6px;
+  border: 0;
+  border-top: 1.5px dashed rgba(37, 15, 28, 0.25);
+}
+
+.rso__card--max .rso__rule {
+  border-top-color: rgba(228, 200, 188, 0.35);
 }
 
 .rso__p {
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 13px;
+  font-size: 17px;
   line-height: 1.5;
-  color: #4d4350;
+  color: #152638;
+  text-wrap: balance;
 }
 
-.rso__p .results-em {
-  color: var(--rso-ink);
+.rso__p b {
+  font-weight: 800;
 }
 
 .rso__nope {
-  margin-top: 4px !important;
-  border-top: 1px dashed var(--rso-line);
-  padding-top: 9px;
-  font-weight: 700;
-  color: var(--rso-ink);
+  margin-top: 6px !important;
 }
 
-/* the joint */
-.rso__but {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  /* clear of both cards: the stop card's shadow on the left and the max
-     card's 10px green ring on the right, which "what if" used to touch */
-  padding: 0 22px 0 16px;
-  text-align: center;
-  color: var(--rso-gold);
+.rso__nope mark {
+  background: #fdf3e6;
+  color: inherit;
+  padding: 1px 4px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
-.rso__but span {
+.rso__times {
   font-family: var(--font-body);
   font-weight: 800;
-  font-style: italic;
-  font-size: 14px;
-  line-height: 1.3;
-}
-
-.rso__but b {
-  font-family: var(--rso-black);
-  font-weight: 900;
-  font-size: 34px;
-}
-
-/* card B — the max: the biggest thing on screen (design note 3) */
-.rso__card--max {
-  background: #ffffff;
-  padding: 26px 28px 28px;
-  border: 4px solid var(--rso-green-hi);
-  box-shadow: 0 0 0 10px rgba(127, 224, 168, 0.18), 10px 10px 0 rgba(0, 0, 0, 0.4);
-}
-
-.rso__card--max .rso__eyebrow {
-  color: var(--rso-green);
-}
-
-.rso__if {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 1.45;
-  color: #4d4350;
-}
-
-.rso__if .results-em {
-  color: var(--rso-ink);
-}
-
-.rso__lead {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 16px;
-  color: var(--rso-ink);
-}
-
-.rso__mega {
-  font-family: var(--rso-black);
-  font-weight: 900;
-  font-size: clamp(56px, 9vw, 110px);
-  line-height: 0.92;
-  letter-spacing: -0.035em;
-  color: var(--rso-green);
-  white-space: nowrap;
-}
-
-.rso__mega small {
-  font-size: 0.32em;
-  letter-spacing: 0;
-  color: var(--rso-mute);
-}
-
-.rso__row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-  margin-top: 4px;
-}
-
-.rso__x {
-  font-family: var(--rso-black);
-  font-weight: 900;
-  font-size: 18px;
-  background: var(--rso-green-bg);
-  color: var(--rso-green);
-  border-radius: 8px;
-  padding: 6px 10px;
-}
-
-/* Loom 3:41 "maybe 12x can be a little bit bigger": the multiple in the
-   total chip, the max bar's chip and the ceiling step run larger than the
-   design's 18px / 11px / 16px (flagged, Oct QC) */
-.rso__x-mult {
-  font-size: 1.35em;
-  font-weight: 900;
+  font-size: 17px;
+  line-height: 1.4;
+  color: #ffffff;
 }
 
 .rso__yep {
-  font-family: var(--font-body);
+  margin-top: 6px;
+  display: inline-block;
+  background: #e0b5a3;
+  color: #250f1c;
+  font-family: var(--font-headline);
   font-weight: 800;
-  font-size: 15px;
-  background: var(--rso-plum);
-  color: #ffffff;
-  padding: 7px 12px;
-  border-radius: 6px;
+  font-size: 16px;
+  padding: 10px 18px;
+  border-radius: 8px;
   transform: rotate(-1.5deg);
 }
 
-/* ——— where you are → where you could go: revenue to scale ——— */
+/* the joint: an arrow + "Buuuuuut… what if…" */
+.rso__but {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+/* her arrow is a big, light one; Montserrat's "→" is small, so a plain
+   system face draws it */
+.rso__but b {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 1;
+  color: #cae1f4;
+}
+
+.rso__but p {
+  margin: 0;
+  font-family: var(--rso-black);
+  font-weight: 900;
+  font-style: italic;
+  font-size: clamp(16px, 1.6vw, 20px);
+  line-height: 1.3;
+  color: #e0b5a3;
+  text-wrap: balance;
+}
+
+/* ——— her new bars block ——— */
 
 .rso__ladder {
-  margin-top: 36px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 16px;
-  padding: 20px 22px;
+  margin-top: 40px;
+  background: linear-gradient(160deg, #2c0f20 0%, #3a1430 100%);
+  border: 2px solid #8a4f70;
+  border-radius: 22px;
+  padding: clamp(24px, 4vw, 48px);
 }
 
 .rso__ladder-head {
-  margin: 0;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 11.5px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #b9c6d2;
+  margin: 0 0 22px;
+  max-width: 880px;
+  font-family: var(--rso-black);
+  font-weight: 900;
+  font-size: clamp(24px, 3.2vw, 38px);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  text-wrap: balance;
 }
 
-.rso__ladder-sub {
-  margin: 4px 0 6px;
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 13px;
-  color: #d4dce4;
+/* the highlighted part of her headline */
+.rso__ladder-head mark {
+  background: #cae1f4;
+  color: #152638;
+  padding: 0 8px;
+  border-radius: 6px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
 .rso__lr {
   display: grid;
-  grid-template-columns: 190px minmax(0, 1fr);
-  gap: 14px;
+  grid-template-columns: minmax(150px, 0.42fr) minmax(0, 1fr);
+  gap: 18px;
   align-items: center;
-  margin-top: 12px;
+  margin-top: 16px;
 }
 
 .rso__l {
-  font-family: var(--font-body);
-  font-weight: 800;
-  font-size: 14px;
-  line-height: 1.25;
+  font-family: var(--rso-black);
+  font-weight: 900;
+  font-size: clamp(20px, 2.2vw, 28px);
+  line-height: 1.15;
+  color: #ffffff;
+}
+
+.rso__lr--max .rso__l {
+  color: #5be39a;
 }
 
 .rso__l small {
   display: block;
-  margin-top: 2px;
+  margin-top: 6px;
+  font-family: var(--font-mono);
   font-weight: 500;
-  font-size: 12px;
-  color: #b9c6d2;
+  font-size: 14px;
+  color: #c9b3bd;
 }
 
 .rso__tr {
   position: relative;
-  height: 40px;
-  border-radius: 8px;
+  height: 56px;
+  border-radius: 12px;
   background: rgba(255, 255, 255, 0.07);
 }
 
 .rso__fill {
   height: 100%;
-  border-radius: 8px;
+  border-radius: 12px;
 }
 
 .rso__lr--today .rso__fill {
-  background: #e9a39b;
+  background: #e0b5a3;
 }
 .rso__lr--goal .rso__fill {
-  background: var(--rso-gold);
+  background: #cae1f4;
 }
 .rso__lr--max .rso__fill {
-  background: var(--rso-green-hi);
+  background: #5be39a;
 }
 
 .rso__val {
@@ -365,55 +404,56 @@
   transform: translateY(-50%);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-family: var(--rso-black);
   font-weight: 900;
-  font-size: 16px;
+  font-size: clamp(16px, 2vw, 24px);
   white-space: nowrap;
 }
 
 /* label just past its bar (left set by placeLabels) … */
 .rso__lr--today .rso__val {
-  color: #f3c4be;
+  color: #e0b5a3;
 }
 .rso__lr--goal .rso__val {
-  color: var(--rso-gold);
+  color: #cae1f4;
 }
 /* … or inside a long one, right-aligned, dark on the fill */
 .rso__val--inside {
-  right: 12px;
-  color: var(--rso-ink) !important;
+  right: 14px;
+  color: #250f1c !important;
 }
 
 .rso__val--nochip i {
   display: none;
 }
 
+/* a figure that fits neither on nor beside its bar sits on its own line
+   just under it (small phones) */
+.rso__tr--below {
+  margin-bottom: 34px;
+}
+
+.rso__val.rso__val--below {
+  top: calc(100% + 6px);
+  left: 0;
+  transform: none;
+}
+
 .rso__val i {
   font-style: normal;
   font-family: var(--font-mono);
   font-weight: 700;
-  font-size: 11px;
+  font-size: 14px;
   border-radius: 999px;
-  padding: 3px 8px;
+  padding: 5px 12px;
+  background: #250f1c;
+  color: #ffffff;
 }
 
-.rso__lr--goal .rso__val i {
-  background: var(--rso-gold);
-  color: #152638;
-}
-.rso__lr--goal .rso__val--inside i,
-.rso__lr--max .rso__val i {
-  background: var(--rso-ink);
-  color: var(--rso-green-hi);
-}
-.rso__lr--max .rso__val i {
-  font-size: 14px;
-  padding: 4px 10px;
-}
-/* smallest phones: the design's size, so the chip still fits on the bar */
+/* smallest phones: the chip a size down, so it still fits on the bar */
 @media (max-width: 360px) {
-  .rso__lr--max .rso__val i {
+  .rso__val i {
     font-size: 11px;
     padding: 3px 8px;
   }
@@ -512,6 +552,16 @@
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 12px;
+  color: var(--rso-mute);
+}
+
+/* the stretch card's small label base (kept from the old cards) */
+.rso__eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--rso-mute);
 }
 
@@ -689,10 +739,10 @@
 
 @media (max-width: 860px) {
   .rso__steps {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .rso__but {
-    padding: 14px 0;
+    padding: 6px 0;
   }
   .rso__but b {
     transform: rotate(90deg);
@@ -710,11 +760,14 @@
     padding: 44px 16px 48px;
   }
   .rso__lr {
-    grid-template-columns: 1fr;
-    gap: 6px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
   }
-  .rso__card--max {
-    padding: 22px 18px 24px;
+  .rso__card {
+    padding: 26px 18px 26px;
+  }
+  .rso__tr {
+    height: 48px;
   }
   .rso__btn {
     width: 100%;
@@ -727,13 +780,9 @@
    under it), and the five stair columns get tighter type so the long
    "Your ceiling…" caption's words fit their column */
 @media (max-width: 420px) {
-  .rso__mega {
-    font-size: min(56px, 14vw);
-  }
-  .rso__mega small {
-    display: block;
-    margin-top: 4px;
-    font-size: 15px;
+  .rso__rpvbox b {
+    font-size: 28px;
+    padding: 8px 14px;
   }
   .rso__stairs-row {
     gap: 4px;

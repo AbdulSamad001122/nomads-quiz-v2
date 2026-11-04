@@ -59,6 +59,16 @@ function CountUp({ text, animate, run, delay = 0, duration }) {
   );
 }
 
+/* the check-circle in the green "per visitor" boxes (her design) */
+function Tick() {
+  return (
+    <svg className="rso__tick" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="12" />
+      <path d="M6.8 12.4l3.4 3.4 7-7.2" />
+    </svg>
+  );
+}
+
 /* Ladder value labels: measured, not guessed. Each label sits just past
    its bar when there is room, else inside the bar (dark, right-aligned);
    only if neither fits does it drop its "× today" chip. Re-runs on resize
@@ -68,28 +78,32 @@ function placeLabels(ladder) {
     const fill = tr.querySelector('.rso__fill');
     const val = tr.querySelector('.rso__val');
     const chip = val.querySelector('i');
-    val.classList.remove('rso__val--inside', 'rso__val--nochip');
+    val.classList.remove('rso__val--inside', 'rso__val--nochip', 'rso__val--below');
+    tr.classList.remove('rso__tr--below');
     const trackW = tr.clientWidth;
     const fillW = fill.offsetWidth;
     const labelW = val.offsetWidth;
-    const chipW = chip ? chip.offsetWidth + 8 : 0;
+    const chipW = chip ? chip.offsetWidth + 10 : 0;
     const outSpace = trackW - fillW - 16;
     const inSpace = fillW - 24;
     let inside = false;
     let nochip = false;
+    let below = false;
     if (labelW <= outSpace) inside = false;
     else if (labelW <= inSpace) inside = true;
     else if (labelW - chipW <= outSpace) nochip = true;
-    else {
+    else if (labelW - chipW <= inSpace) {
       inside = true;
       nochip = true;
-    }
+    } else below = true; // fits nowhere on the bar (small phones): its own line under it
     val.classList.toggle('rso__val--inside', inside);
     val.classList.toggle('rso__val--nochip', nochip);
-    val.style.left = inside ? '' : `${fillW + 10}px`;
+    val.classList.toggle('rso__val--below', below);
+    tr.classList.toggle('rso__tr--below', below);
+    val.style.left = inside || below ? '' : `${fillW + 10}px`;
     // inside: right-aligned to the end of ITS fill (the CSS right: 12px
     // alone would pin it to the end of the track, off a short fill)
-    val.style.right = inside ? `${trackW - fillW + 12}px` : '';
+    val.style.right = inside && !below ? `${trackW - fillW + 12}px` : '';
   });
 }
 
@@ -173,56 +187,73 @@ export default function StopOrPush({ result, tokens }) {
           </span>
         </h2>
 
+        {/* 2.0 FINAL RP QC: her new two-card design (image 04) */}
         <div className="rso__steps">
           <div className="rso__card rso__card--stop">
-            <span className="rso__eyebrow">{c.stopEyebrow}</span>
-            <p className="rso__rpv">
-              {c.stopRpvBefore}{' '}
+            <p className="rso__say">{c.leftIntro}</p>
+            <div className="rso__pair">
+              <span className="rso__rpvbox rso__rpvbox--now">
+                <b>{tokens.current_rpv}</b>
+                <small>{c.perVisitor}</small>
+              </span>
+              <span className="rso__to-word">{c.leftTo}</span>
+            </div>
+            <span className="rso__rpvbox rso__rpvbox--goal">
               <b>
-                <span className="rso__from">{tokens.current_rpv}</span> {c.stopRpvTo}{' '}
-                <span className="rso__to">{tokens.goal_rpv}</span>
+                <Tick />
+                {tokens.goal_rpv}
               </b>
-              {c.stopRpvAfter}
-            </p>
+              <small>{c.perVisitor}</small>
+            </span>
+            <p className="rso__say">{c.leftAdd}</p>
             <p className="rso__big">
               {c.stopBig}
               <small>{c.stopBigSub}</small>
             </p>
-            <p className="rso__p">{emphasize(c.stopBody, [c.stopBodyBold])}</p>
-            <p className="rso__p rso__nope">{c.stopNope}</p>
+            <hr className="rso__rule" />
+            <p className="rso__p">
+              {c.leftMonthBefore} <b>{c.leftMonthBold}</b> {c.leftMonthAfter}
+            </p>
+            <p className="rso__p rso__nope">
+              <mark>{c.stopNope}</mark>
+            </p>
           </div>
 
-          <p className="rso__but">
-            <span>{c.but}</span>
+          <div className="rso__but">
             <b aria-hidden="true">→</b>
-          </p>
+            <p>{c.but}</p>
+          </div>
 
           <div className="rso__card rso__card--max" ref={maxRef}>
-            <span className="rso__eyebrow">{c.maxEyebrow}</span>
-            <p className="rso__if">{emphasize(c.maxIf, [c.maxIfBold])}</p>
-            <span className="rso__lead">{c.maxLead}</span>
+            <p className="rso__say">{c.rightIntro}</p>
+            <span className="rso__rpvbox rso__rpvbox--goal rso__rpvbox--max">
+              <b>
+                <Tick />
+                {tokens.max_rpv}
+              </b>
+              <small>{c.perVisitor}</small>
+            </span>
+            <p className="rso__say">{c.rightAdd}</p>
             <p className="rso__mega">
               <CountUp text={t(c.maxMega)} animate={motion} run={maxIn} duration={MEGA} />
               <small>{c.maxMegaSub}</small>
             </p>
-            <div className="rso__row">
-              <span className="rso__x">
-                {t(c.maxTotal.split('{{max_multiple}}')[0])}
-                <b className="rso__x-mult">{tokens.max_multiple}</b>
-                {t(c.maxTotal.split('{{max_multiple}}')[1] || '')}
-              </span>
-              <span className="rso__yep">{c.maxYep}</span>
-            </div>
+            <hr className="rso__rule" />
+            <p className="rso__times">{t(c.maxTimes)}</p>
+            <span className="rso__yep">{c.maxYep}</span>
           </div>
         </div>
 
+        {/* her new bars block (image 05) */}
         <div
           className={`rso__ladder${motion ? ' rso__ladder--anim' : ''}${ladderIn ? ' rso__ladder--in' : ''}`}
           style={{ '--rso-grow': `${GROW}ms` }}
           ref={ladderRef}
         >
-          <h3 className="rso__ladder-head">{c.ladderHead}</h3>
-          <p className="rso__ladder-sub">{c.ladderSub}</p>
+          <h3 className="rso__ladder-head">
+            {c.barsHeadBefore} <mark>{c.barsHeadHl}</mark>
+            {c.barsHeadAfter}
+          </h3>
           {rows.map((r, i) => (
             <div key={r.key} className={`rso__lr rso__lr--${r.key}`} style={{ '--rso-delay': `${i * STAGGER}ms` }}>
               <div className="rso__l">
