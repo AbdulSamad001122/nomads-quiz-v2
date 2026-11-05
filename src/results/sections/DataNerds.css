@@ -490,3 +490,13 @@
   outline: 3px solid var(--rdn-midnight);
   outline-offset: 3px;
 }
+
+/* smallest phones: keep "Calculate my RPV by channel →" on one line
+   (audit, Nov 5) */
+@media (max-width: 360px) {
+  .results-page .rdn .rdn__btn,
+  .results-page .rdn .rdn__btn:hover {
+    font-size: 14px;
+    padding: 14px 12px;
+  }
+}
