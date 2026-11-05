@@ -1587,17 +1587,18 @@ export const WHAT_IF = {
   // 2.0 FINAL RP QC (Alefiya, Nov 4): her new copy, word for word — the
   // first sentence is the headline (figures in plum), the second the bold
   // line under it; "make this bold and it fills the section properly". Her
-  // spacing/casing kept ("Revenue per Visitor ™ OS", "shopify"); the space
-  // before ™ is non-breaking so the mark never wraps alone. Only this
-  // results section changes — the quiz's GolfBays slides keep £96K / 12 days.
+  // typos written the page's way (user, Nov 5): "Visitor ™ OS" →
+  // "Visitor™ OS" (Alefiya's C4 rule for the OS name), "shopify" →
+  // "Shopify". Only this results section changes — the quiz's GolfBays
+  // slides keep £96K / 12 days.
   golfHead: [
     { t: 'GolfBays generated ' },
     { t: '$131k', hl: true },
     { t: ' in just ' },
     { t: '20 days', hl: true },
-    { t: ' after launching their Compounding Revenue per Visitor ™ OS without adding a dime to their monthly ad spend.' },
+    { t: ' after launching their Compounding Revenue per Visitor™ OS without adding a dime to their monthly ad spend.' },
   ],
-  golfBody: 'They also increased demo conversions by 15.25X, adding 530+ demos with their existing shopify traffic.',
+  golfBody: 'They also increased demo conversions by 15.25X, adding 530+ demos with their existing Shopify traffic.',
   golfName: 'Golfbays',
   golfType: 'E-commerce company',
 };
