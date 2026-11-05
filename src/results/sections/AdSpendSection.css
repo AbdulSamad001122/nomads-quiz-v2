@@ -26,9 +26,10 @@
   --rad-green: #5be39a;
   --rad-green-deep: #127a44;
   --rad-black: 'RAD Montserrat', var(--font-headline);
-  background: linear-gradient(120deg, #faf6ec 0%, #f7eadf 60%, #ecc9bb 100%);
+  /* the artifact's page background */
+  background: linear-gradient(135deg, #f7efe8, #f1ddd3);
   /* bottom room for the next section's round badge on the seam */
-  padding: 56px 24px 110px;
+  padding: 48px 24px 110px;
   color: var(--rad-ink);
 }
 
@@ -44,21 +45,22 @@
   font-family: var(--font-mono);
   font-weight: 700;
   font-size: 11px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   background: var(--rad-navy);
   color: #ffffff;
-  padding: 5px 10px;
+  padding: 6px 12px;
 }
 
 .rad__headline {
-  margin: 12px auto 0;
-  max-width: 720px;
+  /* the artifact's h2: Black, 28–46px, 20ch wide (3 balanced lines) */
+  margin: 28px auto 0;
+  max-width: 20ch;
   text-align: center;
-  font-family: var(--font-headline);
-  font-weight: 800;
-  font-size: clamp(24px, 3vw, 34px);
-  line-height: 1.25;
+  font-family: var(--rad-black);
+  font-weight: 900;
+  font-size: clamp(28px, 4.4vw, 46px);
+  line-height: 1.12;
   color: var(--rad-plum);
   text-wrap: balance;
 }
@@ -66,15 +68,14 @@
 
 /* "Your ad spend stays at [$7,500 a month]. Here's what it brings back." */
 .rad__spend {
-  margin: 16px auto 0;
+  margin: 28px auto 0;
   max-width: 760px;
   text-align: center;
   font-family: var(--font-body);
   font-weight: 700;
   font-size: clamp(17px, 2vw, 20px);
-  line-height: 1.5;
+  line-height: 1.4;
   color: var(--rad-deep);
-  text-wrap: balance;
 }
 
 .rad__spend b {
@@ -85,19 +86,6 @@
   padding: 2px 10px;
   border-radius: 6px;
   white-space: nowrap;
-}
-
-/* Phones (design-v2 §0.9; user, Oct 30): the headline and the spend line
-   run 3 lines at 375px, so they read left-aligned (kept from the old
-   section) */
-@media (max-width: 760px) {
-  .rad__headline,
-  .rad__spend {
-    text-align: left;
-  }
-  .rad__chip {
-    margin-left: 0;
-  }
 }
 
 /* no spend figure: the old lede, plain */
@@ -222,7 +210,7 @@
 .rad__big {
   font-family: var(--rad-black);
   font-weight: 900;
-  font-size: clamp(40px, 6.4vw, 72px);
+  font-size: clamp(44px, 6.4vw, 72px);
   line-height: 1;
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
@@ -265,13 +253,15 @@
 
 .rad__vs {
   align-self: center;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
   font-size: 28px;
+  line-height: 1.2;
   color: #8a4f70;
 }
 
 /* ——— the difference ——— */
 .rad__result {
-  margin-top: 28px;
+  margin: 28px -24px 0;
   background: var(--rad-plum);
   color: #ffffff;
   border-radius: 20px;
@@ -312,7 +302,7 @@
 
 /* ——— the workshop card ——— */
 .rad__ws {
-  margin-top: 28px;
+  margin: 28px -24px 0;
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
   gap: 28px;
@@ -352,8 +342,8 @@
 
 .rad__ws-head {
   margin: 0;
-  font-family: var(--font-headline);
-  font-weight: 800;
+  font-family: var(--rad-black);
+  font-weight: 900;
   font-size: clamp(22px, 2.6vw, 28px);
   line-height: 1.2;
   color: var(--rad-plum);
@@ -382,34 +372,43 @@
   color: var(--rad-green-deep);
 }
 
-/* the workshop button: the top-bar / red-callout workshop style */
+/* the workshop button: the artifact's — ice, midnight text, hard deep
+   shadow, no border */
 .rad__btn {
-  margin-top: 10px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
   font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 15px;
+  font-weight: 800;
+  font-size: 16px;
   line-height: 1.3;
-  color: #250f1c;
+  color: var(--rad-navy);
   text-decoration: none;
   text-align: center;
-  padding: 13px 22px;
-  background: var(--rbtn-workshop-bg, #e8f3fb);
-  border: 2px solid #0f0a10;
-  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.55);
+  padding: 15px 22px;
+  background: #cae1f4;
+  border: 0;
+  box-shadow: 5px 5px 0 var(--rad-deep);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .rad__btn:hover {
-  transform: translate(-2px, -2px) scale(1.04);
-  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.55);
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 var(--rad-deep);
+  color: var(--rad-navy);
 }
 
 .rad__btn:active {
   transform: none;
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.55);
+  box-shadow: 2px 2px 0 var(--rad-deep);
+}
+
+.rad__arw {
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-weight: 700;
+}
+
+.rad__btn:focus-visible {
+  outline: 2px solid var(--rad-plum);
+  outline-offset: 2px;
 }
 
 
@@ -432,7 +431,17 @@
 
 @media (max-width: 560px) {
   .rad {
-    padding: 44px 16px 96px;
+    padding: 28px 16px 96px;
+  }
+  /* the artifact at 390px: the band and the workshop card run to the
+     screen edges */
+  .rad__result,
+  .rad__ws {
+    margin-left: -16px;
+    margin-right: -16px;
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
   }
   .rad__side {
     padding: 24px 18px;

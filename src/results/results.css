@@ -58,7 +58,6 @@ body .results-page :is(
   .rcs__h2,
   .rtc__headline,
   .rta__h3--plan,
-  .rad__headline,
   .rsb__head
 ) {
   font-size: 38px;
@@ -191,7 +190,6 @@ body .results-page .rwk__p--dark br {
     .rcs__h2,
     .rtc__headline,
     .rta__h3--plan,
-    .rad__headline,
     .rsb__head
   ) {
     font-size: 32px;
@@ -211,7 +209,6 @@ body .results-page .rwk__p--dark br {
     .rcs__h2,
     .rtc__headline,
     .rta__h3--plan,
-    .rad__headline,
     .rsb__head
   ) {
     font-size: 26px;

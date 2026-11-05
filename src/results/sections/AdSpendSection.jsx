@@ -158,7 +158,10 @@ export default function AdSpendSection({ result, adAdjustable = false }) {
               {c.wsAfter}
             </p>
             <a className="rad__btn" href={CTA.workshop.href} {...ext} onClick={() => ga.ctaClick(CTA.workshop.id)}>
-              {`${c.button} →`}
+              {c.button}
+              {' '}
+              {/* the artifact's arrow (system font, as it renders there) */}
+              <span className="rad__arw" aria-hidden="true">→</span>
             </a>
           </div>
         </div>
