@@ -103,6 +103,18 @@ export default function CompoundingRps({ result, tokens }) {
     return stops[Math.max(0, Math.min(stops.length - 1, k))];
   };
 
+  // a dot/arrow jump in pin mode: the page scroll position for `at` stops
+  // into the pinned stretch. While the jump is gliding the page above can
+  // still change height (late images on a fresh load moved it ~200px past
+  // the pin), so the page watcher below re-aims it until it settles.
+  const jumpRef = useRef(null);
+  const jumpTo = (at, smooth) => {
+    const p = pinRef.current;
+    const scrolly = scrollyRef.current;
+    if (!p || !scrolly) return;
+    const startY = scrolly.getBoundingClientRect().top + window.scrollY - p.top;
+    window.scrollTo({ top: startY + at * p.step, behavior: smooth ? 'smooth' : 'auto' });
+  };
   const go = (i) => {
     const p = pinRef.current;
     const scrolly = scrollyRef.current;
@@ -110,11 +122,12 @@ export default function CompoundingRps({ result, tokens }) {
       // pinned: scroll the page to the middle of that card's stretch; the
       // page scroll then moves the row
       const k = stopOf(i);
-      const startY = scrolly.getBoundingClientRect().top + window.scrollY - p.top;
-      // the middle of that stop's stretch, but never past the end of the
-      // pin (the last stop's stretch ends where the stage lets go)
-      const at = k === 0 ? 0.05 : Math.min(k + 0.1, p.stops - 1);
-      window.scrollTo({ top: startY + at * p.step, behavior: reducedMotion() ? 'auto' : 'smooth' });
+      // the middle of that stop's stretch, but never at the very end of the
+      // pin (the last stop's stretch ends where the stage lets go, so it
+      // aims a little before that)
+      const at = k === 0 ? 0.05 : Math.min(k + 0.1, p.stops - 1.2);
+      jumpRef.current = at;
+      jumpTo(at, !reducedMotion());
       return;
     }
     slideTo(i);
@@ -253,13 +266,29 @@ export default function CompoundingRps({ result, tokens }) {
       }
     };
     const onScroll = () => {
+      if (jumpRef.current != null) endJump();
       if (!raf) raf = requestAnimationFrame(() => pick(true));
     };
     // the page above can change height with no scroll at all (late images
     // and fonts after a reload mid-section), which moves this section:
     // re-check the stop then and jump straight to it (row 4's fix)
     const page = scrolly.closest('.results-page') || document.body;
-    const pageRo = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(() => pick(false)) : null;
+    const pageRo =
+      typeof ResizeObserver !== 'undefined'
+        ? new ResizeObserver(() => {
+            // a dot/arrow jump still on its way: re-aim it at the moved target
+            if (jumpRef.current != null) jumpTo(jumpRef.current, false);
+            pick(false);
+          })
+        : null;
+    // the jump is over once the page stops scrolling
+    let settle = 0;
+    const endJump = () => {
+      clearTimeout(settle);
+      settle = setTimeout(() => {
+        jumpRef.current = null;
+      }, 250);
+    };
     pageRo?.observe(page);
     // first placement without a glide (e.g. a reload mid-section): start
     // from the stop the scroll position is nearest to
@@ -271,8 +300,18 @@ export default function CompoundingRps({ result, tokens }) {
     pick(false);
     fitHeight();
     window.addEventListener('scroll', onScroll, { passive: true });
+    // the reader taking over (wheel, touch, keys) ends a jump at once, so
+    // the re-aim never fights their own scrolling
+    const userScroll = () => {
+      jumpRef.current = null;
+    };
+    const userEvents = ['wheel', 'touchstart', 'keydown', 'mousedown'];
+    userEvents.forEach((ev) => window.addEventListener(ev, userScroll, { passive: true }));
     return () => {
       cancelAnimationFrame(raf);
+      clearTimeout(settle);
+      jumpRef.current = null;
+      userEvents.forEach((ev) => window.removeEventListener(ev, userScroll));
       pageRo?.disconnect();
       window.removeEventListener('scroll', onScroll);
     };
