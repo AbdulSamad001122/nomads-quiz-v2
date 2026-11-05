@@ -43,7 +43,10 @@ export default function TwoPaths() {
               rel="noopener"
               onClick={() => ga.ctaClick('book_call')}
             >
-              {c.btnCall}
+              {/* "Game Plan Call →" stays together, never "Call →" alone
+                  (audit, Nov 5) */}
+              {c.btnCall.replace(/ (Game Plan Call.*)$/, ' ')}
+              <span className="rtp__nw">{(c.btnCall.match(/Game Plan Call.*$/) || [''])[0]}</span>
             </a>
           </div>
         </div>

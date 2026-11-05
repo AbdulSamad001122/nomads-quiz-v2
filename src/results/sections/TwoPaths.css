@@ -268,3 +268,7 @@
     border-radius: 10px;
   }
 }
+
+.rtp__nw {
+  white-space: nowrap;
+}
