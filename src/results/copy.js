@@ -534,17 +534,16 @@ export const AD_SPEND = {
  *   trailing. Design wins on presentation; flagged.
  */
 export const DATA_NERDS = {
-  // QC row 3 (Oct 2026): Alefiya's "Data Nerds Calculator Peek" design. Its
-  // note: "Same copy, with a sneak peek. The section keeps its copy." — so the
-  // words below are unchanged; the design shows the title as the chip, p1 as
-  // the headline and bolds two phrases in p2.
+  // 2.0 FINAL RP QC (Alefiya, Nov 4, row 14): lighter, headline-led — her
+  // picture's words exactly: the channels question is the headline, the
+  // Google Analytics line moves into the body text (it lists the channels,
+  // so the chips are gone), and the button stands out. Yemi's calculator
+  // window on the right stays ("Keep the existing mockup Yemi created").
   title: 'For the data nerds',
-  p1: 'This diagnostic can’t peek inside your Google Analytics, CRM, ad dashboards, or other data sources.',
-  p2: 'So if you want to go deeper and nerd out, grab your numbers to see your Revenue Per Visitor™ by channel and find which channels are most profitable.',
-  p2Bold: ['Revenue Per Visitor™ by channel', 'which channels are most profitable.'],
-  channels: ['Paid', 'Organic', 'Referral', 'Email', 'Social'],
-  chip: 'Whatever you’ve got.',
-  button: 'Calculate My RPV By Channel →',
+  p1: 'Which of your channels is actually the most profitable?',
+  p2: 'This diagnostic can’t peek inside your Google Analytics, CRM or ad dashboards. So grab your numbers and see your Revenue Per Visitor™ for every channel: paid, organic, referral, email, social, whatever you’ve got.',
+  p2Bold: ['Revenue Per Visitor™ for every channel'],
+  button: 'Calculate my RPV by channel →',
   // Alefiya's Loom (7:12–7:24): "the spreadsheets need to be properly
   // hyperlinked" — the Compounding RPV™ OS calculator (the design's link too).
   buttonHref: 'https://nomads-spreadsheet-calculator.lovable.app/',

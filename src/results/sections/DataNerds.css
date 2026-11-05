@@ -26,9 +26,11 @@
   --rdn-mute: #9fb2c4;
   --rdn-ink: #1b1220;
   --rdn-black: 'RDN Montserrat', var(--font-headline);
-  background: linear-gradient(180deg, var(--rdn-midnight), var(--rdn-midnight-2));
-  color: #ffffff;
-  padding: 56px 24px 60px;
+  /* light, as her 2.0 FINAL RP QC picture ("overwhelming with the whole
+     dark background") */
+  background: #f4ece4;
+  color: var(--rdn-deep);
+  padding: 64px 24px 72px;
 }
 
 .rdn__grid {
@@ -51,10 +53,10 @@
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  background: var(--rdn-ice);
-  color: var(--rdn-midnight);
-  padding: 5px 10px;
-  border-radius: 4px;
+  background: var(--rdn-midnight);
+  color: #ffffff;
+  padding: 6px 12px;
+  border-radius: 0;
 }
 
 .rdn__h2 {
@@ -62,9 +64,9 @@
   font-family: var(--rdn-black);
   font-weight: 900;
   font-size: clamp(28px, 3.6vw, 40px);
-  line-height: 1.15;
+  line-height: 1.12;
   letter-spacing: -0.01em;
-  color: #ffffff;
+  color: var(--rdn-purple);
 }
 
 .rdn__p {
@@ -74,39 +76,13 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 1.6;
-  color: #d3dde7;
+  color: var(--rdn-deep);
 }
 
 .rdn__p strong,
 .rdn__p b {
-  color: #ffffff;
+  color: var(--rdn-deep);
   font-weight: 800;
-}
-
-.rdn__chips {
-  margin-top: 18px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-/* light-blue chips with dark-navy text, slightly rounded rectangles
-   (user, Oct 30; were outlined pills) */
-.rdn__chips span {
-  font-family: var(--font-headline);
-  font-weight: 800;
-  font-size: 13px;
-  background: var(--rdn-ice);
-  border: 1.5px solid var(--rdn-ice);
-  color: var(--rdn-midnight);
-  border-radius: 6px;
-  padding: 6px 12px;
-}
-
-/* "Whatever you've got." keeps a dashed edge so it reads as "any channel" */
-.rdn__chips .rdn__any {
-  border-style: dashed;
-  border-color: var(--rdn-midnight);
 }
 
 /* ——— the calculator window ——— */
@@ -116,7 +92,8 @@
   color: var(--rdn-ink);
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 8px 8px 0 var(--rdn-ice);
+  border: 1.5px solid #e7d4cb;
+  box-shadow: 8px 8px 0 var(--rdn-stone);
 }
 
 .rdn__winbar {
@@ -359,13 +336,13 @@
   font-family: var(--font-mono);
   font-weight: 600;
   font-size: 11px;
-  color: var(--rdn-mute);
+  color: #6e6670;
 }
 
-/* the button, centred, in Stone */
+/* the button under the copy, highlighted: plum, white text, a stone
+   shadow (her 2.0 FINAL RP QC picture) */
 .rdn__cta {
-  margin-top: 34px;
-  text-align: center;
+  margin-top: 28px;
 }
 
 .rdn__btn {
@@ -480,21 +457,36 @@
   }
 }
 
-/* the calculator button, bright so it pops on the navy (Alefiya, Slack
-   Oct 31): white with plum text and a pink shadow, apart from the
-   light-blue workshop / pink booking buttons */
+/* the calculator button: plum with white text and a stone shadow, as in
+   her 2.0 FINAL RP QC picture ("clearly has the button highlighted") */
 .results-page .rdn .rdn__btn,
 .results-page .rdn .rdn__btn:hover {
-  background: #ffffff;
-  color: #5d1b4e;
-  border-color: #0f0a10;
-  box-shadow: 6px 6px 0 #f0a8c8;
+  background: var(--rdn-purple);
+  color: #ffffff;
+  border: 0;
+  border-radius: 0;
+  box-shadow: 8px 8px 0 var(--rdn-stone);
+  font-size: 19px;
+  padding: 18px 30px;
+}
+
+@media (max-width: 560px) {
+  .results-page .rdn .rdn__btn,
+  .results-page .rdn .rdn__btn:hover {
+    font-size: 16px;
+    padding: 15px 20px;
+  }
 }
 
 .results-page .rdn .rdn__btn:hover {
-  box-shadow: 8px 8px 0 #f0a8c8;
+  box-shadow: 10px 10px 0 var(--rdn-stone);
 }
 
 .results-page .rdn .rdn__btn:active {
-  box-shadow: 3px 3px 0 #f0a8c8;
+  box-shadow: 3px 3px 0 var(--rdn-stone);
+}
+
+.results-page .rdn .rdn__btn:focus-visible {
+  outline: 3px solid var(--rdn-midnight);
+  outline-offset: 3px;
 }
