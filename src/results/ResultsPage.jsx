@@ -23,7 +23,6 @@ import YourCall from './sections/YourCall.jsx';
 import PillarsAccordion from './sections/PillarsAccordion.jsx';
 import SeeHowItShowsUp from './sections/SeeHowItShowsUp.jsx';
 import TwoPaths from './sections/TwoPaths.jsx';
-import BookCallCalendar from './sections/BookCallCalendar.jsx';
 import { resolveTokens, anyMetricRed } from './resolveTokens.js';
 import { RED_METRICS_CALL } from './copy.js';
 import './results.css';
@@ -107,8 +106,8 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
           tappable steps; TwoPaths is now only its closing panel. */}
       <SeeHowItShowsUp />
       <TwoPaths />
-      {/* standalone booking calendar on the maroon band (user, Sep 21) */}
-      <BookCallCalendar />
+      {/* the booking calendar now sits inside TwoPaths, under the frame
+          (2.0 FINAL RP QC #17, Yemi Nov 5) */}
       {/* Next sections land here as they're designed. */}
     </div>
   );

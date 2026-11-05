@@ -1,4 +1,5 @@
-import { TWO_PATHS, CTA } from '../copy.js';
+import { TWO_PATHS, CTA, FINAL_FRAME } from '../copy.js';
+import TidyCalEmbed from './TidyCalEmbed.jsx';
 import { emphasize } from '../emphasize.jsx';
 import { ga } from '../../analytics/ga.js';
 import './TwoPaths.css';
@@ -17,7 +18,8 @@ const flow = (lines, bold) => {
  * row 4 the quote, fork and path cards live in SeeHowItShowsUp; this is the
  * plum-bordered panel that rides up over that section's bottom seam into
  * the cream footer: closing copy, workshop/call heading and the two
- * hard-shadow CTAs beside the founder photo.
+ * hard-shadow CTAs beside the workshop thumbnail (placeholder for now),
+ * then the booking calendar in the same section (2.0 FINAL RP QC #17).
  */
 export default function TwoPaths() {
   const c = TWO_PATHS;
@@ -45,9 +47,35 @@ export default function TwoPaths() {
             </a>
           </div>
         </div>
-        <div className="rtp__panel-photo">
-          <img src="/assets/results-fork-photo.webp" alt="Alefiya in a rattan chair" width="2515" height="3793" />
+        {/* 2.0 FINAL RP QC #17 (Yemi, Nov 5): "Remove Alefiya's photo and
+            replace it with the thumbnail". The thumbnail isn't final, so a
+            marked placeholder holds its place until it arrives. */}
+        <div className="rtp__panel-thumb">
+          <a
+            className="rtp__thumb"
+            href={CTA.workshop.href}
+            target="_blank"
+            rel="noopener"
+            onClick={() => ga.ctaClick('watch_workshop')}
+            aria-label={FINAL_FRAME.thumbAlt}
+          >
+            {FINAL_FRAME.thumbPlaceholder || !FINAL_FRAME.thumbSrc ? (
+              <span className="rtp__thumb-ph">
+                <span className="rtp__thumb-play" aria-hidden="true" />
+                <span className="rtp__thumb-label">{FINAL_FRAME.thumbLabel}</span>
+                <span className="rtp__thumb-note">{FINAL_FRAME.thumbNote}</span>
+              </span>
+            ) : (
+              <img src={FINAL_FRAME.thumbSrc} alt="" width="1280" height="720" loading="lazy" />
+            )}
+          </a>
         </div>
+      </div>
+
+      {/* "…and move the calendar up into the same section" (Yemi, Nov 5):
+          the booking calendar sits under the frame, part of this section */}
+      <div className="rtp__cal">
+        <TidyCalEmbed />
       </div>
 
     </section>
