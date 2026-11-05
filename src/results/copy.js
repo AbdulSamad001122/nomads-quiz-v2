@@ -508,7 +508,8 @@ export const AD_SPEND = {
   wsTo: 'to',
   wsSame: ', so the same',
   wsInAds: 'in ads adds',
-  wsAfter: ', predictably, without buying more traffic.',
+  // non-breaking space keeps "more traffic." together (audit, Nov 5)
+  wsAfter: ', predictably, without buying more traffic.',
   button: 'Watch the workshop',
   // kept from the old design for a taker with no ad spend figure (the
   // artifact's spend line needs one)
