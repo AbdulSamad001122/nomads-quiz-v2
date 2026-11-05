@@ -288,6 +288,7 @@
 
 .rad__gain .rad__mo {
   opacity: 0.95;
+  text-wrap: balance;
 }
 
 .rad__yr {
@@ -460,5 +461,16 @@
   .rad__ws-thumb img {
     transition: none;
     transform: none;
+  }
+}
+
+/* 900–1100px: the band and workshop card ran ~8px from the screen edges;
+   keep them inside a 16px gutter (still wider than the cards; audit,
+   Nov 5). Phones keep them edge to edge. */
+@media (min-width: 561px) and (max-width: 1100px) {
+  .rad__result,
+  .rad__ws {
+    margin-left: max(-24px, calc(16px - (100vw - 100%) / 2));
+    margin-right: max(-24px, calc(16px - (100vw - 100%) / 2));
   }
 }
