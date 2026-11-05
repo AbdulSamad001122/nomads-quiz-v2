@@ -808,7 +808,8 @@
 
 .rcs__cw-inner {
   width: 100%;
-  max-width: 824px;
+  /* capped so big monitors look like 1440, not a slide (audit, Nov 5) */
+  max-width: 660px;
   container-type: inline-size;
 }
 
@@ -940,7 +941,7 @@
 /* ——— right half: TODAY → TARGET + the bar ——— */
 .rcs__tt {
   width: 100%;
-  max-width: 824px;
+  max-width: 660px;
   container-type: inline-size;
 }
 
@@ -1060,7 +1061,7 @@
   }
   .rcs__cw-inner,
   .rcs__tt {
-    max-width: 620px;
+    max-width: 540px;
   }
 }
 
