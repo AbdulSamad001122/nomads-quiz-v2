@@ -224,15 +224,14 @@ export const RED_METRICS = {
       icon: '/assets/results-quadrant-icon-4.png',
     },
   ],
-  // QC item 6 ("All 10 Questions section", Yemi C7: this sentence): set as
-  // a bold, large headline; words unchanged.
-  // Split around the {{goal_rpv}} chip per the design. The doc's em dash
-  // after "red" reads as a comma here (user rule: no em dashes in the new
-  // sections, same as Spot A/B).
-  answerBefore:
-    'Answer all 10 questions, and you’ll know exactly what’s keeping your red metric red, and what to optimise to move your RPV™ toward',
-  answerAfter:
-    'and add $125K/month without spending another penny on marketing or ads.',
+  // 2.0 FINAL RP QC (Alefiya, Nov 4, row 4 + comment "optimsie copy"): her
+  // new sentence word for word, set as the bold headline it was. Split
+  // around the two personalised chips: {{current_rpv}} (red) and
+  // {{goal_rpv}} (green); her "$3 to $19.67" was one taker's figures. Her
+  // "$125K/month($1.5M/year)" is kept as typed (no space; user, Nov 5).
+  answerBefore: 'Answer all 10 questions to see what to optimise to grow your Revenue Per Visitor™ from',
+  answerMid: 'to',
+  answerAfter: ', so you can predictably stack $125K/month($1.5M/year) on top of your current monthly revenue.',
   // Doc/design show this in ALL CAPS; user (Sep 21) chose sentence case to
   // match every other button on the page.
   ctaWorkshop: 'Watch the workshop with your marketing team',
