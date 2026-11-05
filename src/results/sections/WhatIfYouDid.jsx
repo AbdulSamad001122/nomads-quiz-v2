@@ -1,4 +1,5 @@
 import { WHAT_IF } from '../copy.js';
+import { keepLastTwo } from '../emphasize.jsx';
 import TitledPortrait from './TitledPortrait.jsx';
 import './WhatIfYouDid.css';
 
@@ -52,18 +53,19 @@ export default function WhatIfYouDid({ result }) {
           {/* one h2 of plain text; only the two coloured figures get a span
               (user, Oct 31) */}
           <h2 className="rwi__head">
-            {c.golfHead.map((seg) =>
+            {c.golfHead.map((seg, i) =>
               seg.hl ? (
                 <span key={seg.t} className="rwi__hl">
                   {seg.t}
                 </span>
               ) : (
-                seg.t
+                // the last words stay together, so no line ends on "spend."
+                i === c.golfHead.length - 1 ? keepLastTwo(seg.t) : seg.t
               ),
             )}
           </h2>
           {/* 2.0 FINAL RP QC (Nov 4): her second sentence, all bold */}
-          <p className="rwi__bold">{c.golfBody}</p>
+          <p className="rwi__bold">{keepLastTwo(c.golfBody)}</p>
           {/* the bar only shows with the logo fallback, which has no title */}
           {!GOLF_IMAGE && (
             <p className="rwi__chip">
