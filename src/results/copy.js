@@ -228,10 +228,11 @@ export const RED_METRICS = {
   // new sentence word for word, set as the bold headline it was. Split
   // around the two personalised chips: {{current_rpv}} (red) and
   // {{goal_rpv}} (green); her "$3 to $19.67" was one taker's figures. Her
-  // "$125K/month($1.5M/year)" is kept as typed (no space; user, Nov 5).
+  // "$125K/month ($1.5M/year)": the missing space added, as in her own
+  // workshop title "$125K/mo ($1.5M/year)" (user, Nov 5).
   answerBefore: 'Answer all 10 questions to see what to optimise to grow your Revenue Per Visitor™ from',
   answerMid: 'to',
-  answerAfter: ', so you can predictably stack $125K/month($1.5M/year) on top of your current monthly revenue.',
+  answerAfter: ', so you can predictably stack $125K/month ($1.5M/year) on top of your current monthly revenue.',
   // Doc/design show this in ALL CAPS; user (Sep 21) chose sentence case to
   // match every other button on the page.
   ctaWorkshop: 'Watch the workshop with your marketing team',
