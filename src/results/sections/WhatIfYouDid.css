@@ -170,13 +170,13 @@
 /* small phones: the shared 26px made an 8-line headline at 320 (audit,
    Nov 5) */
 @media (max-width: 400px) {
-  body .results-page .rwi__head {
+  body .results-page .rwi .rwi__head {
     font-size: 23px;
   }
 }
 
 @media (max-width: 360px) {
-  body .results-page .rwi__head {
+  body .results-page .rwi .rwi__head {
     font-size: 22px;
   }
   .rwi__bold {
