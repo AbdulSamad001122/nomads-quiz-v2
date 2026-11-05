@@ -38,8 +38,8 @@
 
 .rpl__headline {
   /* centred (Alefiya, 2.0 FINAL RP QC: "pls middle indent it"); wide
-     enough for her one line to sit in two balanced lines */
-  max-width: 860px;
+     enough for her one line to sit in two balanced lines on desktop */
+  max-width: 1040px;
   margin: 0 auto;
   text-align: center;
   text-wrap: balance;
