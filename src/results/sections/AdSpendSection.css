@@ -372,33 +372,36 @@
   color: var(--rad-green-deep);
 }
 
-/* the workshop button: the artifact's — ice, midnight text, hard deep
-   shadow, no border */
+/* the workshop button: the page's light-pink button (user, Nov 5: "use
+   the light pink button that we use") — same colour, border, shadow and
+   lift as the other pink buttons */
 .rad__btn {
   display: inline-block;
   font-family: var(--font-body);
-  font-weight: 800;
+  font-weight: 700;
   font-size: 16px;
   line-height: 1.3;
-  color: var(--rad-navy);
+  color: #250f1c;
   text-decoration: none;
   text-align: center;
-  padding: 15px 22px;
-  background: #cae1f4;
-  border: 0;
-  box-shadow: 5px 5px 0 var(--rad-deep);
+  padding: 13px 22px;
+  background: var(--rbtn-book-bg, #f8dfe8);
+  border: 2px solid #0f0a10;
+  border-radius: 0;
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.55);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .rad__btn:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 7px 7px 0 var(--rad-deep);
-  color: var(--rad-navy);
+  transform: translate(-2px, -2px) scale(1.04);
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.55);
+  background: var(--rbtn-book-bg, #f8dfe8);
+  color: #250f1c;
 }
 
 .rad__btn:active {
   transform: none;
-  box-shadow: 2px 2px 0 var(--rad-deep);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.55);
 }
 
 .rad__arw {
