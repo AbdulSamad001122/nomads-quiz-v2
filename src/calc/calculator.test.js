@@ -3,11 +3,13 @@
  * Reproduces the doc's worked test fixture EXACTLY, then exercises edge cases
  * and invariants. Any FAIL exits non-zero.
  */
-import { calculate, runImprovementLoop, metricColour, CEILINGS } from './calculator.js';
+import { calculate, runImprovementLoop, metricColour, CEILINGS, bandMax } from './calculator.js';
 import { resolveInputs } from './backendValues.js';
 import { validateManual, impossibleCheck } from './validation.js';
 import { rpv2 } from './rounding.js';
-import { anyMetricRed, redMetricRows, rpvMultiple, resolveTokens } from '../results/resolveTokens.js';
+import { anyMetricRed, redMetricRows, rpvMultiple, resolveTokens, fill } from '../results/resolveTokens.js';
+import { stairsSteps, STAIRS_FULL_PX } from '../results/stairs.js';
+import { STOP_OR_PUSH } from '../results/copy.js';
 
 let pass = 0,
   fail = 0;
@@ -135,40 +137,109 @@ const near = (a, b, tol = 1e-6) => Math.abs(a - b) <= tol;
 }
 
 /* =========================================================
-   4b · 12× CAP on the "all 5 metrics at max" RPV (QC, Added Logic.docx)
+   4b · CAP LOGIC (Yemi, "Cap Logic" tab, Nov 4 2026) — band multiples
+   replace the old flat 12× cap on "all 5 metrics at max"
    ========================================================= */
 {
-  // The doc's own example: $270K/yr over 360K visitors → RPV $0.75, goal
-  // $4.92; 12 × $0.75 = $9.00 → "~$3.24M/year in total and +$2.97M on top of
-  // today, instead of the uncapped $10.6M".
-  const ex = calculate({ q2: 270000, q7: 30000, q7b: null, q7c: undefined, q8: 3000, q9a: 0.03, q9b: 0.375, q10: 175, q11: 62500 }, 'plg');
-  ok('12× · doc example current RPV $0.75', rpv2(ex.currentRPV) === 0.75, rpv2(ex.currentRPV));
-  ok('12× · doc example goal RPV $4.92', rpv2(ex.goalRPV) === 4.92, rpv2(ex.goalRPV));
-  ok('12× · doc example max RPV capped at $9.00', Math.abs(ex.capped.maxRPV - 9) < 1e-9 && ex.capped.maxCappedAt12, ex.capped.maxRPV);
-  ok('12× · doc example total ≈ $3.24M', Math.round(ex.capped.maxRPV * ex.annualVisitors) === 3240000);
-  ok('12× · doc example +$2.97M on top of today', Math.round(ex.capped.achievableGain) === 2970000, ex.capped.achievableGain);
-  ok('12× · doc example uncapped would have been bigger', ex.capped.ceilingRPV > ex.capped.maxRPV);
-  ok('12× · doc example still reaches the goal (Block 4)', ex.cappedBlock === 4 && ex.capped.goalWithinCap);
+  // Bands + floors (steps 2–4)
+  ok('cap · $270K → 12×', bandMax(270000).multiple === 12 && bandMax(270000).max === 3240000);
+  ok('cap · $810K → 6× = $4.86M (doc step 3 example)', bandMax(810000).multiple === 6 && bandMax(810000).max === 4860000);
+  ok('cap · $2.1M → 5× = $10.5M', bandMax(2100000).max === 10500000);
+  ok('cap · $4.5M → 4× = $18M', bandMax(4500000).max === 18000000);
+  ok('cap · $8M → 3× = $24M', bandMax(8000000).max === 24000000);
+  ok('cap · $12M → 2× floored to $30M (doc step 4 example)', bandMax(12000000).max === 30000000);
+  ok('cap · $9.9M vs $10M never goes down', bandMax(10000000).max >= bandMax(9_900_000).max);
+  ok('cap · $300K boundary floor $3.6M', bandMax(300000).max === 3600000);
+  ok('cap · $1M boundary floor $6M', bandMax(1000000).max === 6000000);
+  ok('cap · $3M boundary floor $15M', bandMax(3000000).max === 15000000);
+  ok('cap · $5M boundary floor $20M', bandMax(5000000).max === 20000000);
+  ok('cap · $299,999 still 12×', bandMax(299999).multiple === 12);
+  // "None of the fixed Q2 answers are changed by it"
+  for (const v of [270000, 810000, 2100000, 4500000]) {
+    ok(`cap · fixed Q2 $${v} not floored`, bandMax(v).max === v * bandMax(v).multiple);
+  }
 
-  // Formula: max added revenue = (max RPV − current RPV) × annual visitors
-  ok('12× · gain = (maxRPV − currentRPV) × visitors', Math.abs(ex.capped.achievableGain - (ex.capped.maxRPV - ex.currentRPV) * ex.annualVisitors) < 1e-6);
+  // Doc table "What each Q2 answer sees" (band max lower than metric max)
+  const big = (q2, q11) => calculate({ q2, q7: 150000, q7b: null, q7c: undefined, q8: 3000, q9a: 0.03, q9b: 0.375, q10: 175, q11 }, 'plg');
+  const rows = [
+    [270000, 3240000, 2970000, '12×'],
+    [810000, 4860000, 4050000, '6×'],
+    [2100000, 10500000, 8400000, '5×'],
+    [4500000, 18000000, 13500000, '4×'],
+    [8000000, 24000000, 16000000, '3×'],
+    [12000000, 30000000, 18000000, '2.5×'],
+  ];
+  for (const [q2, max, add, badge] of rows) {
+    const r = big(q2, Math.round(q2 * 0.1));
+    ok(`cap · table $${q2}: max ${max}`, Math.round(r.capped.maxRevenue) === max, r.capped.maxRevenue);
+    ok(`cap · table $${q2}: added ${add}`, Math.round(r.capped.achievableGain) === add, r.capped.achievableGain);
+    ok(`cap · table $${q2}: badge ${badge} (step 8: max ÷ today)`, resolveTokens(r).max_multiple === badge, resolveTokens(r).max_multiple);
+    ok(`cap · table $${q2}: section shows (Block 4)`, r.cappedBlock === 4, r.cappedBlock);
+  }
 
-  // High-RPV business: 12× today is above the ceiling RPV → the ceiling wins
-  const hi = calculate({ q2: 810000, q7: 7500, q7b: null, q7c: undefined, q8: 3000, q9a: 0.125, q9b: 0.375, q10: 175, q11: 600000 }, 'plg');
-  ok('12× · high RPV → ceiling wins, not capped at 12×', !hi.capped.maxCappedAt12 && hi.capped.maxRPV === hi.capped.ceilingRPV);
-  // High traffic, tiny RPV ($0.125 → shown $0.13): the capped chip still
-  // reads exactly "12×", not "11.5×" from cent-rounded values
-  const tiny = calculate({ q2: 270000, q7: 180000, q7b: null, q7c: undefined, q8: 3000, q9a: 0.03, q9b: 0.375, q10: 175, q11: 62500 }, 'plg');
-  ok('12× · tiny RPV still capped at 12×', tiny.capped.maxCappedAt12, tiny.currentRPV);
-  ok('12× · tiny RPV chip reads "12×"', resolveTokens(tiny).max_multiple === '12×', resolveTokens(tiny).max_multiple);
-  ok('12× · max never above 12× today', hi.capped.maxRPV <= 12 * hi.currentRPV + 1e-9 && ex.capped.maxRPV <= 12 * ex.currentRPV + 1e-9);
+  // Example A — band max lower: $810K, 360,000 visitors/yr → $4.86M
+  const exA = calculate({ q2: 810000, q7: 30000, q7b: null, q7c: undefined, q8: 3000, q9a: 0.03, q9b: 0.375, q10: 175, q11: 62500 }, 'plg');
+  ok('cap · Example A shows $4.86M', Math.round(exA.capped.maxRevenue) === 4860000 && exA.capped.bandCapBites, exA.capped.maxRevenue);
+  // Example B — metric max lower: $2.1M ($1.4M outside email), 120,000
+  // visitors/yr → (120,000 × $30) + $1.4M = $5M
+  const exB = calculate({ q2: 2100000, q7: 10000, q7b: null, q7c: undefined, q8: 1000, q9a: 0.03, q9b: 0.375, q10: 175, q11: 700000 }, 'plg');
+  ok('cap · Example B shows $5M (metric max wins)', Math.round(exB.capped.maxRevenue) === 5000000 && !exB.capped.bandCapBites, exB.capped.maxRevenue);
+  ok('cap · Example B badge = $5M ÷ $2.1M = 2.4×', resolveTokens(exB).max_multiple === '2.4×', resolveTokens(exB).max_multiple);
+  ok('cap · gain = max − today', Math.abs(exA.capped.achievableGain - (exA.capped.maxRevenue - 810000)) < 1e-6);
+  ok('cap · gain = (maxRPV − currentRPV) × visitors', Math.abs(exA.capped.achievableGain - (exA.capped.maxRPV - exA.currentRPV) * exA.annualVisitors) < 1e-3);
 
-  // Edge case answered in the doc: a $60K/yr business needs ~26× to add
-  // $1.5M → the cap wins → capped Blocks 5–7 replace "push to their max".
+  // Step 7 — $60K × 12 = $720K is below the $1.56M goal → Blocks 5–7
   const small = calculate({ q2: 60000, q7: 7500, q7b: null, q7c: undefined, q8: 500, q9a: 0.005, q9b: 0.05, q10: 25, q11: 12500 }, 'plg');
-  ok('12× · $60K business: goal beyond 12× today', !small.capped.goalWithinCap && small.goalRPV > 12 * small.currentRPV);
-  ok('12× · $60K business → capped Block 5/6, not Block 4', small.cappedState && [5, 6].includes(small.cappedBlock), `block=${small.cappedBlock}`);
-  ok('12× · $60K business gain = 11× today', Math.round(small.capped.achievableGain) === 11 * 60000, small.capped.achievableGain);
+  ok('cap · $60K: max $720K below goal → capped block', !small.capped.goalWithinCap && small.cappedState && [5, 6].includes(small.cappedBlock), `block=${small.cappedBlock}`);
+  // "If the max isn't higher than the goal" — exactly equal also hides it.
+  // $136,363.64 × 12 = $1,636,363.64 = its goal → not higher → capped.
+  const eq = calculate({ q2: 1_500_000 / 11, q7: 150000, q7b: null, q7c: undefined, q8: 3000, q9a: 0.03, q9b: 0.375, q10: 175, q11: 10000 }, 'plg');
+  ok('cap · max equal to goal → section hidden (step 7 "isn\'t higher")', !eq.capped.goalWithinCap && eq.cappedState, `max=${eq.capped.maxRevenue} goal=${eq.targetRevenue}`);
+  ok('cap · $60K gain = 11× today', Math.round(small.capped.achievableGain) === 660000, small.capped.achievableGain);
+
+  // Alefiya (QC doc, Nov 4): the "nobody gets there in one jump" block shows
+  // for every max beyond 3× today
+  ok('stretch · 12× / 6× / 5× / 4× show it', [270000, 810000, 2100000, 4500000].every((q2) => big(q2, q2 * 0.1).capped.showStretch));
+  ok('stretch · 3× ($8M) hides it', !big(8000000, 800000).capped.showStretch);
+  ok('stretch · 2.5× ($12M) hides it', !big(12000000, 1200000).capped.showStretch);
+  ok('stretch · 2.4× (Example B) hides it', !exB.capped.showStretch);
+
+  // Yemi's updated Cap Logic tab (Nov 4 evening) — stretch block copy
+  const c = STOP_OR_PUSH;
+  ok('stretch · eyebrow 12× for the $270K band', fill(c.realEyebrow, resolveTokens(big(270000, 27000))).toUpperCase() === 'YES, 12× SOUNDS LIKE A STRETCH');
+  ok('stretch · eyebrow 4× for the $4.5M band', fill(c.realEyebrow, resolveTokens(big(4500000, 450000))).toUpperCase() === 'YES, 4× SOUNDS LIKE A STRETCH');
+  ok('stretch · headline unchanged', c.realHead === 'It is a stretch, which is why nobody gets there in one jump.');
+  ok('stretch · first paragraph = Yemi’s rewrite', c.realP1 === 'You don’t fix all five metrics at once. You fix the first red one and see your first jump. Then you fix the next, and the next, and each fix adds to the one before it.');
+  ok('stretch · second paragraph unchanged', c.realP2.startsWith('It might take two or three years. But you’ll know exactly how to grow month on month and year on year'));
+
+  // Stairs graphic — Yemi's example table, row by row
+  const stairRows = [
+    [12, ['1×', '3×', '5×', '8×', '12×']],
+    [6, ['1×', '1.9×', '2.8×', '4.2×', '6×']],
+    [4, ['1×', '1.5×', '2.1×', '2.9×', '4×']],
+    [2.5, ['1×', '1.3×', '1.5×', '2×', '2.5×']],
+  ];
+  for (const [m, want] of stairRows) {
+    const got = stairsSteps(c.stairs, m).map((s) => s.x);
+    ok(`stairs · ${m}× → ${want.join(' ')}`, got.join(' ') === want.join(' '), got.join(' '));
+  }
+  const s6 = stairsSteps(c.stairs, 6);
+  ok('stairs · last bar always full height', [12, 6, 4, 2.5, 3.7].every((m) => stairsSteps(c.stairs, m)[4].height === STAIRS_FULL_PX));
+  ok('stairs · heights scale to the max (6×: 1.9× bar = 1.9/6 of full)', s6[1].height === Math.round((STAIRS_FULL_PX * 1.9) / 6));
+  ok('stairs · bars only grow', [12, 6, 4, 2.5].every((m) => stairsSteps(c.stairs, m).every((s, i, a) => i === 0 || s.height > a[i - 1].height)));
+  ok('stairs · captions Today / Fix metric 1–3 / Your max', s6.map((s) => s.cap).join('|') === 'Today|Fix metric 1|Fix metric 2|Fix metric 3|Your max');
+  ok('stairs · last step = the badge figure', stairsSteps(c.stairs, exA.capped.maxMultiple)[4].x === resolveTokens(exA).max_multiple);
+  ok('proof card · "We’ve done 12× and more" copy removed', !JSON.stringify(c).includes('12× AND MORE') && !JSON.stringify(c).includes('ceiling, where our clients'));
+
+  // Q2 "$500K+/month" typed revenue (Cap Logic "Change to Q2")
+  const typed = resolveInputs({ q2a: 'manual' }, { q2a: '$8,000,000' }, 'plg');
+  ok('q2 · $500K+ uses the typed annual revenue', typed.q2 === 8000000, typed.q2);
+  ok('q2 · $250K to $500K = $4.5M', resolveInputs({ q2a: '250k-500k' }, {}, 'plg').q2 === 4500000);
+  ok('q2 · under $6M typed → "check the number"', impossibleCheck('q2a', { q2: 5000000 }, { q2a: 'manual' })?.id === 'top-revenue-under-6m');
+  ok('q2 · $6M typed → no check', impossibleCheck('q2a', { q2: 6000000 }, { q2a: 'manual' }) === null);
+  ok('q2 · fixed $4.5M answer → no check', impossibleCheck('q2a', { q2: 4500000 }, { q2a: '250k-500k' }) === null);
+  ok('q2 · $0 typed is rejected', !validateManual('q2a', '0').ok);
+  ok('q2 · $8,000,000 typed is accepted', validateManual('q2a', '$8,000,000').ok);
 }
 
 /* =========================================================

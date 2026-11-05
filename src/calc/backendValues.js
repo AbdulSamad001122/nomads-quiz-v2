@@ -7,6 +7,8 @@
 
 import { parseNumeric } from './validation.js';
 
+// Annual revenue the page uses (Cap Logic, Nov 4: "New Q2 options" table).
+// "$500K+/month" (id 'manual') uses the annual revenue they type instead.
 export const Q2 = {
   'under-10k': 60000,
   '10k-35k': 270000,
@@ -143,7 +145,7 @@ export function resolveInputs(answers, manualValues, path) {
     (answers.q7a === 'dont-track' ? Q7['dont-track'] : Q7[answers.q7a]);
 
   // Q2 annual revenue
-  const q2 = Q2[answers.q2a];
+  const q2 = man('q2a', 'currency') ?? Q2[answers.q2a];
 
   // Q8 new subscribers/month (don't track → 10% of Q7)
   let q8 = man('q8', 'number');

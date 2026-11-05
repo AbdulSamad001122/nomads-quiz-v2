@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { STOP_OR_PUSH, CTA } from '../copy.js';
 import { fill } from '../resolveTokens.js';
+import { stairsSteps } from '../stairs.js';
 import HighlightSweep from '../../components/primitives/HighlightSweep.jsx';
 import { emphasize } from '../emphasize.jsx';
 import { ga } from '../../analytics/ga.js';
@@ -97,20 +98,22 @@ function placeLabels(ladder) {
  * "You can stop at $1.5M. Or push all 5 metrics to their max." — QC row 5
  * (Oct 2026), rebuilt to Alefiya's "RPV Max Upside Section" design: one
  * navy section with one message (design note 1). The smaller "stop here"
- * card (+$1.5M) and the big "go all the way" card (the max, capped at 12×
- * today — calculator.js), joined by "But… what if you did?"; today / goal /
- * max drawn to scale as bars; the scepticism block (only when the 12× cap
- * bites); the workshop note + button. The old "But… what if you did?"
+ * card (+$1.5M) and the big "go all the way" card (the max — the lower of
+ * the revenue band's multiple and the metric max, Cap Logic Nov 4,
+ * calculator.js), joined by "But… what if you did?"; today / goal / max
+ * drawn to scale as bars; the scepticism block (only when the max is beyond
+ * 3× today); the workshop note + button. The old "But… what if you did?"
  * section's headline moved in here; its GolfBays card stays in
  * WhatIfYouDid (QC row 6). Motion (user, Oct 30; not in the design): the
  * bars grow in and their figures count up once seen, and so does the big
  * max figure.
  *
  * ResultsPage renders this only for non-capped takers: capped takers
- * (Blocks 5–7, which now include a goal beyond 12× today) read their capped
- * card instead — "blocks 5, 6, and 7 in the logic doc has the copy to
- * replace the 'push metrics to their max' section" (Added Logic.docx).
+ * (Blocks 5–7, which include a max that isn't above the goal) read their
+ * capped card instead — Cap Logic step 7: "hide this section and show
+ * blocks 5, 6, and 7 instead".
  */
+
 export default function StopOrPush({ result, tokens }) {
   const c = STOP_OR_PUSH;
   const t = (s) => fill(s, tokens);
@@ -138,7 +141,9 @@ export default function StopOrPush({ result, tokens }) {
 
   const today = result.currentAnnualRevenue;
   const goal = today + 1_500_000;
-  const max = Math.max(result.capped.maxRPV * result.annualVisitors, goal);
+  const max = Math.max(result.capped.maxRevenue, goal);
+  const stairs = stairsSteps(c.stairs, result.capped.maxMultiple);
+  const stairsLabel = fill(c.stairsLabel, Object.fromEntries(stairs.map((s, i) => [`s${i}`, s.x])));
   const pct = (v) => Math.max(1.5, Math.min(100, (v / max) * 100));
   const rows = [
     { key: 'today', label: c.rowToday, sub: t(c.rowTodaySub), val: t(c.rowTodayVal), chip: null, w: pct(today) },
@@ -146,7 +151,7 @@ export default function StopOrPush({ result, tokens }) {
     {
       key: 'max',
       label: c.rowMax,
-      sub: t(result.capped.maxCappedAt12 ? c.rowMaxSubCapped : c.rowMaxSub),
+      sub: t(c.rowMaxSub),
       val: t(c.rowMaxVal),
       chip: tokens.max_multiple ? t(c.rowMaxChip) : null,
       w: 100,
@@ -238,7 +243,7 @@ export default function StopOrPush({ result, tokens }) {
           ))}
         </div>
 
-        {result.capped.maxCappedAt12 && (
+        {result.capped.showStretch && (
           <div className="rso__real">
             <div>
               <div className="rso__who">
@@ -248,33 +253,32 @@ export default function StopOrPush({ result, tokens }) {
                   <small>{c.whoRole}</small>
                 </div>
               </div>
-              <span className="rso__eyebrow rso__eyebrow--chip">{c.realEyebrow}</span>
+              <span className="rso__eyebrow rso__eyebrow--chip">{t(c.realEyebrow)}</span>
               <h3 className="rso__real-head">{c.realHead}</h3>
               <p className="rso__real-p">{c.realP1}</p>
               <p className="rso__real-p">{emphasize(c.realP2, [c.realP2Bold])}</p>
             </div>
             {/* bars and captions in two rows, so every bar stands on the same
                 baseline however long its caption wraps (user, Oct 30) */}
-            <div className="rso__stairs" role="img" aria-label={c.stairsLabel}>
+            <div className="rso__stairs" role="img" aria-label={stairsLabel}>
               <div className="rso__stairs-row rso__stairs-row--bars">
-                {c.stairs.map((s, i) => (
-                  <div key={s.x} className={`rso__st rso__st--${i}`}>
+                {stairs.map((s, i) => (
+                  <div key={s.cap} className={`rso__st rso__st--${i}`}>
                     {i === 0 && <span className="rso__st-lab">{s.x}</span>}
-                    <div className="rso__blk">{i === 0 ? null : s.x}</div>
+                    <div className="rso__blk" style={{ height: `${s.height}px` }}>
+                      {i === 0 ? null : s.x}
+                    </div>
                   </div>
                 ))}
               </div>
               <div className="rso__stairs-row">
-                {c.stairs.map((s, i) => (
-                  <span key={s.x} className={`rso__cap rso__cap--${i}`}>
+                {stairs.map((s, i) => (
+                  <span key={s.cap} className={`rso__cap rso__cap--${i}`}>
                     {s.cap}
                   </span>
                 ))}
               </div>
             </div>
-            {/* the "We've done 12× and more" Video Mastermind card moved
-                out into its own case-study section, CreativeDelivery.jsx
-                (user, Nov 2) */}
           </div>
         )}
 

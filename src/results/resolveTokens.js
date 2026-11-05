@@ -1,5 +1,5 @@
 import { money, rpvMoney, dailyVisitors } from '../calc/rounding.js';
-import { metricColour, MAX_RPV_MULTIPLE } from '../calc/calculator.js';
+import { metricColour } from '../calc/calculator.js';
 
 /**
  * Single bridge between the calculator result and the page copy: every
@@ -19,16 +19,16 @@ export function resolveTokens(result) {
     // "6.6×"). Empty when there is no real jump — the hero hides the chip.
     rpv_multiple: rpvMultiple(result.currentRPV, result.goalRPV),
     // QC row 5 — "stop at $1.5M or push all 5 metrics to their max". The max
-    // uses the calculator's 12×-capped max RPV (Added Logic.docx); totals are
-    // yearly revenue at today / goal / max RPV on the taker's real traffic.
+    // uses the calculator's capped max (Cap Logic, Nov 4: band multiple or
+    // metric max, whichever is lower); totals are yearly revenue at today /
+    // goal / max on the taker's real traffic.
     max_rpv: rpvMoney(result.capped.maxRPV),
     max_gain: moneyShort(result.capped.achievableGain),
-    max_total: moneyShort(result.capped.maxRPV * result.annualVisitors),
-    // capped at 12× → exactly "12×" (worked from cent-rounded values a tiny
-    // RPV like $0.13 would read "11.5×"); otherwise never shown above 12×
-    max_multiple: result.capped.maxCappedAt12
-      ? `${MAX_RPV_MULTIPLE}×`
-      : atMost12(rpvMultiple(result.currentRPV, result.capped.maxRPV)),
+    max_total: moneyShort(result.capped.maxRevenue),
+    // Cap Logic step 8: the badge is max ÷ today's revenue, worked from the
+    // revenues (not cent-rounded RPVs), so a band cap reads its exact
+    // multiple ("12×", "6×") and a floored max its real one ("2.5×").
+    max_multiple: timesMultiple(result.capped.maxMultiple),
     current_total: moneyShort(result.currentAnnualRevenue),
     goal_total: moneyShort(result.currentAnnualRevenue + 1_500_000),
     // QC row 7 — the RPS cards: today's / goal revenue per subscriber, the
@@ -74,7 +74,13 @@ export function rpvMultiple(current, goal) {
   return `${(Math.round((g * 10) / c) / 10).toFixed(1).replace(/\.0$/, '')}×`;
 }
 
-const atMost12 = (s) => (s && parseFloat(s) > MAX_RPV_MULTIPLE ? `${MAX_RPV_MULTIPLE}×` : s);
+/* "2.5×" / "12×" — one decimal, no trailing ".0"; '' when there is no real
+   step up (max at or below today). */
+export function timesMultiple(m) {
+  const r = Math.round(m * 10) / 10;
+  if (!(r > 1)) return '';
+  return `${r.toFixed(1).replace(/\.0$/, '')}×`;
+}
 
 const pct = (x) => `${Math.round(x * 100)}%`;
 const dollars = (x) => `$${Math.round(x)}`;

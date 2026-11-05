@@ -160,6 +160,33 @@ const SCENARIOS = {
     inputs: { q2: 810000, q7: 30000, q7b: 0, q7c: 0.65, q8: 3000, q9a: 0.03, q9b: 0.375, q10: 175, q11: 175000 },
   },
 
+  /* ——— Cap Logic (Yemi, Nov 4): one per band behaviour ——— */
+  // $4.5M ("$250K to $500K/month") → 4× = $18M, stretch block shows (>3×)
+  cap4x: {
+    blocks: '1 + 4 · max 4× ($18M)',
+    path: 'plg',
+    inputs: { q2: 4500000, q7: 150000, q7b: null, q7c: undefined, q8: 3000, q9a: 0.03, q9b: 0.375, q10: 175, q11: 450000 },
+  },
+  // typed $8M ("$500K+/month") → 3× = $24M, stretch block hidden (not beyond 3×)
+  cap3x: {
+    blocks: '1 + 4 · max 3× ($24M), no stretch block',
+    path: 'plg',
+    inputs: { q2: 8000000, q7: 150000, q7b: null, q7c: undefined, q8: 3000, q9a: 0.03, q9b: 0.375, q10: 175, q11: 800000 },
+  },
+  // typed $12M → 2× = $24M, floored to $30M → badge 2.5×
+  cap25x: {
+    blocks: '1 + 4 · max $30M floor (2.5×), no stretch block',
+    path: 'plg',
+    inputs: { q2: 12000000, q7: 150000, q7b: null, q7c: undefined, q8: 3000, q9a: 0.03, q9b: 0.375, q10: 175, q11: 1200000 },
+  },
+  // doc Example B: $2.1M, 120,000 visitors/yr, $1.4M outside email → the
+  // metric max ($5M) is lower than the band max ($10.5M) → 2.4×
+  capmetric: {
+    blocks: '1 + 4 · metric max wins ($5M, 2.4×)',
+    path: 'plg',
+    inputs: { q2: 2100000, q7: 10000, q7b: null, q7c: undefined, q8: 1000, q9a: 0.03, q9b: 0.375, q10: 175, q11: 700000 },
+  },
+
   /* ——— original scenario names, kept so existing links still work ——— */
   fixture: { blocks: '1 + 4 · ad module', path: 'slg', inputs: { q2: 810000, q7: 30000, q7b: 17500, q7c: 0.65, q8: 3000, q9a: 0.03, q9b: 0.375, q10: 3500, q11: 175000 } },
   capped: { blocks: '1 + 5', path: 'plg', inputs: { q2: 270000, q7: 4000, q7b: null, q7c: undefined, q8: 400, q9a: 0.03, q9b: 0.375, q10: 175, q11: 62500 } },
