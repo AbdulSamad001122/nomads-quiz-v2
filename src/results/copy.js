@@ -1613,6 +1613,34 @@ export const WHAT_IF = {
  * the design). {{tokens}} resolve per taker (resolveTokens.js). Comment C5
  * ("make this bold headline") → the two sentences are the section headline.
  */
+// 2.0 FINAL RP QC #4 (Alefiya, Nov 4, doc row 5 + image 04): the simpler two
+// cards, every word as her picture ("PER VISITOR" in capitals as drawn;
+// "Buuuuuut" with 6 u's as drawn). Numbers are the taker's own. DRAFT shown
+// under the current cards for comparison (user, Nov 6).
+export const STOP_OR_PUSH_NEW = {
+  head1Before: 'You can',
+  head1Hl: 'stop at $1.5M.',
+  head2: 'Or push all 5 metrics to their max.',
+  leftIntro: 'If you go from making',
+  leftTo: 'to',
+  perVisitor: 'PER VISITOR',
+  leftAdd: 'you add',
+  leftBig: '+$1.5M',
+  perYear: '/year',
+  leftMonthBefore: 'That’s',
+  leftMonthBold: '$125K a month',
+  leftMonthAfter: 'on top of your monthly revenue.',
+  leftNope: 'And nope, you don’t need to max out all 5 Revenue Per Visitor™ metrics to get there.',
+  but: 'Buuuuuut... what if you hit maximum conversion benchmarks across all 5 Revenue Per Visitor™ metrics?',
+  rightIntro: 'If you push all 5 metrics to their max, you make',
+  rightAdd: 'and add',
+  rightBig: '+{{max_gain}}',
+  rightTimes: 'That’s {{max_multiple}} more revenue than today.',
+  yep: 'Yep, with the same traffic!',
+  draftOld: 'Old — current section (stays until the new one below is approved)',
+  draftNew: 'New — draft of change #4 (her simpler two cards)',
+};
+
 export const STOP_OR_PUSH = {
   // Headline: each sentence on its own line (two block spans, not <br>).
   head1Before: 'You can',
