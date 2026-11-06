@@ -42,6 +42,24 @@
   color: #ffffff;
 }
 
+/* her photo on a call (2.0 FINAL RP QC #15), under the copy; it sticks
+   with the copy, so it is kept short enough to fit the screen with it */
+.rwp__photo {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  max-height: calc(100vh - 470px);
+  min-height: 260px;
+  margin-top: 36px;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 22%;
+  border-radius: 14px;
+  border: 3px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
 /* ——— right peach panel ——— */
 
 .rwp__right {
@@ -202,6 +220,12 @@
   .rwp__bold {
     margin-top: 30px;
     max-width: 560px;
+  }
+  .rwp__photo {
+    max-height: none;
+    min-height: 0;
+    max-width: 360px;
+    margin-top: 30px;
   }
   .rwp__right {
     padding: 56px 40px 110px;

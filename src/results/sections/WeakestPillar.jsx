@@ -22,6 +22,16 @@ export default function WeakestPillar() {
           <p className="rwp__bold">
             <Lines lines={WEAKEST_PILLAR.leftBoldLines} />
           </p>
+          {/* 2.0 FINAL RP QC #15 (Alefiya, Nov 4): "Add a picture of me on
+              the call" — photo picked by the user (Nov 6) */}
+          <img
+            className="rwp__photo"
+            src="/assets/results-alefiya-on-call.webp"
+            alt="Alefiya on a call"
+            width="1000"
+            height="1497"
+            loading="lazy"
+          />
         </div>
       </div>
 
