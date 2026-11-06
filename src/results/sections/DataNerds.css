@@ -500,3 +500,8 @@
     padding: 14px 12px;
   }
 }
+
+.rdn__arw {
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-weight: 700;
+}
