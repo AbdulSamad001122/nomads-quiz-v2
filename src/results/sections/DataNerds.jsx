@@ -143,6 +143,21 @@ export default function DataNerds() {
                           </td>
                         </tr>
                       ))}
+                      {/* the rows still to come, invisible, so the window
+                          (and the page) keep their height while the demo
+                          refills the ledger — nothing below jumps (final
+                          check, Nov 6) */}
+                      {c.example.slice(rows.length).map((d) => (
+                        <tr key={`ph-${d[1]}`} className="rdn__tr--ph" aria-hidden="true">
+                          <td>{`${d[0]} · ${d[1]}`}</td>
+                          <td>{d[2]}</td>
+                          <td>{d[3]}</td>
+                          <td className="rdn__rpv">{d[4]}</td>
+                          <td className="rdn__lock">
+                            <span>{d[5]}</span>
+                          </td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>
