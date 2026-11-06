@@ -254,3 +254,18 @@
     font-size: 22px;
   }
 }
+
+/* tablets: the design's forced line breaks gave ragged lines at 761–900px
+   ("influencing" alone) — let the headline reflow (audit, Nov 6) */
+@media (max-width: 900px) {
+  .rwk__headline br {
+    display: none;
+  }
+}
+
+/* smallest phones: "revenue growth" stays one highlight block */
+@media (max-width: 360px) {
+  body .results-page .rwk__hl {
+    white-space: nowrap;
+  }
+}
