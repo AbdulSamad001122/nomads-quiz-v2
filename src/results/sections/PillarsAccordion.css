@@ -9,7 +9,7 @@
      copy is that identical texture with the 7/255 brightness step between its
      opposite edges removed, so the tile joins itself with no visible line. */
   background: #f7f3e8 url('/assets/results-paper-texture-seamless.webp') top center repeat;
-  padding: 36px 96px 120px;
+  padding: 72px 96px 120px; /* more room above the headline (user, Nov 6) */
   /* The doodle hangs past the content column — clip it so it never widens the
      page. `clip` rather than `hidden` because `hidden` makes this a scroll
      container, which kills `position: sticky` for anything in the panels
