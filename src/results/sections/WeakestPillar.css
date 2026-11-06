@@ -40,6 +40,9 @@
   font-size: 29px;
   line-height: 1.45;
   color: #ffffff;
+  /* no lone "RPV." on the last line at tablet / laptop widths (final
+     check, Nov 6) */
+  text-wrap: balance;
 }
 
 /* her photo on a call (2.0 FINAL RP QC #15), under the copy; it sticks
