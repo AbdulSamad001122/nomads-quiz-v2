@@ -1,5 +1,5 @@
 import { WHAT_IF } from '../copy.js';
-import { emphasize } from '../emphasize.jsx';
+import { keepLastTwo } from '../emphasize.jsx';
 import TitledPortrait from './TitledPortrait.jsx';
 import './WhatIfYouDid.css';
 
@@ -17,14 +17,13 @@ const GOLF_INSET = '0%';
  * background"; Yemi's reference is the split testimonial layout (Dani Paige):
  * dark crumpled-paper panel with a framed image on the left, light paper
  * with the story on the right. Same pattern as the Lara / David sections.
- * Copy unchanged (WHAT_IF). Suppressed when the achievable gain is ≤ 0.
+ * Copy: Alefiya's 2.0 FINAL RP QC text (Nov 4) — her first sentence is the
+ * headline, her second the bold line; both big enough to fill the panel.
+ * Suppressed when the achievable gain is ≤ 0.
  */
 export default function WhatIfYouDid({ result }) {
   if (!(result.capped.achievableGain > 0)) return null;
   const c = WHAT_IF;
-  // the body's second sentence carries the result, set bold like the
-  // reference's bold line
-  const boldLine = c.golfBody.slice(c.golfBody.indexOf('They also'));
   return (
     <section className="rwi">
       <div className="rwi__media">
@@ -54,17 +53,19 @@ export default function WhatIfYouDid({ result }) {
           {/* one h2 of plain text; only the two coloured figures get a span
               (user, Oct 31) */}
           <h2 className="rwi__head">
-            {c.golfHead.map((seg) =>
+            {c.golfHead.map((seg, i) =>
               seg.hl ? (
                 <span key={seg.t} className="rwi__hl">
                   {seg.t}
                 </span>
               ) : (
-                seg.t
+                // the last words stay together, so no line ends on "spend."
+                i === c.golfHead.length - 1 ? keepLastTwo(seg.t) : seg.t
               ),
             )}
           </h2>
-          <p className="rwi__body">{emphasize(c.golfBody, [boldLine])}</p>
+          {/* 2.0 FINAL RP QC (Nov 4): her second sentence, all bold */}
+          <p className="rwi__bold">{keepLastTwo(c.golfBody)}</p>
           {/* the bar only shows with the logo fallback, which has no title */}
           {!GOLF_IMAGE && (
             <p className="rwi__chip">

@@ -1583,23 +1583,22 @@ export const WHAT_IF = {
   // now live inside the merged STOP_OR_PUSH section (design: "one message,
   // one section"). What stays here is the GolfBays proof card, which QC row
   // 6 restyles separately.
-  // GolfBays proof card. The bold recap line is design-added (flagged);
-  // the accent spans follow the design. Body is the doc's box copy
-  // verbatim — the doc's em-dash before "without" is kept (design drops
-  // it; doc wins, flagged).
-  // Figure per Yemi (QC questions C5, Oct 2026): "£96,000+ in 12 days", the
-  // same as the quiz landing page. The old "($131K USD)" was £97K converted,
-  // so it is dropped rather than re-converted.
+  // GolfBays proof card.
+  // 2.0 FINAL RP QC (Alefiya, Nov 4): her new copy, word for word — the
+  // first sentence is the headline (figures in plum), the second the bold
+  // line under it; "make this bold and it fills the section properly". Her
+  // typos written the page's way (user, Nov 5): "Visitor ™ OS" →
+  // "Visitor™ OS" (Alefiya's C4 rule for the OS name), "shopify" →
+  // "Shopify". Only this results section changes — the quiz's GolfBays
+  // slides keep £96K / 12 days.
   golfHead: [
     { t: 'GolfBays generated ' },
-    { t: '£96,000+', hl: true },
+    { t: '$131k', hl: true },
     { t: ' in just ' },
-    { t: '12 days', hl: true },
-    { t: ' after launching their Conversion Quiz Ecosystem' },
+    { t: '20 days', hl: true },
+    { t: ' after launching their Compounding Revenue per Visitor™ OS without adding a dime to their monthly ad spend.' },
   ],
-  golfHeadBreakAfter: '12 days',
-  golfBody:
-    'GolfBays generated £96,000+ in just 12 days after launching their Conversion Quiz Ecosystem™ — without increasing traffic. They also increased demo conversions by 15.25X using the same traffic they already had.',
+  golfBody: 'They also increased demo conversions by 15.25X, adding 530+ demos with their existing Shopify traffic.',
   golfName: 'Golfbays',
   golfType: 'E-commerce company',
 };

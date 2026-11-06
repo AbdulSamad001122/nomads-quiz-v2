@@ -65,13 +65,9 @@ body .results-page :is(
   line-height: 1.2;
 }
 
-/* the GolfBays headline runs smaller on desktop (user, Oct 31); tablet and
-   phone keep the shared 32 / 26 */
-@media (min-width: 1101px) {
-  body .results-page .rwi__head {
-    font-size: 31px;
-  }
-}
+/* the GolfBays headline ran 31px on desktop (user, Oct 31); since her
+   2.0 FINAL RP QC copy (Nov 4) it is the whole first sentence and must
+   "fill the section properly", so it takes the shared 38 / 32 / 26 again */
 
 /* ——— subheadings ——— */
 body .results-page :is(
