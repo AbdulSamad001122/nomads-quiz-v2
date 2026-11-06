@@ -918,10 +918,13 @@ export const YOUR_CALL = {
 };
 
 export const PILLARS = {
-  // Doc: "So let's open the pillars, one at a time." — comma kept per doc
-  // (design drops it) — flagged.
-  headline: 'So let\'s open the pillars, one at a time.',
-  sub: 'Starting with the first one your scorecard just asked about.',
+  // 2.0 FINAL RP QC (Alefiya, Nov 4, row 18 + comment "updated copy, pls
+  // middle indent it"): her one line replaces the headline and the sub,
+  // centred (left on phones — user, Nov 5). The OS name is written the
+  // page's way, per Alefiya's C4 rule ("Compounding Revenue per Visitor™
+  // OS"; her "Visitor ™ os" tidied — user, Nov 5).
+  headline: 'Here’s the rundown of each of the four Compounding Revenue per Visitor™ OS pillars:',
+  sub: null,
   items: [
     { num: '01', title: 'Pillar one', name: 'Maximise Revenue Per Visitor™', variant: 'pink' },
     { num: '02', title: 'Pillar two', name: 'Contrarian POV™', variant: 'plum' },

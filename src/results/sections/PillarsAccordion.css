@@ -37,7 +37,12 @@
 }
 
 .rpl__headline {
-  max-width: 561px;
+  /* centred (Alefiya, 2.0 FINAL RP QC: "pls middle indent it"); wide
+     enough for her one line to sit in two balanced lines on desktop */
+  max-width: 1040px;
+  margin: 0 auto;
+  text-align: center;
+  text-wrap: balance;
   font-family: var(--font-headline);
   font-weight: 800;
   font-size: 38px;
@@ -295,6 +300,15 @@
   .rpl__btn--book {
     font-size: 15px;
     padding: 14px 18px;
+  }
+}
+
+/* phones: the headline goes back to the left (user, Nov 5: "dont center
+   on phone") */
+@media (max-width: 760px) {
+  .rpl__headline {
+    margin-left: 0;
+    text-align: left;
   }
 }
 
