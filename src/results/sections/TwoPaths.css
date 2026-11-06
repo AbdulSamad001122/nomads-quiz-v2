@@ -264,6 +264,11 @@
   .rtp__thumb-label {
     font-size: 16px;
   }
+  .rtp__thumb-note {
+    font-size: 10px;
+    letter-spacing: 0;
+    text-wrap: balance;
+  }
   .rtp__cal .rtcal {
     border-radius: 10px;
   }

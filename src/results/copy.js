@@ -926,7 +926,8 @@ export const FINAL_FRAME = {
   thumbSrc: null,
   thumbLabel: 'Workshop thumbnail',
   thumbNote: 'Placeholder: the new thumbnail goes here',
-  thumbAlt: 'Workshop: Turn existing traffic into $1.5M a year',
+  // the new workshop title (row 2: "updated everywhere")
+  thumbAlt: 'Workshop: Predictably stack $125K/mo ($1.5M/year) with your existing traffic without increasing marketing spend',
 };
 
 export const PILLARS = {
