@@ -821,12 +821,9 @@
 
 /* Alefiya's 2.0 FINAL RP QC design (Nov 4): copy on plain cream on the
    left, TODAY → TARGET on dark plum on the right, two equal halves.
-   Every size is a share of the content column's width (container units),
-   measured off her picture (column 824px there: headline 6.57%, steps
-   4.18%, label 2.92%, button 4.07%, $5 / $50 14.8%, "per subscriber"
-   3.63%), so the proportions — and the line breaks — hold at every width;
-   each has a floor so phones stay readable. The px line before each is
-   the fallback for browsers without container units. */
+   Text sizes follow the page's one type scale (user, Nov 6: "looking very
+   big… use the font sizes of the whole results page"): headline 38 / 32 /
+   26, body 16, small mono labels 12; the whole section fits one screen. */
 .rcs-calc {
   --rcs-black: 'RCS Montserrat', var(--font-headline);
   --rcs-plum: #5d1b4e;
@@ -837,7 +834,7 @@
 
 .rcs__cw-text {
   background: #f4ece4;
-  padding: clamp(40px, 3.8vw, 64px) clamp(20px, 2.45vw, 48px);
+  padding: 56px clamp(20px, 3.4vw, 56px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -845,14 +842,13 @@
 
 .rcs__cw-inner {
   width: 100%;
-  /* capped so big monitors look like 1440, not a slide (audit, Nov 5) */
-  max-width: 660px;
+  max-width: 580px;
   container-type: inline-size;
 }
 
 .rcs__cw-media {
   background: radial-gradient(120% 95% at 100% 100%, #3f1534 0%, #2e1124 42%, #250f1c 72%);
-  padding: clamp(40px, 3.8vw, 64px) clamp(20px, 2.45vw, 48px);
+  padding: 56px clamp(20px, 3.4vw, 56px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -862,54 +858,44 @@
   display: block;
   font-family: var(--font-mono);
   font-weight: 700;
-  font-size: 16px;
-  font-size: max(11px, 2.92cqi);
-  line-height: 1.37;
+  font-size: 12px;
+  line-height: 1.4;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--rcs-plum);
 }
 
 .rcs__calc-h {
-  margin: 20px 0 0;
-  margin: max(14px, 4.4cqi) 0 0;
+  margin: 14px 0 0;
   font-family: var(--rcs-black);
   font-weight: 900;
-  font-size: 40px;
-  font-size: max(26px, 6.57cqi);
-  line-height: 1.22;
+  line-height: 1.2;
   color: var(--rcs-ink);
 }
 
 .rcs__gets {
-  margin: 28px 0 0;
-  margin: max(20px, 5.5cqi) 0 0;
+  margin: 24px 0 0;
   padding: 0;
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  gap: max(14px, 3.6cqi);
+  gap: 14px;
 }
 
 .rcs__gets li {
   display: grid;
-  grid-template-columns: 46px minmax(0, 1fr);
-  grid-template-columns: max(30px, 7.77cqi) minmax(0, 1fr);
-  column-gap: 20px;
-  column-gap: max(12px, 3.4cqi);
-  align-items: start;
+  grid-template-columns: 32px minmax(0, 1fr);
+  column-gap: 14px;
+  align-items: center;
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 22px;
-  font-size: max(16px, 4.18cqi);
-  line-height: 1.45;
+  font-size: 16px;
+  line-height: 1.5;
   color: var(--rcs-ink);
 }
 
 .rcs__gets b {
-  width: 46px;
-  width: max(30px, 7.77cqi);
+  width: 32px;
   aspect-ratio: 1;
   border-radius: 50%;
   background: var(--rcs-plum);
@@ -918,8 +904,7 @@
   place-items: center;
   font-family: var(--rcs-black);
   font-weight: 900;
-  font-size: 18px;
-  font-size: max(13px, 3.2cqi);
+  font-size: 14px;
   line-height: 1;
 }
 
@@ -928,20 +913,16 @@
   display: block;
   width: 100%;
   text-align: center;
-  margin-top: 32px;
-  margin-top: max(24px, 5.6cqi);
-  padding: 22px 24px;
-  padding: max(14px, 3.9cqi) max(14px, 4cqi);
+  margin-top: 28px;
+  padding: 16px 20px;
   background: var(--rcs-plum);
   color: #ffffff;
   font-family: var(--font-body);
   font-weight: 800;
-  font-size: 22px;
-  font-size: max(15px, 4.07cqi);
-  line-height: 1.25;
+  font-size: 17px;
+  line-height: 1.3;
   text-decoration: none;
-  --rcs-sh: max(6px, 1.46cqi);
-  box-shadow: 9px 9px 0 #6e6670;
+  --rcs-sh: 6px;
   box-shadow: var(--rcs-sh) var(--rcs-sh) 0 #6e6670;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
@@ -960,7 +941,6 @@
 
 .rcs__cbtn:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 11px 11px 0 #6e6670;
   box-shadow: calc(var(--rcs-sh) + 2px) calc(var(--rcs-sh) + 2px) 0 #6e6670;
   color: #ffffff;
 }
@@ -978,7 +958,7 @@
 /* ——— right half: TODAY → TARGET + the bar ——— */
 .rcs__tt {
   width: 100%;
-  max-width: 660px;
+  max-width: 500px;
   container-type: inline-size;
 }
 
@@ -987,7 +967,6 @@
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
   column-gap: 12px;
-  column-gap: max(8px, 2cqi);
 }
 
 .rcs__tt-side {
@@ -1005,9 +984,8 @@
 .rcs__tt-l {
   font-family: var(--font-mono);
   font-weight: 700;
-  font-size: 15px;
-  font-size: max(11px, 2.7cqi);
-  line-height: 1.37;
+  font-size: 12px;
+  line-height: 1.4;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #e0b5a3;
@@ -1015,13 +993,11 @@
 
 .rcs__tt-v {
   margin-top: 4px;
-  margin-top: max(2px, 0.6cqi);
   font-family: var(--rcs-black);
   font-weight: 900;
-  font-size: 88px;
-  font-size: 14.8cqi;
-  /* 4+ characters ($1667) step down to fit the column (~0.66em a figure) */
-  font-size: min(14.8cqi, calc(60cqi / var(--rcs-len, 3)));
+  /* a big stat figure; 4+ characters ($1667) step down to fit the column */
+  font-size: 64px;
+  font-size: min(64px, calc(60cqi / var(--rcs-len, 3)));
   line-height: 1;
   white-space: nowrap;
 }
@@ -1042,16 +1018,11 @@
 /* "per subscriber, per / year" — the column is kept narrow enough that it
    wraps where her design does, with no forced break */
 .rcs__tt-per {
-  margin-top: 18px;
-  margin-top: max(8px, 3cqi);
-  max-width: 230px;
-  /* wraps where her design does; the em floor keeps "per subscriber," on
-     one line once the font stops shrinking (phones) */
-  max-width: max(8.6em, 38cqi);
+  margin-top: 10px;
+  max-width: 9em;
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: 20px;
-  font-size: max(14px, 3.63cqi);
+  font-size: 16px;
   line-height: 1.27;
   color: #e9dce4;
 }
@@ -1059,19 +1030,15 @@
 /* the thin light-blue arrow sits a little below the middle, as drawn */
 .rcs__tt-arrow {
   display: block;
-  width: 34px;
-  width: max(26px, 5.6cqi);
+  width: 28px;
   height: auto;
   color: #cae1f4;
-  transform: translateY(24px);
-  transform: translateY(3.8cqi);
+  transform: translateY(14px);
 }
 
 .rcs__tt-bar {
-  margin-top: 40px;
-  margin-top: max(18px, 6.6cqi);
-  height: 20px;
-  height: max(10px, 3.4cqi);
+  margin-top: 28px;
+  height: 12px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.12);
   overflow: hidden;
@@ -1081,8 +1048,7 @@
 .rcs__tt-fill {
   display: block;
   height: 100%;
-  min-width: 20px;
-  min-width: max(10px, 3.4cqi);
+  min-width: 12px;
   border-radius: inherit;
   background: linear-gradient(90deg, #f09e93, #e1b3a1);
 }
@@ -1094,11 +1060,36 @@
   }
   .rcs__cw-text,
   .rcs__cw-media {
-    padding: 56px 22px;
+    padding: 48px 22px;
   }
   .rcs__cw-inner,
   .rcs__tt {
     max-width: 540px;
+  }
+}
+
+/* the page's heading scale: 38 desktop, 32 tablet, 26 phone (one class
+   deeper than the section rules so it always applies) */
+body .results-page .rcs-calc .rcs__calc-h {
+  font-size: 38px;
+}
+@media (max-width: 1100px) {
+  body .results-page .rcs-calc .rcs__calc-h {
+    font-size: 32px;
+  }
+}
+@media (max-width: 760px) {
+  body .results-page .rcs-calc .rcs__calc-h {
+    font-size: 26px;
+    line-height: 1.25;
+  }
+  .rcs__tt-v {
+    font-size: min(56px, calc(60cqi / var(--rcs-len, 3)));
+  }
+}
+@media (max-width: 359px) {
+  body .results-page .rcs-calc .rcs__calc-h {
+    font-size: 24px;
   }
 }
 
@@ -1112,7 +1103,7 @@
 /* smallest phones: the button label stays within 2 lines */
 @media (max-width: 359px) {
   .rcs__cbtn {
-    font-size: 14px;
+    font-size: 15px;
   }
 }
 
