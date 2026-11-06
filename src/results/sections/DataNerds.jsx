@@ -95,7 +95,10 @@ export default function DataNerds() {
               onClick={() => ga.ctaClick('rpv_by_channel')}
             >
               {/* the arrow stays with the last word */}
-              {c.button.replace(/ (\S+)$/, '\u00a0$1')}
+              {c.button.replace(/\s*→$/, '')}
+              {'\u00a0'}
+              {/* a bold arrow as tall as the letters, as in her picture */}
+              <span className="rdn__arw" aria-hidden="true">→</span>
             </a>
           </div>
         </div>
