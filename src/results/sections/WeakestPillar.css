@@ -53,7 +53,8 @@
      in view with the copy */
   width: clamp(260px, calc(100vh - 480px), 460px);
   height: auto;
-  margin-top: 64px;
+  /* centred in the left panel (user, Nov 6) */
+  margin: 64px auto 0;
   aspect-ratio: 1;
   object-fit: cover;
   object-position: 50% 24%;
@@ -225,7 +226,7 @@
   }
   .rwp__photo {
     width: min(100%, 360px);
-    margin-top: 44px;
+    margin: 44px auto 0;
   }
   .rwp__right {
     padding: 56px 40px 110px;
