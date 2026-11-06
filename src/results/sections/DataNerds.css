@@ -332,7 +332,8 @@
 }
 
 .rdn__cap {
-  margin: 8px 0 0;
+  margin: 20px 0 0;
+  text-align: center;
   font-family: var(--font-mono);
   font-weight: 600;
   font-size: 11px;
