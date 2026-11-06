@@ -228,9 +228,11 @@
   .rpl {
     padding: 80px 40px 90px;
   }
+  /* tablets: there's no room beside the centred headline — the sign was
+     cut off at the screen edge and sat on the "Pillar one" bar (final
+     check, Nov 6), so it's hidden here as it is on phones */
   .rpl__doodle {
-    width: 210px;
-    top: 24px;
+    display: none;
   }
   .rpl__headline {
     font-size: 33px;
