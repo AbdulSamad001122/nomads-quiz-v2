@@ -1,4 +1,4 @@
-import { useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { AD_SPEND, CTA } from '../copy.js';
 import { fill } from '../resolveTokens.js';
 import { computeAdModule } from '../../calc/calculator.js';
@@ -6,37 +6,22 @@ import { money, round100, rpvMoney } from '../../calc/rounding.js';
 import { ga } from '../../analytics/ga.js';
 import './AdSpendSection.css';
 
-/* a round scale top with 4 equal steps ($80K for a $73,800 bar) */
-function niceMax(v) {
-  if (!(v > 0)) return 1;
-  const raw = v / 4;
-  const p = 10 ** Math.floor(Math.log10(raw));
-  const step = [1, 2, 2.5, 5, 10].map((m) => m * p).find((s) => s >= raw);
-  return step * 4;
-}
-/* axis labels: $0 · $20K · $1.2M */
-function short(v) {
-  if (v === 0) return '$0';
-  if (v >= 1e6) return `$${(v / 1e6).toFixed(v % 1e6 ? 1 : 0)}M`;
-  if (v >= 1e3) return `$${+(v / 1e3).toFixed(1)}K`;
-  return `$${v}`;
-}
-
-/* ROAS as shown: one decimal, but rounding may never move it across 1×
-   (a true 0.96 reads "0.96", not "1") or turn a real return into "0". */
-function roasText(raw, shown) {
+/* "$X back for every $1" — the ROAS as money, one decimal like the old
+   ROAS label, but rounding may never lift a return below 1× to "$1.00"
+   (a true 0.96 reads "$0.96") or turn a real return into "$0.00". */
+const cents = (v) => `$${v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+function perDollar(raw, shown) {
   const two = Math.floor(raw * 100) / 100;
-  if (raw < 1 && shown >= 1) return two.toFixed(2);
-  if (raw > 0 && shown === 0) return two > 0 ? two.toFixed(2) : '<0.01';
-  return String(shown);
+  if (raw < 1 && shown >= 1) return cents(two);
+  if (raw > 0 && shown === 0) return two > 0 ? cents(two) : '<$0.01';
+  return cents(shown);
 }
 
 /**
- * "About your ad budget" — QC item 5 (Oct 2026), rebuilt to Alefiya's "RPV Ad
- * Budget Section" design: spend and visitors as two "stays the same" chips,
- * the month's revenue from that spend as two bars on one scale with a dashed
- * line at the ad spend (ROAS as a small label by each bar), and the extra
- * revenue card with its working and a workshop button. Brand colours.
+ * "About your ad budget" — 2.0 FINAL RP QC (Alefiya, 4 Nov): rebuilt to her
+ * artifact "Ad Budget at Your RPV Goal" (one read, top to bottom): same
+ * spend → what it brings back today vs at the goal → the difference → the
+ * workshop. Every figure is the taker's own (computeAdModule).
  *
  * Shown only when the taker answered the ad questions (result.ad). "Not
  * sure" takers (adAdjustable) also get the Logic Doc's ad-traffic share
@@ -64,111 +49,37 @@ export default function AdSpendSection({ result, adAdjustable = false }) {
   const spend = ad.monthlySpend;
   const hasSpend = Number.isFinite(spend) && spend > 0;
 
-  // the month is worked from the two figures as shown, so the card's working
-  // line always adds up; the year comes from the unrounded figures (Logic
-  // Doc · 7 fixture: +$81,200 a month, +$975,000 a year — not 12 × $81,200)
+  // the month is worked from the two figures as shown, so the strip always
+  // matches the two cards; the year comes from the unrounded figures
+  // (Logic Doc · 7 fixture: +$81,200 a month, +$975,000 a year)
   const gain = d.goalAdRev - d.currentAdRev;
   const year = round100((ad.goalAdRev - ad.currentAdRev) * 12);
-  const top = niceMax(Math.max(d.goalAdRev, d.currentAdRev, hasSpend ? spend : 0));
-  const pct = (v) => Math.max(0, Math.min(100, (v / top) * 100));
-  const spendPct = hasSpend ? pct(spend) : null;
 
-  const bars = [
-    { key: 'today', label: c.todayLabel, rpv: r.currentRPV, rev: d.currentAdRev, raw: ad.currentAdRev, roas: d.currentROAS },
-    { key: 'goal', label: c.goalLabel, rpv: r.goalRPV, rev: d.goalAdRev, raw: ad.goalAdRev, roas: d.goalROAS },
-  ].map((b) => {
-    const w = pct(b.rev);
-    // judged on the true ratio, so a 0.96 return is never painted green
-    const ratio = b.roas != null ? b.raw / spend : null;
-    const good = ratio != null && ratio >= 1;
-    // label inside a long bar; otherwise just past the bar (or past the
-    // dashed line when the bar stops short of it), as in the design
-    const after = Math.max(w, spendPct ?? 0);
-    const inside = w >= 30 || after > 78;
-    return { ...b, w, good, ratio, inside, outLeft: after };
-  });
-
-  // The guess above is the design's placement and holds for most answers,
-  // but a short bar with the spend line far right (or any bar at phone
-  // width) can be narrower than its own figure. So measure: keep the
-  // design's spot when the figure fits there; else just past the dashed
-  // line; else inside; else between the bar and the line — never clipped,
-  // never past the track's end.
-  const rowsRef = useRef(null);
-  const [place, setPlace] = useState(null);
-  useLayoutEffect(() => {
-    const rows = rowsRef.current;
-    if (!rows) return undefined;
-    const measure = () => {
-      const next = {};
-      rows.querySelectorAll('.rad__track').forEach((track) => {
-        const b = bars.find((x) => x.key === track.dataset.key);
-        const label = track.querySelector('.rad__measure');
-        if (!b || !label) return;
-        const tw = track.clientWidth;
-        const lw = label.offsetWidth;
-        const barPx = (Math.max(b.w, b.rev > 0 ? 1.5 : 0) / 100) * tw;
-        const linePx = spendPct != null ? (spendPct / 100) * tw : null;
-        const fitsInside = barPx >= lw + 20;
-        const pastLine = Math.max(barPx, linePx ?? 0) + 10;
-        const fitsPast = pastLine + lw <= tw;
-        // the design's own placement first, then whatever still fits
-        if (b.inside && fitsInside) next[b.key] = { inside: true };
-        else if (fitsPast) next[b.key] = { inside: false, left: pastLine };
-        else if (fitsInside) next[b.key] = { inside: true };
-        else if (linePx != null && linePx - barPx >= lw + 20) next[b.key] = { inside: false, left: barPx + 10 };
-        else next[b.key] = { inside: false, left: Math.max(0, tw - lw) };
-      });
-      setPlace((prev) => (JSON.stringify(prev) === JSON.stringify(next) ? prev : next));
-    };
-    measure();
-    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(measure) : null;
-    ro?.observe(rows);
-    document.fonts?.ready?.then(measure);
-    return () => ro?.disconnect();
-    // bars/spendPct are rebuilt every render from these inputs
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [d.currentAdRev, d.goalAdRev, spendPct]);
-  const at = (b) => place?.[b.key] ?? { inside: b.inside, left: null };
-  // a copy line with its figure picked out (Slack Oct 31: only the "$7.20"
-  // stands out in "Every $1 of ads brings back about $7.20.")
-  const withFigure = (tpl, key, figure) => {
-    const [before, after] = tpl.split(`{{${key}}}`);
-    return (
-      <>
-        {before}
-        <b className="rad__amt">{figure}</b>
-        {after}
-      </>
-    );
-  };
-  const verdict = (b) =>
-    b.roas == null
-      ? null
-      : b.good
-        ? withFigure(c.back, 'amount', `$${b.roas.toFixed(2)}`)
-        : withFigure(c.short, 'amount', money(spend - b.rev));
+  const cards = [
+    { key: 'today', label: c.todayLabel, rev: d.currentAdRev, raw: ad.currentAdRev, roas: d.currentROAS },
+    { key: 'goal', label: c.goalLabel, rev: d.goalAdRev, raw: ad.goalAdRev, roas: d.goalROAS },
+  ];
 
   const fillPct = ((sharePct - 10) / 90) * 100;
   const ext = CTA.workshop.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : null;
+  // the spend is the taker's own answer: shown as entered, to the dollar
+  // ($30 stays $30, $7,550 stays $7,550; money() rounds to $100 — review)
+  const spendMoney = (v) => `$${Math.round(v).toLocaleString('en-US')}`;
+  const perMonth = (v, fmt = money) => fill(c.spendChip, { spend: fmt(v) });
 
   return (
     <section className="rad">
       <div className="rad__inner">
         <span className="rad__chip">{c.chip}</span>
         <h2 className="rad__headline">{c.headline}</h2>
-        <p className="rad__lede">{c.lede}</p>
-
-        <div className="rad__same">
-          <div>
-            {c.spendChip} <b>{money(spend || 0)}</b>
-            <em>{c.stays}</em>
-          </div>
-          <div>
-            {c.visitorsChip} <b>{d.adVisitors.toLocaleString('en-US')}</b>
-            <em>{c.stays}</em>
-          </div>
-        </div>
+        {hasSpend ? (
+          <p className="rad__spend">
+            {c.spendBefore} <b>{perMonth(spend, spendMoney)}</b>
+            {c.spendAfter}
+          </p>
+        ) : (
+          <p className="rad__spend rad__spend--plain">{c.ledeNoSpend}</p>
+        )}
 
         {/* Logic Doc · 7: the share slider, "Not sure" takers only */}
         {adAdjustable && (
@@ -194,72 +105,65 @@ export default function AdSpendSection({ result, adAdjustable = false }) {
           </div>
         )}
 
-        <div className="rad__grid">
-          <div className="rad__chart">
-            <h3 className="rad__chart-head">{c.chartHead}</h3>
-            {hasSpend && (
-              <div className="rad__key">
-                <i aria-hidden="true" />
-                {fill(c.spendKey, { spend: money(spend) })}
-              </div>
-            )}
-            <div className="rad__rows" ref={rowsRef}>
-              {bars.map((b) => (
-                <div key={b.key} className={`rad__row rad__row--${b.key}`}>
-                  <div className="rad__who">
-                    <span>
-                      {b.label}
-                      {b.roas != null && (
-                        <span className={`rad__roas${b.good ? ' rad__roas--good' : ''}`}>
-                          {fill(c.roas, { x: roasText(b.ratio, b.roas) })}
-                        </span>
-                      )}
-                    </span>
-                    <small>{fill(c.perVisitor, { rpv: rpvMoney(b.rpv) })}</small>
-                  </div>
-                  <div className="rad__track" data-key={b.key}>
-                    <div className="rad__bar" style={{ width: `${Math.max(b.w, b.rev > 0 ? 1.5 : 0)}%` }}>
-                      {at(b).inside && money(b.rev)}
-                    </div>
-                    {spendPct != null && <i className="rad__line" style={{ left: `${spendPct}%` }} aria-hidden="true" />}
-                    {!at(b).inside && (
-                      <span
-                        className="rad__out"
-                        style={{ left: at(b).left != null ? `${at(b).left}px` : `calc(${b.outLeft}% + 10px)` }}
-                      >
-                        {money(b.rev)}
-                      </span>
-                    )}
-                    <span className="rad__out rad__measure" aria-hidden="true">
-                      {money(b.rev)}
-                    </span>
-                  </div>
-                  {verdict(b) && <p className={`rad__verdict${b.good ? ' rad__verdict--good' : ''}`}>{verdict(b)}</p>}
-                </div>
-              ))}
-            </div>
-            <div className="rad__axis" aria-hidden="true">
-              {[0, 1, 2, 3, 4].map((i) => (
-                <span key={i}>{short((top / 4) * i)}</span>
-              ))}
-            </div>
-            <p className="rad__foot">{c.foot}</p>
-          </div>
+        {/* today vs the goal: what the same spend brings back each month */}
+        <div className="rad__compare">
+          {cards.map((k, i) => [
+            i === 1 && (
+              <span key="vs" className="rad__vs" aria-hidden="true">
+                →
+              </span>
+            ),
+            <div key={k.key} className={`rad__side rad__side--${k.key}`}>
+              <span className="rad__lbl">{k.label}</span>
+              <span className="rad__big">{money(k.rev)}</span>
+              <span className="rad__mo">{c.backEach}</span>
+              {k.roas != null && (
+                <span className="rad__pill">{fill(c.perDollar, { amount: perDollar(k.raw / spend, k.roas) })}</span>
+              )}
+            </div>,
+          ])}
+        </div>
 
-          <aside className="rad__pay">
-            <span className="rad__pay-intro">{c.payIntro}</span>
-            <span className="rad__pay-n">
-              +{money(gain)}
-              <small>{c.payGainSub}</small>
-            </span>
-            <span className="rad__pay-year">{withFigure(c.payYear, 'year', money(year))}</span>
-            <span className="rad__pay-math">
-              {fill(c.payMath, { goal: money(d.goalAdRev), today: money(d.currentAdRev), gain: money(gain) })}
-            </span>
+        {/* the difference */}
+        <div className="rad__result">
+          <div className="rad__gain">
+            <span className="rad__big rad__big--gain">+{money(gain)}</span>
+            <span className="rad__mo">{c.gainSub}</span>
+          </div>
+          <span className="rad__yr">{fill(c.year, { year: money(year) })}</span>
+        </div>
+
+        {/* the workshop, with its thumbnail */}
+        <div className="rad__ws">
+          <a
+            className="rad__ws-thumb"
+            href={CTA.workshop.href}
+            {...ext}
+            tabIndex={-1}
+            aria-hidden="true"
+            onClick={() => ga.ctaClick(CTA.workshop.id)}
+          >
+            <img src="/assets/results-workshop-thumb.webp" alt="" width="1280" height="720" loading="lazy" />
+          </a>
+          <div className="rad__ws-copy">
+            <h3 className="rad__ws-head">{fill(c.wsHead, { goal: money(d.goalAdRev) })}</h3>
+            <p className="rad__ws-p">
+              {c.wsBefore} <b className="rad__r">{rpvMoney(r.currentRPV)}</b> {c.wsTo}{' '}
+              <b className="rad__g">{rpvMoney(r.goalRPV)}</b>
+              {hasSpend && (
+                <>
+                  {c.wsSame} <b>{perMonth(spend, spendMoney)}</b> {c.wsInAds} <b>{perMonth(gain)}</b>
+                </>
+              )}
+              {c.wsAfter}
+            </p>
             <a className="rad__btn" href={CTA.workshop.href} {...ext} onClick={() => ga.ctaClick(CTA.workshop.id)}>
-              {`${c.button} →`}
+              {c.button}
+              {' '}
+              {/* the artifact's arrow (system font, as it renders there) */}
+              <span className="rad__arw" aria-hidden="true">→</span>
             </a>
-          </aside>
+          </div>
         </div>
       </div>
     </section>
