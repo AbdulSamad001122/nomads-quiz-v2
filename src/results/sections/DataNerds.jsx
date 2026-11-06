@@ -8,7 +8,9 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
 /**
  * "For the data nerds" — QC row 3 (Oct 2026), Alefiya's "Data Nerds
- * Calculator Peek" design: the section's own copy on the left, and a
+ * Calculator Peek" design, made lighter in 2.0 FINAL RP QC (Nov 4): light
+ * background, "Which of your channels…" headline, plum button under the
+ * copy. The copy sits on the left, and a
  * looping sneak peek of the Compounding RPV™ OS calculator on the right — it
  * types a channel into the four fields, presses "Add this channel" and drops
  * the row into the channel ledger. The last column stays blurred and locked;
@@ -83,11 +85,18 @@ export default function DataNerds() {
           <span className="rdn__k">{c.title}</span>
           <h2 className="rdn__h2">{c.p1}</h2>
           <p className="rdn__p">{emphasize(c.p2, c.p2Bold)}</p>
-          <div className="rdn__chips">
-            {c.channels.map((ch) => (
-              <span key={ch}>{ch}</span>
-            ))}
-            <span className="rdn__any">{c.chip}</span>
+          {/* the button sits under the copy, highlighted (her picture) */}
+          <div className="rdn__cta">
+            <a
+              className="rdn__btn"
+              href={c.buttonHref}
+              target="_blank"
+              rel="noopener"
+              onClick={() => ga.ctaClick('rpv_by_channel')}
+            >
+              {/* the arrow stays with the last word */}
+              {c.button.replace(/ (\S+)$/, '\u00a0$1')}
+            </a>
           </div>
         </div>
 
@@ -153,17 +162,6 @@ export default function DataNerds() {
         </div>
       </div>
 
-      <div className="rdn__cta">
-        <a
-          className="rdn__btn"
-          href={c.buttonHref}
-          target="_blank"
-          rel="noopener"
-          onClick={() => ga.ctaClick('rpv_by_channel')}
-        >
-          {c.button}
-        </a>
-      </div>
     </section>
   );
 }

@@ -36,11 +36,9 @@ export default function DevAdCopy() {
     ['Paragraph', `${c.wsBefore} $2.25 ${c.wsTo} $6.42${c.wsSame} $17,500 a month ${c.wsInAds} $81,200 a month${c.wsAfter}`, ['dynamic']],
     ['Button', `${c.button} →`, ['static']],
     ['— “FOR THE DATA NERDS” (its own always-visible section below the module — renders for EVERYONE) —', null, null],
-    ['Title', DATA_NERDS.title, ['static']],
-    ['Paragraph 1', DATA_NERDS.p1, ['static']],
-    ['Paragraph 2', DATA_NERDS.p2, ['static']],
-    ['Channels row (plum swoosh bullets; the doc writes it as one sentence)', DATA_NERDS.channels.join('   ·   '), ['static']],
-    ['Chip (plum band)', DATA_NERDS.chip, ['static']],
+    ['Tag', DATA_NERDS.title, ['static']],
+    ['Headline', DATA_NERDS.p1, ['static']],
+    ['Body text', DATA_NERDS.p2, ['static']],
     ['Button', DATA_NERDS.button, ['static']],
   ];
 
