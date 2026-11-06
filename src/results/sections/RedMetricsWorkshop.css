@@ -671,3 +671,13 @@
     animation: none;
   }
 }
+
+/* smallest phones: "Watch the workshop with your marketing team" ran to 3
+   lines at 320 ("team" alone) — keep it to 2 (audit, Nov 6) */
+@media (max-width: 340px) {
+  .results-page .rmw__light .rmw__btn {
+    font-size: 14px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
