@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { WHAT_IF } from '../copy.js';
 import { keepLastTwo } from '../emphasize.jsx';
 import TitledPortrait from './TitledPortrait.jsx';
@@ -60,7 +61,7 @@ export default function WhatIfYouDid({ result }) {
                 </span>
               ) : (
                 // the last words stay together, so no line ends on "spend."
-                i === c.golfHead.length - 1 ? keepLastTwo(seg.t) : seg.t
+                i === c.golfHead.length - 1 ? <Fragment key={i}>{keepLastTwo(seg.t)}</Fragment> : seg.t
               ),
             )}
           </h2>
