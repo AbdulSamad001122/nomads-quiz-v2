@@ -435,7 +435,7 @@
 
 @media (max-width: 560px) {
   .rad {
-    padding: 28px 16px 96px;
+    padding: 28px 16px 28px;
   }
   /* the artifact at 390px: the band and the workshop card run to the
      screen edges */
