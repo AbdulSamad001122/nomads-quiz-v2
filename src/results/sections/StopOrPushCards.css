@@ -364,7 +364,7 @@
 .rsn__lab small {
   font-family: var(--font-mono);
   font-weight: 600;
-  font-size: 14px;
+  font-size: clamp(14px, 1.2vw, 16px);
   color: #cdb3bd;
 }
 
@@ -415,7 +415,7 @@
   font-style: normal;
   font-family: var(--font-mono);
   font-weight: 700;
-  font-size: 13px;
+  font-size: 15px;
   padding: 6px 12px;
   border-radius: 999px;
   background: #250f1c;
@@ -484,15 +484,24 @@
 }
 
 /* tablets + phones: a more compact figure + chip, so it stays on or beside
-   its bar */
+   its bar; big card figures capped so they keep her ~3× ratio to the text;
+   the bars card as wide as the stacked cards */
 @media (max-width: 900px) {
   .rsn__val {
     font-size: 16px;
     gap: 6px;
   }
   .rsn__val i {
-    font-size: 11px;
-    padding: 4px 8px;
+    font-size: 12px;
+    padding: 4px 9px;
+  }
+  .rsn__big {
+    font-size: min(72px, calc(96cqi / (0.66 * var(--rsn-len, 7) + 1.1)));
+  }
+  .rsn__bars {
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 

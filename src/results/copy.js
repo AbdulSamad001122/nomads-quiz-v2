@@ -1640,8 +1640,8 @@ export const STOP_OR_PUSH_NEW = {
   // #5 (doc row 6 + image 05): her bars, her words; "highlight imp part in
   // headline" → "more profit per visitor" (the point of the block)
   barsHeadBefore: 'Without increasing traffic (or marketing spend), here’s what your business looks like when you make',
-  barsHeadHl: 'more profit per visitor',
-  barsHeadAfter: '.',
+  barsHeadHl: 'more profit per visitor.',
+  barsHeadAfter: '',
   rowToday: 'Today',
   rowGoal: 'Add $1.5M',
   rowMax: 'Max revenue',
