@@ -17,7 +17,7 @@
   /* the page's navy, as the sections around it */
   background: linear-gradient(180deg, #152638 0%, #0f1c2a 100%);
   color: #ffffff;
-  padding: 64px 20px 72px;
+  padding: 64px 20px 48px;
 }
 
 .rsn__inner {

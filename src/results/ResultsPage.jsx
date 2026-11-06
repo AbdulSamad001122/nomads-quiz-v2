@@ -78,6 +78,7 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
       {!result.cappedState && <StopOrPush result={result} tokens={tokens} />}
       {!result.cappedState && <p className="rdraft rdraft--new">{STOP_OR_PUSH_NEW.draftNew}</p>}
       {!result.cappedState && <StopOrPushCards result={result} tokens={tokens} />}
+      {!result.cappedState && <StopOrPush result={result} tokens={tokens} part="tail" />}
       {/* The "We've done 12× and more for clients" proof card (L · Creative
           Delivery) is removed — Cap Logic "Proof card" (Yemi, Nov 4 evening):
           "The case study section further down the page already provides

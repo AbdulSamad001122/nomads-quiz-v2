@@ -1649,7 +1649,7 @@ export const STOP_OR_PUSH_NEW = {
   rowVal: '~{{total}}/year',
   rowChip: '{{x}} today',
   draftOld: 'Old — current section (stays until the new one below is approved)',
-  draftNew: 'New — draft of changes #4 + #5 (her simpler two cards and bars)',
+  draftNew: 'New — draft of changes #4 + #5 (her simpler two cards and bars; the stretch card and workshop line stay as they are)',
 };
 
 export const STOP_OR_PUSH = {

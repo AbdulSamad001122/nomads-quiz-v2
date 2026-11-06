@@ -742,3 +742,19 @@
     font-size: 18px;
   }
 }
+
+/* the draft of #4/#5 shows only the stretch card + workshop line here,
+   straight under its new bars (user, Nov 6) */
+.rso--tail {
+  padding-top: 0;
+  /* continues the draft's navy (it ends on #0f1c2a), no seam */
+  background: #0f1c2a;
+}
+
+.rso--tail .rso__inner {
+  max-width: 1200px;
+}
+
+.rso--tail .rso__real {
+  margin-top: 0;
+}

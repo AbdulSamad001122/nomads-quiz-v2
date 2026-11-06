@@ -114,7 +114,7 @@ function placeLabels(ladder) {
  * blocks 5, 6, and 7 instead".
  */
 
-export default function StopOrPush({ result, tokens }) {
+export default function StopOrPush({ result, tokens, part = 'all' }) {
   const c = STOP_OR_PUSH;
   const t = (s) => fill(s, tokens);
   const btnWords = c.button.split(' ');
@@ -159,8 +159,11 @@ export default function StopOrPush({ result, tokens }) {
   ];
 
   return (
-    <section className="rso">
+    // part="tail": only the stretch card + the workshop line — the draft of
+    // #4/#5 shows them under its new cards (user, Nov 6)
+    <section className={`rso${part === 'tail' ? ' rso--tail' : ''}`}>
       <div className="rso__inner">
+        {part !== 'tail' && (<>
         <h2 className="rso__headline">
           <span className="rso__line">
             {c.head1Before}{' '}
@@ -243,6 +246,7 @@ export default function StopOrPush({ result, tokens }) {
           ))}
         </div>
 
+        </>)}
         {result.capped.showStretch && (
           <div className="rso__real">
             <div>
