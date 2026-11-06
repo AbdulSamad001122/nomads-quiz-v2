@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { RPS_CARDS } from '../copy.js';
+import { CEILINGS } from '../../calc/calculator.js';
 import { fill } from '../resolveTokens.js';
 import { emphasize } from '../emphasize.jsx';
 import { ga } from '../../analytics/ga.js';
@@ -8,7 +9,6 @@ import './CompoundingRps.css';
 const CEILING = 50; // the $50 Revenue Per Subscriber™ benchmark (calculator CEILINGS.rps)
 const PIN_ROOM = 8; // px of clear space two neighbouring pin labels keep
 
-const money = (n) => `$${Math.round(n).toLocaleString('en-US')}`;
 const pad2 = (n) => String(n).padStart(2, '0');
 
 /**
@@ -605,149 +605,102 @@ export default function CompoundingRps({ result, tokens }) {
     </section>
     {/* the calculator, its own split section under the cards (Alefiya,
         Slack Oct 31: it blended into the navy) */}
-    <CalcPreview c={c} />
+    <CalcSection c={c} tokens={tokens} result={result} />
     </>
   );
 }
 
 /**
- * The calculator block: what it tells you, the button, and a looping preview
- * that types the design's example (36,000 subscribers, $360,000) and counts
- * the three outputs up — the design's own script, as a React effect. Reduced
- * motion: the finished example, no animation.
+ * The calculator section (Alefiya, 2.0 FINAL RP QC, Nov 4): her design —
+ * label, headline and three numbered steps with the button on plain cream;
+ * on the dark plum half, TODAY (the taker's own revenue per subscriber, the
+ * same figure as card 1) → TARGET $50 and a bar filled to today ÷ $50.
+ * Sizes follow her picture's proportions (container units, see the CSS).
  */
-function CalcPreview({ c }) {
-  const ex = c.example;
-  const reduced =
-    typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-  const done = {
-    f1: ex.subs,
-    f2: ex.revenue,
-    typing: null,
-    o1: money(ex.rps),
-    o2: `${money(ex.gap)} away`,
-    gap: ex.gapPct,
-    o2b: true,
-    o3: `${money(ex.yearly)} a year`,
-  };
-  const [s, setS] = useState(reduced ? done : { ...done, f1: '', f2: '', o1: '$0', o2: '$0 away', gap: 0, o2b: false, o3: '$0 a year' });
-
-  useEffect(() => {
-    if (reduced) return undefined;
-    let alive = true;
-    const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-    const count = (ms, fn) =>
-      new Promise((res) => {
-        let start = null;
-        const step = (tm) => {
-          if (!alive) return res();
-          if (start === null) start = tm;
-          const p = Math.min((tm - start) / ms, 1);
-          fn(1 - Math.pow(1 - p, 3));
-          if (p < 1) requestAnimationFrame(step);
-          else res();
-        };
-        requestAnimationFrame(step);
-      });
-    const type = async (key, text) => {
-      for (let i = 1; i <= text.length && alive; i++) {
-        setS((v) => ({ ...v, [key]: text.slice(0, i), typing: key }));
-        await wait(100);
-      }
-      await wait(200);
-      if (alive) setS((v) => ({ ...v, typing: null }));
-    };
-    (async () => {
-      await wait(3500);
-      while (alive) {
-        setS({ f1: '', f2: '', typing: null, o1: '$0', o2: '$0 away', gap: 0, o2b: false, o3: '$0 a year' });
-        await wait(500);
-        await type('f1', ex.subs);
-        await type('f2', ex.revenue);
-        await count(900, (e) => setS((v) => ({ ...v, o1: money(ex.rps * e) })));
-        await count(900, (e) => setS((v) => ({ ...v, gap: ex.gapPct * e, o2: `${money(ex.gap * e)} away` })));
-        if (!alive) break;
-        setS((v) => ({ ...v, o2b: true }));
-        await count(900, (e) => setS((v) => ({ ...v, o3: `${money(ex.yearly * e)} a year` })));
-        await wait(3200);
-      }
-    })();
-    return () => {
-      alive = false;
-    };
-  }, [reduced, ex]);
-
+function CalcSection({ c, tokens, result }) {
+  // the bar and the label read the same rounded figure (review: a raw
+  // 0.4 showed "$0" with a dot of bar; 49.6 showed "$50" with a bar short)
+  const now = Math.max(0, Math.round(result.current.rps) || 0);
+  const pct = Math.min(100, (now / CEILINGS.rps) * 100);
+  // already at or past $50: no "→ TARGET $50" (it would point down), just
+  // today's figure and a full bar
+  const reached = now >= CEILINGS.rps;
+  // a long figure ($1667) steps down so it never runs into the arrow
+  const len = tokens.rps_now.length;
+  // the button's arrow is drawn (her design's heavy arrow), kept with the
+  // last word
+  const label = c.button.replace(/\s*→$/, '');
+  const cut = label.lastIndexOf(' ') + 1;
   return (
     <section className="rcs-calc">
       <div className="rcs__cw-text">
         <div className="rcs__cw-inner">
-        <span className="rcs__k2">{c.calcKicker}</span>
-        <h3 className="rcs__calc-h">{c.calcHead}</h3>
-        <ol className="rcs__gets">
-          {c.gets.map((g, i) => (
-            <li key={g}>
-              <b>{i + 1}</b>
-              <span>{g}</span>
-            </li>
-          ))}
-        </ol>
-        {/* TODO: real calculator URL (Burhan, with the other placeholder links) */}
-        <a
-          className="rcs__btn"
-          href={c.buttonHref}
-          target="_blank"
-          rel="noopener"
-          onClick={() => ga.ctaClick('crps_calculator')}
-        >
-          {/* the arrow stays with the last word */}
-          {c.button.replace(/ (\S+)$/, '\u00a0$1')}
-        </a>
+          <span className="rcs__k2">{c.calcKicker}</span>
+          <h3 className="rcs__calc-h">{c.calcHead}</h3>
+          <ol className="rcs__gets">
+            {c.gets.map((g, i) => (
+              <li key={g}>
+                <b>{i + 1}</b>
+                <span>{g}</span>
+              </li>
+            ))}
+          </ol>
+          <a
+            className="rcs__cbtn"
+            href={c.buttonHref}
+            target="_blank"
+            rel="noopener"
+            onClick={() => ga.ctaClick('crps_calculator')}
+          >
+            {label.slice(0, cut)}
+            <span className="rcs__nw">
+              {label.slice(cut)}
+              {'\u00a0'}
+              <svg className="rcs__cbtn-arrow" viewBox="0 0 48 32" aria-hidden="true" focusable="false">
+                <path d="M4 16h38M29 5l13 11-13 11" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+          </a>
         </div>
       </div>
       <div className="rcs__cw-media">
-      <div className="rcs__calc" role="img" aria-label={c.calcLabel}>
-        <div className="rcs__in-side" aria-hidden="true">
-          <div className="rcs__ttl">
-            <i />
-            {c.calcTitle}
-          </div>
-          <div className="rcs__fld">
-            <label>{c.calcField1}</label>
-            <div className={`rcs__box${s.typing === 'f1' ? ' rcs__box--on' : ''}`}>
-              {s.f1}
-              {s.typing === 'f1' && <span className="rcs__caret" />}
+        <div
+          className={`rcs__tt${reached ? ' rcs__tt--reached' : ''}`}
+          role="img"
+          aria-label={fill(reached ? c.calcPanelLabelReached : c.calcPanelLabel, { now: tokens.rps_now })}
+        >
+          <div className="rcs__tt-row" aria-hidden="true">
+            <div className="rcs__tt-side">
+              <span className="rcs__tt-l">{c.calcToday}</span>
+              <span className="rcs__tt-v rcs__tt-v--now" style={len > 3 ? { '--rcs-len': len } : undefined}>
+                {tokens.rps_now}
+              </span>
+              <span className="rcs__tt-per">{c.calcPer}</span>
             </div>
+            {!reached && (
+            <svg className="rcs__tt-arrow" viewBox="0 0 48 32" focusable="false">
+              <path
+                d="M3 16h40M30 4l13 12-13 12"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="4.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            )}
+            {!reached && (
+              <div className="rcs__tt-side rcs__tt-side--target">
+                <span className="rcs__tt-l">{c.calcTarget}</span>
+                <span className="rcs__tt-v rcs__tt-v--target">{c.calcTargetValue}</span>
+                <span className="rcs__tt-per">{c.calcPer}</span>
+              </div>
+            )}
           </div>
-          <div className="rcs__fld">
-            <label>{c.calcField2}</label>
-            <div className={`rcs__box${s.typing === 'f2' ? ' rcs__box--on' : ''}`}>
-              {s.f2}
-              {s.typing === 'f2' && <span className="rcs__caret" />}
-            </div>
+          <div className="rcs__tt-bar" aria-hidden="true">
+            <i className="rcs__tt-fill" style={{ width: `${pct}%`, minWidth: now > 0 ? undefined : 0 }} />
           </div>
         </div>
-        <div className="rcs__out-side" aria-hidden="true">
-          <div className="rcs__o">
-            <span className="rcs__ol">{c.calcOut1}</span>
-            <span className="rcs__ov">{s.o1}</span>
-          </div>
-          <div className="rcs__o rcs__o--hi">
-            <span className="rcs__ol">{c.calcOut2}</span>
-            <span className="rcs__ov rcs__ov--gap">{s.o2}</span>
-            <div className="rcs__gap">
-              <i style={{ width: `${s.gap}%` }} />
-            </div>
-            <span className="rcs__os" style={{ opacity: s.o2b ? 1 : 0 }}>
-              {c.calcOut2Sub}
-            </span>
-          </div>
-          <div className="rcs__o">
-            <span className="rcs__ol">{c.calcOut3}</span>
-            <span className="rcs__ov rcs__ov--sm">{s.o3}</span>
-          </div>
-        </div>
-      </div>
-      <p className="rcs__calc-note">{c.calcNote}</p>
       </div>
     </section>
   );

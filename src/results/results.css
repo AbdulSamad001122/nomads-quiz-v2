@@ -73,7 +73,6 @@ body .results-page :is(
 body .results-page :is(
   .rmw__answer,
   .rsh__quote,
-  .rcs__calc-h,
   .rcs__h3,
   .rtc__scorebox,
   .rta__mystery,
@@ -128,7 +127,6 @@ body .results-page :is(
   .rso__lead,
   .rwi__body,
   .rcs__p,
-  .rcs__gets li span,
   .rcs__node small,
   .rtc__sub,
   .rtc__para,
@@ -219,7 +217,6 @@ body .results-page .rwk__p--dark br {
   body .results-page :is(
     .rmw__answer,
     .rsh__quote,
-    .rcs__calc-h,
     .rcs__h3,
     .rtc__scorebox,
     .rta__mystery,
