@@ -1220,7 +1220,8 @@
 
 /* smallest phones: the headline ran 7 lines at 320 (audit, Nov 5) */
 @media (max-width: 360px) {
-  body .results-page .rcs__h2 {
+  /* one class deeper than results.css's shared 26px rule, so it applies */
+  body .results-page .rcs .rcs__h2 {
     font-size: 23px;
   }
   .rcs__hn--big {
