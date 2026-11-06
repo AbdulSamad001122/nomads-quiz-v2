@@ -1637,8 +1637,19 @@ export const STOP_OR_PUSH_NEW = {
   rightBig: '+{{max_gain}}',
   rightTimes: 'That’s {{max_multiple}} more revenue than today.',
   yep: 'Yep, with the same traffic!',
+  // #5 (doc row 6 + image 05): her bars, her words; "highlight imp part in
+  // headline" → "more profit per visitor" (the point of the block)
+  barsHeadBefore: 'Without increasing traffic (or marketing spend), here’s what your business looks like when you make',
+  barsHeadHl: 'more profit per visitor',
+  barsHeadAfter: '.',
+  rowToday: 'Today',
+  rowGoal: 'Add $1.5M',
+  rowMax: 'Max revenue',
+  rowSub: 'at {{rpv}} RPV',
+  rowVal: '~{{total}}/year',
+  rowChip: '{{x}} today',
   draftOld: 'Old — current section (stays until the new one below is approved)',
-  draftNew: 'New — draft of change #4 (her simpler two cards)',
+  draftNew: 'New — draft of changes #4 + #5 (her simpler two cards and bars)',
 };
 
 export const STOP_OR_PUSH = {

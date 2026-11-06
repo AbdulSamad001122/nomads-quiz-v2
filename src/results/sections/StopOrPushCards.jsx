@@ -1,3 +1,4 @@
+import { useLayoutEffect, useRef } from 'react';
 import { STOP_OR_PUSH_NEW } from '../copy.js';
 import { fill } from '../resolveTokens.js';
 import HighlightSweep from '../../components/primitives/HighlightSweep.jsx';
@@ -19,15 +20,61 @@ function Tick() {
  * joined by "Buuuuuut…", her words and layout, brand colours. "Keep the copy
  * and the visuals this simple. The current version feels really overwhelming
  * because there's a lot of microcopy there."
+ * #5 (doc row 6, image 05): her simpler bars under the cards — "highlight
+ * imp part in headline - but keep it clean and easy like this".
  *
  * DRAFT: shown under the current section so the two can be compared
  * (user, Nov 6); the old cards are removed once this one is approved. The
  * bars below the cards (#5) are not part of this change.
  */
-export default function StopOrPushCards({ tokens }) {
+/* bar figures: inside the bar (right-aligned) when it fits, else just past
+   the bar, else on their own line under it (small phones). Measured. */
+function placeBars(root) {
+  root.querySelectorAll('.rsn__tr').forEach((tr) => {
+    const fill = tr.querySelector('.rsn__fill');
+    const val = tr.querySelector('.rsn__val');
+    val.classList.remove('rsn__val--out', 'rsn__val--below');
+    tr.classList.remove('rsn__tr--below');
+    const trackW = tr.clientWidth;
+    const fillW = fill.offsetWidth;
+    const w = val.offsetWidth;
+    let mode = 'in';
+    if (w + 24 > fillW) mode = w + fillW + 20 <= trackW ? 'out' : 'below';
+    val.classList.toggle('rsn__val--out', mode === 'out');
+    val.classList.toggle('rsn__val--below', mode === 'below');
+    tr.classList.toggle('rsn__tr--below', mode === 'below');
+    val.style.left = mode === 'out' ? `${fillW + 14}px` : '';
+    val.style.right = mode === 'in' ? `${trackW - fillW + 12}px` : '';
+  });
+}
+
+export default function StopOrPushCards({ result, tokens }) {
   const c = STOP_OR_PUSH_NEW;
   const t = (s) => fill(s, tokens);
   const rightBig = t(c.rightBig);
+
+  // #5: today / +$1.5M / max drawn to scale (same maths as the old bars)
+  const today = result.currentAnnualRevenue;
+  const goal = today + 1_500_000;
+  const max = Math.max(result.capped.maxRevenue, goal);
+  const pct = (v) => Math.max(4, Math.min(100, (v / max) * 100));
+  const rows = [
+    { key: 'today', label: c.rowToday, rpv: tokens.current_rpv, total: tokens.current_total, chip: null, w: pct(today) },
+    { key: 'goal', label: c.rowGoal, rpv: tokens.goal_rpv, total: tokens.goal_total, chip: tokens.rpv_multiple, w: pct(goal) },
+    { key: 'max', label: c.rowMax, rpv: tokens.max_rpv, total: tokens.max_total, chip: tokens.max_multiple, w: 100 },
+  ];
+  const barsRef = useRef(null);
+  useLayoutEffect(() => {
+    const el = barsRef.current;
+    if (!el) return undefined;
+    const place = () => placeBars(el);
+    place();
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(place) : null;
+    ro?.observe(el);
+    document.fonts?.ready?.then(place);
+    return () => ro?.disconnect();
+  }, [tokens]);
+
   return (
     <section className="rsn" aria-label={`${c.head1Before} ${c.head1Hl} ${c.head2}`}>
       <div className="rsn__inner">
@@ -99,6 +146,32 @@ export default function StopOrPushCards({ tokens }) {
             {tokens.max_multiple && <p className="rsn__times">{t(c.rightTimes)}</p>}
             <span className="rsn__yep">{c.yep}</span>
           </div>
+        </div>
+
+        {/* #5 (doc row 6, image 05): her bars, under the two cards */}
+        <div className="rsn__bars" ref={barsRef}>
+          <h3 className="rsn__bars-head">
+            {c.barsHeadBefore}{' '}
+            <HighlightSweep tone="iceblue" className="rsn__hl rsn__hl--bars">
+              {c.barsHeadHl}
+            </HighlightSweep>
+            {c.barsHeadAfter}
+          </h3>
+          {rows.map((r) => (
+            <div key={r.key} className={`rsn__row rsn__row--${r.key}`}>
+              <div className="rsn__lab">
+                <b>{r.label}</b>
+                <small>{fill(c.rowSub, { rpv: r.rpv })}</small>
+              </div>
+              <div className="rsn__tr">
+                <div className="rsn__fill" style={{ width: `${r.w}%` }} />
+                <span className="rsn__val">
+                  {fill(c.rowVal, { total: r.total })}
+                  {r.chip && <i>{fill(c.rowChip, { x: r.chip })}</i>}
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

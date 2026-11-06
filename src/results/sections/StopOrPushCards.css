@@ -308,6 +308,138 @@
   text-wrap: balance;
 }
 
+/* ——— #5: her bars (image 05) ——— */
+.rsn__bars {
+  margin-top: 48px;
+  background: linear-gradient(165deg, #3a1430 0%, #250f1c 100%);
+  border: 2px solid #8a4f70;
+  border-radius: 24px;
+  padding: 44px 40px 42px;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.3);
+}
+
+.rsn__bars-head {
+  margin: 0 0 30px;
+  max-width: 760px;
+  font-family: var(--rsn-black);
+  font-weight: 900;
+  font-size: clamp(24px, 2.8vw, 36px);
+  line-height: 1.2;
+  color: #ffffff;
+}
+
+.rsn__hl--bars.hl-sweep {
+  white-space: normal;
+}
+
+.rsn__row {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.3fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 8px 28px;
+}
+
+.rsn__row + .rsn__row {
+  margin-top: 16px;
+}
+
+.rsn__lab {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rsn__lab b {
+  font-family: var(--rsn-black);
+  font-weight: 900;
+  font-size: clamp(18px, 1.8vw, 24px);
+  line-height: 1.15;
+  color: #ffffff;
+}
+
+.rsn__row--max .rsn__lab b {
+  color: #5be39a;
+}
+
+.rsn__lab small {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 14px;
+  color: #cdb3bd;
+}
+
+.rsn__tr {
+  position: relative;
+  height: 56px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.rsn__fill {
+  height: 100%;
+  border-radius: 12px;
+}
+
+.rsn__row--today .rsn__fill {
+  background: #e0b5a3;
+}
+
+.rsn__row--goal .rsn__fill {
+  background: #cae1f4;
+}
+
+.rsn__row--max .rsn__fill {
+  background: #5be39a;
+}
+
+/* the figure: inside the bar (dark), past it (light), or under it */
+.rsn__val {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  font-family: var(--rsn-black);
+  font-weight: 900;
+  font-size: clamp(17px, 1.8vw, 24px);
+  color: #250f1c;
+}
+
+.rsn__val--out {
+  color: #e0b5a3;
+}
+
+.rsn__val i {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #250f1c;
+  color: #ffffff;
+}
+
+.rsn__tr--below {
+  margin-bottom: 34px;
+}
+
+.rsn__val--below {
+  top: calc(100% + 8px);
+  left: 0;
+  transform: none;
+  font-size: 17px;
+  color: #ffffff;
+}
+
+.rsn__val--below i,
+.rsn__val--out i {
+  background: #ffffff;
+  color: #250f1c;
+}
+
 /* ——— responsive ——— */
 
 /* tablets + phones: cards stacked, the arrow points down */
@@ -329,9 +461,53 @@
   }
 }
 
+/* phones: each label above its bar */
+@media (max-width: 700px) {
+  .rsn__bars {
+    padding: 30px 20px 30px;
+  }
+  .rsn__row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .rsn__row + .rsn__row {
+    margin-top: 22px;
+  }
+  .rsn__lab {
+    flex-direction: row;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+  }
+  .rsn__tr {
+    height: 48px;
+  }
+}
+
+/* tablets + phones: a more compact figure + chip, so it stays on or beside
+   its bar */
+@media (max-width: 900px) {
+  .rsn__val {
+    font-size: 16px;
+    gap: 6px;
+  }
+  .rsn__val i {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+}
+
 @media (max-width: 560px) {
   .rsn {
     padding: 48px 16px 56px;
+  }
+  .rsn__bars {
+    margin-top: 36px;
+    padding: 26px 16px 26px;
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.3);
+  }
+  .rsn__bars-head {
+    font-size: 22px;
+    margin-bottom: 22px;
   }
   .rsn__headline {
     line-height: 1.22;
