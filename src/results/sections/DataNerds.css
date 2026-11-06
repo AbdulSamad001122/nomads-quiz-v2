@@ -506,3 +506,14 @@
   font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
   font-weight: 700;
 }
+
+/* placeholder rows that hold the ledger's height during the demo loop */
+.rdn__tr--ph {
+  visibility: hidden;
+}
+
+/* an empty field keeps its full height while the demo clears and retypes
+   it (it collapsed to 16px and the page below moved) */
+.rdn__box:empty::before {
+  content: '\200b';
+}
