@@ -1557,7 +1557,9 @@ export const WORKSHOP_INVITE = {
     'which actions are directly influencing',
   ],
   headHl: 'revenue growth',
-  headTail: 'across their funnel…',
+  // 2.0 FINAL RP QC (Alefiya, Nov 4, row 15): "funnel" → "customer sales
+  // journey"; "across" stays lower case mid-sentence (user, Nov 5)
+  headTail: 'across their customer sales journey…',
   // Doc (row 3) verbatim incl. the doc's "RPV ™" spacing; 2-line map.
   beforeLines: [
     'So before you spend another dollar on marketing, it’s worth seeing how they’re connected, which one',

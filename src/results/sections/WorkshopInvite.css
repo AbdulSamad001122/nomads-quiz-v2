@@ -246,3 +246,11 @@
     border-radius: 4px;
   }
 }
+
+/* smallest phones: the longer "customer sales journey…" tail ran the 26px
+   headline to 11 lines at 320 (audit, Nov 5) */
+@media (max-width: 360px) {
+  body .results-page .rwk__headline {
+    font-size: 22px;
+  }
+}
