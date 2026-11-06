@@ -28,8 +28,9 @@
   --rad-black: 'RAD Montserrat', var(--font-headline);
   /* the artifact's page background */
   background: linear-gradient(135deg, #f7efe8, #f1ddd3);
-  /* bottom room for the next section's round badge on the seam */
-  padding: 48px 24px 110px;
+  /* the artifact's 48px top and bottom (the old 110px bottom was room for
+     a badge that no longer exists — final check, Nov 6) */
+  padding: 48px 24px 48px;
   color: var(--rad-ink);
 }
 
