@@ -917,6 +917,18 @@ export const YOUR_CALL = {
   sub: 'It\'s free, takes about 30 minutes, and you\'re welcome to bring your team.',
 };
 
+// 2.0 FINAL RP QC #17 (Yemi, Nov 5): the workshop thumbnail replaces
+// Alefiya's photo in the final frame. The new thumbnail (updated title copy)
+// isn't ready yet, so a marked placeholder holds its place — swap in
+// /assets/results-workshop-thumb.webp (or the new file) when it arrives.
+export const FINAL_FRAME = {
+  thumbPlaceholder: true,
+  thumbSrc: null,
+  thumbLabel: 'Workshop thumbnail',
+  thumbNote: 'Placeholder: the new thumbnail goes here',
+  thumbAlt: 'Workshop: Turn existing traffic into $1.5M a year',
+};
+
 export const PILLARS = {
   // 2.0 FINAL RP QC (Alefiya, Nov 4, row 18 + comment "updated copy, pls
   // middle indent it"): her one line replaces the headline and the sub,
