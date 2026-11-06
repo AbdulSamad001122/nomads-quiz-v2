@@ -585,7 +585,8 @@ body .results-page .rsn .rsn__bars-head {
 body .results-page .rsn .rsn__say {
   font-size: 20px;
 }
-body .results-page .rsn .rsn__p {
+body .results-page .rsn .rsn__p,
+body .results-page .rsn .rsn__times {
   font-size: 16px;
 }
 body .results-page .rsn .rsn__big {
@@ -624,5 +625,55 @@ body .results-page .rsn .rsn__val {
 @media (max-width: 359px) {
   body .results-page .rsn .rsn__headline {
     font-size: 24px;
+  }
+}
+
+/* side by side (>900px): the two cards share rows, so their lower halves
+   line up as in her picture — both ✓ boxes, "you add" / "and add", both
+   big figures, both dashed rules and both "That's…" lines level (final
+   check, Nov 6). Left card: intro · $X pair · ✓ box · you add · figure ·
+   rule · That's… · nope. Right card: intro (over the first two rows) ·
+   ✓ box · and add · figure · rule · That's N× · Yep. */
+@media (min-width: 901px) {
+  /* a size container blocks shared rows, so the row of cards is the
+     container here and each card's width is worked out from it: two 1fr
+     cards + the joint (0.45fr, at least 170px) + two 24px gaps */
+  .rsn__steps {
+    container-type: inline-size;
+    grid-template-rows: repeat(8, auto);
+    row-gap: 10px;
+  }
+  .rsn__card {
+    container-type: normal;
+    display: grid;
+    grid-row: 1 / span 8;
+    grid-template-rows: subgrid;
+    justify-items: center;
+    align-items: start;
+    align-content: start;
+  }
+  .rsn__card--max {
+    padding-top: 40px;
+  }
+  .rsn__card--max > .rsn__say:first-child {
+    grid-row: span 2;
+    align-self: center;
+  }
+  .rsn__card .rsn__rule {
+    justify-self: stretch;
+  }
+  .rsn__but {
+    grid-row: 1 / span 8;
+  }
+}
+@media (min-width: 901px) {
+  body .results-page .rsn .rsn__big {
+    --rsn-cw: min((100cqi - 48px) / 2.45, (100cqi - 218px) / 2);
+    font-size: min(64px, calc(0.96 * (var(--rsn-cw) - 60px) / (0.66 * var(--rsn-len, 7) + 1.1)));
+  }
+}
+@media (min-width: 901px) and (max-width: 1100px) {
+  body .results-page .rsn .rsn__big {
+    font-size: min(56px, calc(0.96 * (var(--rsn-cw) - 60px) / (0.66 * var(--rsn-len, 7) + 1.1)));
   }
 }
