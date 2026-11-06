@@ -226,6 +226,14 @@
   }
 }
 
+/* tablets: the page's heading size (32px at 1100 and below, final check
+   Nov 6); the phone rule below takes it to 26 */
+@media (max-width: 1100px) {
+  .rwk__headline {
+    font-size: 32px;
+  }
+}
+
 @media (max-width: 760px) {
   .rwk__frame {
     inset: 16px 12px 14px;
