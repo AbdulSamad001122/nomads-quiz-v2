@@ -82,25 +82,18 @@ export default function CompoundingRps({ result, tokens }) {
   const curRef = useRef(0);
   pinRef.current = pin;
 
-  // the places the row can rest: one per card, except that the last cards
-  // share the row's end (2+ cards fit on a desktop row), so they share a stop
-  const stopOf = (i) => {
-    const track = trackRef.current;
-    const els = cardEls();
-    if (!track || !els.length) return i;
-    const max = track.scrollWidth - track.clientWidth;
-    const lefts = els.map((el) => Math.min(Math.max(0, el.offsetLeft - track.offsetLeft - 4), max));
-    const stops = lefts.filter((v, k) => k === 0 || v > lefts[k - 1] + 1);
-    const target = lefts[Math.max(0, Math.min(els.length - 1, i))];
-    return Math.max(0, stops.findIndex((v) => Math.abs(v - target) <= 1));
-  };
+  // one stop per card while pinned. The last cards share the row's end (2+
+  // cards fit on a desktop row), so their stops rest the row at the same
+  // place and only the active dot / counter moves on — every card gets its
+  // own step, so the counter reads 1, 2, 3, 4, 5 (final check, Nov 6: it
+  // skipped 4 when the last two cards shared one stop)
+  const stopOf = (i) => Math.max(0, Math.min(cardEls().length - 1, i));
   const stopLeft = (k) => {
     const track = trackRef.current;
     const els = cardEls();
     const max = track.scrollWidth - track.clientWidth;
-    const lefts = els.map((el) => Math.min(Math.max(0, el.offsetLeft - track.offsetLeft - 4), max));
-    const stops = lefts.filter((v, j) => j === 0 || v > lefts[j - 1] + 1);
-    return stops[Math.max(0, Math.min(stops.length - 1, k))];
+    const el = els[Math.max(0, Math.min(els.length - 1, k))];
+    return el ? Math.min(Math.max(0, el.offsetLeft - track.offsetLeft - 4), max) : 0;
   };
 
   // a dot/arrow jump in pin mode: the page scroll position for `at` stops
@@ -156,7 +149,7 @@ export default function CompoundingRps({ result, tokens }) {
     if (!track) return;
     const end = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
     setAtEnd(end);
-    setActive(end ? cardEls().length - 1 : indexNow());
+    setActive(pinRef.current ? curRef.current : end ? cardEls().length - 1 : indexNow());
     fitHeight();
   }, []);
   useEffect(() => {
@@ -213,10 +206,11 @@ export default function CompoundingRps({ result, tokens }) {
       const fits = zoom >= (pinRef.current ? 0.74 : 0.78);
       const max = track.scrollWidth - track.clientWidth;
       const lefts = cardEls().map((el) => Math.min(Math.max(0, el.offsetLeft - track.offsetLeft - 4), max));
-      const stops = lefts.filter((v, k) => k === 0 || v > lefts[k - 1] + 1).length;
+      const moves = lefts.filter((v, k) => k === 0 || v > lefts[k - 1] + 1).length > 1;
+      const stops = lefts.length;
       stage.style.zoom = prevZoom;
       const z = Math.round(zoom * 1000) / 1000;
-      const next = canPin && w >= 861 && stops > 1 && fits ? { top, step: Math.round(h * 0.55), stops, zoom: z } : null;
+      const next = canPin && w >= 861 && moves && fits ? { top, step: Math.round(h * 0.55), stops, zoom: z } : null;
       setPin((prev) =>
         prev && next && prev.top === next.top && prev.step === next.step && prev.stops === next.stops && prev.zoom === next.zoom ? prev : next
       );
@@ -261,6 +255,7 @@ export default function CompoundingRps({ result, tokens }) {
       if (far) smooth = false;
       if (k !== curRef.current || !smooth) {
         curRef.current = k;
+        setActive(k);
         const track = trackRef.current;
         if (track) track.scrollTo({ left: stopLeft(k), behavior: smooth && !reducedMotion() ? 'smooth' : 'auto' });
       }
@@ -318,14 +313,16 @@ export default function CompoundingRps({ result, tokens }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pin, cards.length]);
 
+  // the card the arrows / keys step from: the current stop while pinned
+  const curCard = () => (pinRef.current ? curRef.current : indexNow());
   const onKey = (e) => {
     if (e.key === 'ArrowRight') {
       e.preventDefault();
-      go(indexNow() + 1);
+      go(curCard() + 1);
     }
     if (e.key === 'ArrowLeft') {
       e.preventDefault();
-      go(indexNow() - 1);
+      go(curCard() - 1);
     }
   };
 
@@ -586,10 +583,10 @@ export default function CompoundingRps({ result, tokens }) {
             <span>
               {active + 1} / {cards.length}
             </span>
-            <button type="button" aria-label={c.prev} disabled={active === 0} onClick={() => go(indexNow() - 1)}>
+            <button type="button" aria-label={c.prev} disabled={active === 0} onClick={() => go(curCard() - 1)}>
               ←
             </button>
-            <button type="button" aria-label={c.next} disabled={atEnd} onClick={() => go(indexNow() + 1)}>
+            <button type="button" aria-label={c.next} disabled={pin ? active >= cards.length - 1 : atEnd} onClick={() => go(curCard() + 1)}>
               →
             </button>
           </div>
