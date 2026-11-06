@@ -474,3 +474,38 @@
     margin-right: max(-24px, calc(16px - (100vw - 100%) / 2));
   }
 }
+
+/* the page's one type scale (user, Nov 6: "use the font sizes of the whole
+   results page"): headline 38 / 32 / 26, the workshop line a subheading */
+body .results-page .rad .rad__headline {
+  font-size: 38px;
+  line-height: 1.2;
+}
+body .results-page .rad .rad__ws-head {
+  font-size: 24px;
+}
+.rad__big {
+  font-size: clamp(44px, 5vw, 60px);
+}
+@media (max-width: 1100px) {
+  body .results-page .rad .rad__headline {
+    font-size: 32px;
+  }
+  body .results-page .rad .rad__ws-head {
+    font-size: 22px;
+  }
+}
+@media (max-width: 760px) {
+  body .results-page .rad .rad__headline {
+    font-size: 26px;
+    line-height: 1.25;
+  }
+  body .results-page .rad .rad__ws-head {
+    font-size: 20px;
+  }
+}
+@media (max-width: 359px) {
+  body .results-page .rad .rad__headline {
+    font-size: 24px;
+  }
+}
