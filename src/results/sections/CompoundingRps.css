@@ -833,7 +833,9 @@
 }
 
 .rcs__cw-text {
-  background: #f4ece4;
+  /* the lined paper the GolfBays and other cream sections use (user,
+     Nov 7: keep the page's line background on the text side) */
+  background: #f7f3e8 url('/assets/results-paper-texture.webp') center / cover;
   padding: 56px clamp(20px, 3.4vw, 56px);
   display: flex;
   align-items: center;
