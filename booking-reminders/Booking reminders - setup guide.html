@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Booking reminders - setup guide</title>
+<style>
+  body { font-family: Montserrat, Arial, sans-serif; max-width: 860px; margin: 32px auto; padding: 0 20px; color: #222; line-height: 1.55; }
+  h1 { font-size: 28px; margin-bottom: 4px; }
+  h2 { font-size: 20px; margin-top: 36px; border-bottom: 2px solid #eee; padding-bottom: 6px; }
+  code, pre { font-family: "Roboto Mono", Consolas, monospace; font-size: 13px; background: #f5f5f5; border-radius: 4px; }
+  code { padding: 1px 5px; }
+  pre { padding: 12px; overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+  th, td { border: 1px solid #ddd; padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: #fafafa; }
+  .note { background: #fff8e1; border-left: 4px solid #f5b400; padding: 10px 14px; margin: 14px 0; }
+  .ok { background: #eef8ee; border-left: 4px solid #3a9a3a; padding: 10px 14px; margin: 14px 0; }
+  ol li { margin-bottom: 8px; }
+</style>
+</head>
+<body>
+<h1>Booking reminder tags: setup guide</h1>
+<p>A Google Apps Script that adds Kit reminder tags <b>48 hours, 24 hours and 1 hour</b> before each person's TidyCal call. Kit then sends the matching email.</p>
+
+<h2>1. How it works</h2>
+<ol>
+  <li>Nomads' Zapier + Kit setup tags each quiz-call booker <b>Quiz Booked a Call</b> and saves the call time in the Kit field <b>Booking Time &amp; Date Raw</b> (e.g. <code>2026-10-09T12:30:00.000000Z</code>, UTC).</li>
+  <li><b>Every 15 minutes</b> the script reads everyone with that tag, works out how many hours are left until each call, and adds:
+    <table>
+      <tr><th>When the call is…</th><th>Tag added</th></tr>
+      <tr><td>48 hours away or less</td><td>Quiz Call 48 hour reminder</td></tr>
+      <tr><td>24 hours away or less</td><td>Quiz Call 24 hour reminder</td></tr>
+      <tr><td>1 hour away or less</td><td>Quiz Call 01 hour reminder</td></tr>
+    </table>
+  </li>
+  <li>Each tag is added <b>once</b>. If a person already has it, they're skipped.</li>
+  <li><b>Late bookings:</b> only the <b>closest</b> reminder is sent. Booked 20 hours ahead → only the 24h reminder now, then the 1h one. The 48h reminder is never sent for them.</li>
+  <li>Kit automations (Nomads' side) send each email the moment its tag is added.</li>
+</ol>
+<div class="note">Timing: the script checks every 15 minutes, so emails can be up to 15 minutes late. Zapier on the free plan also checks TidyCal every 15 minutes, so a brand-new booking can take up to about 30 minutes to be picked up.</div>
+
+<h2>2. Before switching on (Nomads, in Kit)</h2>
+<ol>
+  <li>Build the <b>3 email automations</b>: "tag <i>Quiz Call 48 hour reminder</i> added → send the 48h email", and the same for 24h and 01h.</li>
+  <li>Build them <b>before</b> the script is switched on. People who already have a tag when an automation is created don't go through it.</li>
+  <li>The tag names must stay exactly as they are. The script only looks tags up and never creates them, so if a name changes it stops and reports an error.</li>
+</ol>
+
+<h2>3. Install (on the Nomads Google account)</h2>
+<ol>
+  <li>Sign in to the <b>Nomads Google account</b> and open <a href="https://script.google.com">script.google.com</a> → <b>New project</b>. Name it <i>Booking reminder tags</i>.</li>
+  <li>Delete the sample code in <code>Code.gs</code> and paste in the full contents of <code>booking-reminders/Code.gs</code> from the repo. Save.</li>
+  <li><b>Project Settings</b> (gear icon):
+    <ul>
+      <li>Tick <i>Show "appsscript.json" manifest file in editor</i>, open it, and replace it with <code>booking-reminders/appsscript.json</code>. Save.</li>
+      <li>Under <b>Script Properties</b> → <i>Add script property</i>: name <code>KIT_API_SECRET</code>, value = the Kit <b>v3 API Secret</b> (Kit → Settings → Developer). Use the <b>current</b> secret. The one written in the "Important Settings" doc is an old one.</li>
+    </ul>
+  </li>
+  <li>Choose <code>dryRun</code> in the function menu at the top and press <b>Run</b>. Google asks for permission the first time: allow it (it needs "connect to an external service" and "manage triggers").</li>
+  <li>Open <b>Executions</b> (left menu) and read the log. It lists everyone booked and what it <i>would</i> add. Nothing is added in a dry run.</li>
+  <li>When the dry run looks right, choose <code>setup</code> → <b>Run</b>. It checks the secret and all 4 tag names, then switches on the 15-minute timer. Done.</li>
+</ol>
+<div class="ok">Checked Nov 7, 2026 (read-only): the current Kit secret works, all 4 tags exist with these exact names, and 2 people have "Quiz Booked a Call" with booking times the script reads correctly.</div>
+
+<h2>4. Everyday use</h2>
+<table>
+  <tr><th>Want to…</th><th>Do this</th></tr>
+  <tr><td>See what it did</td><td><b>Executions</b> page: one log line per tag added, plus a summary each run</td></tr>
+  <tr><td>Check without sending</td><td>Run <code>dryRun</code></td></tr>
+  <tr><td>Switch reminders OFF</td><td>Run <code>stop</code></td></tr>
+  <tr><td>Switch back ON</td><td>Run <code>setup</code></td></tr>
+  <tr><td>Know when it breaks</td><td>If a run fails (Kit down, wrong secret, renamed tag), Google emails the Nomads account a "Summary of failures" message</td></tr>
+</table>
+
+<h2>5. Known limits (agreed for now)</h2>
+<ul>
+  <li><b>Cancellations and reschedules are not handled.</b> If someone cancels, they still get the reminders. If someone reschedules and Kit's field isn't updated, the reminders follow the old time.</li>
+  <li><b>Repeat bookers:</b> someone who books a second call later already has the reminder tags from the first one, so they won't get reminders again unless those tags are removed in Kit by hand.</li>
+  <li>A call booked less than about 1 hour ahead may get no 1h reminder (Zapier delay + 15-minute checks).</li>
+  <li>The script only tags <b>active</b> Kit subscribers (unsubscribed people can't be emailed anyway).</li>
+  <li>It uses Kit API v3, the same as the quiz. Kit calls v3 "deprecated" but hasn't set a shutdown date.</li>
+</ul>
+
+<h2>6. Safety</h2>
+<ul>
+  <li>The Kit secret is only in Script Properties, never in the code. The code in the repo has no secrets.</li>
+  <li>Don't share the Apps Script project with people who shouldn't see the Kit secret: anyone who can edit the project can read Script Properties.</li>
+  <li>The code (<code>booking-reminders/_reminders.test.js</code>) is covered by 52 automatic checks: run <code>node booking-reminders/_reminders.test.js</code>.</li>
+</ul>
+</body>
+</html>
