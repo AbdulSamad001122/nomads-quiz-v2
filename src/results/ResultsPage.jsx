@@ -5,6 +5,7 @@ import RedMetricsCallout from './sections/RedMetricsCallout.jsx';
 import RedMetricsWorkshop from './sections/RedMetricsWorkshop.jsx';
 import ResultBlocks from './sections/ResultBlocks.jsx';
 import StopOrPush from './sections/StopOrPush.jsx';
+import StopOrPushCards from './sections/StopOrPushCards.jsx';
 import WhatIfYouDid from './sections/WhatIfYouDid.jsx';
 import CompoundingRps from './sections/CompoundingRps.jsx';
 import AdSpendSection from './sections/AdSpendSection.jsx';
@@ -23,7 +24,6 @@ import YourCall from './sections/YourCall.jsx';
 import PillarsAccordion from './sections/PillarsAccordion.jsx';
 import SeeHowItShowsUp from './sections/SeeHowItShowsUp.jsx';
 import TwoPaths from './sections/TwoPaths.jsx';
-import BookCallCalendar from './sections/BookCallCalendar.jsx';
 import { resolveTokens, anyMetricRed } from './resolveTokens.js';
 import { RED_METRICS_CALL } from './copy.js';
 import './results.css';
@@ -69,6 +69,10 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
           now also covers a max that isn't above the goal (Cap Logic step 7:
           "hide this section and show blocks 5, 6, and 7 instead").
           WhatIfYouDid keeps only the GolfBays card. */}
+      {/* 2.0 FINAL RP QC #4 + #5: her simpler two cards and bars (approved
+          Nov 7 — the old cards and bars are removed), then the stretch card
+          and the workshop line */}
+      {!result.cappedState && <StopOrPushCards result={result} tokens={tokens} />}
       {!result.cappedState && <StopOrPush result={result} tokens={tokens} />}
       {/* The "We've done 12× and more for clients" proof card (L · Creative
           Delivery) is removed — Cap Logic "Proof card" (Yemi, Nov 4 evening):
@@ -107,8 +111,8 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
           tappable steps; TwoPaths is now only its closing panel. */}
       <SeeHowItShowsUp />
       <TwoPaths />
-      {/* standalone booking calendar on the maroon band (user, Sep 21) */}
-      <BookCallCalendar />
+      {/* the booking calendar now sits inside TwoPaths, under the frame
+          (2.0 FINAL RP QC #17, Yemi Nov 5) */}
       {/* Next sections land here as they're designed. */}
     </div>
   );

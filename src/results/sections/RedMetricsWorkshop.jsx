@@ -174,8 +174,13 @@ export default function RedMetricsWorkshop({ result, tokens }) {
           <div className="rmw__light-text">
             <h3 className="rmw__answer">
               {c.answerBefore}{' '}
-              <span className="rmw__val rmw__val--goal">{tokens.goal_rpv}</span>{' '}
-              {c.answerAfter}
+              <span className="rmw__val rmw__val--now">{tokens.current_rpv}</span> {c.answerMid}{' '}
+              {/* the comma stays with the green figure, never alone on a line */}
+              <span className="rmw__nw">
+                <span className="rmw__val rmw__val--goal">{tokens.goal_rpv}</span>
+                {c.answerAfter.startsWith(',') ? ',' : ''}
+              </span>
+              {c.answerAfter.startsWith(',') ? c.answerAfter.slice(1) : ` ${c.answerAfter}`}
             </h3>
 
             <a

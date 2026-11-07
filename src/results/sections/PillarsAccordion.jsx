@@ -137,7 +137,7 @@ export default function PillarsAccordion() {
         <img className="rpl__doodle" src="/assets/results-this-way.png" alt="" aria-hidden="true" />
 
         <h2 className="rpl__headline">{PILLARS.headline}</h2>
-        <p className="rpl__sub">{PILLARS.sub}</p>
+        {PILLARS.sub && <p className="rpl__sub">{PILLARS.sub}</p>}
 
         <div className="rpl__list">
         {PILLARS.items.map((p) => {

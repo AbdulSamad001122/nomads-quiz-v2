@@ -144,6 +144,21 @@
   color: #ffffff;
 }
 
+/* "$3 to $19 - put green and red" (Alefiya, 2.0 FINAL RP QC): today's RPV
+   in the page's red, the goal in its green — the same pair as the red-metric
+   headline ("at $3.00 instead of $19.67") */
+.rwk__rpv {
+  white-space: nowrap;
+}
+
+.rwk__rpv--now {
+  color: #ff8f7f;
+}
+
+.rwk__rpv--goal {
+  color: #6fe0a5;
+}
+
 .rwk__btn {
   /* lined up with the text above it (user, Oct 31) */
   display: block;
@@ -211,6 +226,14 @@
   }
 }
 
+/* tablets: the page's heading size (32px at 1100 and below, final check
+   Nov 6); the phone rule below takes it to 26 */
+@media (max-width: 1100px) {
+  .rwk__headline {
+    font-size: 32px;
+  }
+}
+
 @media (max-width: 760px) {
   .rwk__frame {
     inset: 16px 12px 14px;
@@ -244,5 +267,28 @@
     width: 100%;
     margin-top: 32px;
     border-radius: 4px;
+  }
+}
+
+/* smallest phones: the longer "customer sales journey…" tail ran the 26px
+   headline to 11 lines at 320 (audit, Nov 5) */
+@media (max-width: 360px) {
+  body .results-page .rwk__headline {
+    font-size: 22px;
+  }
+}
+
+/* tablets: the design's forced line breaks gave ragged lines at 761–900px
+   ("influencing" alone) — let the headline reflow (audit, Nov 6) */
+@media (max-width: 900px) {
+  .rwk__headline br {
+    display: none;
+  }
+}
+
+/* smallest phones: "revenue growth" stays one highlight block */
+@media (max-width: 360px) {
+  body .results-page .rwk__hl {
+    white-space: nowrap;
   }
 }

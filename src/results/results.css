@@ -58,26 +58,20 @@ body .results-page :is(
   .rcs__h2,
   .rtc__headline,
   .rta__h3--plan,
-  .rad__headline,
   .rsb__head
 ) {
   font-size: 38px;
   line-height: 1.2;
 }
 
-/* the GolfBays headline runs smaller on desktop (user, Oct 31); tablet and
-   phone keep the shared 32 / 26 */
-@media (min-width: 1101px) {
-  body .results-page .rwi__head {
-    font-size: 31px;
-  }
-}
+/* the GolfBays headline ran 31px on desktop (user, Oct 31); since her
+   2.0 FINAL RP QC copy (Nov 4) it is the whole first sentence and must
+   "fill the section properly", so it takes the shared 38 / 32 / 26 again */
 
 /* ——— subheadings ——— */
 body .results-page :is(
   .rmw__answer,
   .rsh__quote,
-  .rcs__calc-h,
   .rcs__h3,
   .rtc__scorebox,
   .rta__mystery,
@@ -132,7 +126,6 @@ body .results-page :is(
   .rso__lead,
   .rwi__body,
   .rcs__p,
-  .rcs__gets li span,
   .rcs__node small,
   .rtc__sub,
   .rtc__para,
@@ -142,10 +135,7 @@ body .results-page :is(
   .rta__head > span,
   .rta__say,
   .rta__bl span,
-  .rad__lede,
-  .rad__foot,
-  .rad__verdict,
-  .rad__pay-intro
+  .rad__ws-p
 ) {
   font-size: 16px;
 }
@@ -194,7 +184,6 @@ body .results-page .rwk__p--dark br {
     .rcs__h2,
     .rtc__headline,
     .rta__h3--plan,
-    .rad__headline,
     .rsb__head
   ) {
     font-size: 32px;
@@ -214,7 +203,6 @@ body .results-page .rwk__p--dark br {
     .rcs__h2,
     .rtc__headline,
     .rta__h3--plan,
-    .rad__headline,
     .rsb__head
   ) {
     font-size: 26px;
@@ -223,7 +211,6 @@ body .results-page .rwk__p--dark br {
   body .results-page :is(
     .rmw__answer,
     .rsh__quote,
-    .rcs__calc-h,
     .rcs__h3,
     .rtc__scorebox,
     .rta__mystery,

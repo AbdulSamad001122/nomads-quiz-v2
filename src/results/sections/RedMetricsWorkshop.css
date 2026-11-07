@@ -527,7 +527,8 @@
 
 /* the goal RPV, big and green like the hero's goal card (Alefiya, Slack
    Oct 31) — the hero's own green, now that it sits on navy too */
-.rmw__answer .rmw__val--goal {
+.rmw__answer .rmw__val--goal,
+.rmw__answer .rmw__val--now {
   padding: 0 10px;
   border: 2px solid #6fd6a0;
   border-radius: 8px;
@@ -535,6 +536,19 @@
   color: #72e2a7;
   font-size: 1.4em;
   line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* today's RPV in the hero's red, the same chip as the green goal (2.0
+   FINAL RP QC: "from $3 to $19.67", red then green as on the rest of the
+   page) */
+.rmw__answer .rmw__val--now {
+  border-color: #f48274;
+  background: rgba(221, 63, 61, 0.13);
+  color: #f7a090;
+}
+
+.rmw__answer .rmw__nw {
   white-space: nowrap;
 }
 
@@ -655,5 +669,15 @@
 @media (prefers-reduced-motion: reduce) {
   .rmw__dot {
     animation: none;
+  }
+}
+
+/* smallest phones: "Watch the workshop with your marketing team" ran to 3
+   lines at 320 ("team" alone) — keep it to 2 (audit, Nov 6) */
+@media (max-width: 340px) {
+  .results-page .rmw__light .rmw__btn {
+    font-size: 14px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }

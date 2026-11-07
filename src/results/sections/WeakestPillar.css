@@ -40,6 +40,30 @@
   font-size: 29px;
   line-height: 1.45;
   color: #ffffff;
+  /* no lone "RPV." on the last line at tablet / laptop widths (final
+     check, Nov 6) */
+  text-wrap: balance;
+}
+
+/* her photo on a call (2.0 FINAL RP QC #15), under the copy; it sticks
+   with the copy, so it is kept short enough to fit the screen with it */
+.rwp__photo {
+  display: block;
+  /* a circle (user, Nov 6); on desktop small enough to fit the screen with
+     the copy it sticks with */
+  /* bigger, filling more of the left panel, with more room above it
+     (user, Nov 6) — still capped by the screen height so it sticks fully
+     in view with the copy */
+  width: clamp(280px, calc(100vh - 430px), 540px);
+  height: auto;
+  /* centred in the left panel (user, Nov 6) */
+  margin: 48px auto 0;
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: 50% 24%;
+  border-radius: 50%;
+  border: 4px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
 }
 
 /* ——— right peach panel ——— */
@@ -202,6 +226,10 @@
   .rwp__bold {
     margin-top: 30px;
     max-width: 560px;
+  }
+  .rwp__photo {
+    width: min(100%, 420px);
+    margin: 44px auto 0;
   }
   .rwp__right {
     padding: 56px 40px 110px;
