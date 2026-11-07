@@ -252,24 +252,18 @@
   color: var(--rad-green);
 }
 
-/* the page's circle arrow (as on the "Beyond your $1.5M" cards), in the
-   maroon (user, Nov 7: "use the circle arrow like we are using… in the
-   dark maroon colour") */
+/* the page's plum swoosh arrow from the assets (as in the Pillar 2 / 4
+   intros) — user, Nov 7: "use this arrow", the dark maroon one */
 .rad__vs {
   align-self: center;
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 2px solid var(--rad-plum);
-  color: var(--rad-plum);
+  display: block;
+  width: 46px;
 }
 
-.rad__vs svg {
+.rad__vs img {
   display: block;
-  width: 22px;
-  height: 22px;
+  width: 100%;
+  height: auto;
 }
 
 /* ——— the difference ——— */
