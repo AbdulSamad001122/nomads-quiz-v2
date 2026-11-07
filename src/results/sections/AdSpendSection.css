@@ -303,15 +303,25 @@
 }
 
 /* ——— the workshop card ——— */
+/* the workshop card's own band (user, Nov 7: "make this section
+   background dark blue… the white box light blue, the text dark blue, the
+   blue theme button"): full width, Midnight Blue; it ends the section, so
+   it cancels the section's side and bottom padding */
+.rad__band {
+  margin: 48px -24px -48px;
+  padding: 56px 24px;
+  background: var(--rad-navy);
+}
+
 .rad__ws {
-  margin: 28px -24px 0;
+  max-width: 1008px;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
   gap: 28px;
   align-items: center;
   text-align: left;
-  background: #ffffff;
-  border: 1.5px solid #e7d4cb;
+  background: #cae1f4; /* Ice Blue */
   border-radius: 20px;
   padding: 22px;
 }
@@ -348,7 +358,7 @@
   font-weight: 900;
   font-size: clamp(22px, 2.6vw, 28px);
   line-height: 1.2;
-  color: var(--rad-plum);
+  color: var(--rad-navy);
   text-wrap: balance;
 }
 
@@ -358,7 +368,7 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 1.55;
-  color: var(--rad-deep);
+  color: var(--rad-navy);
 }
 
 .rad__ws-p b {
@@ -366,44 +376,46 @@
   white-space: nowrap;
 }
 
+/* a shade darker than the cards' red/green so they stay readable on the
+   light-blue box (4.8:1 and 4.9:1) */
 .rad__ws-p .rad__r {
-  color: var(--rad-red);
+  color: #b3261e;
 }
 
 .rad__ws-p .rad__g {
-  color: var(--rad-green-deep);
+  color: #0f6b3a;
 }
 
-/* the workshop button: the page's light-pink button (user, Nov 5: "use
-   the light pink button that we use") — same colour, border, shadow and
-   lift as the other pink buttons */
+/* the workshop button: the page's blue button, as in the top bar's
+   "Watch the workshop with your team" (user, Nov 7: "the blue theme
+   button") — same lift as the other page buttons */
 .rad__btn {
   display: inline-block;
   font-family: var(--font-body);
   font-weight: 700;
   font-size: 16px;
   line-height: 1.3;
-  color: #250f1c;
+  color: var(--rad-navy);
   text-decoration: none;
   text-align: center;
   padding: 13px 22px;
-  background: var(--rbtn-book-bg, #f8dfe8);
-  border: 2px solid #0f0a10;
+  background: var(--rbtn-workshop-bg, #e8f3fb);
+  border: 2px solid var(--rad-navy);
   border-radius: 0;
-  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.55);
+  box-shadow: 6px 6px 0 var(--rad-navy);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .rad__btn:hover {
   transform: translate(-2px, -2px) scale(1.04);
-  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.55);
-  background: var(--rbtn-book-bg, #f8dfe8);
-  color: #250f1c;
+  box-shadow: 8px 8px 0 var(--rad-navy);
+  background: var(--rbtn-workshop-bg, #e8f3fb);
+  color: var(--rad-navy);
 }
 
 .rad__btn:active {
   transform: none;
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.55);
+  box-shadow: 3px 3px 0 var(--rad-navy);
 }
 
 .rad__arw {
@@ -412,7 +424,7 @@
 }
 
 .rad__btn:focus-visible {
-  outline: 2px solid var(--rad-plum);
+  outline: 2px solid var(--rad-navy);
   outline-offset: 2px;
 }
 
@@ -438,10 +450,8 @@
   .rad {
     padding: 28px 16px 28px;
   }
-  /* the artifact at 390px: the band and the workshop card run to the
-     screen edges */
-  .rad__result,
-  .rad__ws {
+  /* the artifact at 390px: the purple band runs to the screen edges */
+  .rad__result {
     margin-left: -16px;
     margin-right: -16px;
     border-radius: 0;
@@ -451,8 +461,15 @@
   .rad__side {
     padding: 24px 18px;
   }
+  /* the dark-blue band: to the edges, matching the section's phone padding;
+     the light-blue box keeps a small gutter and its corners */
+  .rad__band {
+    margin: 28px -16px -28px;
+    padding: 32px 12px;
+  }
   .rad__ws {
     padding: 16px;
+    border-radius: 16px;
   }
 }
 
@@ -469,8 +486,7 @@
    keep them inside a 16px gutter (still wider than the cards; audit,
    Nov 5). Phones keep them edge to edge. */
 @media (min-width: 561px) and (max-width: 1100px) {
-  .rad__result,
-  .rad__ws {
+  .rad__result {
     margin-left: max(-24px, calc(16px - (100vw - 100%) / 2));
     margin-right: max(-24px, calc(16px - (100vw - 100%) / 2));
   }
