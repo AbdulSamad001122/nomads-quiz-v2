@@ -1038,13 +1038,12 @@
   color: #e9dce4;
 }
 
-/* the thin light-blue arrow sits a little below the middle, as drawn */
+/* the page's swoosh arrow in white (user, Nov 7: "use the same… swoosh
+   arrow, but in white"), level with the figures */
 .rcs__tt-arrow {
   display: block;
-  width: 28px;
+  width: 44px;
   height: auto;
-  color: #cae1f4;
-  transform: translateY(14px);
 }
 
 .rcs__tt-bar {
@@ -1135,6 +1134,10 @@ body .results-page .rcs-calc .rcs__calc-sub {
   }
   .rcs__tt {
     padding: 22px 14px 24px;
+  }
+  /* a smaller swoosh so it keeps clear of $5 / $50 */
+  .rcs__tt-arrow {
+    width: 32px;
   }
 }
 
