@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import { STOP_OR_PUSH_NEW } from '../copy.js';
 import { fill } from '../resolveTokens.js';
+import { markTokens } from '../markTokens.jsx';
 import HighlightSweep from '../../components/primitives/HighlightSweep.jsx';
 import './StopOrPushCards.css';
 
@@ -143,7 +144,7 @@ export default function StopOrPushCards({ result, tokens }) {
             </p>
             <hr className="rsn__rule" />
             {/* no multiple to show (max barely above today): no empty line */}
-            {tokens.max_multiple && <p className="rsn__times">{t(c.rightTimes)}</p>}
+            {tokens.max_multiple && <p className="rsn__times">{markTokens(c.rightTimes, tokens, [['{{max_multiple}}', 'rsn__mult']])}</p>}
             <span className="rsn__yep">{c.yep}</span>
           </div>
         </div>
