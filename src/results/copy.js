@@ -1648,71 +1648,11 @@ export const STOP_OR_PUSH_NEW = {
   rowSub: 'at {{rpv}} RPV',
   rowVal: '~{{total}}/year',
   rowChip: '{{x}} today',
-  draftOld: 'Old — current section (stays until the new one below is approved)',
-  draftNew: 'New — draft of changes #4 + #5 (her simpler two cards and bars; the stretch card and workshop line stay as they are)',
 };
 
 export const STOP_OR_PUSH = {
-  // Headline: each sentence on its own line (two block spans, not <br>).
-  head1Before: 'You can',
-  head1Hl: 'stop at $1.5M',
-  head1After: '.',
-  head2Before: 'Or push all 5 metrics',
-  head2Hl: 'to their max',
-  head2After: '.',
-
-  // Card A — the goal (deliberately the smaller card, design note 3)
-  stopEyebrow: 'Stop here · your goal',
-  // Alefiya (Slack, Oct 31): the card reads as one clear sentence — "by
-  // increasing your revenue per visitor from 2.25 to 6.25, you'll add 1.5
-  // million a year without adding a penny to your current marketing or ad
-  // spend" — around the big figure (kept, made bigger), with the taker's
-  // own numbers; the "And nope…" line stays (Alefiya: keep it; she and Yemi
-  // revise this section's logic on Monday).
-  stopRpvBefore: 'By increasing your Revenue Per Visitor™ from',
-  stopRpvTo: 'to',
-  stopRpvAfter: ', you’ll add',
-  stopBig: '+$1.5M/year',
-  stopBigSub: '($125K/mo)',
-  stopBody: 'without adding a penny to your current marketing or ad spend.',
-  stopBodyBold: 'marketing or ad spend',
-  stopNope: 'And nope, you don’t need to max out all 5 metrics to get there.',
-
-  // the joint between the two cards
-  but: 'But… what if you did?',
-
-  // Card B — the max (12× cap, calculator.js / Added Logic.docx)
-  maxEyebrow: 'Or go all the way · max benchmark',
-  // "Buuuuuuut..." opener (Alefiya, Slack Oct 31)
-  maxIf: 'Buuuuuuut...if you hit the maximum benchmark across all five conversion points,',
-  maxIfBold: 'maximum benchmark across all five conversion points',
-  maxLead: 'your existing traffic could add',
-  maxMega: '{{max_gain}}',
-  maxMegaSub: '/year',
-  maxTotal: '~{{max_total}} total: {{max_multiple}} today',
-  maxYep: 'Yep, with the same traffic!',
-
-  // "Where you are, and where you could go" — revenue drawn to scale.
-  // The design's "Today's revenue is worked back from your numbers…" line
-  // explained its mock-up estimate; design note 8: "'today' must use each
-  // person's real current revenue" — so the build uses the taker's own
-  // yearly revenue and the explainer line is dropped (flagged).
-  ladderHead: 'Where you are, and where you could go',
-  ladderSub: 'Your yearly revenue, drawn to scale. Same visitors in every row.',
-  rowToday: 'Today',
-  rowTodaySub: 'RPV {{current_rpv}}',
-  rowTodayVal: '~{{current_total}}/year',
-  rowGoal: 'Stop at your goal',
-  rowGoalSub: 'RPV {{goal_rpv}} · +$1.5M',
-  rowGoalVal: '~{{goal_total}}/year',
-  rowGoalChip: '{{rpv_multiple}} today',
-  rowMax: 'All 5 metrics at max',
-  // Cap Logic (Nov 4): the "capped at 12× ·" label is removed
-  rowMaxSub: 'RPV {{max_rpv}} · +{{max_gain}}',
-  rowMaxVal: '~{{max_total}}/year',
-  // Loom 3:41 "maybe 12x can be a little bit bigger" — this chip, the total
-  // chip's multiple and the 12× step are set larger than the design (CSS).
-  rowMaxChip: '{{max_multiple}} today',
+  // (the old two cards and the today / goal / max bars were replaced by
+  // STOP_OR_PUSH_NEW — 2.0 FINAL RP QC #4 + #5, approved Nov 7)
 
   // Scepticism block (design note 5). Cap Logic (Nov 4): shown for every max
   // beyond 3× today (Alefiya, QC doc comment). Copy = Yemi's updated Cap
