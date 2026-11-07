@@ -575,23 +575,6 @@
   }
 }
 
-/* ——— temporary compare labels (removed with the old cards) ——— */
-.rdraft {
-  background: #ffe066;
-  color: #1b1220;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-align: center;
-  padding: 8px 12px;
-}
-
-.rdraft--new {
-  background: #5be39a;
-}
-
 /* the page's one type scale (user, Nov 6: "use the font sizes of the whole
    results page"): headline 38 / 32 / 26, card intros + bars heading as
    subheadings (≤24), body 16, big figures capped */
