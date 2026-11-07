@@ -86,8 +86,8 @@ export default function RedMetricsCallout({ result, tokens }) {
             {keepTogether(c.bookLabel, 'game-plan call')}
           </a>
         </div>
-
-        <p className="rrc__caption">{c.caption}</p>
+        {/* "The workshop opens on its own page." removed — 2.0 FINAL RP QC
+            #2 (Alefiya: "remove this micro copy") */}
       </div>
     </section>
   );
