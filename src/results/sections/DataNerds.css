@@ -26,10 +26,11 @@
   --rdn-mute: #9fb2c4;
   --rdn-ink: #1b1220;
   --rdn-black: 'RDN Montserrat', var(--font-headline);
-  /* light, as her 2.0 FINAL RP QC picture ("overwhelming with the whole
-     dark background") */
-  background: #f4ece4;
-  color: var(--rdn-deep);
+  /* the calendar sections' green topo (user, Nov 7: "use the green
+     background we are using, like in the calendar section"); the copy turns
+     light on it; the white window keeps her lighter look */
+  background: #1d3230 url('/assets/results-topo-bg.webp') center / cover;
+  color: #f4ece4;
   padding: 64px 24px 72px;
 }
 
@@ -53,8 +54,8 @@
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  background: var(--rdn-midnight);
-  color: #ffffff;
+  background: #f4ece4;
+  color: #1d3230;
   padding: 6px 12px;
   border-radius: 0;
 }
@@ -66,7 +67,7 @@
   font-size: clamp(28px, 3.6vw, 40px);
   line-height: 1.12;
   letter-spacing: -0.01em;
-  color: var(--rdn-purple);
+  color: #ffffff;
 }
 
 .rdn__p {
@@ -76,12 +77,12 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 1.6;
-  color: var(--rdn-deep);
+  color: rgba(255, 255, 255, 0.88);
 }
 
 .rdn__p strong,
 .rdn__p b {
-  color: var(--rdn-deep);
+  color: #ffffff;
   font-weight: 800;
 }
 
@@ -337,7 +338,7 @@
   font-family: var(--font-mono);
   font-weight: 600;
   font-size: 11px;
-  color: #6e6670;
+  color: rgba(255, 255, 255, 0.75);
 }
 
 /* the button under the copy, highlighted: plum, white text, a stone
