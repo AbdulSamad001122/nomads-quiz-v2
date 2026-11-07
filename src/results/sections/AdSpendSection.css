@@ -252,12 +252,24 @@
   color: var(--rad-green);
 }
 
+/* the page's circle arrow (as on the "Beyond your $1.5M" cards), in the
+   maroon (user, Nov 7: "use the circle arrow like we are using… in the
+   dark maroon colour") */
 .rad__vs {
   align-self: center;
-  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
-  font-size: 28px;
-  line-height: 1.2;
-  color: #8a4f70;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--rad-plum);
+  color: var(--rad-plum);
+}
+
+.rad__vs svg {
+  display: block;
+  width: 22px;
+  height: 22px;
 }
 
 /* ——— the difference ——— */
