@@ -156,9 +156,10 @@
   border: 1.5px solid #d7dee6;
   border-radius: 7px;
   padding: 7px 8px;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 12.5px;
+  /* the typed values in Montserrat, a little bold (user, Nov 7) */
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
   min-height: 16px;
   line-height: 16px;
   background: #fafcfe;
