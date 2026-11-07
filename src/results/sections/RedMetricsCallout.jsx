@@ -1,7 +1,7 @@
 import { RED_CALLOUT, CTA } from '../copy.js';
 import { redMetricRows, fill } from '../resolveTokens.js';
 import { emphasize } from '../emphasize.jsx';
-import { keepTogether } from '../keepTogether.jsx';
+import TidyCalEmbed from './TidyCalEmbed.jsx';
 import { markTokens } from '../markTokens.jsx';
 import { ga } from '../../analytics/ga.js';
 import './RedMetricsCallout.css';
@@ -59,6 +59,22 @@ export default function RedMetricsCallout({ result, tokens }) {
 
         <p className="rrc__body">{emphasize(c.body, [c.bodyBold])}</p>
 
+        {/* 2.0 FINAL RP QC #2, bullet 3 (Alefiya on Slack, Nov 7: "Yess" — the
+            booking button goes, the workshop thumbnail + the "Watch the
+            workshop" button stay, and the full calendar is embedded):
+            thumbnail, then the workshop button, then the calendar (user) */}
+        <a
+          className="rrc__thumb"
+          href={CTA.workshop.href}
+          target="_blank"
+          rel="noopener"
+          tabIndex={-1}
+          aria-hidden="true"
+          onClick={() => ga.ctaClick(CTA.workshop.id)}
+        >
+          <img src="/assets/results-workshop-thumb.webp" alt="" width="1280" height="720" loading="lazy" />
+        </a>
+
         <div className="rrc__ctas">
           <a
             className="rrc__btn rrc__btn--workshop"
@@ -79,15 +95,10 @@ export default function RedMetricsCallout({ result, tokens }) {
               </span>
             </span>
           </a>
-          <a
-            className="rrc__btn rrc__btn--book"
-            href={CTA.book.href}
-            target="_blank"
-            rel="noopener"
-            onClick={() => ga.ctaClick(CTA.book.id)}
-          >
-            {keepTogether(c.bookLabel, 'game-plan call')}
-          </a>
+        </div>
+
+        <div className="rrc__cal">
+          <TidyCalEmbed />
         </div>
         {/* "The workshop opens on its own page." removed — 2.0 FINAL RP QC
             #2 (Alefiya: "remove this micro copy") */}

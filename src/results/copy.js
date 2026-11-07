@@ -120,9 +120,9 @@ export const RED_CALLOUT = {
   headEnd: '.',
   body: 'My workshop takes you and your team through 10 questions across 4 quadrants, so you find exactly why each red metric is red, and what to fix first.',
   bodyBold: '10 questions across 4 quadrants',
-  // the callout's two buttons, exactly as the artifact (the → is drawn in JSX)
+  // the callout's workshop button (the → is drawn in JSX); the booking button
+  // became the embedded calendar (#2, Nov 7)
   workshopLabel: 'Watch the workshop with your team',
-  bookLabel: 'Book your $125k/mo game-plan call',
   // Short metric names on the cards: the artifact's two ("Buyers who
   // complete their purchase", "Revenue Per Subscriber™"); the design gives no
   // name for the others, so they follow the same pattern.
