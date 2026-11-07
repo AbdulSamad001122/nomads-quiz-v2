@@ -120,7 +120,6 @@ export const RED_CALLOUT = {
   headEnd: '.',
   body: 'My workshop takes you and your team through 10 questions across 4 quadrants, so you find exactly why each red metric is red, and what to fix first.',
   bodyBold: '10 questions across 4 quadrants',
-  caption: 'The workshop opens on its own page.',
   // the callout's two buttons, exactly as the artifact (the → is drawn in JSX)
   workshopLabel: 'Watch the workshop with your team',
   bookLabel: 'Book your $125k/mo game-plan call',

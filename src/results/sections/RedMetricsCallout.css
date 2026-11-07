@@ -22,7 +22,8 @@
 }
 
 .rrc__headline {
-  max-width: 720px;
+  /* wide enough for two lines on desktop (user, Nov 7) */
+  max-width: 870px;
   margin: 14px auto 0;
   font-family: var(--font-headline);
   font-weight: 800;
@@ -147,13 +148,6 @@
 .rrc__btn-arrow {
   font-size: 1.15em;
   line-height: 1;
-}
-
-.rrc__caption {
-  margin-top: 18px;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: #a99ca6;
 }
 
 /* ——— responsive ——— */
