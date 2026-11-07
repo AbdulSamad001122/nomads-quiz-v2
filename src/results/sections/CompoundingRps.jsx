@@ -458,16 +458,8 @@ function CalcSection({ c, tokens, result }) {
               <span className="rcs__tt-per">{c.calcPer}</span>
             </div>
             {!reached && (
-            <svg className="rcs__tt-arrow" viewBox="0 0 48 32" focusable="false">
-              <path
-                d="M3 16h40M30 4l13 12-13 12"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="4.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            // the page's swoosh arrow, white on the blue box (user, Nov 7)
+            <img className="rcs__tt-arrow" src="/assets/results-swoosh-white.png" alt="" width="230" height="218" />
             )}
             {!reached && (
               <div className="rcs__tt-side rcs__tt-side--target">
