@@ -817,23 +817,23 @@
   justify-content: center;
 }
 
-.rcs__k2 {
-  display: block;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 1.4;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--rcs-plum);
-}
-
 .rcs__calc-h {
-  margin: 14px 0 0;
+  margin: 0;
   font-family: var(--rcs-black);
   font-weight: 900;
   line-height: 1.2;
   color: var(--rcs-ink);
+}
+
+/* "If each subscriber is worth $50/year…" — the copy line under the
+   heading, a subheading size (20 / 19 / 18) */
+.rcs__calc-sub {
+  margin: 16px 0 0;
+  font-family: var(--font-body);
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--rcs-ink);
+  text-wrap: pretty;
 }
 
 .rcs__gets {
@@ -1036,15 +1036,24 @@
 body .results-page .rcs-calc .rcs__calc-h {
   font-size: 38px;
 }
+body .results-page .rcs-calc .rcs__calc-sub {
+  font-size: 20px;
+}
 @media (max-width: 1100px) {
   body .results-page .rcs-calc .rcs__calc-h {
     font-size: 32px;
+  }
+  body .results-page .rcs-calc .rcs__calc-sub {
+    font-size: 19px;
   }
 }
 @media (max-width: 760px) {
   body .results-page .rcs-calc .rcs__calc-h {
     font-size: 26px;
     line-height: 1.25;
+  }
+  body .results-page .rcs-calc .rcs__calc-sub {
+    font-size: 18px;
   }
   .rcs__tt-v {
     font-size: min(56px, calc(60cqi / var(--rcs-len, 3)));

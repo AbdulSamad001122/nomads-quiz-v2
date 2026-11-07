@@ -412,8 +412,11 @@ function CalcSection({ c, tokens, result }) {
     <section className="rcs-calc">
       <div className="rcs__cw-text">
         <div className="rcs__cw-inner">
-          <span className="rcs__k2">{c.calcKicker}</span>
-          <h3 className="rcs__calc-h">{c.calcHead}</h3>
+          {/* the calculator's name is the heading, the $50/year line sits
+              under it (user, Nov 7: in the doc the name is the bold heading
+              and "If each subscriber…" is a copy line) */}
+          <h3 className="rcs__calc-h">{c.calcKicker}</h3>
+          <p className="rcs__calc-sub">{c.calcHead}</p>
           <ol className="rcs__gets">
             {c.gets.map((g, i) => (
               <li key={g}>
