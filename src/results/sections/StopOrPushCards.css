@@ -683,3 +683,10 @@ body .results-page .rsn .rsn__lab b {
     font-size: min(56px, calc(0.96 * (var(--rsn-cw) - 60px) / (0.66 * var(--rsn-len, 7) + 1.1)));
   }
 }
+
+/* #8: "That's N× more revenue than today." — the taker's multiple in green,
+   like the card's big figure */
+.rsn__mult {
+  color: #5be39a;
+  white-space: nowrap;
+}

@@ -1,5 +1,6 @@
 import { RESULT_BLOCKS, CTA } from '../copy.js';
 import { fill } from '../resolveTokens.js';
+import { markTokens } from '../markTokens.jsx';
 import { ga } from '../../analytics/ga.js';
 import './ResultBlocks.css';
 
@@ -56,7 +57,7 @@ export default function ResultBlocks({ result, tokens, slot }) {
       <section className="rsb">
         {!result.block1.splitSuppressed && (
           <>
-            <p className="rsb__head">{fill(b1.head, tokens)}</p>
+            <p className="rsb__head">{markTokens(b1.head, tokens, [['{{email_percentage}}%', 'rsb__mark']])}</p>
             <p className="rsb__intro">{b.splitIntro}</p>
             <ul className="rsb__cards">
               {b.splitChannels.map((ch) => (
@@ -73,7 +74,7 @@ export default function ResultBlocks({ result, tokens, slot }) {
                 </li>
               ))}
             </ul>
-            <p className="rsb__foot">{fill(b1.foot, tokens)}</p>
+            <p className="rsb__foot">{markTokens(b1.foot, tokens, [['{{email_percentage}}%', 'rsb__mark rsb__mark--foot']])}</p>
           </>
         )}
         {/* Blocks 2/3 have no design reference yet — restrained outline note
@@ -106,14 +107,14 @@ export default function ResultBlocks({ result, tokens, slot }) {
         <div className="rcb__copy">
           <p className="rcb__p">
             {fill(c.leadBefore, tokens)}
-            {c.leadBold ? <strong>{fill(c.leadBold, tokens)}</strong> : null}
+            {c.leadBold ? <strong className="rcb__num rcb__num--gain">{fill(c.leadBold, tokens)}</strong> : null}
             {c.leadAfter}
           </p>
 
           {capped === 5 && showGapSentence && (
             <>
-              <h3 className="rcb__head">{fill(c.gapHead, tokens)}</h3>
-              <p className="rcb__p">{fill(c.gapBody, tokens)}</p>
+              <h3 className="rcb__head">{markTokens(c.gapHead, tokens, [['{{remaining_gap}}', 'rcb__num rcb__num--gap']])}</h3>
+              <p className="rcb__p">{markTokens(c.gapBody, tokens, [['{{additional_daily_visitors}} more visitors a day', 'rcb__num rcb__num--gain']])}</p>
             </>
           )}
 
