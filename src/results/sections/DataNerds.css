@@ -26,11 +26,11 @@
   --rdn-mute: #9fb2c4;
   --rdn-ink: #1b1220;
   --rdn-black: 'RDN Montserrat', var(--font-headline);
-  /* the calendar sections' green topo (user, Nov 7: "use the green
-     background we are using, like in the calendar section"); the copy turns
-     light on it; the white window keeps her lighter look */
-  background: #1d3230 url('/assets/results-topo-bg.webp') center / cover;
-  color: #f4ece4;
+  /* the cream paper of the "So how do you scale your Revenue Per Visitor™"
+     table section (user, Nov 7: "that cream background, I want this one");
+     light, as her 2.0 FINAL RP QC picture */
+  background: #fbf6ec url('/assets/results-cream-bg.webp') center / cover;
+  color: var(--rdn-deep);
   padding: 64px 24px 72px;
 }
 
@@ -54,8 +54,8 @@
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  background: #f4ece4;
-  color: #1d3230;
+  background: var(--rdn-midnight);
+  color: #ffffff;
   padding: 6px 12px;
   border-radius: 0;
 }
@@ -67,7 +67,7 @@
   font-size: clamp(28px, 3.6vw, 40px);
   line-height: 1.12;
   letter-spacing: -0.01em;
-  color: #ffffff;
+  color: var(--rdn-purple);
 }
 
 .rdn__p {
@@ -77,12 +77,12 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.88);
+  color: var(--rdn-deep);
 }
 
 .rdn__p strong,
 .rdn__p b {
-  color: #ffffff;
+  color: var(--rdn-deep);
   font-weight: 800;
 }
 
@@ -338,7 +338,7 @@
   font-family: var(--font-mono);
   font-weight: 600;
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.75);
+  color: #6e6670;
 }
 
 /* the button under the copy, highlighted: plum, white text, a stone
