@@ -110,9 +110,7 @@ export default function AdSpendSection({ result, adAdjustable = false }) {
           {cards.map((k, i) => [
             i === 1 && (
               <span key="vs" className="rad__vs" aria-hidden="true">
-                <svg viewBox="0 0 24 24" focusable="false">
-                  <path d="M4.5 12h14M13 6.5l5.5 5.5-5.5 5.5" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                <img src="/assets/results-swoosh-plum.png" alt="" width="120" height="114" />
               </span>
             ),
             <div key={k.key} className={`rad__side rad__side--${k.key}`}>
