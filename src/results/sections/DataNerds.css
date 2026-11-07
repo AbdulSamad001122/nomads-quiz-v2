@@ -296,10 +296,12 @@
 
 .rdn__vd {
   border-radius: 12px;
-  padding: 10px 12px;
+  padding: 12px 14px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  /* a little air between the label, channel and per-visitor lines (user,
+     Nov 7) */
+  gap: 6px;
   box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.45);
 }
 
