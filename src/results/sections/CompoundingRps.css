@@ -921,10 +921,19 @@
 }
 
 /* ——— right half: TODAY → TARGET + the bar ——— */
+/* TODAY → TARGET in a dark-blue box on the maroon side (user, Nov 7:
+   "wrap this whole content in the dark blue… keep the right side the dark
+   red maroon") — Midnight Blue, the page's hard-edged card shadow */
 .rcs__tt {
+  box-sizing: border-box;
   width: 100%;
-  max-width: 500px;
+  max-width: 564px;
   container-type: inline-size;
+  background: #152638;
+  border: 1px solid rgba(202, 225, 244, 0.16);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.35);
 }
 
 .rcs__tt-row {
@@ -1005,7 +1014,7 @@
   margin-top: 28px;
   height: 12px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(202, 225, 244, 0.16); /* an ice-blue track in the blue box */
   overflow: hidden;
 }
 
@@ -1071,6 +1080,24 @@ body .results-page .rcs-calc .rcs__calc-sub {
   .rcs__cw-text,
   .rcs__cw-media {
     padding: 44px 18px;
+  }
+}
+
+/* phones: the blue box uses more of the width, less inner padding */
+@media (max-width: 560px) {
+  .rcs__tt {
+    padding: 24px 18px 26px;
+    border-radius: 16px;
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.35);
+  }
+}
+@media (max-width: 400px) {
+  .rcs__cw-media {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .rcs__tt {
+    padding: 22px 14px 24px;
   }
 }
 
