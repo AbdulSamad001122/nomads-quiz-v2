@@ -54,9 +54,10 @@
 }
 
 .rad__headline {
-  /* the artifact's h2: Black, 28–46px, 20ch wide (3 balanced lines) */
+  /* the artifact's h2: Black, 28–46px; 40ch wide so it sits on two
+     balanced lines on desktop (user, Nov 7; the artifact had 20ch, 3 lines) */
   margin: 28px auto 0;
-  max-width: 20ch;
+  max-width: 40ch;
   text-align: center;
   font-family: var(--rad-black);
   font-weight: 900;
