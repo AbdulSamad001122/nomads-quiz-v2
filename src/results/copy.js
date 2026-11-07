@@ -916,12 +916,12 @@ export const YOUR_CALL = {
 };
 
 // 2.0 FINAL RP QC #17 (Yemi, Nov 5): the workshop thumbnail replaces
-// Alefiya's photo in the final frame. The new thumbnail (updated title copy)
-// isn't ready yet, so a marked placeholder holds its place — swap in
-// /assets/results-workshop-thumb.webp (or the new file) when it arrives.
+// Alefiya's photo in the final frame — the new title card (Nov 7, #1) is
+// in, so the placeholder is off. (thumbPlaceholder: true brings the marked
+// placeholder back.)
 export const FINAL_FRAME = {
-  thumbPlaceholder: true,
-  thumbSrc: null,
+  thumbPlaceholder: false,
+  thumbSrc: '/assets/results-workshop-thumb.webp',
   thumbLabel: 'Workshop thumbnail',
   thumbNote: 'Placeholder: the new thumbnail goes here',
   // the new workshop title (row 2: "updated everywhere")
