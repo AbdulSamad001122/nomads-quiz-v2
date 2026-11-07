@@ -132,8 +132,11 @@ export default function AdSpendSection({ result, adAdjustable = false }) {
           </div>
           <span className="rad__yr">{fill(c.year, { year: money(year) })}</span>
         </div>
+      </div>
 
-        {/* the workshop, with its thumbnail */}
+      {/* the workshop, with its thumbnail, on its own dark-blue band: light-
+          blue box, dark-blue text, the page's blue button (user, Nov 7) */}
+      <div className="rad__band">
         <div className="rad__ws">
           <a
             className="rad__ws-thumb"
