@@ -533,3 +533,17 @@ body .results-page .rad .rad__ws-head {
     font-size: 24px;
   }
 }
+
+/* #8: the taker's own figures in the workshop card — the goal and the gain
+   in green, their spend in the same navy chip as the spend line above */
+.rad__ws-head .rad__g {
+  color: #0f6b3a;
+  white-space: nowrap;
+}
+
+.rad__ws-p .rad__ws-spend {
+  background: var(--rad-navy);
+  color: #ffffff;
+  padding: 1px 8px;
+  border-radius: 6px;
+}

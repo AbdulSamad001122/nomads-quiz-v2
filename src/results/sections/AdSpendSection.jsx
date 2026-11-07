@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { AD_SPEND, CTA } from '../copy.js';
 import { fill } from '../resolveTokens.js';
+import { markTokens } from '../markTokens.jsx';
 import { computeAdModule } from '../../calc/calculator.js';
 import { money, round100, rpvMoney } from '../../calc/rounding.js';
 import { ga } from '../../analytics/ga.js';
@@ -149,13 +150,13 @@ export default function AdSpendSection({ result, adAdjustable = false }) {
             <img src="/assets/results-workshop-thumb.webp" alt="" width="1280" height="720" loading="lazy" />
           </a>
           <div className="rad__ws-copy">
-            <h3 className="rad__ws-head">{fill(c.wsHead, { goal: money(d.goalAdRev) })}</h3>
+            <h3 className="rad__ws-head">{markTokens(c.wsHead, { goal: money(d.goalAdRev) }, [['{{goal}}', 'rad__g']])}</h3>
             <p className="rad__ws-p">
               {c.wsBefore} <b className="rad__r">{rpvMoney(r.currentRPV)}</b> {c.wsTo}{' '}
               <b className="rad__g">{rpvMoney(r.goalRPV)}</b>
               {hasSpend && (
                 <>
-                  {c.wsSame} <b>{perMonth(spend, spendMoney)}</b> {c.wsInAds} <b>{perMonth(gain)}</b>
+                  {c.wsSame} <b className="rad__ws-spend">{perMonth(spend, spendMoney)}</b> {c.wsInAds} <b className="rad__g">{perMonth(gain)}</b>
                 </>
               )}
               {c.wsAfter}

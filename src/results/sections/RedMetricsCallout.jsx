@@ -2,6 +2,7 @@ import { RED_CALLOUT, CTA } from '../copy.js';
 import { redMetricRows, fill } from '../resolveTokens.js';
 import { emphasize } from '../emphasize.jsx';
 import { keepTogether } from '../keepTogether.jsx';
+import { markTokens } from '../markTokens.jsx';
 import { ga } from '../../analytics/ga.js';
 import './RedMetricsCallout.css';
 
@@ -22,7 +23,9 @@ export default function RedMetricsCallout({ result, tokens }) {
     return typeof n === 'string' ? n : n[result.path];
   };
   const subject =
-    reds.length === 1 ? c.headOne : fill(c.headMany, { red_count: String(reds.length) });
+    reds.length === 1
+      ? c.headOne
+      : markTokens(c.headMany, { red_count: String(reds.length) }, [['{{red_count}} red metrics', 'rrc__val rrc__val--current']]);
   const words = c.workshopLabel.split(' ');
   const workshopLast = words.pop();
   const workshopHead = words.join(' ');
