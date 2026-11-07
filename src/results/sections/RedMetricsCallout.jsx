@@ -39,7 +39,7 @@ export default function RedMetricsCallout({ result, tokens }) {
           {c.headEnd}
         </h2>
 
-        <ul className="rrc__cards">
+        <ul className={`rrc__cards rrc__cards--${reds.length}`}>
           {reds.map((row) => (
             <li key={row.key} className="rrc__card">
               <p className="rrc__name">{nameFor(row.key)}</p>
