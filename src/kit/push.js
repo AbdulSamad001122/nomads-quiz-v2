@@ -14,11 +14,16 @@
  * reaching their results, so errors are logged and swallowed.
  */
 
+import { storeEvent } from '../analytics/eventStore.js';
+
 const ENABLED =
   import.meta.env.PROD || import.meta.env.VITE_KIT_DEV === 'true';
 
 export async function pushToKit({ email, firstName, fields, tags = [] }) {
   const payload = { email, first_name: firstName, fields, tags };
+  // Links this quiz session to the email so the RPV dashboard can match it
+  // to a booked call and revenue later (no-op in dev, never blocks).
+  if (email) storeEvent('lead_identified', {}, email);
 
   if (!ENABLED) {
     console.info('[kit] DEV — push skipped, payload would be:', payload);
