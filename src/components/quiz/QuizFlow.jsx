@@ -642,8 +642,11 @@ export default function QuizFlow({ restored = null } = {}) {
   }, [index, answers, manualValues, otherText, overrides, clampedBrackets, lead, dqReason]);
 
   const continueSaved = () => {
-    const saved = resumeOffer;
     setResumeOffer(null);
+    // Re-read storage: another tab may have moved on, finished or started
+    // over since this page loaded, and an old snapshot must never overwrite
+    // newer progress (or bring back a finished attempt).
+    const saved = loadProgress({ isResumable: isResumableScreen });
     if (!saved) return;
     setAnswers(saved.answers);
     setManualValues(saved.manualValues);
@@ -971,8 +974,11 @@ export default function QuizFlow({ restored = null } = {}) {
           ) : null}
           <WelcomeScreen
             onStart={() => {
-              // A new attempt: earlier saved results must never show again.
+              // A new attempt: earlier saved results must never show again,
+              // and an old half-finished attempt can't be offered again.
               clearResults();
+              clearProgress();
+              setResumeOffer(null);
               ga.quizStart();
               next();
             }}

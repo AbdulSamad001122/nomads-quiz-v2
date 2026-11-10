@@ -15,11 +15,27 @@ import './ResumePrompt.css';
  */
 export default function ResumePrompt({ onContinue, onStartOver }) {
   const continueRef = useRef(null);
+  const startOverRef = useRef(null);
 
   useEffect(() => {
     continueRef.current?.focus();
     const onKey = (e) => {
       if (e.key === 'Escape') onContinue();
+      // Keep keyboard focus inside the dialog: Tab must never reach the
+      // welcome screen's Start button behind it.
+      if (e.key === 'Tab') {
+        const first = continueRef.current;
+        const last = startOverRef.current;
+        if (!first || !last) return;
+        const inside = document.activeElement === first || document.activeElement === last;
+        if (e.shiftKey && (document.activeElement === first || !inside)) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && (document.activeElement === last || !inside)) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -52,7 +68,12 @@ export default function ResumePrompt({ onContinue, onStartOver }) {
           >
             Continue where I left off
           </button>
-          <button type="button" className="q-btn qac__btn" onClick={onStartOver}>
+          <button
+            type="button"
+            ref={startOverRef}
+            className="q-btn qac__btn"
+            onClick={onStartOver}
+          >
             Start over
           </button>
         </div>
