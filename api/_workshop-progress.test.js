@@ -59,10 +59,11 @@ let calls = [];
 let subscriber = { id: 4338103015, email_address: EMAIL.toLowerCase(), state: 'active' };
 let tags = [
   { id: 1, name: 'crpv-quiz' },
-  { id: 25, name: 'Workshop watched 25%' },
-  { id: 50, name: 'Workshop watched 50%' },
-  { id: 75, name: 'Workshop watched 75%' },
-  { id: 95, name: 'Workshop watched 95%' },
+  // the real tag names + ids Nomads created in Kit (Nov 3)
+  { id: 25380510, name: 'Workshop 25%' },
+  { id: 25380528, name: 'Workshop 50%' },
+  { id: 25380535, name: 'Workshop 75%' },
+  { id: 25380551, name: 'Workshop 90+%' },
 ];
 globalThis.fetch = async (url, options = {}) => {
   calls.push({ url, options });
@@ -76,9 +77,9 @@ globalThis.fetch = async (url, options = {}) => {
 
 /* happy path */
 res = await run({ method: 'POST', body: GOOD });
-ok(res.statusCode === 200 && res.body.tag === 'Workshop watched 50%', '200 + 50% tag');
-const tagCall = calls.find((c) => c.url.includes('/tags/50/subscribe'));
-ok(!!tagCall, 'tag 50 subscribe called');
+ok(res.statusCode === 200 && res.body.tag === 'Workshop 50%', '200 + 50% tag');
+const tagCall = calls.find((c) => c.url.includes('/tags/25380528/subscribe'));
+ok(!!tagCall, 'Workshop 50% tag (25380528) subscribe called');
 ok(JSON.parse(tagCall.options.body).email === EMAIL.toLowerCase(), 'tag call carries the Kit email');
 ok(JSON.parse(tagCall.options.body).api_key === 'test-key', 'tag call uses api_key');
 ok(!calls.some((c) => c.url.includes('api_key=test-secret') || (c.options.body || '').includes('test-secret')), 'secret never sent in a tag body');
@@ -86,7 +87,7 @@ ok(!calls.some((c) => c.url.includes('api_key=test-secret') || (c.options.body |
 /* text/plain JSON body (navigator.sendBeacon) */
 calls = [];
 res = await run({ method: 'POST', body: JSON.stringify({ ...GOOD, milestone: 25 }) });
-ok(res.statusCode === 200 && res.body.tag === 'Workshop watched 25%', 'text/plain body works');
+ok(res.statusCode === 200 && res.body.tag === 'Workshop 25%', 'text/plain body works');
 
 /* hash of the email exactly as Kit stores it also accepted */
 subscriber = { ...subscriber, email_address: EMAIL };
@@ -112,16 +113,26 @@ ok(res.statusCode === 200 && /cancelled/.test(res.body.skipped), 'unsubscribed p
 ok(!calls.some((c) => /\/tags\/\d+\/subscribe/.test(c.url)), 'no tag for an unsubscribed person');
 subscriber = { ...subscriber, state: 'active' };
 
-/* tag names from Vercel settings; missing tag is never created */
-process.env.KIT_WORKSHOP_TAG_95 = 'WS - watched 95';
-ok(tagNameFor(95) === 'WS - watched 95', 'tag name from KIT_WORKSHOP_TAG_95');
+/* the last milestone is 90% ("Workshop 90+%" = watched 90% and above), not 95% */
 calls = [];
+res = await run({ method: 'POST', body: { ...GOOD, milestone: 90 } });
+ok(res.statusCode === 200 && res.body.tag === 'Workshop 90+%', '90 -> "Workshop 90+%"');
+ok(calls.some((c) => c.url.includes('/tags/25380551/subscribe')), 'Workshop 90+% tag (25380551) subscribe called');
 res = await run({ method: 'POST', body: { ...GOOD, milestone: 95 } });
+ok(res.statusCode === 400, '95 is no longer a milestone (400)');
+ok(['Workshop 25%', 'Workshop 50%', 'Workshop 75%', 'Workshop 90+%'].join() === [25, 50, 75, 90].map(tagNameFor).join(), 'default names = Kit names');
+
+/* tag names from Vercel settings; missing tag is never created */
+process.env.KIT_WORKSHOP_TAG_90 = 'WS - watched 90';
+ok(tagNameFor(90) === 'WS - watched 90', 'tag name from KIT_WORKSHOP_TAG_90');
+calls = [];
+res = await run({ method: 'POST', body: { ...GOOD, milestone: 90 } });
 ok(res.statusCode === 500 && /not found/.test(res.body.error), '500 when the tag is missing in Kit');
 ok(!calls.some((c) => c.options.method === 'POST' && /\/tags$/.test(c.url)), 'missing tag is not created');
-tags.push({ id: 9595, name: 'WS - watched 95' });
-res = await run({ method: 'POST', body: { ...GOOD, milestone: 95 } });
-ok(res.statusCode === 200 && res.body.tag === 'WS - watched 95', 'custom tag name used once it exists');
+tags.push({ id: 9090, name: 'WS - watched 90' });
+res = await run({ method: 'POST', body: { ...GOOD, milestone: 90 } });
+ok(res.statusCode === 200 && res.body.tag === 'WS - watched 90', 'custom tag name used once it exists');
+delete process.env.KIT_WORKSHOP_TAG_90;
 
 /* Kit down */
 globalThis.fetch = async () => ({ ok: false, status: 503, json: async () => ({ message: 'Kit is down' }) });

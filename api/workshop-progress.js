@@ -1,6 +1,6 @@
 /**
  * Vercel serverless function — tags a Kit subscriber with how much of the
- * workshop video they have watched: 25 / 50 / 75 / 95 %.
+ * workshop video they have watched: 25 / 50 / 75 / 90 %.
  *
  * Called by the video on the Framer workshop page (nomadsmarketing.co/workshop,
  * code component "WorkshopVideo" in framer/WorkshopVideo.tsx) each time the
@@ -22,15 +22,17 @@
  *
  * Environment (Vercel → Settings → Environment Variables):
  *   KIT_API_KEY, KIT_API_SECRET — already set for /api/kit-subscribe
- *   KIT_WORKSHOP_TAG_25 / _50 / _75 / _95 — optional: the tag names Nomads
- *     created in Kit (defaults below). Tags are looked up, never created, so
- *     a typo can't spawn a stray tag.
+ *   KIT_WORKSHOP_TAG_25 / _50 / _75 / _90 — optional overrides. The defaults
+ *     below are the exact tag names Nomads created in Kit on Nov 3 (Kit
+ *     handover doc, "Watched % Tags"): "Workshop 25%", "Workshop 50%",
+ *     "Workshop 75%" and "Workshop 90+%" (= watched 90% and above). Tags are
+ *     looked up, never created, so a typo can't spawn a stray tag.
  */
 import { createHash, timingSafeEqual } from 'node:crypto';
 
 const KIT_API = 'https://api.convertkit.com/v3';
-export const MILESTONES = [25, 50, 75, 95];
-const DEFAULT_TAG = (m) => `Workshop watched ${m}%`;
+export const MILESTONES = [25, 50, 75, 90];
+const DEFAULT_TAGS = { 25: 'Workshop 25%', 50: 'Workshop 50%', 75: 'Workshop 75%', 90: 'Workshop 90+%' };
 // Browsers on these sites may read the reply; sendBeacon doesn't need it.
 const ALLOWED_ORIGINS = [
   /^https:\/\/(www\.)?nomadsmarketing\.co$/,
@@ -40,7 +42,7 @@ const ALLOWED_ORIGINS = [
 // tag name → id, cached for the lifetime of the lambda
 const tagIds = {};
 
-export const tagNameFor = (m) => process.env[`KIT_WORKSHOP_TAG_${m}`] || DEFAULT_TAG(m);
+export const tagNameFor = (m) => process.env[`KIT_WORKSHOP_TAG_${m}`] || DEFAULT_TAGS[m];
 
 async function kitJson(url, options) {
   const res = await fetch(url, options);
@@ -114,7 +116,7 @@ export default async function handler(req, res) {
   const hash = String(rawHash ?? '').trim().toLowerCase();
   const milestone = Number(rawMilestone);
   if (!/^\d{1,15}$/.test(id) || !/^[a-f0-9]{64}$/.test(hash) || !MILESTONES.includes(milestone)) {
-    res.status(400).json({ error: 'subscriber_id, sh_kit and milestone (25, 50, 75 or 95) required' });
+    res.status(400).json({ error: 'subscriber_id, sh_kit and milestone (25, 50, 75 or 90) required' });
     return;
   }
 
