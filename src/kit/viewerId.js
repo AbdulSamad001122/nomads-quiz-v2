@@ -2,7 +2,7 @@
  * Who the quiz taker is in Kit — for the workshop page.
  *
  * The workshop video on nomadsmarketing.co/workshop (Framer) tags viewers in
- * Kit at 25 / 50 / 75 / 95 % watched (api/workshop-progress.js). It knows who
+ * Kit at 25 / 50 / 75 / 90 % watched (api/workshop-progress.js). It knows who
  * is watching from two link parameters, the same ones Kit adds to links in
  * its emails: ck_subscriber_id (their Kit id) and sh_kit (SHA-256 of their
  * email, so the id can't be faked). The Kit push returns the subscriber id;
