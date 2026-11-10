@@ -311,3 +311,39 @@
     padding: 15px 18px;
   }
 }
+
+/* 2.0 FINAL RP QC #8 (Alefiya): the taker's own figures are highlighted so
+   they read as "based on your answers" — the share as a box in the
+   headline, in green in the line under it; on the capped card the gain in
+   green and the shortfall in red */
+.rsb__mark {
+  /* green, as she asked ("shall have a green or red"): the page's green
+     figure box, like the goal boxes in the red-metric cards */
+  background: rgba(111, 224, 165, 0.14);
+  border: 1.5px solid rgba(111, 224, 165, 0.75);
+  color: #6fe0a5;
+  padding: 0 0.22em;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.rsb__mark--foot {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: #6fe0a5;
+  font-weight: 800;
+}
+
+.rcb__num {
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.rcb__num--gain {
+  color: #127a44;
+}
+
+.rcb__num--gap {
+  color: #c7392f;
+}

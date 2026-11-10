@@ -1444,14 +1444,69 @@
   line-height: 1.4;
 }
 
+/* key words: light blue marker (user, Nov 3 — Yemi found the yellow off),
+   a touch bigger than the rest of the answer so they catch the eye */
 .option-card__mark {
-  background: #ffe15a;
+  background: #cae1f4;
   color: #1d1d1f;
   font-weight: 700;
+  font-size: 1.08em;
   padding: 0.05em 0.2em;
   border-radius: 3px;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
+}
+
+/* on the maroon (pink) screen: a stone highlight with the words in the
+   quiz's maroon (user, Nov 3) */
+.quiz-screen--maroon .option-card__mark {
+  background: #e4c8bc;
+  color: #5d1b4e;
+}
+
+/* Q13 on phones (user, Nov 3: text squeezed at 320px): tighter spacing, a
+   smaller number, icon and radio, and slightly smaller text, so each answer
+   has room to breathe */
+@media (max-width: 479px) {
+  .quiz-q-q13 .option-card {
+    gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .quiz-q-q13 .option-card__number {
+    width: 26px;
+    height: 26px;
+    font-size: 13px;
+  }
+
+  .quiz-q-q13 .option-card__icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .quiz-q-q13 .option-card__radio {
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
+  }
+
+  .quiz-q-q13 .option-card__label,
+  .quiz-q-q13 .option-card--long .option-card__label {
+    font-size: 15px;
+    line-height: 1.38;
+  }
+
+  .quiz-q-q13 .option-card__mark {
+    font-size: 1.04em;
+  }
+}
+
+/* smallest phones: the panel's side margins shrink too, so the cards are wider */
+@media (max-width: 379px) {
+  .quiz-q-q13 .answer-panel {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 }
 
 .option-card__icon {

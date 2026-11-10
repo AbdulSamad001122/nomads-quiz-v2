@@ -30,6 +30,8 @@
   color: #ffffff;
   padding: 52px 20px 56px;
   overflow: hidden;
+  /* clip, not hidden, so the pinned stage below can stick (Safari 16+) */
+  overflow: clip;
 }
 
 .rcs__inner {
@@ -92,6 +94,41 @@
 .rcs__hn--alt {
   background: var(--rcs-icebright);
   color: var(--rcs-navy);
+}
+
+/* "$1.5M" in green (Alefiya, 2.0 FINAL RP QC: "make it green") — the
+   page's goal green */
+.rcs__hn--green {
+  background: #72e2a7;
+  color: var(--rcs-navy);
+}
+
+/* ——— pinned (desktop, when the stage fits under the top bar): the
+   controls + the cards stick while the page scrolls past them, and the
+   scroll position picks the card. The extra scroll room is the scrolly's
+   bottom padding; nothing inside changes height while pinned. ——— */
+.rcs--pin {
+  overflow-anchor: none;
+}
+
+/* the extra scroll room is a spacer after the stage (not padding: a sticky
+   element can't travel into its parent's padding) */
+.rcs--pin .rcs__scrolly::after {
+  content: '';
+  display: block;
+  height: var(--rcs-scroll);
+}
+
+.rcs--pin .rcs__stage {
+  position: sticky;
+  top: var(--rcs-pin-top);
+}
+
+/* the row is moved by the page scroll, not dragged sideways */
+.rcs--pin .rcs__track {
+  overflow-x: hidden;
+  scroll-snap-type: none;
+  transition: none;
 }
 
 /* ——— carousel controls ——— */
@@ -782,320 +819,344 @@
 
 /* ——— the calculator ——— */
 
-/* its own full-width split section under the cards (Alefiya, Slack Oct 31):
-   copy on plain cream on the left, the preview on the dark maroon texture on
-   the right, like the GolfBays section */
+/* Alefiya's 2.0 FINAL RP QC design (Nov 4): copy on plain cream on the
+   left, TODAY → TARGET on dark plum on the right, two equal halves.
+   Text sizes follow the page's one type scale (user, Nov 6: "looking very
+   big… use the font sizes of the whole results page"): headline 38 / 32 /
+   26, body 16, small mono labels 12; the whole section fits one screen. */
 .rcs-calc {
   --rcs-black: 'RCS Montserrat', var(--font-headline);
   --rcs-plum: #5d1b4e;
-  --rcs-pink: #f6dbe6;
-  --rcs-ink: #1b1220;
-  --rcs-mute: #6b6170;
-  --rcs-line: #e3dbe6;
-  --rcs-lav: #f2e5f6;
-  --rcs-ice: #d9ecf8;
-  --rcs-icebright: #cae1f4;
-  --rcs-navy: #152638;
+  --rcs-ink: #250f1c;
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 }
 
 .rcs__cw-text {
-  /* the GolfBays section's lined paper (user, Oct 31) */
+  /* the lined paper the GolfBays and other cream sections use (user,
+     Nov 7: keep the page's line background on the text side) */
   background: #f7f3e8 url('/assets/results-paper-texture.webp') center / cover;
-  padding: 80px clamp(24px, 4vw, 64px);
+  padding: 56px clamp(20px, 3.4vw, 56px);
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .rcs__cw-inner {
   width: 100%;
-  max-width: 520px;
-  margin-left: auto;
+  max-width: 580px;
+  container-type: inline-size;
 }
 
 .rcs__cw-media {
-  background: #2a0f1c url('/assets/results-maroon-crumple.webp') center / cover;
-  padding: 80px clamp(20px, 4vw, 64px);
+  background: radial-gradient(120% 95% at 100% 100%, #3f1534 0%, #2e1124 42%, #250f1c 72%);
+  padding: 56px clamp(20px, 3.4vw, 56px);
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
 }
 
-.rcs__cw-media > * {
-  width: 100%;
-  max-width: 640px;
-}
-
-.rcs__k2 {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--rcs-plum);
-}
-
 .rcs__calc-h {
-  margin: 8px 0 0;
+  margin: 0;
   font-family: var(--rcs-black);
   font-weight: 900;
-  font-size: clamp(22px, 2.6vw, 28px);
   line-height: 1.2;
-  color: #250f1c;
-  text-wrap: balance;
+  color: var(--rcs-ink);
+}
+
+/* "If each subscriber is worth $50/year…" — the copy line under the
+   heading, a subheading size (20 / 19 / 18) */
+.rcs__calc-sub {
+  margin: 16px 0 0;
+  font-family: var(--font-body);
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--rcs-ink);
+  text-wrap: pretty;
 }
 
 .rcs__gets {
-  margin: 16px 0 18px;
+  margin: 24px 0 0;
   padding: 0;
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 14px;
 }
 
 .rcs__gets li {
   display: grid;
-  grid-template-columns: 28px minmax(0, 1fr);
-  gap: 10px;
-  align-items: start;
+  grid-template-columns: 32px minmax(0, 1fr);
+  column-gap: 14px;
+  align-items: center;
   font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 1.45;
-  color: #3c1a30;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--rcs-ink);
 }
 
 .rcs__gets b {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  aspect-ratio: 1;
   border-radius: 50%;
   background: var(--rcs-plum);
   color: #ffffff;
+  display: grid;
+  place-items: center;
   font-family: var(--rcs-black);
   font-weight: 900;
   font-size: 14px;
-  line-height: 28px;
-  text-align: center;
+  line-height: 1;
 }
 
-.rcs__btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-body);
-  font-weight: 800;
-  font-size: 14.5px;
-  line-height: 1.3;
-  color: var(--rcs-ink);
-  text-decoration: none;
-  border: 1.5px solid var(--rcs-ink);
-  padding: 13px 18px;
-  box-shadow: 4px 4px 0 #000000;
-  background: var(--rcs-pink);
-}
-
-.rcs__calc {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  border-radius: 18px;
-  overflow: hidden;
-  border: 2px solid #ffffff;
-  box-shadow: 6px 6px 0 var(--rcs-pink);
-}
-
-.rcs__in-side {
-  background: #ffffff;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  color: var(--rcs-ink);
-}
-
-.rcs__ttl {
-  display: flex;
-  align-items: center;
-  font-family: var(--font-body);
-  font-weight: 800;
-  font-size: 12.5px;
-  color: var(--rcs-navy);
-}
-
-.rcs__ttl i {
-  flex: none;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #e0574a;
-  box-shadow: 12px 0 0 #e8b13a, 24px 0 0 #9aa1b3;
-  margin-right: 34px;
-}
-
-.rcs__fld label {
+/* plum, white bold label, a hard grey shadow (her design) */
+.rcs__cbtn {
   display: block;
-  margin-bottom: 4px;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 11.5px;
-  line-height: 1.35;
-  color: var(--rcs-mute);
-}
-
-.rcs__box {
-  min-height: 20px;
-  border: 1.5px solid #cfd8e2;
-  border-radius: 8px;
-  padding: 8px 10px;
-  background: #fafcfe;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 15px;
-  color: var(--rcs-ink);
-}
-
-.rcs__box--on {
-  border-color: var(--rcs-navy);
-  box-shadow: 0 0 0 3px rgba(21, 38, 56, 0.12);
-}
-
-.rcs__caret {
-  display: inline-block;
-  width: 2px;
-  height: 16px;
-  margin-left: 2px;
-  vertical-align: middle;
-  background: var(--rcs-navy);
-  animation: rcs-blink 1s steps(1) infinite;
-}
-
-@keyframes rcs-blink {
-  50% {
-    opacity: 0;
-  }
-}
-
-.rcs__out-side {
+  width: 100%;
+  text-align: center;
+  margin-top: 28px;
+  padding: 16px 20px;
   background: var(--rcs-plum);
   color: #ffffff;
-  padding: 16px;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 17px;
+  line-height: 1.3;
+  text-decoration: none;
+  --rcs-sh: 6px;
+  box-shadow: var(--rcs-sh) var(--rcs-sh) 0 #6e6670;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.rcs__nw {
+  white-space: nowrap;
+}
+
+/* her heavy arrow, as tall as the capitals */
+.rcs__cbtn-arrow {
+  display: inline-block;
+  width: 0.95em;
+  height: 0.7em;
+  vertical-align: -0.02em;
+}
+
+.rcs__cbtn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: calc(var(--rcs-sh) + 2px) calc(var(--rcs-sh) + 2px) 0 #6e6670;
+  color: #ffffff;
+}
+
+.rcs__cbtn:active {
+  transform: none;
+  box-shadow: 3px 3px 0 #6e6670;
+}
+
+.rcs__cbtn:focus-visible {
+  outline: 3px solid #cae1f4;
+  outline-offset: 3px;
+}
+
+/* ——— right half: TODAY → TARGET + the bar ——— */
+/* TODAY → TARGET in a dark-blue box on the maroon side (user, Nov 7:
+   "wrap this whole content in the dark blue… keep the right side the dark
+   red maroon") — Midnight Blue, the page's hard-edged card shadow */
+.rcs__tt {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 564px;
+  container-type: inline-size;
+  background: #152638;
+  border: 1px solid rgba(202, 225, 244, 0.16);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.35);
+}
+
+.rcs__tt-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: 12px;
+}
+
+.rcs__tt-side {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  align-items: flex-start;
+  min-width: 0;
 }
 
-.rcs__o {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  padding-bottom: 10px;
+.rcs__tt-side--target {
+  align-items: flex-end;
+  text-align: right;
 }
 
-.rcs__o:last-child {
-  border-bottom: 0;
-  padding-bottom: 0;
-}
-
-.rcs__o--hi {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1.5px solid var(--rcs-pink);
-  border-radius: 12px;
-  padding: 10px 12px;
-}
-
-.rcs__ol {
+.rcs__tt-l {
   font-family: var(--font-mono);
   font-weight: 700;
-  font-size: 10.5px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--rcs-pink);
-}
-
-.rcs__ov {
-  font-family: var(--rcs-black);
-  font-weight: 900;
-  font-size: 32px;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-}
-
-.rcs__ov--gap {
-  color: var(--rcs-pink);
-  font-size: 40px;
-}
-
-.rcs__ov--sm {
-  font-size: 22px;
-}
-
-.rcs__gap {
-  height: 12px;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.18);
-  overflow: hidden;
-}
-
-.rcs__gap i {
-  display: block;
-  height: 100%;
-  border-radius: 6px;
-  background: var(--rcs-pink);
-}
-
-.rcs__os {
-  font-family: var(--font-body);
-  font-weight: 600;
   font-size: 12px;
   line-height: 1.4;
-  color: #ecd8e6;
-  transition: opacity 0.3s;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #e0b5a3;
 }
 
-.rcs__calc-note {
-  margin: 24px 0 0; /* clears the preview card's shadow */
-  font-family: var(--font-mono);
-  font-weight: 500;
-  font-size: 11.5px;
-  color: #e3c8d6;
+.rcs__tt-v {
+  margin-top: 4px;
+  font-family: var(--rcs-black);
+  font-weight: 900;
+  /* a big stat figure; 4+ characters ($1667) step down to fit the column */
+  font-size: 64px;
+  font-size: min(64px, calc(60cqi / var(--rcs-len, 3)));
+  line-height: 1;
+  white-space: nowrap;
 }
 
-/* the button in the theme's own colour: plum on the cream side, so it pops
-   and stays apart from the light-blue workshop / pink booking buttons */
-.results-page .rcs-calc .rcs__btn,
-.results-page .rcs-calc .rcs__btn:hover {
-  background: var(--rcs-plum);
-  color: #ffffff;
-  border-color: #0f0a10;
+/* at or past $50: no arrow / target, today's figure alone + a full bar */
+.rcs__tt--reached .rcs__tt-row {
+  grid-template-columns: minmax(0, 1fr);
 }
 
-/* ——— responsive ——— */
+.rcs__tt-v--now {
+  color: #f39a90;
+}
 
-/* stacked (copy, then the preview) until there's room for the preview's
-   two columns side by side with the copy */
-@media (max-width: 1100px) {
+.rcs__tt-v--target {
+  color: #5be39a;
+}
+
+/* "per subscriber, per / year" — the column is kept narrow enough that it
+   wraps where her design does, with no forced break */
+.rcs__tt-per {
+  margin-top: 10px;
+  max-width: 9em;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.27;
+  color: #e9dce4;
+}
+
+/* the page's swoosh arrow in white (user, Nov 7: "use the same… swoosh
+   arrow, but in white"), level with the figures */
+.rcs__tt-arrow {
+  display: block;
+  width: 44px;
+  height: auto;
+}
+
+.rcs__tt-bar {
+  margin-top: 28px;
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(202, 225, 244, 0.16); /* an ice-blue track in the blue box */
+  overflow: hidden;
+}
+
+/* filled to today ÷ $50 (at least a dot when there is any revenue) */
+.rcs__tt-fill {
+  display: block;
+  height: 100%;
+  min-width: 12px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #f09e93, #e1b3a1);
+}
+
+/* stacked (copy, then TODAY → TARGET) on tablets and phones */
+@media (max-width: 860px) {
   .rcs-calc {
     grid-template-columns: 1fr;
   }
   .rcs__cw-text,
   .rcs__cw-media {
-    padding: 56px 22px;
+    padding: 48px 22px;
   }
   .rcs__cw-inner,
-  .rcs__cw-media > * {
-    margin-left: auto;
-    margin-right: auto;
+  .rcs__tt {
+    max-width: 540px;
   }
 }
 
-@media (max-width: 640px) {
-  .rcs__calc {
-    grid-template-columns: 1fr;
+/* the page's heading scale: 38 desktop, 32 tablet, 26 phone (one class
+   deeper than the section rules so it always applies) */
+body .results-page .rcs-calc .rcs__calc-h {
+  font-size: 38px;
+}
+body .results-page .rcs-calc .rcs__calc-sub {
+  font-size: 20px;
+}
+@media (max-width: 1100px) {
+  body .results-page .rcs-calc .rcs__calc-h {
+    font-size: 32px;
+  }
+  body .results-page .rcs-calc .rcs__calc-sub {
+    font-size: 19px;
   }
 }
+@media (max-width: 760px) {
+  body .results-page .rcs-calc .rcs__calc-h {
+    font-size: 26px;
+    line-height: 1.25;
+  }
+  body .results-page .rcs-calc .rcs__calc-sub {
+    font-size: 18px;
+  }
+  .rcs__tt-v {
+    font-size: min(56px, calc(60cqi / var(--rcs-len, 3)));
+  }
+}
+@media (max-width: 359px) {
+  body .results-page .rcs-calc .rcs__calc-h {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 400px) {
+  .rcs__cw-text,
+  .rcs__cw-media {
+    padding: 44px 18px;
+  }
+}
+
+/* phones: the blue box uses more of the width, less inner padding */
+@media (max-width: 560px) {
+  .rcs__tt {
+    padding: 24px 18px 26px;
+    border-radius: 16px;
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.35);
+  }
+}
+@media (max-width: 400px) {
+  .rcs__cw-media {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .rcs__tt {
+    padding: 22px 14px 24px;
+  }
+  /* a smaller swoosh so it keeps clear of $5 / $50 */
+  .rcs__tt-arrow {
+    width: 32px;
+  }
+}
+
+/* smallest phones: the button label stays within 2 lines */
+@media (max-width: 359px) {
+  .rcs__cbtn {
+    font-size: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rcs__cbtn,
+  .rcs__cbtn:hover {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* ——— responsive ——— */
 
 @media (max-width: 560px) {
   .rcs {
@@ -1107,15 +1168,10 @@
   .rcs__h3 {
     font-size: 21px;
   }
-  .rcs__btn {
-    width: 100%;
-    justify-content: center;
-    text-align: center;
-  }
 }
 
 /* smallest phones: tier value under its label (the "$50" chip ran into
-   "$1,000,000" at 320) and the calculator's "$40 away" kept on one line */
+   "$1,000,000" at 320) */
 @media (max-width: 359px) {
   .rcs__tier {
     grid-template-columns: minmax(0, 1fr);
@@ -1127,15 +1183,6 @@
   .rcs__tv small {
     display: inline;
     margin-left: 6px;
-  }
-  .rcs__ov--gap {
-    font-size: 32px;
-  }
-  /* "Calculate Your Compounding Revenue Per Subscriber™ →" ran to 3 lines
-     at 320 (responsive pass); every CTA stays within 2 */
-  .rcs__btn {
-    font-size: 13px;
-    padding: 12px 12px;
   }
 }
 
@@ -1200,5 +1247,51 @@
   }
   .rcs__caret {
     animation: none;
+  }
+}
+
+/* smallest phones: the headline ran 7 lines at 320 (audit, Nov 5) */
+@media (max-width: 360px) {
+  /* one class deeper than results.css's shared 26px rule, so it applies */
+  body .results-page .rcs .rcs__h2 {
+    font-size: 23px;
+  }
+  .rcs__hn--big {
+    font-size: 1.4em;
+  }
+}
+
+/* short laptop windows (e.g. 1366x768 with the browser bars = ~657px
+   tall): the three-windows card is the tallest, so its spacing tightens a
+   little — no text gets smaller — and the cards can pin and move with
+   the page scroll there too (final check, Nov 6) */
+@media (min-width: 861px) and (max-height: 720px) {
+  .rcs__card--3 {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+  .rcs__card--3 .rcs__vis {
+    margin-top: 8px;
+  }
+  .rcs__node,
+  .rcs__branch .rcs__node {
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+  .rcs__wnum {
+    top: 7px;
+  }
+  .rcs__fork {
+    height: 18px;
+  }
+  .rcs__fk-s { height: 8px; }
+  .rcs__fk-h { top: 8px; }
+  .rcs__fk-l,
+  .rcs__fk-r { top: 8px; height: 10px; }
+  .rcs__branch {
+    gap: 3px;
+  }
+  .rcs__node small {
+    line-height: 1.35;
   }
 }

@@ -9,7 +9,7 @@
      copy is that identical texture with the 7/255 brightness step between its
      opposite edges removed, so the tile joins itself with no visible line. */
   background: #f7f3e8 url('/assets/results-paper-texture-seamless.webp') top center repeat;
-  padding: 36px 96px 120px;
+  padding: 72px 96px 120px; /* more room above the headline (user, Nov 6) */
   /* The doodle hangs past the content column — clip it so it never widens the
      page. `clip` rather than `hidden` because `hidden` makes this a scroll
      container, which kills `position: sticky` for anything in the panels
@@ -37,7 +37,12 @@
 }
 
 .rpl__headline {
-  max-width: 561px;
+  /* centred (Alefiya, 2.0 FINAL RP QC: "pls middle indent it"); wide
+     enough for her one line to sit in two balanced lines on desktop */
+  max-width: 1040px;
+  margin: 0 auto;
+  text-align: center;
+  text-wrap: balance;
   font-family: var(--font-headline);
   font-weight: 800;
   font-size: 38px;
@@ -223,9 +228,11 @@
   .rpl {
     padding: 80px 40px 90px;
   }
+  /* tablets: there's no room beside the centred headline — the sign was
+     cut off at the screen edge and sat on the "Pillar one" bar (final
+     check, Nov 6), so it's hidden here as it is on phones */
   .rpl__doodle {
-    width: 210px;
-    top: 24px;
+    display: none;
   }
   .rpl__headline {
     font-size: 33px;
@@ -295,6 +302,15 @@
   .rpl__btn--book {
     font-size: 15px;
     padding: 14px 18px;
+  }
+}
+
+/* phones: the headline goes back to the left (user, Nov 5: "dont center
+   on phone") */
+@media (max-width: 760px) {
+  .rpl__headline {
+    margin-left: 0;
+    text-align: left;
   }
 }
 

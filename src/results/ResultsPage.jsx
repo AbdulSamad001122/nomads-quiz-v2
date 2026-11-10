@@ -6,8 +6,8 @@ import RedMetricsCallout from './sections/RedMetricsCallout.jsx';
 import RedMetricsWorkshop from './sections/RedMetricsWorkshop.jsx';
 import ResultBlocks from './sections/ResultBlocks.jsx';
 import StopOrPush from './sections/StopOrPush.jsx';
+import StopOrPushCards from './sections/StopOrPushCards.jsx';
 import WhatIfYouDid from './sections/WhatIfYouDid.jsx';
-import CreativeDelivery from './sections/CreativeDelivery.jsx';
 import CompoundingRps from './sections/CompoundingRps.jsx';
 import AdSpendSection from './sections/AdSpendSection.jsx';
 import DataNerds from './sections/DataNerds.jsx';
@@ -25,7 +25,6 @@ import YourCall from './sections/YourCall.jsx';
 import PillarsAccordion from './sections/PillarsAccordion.jsx';
 import SeeHowItShowsUp from './sections/SeeHowItShowsUp.jsx';
 import TwoPaths from './sections/TwoPaths.jsx';
-import BookCallCalendar from './sections/BookCallCalendar.jsx';
 import { resolveTokens, anyMetricRed } from './resolveTokens.js';
 import { RED_METRICS_CALL } from './copy.js';
 import { installWorkshopLinkTagging } from '../kit/viewerId.js';
@@ -72,13 +71,18 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
           all 5 metrics and add $1.5M/year" would contradict it one section
           later, so they don't get this one. QC row 5 (Oct 2026): this is now
           the merged "stop at $1.5M / push to their max" section, and capped
-          now also covers a $1.5M goal beyond 12× today (Added Logic.docx:
-          "blocks 5, 6, and 7 … replace the 'push metrics to their max'
-          section"). WhatIfYouDid keeps only the GolfBays card. */}
+          now also covers a max that isn't above the goal (Cap Logic step 7:
+          "hide this section and show blocks 5, 6, and 7 instead").
+          WhatIfYouDid keeps only the GolfBays card. */}
+      {/* 2.0 FINAL RP QC #4 + #5: her simpler two cards and bars (approved
+          Nov 7 — the old cards and bars are removed), then the stretch card
+          and the workshop line */}
+      {!result.cappedState && <StopOrPushCards result={result} tokens={tokens} />}
       {!result.cappedState && <StopOrPush result={result} tokens={tokens} />}
-      {/* L · Creative Delivery case study — the Video Mastermind card that
-          sat under the 12× ladder, as its own section (user, Nov 2) */}
-      {!result.cappedState && result.capped.maxCappedAt12 && <CreativeDelivery />}
+      {/* The "We've done 12× and more for clients" proof card (L · Creative
+          Delivery) is removed — Cap Logic "Proof card" (Yemi, Nov 4 evening):
+          "The case study section further down the page already provides
+          client proof." */}
       <WhatIfYouDid result={result} />
       {/* Copy doc blue box "Block 3 — No email marketing … See Logic Doc
           Blocks 1–3 for the revenue-split copy that renders here" sat
@@ -112,8 +116,8 @@ export default function ResultsPage({ result, onBack, adAdjustable = false }) {
           tappable steps; TwoPaths is now only its closing panel. */}
       <SeeHowItShowsUp />
       <TwoPaths />
-      {/* standalone booking calendar on the maroon band (user, Sep 21) */}
-      <BookCallCalendar />
+      {/* the booking calendar now sits inside TwoPaths, under the frame
+          (2.0 FINAL RP QC #17, Yemi Nov 5) */}
       {/* Next sections land here as they're designed. */}
     </div>
   );

@@ -13,9 +13,9 @@ Quiz Questions and logic/*
 *.docx
 
 # …content docs the team DOES need in the repo:
-# NOTE: the Kit handover doc contains the live Kit API secret — committed on
-# the owner's explicit instruction (Sep 12). If this repo ever goes public,
-# rotate the Kit key FIRST.
+# NOTE: the Kit API key + secret were REMOVED from the Kit handover doc
+# (Nov 9 2026); the current keys live only in Vercel env vars + .env.local.
+# Older commits still contain the OLD (replaced) key — it must stay revoked.
 !Quiz Questions and logic/New kit handover doc.docx
 !Quiz Questions and logic/Result Page Copy.docx
 !Quiz Questions and logic/Quiz Logics.docx

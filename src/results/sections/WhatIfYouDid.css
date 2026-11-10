@@ -66,7 +66,7 @@
 }
 
 .rwi__copy-inner {
-  max-width: 540px;
+  max-width: 600px;
 }
 
 .rwi__head {
@@ -83,19 +83,41 @@
   color: #7a2d6a;
 }
 
-.rwi__body {
-  margin: 24px 0 0;
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 17px;
-  line-height: 1.6;
-  color: #3a2130;
+/* user, Nov 6: the shared 38px made her long first sentence look too big
+   on desktop — a calmer headline size here, and the bold line under it
+   just a little above body text */
+body .results-page .rwi .rwi__head {
+  font-size: 32px;
+}
+body .results-page .rwi .rwi__bold {
+  font-size: 20px;
+  line-height: 1.45;
+}
+@media (max-width: 1100px) {
+  body .results-page .rwi .rwi__head {
+    font-size: 30px;
+  }
+  body .results-page .rwi .rwi__bold {
+    font-size: 19px;
+  }
+}
+@media (max-width: 760px) {
+  body .results-page .rwi .rwi__head {
+    font-size: 26px;
+  }
+  body .results-page .rwi .rwi__bold {
+    font-size: 18px;
+  }
 }
 
-.rwi__body strong {
-  display: block;
-  margin-top: 18px;
+/* her second sentence, all bold, a size under the headline (2.0 FINAL
+   RP QC, Nov 4: "make this bold and it fills the section properly") */
+.rwi__bold {
+  margin: 28px 0 0;
+  font-family: var(--font-headline);
   font-weight: 800;
+  font-size: 26px;
+  line-height: 1.4;
   color: #250f1c;
 }
 
@@ -129,6 +151,9 @@
   .rwi__copy {
     padding: 64px 44px;
   }
+  .rwi__bold {
+    font-size: 22px;
+  }
   .rwi__media {
     padding: 56px 36px;
   }
@@ -138,6 +163,10 @@
 @media (max-width: 860px) {
   .rwi {
     grid-template-columns: 1fr;
+  }
+  .rwi__bold {
+    margin-top: 22px;
+    font-size: 21px;
   }
   .rwi__media {
     padding: 48px 24px;
@@ -160,7 +189,24 @@
   .rwi__copy {
     padding: 40px 18px 48px;
   }
-  .rwi__body {
-    font-size: 16px;
+  body .results-page .rwi .rwi__bold {
+    font-size: 18px;
+  }
+}
+
+/* small phones: the shared 26px made an 8-line headline at 320 (audit,
+   Nov 5) */
+@media (max-width: 400px) {
+  body .results-page .rwi .rwi__head {
+    font-size: 23px;
+  }
+}
+
+@media (max-width: 360px) {
+  body .results-page .rwi .rwi__head {
+    font-size: 22px;
+  }
+  body .results-page .rwi .rwi__bold {
+    font-size: 17px;
   }
 }

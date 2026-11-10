@@ -3,7 +3,15 @@
  * Manual entry & validation). Reject out-of-bounds; do not silently clamp.
  */
 
+/** Q2 "$500K+/month" minimum annual revenue (Cap Logic, Nov 4). Kept here,
+ *  not in backendValues.js, which already imports this file. */
+export const Q2_TOP_MIN = 6_000_000;
+
 export const BOUNDS = {
+  // Q2 "$500K+/month" annual revenue (Cap Logic, Nov 4). Min $1: revenue is
+  // what every RPV divides into, so $0 would break the maths. Under $6M is
+  // not rejected here — it gets the "check the number" prompt (impossibleCheck).
+  q2a: { type: 'currency', min: 1, max: 100_000_000_000 },
   q7a: { type: 'integer', min: 1, max: 100_000_000 },
   // Yemi ruling (2026-09-15, Q7): the Logic Doc's bounds table has no Q7b
   // row; min $1 approved. A guessed min of 0 previously let "$0 spend" divide
@@ -54,10 +62,26 @@ export function validateManual(qid, raw) {
 
 /**
  * Cross-question impossible-answer checks that fire on advancing.
- * `resolved` is the numeric inputs so far ({ q7, q8, q2, q11 }).
+ * `resolved` is the numeric inputs so far ({ q7, q8, q2, q11 }); `answers`
+ * the raw answer ids (only Q2 needs to know which option was picked).
  * Returns null, or { id, message } for the first check that trips.
  */
-export function impossibleCheck(qid, resolved) {
+export function impossibleCheck(qid, resolved, answers = {}) {
+  // Cap Logic (Yemi, Nov 4): "If someone picks $500K+/month, their annual
+  // revenue must be at least $6M. If they enter less, ask them to check the
+  // number before continuing."
+  if (
+    qid === 'q2a' &&
+    answers.q2a === 'manual' &&
+    resolved.q2 != null &&
+    resolved.q2 < Q2_TOP_MIN
+  ) {
+    return {
+      id: 'top-revenue-under-6m',
+      // the doc's own words ("check the number before continuing")
+      message: 'Please check the number before continuing.',
+    };
+  }
   if (qid === 'q8' && resolved.q8 != null && resolved.q7 != null && resolved.q8 >= resolved.q7) {
     return {
       id: 'subs-gt-visitors',

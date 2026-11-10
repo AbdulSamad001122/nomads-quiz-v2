@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { RPS_CARDS } from '../copy.js';
+import { CEILINGS } from '../../calc/calculator.js';
 import { fill } from '../resolveTokens.js';
 import { emphasize } from '../emphasize.jsx';
 import { ga } from '../../analytics/ga.js';
@@ -8,7 +9,6 @@ import './CompoundingRps.css';
 const CEILING = 50; // the $50 Revenue Per Subscriber™ benchmark (calculator CEILINGS.rps)
 const PIN_ROOM = 8; // px of clear space two neighbouring pin labels keep
 
-const money = (n) => `$${Math.round(n).toLocaleString('en-US')}`;
 const pad2 = (n) => String(n).padStart(2, '0');
 
 /**
@@ -58,12 +58,72 @@ export default function CompoundingRps({ result, tokens }) {
     });
     return best;
   };
-  const go = (i) => {
+  const reducedMotion = () =>
+    typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  // slide the row itself to card i (used by the pinned scroll and, outside
+  // pin mode, by the arrows / dots / keys)
+  const slideTo = (i, smooth = true) => {
     const track = trackRef.current;
     const els = cardEls();
     if (!track || !els.length) return;
     const k = Math.max(0, Math.min(els.length - 1, i));
-    track.scrollTo({ left: els[k].offsetLeft - track.offsetLeft - 4, behavior: 'smooth' });
+    track.scrollTo({ left: els[k].offsetLeft - track.offsetLeft - 4, behavior: smooth && !reducedMotion() ? 'smooth' : 'auto' });
+  };
+
+  /* ——— pinned on desktop: the page's scroll moves the cards (Alefiya, 2.0
+     FINAL RP QC: "if I scroll, I go left to right on these cards"). Built
+     like row 4's steps after their jitter fix: the scroll position only
+     PICKS a card (with a dead band), the row then glides there on its own,
+     and nothing inside the pinned stage changes height while pinned. ——— */
+  const scrollyRef = useRef(null);
+  const stageRef = useRef(null);
+  const [pin, setPin] = useState(null); // { top, step } while pinned
+  const pinRef = useRef(null);
+  const curRef = useRef(0);
+  pinRef.current = pin;
+
+  // one stop per card while pinned. The last cards share the row's end (2+
+  // cards fit on a desktop row), so their stops rest the row at the same
+  // place and only the active dot / counter moves on — every card gets its
+  // own step, so the counter reads 1, 2, 3, 4, 5 (final check, Nov 6: it
+  // skipped 4 when the last two cards shared one stop)
+  const stopOf = (i) => Math.max(0, Math.min(cardEls().length - 1, i));
+  const stopLeft = (k) => {
+    const track = trackRef.current;
+    const els = cardEls();
+    const max = track.scrollWidth - track.clientWidth;
+    const el = els[Math.max(0, Math.min(els.length - 1, k))];
+    return el ? Math.min(Math.max(0, el.offsetLeft - track.offsetLeft - 4), max) : 0;
+  };
+
+  // a dot/arrow jump in pin mode: the page scroll position for `at` stops
+  // into the pinned stretch. While the jump is gliding the page above can
+  // still change height (late images on a fresh load moved it ~200px past
+  // the pin), so the page watcher below re-aims it until it settles.
+  const jumpRef = useRef(null);
+  const jumpTo = (at, smooth) => {
+    const p = pinRef.current;
+    const scrolly = scrollyRef.current;
+    if (!p || !scrolly) return;
+    const startY = scrolly.getBoundingClientRect().top + window.scrollY - p.top;
+    window.scrollTo({ top: startY + at * p.step, behavior: smooth ? 'smooth' : 'auto' });
+  };
+  const go = (i) => {
+    const p = pinRef.current;
+    const scrolly = scrollyRef.current;
+    if (p && scrolly) {
+      // pinned: scroll the page to the middle of that card's stretch; the
+      // page scroll then moves the row
+      const k = stopOf(i);
+      // the middle of that stop's stretch, but never at the very end of the
+      // pin (the last stop's stretch ends where the stage lets go, so it
+      // aims a little before that)
+      const at = k === 0 ? 0.05 : Math.min(k + 0.1, p.stops - 1.2);
+      jumpRef.current = at;
+      jumpTo(at, !reducedMotion());
+      return;
+    }
+    slideTo(i);
   };
   // The row is as tall as the tallest card on screen, not the tallest card
   // overall, so every card keeps the same gap above what follows (on phones
@@ -75,7 +135,9 @@ export default function CompoundingRps({ result, tokens }) {
     let h = 0;
     cardEls().forEach((el) => {
       const r = el.getBoundingClientRect();
-      if (r.right > box.left + 1 && r.left < box.right - 1) h = Math.max(h, el.offsetHeight);
+      // pinned: the tallest card overall, so the stage never changes height
+      // while the page scrolls (a height change there shook row 4's cards)
+      if (pinRef.current || (r.right > box.left + 1 && r.left < box.right - 1)) h = Math.max(h, el.offsetHeight);
     });
     if (!h) return;
     const cs = getComputedStyle(track);
@@ -87,7 +149,7 @@ export default function CompoundingRps({ result, tokens }) {
     if (!track) return;
     const end = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
     setAtEnd(end);
-    setActive(end ? cardEls().length - 1 : indexNow());
+    setActive(pinRef.current ? curRef.current : end ? cardEls().length - 1 : indexNow());
     fitHeight();
   }, []);
   useEffect(() => {
@@ -107,14 +169,160 @@ export default function CompoundingRps({ result, tokens }) {
       ro?.disconnect();
     };
   }, [sync]);
+  // pin only when the controls + the tallest card fit under the top bar,
+  // on desktop widths; phones and short windows keep arrows + swipe
+  useEffect(() => {
+    // zoom shrinks the pinned stage to fit a short laptop screen (1366x768)
+    const canPin = typeof CSS !== 'undefined' && CSS.supports?.('overflow', 'clip') && CSS.supports?.('zoom', '0.9');
+    let lastW = 0;
+    let lastH = 0;
+    const decide = (force) => {
+      const stage = stageRef.current;
+      const track = trackRef.current;
+      if (!stage || !track) return;
+      const w = window.innerWidth;
+      const h = document.documentElement.clientHeight;
+      // a phone/tablet toolbar sliding in/out only nudges the height: ignore
+      // that on touch screens; on a desktop every height change re-measures
+      // (a download bar can make the pinned stage taller than the window)
+      const touch = window.matchMedia?.('(pointer: coarse)').matches;
+      if (!force && w === lastW && (h === lastH || (touch && Math.abs(h - lastH) < 120))) return;
+      // measure at full size (checked above first, so an ignored resize
+      // never leaves the zoom off — review, Nov 4)
+      const prevZoom = stage.style.zoom;
+      stage.style.zoom = '1';
+      lastW = w;
+      lastH = h;
+      const tallest = Math.max(0, ...cardEls().map((el) => el.offsetHeight));
+      const cs = getComputedStyle(track);
+      const trackH = tallest + parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom) + parseFloat(cs.marginTop);
+      const bar = stage.firstElementChild;
+      const barH = bar ? bar.offsetHeight + parseFloat(getComputedStyle(bar).marginTop) : 0;
+      const top = (document.querySelector('.rnav')?.offsetHeight || 0) + 12;
+      // measured at full size (the zoom is off until we pin); a short
+      // screen gets the stage scaled down to fit, but never below 0.78 so
+      // the cards stay readable — below that, arrows + swipe instead
+      const zoom = Math.min(1, (h - top - 16) / (barH + trackH));
+      const fits = zoom >= (pinRef.current ? 0.74 : 0.78);
+      const max = track.scrollWidth - track.clientWidth;
+      const lefts = cardEls().map((el) => Math.min(Math.max(0, el.offsetLeft - track.offsetLeft - 4), max));
+      const moves = lefts.filter((v, k) => k === 0 || v > lefts[k - 1] + 1).length > 1;
+      const stops = lefts.length;
+      stage.style.zoom = prevZoom;
+      const z = Math.round(zoom * 1000) / 1000;
+      const next = canPin && w >= 861 && moves && fits ? { top, step: Math.round(h * 0.55), stops, zoom: z } : null;
+      setPin((prev) =>
+        prev && next && prev.top === next.top && prev.step === next.step && prev.stops === next.stops && prev.zoom === next.zoom ? prev : next
+      );
+    };
+    let raf = 0;
+    const onResize = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => decide(false));
+    };
+    decide(true);
+    document.fonts?.ready?.then(() => decide(true));
+    window.addEventListener('resize', onResize);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('resize', onResize);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cards.length]);
+
+  useEffect(() => {
+    const scrolly = scrollyRef.current;
+    if (!pin || !scrolly) {
+      // unpinned (or never pinned): the row fits the card on screen again
+      fitHeight();
+      return undefined;
+    }
+    const last = pin.stops - 1;
+    let raf = 0;
+    const pick = (glide) => {
+      let smooth = glide;
+      raf = 0;
+      const box = scrolly.getBoundingClientRect();
+      const raw = Math.max(0, (pin.top - box.top) / pin.step);
+      // card k owns raw in [k - 0.4, k + 0.6); +-0.06 dead band either side
+      // a jump of more than one stop at once (scroll restored after a
+      // reload, the page above changing height) goes straight there with
+      // no glide through the cards in between
+      const far = Math.abs(raw - curRef.current) > 1.2;
+      let k = smooth && !far ? curRef.current : Math.max(0, Math.min(last, Math.round(raw)));
+      while (k < last && raw >= k + 0.66) k += 1;
+      while (k > 0 && raw < k - 0.46) k -= 1;
+      if (far) smooth = false;
+      if (k !== curRef.current || !smooth) {
+        curRef.current = k;
+        setActive(k);
+        const track = trackRef.current;
+        if (track) track.scrollTo({ left: stopLeft(k), behavior: smooth && !reducedMotion() ? 'smooth' : 'auto' });
+      }
+    };
+    const onScroll = () => {
+      if (jumpRef.current != null) endJump();
+      if (!raf) raf = requestAnimationFrame(() => pick(true));
+    };
+    // the page above can change height with no scroll at all (late images
+    // and fonts after a reload mid-section), which moves this section:
+    // re-check the stop then and jump straight to it (row 4's fix)
+    const page = scrolly.closest('.results-page') || document.body;
+    const pageRo =
+      typeof ResizeObserver !== 'undefined'
+        ? new ResizeObserver(() => {
+            // a dot/arrow jump still on its way: re-aim it at the moved target
+            if (jumpRef.current != null) jumpTo(jumpRef.current, false);
+            pick(false);
+          })
+        : null;
+    // the jump is over once the page stops scrolling
+    let settle = 0;
+    const endJump = () => {
+      clearTimeout(settle);
+      settle = setTimeout(() => {
+        jumpRef.current = null;
+      }, 250);
+    };
+    pageRo?.observe(page);
+    // first placement without a glide (e.g. a reload mid-section): start
+    // from the stop the scroll position is nearest to
+    {
+      const box = scrolly.getBoundingClientRect();
+      const raw = Math.max(0, (pin.top - box.top) / pin.step);
+      curRef.current = Math.max(0, Math.min(last, Math.round(raw)));
+    }
+    pick(false);
+    fitHeight();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    // the reader taking over (wheel, touch, keys) ends a jump at once, so
+    // the re-aim never fights their own scrolling
+    const userScroll = () => {
+      jumpRef.current = null;
+    };
+    const userEvents = ['wheel', 'touchstart', 'keydown', 'mousedown'];
+    userEvents.forEach((ev) => window.addEventListener(ev, userScroll, { passive: true }));
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(settle);
+      jumpRef.current = null;
+      userEvents.forEach((ev) => window.removeEventListener(ev, userScroll));
+      pageRo?.disconnect();
+      window.removeEventListener('scroll', onScroll);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pin, cards.length]);
+
+  // the card the arrows / keys step from: the current stop while pinned
+  const curCard = () => (pinRef.current ? curRef.current : indexNow());
   const onKey = (e) => {
     if (e.key === 'ArrowRight') {
       e.preventDefault();
-      go(indexNow() + 1);
+      go(curCard() + 1);
     }
     if (e.key === 'ArrowLeft') {
       e.preventDefault();
-      go(indexNow() - 1);
+      go(curCard() - 1);
     }
   };
 
@@ -328,14 +536,14 @@ export default function CompoundingRps({ result, tokens }) {
 
   return (
     <>
-    <section className="rcs">
+    <section className={`rcs${pin ? ' rcs--pin' : ''}`}>
       <div className="rcs__inner">
         <div className="rcs__head">
           {/* capped takers can't reach $1.5M, so no "Beyond your $1.5M" */}
           {!result.cappedState && <span className="rcs__k">{c.kicker}</span>}
           {lifts ? (
             <h2 className="rcs__h2">
-              {c.headBefore} <span className="rcs__hn">{c.headPromise}</span> {c.headMid}{' '}
+              {c.headBefore} <span className="rcs__hn rcs__hn--green">{c.headPromise}</span> {c.headMid}{' '}
               <span className="rcs__hn rcs__hn--big">{tokens.rps_goal}</span> {c.headAfter}{' '}
               {/* both sentences always — the design's approved copy, even when
                   the goal is already the $50 ceiling */}
@@ -349,6 +557,16 @@ export default function CompoundingRps({ result, tokens }) {
           )}
         </div>
 
+        <div
+          className="rcs__scrolly"
+          ref={scrollyRef}
+          style={
+            pin
+              ? { '--rcs-scroll': `${(pin.stops - 1) * pin.step}px`, '--rcs-pin-top': `${(pin.top / pin.zoom).toFixed(2)}px` }
+              : undefined
+          }
+        >
+        <div className="rcs__stage" ref={stageRef} style={pin && pin.zoom < 1 ? { zoom: pin.zoom } : undefined}>
         <div className="rcs__bar">
           <div className="rcs__dots">
             {cards.map((id, i) => (
@@ -365,10 +583,10 @@ export default function CompoundingRps({ result, tokens }) {
             <span>
               {active + 1} / {cards.length}
             </span>
-            <button type="button" aria-label={c.prev} disabled={active === 0} onClick={() => go(indexNow() - 1)}>
+            <button type="button" aria-label={c.prev} disabled={active === 0} onClick={() => go(curCard() - 1)}>
               ←
             </button>
-            <button type="button" aria-label={c.next} disabled={atEnd} onClick={() => go(indexNow() + 1)}>
+            <button type="button" aria-label={c.next} disabled={pin ? active >= cards.length - 1 : atEnd} onClick={() => go(curCard() + 1)}>
               →
             </button>
           </div>
@@ -377,154 +595,104 @@ export default function CompoundingRps({ result, tokens }) {
         <div className="rcs__track" ref={trackRef} tabIndex={0} onKeyDown={onKey}>
           {cards.map(render)}
         </div>
+        </div>
+        </div>
 
       </div>
     </section>
     {/* the calculator, its own split section under the cards (Alefiya,
         Slack Oct 31: it blended into the navy) */}
-    <CalcPreview c={c} />
+    <CalcSection c={c} tokens={tokens} result={result} />
     </>
   );
 }
 
 /**
- * The calculator block: what it tells you, the button, and a looping preview
- * that types the design's example (36,000 subscribers, $360,000) and counts
- * the three outputs up — the design's own script, as a React effect. Reduced
- * motion: the finished example, no animation.
+ * The calculator section (Alefiya, 2.0 FINAL RP QC, Nov 4): her design —
+ * label, headline and three numbered steps with the button on plain cream;
+ * on the dark plum half, TODAY (the taker's own revenue per subscriber, the
+ * same figure as card 1) → TARGET $50 and a bar filled to today ÷ $50.
+ * Sizes follow her picture's proportions (container units, see the CSS).
  */
-function CalcPreview({ c }) {
-  const ex = c.example;
-  const reduced =
-    typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-  const done = {
-    f1: ex.subs,
-    f2: ex.revenue,
-    typing: null,
-    o1: money(ex.rps),
-    o2: `${money(ex.gap)} away`,
-    gap: ex.gapPct,
-    o2b: true,
-    o3: `${money(ex.yearly)} a year`,
-  };
-  const [s, setS] = useState(reduced ? done : { ...done, f1: '', f2: '', o1: '$0', o2: '$0 away', gap: 0, o2b: false, o3: '$0 a year' });
-
-  useEffect(() => {
-    if (reduced) return undefined;
-    let alive = true;
-    const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-    const count = (ms, fn) =>
-      new Promise((res) => {
-        let start = null;
-        const step = (tm) => {
-          if (!alive) return res();
-          if (start === null) start = tm;
-          const p = Math.min((tm - start) / ms, 1);
-          fn(1 - Math.pow(1 - p, 3));
-          if (p < 1) requestAnimationFrame(step);
-          else res();
-        };
-        requestAnimationFrame(step);
-      });
-    const type = async (key, text) => {
-      for (let i = 1; i <= text.length && alive; i++) {
-        setS((v) => ({ ...v, [key]: text.slice(0, i), typing: key }));
-        await wait(100);
-      }
-      await wait(200);
-      if (alive) setS((v) => ({ ...v, typing: null }));
-    };
-    (async () => {
-      await wait(3500);
-      while (alive) {
-        setS({ f1: '', f2: '', typing: null, o1: '$0', o2: '$0 away', gap: 0, o2b: false, o3: '$0 a year' });
-        await wait(500);
-        await type('f1', ex.subs);
-        await type('f2', ex.revenue);
-        await count(900, (e) => setS((v) => ({ ...v, o1: money(ex.rps * e) })));
-        await count(900, (e) => setS((v) => ({ ...v, gap: ex.gapPct * e, o2: `${money(ex.gap * e)} away` })));
-        if (!alive) break;
-        setS((v) => ({ ...v, o2b: true }));
-        await count(900, (e) => setS((v) => ({ ...v, o3: `${money(ex.yearly * e)} a year` })));
-        await wait(3200);
-      }
-    })();
-    return () => {
-      alive = false;
-    };
-  }, [reduced, ex]);
-
+function CalcSection({ c, tokens, result }) {
+  // the bar and the label read the same rounded figure (review: a raw
+  // 0.4 showed "$0" with a dot of bar; 49.6 showed "$50" with a bar short)
+  const now = Math.max(0, Math.round(result.current.rps) || 0);
+  const pct = Math.min(100, (now / CEILINGS.rps) * 100);
+  // already at or past $50: no "→ TARGET $50" (it would point down), just
+  // today's figure and a full bar
+  const reached = now >= CEILINGS.rps;
+  // a long figure ($1667) steps down so it never runs into the arrow
+  const len = tokens.rps_now.length;
+  // the button's arrow is drawn (her design's heavy arrow), kept with the
+  // last word
+  const label = c.button.replace(/\s*→$/, '');
+  const cut = label.lastIndexOf(' ') + 1;
   return (
     <section className="rcs-calc">
       <div className="rcs__cw-text">
         <div className="rcs__cw-inner">
-        <span className="rcs__k2">{c.calcKicker}</span>
-        <h3 className="rcs__calc-h">{c.calcHead}</h3>
-        <ol className="rcs__gets">
-          {c.gets.map((g, i) => (
-            <li key={g}>
-              <b>{i + 1}</b>
-              <span>{g}</span>
-            </li>
-          ))}
-        </ol>
-        {/* TODO: real calculator URL (Burhan, with the other placeholder links) */}
-        <a
-          className="rcs__btn"
-          href={c.buttonHref}
-          target="_blank"
-          rel="noopener"
-          onClick={() => ga.ctaClick('crps_calculator')}
-        >
-          {/* the arrow stays with the last word */}
-          {c.button.replace(/ (\S+)$/, '\u00a0$1')}
-        </a>
+          {/* the calculator's name is the heading, the $50/year line sits
+              under it (user, Nov 7: in the doc the name is the bold heading
+              and "If each subscriber…" is a copy line) */}
+          <h3 className="rcs__calc-h">{c.calcKicker}</h3>
+          <p className="rcs__calc-sub">{c.calcHead}</p>
+          <ol className="rcs__gets">
+            {c.gets.map((g, i) => (
+              <li key={g}>
+                <b>{i + 1}</b>
+                <span>{g}</span>
+              </li>
+            ))}
+          </ol>
+          <a
+            className="rcs__cbtn"
+            href={c.buttonHref}
+            target="_blank"
+            rel="noopener"
+            onClick={() => ga.ctaClick('crps_calculator')}
+          >
+            {label.slice(0, cut)}
+            <span className="rcs__nw">
+              {label.slice(cut)}
+              {'\u00a0'}
+              <svg className="rcs__cbtn-arrow" viewBox="0 0 48 32" aria-hidden="true" focusable="false">
+                <path d="M4 16h38M29 5l13 11-13 11" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+          </a>
         </div>
       </div>
       <div className="rcs__cw-media">
-      <div className="rcs__calc" role="img" aria-label={c.calcLabel}>
-        <div className="rcs__in-side" aria-hidden="true">
-          <div className="rcs__ttl">
-            <i />
-            {c.calcTitle}
-          </div>
-          <div className="rcs__fld">
-            <label>{c.calcField1}</label>
-            <div className={`rcs__box${s.typing === 'f1' ? ' rcs__box--on' : ''}`}>
-              {s.f1}
-              {s.typing === 'f1' && <span className="rcs__caret" />}
+        <div
+          className={`rcs__tt${reached ? ' rcs__tt--reached' : ''}`}
+          role="img"
+          aria-label={fill(reached ? c.calcPanelLabelReached : c.calcPanelLabel, { now: tokens.rps_now })}
+        >
+          <div className="rcs__tt-row" aria-hidden="true">
+            <div className="rcs__tt-side">
+              <span className="rcs__tt-l">{c.calcToday}</span>
+              <span className="rcs__tt-v rcs__tt-v--now" style={len > 3 ? { '--rcs-len': len } : undefined}>
+                {tokens.rps_now}
+              </span>
+              <span className="rcs__tt-per">{c.calcPer}</span>
             </div>
+            {!reached && (
+            // the page's swoosh arrow, white on the blue box (user, Nov 7)
+            <img className="rcs__tt-arrow" src="/assets/results-swoosh-white.png" alt="" width="230" height="218" />
+            )}
+            {!reached && (
+              <div className="rcs__tt-side rcs__tt-side--target">
+                <span className="rcs__tt-l">{c.calcTarget}</span>
+                <span className="rcs__tt-v rcs__tt-v--target">{c.calcTargetValue}</span>
+                <span className="rcs__tt-per">{c.calcPer}</span>
+              </div>
+            )}
           </div>
-          <div className="rcs__fld">
-            <label>{c.calcField2}</label>
-            <div className={`rcs__box${s.typing === 'f2' ? ' rcs__box--on' : ''}`}>
-              {s.f2}
-              {s.typing === 'f2' && <span className="rcs__caret" />}
-            </div>
+          <div className="rcs__tt-bar" aria-hidden="true">
+            <i className="rcs__tt-fill" style={{ width: `${pct}%`, minWidth: now > 0 ? undefined : 0 }} />
           </div>
         </div>
-        <div className="rcs__out-side" aria-hidden="true">
-          <div className="rcs__o">
-            <span className="rcs__ol">{c.calcOut1}</span>
-            <span className="rcs__ov">{s.o1}</span>
-          </div>
-          <div className="rcs__o rcs__o--hi">
-            <span className="rcs__ol">{c.calcOut2}</span>
-            <span className="rcs__ov rcs__ov--gap">{s.o2}</span>
-            <div className="rcs__gap">
-              <i style={{ width: `${s.gap}%` }} />
-            </div>
-            <span className="rcs__os" style={{ opacity: s.o2b ? 1 : 0 }}>
-              {c.calcOut2Sub}
-            </span>
-          </div>
-          <div className="rcs__o">
-            <span className="rcs__ol">{c.calcOut3}</span>
-            <span className="rcs__ov rcs__ov--sm">{s.o3}</span>
-          </div>
-        </div>
-      </div>
-      <p className="rcs__calc-note">{c.calcNote}</p>
       </div>
     </section>
   );

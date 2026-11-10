@@ -95,14 +95,22 @@ export const QUESTIONS = [
     label: 'Where you stand',
     theme: 'maroon',
     variant: 'list',
+    // Cap Logic (Yemi, Nov 4): labels verbatim from the doc's "New Q2
+    // options" table; the old top option "$250K to $500K+/month" split in two,
+    // and "$500K+/month (new)" shows a field asking for their annual revenue.
+    manualEntry: true,
+    manualType: 'currency',
+    // doc: "show a field asking for their annual revenue"
+    manualLabel: 'Your annual revenue',
     question:
       'To make our recommendations realistic, where is your business today?',
     options: [
-      { id: 'under-10k', label: 'Under $10k/month' },
-      { id: '10k-35k', label: '$10k – $35k/month' },
-      { id: '35k-100k', label: '$35k – $100k/month' },
-      { id: '100k-250k', label: '$100k – $250k/month' },
-      { id: '250k-500k', label: '$250k – $500k+/month' },
+      { id: 'under-10k', label: 'Under $10K/month' },
+      { id: '10k-35k', label: '$10K to $35K/month' },
+      { id: '35k-100k', label: '$35K to $100K/month' },
+      { id: '100k-250k', label: '$100K to $250K/month' },
+      { id: '250k-500k', label: '$250K to $500K/month' },
+      { id: 'manual', label: '$500K+/month' },
     ],
   },
   {

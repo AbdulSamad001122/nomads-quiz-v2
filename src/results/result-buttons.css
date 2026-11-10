@@ -174,8 +174,7 @@
 .results-page .rgp__btn,
 .results-page .ryc__btn,
 .results-page .rtp__btns > .rtp__btn:last-child,
-.results-page .rdn__btn,
-.results-page .rcs__btn {
+.results-page .rdn__btn {
   color: #250f1c;
   border: 2px solid #0f0a10;
   border-radius: 0;
@@ -195,8 +194,7 @@
 .results-page .rcb__btn,
 .results-page .rwk__btn,
 .results-page .rtp__btns > .rtp__btn:first-child,
-.results-page .rdn__btn,
-.results-page .rcs__btn {
+.results-page .rdn__btn {
   background: var(--rbtn-workshop-bg);
 }
 
@@ -214,7 +212,6 @@
   .results-page .rwk__btn,
   .results-page .rtp__btns > .rtp__btn:first-child,
   .results-page .rdn__btn,
-  .results-page .rcs__btn,
   .results-page .rad__btn {
     font-size: 16px;
   }
@@ -239,8 +236,7 @@
    sitewide .q-btn plum swap is cancelled so the colour stays */
 .results-page .rmw__btn:hover,
 .results-page .rcb__btn:hover,
-.results-page .rdn__btn:hover,
-.results-page .rcs__btn:hover {
+.results-page .rdn__btn:hover {
   transform: translate(-2px, -2px) scale(1.04);
   background: var(--rbtn-workshop-bg);
   color: #250f1c;
@@ -252,8 +248,7 @@
 .results-page .rtp__btns > .rtp__btn:hover,
 .results-page .rgp__btn:hover,
 .results-page .ryc__btn:hover,
-.results-page .rdn__btn:hover,
-.results-page .rcs__btn:hover {
+.results-page .rdn__btn:hover {
   box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.55);
 }
 
@@ -263,8 +258,7 @@
 .results-page .rtp__btns > .rtp__btn:active,
 .results-page .rgp__btn:active,
 .results-page .ryc__btn:active,
-.results-page .rdn__btn:active,
-.results-page .rcs__btn:active {
+.results-page .rdn__btn:active {
   transform: translate(0, 0) scale(1);
   box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.55);
 }
@@ -272,8 +266,7 @@
 @media (prefers-reduced-motion: reduce) {
   .results-page .rmw__btn:hover,
   .results-page .rcb__btn:hover,
-  .results-page .rdn__btn:hover,
-  .results-page .rcs__btn:hover {
+  .results-page .rdn__btn:hover {
     transform: none;
   }
 }

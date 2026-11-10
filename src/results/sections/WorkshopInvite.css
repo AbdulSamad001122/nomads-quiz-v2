@@ -85,19 +85,20 @@
   padding: 128px 48px 92px;
 }
 
-/* workshop page mockup on the left, the invite + button on the right
+/* workshop thumbnail on the left (user, Nov 3), the invite + button on the right
    (user, Oct 31); stacked on phones */
 .rwk__invite {
-  max-width: 1100px;
+  max-width: 1280px;
   margin: 0 auto;
   text-align: left;
   display: grid;
-  grid-template-columns: clamp(220px, 32%, 350px) minmax(0, 1fr);
-  gap: clamp(36px, 5.5vw, 80px);
+  /* the wide workshop thumbnail takes a little over half (user, Nov 3) */
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(32px, 4vw, 64px);
   align-items: center;
-  /* the mockup, text and button sit on one navy card on the white
+  /* the thumbnail, text and button sit on one navy card on the white
      section, rounded like row 4's "Two paths" card, no shadow, up to
-     1100px wide (user, Oct 31) */
+     1280px wide (user: wider, Nov 3) */
   background: #0f1c2a;
   border-radius: 20px;
   padding: clamp(24px, 4vw, 52px);
@@ -111,7 +112,17 @@
 .rwk__mock img {
   width: 100%;
   height: auto;
+  border-radius: 12px;
   transition: transform 0.3s ease;
+}
+
+/* stacked under 960px: the wide thumbnail runs the card's full width on
+   top, the text and button below (beside it the image got too small) */
+@media (max-width: 960px) {
+  .rwk__invite {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
 }
 
 /* the mockup opens the workshop page in a new tab; it grows a little on
@@ -131,6 +142,21 @@
 .rwk__p--dark {
   margin-top: 0;
   color: #ffffff;
+}
+
+/* "$3 to $19 - put green and red" (Alefiya, 2.0 FINAL RP QC): today's RPV
+   in the page's red, the goal in its green — the same pair as the red-metric
+   headline ("at $3.00 instead of $19.67") */
+.rwk__rpv {
+  white-space: nowrap;
+}
+
+.rwk__rpv--now {
+  color: #ff8f7f;
+}
+
+.rwk__rpv--goal {
+  color: #6fe0a5;
 }
 
 .rwk__btn {
@@ -200,6 +226,14 @@
   }
 }
 
+/* tablets: the page's heading size (32px at 1100 and below, final check
+   Nov 6); the phone rule below takes it to 26 */
+@media (max-width: 1100px) {
+  .rwk__headline {
+    font-size: 32px;
+  }
+}
+
 @media (max-width: 760px) {
   .rwk__frame {
     inset: 16px 12px 14px;
@@ -223,14 +257,6 @@
   .rwk__light {
     padding: 88px 22px 48px;
   }
-  .rwk__invite {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 32px;
-  }
-  .rwk__mock {
-    width: min(250px, 72%);
-    margin: 0 auto;
-  }
   .rwk__btn {
     margin-top: 26px;
     width: 100%;
@@ -241,5 +267,28 @@
     width: 100%;
     margin-top: 32px;
     border-radius: 4px;
+  }
+}
+
+/* smallest phones: the longer "customer sales journey…" tail ran the 26px
+   headline to 11 lines at 320 (audit, Nov 5) */
+@media (max-width: 360px) {
+  body .results-page .rwk__headline {
+    font-size: 22px;
+  }
+}
+
+/* tablets: the design's forced line breaks gave ragged lines at 761–900px
+   ("influencing" alone) — let the headline reflow (audit, Nov 6) */
+@media (max-width: 900px) {
+  .rwk__headline br {
+    display: none;
+  }
+}
+
+/* smallest phones: "revenue growth" stays one highlight block */
+@media (max-width: 360px) {
+  body .results-page .rwk__hl {
+    white-space: nowrap;
   }
 }
