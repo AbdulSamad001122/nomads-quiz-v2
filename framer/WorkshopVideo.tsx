@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { addPropertyControls, ControlType, RenderTarget } from "framer"
 
 /**
@@ -24,6 +24,13 @@ import { addPropertyControls, ControlType, RenderTarget } from "framer"
  *
  * In Framer: Assets → Code → New component → paste this file → name it
  * WorkshopVideo → drag it onto the workshop page where the YouTube embed was.
+ *
+ * Panel (like Framer's own YouTube component): Video (link or id), Autoplay
+ * (Off / On / Loop), Mute, Color (progress bar), Fit (16:9 keeps the video's
+ * shape and the rest shows Background; Fill stretches the player to the box),
+ * Background (transparent by default), Radius, Border, Shadows, Helper URL,
+ * RPV dashboard. With Autoplay on, watch time only counts once the sound is
+ * on, so a muted autoplay never earns watch tags by itself.
  *
  * @framerSupportedLayoutWidth any
  * @framerSupportedLayoutHeight any
@@ -151,10 +158,39 @@ function addRange(ranges: number[][], a: number, b: number): number[][] {
 }
 const watchedSeconds = (ranges: number[][]) => ranges.reduce((t, [x, y]) => t + (y - x), 0)
 
+/** YouTube id from a full link (youtu.be/…, watch?v=…, /embed/…, /shorts/…) or a bare id. */
+export function parseVideoId(input: string): string {
+    const s = String(input || "").trim()
+    if (/^[\w-]{11}$/.test(s)) return s
+    const m = s.match(/(?:youtu\.be\/|[?&]v=|\/embed\/|\/shorts\/|\/live\/)([\w-]{11})/)
+    return m ? m[1] : ""
+}
+
+/** Size of a 16:9 frame that fits inside w × h. */
+function fit169(w: number, h: number) {
+    if (!w || !h) return { w: 0, h: 0 }
+    return w / h > 16 / 9 ? { w: h * (16 / 9), h } : { w, h: w * (9 / 16) }
+}
+
 export default function WorkshopVideo(props) {
-    const { videoId, endpoint, radius, dashboard, style } = props
+    const { video, autoplay, mute, color, fit, background, radius, border, shadows, endpoint, dashboard, style } = props
+    const videoId = parseVideoId(video) || "Zzu1a3robjE"
     const hostRef = useRef<HTMLDivElement>(null)
+    const boxRef = useRef<HTMLDivElement>(null)
+    const [box, setBox] = useState({ w: 0, h: 0 })
     const onCanvas = RenderTarget.current() === RenderTarget.canvas
+
+    // measure the component so the video can keep 16:9 inside any size
+    useEffect(() => {
+        const el = boxRef.current
+        if (!el) return
+        const measure = () => setBox({ w: el.clientWidth, h: el.clientHeight })
+        measure()
+        if (typeof ResizeObserver === "undefined") return
+        const ro = new ResizeObserver(measure)
+        ro.observe(el)
+        return () => ro.disconnect()
+    }, [])
 
     useEffect(() => {
         if (onCanvas || !hostRef.current) return
@@ -162,6 +198,7 @@ export default function WorkshopVideo(props) {
         let timer: any = null
         let gone = false
         let last: number | null = null
+        const auto = autoplay === "on" || autoplay === "loop"
 
         const viewer = readViewer()
         const kitId = dashboardKitId(viewer)
@@ -181,13 +218,17 @@ export default function WorkshopVideo(props) {
             const playing = player.getPlayerState() === 1
             const t = player.getCurrentTime()
             const duration = player.getDuration()
-            // `last` is set only while playing, so this also counts the stretch
+            // A muted autoplay isn't watching: with Autoplay on, time only counts
+            // once the sound is on (the viewer unmuted, or "Mute: No").
+            const muted = typeof player.isMuted === "function" && player.isMuted()
+            const counts = playing && !(auto && muted)
+            // `last` is set only while counting, so this also counts the stretch
             // up to a pause or the end of the video (state 2 / 0 at this tick)
             if (last !== null) {
                 const step = t - last
                 if (step > 0 && step <= MAX_STEP) progress.ranges = addRange(progress.ranges, last, t)
             }
-            last = playing ? t : null
+            last = counts ? t : null
             if (!duration) return
             const percent = (watchedSeconds(progress.ranges) / duration) * 100
             for (const m of MILESTONES) {
@@ -206,12 +247,32 @@ export default function WorkshopVideo(props) {
             if (gone || !hostRef.current) return
             const el = document.createElement("div")
             hostRef.current.appendChild(el)
+            const playerVars: any = {
+                rel: 0,
+                playsinline: 1,
+                modestbranding: 1,
+                autoplay: auto ? 1 : 0,
+                mute: mute ? 1 : 0,
+                color: color === "white" ? "white" : "red",
+            }
+            if (autoplay === "loop") {
+                playerVars.loop = 1
+                playerVars.playlist = videoId // YouTube needs this for a single video to loop
+            }
             player = new YT.Player(el, {
                 videoId,
                 width: "100%",
                 height: "100%",
-                playerVars: { rel: 0, playsinline: 1, modestbranding: 1 },
-                events: { onStateChange: () => tick() },
+                playerVars,
+                events: {
+                    onReady: (e: any) => {
+                        try {
+                            if (mute) e.target.mute()
+                            if (auto) e.target.playVideo()
+                        } catch {}
+                    },
+                    onStateChange: () => tick(),
+                },
             })
             timer = window.setInterval(tick, 1000)
         })
@@ -227,47 +288,90 @@ export default function WorkshopVideo(props) {
             } catch {}
             if (hostRef.current) hostRef.current.innerHTML = ""
         }
-    }, [videoId, endpoint, dashboard, onCanvas])
+    }, [videoId, autoplay, mute, color, endpoint, dashboard, onCanvas])
+
+    // Frame = the video itself. "16:9" keeps the video's shape and centres it;
+    // the rest of the component shows Background (transparent by default).
+    const keep = fit !== "fill"
+    const frameSize = keep ? fit169(box.w, box.h) : null
+    const frameStyle: any = {
+        position: "absolute",
+        overflow: "hidden",
+        background: "#000",
+        borderRadius: radius,
+        boxShadow: shadows,
+        ...(border || {}),
+        boxSizing: "border-box",
+        ...(keep
+            ? frameSize && frameSize.w
+                ? { width: frameSize.w, height: frameSize.h, left: (box.w - frameSize.w) / 2, top: (box.h - frameSize.h) / 2 }
+                : { left: 0, right: 0, top: "50%", transform: "translateY(-50%)", aspectRatio: "16 / 9" }
+            : { inset: 0 }),
+    }
 
     return (
-        <div
-            style={{
-                ...style,
-                position: "relative",
-                width: "100%",
-                height: "100%",
-                borderRadius: radius,
-                overflow: "hidden",
-                background: "#000",
-            }}
-        >
-            {onCanvas ? (
-                <img
-                    src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
-                    alt=""
-                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                />
-            ) : (
-                <div ref={hostRef} style={{ position: "absolute", inset: 0 }} />
-            )}
+        <div ref={boxRef} style={{ ...style, position: "relative", width: "100%", height: "100%", background }}>
+            <div style={frameStyle} data-ws-frame="">
+                {onCanvas ? (
+                    <img
+                        src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+                        alt=""
+                        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                    />
+                ) : (
+                    <div ref={hostRef} style={{ position: "absolute", inset: 0 }} />
+                )}
+            </div>
         </div>
     )
 }
 
 WorkshopVideo.defaultProps = {
-    videoId: "Zzu1a3robjE",
+    video: "https://youtu.be/Zzu1a3robjE",
+    autoplay: "off",
+    mute: false,
+    color: "red",
+    fit: "16:9",
+    background: "rgba(0, 0, 0, 0)",
+    radius: "0px",
     endpoint: "https://diagnostic.nomadsmarketing.co/api/workshop-progress",
-    radius: 0,
     dashboard: true,
 }
 
 addPropertyControls(WorkshopVideo, {
-    videoId: { type: ControlType.String, title: "YouTube ID", defaultValue: "Zzu1a3robjE" },
+    video: { type: ControlType.String, title: "Video", defaultValue: "https://youtu.be/Zzu1a3robjE", placeholder: "YouTube link or ID" },
+    autoplay: {
+        type: ControlType.Enum,
+        title: "Autoplay",
+        options: ["off", "on", "loop"],
+        optionTitles: ["Off", "On", "Loop"],
+        defaultValue: "off",
+    },
+    mute: { type: ControlType.Boolean, title: "Mute", defaultValue: false, enabledTitle: "Yes", disabledTitle: "No" },
+    color: {
+        type: ControlType.Enum,
+        title: "Color",
+        options: ["red", "white"],
+        optionTitles: ["Red", "White"],
+        displaySegmentedControl: true,
+        defaultValue: "red",
+    },
+    fit: {
+        type: ControlType.Enum,
+        title: "Fit",
+        options: ["16:9", "fill"],
+        optionTitles: ["16:9", "Fill"],
+        displaySegmentedControl: true,
+        defaultValue: "16:9",
+    },
+    background: { type: ControlType.Color, title: "Background", defaultValue: "rgba(0, 0, 0, 0)", optional: true },
+    radius: { type: ControlType.BorderRadius, title: "Radius", defaultValue: "0px" },
+    border: { type: ControlType.Border, title: "Border", optional: true },
+    shadows: { type: ControlType.BoxShadow, title: "Shadows" },
     endpoint: {
         type: ControlType.String,
         title: "Helper URL",
         defaultValue: "https://diagnostic.nomadsmarketing.co/api/workshop-progress",
     },
-    radius: { type: ControlType.Number, title: "Corner radius", defaultValue: 0, min: 0, max: 60 },
     dashboard: { type: ControlType.Boolean, title: "RPV dashboard", defaultValue: true, enabledTitle: "Send", disabledTitle: "Off" },
 })
