@@ -45,6 +45,8 @@ import {
 } from '../../results/savedResults.js';
 import { resultFor } from '../../results/restoreResults.js';
 import { currentRoute, RESULTS_PATH } from '../../routes.js';
+import { saveProgress, loadProgress, clearProgress } from './savedProgress.js';
+import ResumePrompt from './ResumePrompt.jsx';
 
 /**
  * QuizFlow — the sequencer. Wireframe order: welcome → Q1 → Q2A/Q2B →
@@ -393,6 +395,14 @@ const DEV_INIT = devInitialState();
 
 const RESULTS_INDEX = SCREENS.findIndex((s) => s.id === 'results');
 
+/* Saved progress (savedProgress.js) resumes on any screen from Q1 to Q14.
+   Never the welcome screen (nothing started), the loading card (it moves on
+   by itself — a taker who left there resumes on Q14) or the results (those
+   have their own save at /diagnostic-results). */
+const NOT_RESUMABLE = new Set(['welcome', 'loading', 'results']);
+const isResumableScreen = (id) =>
+  !NOT_RESUMABLE.has(id) && SCREENS.some((s) => s.id === id);
+
 /** Address bar → /diagnostic-results without reloading the page. */
 function showResultsAddress() {
   try {
@@ -445,6 +455,12 @@ export default function QuizFlow({ restored = null } = {}) {
   // Signature of the saved results this page is showing (null = not saved,
   // e.g. storage blocked or a dev jump) — see the stale-results check below.
   const shownSig = useRef(restored ? restored.sig : null);
+  // A half-finished quiz saved in this browser, offered on the welcome
+  // screen ("Continue where I left off" / "Start over"). Read once on load;
+  // never on reopened results or dev ?goto= jumps.
+  const [resumeOffer, setResumeOffer] = useState(() =>
+    restored || DEV_INIT ? null : loadProgress({ isResumable: isResumableScreen })
+  );
 
   const totalQuestions = QUESTIONS.length;
 
@@ -597,6 +613,61 @@ export default function QuizFlow({ restored = null } = {}) {
     if (restored && !hasEmailGivenCookie()) markEmailGiven();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  /* ---------- saved progress: keep every step, so they can resume ----------
+     Saved on every screen from Q1 to Q14 (and on every answer change), and
+     deleted once the results are reached — the finished quiz has its own
+     save. Nothing is saved while the welcome screen (and any resume offer)
+     is up, on the loading card, on reopened results or on dev jumps. A
+     disqualified taker keeps their place on the gate question (dqReason is
+     separate state; the index doesn't move). */
+  useEffect(() => {
+    if (restored || DEV_INIT) return;
+    const id = SCREENS[index].id;
+    if (id === 'results') {
+      if (!dqReason) clearProgress();
+      return;
+    }
+    if (!isResumableScreen(id)) return;
+    saveProgress({
+      screen: id,
+      answers,
+      manualValues,
+      otherText,
+      overrides,
+      clampedBrackets,
+      lead,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [index, answers, manualValues, otherText, overrides, clampedBrackets, lead, dqReason]);
+
+  const continueSaved = () => {
+    const saved = resumeOffer;
+    setResumeOffer(null);
+    if (!saved) return;
+    setAnswers(saved.answers);
+    setManualValues(saved.manualValues);
+    setOtherText(saved.otherText);
+    setOverrides(saved.overrides);
+    setClampedBrackets(saved.clampedBrackets);
+    setLead(saved.lead);
+    // The saved screen, or — if its question is no longer shown for these
+    // answers — the next screen that is.
+    let i = SCREENS.findIndex((s) => s.id === saved.screen);
+    while (i > 0 && i < RESULTS_INDEX && !screenVisible(SCREENS[i], saved.answers)) i += 1;
+    if (i <= 0 || i >= RESULTS_INDEX || !isResumableScreen(SCREENS[i].id)) {
+      // Nothing left to resume on: behave like a fresh visit.
+      clearProgress();
+      return;
+    }
+    ga.quizResume(SCREENS[i].id);
+    setIndex(i);
+  };
+
+  const startOverSaved = () => {
+    clearProgress();
+    setResumeOffer(null);
+  };
 
   /* ---------- finished: save the answers + switch the address ----------
      Runs before the GA effect below, so the completion events already carry
@@ -894,14 +965,19 @@ export default function QuizFlow({ restored = null } = {}) {
   switch (screen.id) {
     case 'welcome':
       return (
-        <WelcomeScreen
-          onStart={() => {
-            // A new attempt: earlier saved results must never show again.
-            clearResults();
-            ga.quizStart();
-            next();
-          }}
-        />
+        <>
+          {resumeOffer ? (
+            <ResumePrompt onContinue={continueSaved} onStartOver={startOverSaved} />
+          ) : null}
+          <WelcomeScreen
+            onStart={() => {
+              // A new attempt: earlier saved results must never show again.
+              clearResults();
+              ga.quizStart();
+              next();
+            }}
+          />
+        </>
       );
 
     case 'benchmark':
