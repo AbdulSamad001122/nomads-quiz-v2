@@ -68,9 +68,6 @@ export function track(event, params = {}) {
 export const ga = {
   quizStart: () => track('quiz_start'),
 
-  // A returning taker chose "Continue where I left off" (saved progress).
-  quizResume: (screenId) => track('quiz_resume', { screen_id: screenId }),
-
   questionView: (q, salesModel) =>
     track('question_view', {
       question_id: q.id,

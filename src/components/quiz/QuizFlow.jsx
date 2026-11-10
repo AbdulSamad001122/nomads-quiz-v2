@@ -46,7 +46,6 @@ import {
 import { resultFor } from '../../results/restoreResults.js';
 import { currentRoute, RESULTS_PATH } from '../../routes.js';
 import { saveProgress, loadProgress, clearProgress } from './savedProgress.js';
-import ResumePrompt from './ResumePrompt.jsx';
 
 /**
  * QuizFlow — the sequencer. Wireframe order: welcome → Q1 → Q2A/Q2B →
@@ -403,6 +402,25 @@ const NOT_RESUMABLE = new Set(['welcome', 'loading', 'results']);
 const isResumableScreen = (id) =>
   !NOT_RESUMABLE.has(id) && SCREENS.some((s) => s.id === id);
 
+/**
+ * A returning taker goes straight back to where they stopped — no prompt
+ * (Nov 10: no wording from Yemi/Alefiya, so no "Welcome back" box). Returns
+ * the saved progress plus the screen index to open, or null for a fresh
+ * start. If the saved question is no longer shown for these answers, the
+ * next screen that is shown opens instead.
+ */
+function savedResume() {
+  const saved = loadProgress({ isResumable: isResumableScreen });
+  if (!saved) return null;
+  let i = SCREENS.findIndex((s) => s.id === saved.screen);
+  while (i > 0 && i < RESULTS_INDEX && !screenVisible(SCREENS[i], saved.answers)) i += 1;
+  if (i <= 0 || i >= RESULTS_INDEX || !isResumableScreen(SCREENS[i].id)) {
+    clearProgress(); // nothing left to resume on: a fresh start
+    return null;
+  }
+  return { ...saved, index: i };
+}
+
 /** Address bar → /diagnostic-results without reloading the page. */
 function showResultsAddress() {
   try {
@@ -422,19 +440,22 @@ function showResultsAddress() {
  * restored page).
  */
 export default function QuizFlow({ restored = null } = {}) {
+  // A half-finished quiz saved in this browser (savedProgress.js), read once
+  // on load. Never on reopened results or dev ?goto= jumps.
+  const [resume] = useState(() => (restored || DEV_INIT ? null : savedResume()));
   const [index, setIndex] = useState(
-    restored ? RESULTS_INDEX : DEV_INIT ? DEV_INIT.index : 0
+    restored ? RESULTS_INDEX : DEV_INIT ? DEV_INIT.index : resume ? resume.index : 0
   );
   const [answers, setAnswers] = useState(
-    restored ? restored.answers : DEV_INIT ? DEV_INIT.answers : {}
+    restored ? restored.answers : DEV_INIT ? DEV_INIT.answers : resume ? resume.answers : {}
   );
   const [manualValues, setManualValues] = useState(
-    restored ? restored.manualValues : DEV_INIT?.manual ?? {}
+    restored ? restored.manualValues : DEV_INIT?.manual ?? resume?.manualValues ?? {}
   );
-  const [otherText, setOtherText] = useState('');
+  const [otherText, setOtherText] = useState(resume?.otherText ?? '');
   const [vocText, setVocText] = useState('');
   // { firstName, email } from the email capture after Q2.
-  const [lead, setLead] = useState(null);
+  const [lead, setLead] = useState(resume?.lead ?? null);
   // Last payload sent to Kit, so going Back and forth never re-sends it.
   const kitSentPayload = useRef(null);
   const [dqReason, setDqReason] = useState(restored ? null : DEV_INIT?.dq ?? null);
@@ -442,11 +463,11 @@ export default function QuizFlow({ restored = null } = {}) {
   // pushed past with "Keep my answers" (Quiz Logics.docx · Manual entry &
   // validation). Overrides tag the Kit record unverified.
   const [answerCheck, setAnswerCheck] = useState(null);
-  const [overrides, setOverrides] = useState([]);
+  const [overrides, setOverrides] = useState(resume?.overrides ?? []);
   // Questions whose stored "manual" value was written by the clamp, not typed:
   // the taker picked a range and hit "Keep my answers". Kit's qXX_answer_type
   // must still read "Bracket" for these. Typing on that question clears it.
-  const [clampedBrackets, setClampedBrackets] = useState([]);
+  const [clampedBrackets, setClampedBrackets] = useState(resume?.clampedBrackets ?? []);
   // Doc: "Reject out-of-bounds values with an inline message; do not silently
   // clamp." Set on Continue when the manual entry fails validateManual;
   // cleared as soon as they type again or the screen changes.
@@ -455,12 +476,6 @@ export default function QuizFlow({ restored = null } = {}) {
   // Signature of the saved results this page is showing (null = not saved,
   // e.g. storage blocked or a dev jump) — see the stale-results check below.
   const shownSig = useRef(restored ? restored.sig : null);
-  // A half-finished quiz saved in this browser, offered on the welcome
-  // screen ("Continue where I left off" / "Start over"). Read once on load;
-  // never on reopened results or dev ?goto= jumps.
-  const [resumeOffer, setResumeOffer] = useState(() =>
-    restored || DEV_INIT ? null : loadProgress({ isResumable: isResumableScreen })
-  );
 
   const totalQuestions = QUESTIONS.length;
 
@@ -640,37 +655,6 @@ export default function QuizFlow({ restored = null } = {}) {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index, answers, manualValues, otherText, overrides, clampedBrackets, lead, dqReason]);
-
-  const continueSaved = () => {
-    setResumeOffer(null);
-    // Re-read storage: another tab may have moved on, finished or started
-    // over since this page loaded, and an old snapshot must never overwrite
-    // newer progress (or bring back a finished attempt).
-    const saved = loadProgress({ isResumable: isResumableScreen });
-    if (!saved) return;
-    setAnswers(saved.answers);
-    setManualValues(saved.manualValues);
-    setOtherText(saved.otherText);
-    setOverrides(saved.overrides);
-    setClampedBrackets(saved.clampedBrackets);
-    setLead(saved.lead);
-    // The saved screen, or — if its question is no longer shown for these
-    // answers — the next screen that is.
-    let i = SCREENS.findIndex((s) => s.id === saved.screen);
-    while (i > 0 && i < RESULTS_INDEX && !screenVisible(SCREENS[i], saved.answers)) i += 1;
-    if (i <= 0 || i >= RESULTS_INDEX || !isResumableScreen(SCREENS[i].id)) {
-      // Nothing left to resume on: behave like a fresh visit.
-      clearProgress();
-      return;
-    }
-    ga.quizResume(SCREENS[i].id);
-    setIndex(i);
-  };
-
-  const startOverSaved = () => {
-    clearProgress();
-    setResumeOffer(null);
-  };
 
   /* ---------- finished: save the answers + switch the address ----------
      Runs before the GA effect below, so the completion events already carry
@@ -968,22 +952,16 @@ export default function QuizFlow({ restored = null } = {}) {
   switch (screen.id) {
     case 'welcome':
       return (
-        <>
-          {resumeOffer ? (
-            <ResumePrompt onContinue={continueSaved} onStartOver={startOverSaved} />
-          ) : null}
-          <WelcomeScreen
-            onStart={() => {
-              // A new attempt: earlier saved results must never show again,
-              // and an old half-finished attempt can't be offered again.
-              clearResults();
-              clearProgress();
-              setResumeOffer(null);
-              ga.quizStart();
-              next();
-            }}
-          />
-        </>
+        <WelcomeScreen
+          onStart={() => {
+            // A new attempt: earlier saved results must never show again,
+            // and an old half-finished attempt is wiped too.
+            clearResults();
+            clearProgress();
+            ga.quizStart();
+            next();
+          }}
+        />
       );
 
     case 'benchmark':

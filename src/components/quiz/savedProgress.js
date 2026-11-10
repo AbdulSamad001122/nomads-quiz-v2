@@ -6,9 +6,11 @@ import { quizFingerprint } from '../../results/savedResults.js';
  * (localStorage) so they can continue where they left off (Nomads, Nov 9).
  *
  * - Saved after every step from Q1 up to Q14. Nothing is sent to a server.
+ * - On their next visit the quiz opens straight on the screen where they
+ *   stopped (no prompt). To restart, Back leads to the welcome screen.
  * - Expires 7 days after the LAST step they took (each save resets the clock).
- * - Deleted when they finish (the results get their own save), when they
- *   press "Start over", and when a new attempt starts from the welcome screen.
+ * - Deleted when they finish (the results get their own save) and when a new
+ *   attempt starts from the welcome screen's Start button.
  * - Anything unexpected (corrupt JSON, another version, a changed quiz, a
  *   screen that no longer exists, blocked or full storage) is treated as
  *   "nothing saved": the quiz just starts at the welcome screen as before.
