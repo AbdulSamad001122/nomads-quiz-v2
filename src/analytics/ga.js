@@ -20,6 +20,7 @@
  * track() call safely no-ops, so the wiring can ship now and light up later.
  */
 import { popupGaParams, popupSource } from './popupSource.js';
+import { storeEvent } from './eventStore.js';
 
 const GA_ID = import.meta.env.VITE_GA_ID || 'G-HP0WTDLWJ7'; // public — committed like Clarity
 // Production always tracks. Dev is OFF by default (keeps prod reports clean) —
@@ -62,6 +63,8 @@ export function track(event, params = {}) {
   // dev events carry traffic_type=internal → excluded by the GA4 filter
   if (DEBUG) clean.traffic_type = 'internal';
   window.gtag('event', event, clean);
+  // Copy for the RPV dashboard's database (fire-and-forget, never blocks).
+  storeEvent(event, clean);
 }
 
 /** Named day-one events. */
