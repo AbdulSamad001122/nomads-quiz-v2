@@ -632,12 +632,29 @@ export default function QuizFlow({ restored = null } = {}) {
   /* ---------- saved progress: keep every step, so they can resume ----------
      Saved on every screen from Q1 to Q14 (and on every answer change), and
      deleted once the results are reached — the finished quiz has its own
-     save. Nothing is saved while the welcome screen (and any resume offer)
-     is up, on the loading card, on reopened results or on dev jumps. A
-     disqualified taker keeps their place on the gate question (dqReason is
-     separate state; the index doesn't move). */
+     save. Nothing is saved on the welcome screen, on the loading card, on
+     reopened results or on dev jumps. A disqualified taker keeps their place
+     on the gate question (dqReason is separate state; the index doesn't
+     move). Opening the page from a save doesn't re-save it, so the 7 days
+     run from the last step they actually took, not from their last visit. */
   useEffect(() => {
     if (restored || DEV_INIT) return;
+    // Still exactly what was loaded (same screen, same state objects)? Then
+    // nothing to save yet. Compared by identity, so it holds however often
+    // React runs this effect (StrictMode runs it twice in dev).
+    if (
+      resume &&
+      !dqReason &&
+      index === resume.index &&
+      answers === resume.answers &&
+      manualValues === resume.manualValues &&
+      otherText === resume.otherText &&
+      overrides === resume.overrides &&
+      clampedBrackets === resume.clampedBrackets &&
+      lead === resume.lead
+    ) {
+      return;
+    }
     const id = SCREENS[index].id;
     if (id === 'results') {
       if (!dqReason) clearProgress();
@@ -958,8 +975,23 @@ export default function QuizFlow({ restored = null } = {}) {
             // and an old half-finished attempt is wiped too.
             clearResults();
             clearProgress();
+            if (resume) {
+              // This page opened on a saved attempt and they came Back here
+              // to restart: drop its answers, so they aren't saved straight
+              // back. The name + email stay to pre-fill the opt-in (the user
+              // chose "remember the email"; they can still change it).
+              setAnswers({});
+              setManualValues({});
+              setOtherText('');
+              setVocText('');
+              setOverrides([]);
+              setClampedBrackets([]);
+              setDqReason(null);
+              goTo(0, 1, {});
+            } else {
+              next();
+            }
             ga.quizStart();
-            next();
           }}
         />
       );
