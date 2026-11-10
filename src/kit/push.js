@@ -15,6 +15,7 @@
  */
 
 import { storeEvent } from '../analytics/eventStore.js';
+import { saveKitViewer } from './viewerId.js';
 
 const ENABLED =
   import.meta.env.PROD || import.meta.env.VITE_KIT_DEV === 'true';
@@ -42,6 +43,8 @@ export async function pushToKit({ email, firstName, fields, tags = [] }) {
     });
     const body = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(body.error || `HTTP ${res.status}`);
+    // remembered for the workshop page's watch tags (src/kit/viewerId.js)
+    if (body.subscriber_id) saveKitViewer(email, body.subscriber_id);
     return body;
   } catch (err) {
     console.warn('[kit] push failed (quiz continues):', err.message);
