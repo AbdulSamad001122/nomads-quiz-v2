@@ -35,6 +35,9 @@ import { rememberPopupSource } from '../../analytics/popupSource.js';
 import { hasEmailGivenCookie, markEmailGiven } from '../../popups/emailGivenCookie.js';
 import { buildKitFields, buildKitTags } from '../../kit/kitPayload.js';
 import { pushToKit } from '../../kit/push.js';
+import { withKitViewer } from '../../kit/viewerId.js';
+
+const WORKSHOP_URL = 'https://nomadsmarketing.co/workshop';
 import { DEV_ROUTES_ENABLED } from '../../devRoutes.js';
 import {
   saveResults,
@@ -799,7 +802,9 @@ export default function QuizFlow({ restored = null } = {}) {
         onBack={back}
         onWorkshop={() => {
           ga.ctaClick('dq_workshop');
-          // TODO: workshop link pending from the team
+          // Same workshop page as the results page's buttons; carries the
+          // taker's Kit id when they gave their email, so the watch tags work.
+          window.open(withKitViewer(WORKSHOP_URL), '_blank', 'noopener');
         }}
         onWebsite={() => {
           ga.ctaClick('dq_website');
