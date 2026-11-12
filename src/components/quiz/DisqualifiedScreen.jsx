@@ -8,7 +8,7 @@ import './DisqualifiedScreen.css';
  * rotation). Split background — dark blue texture on top, light blue
  * texture below — with the two exit cards straddling the seam.
  *
- * "Watch the workshop" has no destination yet (workshop link pending);
+ * "Watch the workshop" opens nomadsmarketing.co/workshop (QuizFlow);
  * "Explore the website" opens the main Nomads site.
  */
 export default function DisqualifiedScreen({ onBack, onWorkshop, onWebsite }) {
