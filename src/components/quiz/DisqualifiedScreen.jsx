@@ -57,8 +57,8 @@ export default function DisqualifiedScreen({ onBack, onWorkshop, onWebsite }) {
               </p>
               <img
                 className="dq__laptop"
-                src="/assets/dq-laptop.webp"
-                alt="Preview of the workshop on a laptop"
+                src="/assets/dq-workshop-laptop.webp"
+                alt="Preview of the workshop page on a laptop"
                 loading="lazy"
               />
               <button type="button" className="q-btn dq__cta" onClick={onWorkshop}>
