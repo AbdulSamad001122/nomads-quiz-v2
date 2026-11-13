@@ -35,7 +35,7 @@ import { rememberPopupSource } from '../../analytics/popupSource.js';
 import { hasEmailGivenCookie, markEmailGiven } from '../../popups/emailGivenCookie.js';
 import { buildKitFields, buildKitTags } from '../../kit/kitPayload.js';
 import { pushToKit } from '../../kit/push.js';
-import { utmKitFields, utmState } from '../../analytics/utmSource.js';
+import { currentUtm, utmKitFields } from '../../analytics/utmSource.js';
 import { withKitViewer } from '../../kit/viewerId.js';
 
 const WORKSHOP_URL = 'https://nomadsmarketing.co/workshop';
@@ -716,7 +716,7 @@ export default function QuizFlow({ restored = null } = {}) {
         overrides,
         clampedBrackets,
         // which channel they came from (UTM links), first + latest touch
-        extraFields: utmKitFields(utmState),
+        extraFields: utmKitFields(currentUtm()),
       }),
       // every finisher gets the "Quiz Taker" TAG (handover doc Oct 8);
       // capped takers also get "Quiz Taker Capped State" (Sep 23)
