@@ -15,7 +15,7 @@
  *    development), so test runs on preview links don't count in the
  *    dashboard's real numbers.
  */
-import { utmEventParams, utmState } from './utmSource.js';
+import { currentUtm, utmEventParams } from './utmSource.js';
 
 const SUPABASE_URL = 'https://vporwmbmkssbktlhwddp.supabase.co';
 const SUPABASE_PUBLIC_KEY =
@@ -53,7 +53,7 @@ export function storeEvent(event, params = {}, email = null) {
   try {
     // Every row also carries where the visitor came from (UTM links):
     // first_utm_source / first_utm_medium / utm_source / utm_medium.
-    const { sales_model, ...rest } = { ...utmEventParams(utmState), ...params };
+    const { sales_model, ...rest } = { ...utmEventParams(currentUtm()), ...params };
     const row = {
       event,
       session_id: sessionId(),
