@@ -261,6 +261,23 @@ eq('q7a_answer_type' in noCalc, false, 'unanswered question → no answer-type f
   eq('q11_answer_type' in fields, false, 'skipped Q11 → no answer-type field');
 }
 
+/* UTM fields (Nov 12): merged as-is; existing fields unchanged; empty → nothing */
+{
+  const ans = { q1: 'founder', q2: 'b', q4: 'calls' };
+  const base = buildKitFields({ answers: ans, manualValues: {} });
+  const withUtm = buildKitFields({
+    answers: ans, manualValues: {},
+    extraFields: { quiz_taker_first_utm_source: 'linkedin', quiz_taker_first_utm_medium: 'social', quiz_taker_utm_source: 'kit', quiz_taker_utm_medium: 'email' },
+  });
+  eq(withUtm.quiz_taker_first_utm_source, 'linkedin', 'UTM first source -> Kit');
+  eq(withUtm.quiz_taker_first_utm_medium, 'social', 'UTM first medium -> Kit');
+  eq(withUtm.quiz_taker_utm_source, 'kit', 'UTM latest source -> Kit');
+  eq(withUtm.quiz_taker_utm_medium, 'email', 'UTM latest medium -> Kit');
+  const stripped = Object.fromEntries(Object.entries(withUtm).filter(([k]) => !k.includes('utm')));
+  eq(JSON.stringify(stripped), JSON.stringify(base), 'UTM fields leave every other field unchanged');
+  eq(JSON.stringify(buildKitFields({ answers: ans, manualValues: {}, extraFields: {} })), JSON.stringify(base), 'no UTMs -> payload identical to before');
+}
+
 console.log(`\nkitPayload: all ${passed} checks passed ✓`);
 console.log('\nSample SLG payload that would reach Kit:');
 console.log(JSON.stringify(slg, null, 2));

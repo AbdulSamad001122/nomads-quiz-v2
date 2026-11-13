@@ -60,6 +60,8 @@ export function buildKitFields({
   // Question ids whose "manual" value came from that clamp over a picked
   // range, not from typing (QuizFlow keepAnswers). Still "Bracket" in Kit.
   clampedBrackets = [],
+  // Extra fields merged in as-is, e.g. the 4 UTM fields (utmKitFields()).
+  extraFields = {},
 }) {
   const path = salesModel(answers);
   const inputs = resolveInputs(answers, manualValues, path);
@@ -161,6 +163,8 @@ export function buildKitFields({
     }
     fields.quiz_takers_record_unverified = String(overrides.length > 0);
   }
+
+  Object.assign(fields, extraFields || {});
 
   // Kit rejects nulls in the fields hash — drop empty values entirely.
   return Object.fromEntries(
