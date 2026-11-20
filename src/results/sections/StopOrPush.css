@@ -225,6 +225,31 @@
   text-align: center;
 }
 
+/* workshop thumbnail above the note + button (Yemi, Nov 20) — same look as
+   the red-metric callout's .rrc__thumb */
+.rso__thumb {
+  display: block;
+  width: 100%;
+  max-width: 640px;
+  margin-bottom: 10px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+}
+
+.rso__thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+@media (hover: hover) {
+  .rso__thumb:hover img {
+    transform: scale(1.03);
+  }
+}
+
 .rso__next p {
   margin: 0;
   font-family: var(--font-body);
@@ -269,6 +294,9 @@
 @media (max-width: 560px) {
   .rso {
     padding: 44px 16px 48px;
+  }
+  .rso__thumb {
+    border-radius: 10px;
   }
   .rso__btn {
     width: 100%;

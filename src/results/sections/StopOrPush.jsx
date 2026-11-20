@@ -70,6 +70,18 @@ export default function StopOrPush({ result, tokens }) {
         )}
 
         <div className="rso__next">
+          {/* Yemi (Slack, Nov 20): this workshop section was missing the
+              thumbnail — same clickable title card as the other workshop spots */}
+          <a
+            className="rso__thumb"
+            href={CTA.workshop.href}
+            {...(CTA.workshop.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : null)}
+            tabIndex={-1}
+            aria-hidden="true"
+            onClick={() => ga.ctaClick(CTA.workshop.id)}
+          >
+            <img src="/assets/results-workshop-thumb.webp" alt="" width="1280" height="720" loading="lazy" />
+          </a>
           <p>{c.next}</p>
           {/* TODO: real workshop URL — the "Watch the Workshop" page (QC item 8) */}
           <a className="rso__btn" href={CTA.workshop.href} {...(CTA.workshop.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : null)} onClick={() => ga.ctaClick(CTA.workshop.id)}>
